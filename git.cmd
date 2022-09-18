@@ -13,6 +13,6 @@ cd %Mypath%
 @git add readme.md
 @git commit -m"first commit"
 @git branch -M main
-@REM git remote remove origin
+@REM git remote remove origin qwe
 git remote add origin %link%
 git push -u origin main
