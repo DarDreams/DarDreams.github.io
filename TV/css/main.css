@@ -1,0 +1,11 @@
+.html5-vpl_chromecast {
+    display: inline-block !important;
+}
+
+.html5-vpl_panel_btn .html5-vpl_chromecast {
+    display: inline-block !important;
+}
+
+.html5-vpl.__w440 .html5-vpl_oklive, .html5-vpl.__w440 .html5-vpl_ok, .html5-vpl.__w440 .html5-vpl_chromecast, .html5-vpl.__w440 .html5-vpl_airplay {
+    display: inline-block !important;
+}
