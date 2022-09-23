@@ -1,0 +1,39 @@
+html { overflow:  hidden;background-color:black; }
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100vw !important;
+    height: 100vh !important;
+    }
+
+
+    iframe {
+
+        width : 84vw;
+        height: 100vh;
+        top:  50%;
+        /* transform: translateY(-50%); */
+    
+    }
+
+    
+    @media(max-width:1440px) {iframe {transform: translateY(10%);}}
+    @media(max-width:1024px) {iframe {transform: translateY(20%);}}
+    @media(max-width:768px) {iframe {transform: translateY(30%);}}
+    @media(max-width:400px) {iframe {transform: translateY(25%);}}
+    @media(max-width:200px) {iframe {transform: translateY(5%);}}
+    
+    
+
+    
+
+    
+
+    
+
+
+ 
+    
+   
+
+    
