@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caliber</title>
+</head>
+<style>
+    html {
+        background-color: #000;
+        font-family: "Consolas", Sans-Serif;
+        position: relative;
+    }
+    table {
+        
+        text-align: center;
+        border-collapse: separate;
+        border-spacing: 5px;
+        background: #191919e0;
+        color: #00ff00;
+        border: 2px solid;
+        border-radius: 20px;
+        max-width: 400px;
+    }
+    th {
+        font-size: 15px;
+        padding: 5px 0 0 0;
+        color:#ff7300;
+        text-align: center;
+    }
+   
+    td {
+        background: #000000;
+        padding: 6px;
+    }
+    .team1 {
+        border: 2px solid rgb(0, 0, 255);
+        z-index: 1;
+        margin-bottom: 5px;
+        
+    }
+    .team2 {
+        z-index: 1;
+        border: 2px solid rgb(255, 0, 0,.8);
+        
+    }
+    .id {
+        position: absolute;
+        top: 0;
+        color: #ff7300;
+        transform: translateX(100%);
+        font-size: 15px;
+    }
+    .team_rank {
+        position: absolute;
+        top: 0px;
+        color: #ff7300;
+        background-color:#191919e0;
+        transform: translateX(100%);
+        font-size: 15px;
+    }
+
+    .dif {
+        top: 394px;
+        color: #ff7300;
+    }
+    .rRed {
+        z-index: 2;
+        
+        top: 200px;
+        color: #ff7300;
+    
+    }
+
+    .container {
+        max-width: 400px;
+    }
+</style>
+<body>
+    <div class="container">
+    <table class="team1">       
+        <tr>
+          <th>LVL</th>
+          <th>RANK</th>
+          <th>ROLE</th>
+          <th>SKILLS</th>
+          <th>NAME</th>
+          </tr>
+         <tr>
+          <td class="lvl"   >{LVL_BLUE_1}</td>
+          <td class="rank"  >{RANK_BLUE_1}</td>
+          <td class="role"  >{ROLE_BLUE_1}</td>
+          <td class="skills">{SKILLS_BLUE_1}</td>
+          <td class="name"  >{NAME_BLUE_1}</td>
+         </tr>
+        <tr>
+          <td class="lvl"   >{LVL_BLUE_2}</td>
+          <td class="rank"  >{RANK_BLUE_2}</td>
+          <td class="role"  >{ROLE_BLUE_2}</td>
+          <td class="skills">{SKILLS_BLUE_2}</td>
+          <td class="name"  >{NAME_BLUE_2}</td>
+        </tr>
+        <tr>
+          <td class="lvl"   >{LVL_BLUE_3}</td>
+          <td class="rank"  >{RANK_BLUE_3}</td>
+          <td class="role"  >{ROLE_BLUE_3}</td>
+          <td class="skills">{SKILLS_BLUE_3}</td>
+          <td class="name"  >{NAME_BLUE_3}</td>
+        </tr>
+        <tr>
+          <td class="lvl"   >{LVL_BLUE_4}</td>
+          <td class="rank"  >{RANK_BLUE_4}</td>
+          <td class="role"  >{ROLE_BLUE_4}</td>
+          <td class="skills">{SKILLS_BLUE_4}</td>
+          <td class="name"  >{NAME_BLUE_4}</td>
+        </tr>
+        </table> 
+        
+        <table class="team2">
+            
+            <tr>
+              <th>LVL</th>
+              <th >RANK</th>
+              <th>ROLE</th>
+              <th>SKILLS</th>
+              <th>NAME</th>
+              </tr>
+             <tr>
+              <td class="lvl">{LVL_RED_1}</td>
+              <td class="rank">{RANK_RED_1}</td>
+              <td class="role">{ROLE_RED_1}</td>
+              <td class="skills">{SKILLS_RED_1}</td>
+              <td class="name">{NAME_RED_1}</td>
+             </tr>
+            <tr>
+              <td class="lvl">{LVL_RED_2}</td>
+              <td class="rank">{RANK_RED_2}</td>
+              <td class="role">{ROLE_RED_2}</td>
+              <td class="skills">{SKILLS_RED_2}</td>
+              <td class="name">{NAME_RED_2}</td>
+            </tr>
+            <tr>
+              <td class="lvl">{LVL_RED_3}</td>
+              <td class="rank">{RANK_RED_3}</td>
+              <td class="role">{ROLE_RED_3}</td>
+              <td class="skills">{SKILLS_RED_3}</td>
+              <td class="name">{NAME_RED_3}</td>
+            </tr>
+            <tr>
+              <td class="lvl">{LVL_RED_4}</td>
+              <td class="rank">{RANK_RED_4}</td>
+              <td class="role">{ROLE_RED_4}</td>
+              <td class="skills">{SKILLS_RED_4}</td>
+              <td class="name">{NAME_RED_4}</td>
+            </tr>
+            </table> 
+            <div class="id">[ID-76CC5E90]</div>
+            <div class="team_rank rBlue">[1234]</div>
+            <div class="team_rank rRed">[1234]</div>
+            <div class="team_rank dif">[1234]</div>
+        </div>
+</body>
+</html>
