@@ -1,6 +1,8 @@
 html { overflow:  hidden;background-color:black; }
 .container {
     display: flex;
+    margin: 0;
+    left: 1px;
     justify-content: center;         
     width: 100vw !important;
     height: 100vh !important;
@@ -8,5 +10,5 @@ html { overflow:  hidden;background-color:black; }
     iframe {
         width : 84vw;
         height: 100vh;
-        margin:-8px -8px;
+        margin:-8px -8px -8px -32px;
     }
