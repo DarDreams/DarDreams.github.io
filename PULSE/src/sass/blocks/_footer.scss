@@ -1,6 +1,6 @@
 .footer {
     position: relative;
-    height: 630px;
+    height: 500px;
     &__info {
         position: absolute;
         top:0;
@@ -12,6 +12,11 @@
         padding: 50px 68px 60px 68px;
     }
     &__addr {
+        font-family: 'Museo Sans Cyrl';
+        font-size: 20px;
+        line-height: 1.2;
+        font-weight: 500;
+        color: #ffffff;
         margin-bottom: 36px;
         font-size: 20px;
         font-weight: 500;
@@ -26,6 +31,7 @@
         line-height: 20px;
         margin-bottom: 38px;
         text-align: center;
+        text-decoration-line: none;
         &:hover {
             color: #fff;
         }
@@ -40,7 +46,7 @@
         border-radius: 100%;
         margin: 0 15px;
         img {
-            height: 27px;
+            height: 51px;
         }
         
     }

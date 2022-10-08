@@ -88,6 +88,27 @@ $(document).ready(function(){
           }); 
 
       };
-      toggleSlide(".catalog-item__link")
-      toggleSlide(".catalog-item__back")
+      toggleSlide(".catalog-item__link");
+      toggleSlide(".catalog-item__back");
+      
+      //MODAL
+
+      $("[data-modal='consultation']").on("click",function(){
+        $(".overlay, #consultation").fadeIn(".5");
+      });
+
+      $(".modal__close").on("click",function(){
+        $(".overlay, #consultation, #order ,#thanks").fadeOut(.5);
+      });
+
+      $(".button_mini").on("click",function(){
+        $(".overlay, #order").fadeIn(".5");
+      });
+
+      $(".button_mini").each(function(i){
+        $(this).on("click",function(){
+            $("#order .modal__descr").text($(".catalog-item__subtitle").eq(i).text())
+        });
+      });
+
   });
