@@ -1,7 +1,7 @@
 html body {
     background-color:rgb(0, 0, 0);
     overflow: hidden;
-    font-family: 'Consolas', sans-serif;
+    /* font-family: 'Consolas', sans-serif; */
     position: relative;
 }
 
@@ -16,7 +16,7 @@ html body {
       background: blue;
     }
     
-    .button {
+    .button1 {
       /* position: fixed; */
       top: 50px;
       cursor: pointer;
@@ -24,20 +24,31 @@ html body {
     }
     
     .menu {
-      
+      @import url('https://fonts.googleapis.com/css2?family=Jura:wght@600&family=Roboto:wght@100;400;700;900&display=swap');
+      font-family: 'Jura', sans-serif;
+      left: -20px;
+      top: 2px;
       width: 0px;
-      left:-140px; 
+      /* left:-140px;  */
       z-index: 999;
       display: block;
       position: fixed;
       text-align: left;
       background-color:black;
-      
     }
+    .tnt:hover, .bitva:hover, .ataka:hover{
+      color:lime;      
+      transition: .8s all; 
+      filter: drop-shadow(2px 1px 2px rgb(0, 255, 0));
+    }
+    
+.hamburger:focus {
+  background-color:red;
+}
 
     li {
         
-        color:red;
+        color:white;
         display: flex;
         justify-content: space-between;
         padding-bottom: 10px;
@@ -48,7 +59,6 @@ html body {
     }
 
    .container {
-    
     display: fixed;
     justify-content: space-between;
     top: 0;
@@ -63,10 +73,11 @@ html body {
       position: absolute;
       left: 0px;
       top: 0px;
-      
       width: 26px;
-      
-      background-color: red;
+      cursor: pointer;
+      z-index: 9999;
+    
+      /* background-color: red; */
   }
     
    

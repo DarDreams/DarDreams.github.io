@@ -1,6 +1,7 @@
 $(".tv_tnt").hide();
 $(".tv_bitva").hide();
 $(".tv_ataka").hide();
+$(".menu").hide();
 
 $(".tnt").click(function() {
     $(".tv_bitva").hide();
@@ -16,12 +17,12 @@ $(".bitva").click(function() {
 
  $(".ataka").click(function() {
     $(".tv_bitva").hide();
-    $(".tv_tnt").hide();
+    $(".tv_tnt").unload();
     $(".tv_ataka").show();
     });
 
-    $(".button").click(function() {
-        //$(".button").hide();
-        $(".menu").css({"left":"20px"});
-        });
+$(".hamburger").click(function() {
+   // $(".button").show();
+    $(".menu").toggle();
+    });
     
