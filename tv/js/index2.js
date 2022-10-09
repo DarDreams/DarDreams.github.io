@@ -2,6 +2,7 @@ $(".tv_tnt").hide();
 $(".tv_bitva").hide();
 $(".tv_ataka").hide();
 $(".menu").hide();
+$(".overlay").hide();
 
 $(".tnt").click(function() {
     $(".tv_bitva").hide();
@@ -24,5 +25,11 @@ $(".bitva").click(function() {
 $(".hamburger").click(function() {
    // $(".button").show();
     $(".menu").toggle();
+    $(".overlay").toggle();
     });
+
+$(".overlay").click(function(){
+    $(".overlay").toggle();
+    $(".menu").toggle();
+});
     

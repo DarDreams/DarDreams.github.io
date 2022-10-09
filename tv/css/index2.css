@@ -38,8 +38,9 @@ html body {
     }
     .tnt:hover, .bitva:hover, .ataka:hover{
       color:lime;      
-      transition: .8s all; 
-      filter: drop-shadow(2px 1px 2px rgb(0, 255, 0));
+      transition: .8s ease-out; 
+      transition-timing-function: .8 ease;
+      /* filter: drop-shadow(2px 1px 2px rgb(0, 255, 0)); */
     }
     
 .hamburger:focus {
@@ -79,7 +80,12 @@ html body {
     
       /* background-color: red; */
   }
-    
+  
+  .hamburger:hover {
+    border-radius: 100px;
+    border: 1px ridge rgb(107, 105, 105);
+    background-color: rgb(122, 121, 121);
+  }
    
   
 
@@ -94,4 +100,24 @@ html body {
     /* transform: translateY(-50%); */
 
 }
+
+.overlay {
+--  filter: blur(5px);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: rgba(0,0,0,.8);
+}
     
+@media (min-width: 920px) {
+  .hamburger {
+    transform: scale(2);
+    left: 20px;
+    top: 20px;
+  }
+  .menu {
+    left: -10px;
+  }
+  
+}
