@@ -32,7 +32,7 @@ html body {
       text-align: left;
       background-color:black;
     } 
-    .tnt:hover, .bitva:hover, .ataka:hover{
+    .tnt:hover, .bitva:hover, .punch:hover{
       color:lime;      
       transition: .8s ease-out; 
       transition-timing-function: .8 ease;
