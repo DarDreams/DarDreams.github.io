@@ -5,12 +5,6 @@ html body {
     position: relative;
 }
 
-/* ::-webkit-scrollbar{
-  width:5px;
-} */
-
-
-
 ::selection {
     /*   color: rgb(0,255,0); */
       background: blue;
@@ -26,26 +20,25 @@ html body {
     .menu {
       @import url('https://fonts.googleapis.com/css2?family=Jura:wght@600&family=Roboto:wght@100;400;700;900&display=swap');
       font-family: 'Jura', sans-serif;
-      left: -20px;
-      top: 2px;
+      font-size: 25px;
+      left: 25px;
+      top: 15px;
       width: 0px;
-      /* left:-140px;  */
+      height: 0px;
+   
       z-index: 999;
       display: block;
-      position: fixed;
+      position: absolute;
       text-align: left;
       background-color:black;
-    }
+    } 
     .tnt:hover, .bitva:hover, .ataka:hover{
       color:lime;      
       transition: .8s ease-out; 
       transition-timing-function: .8 ease;
-      /* filter: drop-shadow(2px 1px 2px rgb(0, 255, 0)); */
     }
     
-.hamburger:focus {
-  background-color:red;
-}
+
 
     li {
         
@@ -60,57 +53,61 @@ html body {
     }
 
    .container {
-    display: fixed;
+    z-index: -1;
+    position: absolute;
+    display: flex;
     justify-content: space-between;
     top: 0;
     left: 0;
     width: 100vw !important;
     height: 100vh !important;
     overflow: hidden;
+    filter : blur(0px);
+ 
    }
 
    .hamburger {
       display: block;
       position: absolute;
-      left: 0px;
-      top: 0px;
-      width: 26px;
+      left: 20px;
+      top: 21px;
+      width: 56px;
       cursor: pointer;
       z-index: 9999;
-    
-      /* background-color: red; */
+      opacity: .5;
   }
   
   .hamburger:hover {
-    border-radius: 100px;
-    border: 1px ridge rgb(107, 105, 105);
-    background-color: rgb(122, 121, 121);
+    
+    /* transform: rotate(90deg); */
+    opacity: 1;
+    transition: .5s linear;    
   }
    
-  
-
-
    iframe {
-    
+    z-index: -1;
     /* position: fixed; */
     overflow: hidden;
     width : 100%;
     height: 100%;
     top:  50%;
     /* transform: translateY(-50%); */
-
+    
 }
 
-.overlay {
---  filter: blur(5px);
+.overlay { 
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   background-color: rgba(0,0,0,.8);
+  transition: .8s all;
+   
 }
     
-@media (min-width: 920px) {
+
+
+/* @media (min-width: 920px) {
   .hamburger {
     transform: scale(2);
     left: 20px;
@@ -119,5 +116,4 @@ html body {
   .menu {
     left: -10px;
   }
-  
-}
+} */
