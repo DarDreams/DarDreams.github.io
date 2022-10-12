@@ -27,7 +27,7 @@ html body {
       width: 0;
       height: 0;
       opacity: 1;
-      left: 30px;
+      left: 40px;
       top: calc(100vh / 2 - 40px);      
       z-index: 999;
       display: block;

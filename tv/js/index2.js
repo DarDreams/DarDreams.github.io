@@ -4,24 +4,38 @@ $(".tv_punch").hide();
 $(".menu").hide();
 $(".overlay").hide();
 
-    $(".tnt").click(function() {
-        $(".tv_bitva").fadeOut();
-        $(".tv_tnt")  .fadeIn();
-        $(".tv_punch").fadeOut();
+    
+    $(".container").each(function () {
+        
+        $(this).click(function(){
+            alert(this);
+           // $(this).fadeIn();
+           // $(".container").not($(this)).fadeOut();
+        })
+        
+       
+        
     });
 
-    $(".bitva").click(function() {
-        $(".tv_bitva").fadeIn();
-        $(".tv_tnt")  .fadeOut();
-        $(".tv_punch").fadeOut();
-        });
+
+    // $(".tnt").click(function() {
+    //     $(".tv_bitva").fadeOut();
+    //     $(".tv_tnt")  .fadeIn();
+    //     $(".tv_punch").fadeOut();
+    // });
+
+    // $(".bitva").click(function() {
+    //     $(".tv_bitva").fadeIn();
+    //     $(".tv_tnt")  .fadeOut();
+    //     $(".tv_punch").fadeOut();
+    // });
 
 
-    $(".punch").click(function() {
-        $(".tv_bitva").fadeOut();
-        $(".tv_tnt")  .fadeOut();
-        $(".tv_punch").fadeIn();
-        });
+    // $(".punch").click(function() {
+    //     $(".tv_bitva").fadeOut();
+    //     $(".tv_tnt")  .fadeOut();
+    //     $(".tv_punch").fadeIn();
+    // });
         
     $(".hamburger").click(function() {
         
