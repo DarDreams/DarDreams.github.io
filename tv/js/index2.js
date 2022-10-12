@@ -15,7 +15,7 @@ $(".overlay").hide();
 
 
 $(".tnt").click(function() {
-     $(".tv_bitva").hide();
+     $(".tv_bitva").fadeOut();
      $(".tv_tnt").show();
      $(".tv_punch").hide();
     });
