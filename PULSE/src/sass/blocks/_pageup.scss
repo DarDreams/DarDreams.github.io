@@ -3,5 +3,10 @@
     position: fixed;
     bottom: 40px;
     right: 40px;
-    text-underline-position: none;
+    transform: scale(2) rotate(-90deg);
+    color:$main-color;
+
+    &:hover {
+        text-decoration: none;
+    }
 }
