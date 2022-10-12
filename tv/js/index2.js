@@ -5,17 +5,17 @@ $(".menu").hide();
 $(".overlay").hide();
 
     
-    $(".container").each(function () {
-        
-        $(this).click(function(){
-            alert(this);
+    $(".button").click(function(){
+        $(".container").each(function () {
+       // $(this).click(function(){
+          alert($(this));
            // $(this).fadeIn();
-           // $(".container").not($(this)).fadeOut();
+          //  $(".container").not($(this)).fadeOut();
         })
         
-       
+    })
         
-    });
+ //   });
 
 
     // $(".tnt").click(function() {
