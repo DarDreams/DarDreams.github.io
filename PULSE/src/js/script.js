@@ -140,10 +140,18 @@ $(document).ready(function(){
       $('input[name=phone]').mask("+7 (999) 999-99-99");
 
       $(".overlay").on("click",function(){
-        $(".overlay").hide()
+        $(".overlay").fadeOut("slow")
       });
 
+      //smooth scroll pageup
 
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 1600) {
+          $(".pageup").fadeIn();
+        } else {
+          $(".pageup").fadeOut();
+        }
+      });
 
 
 
