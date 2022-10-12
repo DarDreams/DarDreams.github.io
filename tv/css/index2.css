@@ -22,15 +22,16 @@ html body {
     .menu {
       @import url('https://fonts.googleapis.com/css2?family=Jura:wght@600&family=Roboto:wght@100;400;700;900&display=swap');
       font-family: 'Jura', sans-serif;
+      position: absolute;
       font-size: 25px;
-      left: 25px;
-      top: 15px;
-      width: 0px;
-      height: 0px;
-   
+      width: 0;
+      height: 0;
+      opacity: 1;
+      left: 30px;
+      top: calc(100vh / 2 - 40px);      
       z-index: 999;
       display: block;
-      position: absolute;
+      /* top:100px; */
       text-align: left;
       background-color:black;
     } 
@@ -74,8 +75,9 @@ html body {
       display: block;
       position: absolute;
       left: 20px;
-      top: 21px;
+      top: calc(100vh / 2);
       width: 56px;
+      min-height: 10px;
       cursor: pointer;
       z-index: 9999;
       opacity: .5;
@@ -85,7 +87,8 @@ html body {
     
     /* transform: rotate(90deg); */
     opacity: 1;
-    transition: .5s linear;    
+    transition: .5s linear;   
+    
   }
    
    iframe {
@@ -101,13 +104,15 @@ html body {
 
 .overlay { 
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
   top: 0;
   background-color: rgba(0,0,0,.8);
   transition: .8s all;
    
 }
+
     
 
 

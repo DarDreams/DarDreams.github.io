@@ -4,38 +4,29 @@ $(".tv_punch").hide();
 $(".menu").hide();
 $(".overlay").hide();
 
-
-  
-//   $(".button_mini").each(function(i){
-//     $(this).on("click",function(){
-//         $("#order .modal__descr").text($(".catalog-item__subtitle").eq(i).text())
-//     });
-//   });
-
-
-
-$(".tnt").click(function() {
-     $(".tv_bitva").fadeOut();
-     $(".tv_tnt").show();
-     $(".tv_punch").hide();
+    $(".tnt").click(function() {
+        $(".tv_bitva").fadeOut();
+        $(".tv_tnt")  .fadeIn();
+        $(".tv_punch").fadeOut();
     });
 
     $(".bitva").click(function() {
-        $(".tv_bitva").show();
-        $(".tv_tnt").hide();
-        $(".tv_punch").hide();
+        $(".tv_bitva").fadeIn();
+        $(".tv_tnt")  .fadeOut();
+        $(".tv_punch").fadeOut();
         });
 
 
     $(".punch").click(function() {
-        $(".tv_bitva").hide();
-        $(".tv_tnt").unload();
-        $(".tv_punch").show();
+        $(".tv_bitva").fadeOut();
+        $(".tv_tnt")  .fadeOut();
+        $(".tv_punch").fadeIn();
         });
-
+        
     $(".hamburger").click(function() {
-        $(".menu").toggle();
-        $(".overlay").toggle();
+        
+        $(".menu").fadeToggle();       
+        $(".overlay").fadeToggle();
     
     
 
@@ -48,8 +39,11 @@ $(".tnt").click(function() {
     });
 
 $(".overlay").click(function(){
-    $(".overlay").toggle();
-    $(".menu").toggle();
+    $(".overlay").fadeToggle();
+    $(".menu").fadeToggle();
     $(".container").css("filter","blur(0px)");
 });
     
+// $(".overlay").mousemove(function(){
+//     $(".menu").attr("opacity","1");
+// });
