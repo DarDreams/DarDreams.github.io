@@ -5,37 +5,15 @@ $(".menu").hide();
 $(".overlay").hide();
 
     
-    $(".button").click(function(){
-        $(".container").each(function () {
-       // $(this).click(function(){
-          alert($(this));
-           // $(this).fadeIn();
-          //  $(".container").not($(this)).fadeOut();
-        })
+    $("li").click(function(){
+        //alert(".tv_"+$(this).attr("class"));
+        $(".tv_bitva").fadeOut();
+        $(".tv_tnt")  .fadeOut();
+        $(".tv_punch").fadeOut();
+        $(".tv_"+$(this).attr("class")).fadeIn();   
+    });
         
-    })
-        
- //   });
-
-
-    // $(".tnt").click(function() {
-    //     $(".tv_bitva").fadeOut();
-    //     $(".tv_tnt")  .fadeIn();
-    //     $(".tv_punch").fadeOut();
-    // });
-
-    // $(".bitva").click(function() {
-    //     $(".tv_bitva").fadeIn();
-    //     $(".tv_tnt")  .fadeOut();
-    //     $(".tv_punch").fadeOut();
-    // });
-
-
-    // $(".punch").click(function() {
-    //     $(".tv_bitva").fadeOut();
-    //     $(".tv_tnt")  .fadeOut();
-    //     $(".tv_punch").fadeIn();
-    // });
+ 
         
     $(".hamburger").click(function() {
         
@@ -45,8 +23,8 @@ $(".overlay").hide();
     
 
        if ($(".container").css("filter") == "blur(0px)") {
-        $(".container").css("filter","blur(10px)")} else {
-        $(".container").css("filter","blur(0px)")    
+          $(".container").css("filter","blur(10px)")} else {
+          $(".container").css("filter","blur(0px)")    
         }
     
 
