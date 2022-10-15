@@ -101,15 +101,15 @@ html body {
    .container {
     z-index: -1;
     position: absolute;
-    display: flex;
+    display: block;
     justify-content: space-between;
-    
     left: 0px;
     top: -7px;
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     filter : blur(0px);
+    margin: 0 auto;
     
  
    }
@@ -144,6 +144,17 @@ html body {
     /* transform: translateY(-50%); */
     
 }
+
+  1 .tv_bitva {
+    width : 85vw;
+    height: 100vh;
+    left: calc(15vw / 2);
+    /* transform: translateX(50%);     */
+  }
+
+
+
+
 
 .overlay { 
   position: fixed;
