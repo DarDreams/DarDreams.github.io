@@ -44,7 +44,7 @@ html body {
     .menu a {
       text-decoration: none;
       color:darkorange;
-      width: 100%;
+      width: calc(100% * 1);
     }
 
     .menu a:after{
