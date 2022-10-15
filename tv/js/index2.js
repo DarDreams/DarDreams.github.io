@@ -36,6 +36,4 @@ $(".overlay").click(function(){
     $(".container").css("filter","blur(0px)");
 });
     
-// $(".overlay").mousemove(function(){
-//     $(".menu").attr("opacity","1");
-// });
+

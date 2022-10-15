@@ -23,7 +23,7 @@ html body {
     }
     
     .menu {
-      font-family: 'Bungee Spice', "cursive";
+      font-family: 'Consolas', sans-serif;
       position: absolute;
       font-size: 30px;
       width: 0;
@@ -40,40 +40,42 @@ html body {
 
     .menu a {
       text-decoration: none;
+      color:darkorange;
+      width: 100%;
     }
 
-    .menu a::after{
+    .menu a:after{
       content: "";
+      display: inline;
+      position: absolute;
+      /* right: 0; */
+      /* bottom: -3px; */
+      width: 0px;
+      height: 3px; /* Высота линии */
+      background-color: black; /* Цвет подчеркивания при исчезании линии*/
+      transition: width 0.5s ease; /* Время эффекта */
+    }
+    .menu .tnt a:hover:after {
+      content: "";
+      width: 50px;
       display: block;
       position: absolute;
-      right: 0;
-      bottom: -3px;
-      width: 0;
-      height: 2px; /* Высота линии */
-      background-color: black; /* Цвет подчеркивания при исчезании линии*/
-      transition: width 0.5s; /* Время эффекта */
+      height: 3px; /* Высота линии */
+      background-color: red; /* Цвет подчеркивания при появлении линии*/
+      transition: width 0.5s ease;  /* Время эффекта */
     }
-    .menu a:hover:after {
-      content: "";
-    width: 100%;
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 2px; /* Высота линии */
-    background-color: red; /* Цвет подчеркивания при появлении линии*/
-    transition: width 0.5s;  /* Время эффекта */
-    
+    .menu .bitva a:hover:after {
+      width: 85px;
+      height: 3px;
+      background-color: red; /* Цвет подчеркивания при появлении линии*/
     }
 
-    .tnt:hover, .bitva:hover, .punch:hover{   
-     /* transform: scale(1.3); */
-      transition: .8s ease-out; 
-      transition-timing-function: .8 ease;
+    .menu .punch a:hover:after {
+      width: 135px;
+      height: 3px;
+      background-color: red; /* Цвет подчеркивания при появлении линии*/
     }
-    
 
-    
     li {
         
         color:white;
