@@ -29,11 +29,13 @@ html body {
       font-family: 'Swampy', sans-serif;
       position: absolute;
       font-size: 30px;
+      font-weight: 900;
       width: 0;
       height: 0;
       opacity: 1;
       left: 40px;
-      top: calc(100vh / 2 - 40px);      
+      top: calc(100vh / 2 - 50px);      
+      
       z-index: 999;
       display: block;
       /* top:100px; */
@@ -44,12 +46,13 @@ html body {
     .menu a {
       text-decoration: none;
       color:darkorange;
-      width: calc(100% * 1);
+      height: 30px;
+      width: 100%;
     }
 
     .menu a:after{
       content: "";
-      display: inline;
+      display: flex;
       position: absolute;
       /* right: 0; */
       /* bottom: -3px; */
@@ -68,13 +71,13 @@ html body {
       transition: width 0.5s ease;  /* Время эффекта */
     }
     .menu .bitva a:hover:after {
-      width: 85px;
+      width: 75px;
       height: 3px;
       background-color: red; /* Цвет подчеркивания при появлении линии*/
     }
 
     .menu .punch a:hover:after {
-      width: 135px;
+      width: 128px;
       height: 3px;
       background-color: red; /* Цвет подчеркивания при появлении линии*/
     }
@@ -152,13 +155,27 @@ html body {
     
 
 
-/* @media (min-width: 920px) {
+@media (max-width: 320px) {
   .hamburger {
     transform: scale(2);
     left: 20px;
     top: 20px;
   }
   .menu {
-    left: -10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    /* left: 10px; */
+    
+    
+    transform: scale(1.5) translateY(-25%) translateX(15%);
   }
-} */
+
+    li {
+      display:block;
+    }
+    
+ 
+}
