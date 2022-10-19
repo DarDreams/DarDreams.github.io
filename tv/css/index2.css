@@ -26,7 +26,8 @@ html body {
     }
     
     .menu {
-      font-family: 'Swampy', sans-serif;
+      /* font-family: 'Swampy', sans-serif; */
+      font-family: 'tahoma', sans-serif;
       display: block;
       position: absolute;
       
@@ -145,14 +146,34 @@ html body {
     
 }
 
-  1 .tv_bitva {
+   /* .tv_bitva {
     width : 85vw;
     height: 100vh;
     left: calc(15vw / 2);
-    /* transform: translateX(50%);     */
-  }
+  } */
+  
+
+.tnt {
+  animation-name: bounceInLeft; 
+  animation-duration: .5s;
+  animation-timing-function: ease;
+  /* animation-iteration-count: infinite; */
+}
 
 
+li.bitva {
+  animation-name: bounceInLeft; 
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  /* animation-iteration-count: infinite; */
+}
+
+li.punch {
+  animation-name: bounceInLeft; 
+  animation-duration: 1.5s;
+  animation-timing-function: ease;
+  /* animation-iteration-count: infinite; */
+}
 
 
 
