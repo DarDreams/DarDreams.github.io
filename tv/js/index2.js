@@ -1,13 +1,10 @@
 $(".tv_tnt").hide();
 $(".tv_bitva").hide();
 $(".tv_punch").hide();
-//$(".menu").hide();
 $(".overlay").hide();
 
     
     $("li").click(function(){
-      //  alert(".tv_"+$(this).attr("class"));
-      //  alert($(this).css("[class*='tnt']"));
         $(".tv_bitva").fadeOut();
         $(".tv_tnt")  .fadeOut();
         $(".tv_punch").fadeOut();
@@ -23,15 +20,15 @@ $(".overlay").hide();
     if ( $("li").attr("class") == "tnt    animate__animated animate__bounceInLeft") {    
     $("li.tnt, li.bitva, li.punch").removeClass("animate__bounceInLeft");
     $("li.tnt, li.bitva, li.punch").addClass("animate__bounceOutLeft");
-    $(".container").css("filter","blur(0px)");
-    //$(".overlay").hide();
+    
+     //$(".overlay").hide();
     
         } else {       
             $("li.tnt, li.bitva, li.punch").removeClass("animate__bounceOutLeft");
             $("li.tnt, li.bitva, li.punch").addClass("animate__bounceInLeft");
-            
+            $(".overlay").show();
         }
-    $(".overlay").show();
+      
     
  }
  
@@ -41,7 +38,7 @@ $(".overlay").hide();
        
         HideMenuToggle();    
         
-        ///$(".overlay").show();
+        //$(".overlay").show();
         //$(".overlay").toggle();
         
     
