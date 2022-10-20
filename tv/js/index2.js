@@ -6,30 +6,44 @@ $(".overlay").hide();
 
     
     $("li").click(function(){
-        //alert(".tv_"+$(this).attr("class"));
+      //  alert(".tv_"+$(this).attr("class"));
+      //  alert($(this).css("[class*='tnt']"));
         $(".tv_bitva").fadeOut();
         $(".tv_tnt")  .fadeOut();
         $(".tv_punch").fadeOut();
+        //$(".tv_"+$(this).attr("class")).fadeIn();   
+        $("li.tnt, li.bitva, li.punch").removeClass("animate__bounceOutLeft");
+        $("li.tnt, li.bitva, li.punch").removeClass("animate__bounceInLeft");
+        $("li.tnt, li.bitva, li.punch").removeClass("animate__animated");
         $(".tv_"+$(this).attr("class")).fadeIn();   
     });
         
  function HideMenuToggle() {
-    
-    if ( $(".overlay").css("display") == "block") {  
+    //console.log($("li").attr("class"));
+    if ( $("li").attr("class") == "tnt    animate__animated animate__bounceInLeft") {    
     $("li.tnt, li.bitva, li.punch").removeClass("animate__bounceInLeft");
     $("li.tnt, li.bitva, li.punch").addClass("animate__bounceOutLeft");
-        } else {
+    $(".container").css("filter","blur(0px)");
+    //$(".overlay").hide();
+    
+        } else {       
             $("li.tnt, li.bitva, li.punch").removeClass("animate__bounceOutLeft");
             $("li.tnt, li.bitva, li.punch").addClass("animate__bounceInLeft");
+            
         }
-                //    alert($(".overlay").is("visible"));
+    $(".overlay").show();
+    
  }
  
         
     $(".hamburger").click(function() {
        // $(".menu").fadeToggle();   
+       
         HideMenuToggle();    
-        $(".overlay").fadeToggle();
+        
+        ///$(".overlay").show();
+        //$(".overlay").toggle();
+        
     
     
 
@@ -38,12 +52,12 @@ $(".overlay").hide();
            $(".container").css("filter","blur(0px)")    
         }
     
-
+        
     });
 
 $(".overlay").click(function(){
-    $(".overlay").fadeToggle();
-    //$(".menu").fadeToggle();
+    //$(".overlay").fadeOut();
+    //HideMenuToggle();
     $(".container").css("filter","blur(0px)");
 });
     
