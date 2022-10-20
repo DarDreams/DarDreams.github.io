@@ -154,7 +154,7 @@ html body {
   
 
 .tnt {
-  animation-name: bounceInLeft; 
+  /* animation-name: bounceInLeft;  */
   animation-duration: .5s;
   animation-timing-function: ease;
   /* animation-iteration-count: infinite; */
@@ -162,14 +162,14 @@ html body {
 
 
 li.bitva {
-  animation-name: bounceInLeft; 
+  /* animation-name: bounceInLeft;  */
   animation-duration: 1s;
   animation-timing-function: ease;
   /* animation-iteration-count: infinite; */
 }
 
 li.punch {
-  animation-name: bounceInLeft; 
+  /* animation-name: bounceInLeft;  */
   animation-duration: 1.5s;
   animation-timing-function: ease;
   /* animation-iteration-count: infinite; */
