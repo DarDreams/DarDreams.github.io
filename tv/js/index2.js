@@ -3,6 +3,27 @@ $(".tv_bitva").hide();
 $(".tv_punch").hide();
 $(".overlay").hide();
 
+
+
+    if (($("body").width() > $(".tv").width()) || ($("body").height()>$(".tv").height())) 
+    {
+        let topTV = $("body").height()-$(".tv").height()+15;
+        $(".tv").css("top",topTV);
+    }
+    {
+    let leftTV = $("body").width()-$(".tv").width();
+    $(".tv").css("left",leftTV);
+}
+
+
+
+
+
+
+console.clear();
+console.log("TOP = "+topTV+"px");
+console.log("BODY_HEGIHT = "+$("body").height()+"-"+$(".tv").height());
+
 //document.querySelectorAll('.tnt>a:after').setAttribute("width","60px");
     
     $("li").click(function(){
