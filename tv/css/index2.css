@@ -11,7 +11,8 @@ html body {
     position: relative;
     /* width: 100%; */
     height: 97vh;
-    background: url("/pic/tv_room.png");
+    background: url("/pic/tv_room4.png");
+    background-size:cover;
     
     
 }
