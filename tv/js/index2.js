@@ -1,4 +1,4 @@
-$(".tv_tnt").hide();
+//$(".tv_tnt").hide();
 $(".tv_bitva").hide();
 $(".tv_punch").hide();
 $(".overlay").hide();
