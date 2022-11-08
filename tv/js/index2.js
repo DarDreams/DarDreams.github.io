@@ -63,6 +63,7 @@ $(".overlay").click(function(){
     $("li.tnt, li.bitva, li.punch").addClass("animate__bounceOutLeft");
     $(".overlay").fadeOut(1000);
     $(".container").css("filter","blur(0px)");
+    $(".tv").css("filter","blur(0px)");
     console.log("dd!")
 });
 console.log("GAVNO PABOTAET!");
