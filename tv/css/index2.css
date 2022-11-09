@@ -222,7 +222,7 @@ li.punch {
   /* width: initial;
   height: initial; */
   /* transform: scale(1); */
-  background: url("/pic/TV.png") center;
+  background: url("../pic/TV.png") center;
   background-size:cover;
   z-index: 9;
   /* background-color: white; */
