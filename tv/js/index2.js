@@ -24,14 +24,14 @@ $(".overlay").hide();
 //document.querySelectorAll('.tnt>a:after').setAttribute("width","60px");
 
     $("li").click(function(){
-        $(".tv_bitva").fadeOut();
-        $(".tv_tnt")  .fadeOut();
-        $(".tv_punch").fadeOut();
+        $(".tv_bitva").hide();
+        $(".tv_tnt")  .hide();
+        $(".tv_punch").hide();
         //$(".tv_"+$(this).attr("class")).fadeIn();   
        $("li.tnt, li.bitva, li.punch").removeClass("animate__bounceOutLeft");
        $("li.tnt, li.bitva, li.punch").removeClass("animate__bounceInLeft");
        $("li.tnt, li.bitva, li.punch").removeClass("animate__animated");
-        $(".tv_"+$(this).attr("class")).fadeIn(); 
+        $(".tv_"+$(this).attr("class")).fadeIn(1000); 
         $("li.tnt, li.bitva, li.punch").addClass("animate__animated");
         console.log($(".tnt>a").css("width"));
     });
