@@ -45,12 +45,12 @@
 
         }
         &-circle {    
-                position: relative;
-                padding: 15px 0 0 15px;
-                @include before_circle;
-                &:before {
-                    top:0;
-                }
+            position: relative;
+            padding: 15px 0 0 15px;
+            @include before_circle;
+            &:before {
+                top:0;
+            }
         }
         &-text {
             padding-left: 61px;

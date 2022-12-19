@@ -93,7 +93,17 @@
         <div class="container">
             <div class="about__wrapper">
                 <div class="about__photo">
-                    <img src="img/main_photo.jpg" alt="photo" class="about__photo">
+                    <!-- <img srcset="img/main_photo-min.jpg 300w,
+                                 img/main_photo.jpg 400w"
+                          sizes="(max-width:576px) 280px,
+                                 (min-width:577px) 400px"
+                    src="img/main_photo.jpg" alt="photo" class="about__photo"> -->
+                    <picture>
+                        <source media="(max-width:576px)" srcset="img/main_photo-min.jpg">
+                        <source media="(min-width:577px)" srcset="img/main_photo.jpg">
+                        <!-- <source type="image/webp" srcset="img/main_photo-min.jpg"> -->
+                        <img src="img/main_photo.jpg" alt="photo">
+                    </picture>
                 </div>
                 
                 <div class="about__descr">
@@ -372,6 +382,54 @@
                     <div class="price__list-cost">Индивидуально</div>
                     <div class="price__list-subtitle">Создам дизайн для вашего сайта/приложения</div>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="contacts">
+        <div class="container">
+            <div class="contacts__wrapper">
+                <div class="contacts__photo">
+                    <img src="img/main_photo.jpg" alt="photo" class="contacts__photo">
+                </div>
+                <div class="contacts__descr">
+                    <h2 class="title title_fz16 contacts__title">Контакты</h2>
+                    <div class="title title_fz36 contacts__subtitle">Свяжитесь со мной</div>
+                    <div class="divider"></div>
+                    <div class="title title__fz14 contacts__text">Любым удобным для вас способом:</div>
+                        <div class="contacts__social">
+                            <a href="#" class="contacts__link">
+                                <img style="transform: rotate(90deg)" src="icons/social/facebook.svg" alt="facebook">
+                            </a>
+                            <a href="#" class="contacts__link">
+                                <img src="icons/social/telegram.svg" alt="telegram">
+                            </a>
+                            <a href="#" class="contacts__link">
+                                <img src="icons/social/instagram.svg" alt="instagram">
+                            </a>
+                        </div>   
+                        <div class="title title__fz14 contacts__text">Или оставьте ваши данные и я сам вам напишу:</div> 
+                        <form action="#" class="contacts__form">
+                            <div class="contacts__input">
+                                <input required name="name" id="name" type="text">
+                                <label for="name">Ваше имя</label>
+                            </div>
+                            <div class="contacts__input">
+                                <input required name="email" id="email" type="email">
+                                <label for="email">Ваша почта</label>
+                            </div>
+                            <div class="contacts__textarea">
+                                <textarea name="text" id="text"></textarea>
+                                <label for="text">Ваше сообщение</label>
+                            </div>
+                            <div class="contacts__triggers">
+                                <button class="contacts__btn btn">Отправить сообщение</button>
+                                <div class="contacts__policy">
+                                    <input required type="checkbox">
+                                    <span>Я согласен(а) с <a href="policy.html">политикой конфиденциальности</a></span>
+                                </div>
+                            </div>
+                        </form>
+                </div>               
             </div>
         </div>
     </section>
