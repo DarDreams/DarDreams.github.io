@@ -1,21 +1,31 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 :root {
-    --text-color: blue;
-    --big-text: 20px;
+    --text-color: grey;
+    --big-text: 80px;
 }
 
 .wrapper {
-    
-    color: var(--text-color);
+    color: var(--text-color, red)
+}
 
+h1 {
+    margin: 20px;
+    font-size: var(--big-text);
 }
 
 .element {
     width: 500px;
     margin: 20px;
-
 }
 
-.big {
-    font-size: var(--big-text);
+@media (max-width:600px) {
+    :root {
+        --text-color: lime;
+        --big-text:10px;
+    }
 }

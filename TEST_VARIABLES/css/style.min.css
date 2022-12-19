@@ -1,1 +1,1 @@
-:root{--text-color: blue;--big-text: 20px}.wrapper{color:var(--text-color)}.element{width:500px;margin:20px}.big{font-size:var(--big-text)}/*# sourceMappingURL=style.min.css.map */
+*{-webkit-box-sizing:border-box;box-sizing:border-box;margin:0;padding:0}:root{--text-color: grey;--big-text: 80px}.wrapper{color:var(--text-color, red)}h1{margin:20px;font-size:var(--big-text)}.element{width:500px;margin:20px}@media(max-width: 600px){:root{--text-color: purple;--big-text: 40px}}/*# sourceMappingURL=style.min.css.map */
