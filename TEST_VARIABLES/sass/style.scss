@@ -1,0 +1,21 @@
+
+:root {
+    --text-color: blue;
+    --big-text: 20px;
+}
+
+.wrapper {
+    
+    color: var(--text-color);
+
+}
+
+.element {
+    width: 500px;
+    margin: 20px;
+
+}
+
+.big {
+    font-size: var(--big-text);
+}
