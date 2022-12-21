@@ -1,0 +1,53 @@
+.KUSOK_GOVNA {
+	min-height: 100vh;
+	min-width: 100vw;
+	position: relative;
+	background: url("../img/main_bg.jpg") no-repeat 50%/cover;
+	padding-top: 205px;
+}
+
+.navbar-logo {
+	position: absolute;
+	left: 10px;
+	top: 0;
+	//transform: translate(-50%,-50%);
+	img {
+		width: 250px;
+	}
+}
+
+.top-menu {
+	padding-top: 20px;
+	right: 0;
+	position: fixed;
+	//background: rgba(34,34,34,.2);
+
+	.menu-main {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+			&:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+		.menu-item {
+			float: right;
+		}
+	a {
+		text-decoration: none;
+		display: block;
+		line-height: 50px;
+		padding: 0 20px;
+		font-size: 18px;
+		letter-spacing: 2px;
+		font-family: 'Arimo', sans-serif;
+		font-weight: bold;
+		color: white;
+		transition: .3s linear;
+		:hover {
+			background: rgba(0,0,0,.3);
+		}
+		}
+	}
+}
