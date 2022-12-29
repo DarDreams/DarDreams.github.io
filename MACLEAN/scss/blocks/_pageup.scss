@@ -1,0 +1,22 @@
+.pageup {
+    display: none;
+    position: fixed;
+    font-size: 20px;
+    bottom: 60px;
+    right: 80px;
+    transform: scale(2) rotate(-90deg);
+    color:rgba(255, 0, 0, 0.8);
+
+    &:hover {
+        text-decoration: none;
+    }
+    &:before {
+        content: "";
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 0, 0, 0.8);
+        -moz-border-radius: 100px / 50px;
+        -webkit-border-radius: 100px / 50px;
+        border-radius: 100px / 50px;
+    }
+}
