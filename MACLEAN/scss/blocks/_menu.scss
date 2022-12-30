@@ -1,0 +1,62 @@
+.menu {
+	padding: 60px;
+	right: 0;
+	top: 40px;
+	position: fixed;
+	z-index: 1;
+	//background: rgba(34,34,34,.2);
+
+	&__nav {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+			&:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+			&_item {
+			float: right;
+			a {
+				text-decoration: none;
+				display: block;
+				line-height: 50px;
+				padding: 0 20px;
+				font-size: 20px;
+				letter-spacing: 2px;
+				font-family: 'Arimo', sans-serif;
+				font-weight: bold;
+				color: white;
+				transition: .3s linear;
+				:hover {
+					background: rgb(255, 3, 3);
+				}
+				}
+			}
+	
+	}
+}
+
+.link-ease-in-out a {
+  display: inline-block;
+  color: #ffffff; /* Цвет обычной ссылки */
+  line-height: 1;
+  text-decoration: none; /* Убираем подчеркивание */
+  cursor: pointer;
+}
+.link-ease-in-out a:after {
+  margin-top: 5px;
+  background-color: #ff0000; /* Цвет линии при наведении на нее курсора мыши */
+  display: block;
+  content: "";
+  
+  height: 3px; /* Высота линии */
+  width: 0%;
+  -webkit-transition: width .3s ease-in-out;
+  -moz--transition: width .3s ease-in-out;
+  transition: width .3s ease-in-out;
+}
+.link-ease-in-out a:hover:after,
+.link-ease-in-out a:focus:after {
+  width: 100%;
+}
