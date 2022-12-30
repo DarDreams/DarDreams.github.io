@@ -1,28 +1,33 @@
-footer {
+.footer {
     padding: 10px 200px;
     display: grid;
-    grid-template-columns: 500px 500px 500px;
-    grid-template-rows: 150px;
+    grid-template-columns: 400px 500px auto;
+    grid-template-rows: repeat(4, auto);
     height: 200px;
     background-color: rgb(0, 0, 0);
+    color: white;
 
     .footer__flag {
         display: flex;
         grid-column-start: 2;
         grid-row-start: 1;
-        width: 7%;
-        //margin-top: -161px;
-        //margin-left: 520px;
+        width: 28%;
         &_text {
             text-decoration: uppercase;
         }
     }
 
+    .footer__flag_text {
+        grid-column-start: 2;
+        grid-row-start: 2;
+        line-height: 20px;
+    }
+
     .footer__text_left {
-        grid-row-start: 1;
+        margin-left: 40px;
+        grid-column-start: 1;
+        grid-row-start: 2;
         position: relative;
-        color: white;
-       // margin-left: 245px;
         font-size: 14px;
     }
 
