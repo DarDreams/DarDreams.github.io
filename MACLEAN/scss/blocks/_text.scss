@@ -1,9 +1,10 @@
 .main-text { 
-  //  position: fixed;
+    position: fixed;
     height: 100vh;
+    top: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.99);
-    z-index: 100;
+    //background-color: rgba(0, 0, 0, 0.3);
+    
 
     .roca {
         position: relative;
