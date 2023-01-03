@@ -20,12 +20,17 @@
 
 $(document).ready(function(){
 
-$("#first").click(function(){
+  $(".inicio").hide();
+  $(".empresa").hide();
+
+  $(".overlay").hide();
+
+// $("#first").click(function(){
     
-    const ID_SCROLL = "#inicio";
-    $("html, body").animate({scrollTop: $(ID_SCROLL).offset().top+"px"});
-    return false;
-  });
+//     const ID_SCROLL = "#inicio";
+//     $("html, body").animate({scrollTop: $(ID_SCROLL).offset().top+"px"});
+//     return false;
+//   });
 
 
   $(window).scroll(function() {
@@ -42,6 +47,31 @@ $("#first").click(function(){
     return false;
   });
   
+
+  $("#inicio").click(function(){
+    $(".overlay").fadeIn();
+    $(".inicio").show();
+    $(".empresa").fadeOut();
+
+    $(".inicio").addClass("animate__bounceInRight");
+    $(".inicio").removeClass("animate__bounceOutLeft");
+    
+
+  });
+
+
+
+  $("#empresa").click(function(){
+    $(".overlay").fadeIn();
+    $(".empresa").show();
+    $(".inicio").fadeOut(1000);
+
+    $(".inicio").addClass("animate__bounceOutLeft");
+    $(".empresa").addClass("animate__bounceInRight");
+
+    
+
+  });
 
 
 });

@@ -33,6 +33,7 @@
     <!-- Fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@100&display=swap" rel="stylesheet">
 
     <!-- Style  -->
@@ -80,17 +81,16 @@
         <ul class="link-ease-in-out menu__nav__list">
           <li class="underline-one menu__nav_item"><a href="#">Contactos</a></li>
           <li class="underline-one menu__nav_item"><a href="#">Productos</a></li>
-          <li class="underline-one menu__nav_item"><a href="#">Empressa</a></li>
-          <li class="underline-one menu__nav_item"><a id="first" href="#">Inicio</a></li>
+          <li class="underline-one menu__nav_item"><a id="empresa" href="#">Empresa</a></li>
+          <li class="underline-one menu__nav_item"><a id="inicio" href="#">Inicio</a></li>
       </ul>
       <div id="line"></div>
     </nav>
 </section>
 
 <div class="background"></div>
-
-<section class="content">
-    <div class="content__overlay"></div>
+<div class="overlay"></div>
+<section class="inicio animate__animated">
     <div id="inicio" class="container">
         <h2>
             Estamos trabajando en la mejora de nuestro sitio web. En breve dispondremos de nuevos productos y contenidos. Disculpen las molestias.
@@ -115,6 +115,28 @@
     </div>
 </section>
 
+<section class="empresa animate__animated">
+    <div class="container">
+        <ul>
+            <li>
+                La empresa almeriense Conservas Alborán nace bajo la filosofía de ofrecer al consumidor un  producto natural  de calidad,  resaltando su sabor, proporcionando salud, nutrición y bienestar  a través de una alimentación natural de la más alta calidad.
+            </li>
+            <br>
+            <li>
+                Se ofrecen diversas líneas de productos naturales, vegano – naturales  y artesanales mezclando la cocina tradicional con la cocina moderna. Se ofertan distintos productos en  conservas  (ensalada de tomate cherry y pimiento asado al carbón, sobrasada vegetal, morcilla vegetal, cebollitas francesas en vinagre balsámico..), sopas frías y calientes, jaleas ( jalea de aove, jalea de arándanos..), salsas de verduras, caracoles en salsa.
+            </li>
+            <br>
+            <li>
+                En Conservas Alborán comprendemos que las principales preocupaciones de los consumidores de hoy, es consumir productos saludables, sin derivados industriales pero con un exquisito sabor. Por ello, elaboramos de forma artesana, sin conservantes ni colorantes, sin gluten, sin lactosa y con sustitutos del azúcar 100% naturales ( azúcar de abedul..), por lo que la mayoría de  nuestros productos son también aptos para celiacos, diabéticos tipo 2, intolerantes a la lactosa y gran parte de ellos son aptos para personas que lleven una dieta vegetariana o vegana.
+            </li>
+            <br>
+            <li>
+                Nos basamos para nuestras elaboraciones en recetas tradicionales de nuestros antepasados, dándoles un toque de innovación e investigación introduciendo otros productos sustitutivos ( azúcar de abedul), y aprovechar el poder de otros ( semillas de chía).
+            </li>
+        </ul>
+    </div>
+</section>
+
 <footer>
     <section class="footer">
     <div class="footer__logo__wrapper">
@@ -131,13 +153,23 @@
         Fondo Europeo de Desarrollo Regional <br>
         "Una manera de hacer Europa" <br>
     </div>
-    <div class="footer__inforamtion">Informacion: <br> <br>
-        <a href="#">Inicio</a><br>
-        <a href="#">Empresa</a><br>
-        <a href="#">Productos</a><br>
-        <a href="#">Contastos</a>
+    <div class="footer__informacion">Información: <br> <br>
+        <div class="footer__informacion_links">
+            <a href="#">Inicio</a><br>
+            <a href="#">Empresa</a><br>
+            <a href="#">Productos</a><br>
+            <a href="#">Contastos</a>
+        </div>
     </div>
+    <div class="footer__news">
+        <div class="footer__news_caption">Newsletter:</div>
+        <div class="footer__news_text">Inscríbete a nuestra newsletter infórmate de todos nuestros productos y novedades.</div>
+        <input type="email" placeholder="introduce email">
+        <button>></button>
+    </div>
+    
 </section>
+
 </footer>
 
 <a href="#up" class="pageup">&#10148;</a>

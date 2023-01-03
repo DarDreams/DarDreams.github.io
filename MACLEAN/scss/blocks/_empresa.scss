@@ -1,0 +1,17 @@
+.empresa {
+    
+    margin-top: 250px;
+    position: absolute;
+    min-height: 10vh;
+    top: 0;
+    width: 100%;
+   // transition: all .5s;
+    --animate-duration: 2s;
+
+    ul {
+        font-size: 20px;
+        margin-top: 50px;
+        line-height: 30px;
+        color: grey;
+    }
+}

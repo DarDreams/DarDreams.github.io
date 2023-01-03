@@ -1,25 +1,18 @@
-.content { 
-    display: none;
+.inicio { 
+    //display: none;
+    
+    //margin-left:100vw;
     margin-top: 250px;
     position: absolute;
     min-height: 10vh;
     top: 0;
     width: 100%;
+   // transition: all .5s;
+    --animate-duration: 2s;
+    
     //background-color: rgba(0, 0, 0, 0.3);
     
-    &__overlay {
-        //display: none;
-        margin: 0 300px;
-        position: absolute;
-        top: 0px;
-        left: 0;
-        width: 1300px;
-        height: calc(100vh - 250px);
-        background-color: rgba(0, 0, 0,.47);
-        opacity: .65;
-        z-index: -1;
-        
-    } 
+   
 
     h2 {
         margin-top: 70px;
