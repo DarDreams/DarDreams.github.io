@@ -1,11 +1,12 @@
 .logo {
     left: 50px;
+    z-index: 99;
     &__roca {
         margin: 30px;
         width: 65%;
     }
     position: fixed;
-
+    
     &__wrapper {
         position: absolute;
         top: 55px;

@@ -22,8 +22,12 @@ $(document).ready(function(){
 
   $(".inicio").hide();
   $(".empresa").hide();
+  $(".contactos").hide();
 
   $(".overlay").hide();
+
+  $(".menu__overlay").hide();
+
 
 // $("#first").click(function(){
     
@@ -47,7 +51,7 @@ $(document).ready(function(){
     return false;
   });
   
-
+////////////////////////////////////////////
   $("#inicio").click(function(){
     $(".overlay").fadeIn();
     $(".inicio").show();
@@ -55,10 +59,7 @@ $(document).ready(function(){
 
     $(".inicio").addClass("animate__bounceInRight");
     $(".inicio").removeClass("animate__bounceOutLeft");
-    
-
   });
-
 
 
   $("#empresa").click(function(){
@@ -69,9 +70,41 @@ $(document).ready(function(){
     $(".inicio").addClass("animate__bounceOutLeft");
     $(".empresa").addClass("animate__bounceInRight");
 
-    
+  });
+
+  $("#contactos").click(function(){
+    $(".overlay").fadeIn();
+    $(".contactos").show();
+    $(".inicio").fadeOut(1000);
+    $(".empresa").fadeOut(1000);
+
+    $(".inicio").addClass("animate__bounceOutLeft");
+    $(".contactos").addClass("animate__bounceInRight");
 
   });
+
+  ////////////////////////////////////////////
+
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 50) {
+      $(".menu__overlay").fadeIn();
+    } else {
+      $(".menu__overlay").fadeOut();
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 });

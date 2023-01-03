@@ -5,7 +5,8 @@ body, html {
     margin: 0;
     padding: 0;
     overflow-y: scroll;
-overflow-x: hidden;
+    overflow-x: hidden;
+    background-color: black;
 }
 
 ::-webkit-scrollbar{
@@ -17,10 +18,13 @@ overflow-x: hidden;
 }
 
 .overlay {
-    //display: none;
-    margin: 300px;
-    position: absolute;
-    top: 300px;
+    display: inline-block;
+    margin-left: 260px;
+    margin-right: 260px;
+    margin-top: 300px;
+    //margin: auto 300px auto;
+    //position: absolute;
+    //top: 200px;
     left: 0;
     width: 1300px;
     height: calc(100vh - 300px);
@@ -38,6 +42,7 @@ overflow-x: hidden;
     background: url("../img/main_test.jpg") no-repeat center/cover;
   	z-index: -1;
 }
+
 
 
 
