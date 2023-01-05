@@ -1,18 +1,18 @@
 .contactos {
     display: grid;
-    grid-template-columns: 55vw auto;
+    grid-template-columns: 800px auto;
     grid-template-rows: auto;
     //gap: 10px;
     margin-top: 250px;
+    margin-left: 250px;
     position: absolute;
     min-height: 10vh;
     top: 0;
     width: 100%;
-   // transition: all .5s;
-    --animate-duration: 2s;
+    --animate-duration: 1.5s;
 
     &__informacion {
-        margin-left: 150px;
+        margin-left: 0px;
         position: relative;
         color: white;
         font-size: 20px;
@@ -80,7 +80,8 @@
     iframe {
         position: absolute;
         left: 50px;
-        width: 50vw;
+        width: 700px;
         height: 700px;
+        border: 1px solid red;
     }
 }

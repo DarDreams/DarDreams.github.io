@@ -1,0 +1,56 @@
+////////////////////////////////////////////
+  $("#inicio").click(function(){
+    $(".overlay").fadeIn();
+
+    $(".inicio").show();
+    $(".empresa").fadeOut(1000);
+    $(".contactos").fadeOut(1000);
+
+    $(".inicio").addClass("animate__bounceInRight");
+    $(".inicio").removeClass("animate__bounceOutLeft");
+
+    $(".empresa").removeClass("animate__bounceInRight");
+
+    $(".contactos").removeClass("animate__bounceInRight");
+    $(".contactos").addClass("animate__bounceOutLeft");
+  });
+
+
+  $("#empresa").click(function(){
+    $(".overlay").fadeIn();
+
+    $(".empresa").show();
+    $(".contactos").fadeOut(1000);
+    $(".inicio").fadeOut(1000);
+
+
+    $(".inicio").addClass("animate__bounceOutLeft");
+    $(".inicio").removeClass("animate__bounceOutLeft");
+
+    $(".empresa").addClass("animate__bounceInRight");
+
+    $(".contactos").addClass("animate__bounceOutLeft");
+    $(".contactos").removeClass("animate__bounceInRight");
+    
+
+  });
+
+  $("#contactos").click(function(){
+    $(".overlay").fadeIn();
+
+    $(".inicio").fadeOut(1000);
+    $(".empresa").fadeOut(1000);
+    $(".contactos").show();
+
+    $(".inicio").addClass("animate__bounceOutLeft");
+    $(".inicio").removeClass("animate__bounceOutLeft");
+
+    $(".empresa").addClass("animate__bounceOutLeft");
+    $(".empresa").removeClass("animate__bounceInRight");
+
+    $(".contactos").removeClass("animate__bounceOutLeft");
+    $(".contactos").addClass("animate__bounceInRight");
+
+  });
+
+  ////////////////////////////////////////////

@@ -1,0 +1,59 @@
+.productos {
+    //width: 1140px;
+    margin-top: 250px;
+    margin-left: 367px;
+    margin-right: 367px;
+    position: absolute;
+    //height: 1500px;
+    top: 0;
+    &__items {
+    //width: 300px;
+        &_item {
+            //border: 1px solid red;
+            max-width: 300px;
+            img {
+                height: 200px;
+                width: 300px;
+                object-fit: cover;
+                }
+            .cap {
+                color: white;
+                text-align: center;
+                }
+            .precio {
+                color: red;
+                text-align: center;
+                }
+            button {
+                display: table;
+                background-color: black;
+                color: white;
+                border: 1px solid red;
+                margin: 0 auto;
+                margin-bottom: 20px;
+                }
+        }
+    }    
+}
+
+button.slick-next {
+    position: absolute;
+    background: #000;
+    color: red;
+    left: 0;
+    top: 0;
+    //border: 1px solid red;
+    transform: translateY(270px) translateX(1100px);
+    font-size: 40px;
+}
+
+button.slick-prev {
+    position: absolute;
+    background: #000;
+    color: red;
+    left: 0;
+    top: 0;
+    //border: 1px solid red;
+    transform: translateY(270px) translateX(-100px) rotate(180deg);
+    font-size: 40px;
+}

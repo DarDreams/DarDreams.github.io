@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@100&display=swap" rel="stylesheet">
 
+    <!-- Add the new slick-theme.css if you want the default styling -->
+    <link rel="stylesheet"  href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
     <!-- Style  -->
     <link rel="stylesheet" href="css/style.min.css">
 </head>
@@ -47,24 +50,7 @@
         <div class="sidepanel__divider"></div>
         <div class="sidepanel__text"><span>Социальные сети</span></div>
     </aside> -->
-    <!-- <div class="menu">
-        <div class="menu__block">           
-            <nav class="top-menu">
-                <ul class="menu__main">
-                    <li class="left_item"><a href="#">Inicio</a></li>
-                    <li class="left_item"><a href="#">Empressa</a></li>
-                    <li class="right_item"><a href="#">Productos</a></li>
-                    <li class="right_item"><a href="#">Contactos</a></li>
-                </ul>
-                <a class="nav-logo" href="">
-                    <img src="img/logo.png">
-                </a>
-            </nav>
-        </div>
-    <div class="menu__overlay">
-
-    </div>
-    </div> -->
+    
     
 <div class="menu__overlay"></div>    
 
@@ -82,8 +68,8 @@
     
     <nav class="menu__nav">
         <ul class="link-ease-in-out menu__nav__list">
-          <li class="underline-one menu__nav_item"><a href="#">Contactos</a></li>
-          <li class="underline-one menu__nav_item"><a id="contactos" href="#">Productos</a></li>
+          <li class="underline-one menu__nav_item"><a id="contactos" href="#">Contactos</a></li>
+          <li class="underline-one menu__nav_item"><a id="productos" href="#">Productos</a></li>
           <li class="underline-one menu__nav_item"><a id="empresa" href="#">Empresa</a></li>
           <li class="underline-one menu__nav_item"><a id="inicio" href="#">Inicio</a></li>
       </ul>
@@ -102,7 +88,7 @@
             Estamos trabajando en la mejora de nuestro sitio web. En breve dispondremos de nuevos productos y contenidos. Disculpen las molestias.
         </h2>
         <br>
-        <h3> 
+        <h3 class="cap">Hummus  
             «Creemos en trabajar por un mundo digno y justo, en el que la globalización suponga una oportunidad y no una amenaza.»
         </h3>
         <ul> 
@@ -143,7 +129,7 @@
     </div>
 </section>
 
-<section class="contactos">
+<section class="contactos animate__animated">
     <div class="container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1.1m3!1d2211.998792828823!2d-2.605439178379319!3d36.96124486917935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9217c8222779a86!2zMzbCsDU3JzQ2LjAiTiAywrAzNicxOC43Ilc!5e1!3m2!1ses!2ses!4v1672748299814!5m2!1ses!2ses"  style="border: 3" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
@@ -158,12 +144,61 @@
             <div class="contactos__informacion__mensaje_sub">Escríbenos un mensaje:</div>
             <form class="contactos__informacion__mensaje_form" action="#">
                 <input class="name" name="name"  type="text" pattern="[A-Za-z]+" required minlength="3" placeholder="Nombre y apellidos">
-                <input class="tel" name="tel" type="number" required placeholder="Teléfono">
+                <input class="tel" name="tel" type="text" pattern="\+?[0-9]+" required placeholder="Teléfono">
                 <input class="email" name="email" type="email" required placeholder="Email">
-                <textarea class="text" name="mensaje" placeholder="Mensaje"></textarea>             
+                <textarea class="text" name="mensaje" required placeholder="Mensaje"></textarea>             
                 <button class="button button_submit">Enviar</button>
             </form>
         </div>
+    </div>
+</section>
+
+<section class="productos animate__animated">
+    <div class="container">
+        <div class="productos__items">
+            <div class="productos__items_item">
+                <img src="img/productos/hummus/chili.png" alt="">
+                <h3 class="cap">Hummus Chili</h3>
+                <h4 class="precio">5 eur</h4>
+                <button>Comprar</button>
+            </div>
+            <div class="productos__items_item">
+                <img src="img/productos/hummus/cilantro.png" alt="">
+                <h3 class="cap">Hummus Cilantro</h3>
+                <h4 class="precio">5 eur</h4>
+                <button>Comprar</button>
+            </div>
+            <div class="productos__items_item">
+                <img src="img/productos/hummus/clasico.png" alt="">
+                <h3 class="cap">Hummus Clasico</h3>
+                <h4 class="precio">5 eur</h4>
+                <button>Comprar</button>
+            </div>
+            <div class="productos__items_item">
+                <img src="img/productos/hummus/pimiento_asado.png" alt="">
+                <h3 class="cap">Hummus Pimiento Asado</h3>
+                <h4 class="precio">5 eur</h4>
+                <button>Comprar</button>
+            </div>
+            <div class="productos__items_item">
+                <img src="img/productos/hummus/tomate_seco.png" alt="">
+                <h3 class="cap">Hummus Tomate Seco</h3>
+                <h4 class="precio">5 eur</h4>
+                <button>Comprar</button>
+            </div>
+            <div class="productos__items_item">
+                <img src="img/productos/hummus/chili.png" alt="">
+                <h3 class="cap">Hummus Chili</h3>
+                <h4 class="precio">5 eur</h4>
+                <button>Comprar</button>
+            </div>
+            <div class="productos__items_item">
+                <img src="img/productos/hummus/cilantro.png" alt="">
+                <h3 class="cap">Hummus Cilantro</h3>
+                <h4 class="precio">5 eur</h4>
+                <button>Comprar</button>
+            </div>
+          </div>
     </div>
 </section>
 
@@ -202,12 +237,15 @@
     
 </section>
 
+
+
 </footer>
 
 <a href="#up" class="pageup">&#10148;</a>
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
