@@ -2,12 +2,14 @@
     left: 50px;
     z-index: 99;
     &__roca {
+        transition: var(--s) all;
         margin: 30px;
         width: 65%;
     }
     position: fixed;
     
     &__wrapper {
+        transition: var(--s) all;
         position: absolute;
         top: 55px;
         left: 210px;

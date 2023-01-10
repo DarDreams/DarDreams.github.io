@@ -100,8 +100,10 @@ let animate = "animate__bounceInRight"
   $(window).scroll(function() {
     if ($(this).scrollTop() > 50) {
       $(".menu__overlay").fadeIn();
+       $("header").addClass("header_mini");
     } else {
       $(".menu__overlay").fadeOut();
+      $("header").removeClass("header_mini");
     }
   });
 
