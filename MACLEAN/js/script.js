@@ -26,16 +26,7 @@ $(document).ready(function(){
   $(".productos").hide();
 
   $(".overlay").hide();
-
   $(".menu__overlay").hide();
-
-
-// $("#first").click(function(){
-    
-//     const ID_SCROLL = "#inicio";
-//     $("html, body").animate({scrollTop: $(ID_SCROLL).offset().top+"px"});
-//     return false;
-//   });
 
 
   $(window).scroll(function() {

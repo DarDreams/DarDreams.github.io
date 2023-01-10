@@ -1,15 +1,10 @@
 .inicio { 
-    //display: none;
-    
-    //margin-left:100vw;
-    margin-top: 250px;
+    width: 1300px;
     position: absolute;
     min-height: 10vh;
     top: 0;
-    width: 100%;
-   // transition: all .5s;
-    --animate-duration: 2s;
-    
+    margin: 250px var(--mid);
+
     //background-color: rgba(0, 0, 0, 0.3);
     
    
