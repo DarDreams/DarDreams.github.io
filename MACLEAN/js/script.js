@@ -55,7 +55,8 @@ function anime(cl1,cl2) {
 ////////////////ANIMATE//////////////////////
 let animate = "animate__bounceInRight"
 
-  $("#inicio").click(function(){
+  $(".inicio_link").click(function(){
+    $("html, body").animate({scrollTop: 0+"px"});
     $(".overlay").fadeIn();
     $(".inicio").show();
     $(".empresa").fadeOut(1000);
@@ -65,7 +66,8 @@ let animate = "animate__bounceInRight"
     anime(".inicio", animate);
   });
 
-  $("#empresa").click(function(){
+  $(".empresa_link").click(function(){
+    $("html, body").animate({scrollTop: 0+"px"});
     $(".overlay").fadeIn();
     $(".empresa").show();
     $(".contactos").fadeOut(1000);
@@ -75,7 +77,8 @@ let animate = "animate__bounceInRight"
     anime(".empresa", animate);
   });
 
-  $("#contactos").click(function(){
+  $(".contactos_link").click(function(){
+    $("html, body").animate({scrollTop: 0+"px"});
     $(".overlay").fadeIn();
     $(".inicio").fadeOut(1000);
     $(".empresa").fadeOut(1000);
@@ -85,7 +88,8 @@ let animate = "animate__bounceInRight"
     anime(".contactos", animate);
   });
 
-  $("#productos").click(function(){
+  $(".productos_link").click(function(){
+    $("html, body").animate({scrollTop: 0+"px"});
     $(".overlay").fadeIn();
     $(".inicio").fadeOut(1000);
     $(".empresa").fadeOut(1000);
