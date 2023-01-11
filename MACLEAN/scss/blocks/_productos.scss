@@ -22,6 +22,7 @@
                 object-fit: cover;
                 }
             .cap {
+                margin-top: 10px;
                 color: white;
                 text-align: center;
                 }
@@ -31,11 +32,13 @@
                 }
             button {
                 display: table;
+                width: 100px;
                 background-color: black;
                 color: white;
                 border: 1px solid var(--red);
                 margin: 0 auto;
                 margin-bottom: 20px;
+                border-radius: 4px;
                 }
         }
     }    

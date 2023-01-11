@@ -49,8 +49,8 @@ body {
 .background {
     left: 0;
     top: 0;
-	width: calc(100vw - 4px);
-	min-height: 100vh;
+	//width: calc(100vw - 4px);
+	height: 100vh;
 	//background: url("../img/main_test.jpg") no-repeat 10%/cover;
     background: url("../img/main_test.jpg") no-repeat center/cover;
   	z-index: -1;

@@ -139,8 +139,19 @@ $(".logo").click(function(){
 
 
 
+// $(".b_mail").click(function(){
+  
+//   var txt = $(".e_mail").val();
+//    alert("ahora usted recibirá las noticias a su correo: "+txt);
+  
+// });
 
 
+
+function test()
+{
+alert("Se");
+}
 
 
 
