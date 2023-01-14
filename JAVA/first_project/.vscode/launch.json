@@ -1,17 +1,13 @@
 {
     "configurations": [
-        {
-            "command": "npm start",
-            "name": "Run npm start",
-            "request": "launch",
-            "type": "node-terminal"
-        },
     {
-        "name": "Launch Chrome",
+        "name": "GAVNO,
+        "program": "${workspaceFolder}/test.js",
         "request": "launch",
-        "type": "chrome",
-        "url": "http://localhost:8080",
-        "webRoot": "${workspaceFolder}"
+        "skipFiles": [
+            "<node_internals>/**"
+        ],
+        "type": "node"
     }
     ]
 }
