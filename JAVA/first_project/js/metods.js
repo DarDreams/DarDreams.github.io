@@ -1,8 +1,8 @@
 "use strict";
 
-const fruit = "Some fruit";
+const fruit = "Some . fruit";
 console.log(fruit[2]);
-console.log(fruit.indexOf("fruit"));
+console.log(fruit.indexOf("."));
 
 const logg = "Hello world";
 console.log(logg.slice(6,10));
