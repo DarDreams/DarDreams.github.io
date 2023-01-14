@@ -43,13 +43,68 @@ calculateVolumeAndArea();
 
 
 function getCoupeNumber(num) {
-    if (num > 36 || num <= 0 || Number.isInteger(num) == false || typeof(num) != "number") {
+    if (Number.isInteger(num) == false || typeof(num) != "number" || num < 0) {
         console.log("Ошибка. Проверьте правильность введенного номера места");
         return("Ошибка. Проверьте правильность введенного номера места");
     }
-    let vagon = Math.ceil(num);
-    console.log(vagon);
-
+    if ( num > 36 || num == 0 ) {
+        console.log("Таких мест в вагоне не существует");
+        return("Таких мест в вагоне не существует");
+    }
+    let vagon = Math.ceil(num / 4);
+    return(vagon);
 }
+getCoupeNumber('heello');
 
-getCoupeNumber(33);
+
+// 1) Создайте функцию, которая принимает в себя целое число минут и возвращает время в нужном формате строки. (Смотри пример). Обратите внимание на окончание слова "час" - оно меняется в зависимости от цифры. Если вместо аргумента приходит не число, дробное или отрицательное число - функция возвращает строку "Ошибка, проверьте данные"
+// Внимание! Давайте пока ограничимся максимум 600ю минутами (10 часов). Так как проверки на большие числа будут раздувать код (33 часа, 31 час, 11 часов и тд). Этого будет достаточно и код будет проверять именно этот промежуток (1 - 10 часов). Но вы можете реализовать и полный скрипт, он тоже должен проходить тесты.
+// Пример:
+// getTimeFromMinutes(150) => "Это 2 часа и 30 минут"
+// getTimeFromMinutes(50) => "Это 0 часов и 50 минут"
+// getTimeFromMinutes(0) => "Это 0 часов и 0 минут"
+// getTimeFromMinutes(-150) => "Ошибка, проверьте данные"
+
+function getTimeFromMinutes(min) {
+    if (Number.isInteger(min) == false || typeof(min) != "number" || min < 0) {
+        console.log("Ошибка, проверьте данные");
+        return("Ошибка, проверьте данные");
+    }
+
+    let h = Math.floor(min / 60);
+    let m = Math.floor(min % 60);
+
+    let hT = "";
+
+    switch (h) {
+        case 0: hT="часов"; break;
+        case 1: hT="час";   break;
+        case 2: hT="часа"; break;
+        case 3: hT="часа"; break;
+        case 4: hT="часа"; break;
+        default: hT = 'часов';
+    }
+
+    console.log(`Это ${h} ${hT} и ${m} минут`);
+    return(`Это ${h} ${hT} и ${m} минут`);
+}
+getTimeFromMinutes(180);
+
+
+// Напишите функцию, которая принимает в себя 4 числа и возвращает самое большее из них. Если один из аргументов не является числом или их меньше 4 - возвращается 0. Дробные числа разрешены.
+// Пример:
+// findMaxNumber(1, 5, 6.6, 11); =>  11
+// findMaxNumber(1, 5, '6', '10');  =>  0
+
+function findMaxNumber(a,b,c,d) {
+    console.log(`${typeof(a)} ${typeof(b)} ${typeof(c)} ${typeof(d)}`);
+    if (typeof(a) != "number" || typeof(b) != "number" || typeof(c) != "number" || typeof(d) != "number" || typeof(b) != "undefined" || typeof(c) != "undefined" || typeof(d) != "undefined") {
+        console.log("0");
+         return("0");
+    }
+
+    console.log(Math.max(a,b,c,d));
+    return(Math.max(a,b,c,d));
+    
+}
+findMaxNumber('6', '10');
