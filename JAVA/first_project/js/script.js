@@ -97,14 +97,17 @@ getTimeFromMinutes(180);
 // findMaxNumber(1, 5, '6', '10');  =>  0
 
 function findMaxNumber(a,b,c,d) {
-    console.log(`${typeof(a)} ${typeof(b)} ${typeof(c)} ${typeof(d)}`);
-    if (typeof(a) != "number" || typeof(b) != "number" || typeof(c) != "number" || typeof(d) != "number" || typeof(b) != "undefined" || typeof(c) != "undefined" || typeof(d) != "undefined") {
-        console.log("0");
-         return("0");
+  let numb = ["a","b","c","d"];
+  for (let i = 1; i < 4;i++) {
+    if (typeof(numb[i]) != "number" || numb[i] == "NaN") {
+        console.log(typeof(numb[i]));
+        //return("0");
     }
+}
 
     console.log(Math.max(a,b,c,d));
     return(Math.max(a,b,c,d));
     
 }
-findMaxNumber('6', '10');
+
+findMaxNumber(1,5,3);
