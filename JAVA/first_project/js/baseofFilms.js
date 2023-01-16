@@ -2,10 +2,10 @@
 let numberOfFilms;
 
 function start() {
-     numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "1");
+     numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "1").trim();
 
-     while (numberOfFilms =='' || numberOfFilms == null || isNaN(numberOfFilms) {
-        numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "1");
+     while (numberOfFilms =='' || numberOfFilms == null || isNaN(numberOfFilms) ){
+        numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "1").trim();
     }
 }
 
@@ -21,8 +21,8 @@ let personalMovieDB = {
 
 function rememberMyFilms() {
     for (let i = 0; i < 2; i++) {
-        const a = prompt('Один из просмотреных фильмов?', ``);
-        const b = +prompt('На сколько оцените его?', ``);  
+        const a = prompt('Один из просмотреных фильмов?', ``).trim();
+        const b = +prompt('На сколько оцените его?', ``).trim();  
     
         if (a != null && b != null && a !="" && b !="" && a.length < 50) {
             personalMovieDB.movies[a] = b;
@@ -54,7 +54,7 @@ detectPersonalLevel();
 
 function showMyDB(hidden) {
     if (!hidden) {
-        console.log(personalMovieDB)
+        console.log(personalMovieDB);
     }
 }
 

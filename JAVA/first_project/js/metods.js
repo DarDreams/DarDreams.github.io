@@ -5,7 +5,7 @@ console.log(fruit[2]);
 console.log(fruit.indexOf("."));
 
 const logg = "Hello world";
-console.log(logg.slice(6,10));
+console.log(logg.slice(1,10));
 console.log(logg.slice(6));
 console.log(logg.slice(-5));
 
@@ -18,6 +18,9 @@ console.log(Math.round(num));
 const test = "12.2px";
 console.log(parseFloat(test));
 console.log(parseInt(test));
+
+const text = " asdasd asdasdas ";
+    text.trim();
 
 
 
