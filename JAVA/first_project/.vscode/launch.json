@@ -1,13 +1,23 @@
 {
+    "version": "0.2.0",
     "configurations": [
-    {
-        "name": "GAVNO,
-        "program": "${workspaceFolder}/test.js",
-        "request": "launch",
-        "skipFiles": [
-            "<node_internals>/**"
-        ],
-        "type": "node"
-    }
+        {
+            "name": "Launch Edge",
+            "request": "launch",
+            "type": "msedge",
+            "url": "http://127.0.0.1:3000/index.html",
+            "webRoot": "${workspaceFolder}"
+        },
+        
+
+        {
+            // режим launch без сервера
+            "name": "Launch index.html, without WebServer",
+            "type": "chrome",
+            "request": "launch",
+            "file": "${workspaceFolder}/index.html"
+        },
+        
     ]
 }
+
