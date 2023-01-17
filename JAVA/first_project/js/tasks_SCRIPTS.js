@@ -395,7 +395,7 @@ isBudgetEnough(shoppingMallData);
 
 // Задача интересная, немного заковыристая, но все необходимое для неё мы уже проходили. Просто распишите логику действий строка за строкой.
 
-const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam', 'some'];
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam', 'noname'];
 
 function sortStudentsByGroups(arr) {
    //console.log(arr.sort());

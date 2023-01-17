@@ -1,5 +1,4 @@
 "use strict";
-
 let personalMovieDB = {
     count:  0,
     movies: {},
@@ -83,3 +82,4 @@ let personalMovieDB = {
 
 console.log(personalMovieDB);
 document.write(`Название первого фильма:${personalMovieDB.movies.name} \n Оценка: ${personalMovieDB.movies.score}`);
+
