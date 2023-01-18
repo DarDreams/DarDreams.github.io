@@ -107,39 +107,29 @@ var caliber = {
         }
     },
     convertNumbers: function(numbers) {
-    var sNumb = {
-        0: "{Chr(186)}",
-        1: "{Chr(185)}",
-        2: "{Chr(178)}",
-        3: "{Chr(179)}",
-        4: "{Chr(8308)}",
-        5: "{Chr(8309)}",
-        6: "{Chr(8310)}",
-        7: "{Chr(8311)}",
-        8: "{Chr(8312)}",
-        9: "{Chr(8313)}",
-        10: "{Chr(729)}",
-        11: "{Chr(96)}",
-        12: "{Chr(8314)}",
-        13: "{Chr(8315)}"
-    };
-    numbers = numbers.split('');
-    for (var i = 0; i < numbers.length; i++) {
-        for (var value in sNumb) {
-               if (numbers[i].indexOf(":") >= 0) {numbers[i] = numbers[i].replace(/\:/g, sNumb[10]); break; 
-        } else if (numbers[i].indexOf(".") >= 0) {numbers[i] = numbers[i].replace(/\./g, sNumb[11]); break;
-        } else if (numbers[i].indexOf("+") >= 0) {numbers[i] = numbers[i].replace(/\+/g, sNumb[12]); break;
-        } else if (numbers[i].indexOf("-") >= 0) {numbers[i] = numbers[i].replace(/\-/g, sNumb[13]); break;
-        } else if (numbers[i] == sNumb[i]){
-        numbers[i] = numbers[i].replace(numbers[i], sNumb[i]);break;  
-        }{
-        }{
-        }{
-        }  
-    }}
-
-    numbers = numbers.join(",").replace(/\,/g, '');
-    return numbers;
-}};
-
-console.log(caliber.convertNumbers("2"));
+        var res = [];
+        for (var i = 0; i < numbers.length; i++) {
+            res[0] = numbers.replace(/0/g,"{Chr(186)}");
+            //console.log("====",numbers.replace("0","{Chr(186)}"));
+        
+            res[1] = numbers.replace(/1/g,"{Chr(185)}");
+            // res[2] = numbers.replace(/2/g,"{Chr(178)}");
+            // res[3] = numbers.replace(/3/g,"{Chr(179)}");
+            // res[4] = numbers.replace(/4/g,"{Chr(8308)}");
+            // res[5] = numbers.replace(/5/g,"{Chr(8309)}");
+            // res += numbers.replace(/6/g,"{Chr(8310)}");
+            // res += numbers.replace(/7/g,"{Chr(8311)}");
+            // res += numbers.replace(/8/g,"{Chr(8312)}");
+            // res += numbers.replace(/9/g,"{Chr(8313)}");
+            // res += numbers.replace(/\:/g,"{Chr(729)}");
+            // res += numbers.replace(/\./g,"{Chr(96)}");
+            // res += numbers.replace(/\-/g,"{Chr(8314)}");
+            // res += numbers.replace(/\+/g,"{Chr(8315)}");
+            res = res[0]+res[1];
+            return res;
+        }
+        //res = res.join(",").replace(/\,/g, '');
+        
+    }
+};
+console.log(caliber.convertNumbers("01"));
