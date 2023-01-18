@@ -1,9 +1,14 @@
+var test = 0;
 var caliber = {
     resizerName: function(name, len) {
-        for (var i = 0; i < len - name.length; i++) {
+        //console.log(name.length);
+        len = len - name.length-1;
+        for (var i = 1; i <= len; i++) {
             name += " ";
-            return name;
+         //   console.log(i);
         }
+        test = name.length;
+        return name;
     },
     resizerNumbers: function(number, loop) {
         if (loop == 4) {
@@ -160,4 +165,4 @@ var caliber = {
     }
 };
     
-    console.log(caliber.resizerName("Jack",19));
+   // console.log(caliber.resizerName("Jack",20),"["+test+"]");
