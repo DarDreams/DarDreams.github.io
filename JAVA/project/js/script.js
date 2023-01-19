@@ -16,7 +16,7 @@
 
 const movieDB = {
     movies: [
-        "Логан",
+        "ЛоганC",
         "Лига справедливости",
         "Ла-ла лэнд",
         "Одержимость",
@@ -31,7 +31,7 @@ const poster = document.querySelector(".promo__bg");
 const genre = poster.querySelector(".promo__genre");
 const movieList = document.querySelector(".promo__interactive-list");
       
-document.querySelector(".promo__adv").remove();
+ document.querySelector(".promo__adv").remove();
  adv.forEach(item =>{
          item.remove();
      });
