@@ -417,3 +417,65 @@ function sortStudentsByGroups(arr) {
 }
 sortStudentsByGroups(students);
 
+
+////////////////////////////////////////////////////////////////
+const restorantData = {
+    menu: [
+        {
+            name: 'Salad Caesar',
+            price: '14$'
+        },
+        {
+            name: 'Pizza Diavola',
+            price: '9$'
+        },
+        {
+            name: 'Beefsteak',
+            price: '17$'
+        },
+        {
+            name: 'Napoleon',
+            price: '7$'
+        }
+    ],
+    waitors: [
+        {name: 'Alice', age: 22}, {name: 'John', age: 24}
+    ],
+    averageLunchPrice: '20$',
+    openNow: true
+};
+
+function isOpen(prop) {
+    let {price} = restorantData.openNow;
+    let answer = '';
+    prop ? answer = 'Закрыто' : answer = 'Открыто';
+
+    return answer;
+}
+
+//console.log(isOpen(openNow));
+
+
+//////////////////////////////////////////////////
+function isAverageLunchPriceTrue(fDish, sDish, average) {
+    if (+parseInt(fDish.price) + (parseInt(sDish.price)) < average) {
+        return 'Цена ниже средней';
+    } else {
+        return 'Цена выше средней';
+    }
+}
+
+//console.log(isAverageLunchPriceTrue(restorantData.menu[0], restorantData.menu[1], restorantData.averageLunchPrice));
+
+// Функция transferWaitors создана для того, чтобы копировать шаблон данных и передавать их в другой ресторан. Конечно, в другом ресторане будут другие блюда, другие официанты и тп. Сейчас эта функция только в начале разработки и должна менять данные про официантов.
+
+// Но в нынешнем виде мы обнаружили, что после её запуска не только копия данных содержит новых официантов, но и основные данные! В restorantData сотрудник Alice исчезает и заменяется Mike! Необходимо найти причину и немедленно исправить, чтобы данные были разделены.
+
+function transferWaitors(data) {
+    const copy = Object.assign({}, data);
+
+    copy.waitors = {name: 'Mike', age: 32};
+    return copy;
+}
+
+console.log(transferWaitors(restorantData));
