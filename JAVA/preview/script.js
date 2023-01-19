@@ -45,6 +45,6 @@ const time = video.currentTime;
 
 let timerId2 = setInterval(() => console.log(document.getElementsByTagName("video")[0].currentTime), 2000);
     
-let timerId = setInterval(i => {
-    console.log(document.getElementsByTagName("video")[0].currentTime), 2000;
-});
+let timerId2 = setInterval(() => console.log(document.getElementsByTagName("video")[0].currentTime), 2000);
+
+let func = (arg1, arg2, ...argN) => expression;
