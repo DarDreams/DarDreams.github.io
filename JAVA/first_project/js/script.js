@@ -19,3 +19,4 @@ function sortStudentsByGroups(arr) {
     console.log(`Оставшиеся студенты: -`);
 }
 sortStudentsByGroups(students);
+

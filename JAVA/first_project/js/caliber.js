@@ -24,9 +24,12 @@ var caliber = {
         if (loop == 2) {
             number = number.replace(/^(\d)$/g, '0$1');
         }
+            ;
             return number;
     },
     checkSkills: function(text) {
+
+        text = String(text);
         var skills = {
             PERK_1: [
                 "booster_pouch",
@@ -118,6 +121,7 @@ var caliber = {
         }
     },
     convertNumbers: function(numbers) {
+        numbers = String(numbers);
         var res = "";
         var sNumb = {
             0: "{Chr(8304)}",
