@@ -115,6 +115,7 @@ var caliber = {
                }
                if (text == "null") {
                     res = key+" "+0;
+                 //res = "00";
                     return res;
                }
             }
@@ -170,3 +171,4 @@ var caliber = {
 };
     
    // console.log(caliber.resizerName("Jack",20),"["+test+"]");
+   console.log(caliber.checkSkills("null"));
