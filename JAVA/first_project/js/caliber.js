@@ -50,7 +50,6 @@ var caliber = {
                 "adrenaline_rush",
                 "dead_silence",
                 "in_the_crosshairs",
-                "null"
             ],
             PERK_2: [
                 "fireres_materials",
@@ -66,7 +65,6 @@ var caliber = {
                 "stay_frosty",
                 "stim_medpacks",
                 "inner_strength",
-                "null"
             ],
             PERK_3: [
                 "forend_processing",
@@ -86,7 +84,6 @@ var caliber = {
                 "robotic_calibrations",
                 "heavy_barrel",
                 "lightweight_equipment",
-                "null"
         
             ],
             PERK_4: [
@@ -106,7 +103,6 @@ var caliber = {
                 "die_hard",
                 "shoulder_to_shoulder",
                 "own_priorities",
-                "null"
             ]
         };
         for (var key in skills) {
@@ -117,7 +113,7 @@ var caliber = {
                 
                if (skills[key][i] == text) {
                    // console.log(key,"-",i+1);
-                     res = key+" "+(i+1);
+                     res = key+" "+(i);
                     return res;
                }
                if (text == "null") {
@@ -178,4 +174,4 @@ var caliber = {
 };
     
    // console.log(caliber.resizerName("Jack",20),"["+test+"]");
- console.log(caliber.checkSkills("own_priorities"));
+ console.log(caliber.checkSkills("shoulder_to_shoulder"));
