@@ -1,4 +1,3 @@
-var test = 0;
 var caliber = {
     resizerName: function(name, len) {
         //console.log(name.length);
@@ -49,7 +48,7 @@ var caliber = {
                 "cold_blood",
                 "adrenaline_rush",
                 "dead_silence",
-                "in_the_crosshairs",
+                "in_the_crosshairs"
             ],
             PERK_2: [
                 "fireres_materials",
@@ -64,7 +63,7 @@ var caliber = {
                 "lightweight_armor",
                 "stay_frosty",
                 "stim_medpacks",
-                "inner_strength",
+                "inner_strength"
             ],
             PERK_3: [
                 "forend_processing",
@@ -83,7 +82,7 @@ var caliber = {
                 "strong_stim",
                 "robotic_calibrations",
                 "heavy_barrel",
-                "lightweight_equipment",
+                "lightweight_equipment"
         
             ],
             PERK_4: [
@@ -102,24 +101,17 @@ var caliber = {
                 "merciless",
                 "die_hard",
                 "shoulder_to_shoulder",
-                "own_priorities",
+                "own_priorities"
             ]
         };
         for (var key in skills) {
-            //console.log(skills[key]+" - "+skills[key].length);///////////////////
-            var res = "";
-          //  for (var i = 0; i < skills[key].length;i++) {
-            for (var i in skills[key]) {
-                
+           // console.log(skills[key].length);///////////////////
+            for (var i = 0; i <= skills[key].length-1;i++) {
                if (skills[key][i] == text) {
-                   // console.log(key,"-",i+1);
-                     res = key+" "+(i);
-                    return res;
+                    return key+" "+(i+1);
                }
                if (text == "null") {
-                    res = key+" "+0;
-                 //res = "00";
-                    return res;
+                    return key+" 0";
                }
             }
         }
@@ -174,4 +166,6 @@ var caliber = {
 };
     
    // console.log(caliber.resizerName("Jack",20),"["+test+"]");
- console.log(caliber.checkSkills("shoulder_to_shoulder"));
+ console.log("CROSSHAIRS",caliber.checkSkills("in_the_crosshairs"));
+ console.log("OWN",caliber.checkSkills("own_priorities"));
+ console.log("NULL",caliber.checkSkills("null"));

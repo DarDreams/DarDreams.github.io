@@ -1,5 +1,4 @@
-﻿var test = 0;
-var caliber = {
+﻿var caliber = {
     resizerName: function(name, len) {
 
         len = len - name.length-1;
@@ -106,17 +105,13 @@ var caliber = {
             ]
         };
         for (var key in skills) {
-            var res = "";
-            for (var i = 0; i < skills[key].length-1;i++) {
-               if (skills[key][i] == text) {
 
-                     res = key+" "+(i+1);
-                    return res;
+            for (var i = 0; i <= skills[key].length-1;i++) {
+               if (skills[key][i] == text) {
+                    return key+" "+(i+1);
                }
                if (text == "null") {
-                    res = key+" "+0+" "+i;
-                 //res = "00";
-                    return res;
+                    return key+" 0";
                }
             }
         }
