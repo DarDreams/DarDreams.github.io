@@ -1,11 +1,11 @@
-var test = 0;
+﻿var test = 0;
 var caliber = {
     resizerName: function(name, len) {
-        //console.log(name.length);
+
         len = len - name.length-1;
         for (var i = 1; i <= len; i++) {
             name += " ";
-         //   console.log(i);
+
         }
         test = name.length;
         return name;
@@ -110,13 +110,13 @@ var caliber = {
             ]
         };
         for (var key in skills) {
-            //console.log(skills[key]+" - "+skills[key].length);///////////////////
+
             var res = "";
           //  for (var i = 0; i < skills[key].length;i++) {
             for (var i in skills[key]) {
                 
                if (skills[key][i] == text) {
-                   // console.log(key,"-",i+1);
+
                      res = key+" "+(i+1);
                     return res;
                }
@@ -132,20 +132,20 @@ var caliber = {
         numbers = String(numbers);
         var res = "";
         var sNumb = {
-            0: "{Chr(8304)}",
-            1: "{Chr(185)}",
-            2: "{Chr(178)}",
-            3: "{Chr(179)}",
-            4: "{Chr(8308)}",
-            5: "{Chr(8309)}",
-            6: "{Chr(8310)}",
-            7: "{Chr(8311)}",
-            8: "{Chr(8312)}",
-            9: "{Chr(8313)}",
-            10: "{Chr(729)}",
-            11: "{Chr(96)}",
-            12: "{Chr(8314)}",
-            13: "{Chr(8315)}"
+            0: "⁰",
+            1: "¹",
+            2: "²",
+            3: "³",
+            4: "⁴",
+            5: "⁵",
+            6: "⁶",
+            7: "⁷",
+            8: "⁸",
+            9: "⁹",
+            10: "˙",
+            11: "`",
+            12: "⁺",
+            13: "⁻"
         };
         numbers = numbers.split('');
         for (var key = 0; key < numbers.length+1; key++) {
@@ -177,5 +177,3 @@ var caliber = {
     }
 };
     
-   // console.log(caliber.resizerName("Jack",20),"["+test+"]");
- console.log(caliber.checkSkills("own_priorities"));
