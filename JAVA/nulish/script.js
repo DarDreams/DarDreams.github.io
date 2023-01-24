@@ -37,6 +37,12 @@ userData.sayy?.();
 const boxesQuery = document.querySelectorAll('.box');
 const boxesGet = document.getElementsByClassName('box');
 
+boxesQuery.forEach(box => {
+    if (box.matches('.this')) console.log('this one');
+});
+
+console.log(boxesQuery[0].closest('.wrapper'));
+
 boxesQuery[0].remove();
 boxesGet[0].remove();
 
@@ -46,9 +52,51 @@ for (let i = 0; i < 5; i++) {
     document.body.append(div);
 }
 
-
 console.log(boxesQuery);
 console.log(boxesGet);
 console.log(document.body.children);
 
 console.log((Array.from(boxesGet)));
+
+/////////////////////////////////////////////////////////////////////
+const obj = {
+    name: 'text',
+    [Symbol('id')]: 1
+};
+
+let id = Symbol('id');
+obj[id] = 1;
+console.log(obj[id]);
+
+const myAwesomeDB = {
+    movies: [],
+    actors: [],
+    [Symbol('id')]: 123          //Object.getOwnPropertySymbols(obj)[0];
+}
+
+///Стороний код
+
+myAwesomeDB.id = '2342342343';
+
+///////////////////////////////////////////////////
+
+const user = {
+    name: 'Alex',
+    surname: 'Smith',
+    birthday: '20/04/1993',
+    showMyPublicData: function() {
+        console.log(`${this.name} ${this.surname}`);
+    }
+};
+
+Object.defineProperty(user,'birthda',{writeable: false});
+
+console.log(Object.getOwnPropertyDescriptor(user, 'name'));
+
+Object.defineProperty(user,'name',{writeable: false});
+// Object.defineProperty(user,'gender',{value: 'male'});
+// console.log(Object.getOwnPropertyDescriptor(user, 'gender'));
+
+//writeable
+//enumerable
+//configurable
