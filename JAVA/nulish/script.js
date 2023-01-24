@@ -100,3 +100,75 @@ Object.defineProperty(user,'name',{writeable: false});
 //writeable
 //enumerable
 //configurable
+
+//////////////////////////////////////////////////////
+const user = {
+    name: 'Alex',
+    surname: 'Smith',
+    birthday: '20/04/1993',
+    showMyPublicData: function() {
+        console.log(`${this.name} ${this.surname}`);
+    }
+};
+
+for (const key in user) {
+    console.log(user[key]);
+        
+    }
+
+    const arr = ['b','a','c'];
+
+    for (const key in arr) {
+            
+        }
+    
+        /////////////////Сделать объект итерируемым///////////////////
+        const salaries = {
+            john: 500,
+            ivan: 1000,
+            ann: 5000
+        };
+        
+        salaries[Symbol.iterator] = function () {
+            return {
+                current: this.john,
+                last: this.ann,
+
+                next() {
+                    if (this.current < this.last) {
+                        this.current = this.current  + 500;
+                        return {done: false, value: this.current};
+                    } else {
+                        return {done: true};
+                    }
+                }
+            };
+        };
+
+for (let res of salaries) {
+    console.log(res);
+};
+
+/////////////////////////////////////////////////////
+// const user = {
+//     name: 'Alex',
+//     surname: 'Smith',
+//     birthday: '20/04/1993',
+//     showMyPublicData: function() {
+//         console.log(`${this.name} ${this.surname}`);
+//     }
+// };
+
+const shops = [
+    {rice: 500},
+    {oil: 200},
+    {bread: 50}
+];
+
+
+const map = new Map();
+
+map.set(shops[0],5000)
+   .set(shops[1],15000)
+   .set(shops[2],25000);
+console.log(map);
