@@ -516,3 +516,25 @@ function factorial(num) {
 }
 
 console.log(factorial(5)); 
+//////////////////////////////////////////
+
+
+
+function digitalRoot(n) {
+    //let n1 = +n.toString()[0];
+    //let n2 = +n.toString()[1];
+    let res = 0;
+    let text =  n.toString(10).split('').map(int => parseInt(int, 10));
+   // console.log(text);
+    for (let i = 0; i < n.length-1; i++) {
+        //console.log(text[i]);
+        text += text[i];
+    }
+    
+    //res = n1 + n2;
+   
+
+    return text;
+  }
+
+  console.log(digitalRoot(942));
