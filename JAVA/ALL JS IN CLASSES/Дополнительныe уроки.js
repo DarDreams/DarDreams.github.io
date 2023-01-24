@@ -215,12 +215,18 @@ console.log(unique(arr));
 //         amountOfPages(185) => 97
 
 function amountOfPages(summary){
-    
-    for (let i = 0; i < summary.length; i++) {
-        const element = summary[i];
-        
+    let arr = [];
+    let res = 0;
+    for (let i = 0; i < summary; i++) {
+        arr[i] = summary;
+        summary += summary - 1;
+         
     }
-    return 
+    return arr;
 }
 
 console.log(amountOfPages(5));
+
+
+
+echo helo
