@@ -9,22 +9,31 @@ var caliber = {
         test = name.length;
         return name;
     },
-    resizerNumbers: function(number, loop) {
-        if (loop == 4) {
-            number = number.replace(/^(\d)$/g, '000$1');
-            number = number.replace(/^(\d)(\d)$/g, '00$1$2');
-            number = number.replace(/^(\d)(\d)(\d)$/g, '0$1$2$3');
+    resizerNumbers: function(num, loop) {
+        let res = 0;
+        for (let i = 1; i < loop - num.length; i++) {
+           res += "0";
         }
-        if (loop == 3) {
-            number = number.replace(/^(\d)(\d)$/g, '0$1$2');
-            number = number.replace(/^(\d)$/g, '00$1');
+          if (num.length >= loop) {
+              return num;
+          } else {
+              return `${res}${num}`;
+          }
+        // if (loop == 4) {
+        //     number = number.replace(/^(\d)$/g, '000$1');
+        //     number = number.replace(/^(\d)(\d)$/g, '00$1$2');
+        //     number = number.replace(/^(\d)(\d)(\d)$/g, '0$1$2$3');
+        // }
+        // if (loop == 3) {
+        //     number = number.replace(/^(\d)(\d)$/g, '0$1$2');
+        //     number = number.replace(/^(\d)$/g, '00$1');
             
-        }
-        if (loop == 2) {
-            number = number.replace(/^(\d)$/g, '0$1');
-        }
-            ;
-            return number;
+        // }
+        // if (loop == 2) {
+        //     number = number.replace(/^(\d)$/g, '0$1');
+        // }
+        //     ;
+        //     return number;
     },
     checkSkills: function(text) {
 
@@ -169,3 +178,4 @@ var caliber = {
  console.log("CROSSHAIRS",caliber.checkSkills("in_the_crosshairs"));
  console.log("OWN",caliber.checkSkills("own_priorities"));
  console.log("NULL",caliber.checkSkills("null"));
+  
