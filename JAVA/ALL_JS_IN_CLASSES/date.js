@@ -21,3 +21,18 @@ for (let i = 0;i < 10000000; i++) {
 let end = new Date();
 
 console.log(`WORK FOR ${end-start}mm`);
+
+
+var date = new Date(1969, 0, 0, 0, 8, 0, 0);
+console.log( date.setMilliseconds(date));
+
+var ms = new Date();
+console.log(ms.setTime(194*1000));
+console.log(ms.getMinutes());
+console.log(ms.getSeconds());
+console.log(ms.getMilliseconds());
+
+
+
+
+
