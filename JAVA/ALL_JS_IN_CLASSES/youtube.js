@@ -129,7 +129,7 @@ function inSeconds(time) {
 }
 
 function listSeconds() {
-    let list = []
+    let list = [];
     for (let i = 0; i < createList().length;i++) {
      list.push(inSeconds(createList()[i].replaceAll("'","")));
     }
@@ -169,7 +169,7 @@ function border(arg) {
 }
 
 function next() {
-    for (i = 0; i < createList().length; i++) {
+    for (let i = 0; i < createList().length; i++) {
         if (video.currentTime < listSeconds()[i]) {
             click(createList()[i]);
             border(i+1);

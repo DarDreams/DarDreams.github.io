@@ -6,7 +6,6 @@ var caliber = {
             name += " ";
          //   console.log(i);
         }
-        test = name.length;
         return name;
     },
     resizerNumbers: function(num, loop) {
