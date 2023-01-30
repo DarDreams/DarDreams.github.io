@@ -1,4 +1,45 @@
+const dardreamsButton = document.createElement('div');
+let checkStateMyButton = false;
+let firstBorder;
+dardreamsButton.innerHTML = '<img class = "dardreamsButton" style = "height: 25px; width: 25px; position: fixed; z-index: 999999;cursor:pointer;border-radius: 20%" src="https://sun6-20.userapi.com/s/v1/if2/mSxSLzTakqUQvgIVOS2BZFXUmIgmz63Plwrlz4f70Qjr0fr_EZhrlPSEdomh-JdSv-ZK2c5PreRmr6JBYV2C8BJf.jpg?size=50x50&amp;quality=96&amp;crop=60,155,385,385&amp;ava=1" class="AvatarRich__img">';
+
+document.body.prepend(dardreamsButton);
+document.querySelector('.dardreamsButton').style.opacity='0.5';
+	
+//	document.querySelector('.dardreamsButton:hover').style.setProperty('--dardreamsButton-opacity', '1');
+
+dardreamsButton.addEventListener('click', () => {
+	if (checkStateMyButton == false) {
+	change(true);
+	} else {
+	change(false);	
+	checkStateMyButton = false;
+	}
+});
+
+function change(bool) {
+	if (bool) {
+		document.querySelector('.dardreamsButton').style.opacity='1';
+		checkStateMyButton = true;
+		global();
+		
+	} else {
+		document.querySelector('.dardreamsButton').style.opacity='0.5';
+		checkStateMyButton = false;
+		document.body.firstChild.style.display='none';
+		document.querySelectorAll('#comment-content')[0].style = '';
+		document.body.style.overflow ='';
+		
+		
+	}
+}
+
+
 ////////////////////////////////
+
+
+function global() {
+
 let timer = setInterval(overlay, 1000);
 let timerPlay = setInterval(currentTime, 1000);
 let video = document.getElementsByTagName("video")[0];
@@ -10,14 +51,17 @@ let divButtonNext;
 let divButtonPrev;
 let divTimer;
 let total;
-////////////////////////////////
+let iElement;
 
 
-function firstBorder() {
-	for (i = 0; i < createList().length; i++) {
-        if (video.currentTime < listSeconds()[i]) {
-            //click(createList()[i]);
-            border(i);
+//////////////////////////////////////////////////////
+
+
+
+firstBorder = function () {
+	for (iElement = 0; iElement < createList().length; iElement++) {
+        if (video.currentTime < listSeconds()[iElement]) {
+            border(iElement);
             return;
         }
     }   
@@ -45,6 +89,10 @@ function pause() {
     }
 }
 
+function hide(string){
+	document.querySelector(string).style.display = 'none';
+}
+
 function overlay() {
     divOverlay = document.createElement('div');
     divButtonNext = document.createElement('div');
@@ -58,7 +106,7 @@ function overlay() {
     if (divComments) {
         clearTimeout(timer);
         divOverlay.innerHTML = "<div class='overlayBlack' style='position: fixed; height: 100vh;width: 100vw;background: black;pointer-events: none; z-index: 999;opacity: 0.8;'></div>";
-        document.body.append(divOverlay);
+        document.body.prepend(divOverlay);
         divButtonNext.innerHTML = `<div class = "myButtons" style="position:absolute;width: 126px;height: 55px;color: red;z-index: 99999;font-size: 50px;cursor: pointer;left: 1086px;top: 302px;border: 4px solid red;">NEXT</div>`;
         divButtonPrev.innerHTML = `<div class = "myButtons" style="position:absolute;width: 126px;height: 55px;color: red;z-index: 99999;font-size: 50px;cursor: pointer;left: 813px;top: 302px;border: 4px solid red;">PREV</div>`;
         divTimer.innerHTML = `<div id = "myTimer" style="position:absolute;width: 196px;height: 55px;color: red;z-index: 99999;font-size: 50px;left: 849px;top: 198px;font-family: Consolas;font-size: 76px;">01:35:17</div>`;
@@ -67,7 +115,7 @@ function overlay() {
         divOverlay.prepend(divButtonNext);
         divOverlay.prepend(divButtonPrev);
         divOverlay.prepend(divTimer);
-        divOverlay.prepend(divPause);
+        //divOverlay.prepend(divPause);
         divOverlay.prepend(divVolume);
         divComments.style.zIndex = 9999;
         divComments.style.marginTop = `-155vh`;
@@ -95,9 +143,15 @@ function overlay() {
     createList();
     document.querySelector("#more > span").click();
     firstBorder();
+    document.documentElement.scrollTop = 0;
     document.body.style.overflow = "hidden";
+    hide('#detach-button-host');
+    hide('#masthead-container');
+    hide('#toolbar');
     console.clear();
 }
+
+
 
 
 
@@ -115,6 +169,15 @@ function createList() {
     let divLink = document.querySelectorAll('#comment-content a');
     let mlines = [];
     for (var i = 1; i < total; i++) {
+    	
+    	divLink.onclick = function (event){
+  	    firstBorder();
+    	}
+    	
+    	
+    	
+    	
+    	
         mlines.push(`${divLink[i].innerHTML}`);
     }
     return mlines;
@@ -129,7 +192,7 @@ function inSeconds(time) {
 }
 
 function listSeconds() {
-    let list = [];
+    let list = []
     for (let i = 0; i < createList().length;i++) {
      list.push(inSeconds(createList()[i].replaceAll("'","")));
     }
@@ -169,10 +232,12 @@ function border(arg) {
 }
 
 function next() {
-    for (let i = 0; i < createList().length; i++) {
+    for (i = 0; i < createList().length; i++) {
         if (video.currentTime < listSeconds()[i]) {
             click(createList()[i]);
             border(i+1);
+            time[iElement].nextElementSibling.style.border = "none";
+            time[iElement].style.border = "none";
             return;
         }
     }   
@@ -183,12 +248,14 @@ function prev() {
         if (video.currentTime < listSeconds()[i]) {
             click(createList()[i-2]);
             border(i-1);
+            time[iElement].nextElementSibling.style.border = "none";
+            time[iElement].style.border = "none";
             return;
         }
     }   
 }
 
-
+}
 
 // let key = hotkeys('num_add', function() {
 // event.preventDefault();
