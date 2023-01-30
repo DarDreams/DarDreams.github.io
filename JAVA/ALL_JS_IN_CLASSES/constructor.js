@@ -14,6 +14,8 @@ User.prototype.exit = function() {
 }
 
 
+
+
 const ivan = new User('Ivan', 28);
 const alex = new User('Alex', 20);
 
