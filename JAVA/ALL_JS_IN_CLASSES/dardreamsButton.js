@@ -5,7 +5,7 @@ dardreamsButton.innerHTML = '<img class = "dardreamsButton" style = "height: 25p
 document.body.prepend(dardreamsButton);
 	
 dardreamsButton.addEventListener('click', () => {
-	if (checkStateMyButton == false) {
+	if (checkStateDarDreamsButton == false) {
 		document.querySelector('.dardreamsButton').style.opacity='1';
 		changeDarDreamsButton(true);
 		checkStateDarDreamsButton = true;
