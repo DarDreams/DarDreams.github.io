@@ -538,3 +538,93 @@ function digitalRoot(n) {
   }
 
   console.log(digitalRoot(942));
+
+
+  const films = [
+    {
+        name: 'Titanic',
+        rating: 9
+    },
+    {
+        name: 'Die hard 5',
+        rating: 5
+    },
+    {
+        name: 'Matrix',
+        rating: 8
+    },
+    {
+        name: 'Some bad film',
+        rating: 4
+    }
+];
+
+
+
+function showGoodFilms(arr) {
+    return arr.filter(film => film.rating >= 8);
+}
+
+
+//console.log(showGoodFilms(films));
+
+
+
+function showListOfFilms(arr) {
+   return arr.map(film => film.name)
+    .reduce((prev,current) => `${prev}, ${current}`)
+}
+
+//console.log(showListOfFilms(films));
+
+
+
+function setFilmsIds(arr) {
+return arr.map((film, i) => {
+    film.id = i;
+    return film;
+});
+}
+
+//console.log(setFilmsIds(films));
+
+
+const tranformedArray = setFilmsIds(films);
+
+function checkFilms(arr) {
+   return arr.every(value => typeof(value.id) === 'number');
+
+}
+
+console.log(checkFilms(tranformedArray));
+
+
+function checkFilms(arr) {
+    return arr.every(film => film.id || film.id === 0 ? true : false)
+}
+
+
+const funds = [
+    {amount: -1400},
+    {amount: 2400},
+    {amount: -1000},
+    {amount: 500},
+    {amount: 10400},
+    {amount: -11400}
+];
+
+const getPositiveIncomeAmount = (data) => {
+    return data.filter(value => value.amount > 0).map(item => item.amount)
+    .reduce((sum, cur) => sum + cur);
+};
+
+//console.log(getPositiveIncomeAmount(funds));
+
+const getTotalIncomeAmount = (data) => {
+    let x = data.some(value => value.amount < 0);
+    if (x === true) {
+        return data.map(item => item.amount).reduce((sum, cur) => sum + cur)
+    } else return getPositiveIncomeAmount(funds)
+};
+
+console.log(getTotalIncomeAmount(funds));
