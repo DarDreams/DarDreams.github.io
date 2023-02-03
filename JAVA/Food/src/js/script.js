@@ -41,7 +41,7 @@ tabsParent.addEventListener('click',  (event) => {
 
 //TIMER
 
-const deadline = '2023-01-31';
+const deadline = '2023-05-15';
 
 function getTimeRemaining(endtime) {
     let days, hours, minutes, seconds;
@@ -138,7 +138,7 @@ function setClock(selector, endtime) {
 
     });
 
-    const modalTimerId = setTimeout(openModal, 50000);
+    //const modalTimerId = setTimeout(openModal, 50000);
 
     function showModalByScroll (){
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight-1) {
@@ -147,7 +147,7 @@ function setClock(selector, endtime) {
         }
     }
 
-    window.addEventListener('scroll',showModalByScroll);
+    //window.addEventListener('scroll',showModalByScroll);
 
 // Используем классы для карточек
 
@@ -193,42 +193,50 @@ function setClock(selector, endtime) {
 
     const getResource = async (url) => {
         const res = await fetch(url)
-        return await res.json();
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status: ${res.status}`);
         }
+        return await res.json();
     };
+    // версия №3 
+    axios.get('https://my-json-server.typicode.com/DarDreams/database/menu')
+        .then(data => { console.log(data);
+            data.data.forEach(({img, altimg, title, descr, price}) => {
+                new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+        });
+    });
 
+/// версия №1 
     // getResource('https://my-json-server.typicode.com/DarDreams/database/menu')
     //     .then(data =>{
     //         data.forEach(({img, altimg, title, descr, price}) => {
     //             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
     //         })
     //     });
+    // версия №2
+    // getResource('https://my-json-server.typicode.com/DarDreams/database/menu')
+    //     .then(data => createCard(data));
 
-    getResource('https://my-json-server.typicode.com/DarDreams/database/menu')
-        .then(data => createCard(data));
+    //     function createCard(data) {
+    //         data.forEach(({img, altimg, title, descr, price}) => {
+    //             const element = document.createElement('div');
 
-        function createCard(data) {
-            data.forEach(({img, altimg, title, descr, price}) => {
-                const element = document.createElement('div');
+    //             element.classList.add('menu__item');
+    //             element.innerHTML =`
+    //             <img src=${img} alt=${altimg}>
+    //             <h3 class="menu__item-subtitle">${title}</h3>
+    //             <div class="menu__item-descr">${descr}</div>
+    //             <div class="menu__item-divider"></div>
+    //             <div class="menu__item-price">
+    //                 <div class="menu__item-cost">Цена:</div>
+    //                 <div class="menu__item-total"><span>${price}</span> грн/день</div>
+    //             </div>
+    //             `;
 
-                element.classList.add('menu__item');
-                element.innerHTML =`
-                <img src=${img} alt=${altimg}>
-                <h3 class="menu__item-subtitle">${title}</h3>
-                <div class="menu__item-descr">${descr}</div>
-                <div class="menu__item-divider"></div>
-                <div class="menu__item-price">
-                    <div class="menu__item-cost">Цена:</div>
-                    <div class="menu__item-total"><span>${price}</span> грн/день</div>
-                </div>
-                `;
-
-                document.querySelector('.menu .container').append(element);
-        });
-
-        };
+    //             document.querySelector('.menu .container').append(element);
+    //     });
+// 
+        // };
 
     //  Forms
 
@@ -310,7 +318,82 @@ function setClock(selector, endtime) {
         }, 4000)
     }
 
-fetch('https://my-json-server.typicode.com/DarDreams/database/menu')
-    .then(data => data.json())
-    .then(res => console.log(res));
+    fetch('https://my-json-server.typicode.com/DarDreams/database/menu')
+        .then(data => data.json())
+        .then(res => console.log(res));
+// SLIDERS
+
+    // const sliders = document.querySelector('.offer__slider');
+    // const nextSlider = document.querySelector('.offer__slider-next');
+    // const prevSlider = document.querySelector('.offer__slider-prev');
+    // const curSlider = document.querySelector('#current');
+    // const totalSlider = document.querySelector('#total');
+    // const curImgSlider = document.querySelector('.offer__slide>img');
+    // const imagesSlider = ['','img/slider/paprika.jpg','img/slider/olive-oil.jpg', 'img/slider/pepper.jpg', 'img/slider/food-12.jpg'];
+    
+    // function slide (num) {
+    //     (curSlider.innerText == 4) ? curSlider.innerText = + num : curSlider.innerText++;
+    //     curSlider.innerText = '0' + curSlider.innerText ;
+    //     curImgSlider.src = imagesSlider[curSlider.innerText[1]];  
+    // }
+
+    // nextSlider.onclick = function () {
+    //     slide("+1")
+    // }
+
+    // Slider.onclick = function () {
+    //     slide("+1")
+    // }
+
+    let slideIndex = 1;
+    const slides = document.querySelectorAll('.offer__slide'),
+        prev = document.querySelector('.offer__slider-prev'),
+        next = document.querySelector('.offer__slider-next'),
+        total = document.querySelector('#total'),
+        current = document.querySelector('#current');
+
+    showSlides(slideIndex);
+
+    if (slides.length < 10) {
+        total.textContent = `0${slides.length}`;
+    } else {
+        total.textContent = slides.length;
+    }
+
+    function showSlides(n) {
+        n > slides.length && (slideIndex = 1);
+         //  n > slides.length ? slideIndex = 1 : null;
+        
+           n < 1 && slides.length;
+        // if (n < 1) {
+        //     slideIndex = slides.length;
+        // }
+
+        slides.forEach((item) => item.style.display = 'none');
+
+        slides[slideIndex - 1].style.display = 'block'; // Как ваша самостоятельная работа - переписать на использование классов show/hide
+        
+        if (slides.length < 10) {
+            current.textContent =  `0${slideIndex}`;
+        } else {
+            current.textContent =  slideIndex;
+        }
+    }
+
+    function plusSlides (n) {
+        showSlides(slideIndex += n);
+    }
+
+    prev.addEventListener('click', function(){
+        plusSlides(-1);
+    });
+
+    next.addEventListener('click', function(){
+        plusSlides(1);
+    });
+
+
+
+
+
 });
