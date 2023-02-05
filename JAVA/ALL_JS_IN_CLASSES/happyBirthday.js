@@ -109,10 +109,9 @@ const dates = {
 function check () {
     const dateObj = Object.entries(dates)
     return dateObj.filter(item => item[0].substring(3,5) == new Date().getMonth()+1)
-    .filter(item => item[0].substring(0,2) < new Date().getDay()+3)
+    .filter(item => item[0].substring(0,2) < new Date().getDate()+3)
 
 }
-
 console.log( check());
 
 
