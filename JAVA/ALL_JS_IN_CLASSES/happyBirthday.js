@@ -25,7 +25,7 @@ const dates = {
     '11.04.2021': 'Люблю тебя Олдик',
     '12.04.2019': 'День рождение Давидки',
     '14.04.1986': 'День рождение Алибека',
-    '14.04.1990': 'лет со дня смерти д. Берлика',
+    '14.04.1990': 'год со дня смерти д. Берлика',
     '29.04.0000': 'День рождение Самира',
   
     //  М А Й
@@ -49,7 +49,7 @@ const dates = {
     '07.07.2017': 'День свадьбы Андрея',
     '08.07.0000': 'День смерти деда Суртая',
     '15.07.0000': 'День рождение бабушки Раи',
-    '28.07.1984': 'Лет Родители в браке',
+    '28.07.1984': 'год Родители в браке',
     '29.07.0000': 'День рождение Нэли и Зайтнам',
     '30.07.1995': 'День рождение Colt47Pc',
     '31.07.2018': 'День смерти бабушки Раи',
@@ -109,9 +109,13 @@ const dates = {
 
 function check () {
     const dateObj = Object.entries(dates)
-    return dateObj.filter(item => item[0].substring(3,5) == new Date().getMonth()+1)
+     let today = dateObj.filter(item => item[0].substring(3,5) == new Date().getMonth()+1)
     .filter(item => item[0].substring(0,2) < new Date().getDate()+3)
-
+    let remain = today.map(item => new Date().getFullYear() - item[0].substring(6,10));
+    if (remain > 0) { 
+      return `${remain}-й ${today[0][1]}`} 
+      else {
+        return today}
 }
 console.log( check());
 
