@@ -6,25 +6,19 @@
             name += " ";
 
         }
-        test = name.length;
         return name;
     },
-    resizerNumbers: function(number, loop) {
-        if (loop == 4) {
-            number = number.replace(/^(\d)$/g, '000$1');
-            number = number.replace(/^(\d)(\d)$/g, '00$1$2');
-            number = number.replace(/^(\d)(\d)(\d)$/g, '0$1$2$3');
+    resizerNumbers: function(num, loop) {
+        var res = 0;
+        for (var i = 1; i < loop - num.length; i++) {
+           res += "0";
         }
-        if (loop == 3) {
-            number = number.replace(/^(\d)(\d)$/g, '0$1$2');
-            number = number.replace(/^(\d)$/g, '00$1');
-            
-        }
-        if (loop == 2) {
-            number = number.replace(/^(\d)$/g, '0$1');
-        }
-            ;
-            return number;
+          if (num.length >= loop) {
+              return num;
+          } else {
+              //return `${res}${num}`;
+              return String(res+num);
+          };
     },
     checkSkills: function(text) {
 
@@ -163,5 +157,14 @@
         }
         return res;
     }
+
 };
     
+
+
+
+
+
+
+ 
+  

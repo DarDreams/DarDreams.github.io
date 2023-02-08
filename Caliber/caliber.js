@@ -9,30 +9,16 @@ var caliber = {
         return name;
     },
     resizerNumbers: function(num, loop) {
-        let res = 0;
-        for (let i = 1; i < loop - num.length; i++) {
+        var res = 0;
+        for (var i = 1; i < loop - num.length; i++) {
            res += "0";
         }
           if (num.length >= loop) {
               return num;
           } else {
-              return `${res}${num}`;
-          }
-        // if (loop == 4) {
-        //     number = number.replace(/^(\d)$/g, '000$1');
-        //     number = number.replace(/^(\d)(\d)$/g, '00$1$2');
-        //     number = number.replace(/^(\d)(\d)(\d)$/g, '0$1$2$3');
-        // }
-        // if (loop == 3) {
-        //     number = number.replace(/^(\d)(\d)$/g, '0$1$2');
-        //     number = number.replace(/^(\d)$/g, '00$1');
-            
-        // }
-        // if (loop == 2) {
-        //     number = number.replace(/^(\d)$/g, '0$1');
-        // }
-        //     ;
-        //     return number;
+              //return `${res}${num}`;
+              return String(res+num);
+          };
     },
     checkSkills: function(text) {
 
@@ -171,10 +157,14 @@ var caliber = {
         }
         return res;
     }
+
 };
     
    // console.log(caliber.resizerName("Jack",20),"["+test+"]");
- console.log("CROSSHAIRS",caliber.checkSkills("in_the_crosshairs"));
- console.log("OWN",caliber.checkSkills("own_priorities"));
- console.log("NULL",caliber.checkSkills("null"));
+console.log("RESIZE_NAME",caliber.resizerName("DAR", 10));
+console.log("RESIZE_NUMBER",caliber.resizerNumbers(2,4));
+console.log("CHECK_SKILLS",caliber.checkSkills("in_the_crosshairs"));
+console.log("CONVERT_NUMBERS",caliber.convertNumbers("6"));  
+console.log("MATCH",caliber.match.team1.gunner.dmg);
+ 
   
