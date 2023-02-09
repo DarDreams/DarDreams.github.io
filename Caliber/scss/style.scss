@@ -26,6 +26,20 @@ td {
     width: 80px;
 }
 
+svg {
+    fill: lime;
+    width: 25px;
+    height: 25px;
+}
+
+rect {
+    width: 100%;
+    height: 100%;
+    fill: #69c;
+    stroke: #069;
+    stroke-width: 5px;
+    opacity: 0.5
+  }
 
 .name_h {
     width: 200px;
@@ -54,10 +68,11 @@ td {
 
 .team_rank {
     color: #ff0000;
-    transform: translateY(100%);
+    //transform: translateY(100%);
     padding: 0px;
-    font-size: 1px;
-    transform: scale(15);
+    //font-size: 1px;
+    //transform: scale(15);
+    //transform: translateY(1px);
     text-align: center;
 }
 
