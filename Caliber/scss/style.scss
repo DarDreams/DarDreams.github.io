@@ -23,12 +23,21 @@ th {
 td {
     background: #000000;
     padding: 5px;
+    width: 80px;
 }
 
 
 .name_h {
-    width: 500px;
+    width: 200px;
 }
+
+.skills_h{
+    width: 150px;
+}
+
+// .kills_h, .deaths_h, .assisst_h, .recive_h {
+//     width: 80px;
+// }
 
 .team1 {
     border: 2px solid rgb(0, 0, 255);

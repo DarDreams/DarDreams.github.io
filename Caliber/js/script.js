@@ -4,6 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const team1Selector = document.querySelectorAll('.line');
     const rank = document.querySelectorAll('.team_rank');
+    const difRank = document.querySelector('.team_rank_dif');
     let gameArr  = Object.entries(game);
     let assault1 = Object.entries(game.team1.assault);
     let gunner1  = Object.entries(game.team1.gunner);
@@ -20,6 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
     team1Selector[0].children[1].innerText = `[${game.team1.rank}]`;
     team1Selector[0].children[4].innerText = `[${game.id}]`;
     rank[1].innerText = `[${game.team2.rank}]`;
+    difRank.innerText = `[${game.difference}]`;
 
 
     for (let i = 0; i < assault1.length; i++){

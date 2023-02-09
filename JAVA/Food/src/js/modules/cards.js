@@ -1,3 +1,5 @@
+import { getResource } from "../services/services.js";
+
 function cards () {
     // Используем классы для карточек
 
@@ -41,13 +43,6 @@ function cards () {
         }
     }
 
-    const getResource = async (url) => {
-        const res = await fetch(url)
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-        }
-        return await res.json();
-    };
     // версия №3 
     axios.get('https://my-json-server.typicode.com/DarDreams/database/menu')
         .then(data => { console.log(data);
