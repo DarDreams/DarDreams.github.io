@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caliber</title>
+    <link rel="stylesheet" href="css/style.min.css">
     
 </head>
 <script>
@@ -16,159 +17,86 @@
         
   }
 </script>
-<style>
-    html {
-        background-color: #000;
-        font-family: "Consolas", Sans-Serif;
-        position: relative;
-    }
-    table {
-        
-        text-align: center;
-        border-collapse: separate;
-        border-spacing: 3px;
-        background: #191919e0;
-        color: #00ff00;
-        border: 2px solid;
-        border-radius: 20px;
-        
-    }
-    th {
-        font-size: 15px;
-        padding: 5px 0 0 0;
-        color:#ff7300;
-        text-align: center;
-    }
-   
-    td {
-        background: #000000;
-        padding: 5px;
-    }
-    .team1 {
-        border: 2px solid rgb(0, 0, 255);
-        z-index: 1;
-        margin-bottom: 5px;
-        
-    }
-    .team2 {
-        z-index: 1;
-        border: 2px solid rgb(255, 0, 0,.8);
-        
-    }
-    .lvl_h {
-        max-width: 45px;
-        width: 45px;
-        text-align: center;
-    }
-    .rank_h, .skills_h {
-        max-width: 45px;
-        width: 45px;
-    }
-    .role_h {
-        width: 210px;
-    }
-    .name_h {
-        max-width: 180px;
-        width: 180px;
-    }
-    .rank {
-        width: 50px;
-    }
-    
-    .team_rank {
-        color: #ff0000;
-        transform: translateY(100%);
-        padding: 0px;
-        font-size: 1px;
-        transform: scale(15);
-        text-align: center;
-    }
-  
-    .team_rank_dif {
-        padding: 0px;
-        color:#ff0000;
-    }
-   
-
-    .container {
-
-        width: 653px;
-    }
-    
-
-    .role {
-        max-width: 200px;
-        text-align: left;
-    }
-
-    .name {
-        max-width: 200px;
-    }
-  
-</style>
-
-<body>
-    <div id="page-wrapper">
-
-		<h1>Text File Reader</h1>
-		<div>
-			Select a text file: 
-			<input type="file" id="fileInput">
-		</div>
-		<pre id="fileDisplayArea"><pre>
-
-	</div>
-
     <div class="container">
     <table class="team1">    
-        <tr>
+        <tr class = 'line 0'>
             <th></th>
-            <th class="team_rank">[{TEAM_RANK_BLUE}]</th>
+            <th class="team_rank">[RANK_1]</th>
             <th></th>
             <th></th>
-            <th id="id" class="team_rank">ID - {ID}</th>
+            <th id="id" class="id">ID</th>
         </tr>   
         <tr>
             <th class="lvl_h">LVL</th>
             <th class="rank_h">RANK</th>
             <th class="role_h">ROLE</th>
+            <th class="groups_h">GROUPS</th>
             <th class="skills_h">SKILLS</th>
             <th class="name_h">NAME</th>
+            <th class="damage_h">DAMAGE</th>
+            <th class="kills_h">KILLS</th>
+            <th class="deaths_h">DEATHS</th>
+            <th class="assisst_h">ASSISTS</th>
+            <th class="recive_h">RECIVE</th>
         </tr>
-         <tr>
-          <td class="lvl"   >{LVL_BLUE_1}</td>
-          <td class="rank"  >{RANK_BLUE_1}</td>
-          <td class="role"  >{ROLE_BLUE_1}</td>
-          <td class="skills">{SKILLS_BLUE_1}</td>
-          <td class="name"  >{NAME_BLUE_1}</td>
-         </tr>
-        <tr>
-          <td class="lvl"   >{LVL_BLUE_2}</td>
-          <td class="rank"  >{RANK_BLUE_2}</td>
-          <td class="role"  >{ROLE_BLUE_2}</td>
-          <td class="skills">{SKILLS_BLUE_2}</td>
-          <td class="name"  >{NAME_BLUE_2}</td>
+            <tr class = "line 1">
+            <td class="lvl"   ></td>
+            <td class="rank"  ></td>
+            <td class="role"  ></td>
+            <td class="groups"></td>
+            <td class="skills"></td>
+            <td class="name"  ></td>
+            <td class="dmg">  </td>
+            <td class="kills"></td>
+            <td class="deaths"></td>
+            <td class="assists"></td>
+            <td class="recive"></td>
         </tr>
-        <tr>
-          <td class="lvl"   >{LVL_BLUE_3}</td>
-          <td class="rank"  >{RANK_BLUE_3}</td>
-          <td class="role"  >{ROLE_BLUE_3}</td>
-          <td class="skills">{SKILLS_BLUE_3}</td>
-          <td class="name"  >{NAME_BLUE_3}</td>
+        <tr class = "line 2">
+            <td class="lvl"   ></td>
+            <td class="rank"  ></td>
+            <td class="role"  ></td>
+            <td class="groups"></td>
+            <td class="skills"></td>
+            <td class="name"  ></td>
+            <td class="dmg">  </td>
+            <td class="kills"></td>
+            <td class="deaths"></td>
+            <td class="assists"></td>
+            <td class="recive"></td>
         </tr>
-        <tr>
-          <td class="lvl"   >{LVL_BLUE_4}</td>
-          <td class="rank"  >{RANK_BLUE_4}</td>
-          <td class="role"  >{ROLE_BLUE_4}</td>
-          <td class="skills">{SKILLS_BLUE_4}</td>
-          <td class="name"  >{NAME_BLUE_4}</td>
+        <tr class = "line 3">
+            <td class="lvl"   ></td>
+            <td class="rank"  ></td>
+            <td class="role"  ></td>
+            <td class="groups"></td>
+            <td class="skills"></td>
+            <td class="name"  ></td>
+            <td class="dmg">  </td>
+            <td class="kills"></td>
+            <td class="deaths"></td>
+            <td class="assists"></td>
+            <td class="recive"></td>
         </tr>
+        <tr class = "line 4">
+            <td class="lvl"   ></td>
+            <td class="rank"  ></td>
+            <td class="role"  ></td>
+            <td class="groups"></td>
+            <td class="skills"></td>
+            <td class="name"  ></td>
+            <td class="dmg">  </td>
+            <td class="kills"></td>
+            <td class="deaths"></td>
+            <td class="assists"></td>
+            <td class="recive"></td>
+        </tr class = "line">
         </table> 
         
         <table class="team2">
-            <tr class="team_rank_h">
+            <tr>
                 <th></th>
-                <th class="team_rank">[{TEAM_RANK_RED}]</th>
+                <th class="team_rank">[RANK_2]</th>
             </tr> 
             <tr>
                 <th class="lvl_h">LVL</th>
@@ -176,38 +104,67 @@
                 <th class="role_h">ROLE</th>
                 <th class="skills_h">SKILLS</th>
                 <th class="name_h">NAME</th>
+                <th class="damage_h">DAMAGE</th>
+                <th class="kills_h">KILLS</th>
+                <th class="deaths_h">DEATHS</th>
+                <th class="assists_h">ASSISTS</th>
+                <th class="recive_h">RECIVE</th>
             </tr>
-             <tr>
-              <td class="lvl">{LVL_RED_1}</td>
-              <td class="rank">{RANK_RED_1}</td>
-              <td class="role">{ROLE_RED_1}</td>
-              <td class="skills">{SKILLS_RED_1}</td>
-              <td class="name">{NAME_RED_1}</td>
-             </tr>
-            <tr>
-              <td class="lvl">{LVL_RED_2}</td>
-              <td class="rank">{RANK_RED_2}</td>
-              <td class="role">{ROLE_RED_2}</td>
-              <td class="skills">{SKILLS_RED_2}</td>
-              <td class="name">{NAME_RED_2}</td>
+                <tr class = "line 5">
+                <td class="lvl"></td>
+                <td class="rank"></td>
+                <td class="role"></td>
+                <td class="groups"></td>
+                <td class="skills"></td>
+                <td class="name"></td>
+                <td class="dmg"></td>
+                <td class="kills"></td>
+                <td class="deaths"></td>
+                <td class="assists"></td>
+                <td class="recive"></td>
             </tr>
-            <tr>
-              <td class="lvl">{LVL_RED_3}</td>
-              <td class="rank">{RANK_RED_3}</td>
-              <td class="role">{ROLE_RED_3}</td>
-              <td class="skills">{SKILLS_RED_3}</td>
-              <td class="name">{NAME_RED_3}</td>
+            <tr class = "line 6">
+                <td class="lvl"></td>
+                <td class="rank"></td>
+                <td class="role"></td>
+                <td class="groups"></td>
+                <td class="skills"></td>
+                <td class="name"></td>
+                <td class="dmg"></td>
+                <td class="kills"></td>
+                <td class="deaths"></td>
+                <td class="assists"></td>
+                <td class="recive"></td>
             </tr>
-            <tr>
-              <td class="lvl">{LVL_RED_4}</td>
-              <td class="rank">{RANK_RED_4}</td>
-              <td class="role">{ROLE_RED_4}</td>
-              <td class="skills">{SKILLS_RED_4}</td>
-              <td class="name">{NAME_RED_4}</td>
+            <tr class = "line 7">
+                <td class="lvl"></td>
+                <td class="rank"></td>
+                <td class="role"></td>
+                <td class="groups"></td>
+                <td class="skills"></td>
+                <td class="name"></td>
+                <td class="dmg"> </td>
+                <td class="kills"></td>
+                <td class="deaths"></td>
+                <td class="assists"></td>
+                <td class="recive"></td>
+            </tr>
+            <tr class = "line 8">
+                <td class="lvl"></td>
+                <td class="rank"></td>
+                <td class="role"></td>
+                <td class="groups"></td>
+                <td class="skills"></td>
+                <td class="name"></td>
+                <td class="dmg">  </td>
+                <td class="kills"></td>
+                <td class="deaths"></td>
+                <td class="assists"></td>
+                <td class="recive"></td>
             </tr>
             <tr>
                 <th></th>
-                <th class="team_rank_dif">[{TEAM_RANK_DIF}]</th>
+                <th class="team_rank_dif">DIFALL</th>
             </tr> 
             </table> 
             <!-- <button onclick="copy()" class="id">[ID-{ID}]</button>
@@ -218,6 +175,6 @@
         </div>
         <!-- <button onclick="addData()">RUN TASK</button> -->
 </body>
-<script src="js/script.js"></script>
-<script src="match.js"></script>
+<script type = 'module' src="js/script.js"></script>
+<script type = 'module' src="js/game.js"></script>
 </html>

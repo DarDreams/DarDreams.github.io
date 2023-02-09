@@ -157,7 +157,6 @@ var caliber = {
         }
         return res;
     }
-
 };
     
    // console.log(caliber.resizerName("Jack",20),"["+test+"]");
@@ -167,4 +166,7 @@ console.log("CHECK_SKILLS",caliber.checkSkills("in_the_crosshairs"));
 console.log("CONVERT_NUMBERS",caliber.convertNumbers("6"));  
 console.log("MATCH",caliber.match.team1.gunner.dmg);
  
+
+
+
   

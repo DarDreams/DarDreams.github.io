@@ -1,2 +1,58 @@
+html {
+    background-color: #000;
+    font-family: "Consolas", Sans-Serif;
+    position: relative;
+}
+table {
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 3px;
+    background: #191919e0;
+    color: #00ff00;
+    border: 2px solid;
+    border-radius: 5px;
+    
+}
+th {
+    font-size: 15px;
+    padding: 5px 0 0 0;
+    color:#ff7300;
+    text-align: center;
+}
 
-   
+td {
+    background: #000000;
+    padding: 5px;
+}
+
+
+.name_h {
+    width: 500px;
+}
+
+.team1 {
+    border: 2px solid rgb(0, 0, 255);
+    z-index: 1;
+    margin-bottom: 5px;
+    
+}
+.team2 {
+    z-index: 1;
+    border: 2px solid rgb(255, 0, 0,.8);
+    
+}
+
+
+.team_rank {
+    color: #ff0000;
+    transform: translateY(100%);
+    padding: 0px;
+    font-size: 1px;
+    transform: scale(15);
+    text-align: center;
+}
+
+.team_rank_dif {
+    padding: 0px;
+    color:#ff0000;
+}

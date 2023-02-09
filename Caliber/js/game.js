@@ -1,0 +1,118 @@
+﻿let game = {
+    id: "{ID}",
+    difference: "0027",
+    team1: {
+        win: "3",
+        rank: "5021",
+        assault: {
+            lvl: "26¹²",
+            rank: "1066",
+            oper: "KSK",
+            group: "1155",
+            perks: "04 08 02 00",
+            name: "Vormin",
+            dmg: "0351",
+            kills: "02",
+            deaths: "05",
+            assists: "04",
+            recive: "0507"
+        },
+        gunner: {
+            lvl: "62¹⁵",
+            rank: "1469",
+            oper: "CST",
+            group: "2090",
+            perks: "03 03 05 03",
+            name: "Stroker217",
+            dmg: "0769",
+            kills: "04",
+            deaths: "05",
+            assists: "04",
+            recive: "0700"
+        },
+        medic: {
+            lvl: "59¹⁵",
+            rank: "1261",
+            oper: "GRO",
+            group: "1721",
+            perks: "07 11 16 12",
+            name: "4IPASHOT",
+            dmg: "0296",
+            kills: "03",
+            deaths: "02",
+            assists: "00",
+            recive: "0513"
+        },
+        sniper: {
+            lvl: "38¹⁰",
+            rank: "1225",
+            oper: "CST",
+            group: "7979",
+            perks: "11 06 00 00",
+            name: "LeonTsvet",
+            dmg: "0479",
+            kills: "04",
+            deaths: "01",
+            assists: "06",
+            recive: "0187"
+        },
+    },
+    team2: {
+        win: "1",
+        rank: "4994",
+        assault: {
+            lvl: "36⁰⁶",
+            rank: "0808",
+            oper: "NES",
+            group: "1020",
+            perks: "04 00 00 00",
+            name: "Wertoox",
+            dmg: "0690",
+            kills: "05",
+            deaths: "03",
+            assists: "03",
+            recive: "0337"
+        },
+        gunner: {
+            lvl: "32¹¹",
+            rank: "0798",
+            oper: "EZA",
+            group: "1020",
+            perks: "03 00 01 01",
+            name: "R1ckp0int",
+            dmg: "0200",
+            kills: "00",
+            deaths: "03",
+            assists: "02",
+            recive: "0464"
+        },
+        medic: {
+            lvl: "62¹⁵",
+            rank: "1669",
+            oper: "KSK",
+            group: "4702",
+            perks: "00 00 00 00",
+            name: "SNOW__",
+            dmg: "0328",
+            kills: "03",
+            deaths: "04",
+            assists: "01",
+            recive: "0612"
+        },
+        sniper: {
+            lvl: "85¹⁵",
+            rank: "1719",
+            oper: "FSB",
+            group: "4702",
+            perks: "11 05 06 10",
+            name: "MASTER",
+            dmg: "0689",
+            kills: "05",
+            deaths: "03",
+            assists: "03",
+            recive: "0482"
+        },
+    },
+}
+
+export default game;
