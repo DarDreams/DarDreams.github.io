@@ -24,7 +24,29 @@ window.addEventListener('DOMContentLoaded', () => {
     rank[1].innerText = `[${game.team2.rank}]`;
     difRank.innerText = `[${game.difference}]`;
 
-    for (let i = 0; i < assault1.length; i++){
+    team1Selector[1].children[1].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">`);
+    team1Selector[2].children[1].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">`);
+    team1Selector[3].children[1].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">`);
+    team1Selector[4].children[1].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">`);
+    team1Selector[5].children[1].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">`);
+    team1Selector[6].children[1].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">`);
+    team1Selector[7].children[1].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">`);
+    team1Selector[8].children[1].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">`);
+
+    team1Selector[1].children[2].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>assualt</title><use xlink:href="#whiteWrapper"></use></svg>`);
+    
+    team1Selector[1].children[2].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">`);
+    team1Selector[2].children[2].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">`);
+    team1Selector[3].children[2].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">`);
+    team1Selector[4].children[2].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">`);
+    team1Selector[5].children[2].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">`);
+    team1Selector[6].children[2].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">`);
+    team1Selector[7].children[2].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">`);
+    team1Selector[8].children[2].insertAdjacentHTML('afterbegin',`<img src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">`);
+    
+    
+
+    for (let i = 5; i < assault1.length; i++){
         if (i == 4) continue;
             team1Selector[1].children[i].innerText = assault1[i];
             team1Selector[2].children[i].innerText = gunner1[i];
@@ -51,6 +73,18 @@ window.addEventListener('DOMContentLoaded', () => {
     let gunPerks2 = game.team2.gunner.perks.split(",");
     let medPerks2 = game.team2.medic.perks.split(",");
     let sniPerks2 = game.team2.sniper.perks.split(",");
+
+    team1Selector[1].children[0].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>assualt</title><use xlink:href="#assault"></use></svg>`);    
+    team1Selector[2].children[0].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>gunner</title><use xlink:href="#gunner"></use></svg>`);
+    team1Selector[3].children[0].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>medic</title><use xlink:href="#medic"></use></svg>`);
+    team1Selector[4].children[0].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>sniper</title><use xlink:href="#sniper"></use></svg>`);
+
+    team1Selector[5].children[0].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>assualt</title><use xlink:href="#assault"></use></svg>`);    
+    team1Selector[6].children[0].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>gunner</title><use xlink:href="#gunner"></use></svg>`);
+    team1Selector[7].children[0].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>medic</title><use xlink:href="#medic"></use></svg>`);
+    team1Selector[8].children[0].insertAdjacentHTML('afterbegin',`<svg class="skill-ico"><title>sniper</title><use xlink:href="#sniper"></use></svg>`);
+
+
 
     for (let i = 0; i < 4; i++) {
         console.log(assPerks1[i]);

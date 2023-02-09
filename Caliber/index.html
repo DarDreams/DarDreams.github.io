@@ -27,9 +27,9 @@
             <th id="id" class="id">ID</th>
         </tr>   
         <tr>
-            <th class="lvl_h">LVL</th>
-            <th class="rank_h">RANK</th>
-            <th class="role_h">ROLE</th>
+            <th class="lvl_h"></th>
+            <th class="rank_h"></th>
+            <th class="role_h"></th>
             <th class="groups_h">GROUPS</th>
             <th class="skills_h">SKILLS</th>
             <th class="name_h">NAME</th>
@@ -52,6 +52,7 @@
             <td class="assists"></td>
             <td class="recive"></td>
         </tr>
+        <tr><th></th></tr>
         <tr class = "line 2">
             <td class="lvl"   ></td>
             <td class="rank"  ></td>
@@ -64,6 +65,7 @@
             <td class="deaths"></td>
             <td class="assists"></td>
             <td class="recive"></td>
+            <tr><th></th></tr>
         </tr>
         <tr class = "line 3">
             <td class="lvl"   ></td>
@@ -77,6 +79,7 @@
             <td class="deaths"></td>
             <td class="assists"></td>
             <td class="recive"></td>
+            <tr><th></th></tr>
         </tr>
         <tr class = "line 4">
             <td class="lvl"   ></td>
@@ -123,6 +126,7 @@
                 <td class="deaths"></td>
                 <td class="assists"></td>
                 <td class="recive"></td>
+                <tr><th></th></tr>
             </tr>
             <tr class = "line 6">
                 <td class="lvl"></td>
@@ -136,6 +140,7 @@
                 <td class="deaths"></td>
                 <td class="assists"></td>
                 <td class="recive"></td>
+                <tr><th></th></tr>
             </tr>
             <tr class = "line 7">
                 <td class="lvl"></td>
@@ -149,6 +154,7 @@
                 <td class="deaths"></td>
                 <td class="assists"></td>
                 <td class="recive"></td>
+                <tr><th></th></tr>
             </tr>
             <tr class = "line 8">
                 <td class="lvl"></td>
@@ -176,7 +182,25 @@
         </div>
         <!-- <button onclick="addData()">RUN TASK</button> -->
 </body>
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">	  
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">	 
+    <symbol id="whiteWrapper" viewBox="2 0 28 28">
+        <g class="layer">
+            <!-- <rect fill="#000000" height="250" id="svg_1" stroke="#000000" stroke-width="0" width="300" x="84.666667" y="136"/> -->
+            <path d="m227.180005,135.855951l180.498146,0l60.166154,124.999741l-60.166154,125.000294l-180.498146,0l60.166138,-125.000294l-60.166138,-124.999741z" fill="#000000" id="svg_8" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-width="0" transform="rotate(-180 347.512 260.856)"/>
+           </g>
+    </symbol>
+    <symbol id="assault" viewBox="2 0 28 28">
+        <polygon points="13,28 3,28 16,3 29,28 19,28 19,25 24,25 16,8 8,25 13,25"></polygon>
+    </symbol>  
+    <symbol id="gunner" viewBox="2 0 28 28">
+        <path d="M4,3v18l12,8l12-8V3H4z M25,20l-9,6l-9-6V6h18V20z"></path>
+    </symbol> 
+    <symbol id="medic" viewBox="2 0 28 28">
+        <path d="M3,10v12h7v7h12v-7h7V10h-7V3H10v7H3z M6,13h7V6h6v7h7v6h-7v7h-6v-7H6V13z"></path>
+    </symbol> 
+    <symbol id="sniper" viewBox="2 1 28 28">
+        <path class="rectclass2" d="M3,16c0,7.2,5.8,13,13,13s13-5.8,13-13S23.2,3,16,3S3,8.8,3,16z M6,16c0-5.5,4.5-10,10-10   s10,4.5,10,10s-4.5,10-10,10S6,21.5,6,16z"></path>
+    </symbol> 
 	<symbol id="adaptive_armor" viewBox="0 0 128 128">
 		<path d="M83 56l0 61 8 0 0 -61c0,-8.66 8.63,-7.93 4.35,-18.3 -1.79,-4.33 -7.02,-15.69 -7.35,-19.7l-2 0c-0.32,3.8 -5.44,15.19 -7.04,18.99 -4.91,11.67 4.04,9.81 4.04,19.01z"></path>
 		<path d="M19 25c0,8.37 -1.89,16.21 4.24,21.76 4.76,4.32 6.78,3.89 10.98,0.46 6.45,-5.26 4.78,-12.66 4.78,-22.22 -14.53,-3.39 -5.47,-3.39 -20,0z"></path>
