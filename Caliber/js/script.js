@@ -68,8 +68,12 @@ window.addEventListener('DOMContentLoaded', () => {
         <th>УРОН</th>
         <th>ПОЛУЧЕНИЕ</th>
         <tr class = 'line'>
-            <td><svg class = "assaultLogo"><title>assault</title><use xlink:href="#assault"></use></svg></td>
-            <td><img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso"></td>
+            <td>
+                <svg class = "assaultLogo"><title>assault</title><use xlink:href="#assault"></use></svg>
+            </td>
+            <td>
+                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">
+            </td>
             <td>
                 <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
                     <span class="lvlText">${Object.values(team1[2])[0]}</span>    
@@ -83,20 +87,18 @@ window.addEventListener('DOMContentLoaded', () => {
                 <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">
                 <span class = "name" style = "position: absolute">${assault1[6]}</span>
             </td>
-            <td>${assault1[4]}</td>
             <td>
-                <div class = "perks">
-                    <svg class="perk _1"><title>${assPerks1[0]}</title><use xlink:href="#${assPerks1[0]}"></use></svg>
-                    <svg class="perk _2"><title>${gunPerks1[0]}</title><use xlink:href="#${gunPerks1[0]}"></use></svg>
-                    <svg class="perk _3"><title>${medPerks1[0]}</title><use xlink:href="#${medPerks1[0]}"></use></svg>
-                    <svg class="perk _4"><title>${sniPerks1[0]}</title><use xlink:href="#${sniPerks1[0]}"></use></svg>
-                </div>
-            </td>
-            
-            <td>${assault1[7]}</td>
+            ${assault1[4]}
+            <div class = "perks">
+            <svg class="perk _1"><title>${assPerks1[0]}</title><use xlink:href="#${assPerks1[0]}"></use></svg>
+            <svg class="perk _2"><title>${gunPerks1[0]}</title><use xlink:href="#${gunPerks1[0]}"></use></svg>
+            <svg class="perk _3"><title>${medPerks1[0]}</title><use xlink:href="#${medPerks1[0]}"></use></svg>
+            <svg class="perk _4"><title>${sniPerks1[0]}</title><use xlink:href="#${sniPerks1[0]}"></use></svg>
+        </div></td>
             <td>${assault1[8]}</td>
             <td>${assault1[9]}</td>
             <td>${assault1[10]}</td>
+            <td>${assault1[7]}</td>
             <td>${assault1[11]}</td>
             <tr><th></th></tr>
             <tr><th></th></tr>
@@ -121,8 +123,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">
                 <span class = "name" style = "position: absolute">${gunner1[6]}</span>
             </td>
-            <td>${gunner1[4]}</td>
             <td>
+            ${gunner1[4]}
                 <div class = "perks">
                     <svg class="perk _1"><title>${assPerks1[1]}</title><use xlink:href="#${assPerks1[1]}"></use></svg>
                     <svg class="perk _2"><title>${gunPerks1[1]}</title><use xlink:href="#${gunPerks1[1]}"></use></svg>
@@ -182,17 +184,21 @@ window.addEventListener('DOMContentLoaded', () => {
             <tr><th></th></tr>
         </tr>
         <tr class = 'line'>
-            <td><svg class="sniperLogo"><title>assault</title><use xlink:href="#sniper"></use></svg></td>
-            <td><img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso"></td>
             <td>
-            <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
-                <span class="lvlText">${Object.values(team1[5])[0]}</span>    
-                <div class="bevel">
-                    <span class = "nameOp">Арчер</span>
-                    <span class = "lvlOp">${Object.values(team1[5])[1]}</span>
+                <svg class="sniperLogo"><title>assault</title><use xlink:href="#sniper"></use></svg>
+            </td>
+            <td>
+                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">
+            </td>
+            <td>
+                <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
+                    <span class="lvlText">${Object.values(team1[5])[0]}</span>    
+                    <div class="bevel">
+                        <span class = "nameOp">Арчер</span>
+                        <span class = "lvlOp">${Object.values(team1[5])[1]}</span>
+                    </div>
                 </div>
-            </div>
-        </td>
+            </td>
             <td>
                 <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">
                 <span class = "name "style = "position: absolute">${sniper1[6]}</span>
