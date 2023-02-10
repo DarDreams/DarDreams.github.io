@@ -56,7 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let medPerks2 = game.team2.medic.perks.split(",");
     let sniPerks2 = game.team2.sniper.perks.split(",");
     //console.log($Object.values(team1[1])[5]);
-    console.log(game.team1.assault.baner);
+    //console.log(game.team1.assault.baner);
     document.querySelector('.team1Table').insertAdjacentHTML('afterbegin',`
         <th></th>
         <th></th>
