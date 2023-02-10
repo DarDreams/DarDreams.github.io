@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 </div>
             </td>
             <td>
-                <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_${game.team1.assault.baner}_large.png" alt="baner">
+                <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${game.team1.assault.baner}_large.png" alt="baner">
                 <span class = "name" style = "position: absolute">${assault1[6]}</span>
             </td>
             <td>
@@ -121,7 +121,7 @@ window.addEventListener('DOMContentLoaded', () => {
             </div>
         </td>
             <td>
-                <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">
+            <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${game.team1.gunner.baner}_large.png" alt="baner">
                 <span class = "name" style = "position: absolute">${gunner1[6]}</span>
             </td>
             <td>
@@ -159,7 +159,7 @@ window.addEventListener('DOMContentLoaded', () => {
             </div>
         </td>
             <td>
-                <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">
+            <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${game.team1.medic.baner}_large.png" alt="baner">
                 <span class = "name "style = "position: absolute">${medic1[6]}</span>
             </td>
             <td>${medic1[4]}</td>
@@ -201,7 +201,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 </div>
             </td>
             <td>
-                <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">
+            <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${game.team1.sniper.baner}_large.png" alt="baner">
                 <span class = "name "style = "position: absolute">${sniper1[6]}</span>
             </td>
             <td>${sniper1[4]}</td>
