@@ -56,8 +56,9 @@ html {
         position: absolute;
         z-index: 9;
         color: #6aa5ee;
-        font-weight: 800;
-        transform: translate(16px, 0px);
+        font-weight: 600;
+        font-size: 12px;
+        transform: translate(20px, 2px);
     }
 
     .nameOp {
@@ -79,7 +80,7 @@ html {
     .lvlText {
         position: absolute;
         color: black;
-        font-size: 23px;
+        font-size: 18px;
         font-weight: 800;
         z-index: 9;
         transform: translate(-43px, -2px);
