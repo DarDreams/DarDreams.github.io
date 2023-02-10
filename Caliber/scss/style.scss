@@ -1,6 +1,8 @@
 html {
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+    font-family: "Roboto", sans-serif;
     background-color: #283847;
-    font-family: "Consolas", Sans-Serif;
+    //font-family: "Consolas", Sans-Serif;
     position: relative;
 
     table {
@@ -77,10 +79,10 @@ html {
     .lvlText {
         position: absolute;
         color: black;
-        font-size: 25px;
+        font-size: 23px;
         font-weight: 800;
         z-index: 9;
-        transform: translate(-45px, -4px);
+        transform: translate(-43px, -2px);
     }
 
     .baner {
