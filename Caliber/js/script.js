@@ -55,7 +55,8 @@ window.addEventListener('DOMContentLoaded', () => {
     let gunPerks2 = game.team2.gunner.perks.split(",");
     let medPerks2 = game.team2.medic.perks.split(",");
     let sniPerks2 = game.team2.sniper.perks.split(",");
-
+    //console.log($Object.values(team1[1])[5]);
+    console.log(game.team1.assault.baner);
     document.querySelector('.team1Table').insertAdjacentHTML('afterbegin',`
         <th></th>
         <th></th>
@@ -84,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 </div>
             </td>
             <td>
-                <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_RankedSeason_large.png" alt="baner">
+                <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_${game.team1.assault.baner}_large.png" alt="baner">
                 <span class = "name" style = "position: absolute">${assault1[6]}</span>
             </td>
             <td>
