@@ -5,7 +5,8 @@
         win: "3",
         rank: "5021",
         assault: {
-            lvl: "26¹²",
+            lvl: "26",
+            lvlop: "12",
             rank: "1066",
             oper: "KSK",
             group: "1155",
@@ -18,7 +19,8 @@
             recive: "0507"
         },
         gunner: {
-            lvl: "62¹⁵",
+            lvl: "62",
+            lvlop: "15",
             rank: "1469",
             oper: "CST",
             group: "2090",
@@ -31,7 +33,8 @@
             recive: "0700"
         },
         medic: {
-            lvl: "59¹⁵",
+            lvl: "59",
+            lvlop: "15",
             rank: "1261",
             oper: "GRO",
             group: "1721",
@@ -44,7 +47,8 @@
             recive: "0513"
         },
         sniper: {
-            lvl: "38¹⁰",
+            lvl: "38",
+            lvlop: "10",
             rank: "1225",
             oper: "CST",
             group: "7979",
@@ -61,7 +65,8 @@
         win: "1",
         rank: "4994",
         assault: {
-            lvl: "36⁰⁶",
+            lvl: "36",
+            lvlop: "06",
             rank: "0808",
             oper: "NES",
             group: "1020",
@@ -74,7 +79,8 @@
             recive: "0337"
         },
         gunner: {
-            lvl: "32¹¹",
+            lvl: "32",
+            lvlop: "11",
             rank: "0798",
             oper: "EZA",
             group: "1020",
@@ -87,7 +93,8 @@
             recive: "0464"
         },
         medic: {
-            lvl: "62¹⁵",
+            lvl: "62",
+            lvlop: "15",
             rank: "1669",
             oper: "KSK",
             group: "4702",
@@ -100,7 +107,8 @@
             recive: "0612"
         },
         sniper: {
-            lvl: "85¹⁵",
+            lvl: "85",
+            lvlop: "15",
             rank: "1719",
             oper: "FSB",
             group: "4702",
