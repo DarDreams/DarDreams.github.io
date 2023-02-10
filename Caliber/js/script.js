@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <th></th>
         <th></th>
         <th></th>
-        <th>ПЕРКИ</th>
+        <th></th>
         <th>ГРУППА</th>
         <th>ЛИКВИДИРОВАЛ</th>
         <th>ПОГИБ</th>
