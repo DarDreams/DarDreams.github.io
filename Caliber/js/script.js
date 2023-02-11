@@ -181,12 +181,16 @@ let roleName;
             }
 
             error('Showcase3');
+            error('Showcase11');
+            error('Showcase12');
             error('Showcase13');
             error('Birthday2022emblem4');
             error('PvPDestruction2022Top1000');
             error('cst');
             error('PvPDestruction2022Arsenal2');
+            error('PvPDestruction2022Arsenal3');
             error('BP10emblem1');
+            error("BP9mOldComplete");
 
             
             
