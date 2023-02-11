@@ -15,8 +15,8 @@ window.addEventListener('DOMContentLoaded', () => {
   
     let team1    = Object.values(game.team1);
     let team2    = Object.values(game.team2);
-    console.log(team1);
-    console.log(team2);
+    // console.log(team1);
+    // console.log(team2);
     let assault1 = Object.values(game.team1.assault);
     
     let gunner1  = Object.values(game.team1.gunner);
@@ -46,6 +46,21 @@ window.addEventListener('DOMContentLoaded', () => {
     // `
     //document.querySelector('.container').append(team1Table);
 
+    function oper(collection) {
+        let res;
+        let colShort = collection.replace(/(\d+)./g,'');
+        let letter = collection.slice(0,collection.length-1);
+        let colFull = collection[collection.length-1];
+        if (colShort == 'SSO') { res = `RUS_${colFull}_${colShort}_${letter}` };
+         //res = colShort+"_"+collection.slice(-1);
+         console.log(res);
+    
+        return res
+    }
+    
+    console.log(oper(game.team1.gunner.oper));
+    console.log(game.team1.gunner.oper);
+
     let assPerks1 = game.team1.assault.perks.split(",");
     let gunPerks1 = game.team1.gunner.perks.split(",");
     let medPerks1 = game.team1.medic.perks.split(",");
@@ -73,7 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <svg class = "assaultLogo"><title>assault</title><use xlink:href="#assault"></use></svg>
             </td>
             <td>
-                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso">
+                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(game.team1.assault.oper)}_Small.png" alt="sso">
             </td>
             <td>
                 <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
@@ -110,7 +125,7 @@ window.addEventListener('DOMContentLoaded', () => {
         </tr>   
         <tr class = 'line'>
             <td><svg class="gunnerLogo"><title>assault</title><use xlink:href="#gunner"></use></svg></td>
-            <td><img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_RUS_SSO2013_A_ES_Small.png" alt="sso"></td>
+            <td><img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(game.team1.gunner.oper)}_Small.png" alt="sso"></td>
             <td>
             <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
                 <span class="lvlText">${Object.values(team1[3])[0]}</span>    
