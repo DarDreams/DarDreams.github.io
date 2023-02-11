@@ -192,7 +192,12 @@ let roleName;
             error('BP10emblem1');
             error("BP9mOldComplete");
 
-            
+            let img = new Image();
+            img.src = `https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[k][i+2][12]}_large.png" alt="${games[k][i+2][12]}`;
+            img.onerror = function () {
+                console.log("gav");
+            }
+          
             
             // console.log(roleName);
             //  if (games[k][i+2][3] == "CSTA") {games[k][i+2][3] = "RECRUITA"}
