@@ -37,7 +37,6 @@ window.addEventListener('DOMContentLoaded', () => {
     
         
 
-
 let roleName;
     function oper(collection) {
         let res;
@@ -148,21 +147,18 @@ let roleName;
             if (role == 'S' && division == 'JIAOLONG') {roleName = 'ЦАНЛУН'};
         };
         if (division == 'CST')      {
-            res = `USA_${division}${year}_${role}`;
+          //  res = `USA_${division}${year}_${role}`;
             if (role == 'A' && division == 'CST') {roleName = 'СЛАЙ'}; 
             if (role == 'G' && division == 'CST') {roleName = 'ФОРТРЕСС'};
             if (role == 'M' && division == 'CST') {roleName = 'БОУНС'};
             if (role == 'S' && division == 'CST') {roleName = 'АВАЛАНШ'};
+            
         };
-        
+        //console.log(res);
         return res
         
     }
 
-
-
-
-   // console.log(oper(games[2][0+3][3]));
     for (let k = 2; k < 4; k++) {
     document.querySelector(`.team1Table`).insertAdjacentHTML('beforeend',`
     <th></th>
@@ -175,20 +171,29 @@ let roleName;
     <th>СОДЕЙСТВИЯ</th>
     <th>УРОН</th>
     <th>ПОЛУЧЕНИЕ</th>`);
-
     
-
         for (let i = 0; i <= 3; i++) {
-           // if (games[k][i+2][12] == 'Birthday2022emblem4'||games[k][i+2][12] == 'PvPDestruction2022Top1000') { games[k][i+2][12] = 'default'}
-              console.log(img(`https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[k][i+2][12]}_large.png`));
-        
-        
-                //console.error("test");
-               // games[k][i+2][12]= "default"
-                //games[k][i+2][3] = 'RECRUIT';
-         
+
+            function error(string) {
+                if (games[k][i+2][12] == string) { 
+                    games[k][i+2][12] = 'default'
+                }
+            }
+
+            error('Showcase3');
+            error('Birthday2022emblem4');
+            error('PvPDestruction2022Top1000');
+            error('cst');
+
+            
+            
+            // console.log(roleName);
+            //  if (games[k][i+2][3] == "CSTA") {games[k][i+2][3] = "RECRUITA"}
+            //  if (games[k][i+2][3] == "CSTG") {games[k][i+2][3] = "RECRUITG"}
+            //  if (games[k][i+2][3] == "CSTM") {games[k][i+2][3] = "RECRUITM"}
+            //  if (games[k][i+2][3] == "CSTS") {games[k][i+2][3] = "RECRUITS"}
+                     
             let operLoop = ['assault','gunner','medic','sniper'];
-            //let team = ['','1','2'];
             document.querySelector(`.team1Table`).insertAdjacentHTML('beforeend',`
     
             <tr class = 'line ${operLoop[i]}'>
@@ -196,7 +201,7 @@ let roleName;
                     <svg class = "${operLoop[i]}Logo"><title>${operLoop[i]}</title><use xlink:href="#${operLoop[i]}"></use></svg>
                 </td>
                 <td>
-                    <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(games[k][i+2][3])}_Small.png" alt="${oper(games[k][i+2][3])}">
+                    <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(games[k][i+2][3])}_Small.png" alt="">
                 </td>
                 <td>
                     <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
@@ -208,7 +213,7 @@ let roleName;
                     </div>
                 </td>
                 <td>
-                    <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[k][i+2][12]}_large.png" alt="baner">
+                    <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[k][i+2][12]}_large.png" alt="${games[k][i+2][12]}">
                     <span class = "name" style = "position: absolute">${games[k][i+2][6]}</span>
                 </td>
                 <td>

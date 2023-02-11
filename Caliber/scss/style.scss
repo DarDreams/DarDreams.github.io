@@ -3,14 +3,14 @@ html {
     font-family: "Roboto", sans-serif;
     background-image: url('https://cdn.playcaliber.com/site/media/wallpapers/2021/09/08/wallpapers-ksk_1920.jpg');
     background-color: black;
-    background-position: bottom -410px right -60px;
+    background-position: bottom -250px right -60px;
     background-size: cover;
     background-repeat: no-repeat;
     //font-family: "Consolas", Sans-Serif;
     position: relative;
 
     table {
-        margin: 0 auto;
+        margin: 100px auto;
         text-align: center;
         background: #1919192d;
         color: #ffffff;
@@ -21,7 +21,8 @@ html {
             font-weight: 200;
             color:white;
             text-align: center;
-            padding-right: 50px;
+            padding-right: 25px;
+
             &:nth-child(5) {
                 padding-right: 100px;
             }
@@ -44,6 +45,9 @@ html {
                 padding-right: 25px;
             }
             &:nth-child(9) {
+                padding-right: 25px;
+            }
+            &:nth-child(10) {
                 padding-right: 25px;
             }
         }
