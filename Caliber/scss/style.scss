@@ -29,18 +29,8 @@ html {
             padding: 0;
         }
 
-        
-
-        // svg {
-        //     fill: white;
-        //     width: 40px;
-        //     height: 40px;
-        // }
-
     }
     
-
-
 
     .assaultLogo, .gunnerLogo, .medicLogo, .sniperLogo {
         width: 55px;
@@ -63,18 +53,19 @@ html {
 
     .nameOp {
         font-size: 11px;
-        font-stretch: ultra-condensed;
+        //font-stretch: ultra-condensed;
+        font-weight: 400;
         color: #fec544;
         position: absolute;
-        transform: translate(-34px, 4px);
+        transform: translate(-42px, 4px);
     }
 
     .bevel {
         width: 72px;
         height: 20px;
-        background: #000;
+        background: rgba(0, 0, 0, 0.441);
         transform: translate(-84px, 33px);
-        opacity: .7;
+        //opacity: .7;
     }
 
     .lvlText {
