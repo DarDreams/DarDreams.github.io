@@ -181,6 +181,7 @@ let roleName;
             }
 
             error('Showcase3');
+            error('Showcase13');
             error('Birthday2022emblem4');
             error('PvPDestruction2022Top1000');
             error('cst');
