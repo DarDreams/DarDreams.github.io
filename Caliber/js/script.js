@@ -184,6 +184,8 @@ let roleName;
             error('Birthday2022emblem4');
             error('PvPDestruction2022Top1000');
             error('cst');
+            error('PvPDestruction2022Arsenal2');
+            error('BP10emblem1');
 
             
             
