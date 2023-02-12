@@ -32,7 +32,18 @@ window.addEventListener('DOMContentLoaded', () => {
     })();
 
 (function () {
-    //Winlose
+    function color(color) {
+        document.querySelector("div.winLose > svg > path").style.fill = color;
+        
+    }
+    const winLose = document.querySelector("div.winLose > div");
+    if (games[2][0] == 3) {color('#6aa5ee');} else {
+        
+        color('#ff0000');
+        winLose.style.color ="#ff0000";
+        document.querySelector("div.winLose > div").style.letterSpacing = '3px';
+        document.querySelector("div.winLose > div").innerText = 'ПОРАЖЕНИЕ!'
+    }
 })()
 
 

@@ -31,11 +31,12 @@ html {
    
 
     .container {
-        margin-top: 200px;
+        margin-top: 130px;
     }
 
     table {
-        margin: 50px auto;
+        transform: scale(.8);
+        margin: 20px auto;
         text-align: center;
         background: #1919192d;
         color: #ffffff;
@@ -212,7 +213,7 @@ html {
         transform: translate(34px, -92px);
         }    
     .redPoint3 {
-        transform: translate(67px, -185px);
+        transform: translate(67px, -184px);
         }
 
     .bluePoint1 {
@@ -226,13 +227,14 @@ html {
     }
     .winLose>svg{
         position: absolute;
-        transform: translate(103px, -200px);
+        transform: translate(103px, -130px);
     }
     .winLoseText {
         color : #6aa5ee;
         position: absolute;
         font-size: 60px;
-        font-weight: 800;
-        transform: translate(10px 10px);
+        font-weight: 600;
+        letter-spacing: 10px;
+        transform: translate(205px, -90px);
     }
 }
