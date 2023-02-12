@@ -117,9 +117,38 @@ function check () {
       else {
         return today}
 }
-console.log( check());
+//console.log( check());
 
+function logDate(obj) {
+  let currentDate = new Date();
+  let targetDate = new Date(obj.date);
+  let diff = (targetDate - currentDate) / (1000 * 60 * 60 * 24);
+  if (diff >= 0 && diff <= 3) {
+    console.log(obj.text);
+  }
+}
 
+function checkDate(dates, currentDate) {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+
+  for (let key in dates) {
+    const dateComponents = key.split(".");
+    const day = parseInt(dateComponents[0]);
+    const month = parseInt(dateComponents[1]) - 1; // JavaScript months are zero-based
+    const year = parseInt(dateComponents[2]) || currentYear;
+
+    const date = new Date(year, month, day);
+    const timeDiff = date.getTime() - today.getTime();
+    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+    if (diffDays >= 0 && diffDays <= 3) {
+      console.log(dates[key]);
+    }
+  }
+}
+
+checkDate(dates);
 
 // [ '02.01.0000', 'День рождение Капо' ],
 // [ '06.01.2007', 'День рождение Сына Алены (Тимы)' ],

@@ -14,7 +14,9 @@ window.addEventListener('DOMContentLoaded', () => {
             
         let games = objectToArray(game);
 
-        console.log(games);
+      //  console.log(games);
+
+      document.querySelector('.redPoint1>path').style.fillOpacity = '1';
 
 let roleName;
     function oper(collection) {

@@ -28,7 +28,11 @@ html {
         border-width:0;
     }
     
-    
+   
+
+    .container {
+        margin-top: 200px;
+    }
 
     table {
         margin: 50px auto;
@@ -169,6 +173,7 @@ html {
             height: 30px;
             fill: white;
             position: absolute;
+            
             &._1 {
                 transform: translate(-376px, -30px);
             }
@@ -182,5 +187,41 @@ html {
                 transform: translate(-350px, 0px);
             }
         }
+    }
+    h1 {
+        color: #fff;
+        transform: translate(-128px, 78px);
+       // margin-left: calc(100vw / 2);
+    }
+    .redPoints {
+        //display: block;
+        position: absolute;
+        width: 30px;
+        left: 1000px;
+        top: -60px;
+        //height: 20px;
+        
+       // transform: translate(10px 10px);
+    }
+    .redPoint1 {
+        transform: translate(0px, 0px);
+        }
+    .redPoint2 {
+        left: 48.8vw;
+        top: -10px;
+        transform: translate(34px, -92px);
+        }    
+    .redPoint3 {
+        transform: translate(67px, -185px);
+        }
+
+    .bluePoint1 {
+        transform: scaleX(-1) translate(205px, -276px);
+    }
+    .bluePoint2 {
+        transform: scaleX(-1) translate(239px, -368px);
+    }
+    .bluePoint3 {
+        transform: scaleX(-1) translate(273px, -460px);
     }
 }
