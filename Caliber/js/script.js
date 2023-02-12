@@ -1,7 +1,7 @@
 import game from "./game.js";
 console.clear();
 window.addEventListener('DOMContentLoaded', () => {
-
+let img,x;
     // const team1Selector = document.querySelectorAll('.line');
     // const rank = document.querySelectorAll('.team_rank');
     // const difRank = document.querySelector('.team_rank_dif');
@@ -159,6 +159,24 @@ let roleName;
         
     }
 
+    function huy() {
+       let img = new Image();
+       
+       for (let i = 0;i < 4; i++) {     
+        img.src = `https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[2][i+2][12]}_large.png`;
+       img.onerror = function () {
+                games[2][i+2].pop();
+                games[2][i+2].push('default');
+                //games[k][i+2][12] = 'default';
+                }
+                return games;
+            };
+
+    }
+    huy();
+
+    console.log(games);
+
     for (let k = 2; k < 4; k++) {
     document.querySelector(`.team1Table`).insertAdjacentHTML('beforeend',`
     <th></th>
@@ -180,24 +198,23 @@ let roleName;
                 }
             }
 
-            error('Showcase3');
-            error('Showcase11');
-            error('Showcase12');
-            error('Showcase13');
-            error('Birthday2022emblem4');
-            error('PvPDestruction2022Top1000');
-            error('cst');
-            error('PvPDestruction2022Arsenal2');
-            error('PvPDestruction2022Arsenal3');
-            error('BP10emblem1');
-            error("BP9mOldComplete");
+            // error('Showcase3');
+            // error('Showcase11');
+            // error('Showcase12');
+            // error('Showcase13');
+            // error('Birthday2022emblem4');
+            // error('PvPDestruction2022Top1000');
+            // error('cst');
+            // error('PvPDestruction2022Arsenal2');
+            // error('PvPDestruction2022Arsenal3');
+            // error('BP10emblem1');
+            // error("BP9mOldComplete");
 
-            let img = new Image();
-            img.src = `https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[k][i+2][12]}_large.png" alt="${games[k][i+2][12]}`;
-            img.onerror = function () {
-                console.log("gav");
-            }
+            
+
+            
           
+            
             
             // console.log(roleName);
             //  if (games[k][i+2][3] == "CSTA") {games[k][i+2][3] = "RECRUITA"}
