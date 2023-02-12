@@ -79,9 +79,10 @@ html {
     }
     .rank {
     z-index: 9;
-    transform: translate(416px, 19px);
+    transform: translate(-124px, 8px);
     position: absolute;
-    float: right;
+    text-align: right;
+    justify-content: right;
 }
 
     .assaultLogo, .gunnerLogo, .medicLogo, .sniperLogo {

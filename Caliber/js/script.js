@@ -224,7 +224,7 @@ let roleName;
                      
             let operLoop = ['assault','gunner','medic','sniper'];
             document.querySelector(`.team1Table`).insertAdjacentHTML('beforeend',`
-            <span class = "rank">${games[k][i+2][2]}</span>
+            
             <tr class = 'line ${operLoop[i]}'>
                 <td>
                     <svg class = "${operLoop[i]}Logo"><title>${operLoop[i]}</title><use xlink:href="#${operLoop[i]}"></use></svg>
@@ -243,6 +243,7 @@ let roleName;
                 </td>
                 <td>
                     <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[k][i+2][12]}_large.png" alt="${games[k][i+2][12]}">
+                    <span class = "rank">${games[k][i+2][2]}</span>
                     <span class = "name" style = "position: absolute">${games[k][i+2][6]}</span>
                 </td>
                 <td>
