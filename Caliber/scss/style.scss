@@ -77,8 +77,12 @@ html {
         }
 
     }
-    
-   
+    .rank {
+    z-index: 9;
+    transform: translate(416px, 19px);
+    position: absolute;
+    float: right;
+}
 
     .assaultLogo, .gunnerLogo, .medicLogo, .sniperLogo {
         width: 45px;

@@ -224,7 +224,7 @@ let roleName;
                      
             let operLoop = ['assault','gunner','medic','sniper'];
             document.querySelector(`.team1Table`).insertAdjacentHTML('beforeend',`
-    
+            <span class = "rank">${games[k][i+2][2]}</span>
             <tr class = 'line ${operLoop[i]}'>
                 <td>
                     <svg class = "${operLoop[i]}Logo"><title>${operLoop[i]}</title><use xlink:href="#${operLoop[i]}"></use></svg>
