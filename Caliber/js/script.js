@@ -16,7 +16,25 @@ window.addEventListener('DOMContentLoaded', () => {
 
       //  console.log(games);
 
-      document.querySelector('.redPoint1>path').style.fillOpacity = '1';
+      console.log(game.team1.win);
+      console.log(games[2][0]);
+
+(function () {
+        let color = ["blue","red"]
+        color.forEach((color,i) => {
+            function setColor(n) {
+                document.querySelector(`.${color}Point${n}>path`).style.fillOpacity = '1';
+            }
+            if (games[i+2][0] == 1) {setColor(1)}
+            if (games[i+2][0] == 2) {setColor(1);setColor(2)}
+            if (games[i+2][0] == 3) {setColor(1);setColor(2);setColor(3);}
+        });
+    })();
+
+(function () {
+    //Winlose
+})()
+
 
 let roleName;
     function oper(collection) {
@@ -153,7 +171,6 @@ let roleName;
     <th>УРОН</th>
     <th>ПОЛУЧЕНИЕ</th>`);
     
-        console.log(games[2][0+2][5]);
 
         for (let i = 0; i <= 3; i++) {
 
