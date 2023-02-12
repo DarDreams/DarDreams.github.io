@@ -1,41 +1,20 @@
 import game from "./game.js";
 console.clear();
 window.addEventListener('DOMContentLoaded', () => {
-let img,x;
-    // const team1Selector = document.querySelectorAll('.line');
-    // const rank = document.querySelectorAll('.team_rank');
-    // const difRank = document.querySelector('.team_rank_dif');
 
+        function objectToArray(obj) {
+            return Object.values(obj).map((value) => {
+              if (typeof value === 'object' && value !== null) {
+                return objectToArray(value);
+              } else {
+                return value;
+              }
+            });
+          }
+            
+        let games = objectToArray(game);
 
-    //today.map(item => new Date().getFullYear() - item[0].substring(6,10));
-    //let team3;
-    
-    // let team2    = Object.values(team1[2]);
-    // team3[2] =  team1+team2;
-    let games          = Object.values(game);
-        games[2]       = Object.values(game.team1);
-        games[2][2]    = Object.values(game.team1.assault);
-        games[2][2][5] = game.team1.assault.perks.split(",");
-        games[2][3]    = Object.values(game.team1.gunner);
-        games[2][3][5] = game.team1.gunner.perks.split(",");
-        games[2][4]    = Object.values(game.team1.medic);
-        games[2][4][5] = game.team1.medic.perks.split(",");
-        games[2][5]    = Object.values(game.team1.sniper);
-        games[2][5][5] = game.team1.sniper.perks.split(",");
-
-        games[3]        = Object.values(game.team2);
-        games[3][2]     = Object.values(game.team2.assault);
-        games[3][2][5]  = game.team2.assault.perks.split(",");
-        games[3][3]     = Object.values(game.team2.gunner);
-        games[3][3][5]  = game.team2.gunner.perks.split(",");
-        games[3][4]     = Object.values(game.team2.medic);
-        games[3][4][5]  = game.team2.medic.perks.split(",");
-        games[3][5]     = Object.values(game.team2.sniper);
-        games[3][5][5]  = game.team2.sniper.perks.split(",");
-
-    // console.log(games);
-    
-        
+        console.log(games);
 
 let roleName;
     function oper(collection) {
@@ -159,26 +138,8 @@ let roleName;
         
     }
 
-    function huy() {
-       let img = new Image();
-       
-       for (let i = 0;i < 4; i++) {     
-        img.src = `https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[2][i+2][12]}_large.png`;
-       img.onerror = function () {
-                games[2][i+2].pop();
-                games[2][i+2].push('default');
-                //games[k][i+2][12] = 'default';
-                }
-                return games;
-            };
-
-    }
-    huy();
-
-    console.log(games);
-
     for (let k = 2; k < 4; k++) {
-    document.querySelector(`.team1Table`).insertAdjacentHTML('beforeend',`
+    document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('afterbegin',`
     <th></th>
     <th></th>
     <th></th>
@@ -190,6 +151,8 @@ let roleName;
     <th>УРОН</th>
     <th>ПОЛУЧЕНИЕ</th>`);
     
+        console.log(games[2][0+2][5]);
+
         for (let i = 0; i <= 3; i++) {
 
             function error(string) {
@@ -198,39 +161,29 @@ let roleName;
                 }
             }
 
-            // error('Showcase3');
-            // error('Showcase11');
-            // error('Showcase12');
-            // error('Showcase13');
-            // error('Birthday2022emblem4');
-            // error('PvPDestruction2022Top1000');
-            // error('cst');
-            // error('PvPDestruction2022Arsenal2');
-            // error('PvPDestruction2022Arsenal3');
-            // error('BP10emblem1');
-            // error("BP9mOldComplete");
-
-            
-
-            
-          
-            
-            
-            // console.log(roleName);
-            //  if (games[k][i+2][3] == "CSTA") {games[k][i+2][3] = "RECRUITA"}
-            //  if (games[k][i+2][3] == "CSTG") {games[k][i+2][3] = "RECRUITG"}
-            //  if (games[k][i+2][3] == "CSTM") {games[k][i+2][3] = "RECRUITM"}
-            //  if (games[k][i+2][3] == "CSTS") {games[k][i+2][3] = "RECRUITS"}
-                     
             let operLoop = ['assault','gunner','medic','sniper'];
-            document.querySelector(`.team1Table`).insertAdjacentHTML('beforeend',`
+
+            let img = new Image();
+            img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + games[k][i+2][12] + "_large.png";
+            img.onload = function() {
+                document.querySelector(`.team${k-1}Table > tbody > tr.${operLoop[i]} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
+            };
+            img.onerror = function() {
+            document.querySelector(`.team${k-1}Table > * > tr.${operLoop[i]} >.imgBaner`).insertAdjacentHTML('afterbegin', `
+                
+            <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${games[k][i+2][12]}">
+
+            `);
+            };
+
+            document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('beforeend',`
             
             <tr class = 'line ${operLoop[i]}'>
                 <td>
                     <svg class = "${operLoop[i]}Logo"><title>${operLoop[i]}</title><use xlink:href="#${operLoop[i]}"></use></svg>
                 </td>
                 <td>
-                    <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(games[k][i+2][3])}_Small.png" alt="">
+                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(games[k][i+2][3])}_Small.png" alt="">
                 </td>
                 <td>
                     <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
@@ -241,8 +194,8 @@ let roleName;
                         </div>
                     </div>
                 </td>
-                <td>
-                    <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${games[k][i+2][12]}_large.png" alt="${games[k][i+2][12]}">
+                <td class = "imgBaner">
+                
                     <span class = "rank">${games[k][i+2][2]}</span>
                     <span class = "name" style = "position: absolute">${games[k][i+2][6]}</span>
                 </td>

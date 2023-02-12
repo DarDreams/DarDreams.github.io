@@ -31,7 +31,7 @@ html {
     
 
     table {
-        margin: 100px auto;
+        margin: 50px auto;
         text-align: center;
         background: #1919192d;
         color: #ffffff;
@@ -78,12 +78,14 @@ html {
 
     }
     .rank {
-    z-index: 9;
-    transform: translate(-124px, 8px);
-    position: absolute;
-    text-align: right;
-    justify-content: right;
-}
+        z-index: 9;
+        transform: translate(-116px, 8px);
+        position: absolute;
+        //text-align: right;
+        font-size: 12px;
+        width: 30px;
+        background-color:rgba(0, 0, 0, 0.5);
+    }
 
     .assaultLogo, .gunnerLogo, .medicLogo, .sniperLogo {
         width: 45px;
