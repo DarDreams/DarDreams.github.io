@@ -1,4 +1,5 @@
 import game from "./game.js";
+import {caliber, caliber2} from "./game2.js";
 console.clear();
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -14,10 +15,35 @@ window.addEventListener('DOMContentLoaded', () => {
             
         let games = objectToArray(game);
 
-      //  console.log(games);
+console.log(caliber);
+console.log(caliber2);//
 
-      console.log(game.team1.win);
-      console.log(games[2][0]);
+function convertSecondsToTime(seconds) {
+    //const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const sec = Math.floor(seconds % 60);
+    return `${minutes
+      .toString()
+      .padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+  }
+  
+
+    (function (){
+        const mode = document.querySelector('.mode');
+        const time = document.querySelector('.time');
+        const map = document.querySelector('.map');
+        if (caliber[4] == 'pvp') {
+            mode.innerText = `Столкновение`;
+        };
+        time.innerText = convertSecondsToTime(caliber2.Log.MatchTimeSeconds);
+        console.log(caliber2.Log.Data[1]);
+        if (caliber2.Log.Data[1] == 'lv_zalessye_radarbase_overcast') {
+            map.innerText = 'Залесье';
+        }
+    })();
+        
+        //console.log(caliber[7][0][2]);
+
 
 (function () {
         let color = ["blue","red"]

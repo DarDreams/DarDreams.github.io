@@ -36,7 +36,7 @@ html {
 
     table {
         transform: scale(.8);
-        margin: 20px auto;
+        margin: 15px auto;
         text-align: center;
         background: #1919192d;
         color: #ffffff;
@@ -197,9 +197,12 @@ html {
     .redPoints {
         //display: block;
         position: absolute;
+        //display: flex;
+        //justify-content: center;
         width: 30px;
-        left: 1000px;
-        top: -60px;
+         left: 1000px;
+         top: -60px;
+        //margin: 0 auto;
         //height: 20px;
         
        // transform: translate(10px 10px);
@@ -237,4 +240,27 @@ html {
         letter-spacing: 10px;
         transform: translate(205px, -90px);
     }
+    .stats {
+        //position: absolute;
+        color: white;
+        font-size: 30px;
+        font-weight: 600;
+        .mode {
+            position: absolute;
+            right: 10px;
+            top: 0;
+        }
+        .time {
+            position: absolute;
+            transform: translate(867px, -50px);
+        }
+        .map {
+            position: absolute;
+            right: 10px;
+            top:40px;
+            //transform: translate(1389px, -90px);
+        }
+    }
+
+    
 }
