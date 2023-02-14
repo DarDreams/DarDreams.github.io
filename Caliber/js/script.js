@@ -15,18 +15,15 @@ window.addEventListener('DOMContentLoaded', () => {
             
         let games = objectToArray(game);
 
-        //caliber[8][0] = 'asd';
-         caliber[8] = [caliber[7][4],caliber[7][5],caliber[7][6],caliber[7][7]];
-        //  caliber[8][0] = caliber[7][4];
-        //  caliber[8][1] = caliber[7][5];
-        //  caliber[8][2] = caliber[7][6];
-        //  caliber[8][3] = caliber[7][7];
 
-        console.log(caliber);
-        console.log(caliber2);
-        console.log(games);
-        console.log(games[2][0+2][5][0]);
-        console.log(caliber[2+5][0+0][8][15][0]);
+         caliber[8] = [caliber[7][4],caliber[7][5],caliber[7][6],caliber[7][7]];
+
+
+        // console.log(caliber);
+        // console.log(caliber2);
+        // console.log(games);
+        // console.log(games[2][0+2][5][0]);
+        // console.log(caliber[2+5][0+0][8][15][0]);
 
 
 
@@ -48,9 +45,12 @@ function convertSecondsToTime(seconds) {
             mode.innerText = `Столкновение`;
         };
         time.innerText = convertSecondsToTime(caliber2.Log.MatchTimeSeconds);
-        console.log(caliber2.Log.Data[1]);
-        if (caliber2.Log.Data[1] == 'lv_zalessye_radarbase_overcast') {
+        //console.log(caliber2.Log.Data[1].match(/^(.*?)\s[^\s]+$/g));
+        if (caliber2.Log.Data[1].match(/^(.*?)\s[^\s]+$/g) == 'lv_zalessye_radarbase_overcast') {
             map.innerText = 'Залесье';
+        }
+        if (caliber2.Log.Data[1] == 'lv_karhad_emirresidence_evening') {
+            map.innerText = 'Резиденция Эмира';
         }
     })();
         
@@ -86,7 +86,7 @@ function convertSecondsToTime(seconds) {
 
 
 let roleName;
-    function oper(collection) {
+    function oper(collection, k) {
         let res;
         let division = collection.replace(/(\d+)?.$/g,''); 
         let year = collection.match(/\d\d\d\d/g); if (year === null) {year = ''}
@@ -196,9 +196,18 @@ let roleName;
         };
         if (division == 'CST')      {
           //  res = `USA_${division}${year}_${role}`;
-            if (role == 'A' && division == 'CST') {roleName = 'СЛАЙ'}; 
+            if (role == 'A' && division == 'CST') {
+                roleName = 'СЛАЙ';
+                //document.querySelector('img.oper').src = 'img/sly.png';
+            }; 
             if (role == 'G' && division == 'CST') {roleName = 'ФОРТРЕСС'};
-            if (role == 'M' && division == 'CST') {roleName = 'БОУНС'};
+            if (role == 'M' && division == 'CST') {
+                roleName = 'БОУНС';
+                debugger;
+                document.querySelector("body > div.container > table.team2Table > tbody:nth-child(4) > tr.line.medic > td:nth-child(2) > img")
+                //document.querySelector(`table.team${k}Table > tbody:nth-child(4) > tr.line.medic > td:nth-child(2) > img.oper`).src = './img/bounce.png';
+                
+            };
             if (role == 'S' && division == 'CST') {roleName = 'АВАЛАНШ'};
             
         };
@@ -206,6 +215,7 @@ let roleName;
         return res
         
     }
+
 
     for (let k = 2; k < 4; k++) {
     document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('afterbegin',`
