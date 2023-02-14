@@ -23,10 +23,13 @@ $(document).ready(function(){
   $(".inicio").hide();
   $(".empresa").hide();
   $(".contactos").hide();
-  $(".productos").hide();
+  //$(".productos").hide();
 
   $(".overlay").hide();
   $(".menu__overlay").hide();
+
+
+  $('footer').hide();
 
 
   $(window).scroll(function() {
@@ -138,20 +141,63 @@ $(".logo").click(function(){
 
 
 
+///////tienda
 
-// $(".b_mail").click(function(){
-  
-//   var txt = $(".e_mail").val();
-//    alert("ahora usted recibirá las noticias a su correo: "+txt);
-  
-// });
+cards = {
+  hummus : {
+    chili : {
+    name: "Hummus Chili",
+    img: "img/productos/hummus/chili.png",
+    precio:5
+    }
+  }
+};
 
-
-
-function test()
-{
-alert("Se");
+function createCards(img, name, precio) {
+  document.querySelector('.productos__items').insertAdjacentHTML('afterbegin',`
+    <div class = "productos__items_item">
+      <img src="${img}" alt="">
+      <h3 class="cap">${name}</h3>
+      <div class="counter">
+          <button class="counter-down">-</button>
+          <input type="text" value="0" class="counter-value"/>
+          <button class="counter-up">+</button>
+      </div>
+      <h4 class="precio">${precio} €</h4>
+      <button>Comprar</button>
+    </div>
+  `);
 }
+
+createCards(cards.hummus.chili.img, cards.hummus.chili.name, cards.hummus.chili.precio);
+createCards(cards.hummus.chili.img, cards.hummus.chili.name, cards.hummus.chili.precio);
+
+
+
+/////////////
+
+//$('.counter-up').click(function(e) {
+  const countUp = document.querySelectorAll('.counter-up');
+  const countDown = document.querySelectorAll('.counter-up');
+
+  countUp.forEach(element => {
+    element.addEventListener('click', function (e) {  
+      //console.log(e.target);
+     // console.log(this);
+     // console.log(this.previousSibling.previousSibling.value);
+    var value = parseInt(this.previousSibling.previousSibling.value, 10);
+    this.previousSibling.previousSibling.value = value + 1;
+    console.log(this.NextSibling.NextSibling);
+    // = card.hummus.chili.precio * value;
+    });
+  });
+
+$('.counter-down').click(function() {
+  var value = parseInt($('.counter-value').val(), 10);
+  $('.counter-value').val(value - 1);
+});
+
+
 
 
 

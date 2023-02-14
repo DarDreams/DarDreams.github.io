@@ -15,8 +15,20 @@ window.addEventListener('DOMContentLoaded', () => {
             
         let games = objectToArray(game);
 
-console.log(caliber);
-console.log(caliber2);//
+        //caliber[8][0] = 'asd';
+         caliber[8] = [caliber[7][4],caliber[7][5],caliber[7][6],caliber[7][7]];
+        //  caliber[8][0] = caliber[7][4];
+        //  caliber[8][1] = caliber[7][5];
+        //  caliber[8][2] = caliber[7][6];
+        //  caliber[8][3] = caliber[7][7];
+
+        console.log(caliber);
+        console.log(caliber2);
+        console.log(games);
+        console.log(games[2][0+2][5][0]);
+        console.log(caliber[2+5][0+0][8][15][0]);
+
+
 
 function convertSecondsToTime(seconds) {
     //const hours = Math.floor(seconds / 3600);
@@ -258,10 +270,10 @@ let roleName;
                 <td>
                 ${games[k][i+2][4]}
                     <div class = "perks">
-                        <svg class="perk _1"><title>${games[k][i+2][5][0]}</title><use xlink:href="#${games[k][i+2][5][0]}"></use></svg>
-                        <svg class="perk _2"><title>${games[k][i+2][5][1]}</title><use xlink:href="#${games[k][i+2][5][1]}"></use></svg>
-                        <svg class="perk _3"><title>${games[k][i+2][5][2]}</title><use xlink:href="#${games[k][i+2][5][2]}"></use></svg>
-                        <svg class="perk _4"><title>${games[k][i+2][5][3]}</title><use xlink:href="#${games[k][i+2][5][3]}"></use></svg>
+                        <svg class="perk _1"><title>${caliber[k+5][i+0][8][15][0]}</title><use xlink:href="#${caliber[k+5][i+0][8][15][0]}"></use></svg>
+                        <svg class="perk _2"><title>${caliber[k+5][i+0][8][15][1]}</title><use xlink:href="#${caliber[k+5][i+0][8][15][1]}"></use></svg>
+                        <svg class="perk _3"><title>${caliber[k+5][i+0][8][15][2]}</title><use xlink:href="#${caliber[k+5][i+0][8][15][2]}"></use></svg>
+                        <svg class="perk _4"><title>${caliber[k+5][i+0][8][15][3]}</title><use xlink:href="#${caliber[k+5][i+0][8][15][3]}"></use></svg>
                     </div>
                 </td>
                 <td>${games[k][i+2][8]}</td>
