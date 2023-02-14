@@ -26,6 +26,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // console.log(caliber[2+5][0+0][8][15][0]);
 
 
+        
+
 
 function convertSecondsToTime(seconds) {
     //const hours = Math.floor(seconds / 3600);
@@ -298,11 +300,11 @@ let roleName;
                         <svg class="perk _4"><title>${caliber[k+5][i+0][8][15][3]}</title><use xlink:href="#${caliber[k+5][i+0][8][15][3]}"></use></svg>
                     </div>
                 </td>
-                <td>${games[k][i+2][8]}</td>
-                <td>${games[k][i+2][9]}</td>
-                <td>${games[k][i+2][10]}</td>
-                <td>${games[k][i+2][7]}</td>
-                <td>${games[k][i+2][11]}</td>
+                <td class = "kills" >${games[k][i+2][8]}</td>
+                <td class = "deaths">${games[k][i+2][9]}</td>
+                <td class = "assists">${games[k][i+2][10]}</td>
+                <td class = "damages">${games[k][i+2][7]}</td>
+                <td class = "recive">${games[k][i+2][11]}</td>
                 <tr><th></th></tr>
                 <tr><th></th></tr>
                 <tr><th></th></tr>
@@ -312,6 +314,70 @@ let roleName;
             </tr>
         `)};
     }
+
+
+    function topStat(selector, type) {
+        if (!selector || typeof selector !== "string") {
+          console.error("Invalid selector argument, expected a string but got " + selector);
+          return;
+        }
+        if (!type || (type !== "max" && type !== "min")) {
+          console.error("Invalid type argument, expected 'max' or 'min' but got " + type);
+          return;
+        }
+        let max = Number.MIN_SAFE_INTEGER;
+        let min = Number.MAX_SAFE_INTEGER;
+        let maxIndex = [];
+        let minIndex = [];
+      
+        for (let i = 0; i < 8; i++) {
+          let currentValue = parseInt(
+            Object.values(document.querySelectorAll(selector)[i].innerText)
+          );
+          if (currentValue > max) {
+            max = currentValue;
+            maxIndex = [i];
+          } else if (currentValue === max) {
+            maxIndex.push(i);
+          }
+          if (currentValue < min) {
+            min = currentValue;
+            minIndex = [i];
+          } else if (currentValue === min) {
+            minIndex.push(i);
+          }
+        }
+        if (type === "max") {
+          for (let i = 0; i < maxIndex.length; i++) {
+            document.querySelectorAll(selector)[maxIndex[i]].style.cssText = `
+                      color: #C49A30;
+                      font-weight: 800;
+                      `;
+          }
+        } else if (type === "min") {
+          for (let i = 0; i < minIndex.length; i++) {
+            document.querySelectorAll(selector)[minIndex[i]].style.cssText = `
+                      color: #C49A30;
+                      font-weight: 800;
+                      `;
+          }
+        }
+      }
+      
+    
+    
+    
+    
+        topStat('.damages','max');
+        topStat('.kills','max');
+        topStat('.assists','max');
+        topStat('.recive','min');
+        topStat('.deaths','min');
+       // console.log(`User ${maxIndex} has the highest player kills with ${max}`);
+        
+        
+   
+
 document.querySelectorAll('.nameOp').forEach(element => {
     if (element.innerText == 'СЛАЙ') {
         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/sly.png";
