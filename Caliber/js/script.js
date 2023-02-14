@@ -19,8 +19,8 @@ window.addEventListener('DOMContentLoaded', () => {
          caliber[8] = [caliber[7][4],caliber[7][5],caliber[7][6],caliber[7][7]];
 
 
-        // console.log(caliber);
-        // console.log(caliber2);
+         console.log(caliber);
+         console.log(caliber2);
         // console.log(games);
         // console.log(games[2][0+2][5][0]);
         // console.log(caliber[2+5][0+0][8][15][0]);
