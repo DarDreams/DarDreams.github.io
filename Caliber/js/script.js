@@ -200,12 +200,24 @@ let roleName;
                 roleName = 'СЛАЙ';
                 //document.querySelector('img.oper').src = 'img/sly.png';
             }; 
-            if (role == 'G' && division == 'CST') {roleName = 'ФОРТРЕСС'};
+            if (role == 'G' && division == 'CST') {
+                roleName = 'ФОРТРЕСС';
+
+            };
             if (role == 'M' && division == 'CST') {
                 roleName = 'БОУНС';
-                debugger;
-                document.querySelector("body > div.container > table.team2Table > tbody:nth-child(4) > tr.line.medic > td:nth-child(2) > img")
-                //document.querySelector(`table.team${k}Table > tbody:nth-child(4) > tr.line.medic > td:nth-child(2) > img.oper`).src = './img/bounce.png';
+                // console.log(k);
+                // document.querySelector(`body > div.container > table.team${k-1}Table > tbody:nth-child(3)`).insertAdjacentHTML('beforeend',`
+                // <tbody>
+                // <td></td>
+                // <tr  class = 'line medic'>
+                // <td style = "height:10px">
+                // </td>
+                // <td>
+                // <img style= "position: absolute; left: 83px; top: 215px" class = "oper" src="img/bounce.png" alt="">
+                // </td>
+                // </tbody>
+                // `)
                 
             };
             if (role == 'S' && division == 'CST') {roleName = 'АВАЛАНШ'};
@@ -261,7 +273,7 @@ let roleName;
                     <svg class = "${operLoop[i]}Logo"><title>${operLoop[i]}</title><use xlink:href="#${operLoop[i]}"></use></svg>
                 </td>
                 <td>
-                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(games[k][i+2][3])}_Small.png" alt="">
+                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(games[k][i+2][3],k)}_Small.png" alt="">
                 </td>
                 <td>
                     <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
@@ -300,5 +312,20 @@ let roleName;
             </tr>
         `)};
     }
+document.querySelectorAll('.nameOp').forEach(element => {
+    if (element.innerText == 'СЛАЙ') {
+        element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/sly.png";
+    }
+    if (element.innerText == 'ФОРТРЕСС') {
+        element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/fortress.png";
+    }
+    if (element.innerText == 'БОУНС') {
+        element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/bounce.png";
+    }
+    if (element.innerText == 'АВАЛАНШ') {
+        element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/avalansh.png";
+    }
+});
+    
 
 });
