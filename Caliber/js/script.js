@@ -480,10 +480,6 @@ let roleName;
           }
         }
       }
-      
-    
-    
-    
     
         topStat('.damages','max');
         topStat('.kills','max');
@@ -492,7 +488,9 @@ let roleName;
         topStat('.deaths','min');
        // console.log(`User ${maxIndex} has the highest player kills with ${max}`);
         
-        
+       document.querySelectorAll('.team2Table>tbody>tr>td>svg').forEach(element => {
+                element.fill = 'red';
+            });
    
 
 document.querySelectorAll('.nameOp').forEach(element => {
