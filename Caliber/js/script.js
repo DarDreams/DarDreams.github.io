@@ -69,6 +69,7 @@ function convertSecondsToTime(seconds) {
             if (games[i+2][0] == 2) {setColor(1);setColor(2)}
             if (games[i+2][0] == 3) {setColor(1);setColor(2);setColor(3);}
         });
+    
     })();
 
 (function () {
@@ -77,7 +78,9 @@ function convertSecondsToTime(seconds) {
         
     }
     const winLose = document.querySelector("div.winLose > div");
-    if (games[2][0] == 3) {color('#6aa5ee');} else {
+    for (let i = 0; i < 7; i++) {
+    if (games[2][0] == 3 && caliber[7][i][2] == 'MASTER') {color('#6aa5ee');} else {
+    }
         
         color('#ff0000');
         winLose.style.color ="#ff0000";
@@ -208,19 +211,6 @@ let roleName;
             };
             if (role == 'M' && division == 'CST') {
                 roleName = 'БОУНС';
-                // console.log(k);
-                // document.querySelector(`body > div.container > table.team${k-1}Table > tbody:nth-child(3)`).insertAdjacentHTML('beforeend',`
-                // <tbody>
-                // <td></td>
-                // <tr  class = 'line medic'>
-                // <td style = "height:10px">
-                // </td>
-                // <td>
-                // <img style= "position: absolute; left: 83px; top: 215px" class = "oper" src="img/bounce.png" alt="">
-                // </td>
-                // </tbody>
-                // `)
-                
             };
             if (role == 'S' && division == 'CST') {roleName = 'АВАЛАНШ'};
             
@@ -229,6 +219,128 @@ let roleName;
         return res
         
     }
+
+    class newOper {
+        constructor(role, avatar, lvl, nameOp, lvlOp, baner, rank, name, group, perks, kills, deaths, assists, damage, recive) {
+            this.role = role;
+            this.avatar = avatar;
+            this.lvl = lvl;
+            this.nameOp = nameOp;
+            this.lvlOp = lvlOp;
+            this.baner = baner;
+            this.rank = rank;
+            this.name = name;
+            this.group = group;
+            this.perks = perks;
+            this.kills = kills;
+            this.deaths = deaths;
+            this.assists = assists;
+            this.damage = damage;
+            this.recive = recive;
+
+        }
+    }
+        // render() {
+            // for (let i = 0; i <= 3; i++) {
+
+            //     function error(string) {
+            //         if (games[k][i+2][12] == string) { 
+            //             games[k][i+2][12] = 'default'
+            //         }
+            //     }
+
+            //     let operLoop = ['assault','gunner','medic','sniper'];
+
+            //     let img = new Image();
+            //     img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + games[k][i+2][12] + "_large.png";
+            //     img.onload = function() {
+            //         document.querySelector(`.team${k-1}Table > tbody > tr.${operLoop[i]} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
+            //     };
+            //     img.onerror = function() {
+            //     document.querySelector(`.team${k-1}Table > * > tr.${operLoop[i]} >.imgBaner`).insertAdjacentHTML('afterbegin', `
+                    
+            //     <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${games[k][i+2][12]}">
+
+            //     `);
+            //     };
+
+
+    //             const operator = new newOper(
+    //                 'assault', 
+    //                 `https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(games[k][i+2][3],k)}_Small.png`, 
+    //                 games[k][i+2][0], 
+    //                 roleName, 
+    //                 games[k][i+2][1], 
+    //                 'https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png', 
+    //                 games[k][i+2][2], 
+    //                 games[k][i+2][6], 
+    //                 games[k][i+2][4],
+    //                 [caliber[k+5][i+0][8][15][0], caliber[k+5][i+0][8][15][1], caliber[k+5][i+0][8][15][2], caliber[k+5][i+0][8][15][3]], 
+    //                 games[k][i+2][8],
+    //                 games[k][i+2][9],
+    //                 games[k][i+2][10],
+    //                 games[k][i+2][7],
+    //                 games[k][i+2][11]
+    //               ).render();
+
+
+    //             document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('beforeend',`
+                
+    //             <tr class = "line ${this.role}">
+    //                 <td>
+    //                     <svg class = "${this.role}Logo"><title>${this.role}</title><use xlink:href="#${this.role}"></use></svg>
+    //                 </td>
+    //                 <td>
+    //                 <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${this.avatar}_Small.png" alt="">
+    //                 </td>
+    //                 <td>
+    //                     <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
+    //                         <span class="lvlText">${this.lvl}</span>    
+    //                         <div class="bevel">
+    //                             <span class = "nameOp">${this.role}</span>
+    //                             <span class = "lvlOp">${this.lvlOp}</span>
+    //                         </div>
+    //                     </div>
+    //                 </td>
+    //                 <td class = "imgBaner">
+                    
+    //                     <span class = "rank">${this.rank}</span>
+    //                     <span class = "name" style = "position: absolute">${this.name}</span>
+    //                 </td>
+    //                 <td>
+    //                 ${this.group}
+    //                     <div class = "perks">
+    //                         <svg class="perk _1"><title>${this.perk[0]}</title><use xlink:href="#${this.perk[0]}"></use></svg>
+    //                         <svg class="perk _2"><title>${this.perk[1]}</title><use xlink:href="#${this.perk[1]}"></use></svg>
+    //                         <svg class="perk _3"><title>${this.perk[2]}</title><use xlink:href="#${this.perk[2]}"></use></svg>
+    //                         <svg class="perk _4"><title>${this.perk[3]}</title><use xlink:href="#${this.perk[3]}"></use></svg>
+    //                     </div>
+    //                 </td>
+    //                 <td class = "kills" >${this.kills}</td>
+    //                 <td class = "deaths">${this.deaths}</td>
+    //                 <td class = "assists">${this.assists}</td>
+    //                 <td class = "damages">${this.damage}</td>
+    //                 <td class = "recive">${this.recive}</td>
+    //                 <tr><th></th></tr>
+    //                 <tr><th></th></tr>
+    //                 <tr><th></th></tr>
+    //                 <tr><th></th></tr>
+    //                 <tr><th></th></tr>
+    //                 <tr><th></th></tr>
+    //             </tr>
+    //         `)};
+    //     }
+    // }
+
+
+
+
+      
+      
+      
+      
+      
+      
 
 
     for (let k = 2; k < 4; k++) {
@@ -244,6 +356,7 @@ let roleName;
     <th>УРОН</th>
     <th>ПОЛУЧЕНИЕ</th>`);
     
+
 
         for (let i = 0; i <= 3; i++) {
 
@@ -267,6 +380,10 @@ let roleName;
 
             `);
             };
+
+
+
+
 
             document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('beforeend',`
             

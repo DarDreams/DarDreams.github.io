@@ -23,7 +23,7 @@ $(document).ready(function(){
   $(".inicio").hide();
   $(".empresa").hide();
   $(".contactos").hide();
-  //$(".productos").hide();
+  $(".productos").hide();
 
   $(".overlay").hide();
   $(".menu__overlay").hide();
