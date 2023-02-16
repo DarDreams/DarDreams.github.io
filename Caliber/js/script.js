@@ -59,6 +59,17 @@ function convertSecondsToTime(seconds) {
         
         //console.log(caliber[7][0][2]);
 
+        function score(teamNumber) {
+            let data = caliber2.Log.Rounds;
+            const teamKey = `winner_team_${teamNumber}`;
+            const counts = data.reduce((acc, cur) => {
+              if (cur.winner_team === teamNumber) {
+                acc[teamKey] += 1;
+              }
+              return acc;
+            }, { [teamKey]: 0 });
+            return counts[teamKey];
+          }
 
 (function () {
         let color = ["blue","red"]
@@ -66,26 +77,15 @@ function convertSecondsToTime(seconds) {
             function setColor(n) {
                 document.querySelector(`.${color}Point${n}>path`).style.fillOpacity = '1';
             }
-            if (games[i+2][0] == 1) {setColor(1)}
-            if (games[i+2][0] == 2) {setColor(1);setColor(2)}
-            if (games[i+2][0] == 3) {setColor(1);setColor(2);setColor(3);}
+            if (score(i) == 1) {setColor(1)}
+            if (score(i) == 2) {setColor(1);setColor(2)}
+            if (score(i) == 3) {setColor(1);setColor(2);setColor(3);}
         });
     
     })();
 
-    function score(teamNumber) {
-        let data = caliber2.Log.Rounds;
-        const teamKey = `winner_team_${teamNumber}`;
-        const counts = data.reduce((acc, cur) => {
-          if (cur.winner_team === teamNumber) {
-            acc[teamKey] += 1;
-          }
-          return acc;
-        }, { [teamKey]: 0 });
-        return counts[teamKey];
-      }
 
-      console.log(score(0));
+
 
 (function () {
 
@@ -99,14 +99,14 @@ function convertSecondsToTime(seconds) {
     if (caliber[7].some(player => player[2] == 'MASTER')) {
         //console.log('НАШЕЛ!');
         
-        if (games[2][0] == 3) {   
+        if (score(0) == 3) {   
           color('#6aa5ee', 'ПОБЕДА!');
         } else {
           color('#6aa5ee', 'ПОРАЖЕНИЕ!');
         }
     } else if (caliber[8].some(player => player[2] === 'MASTER')) {
         
-        if (games[3][0] == 3) {
+        if (score(1) == 3) {
 
           color('#ff323b', 'ПОБЕДА!');
         } else {
@@ -116,13 +116,7 @@ function convertSecondsToTime(seconds) {
       
 
 
-            // color('#ff0000');
-            // //winLose.style.color ="#ff0000";
-            // winLose.style.letterSpacing = '3px';
-            // winLose.innerText = 'ПОРАЖЕНИЕ!';
-            
-         
-       // return
+
     
     
 })()
@@ -130,6 +124,7 @@ function convertSecondsToTime(seconds) {
 
 let roleName;
     function oper(collection, k) {
+        collection = collection.toUpperCase();
         let res;
         let division = collection.replace(/(\d+)?.$/g,''); 
         let year = collection.match(/\d\d\d\d/g); if (year === null) {year = ''}
@@ -395,36 +390,39 @@ let roleName;
     <th>УРОН</th>
     <th>ПОЛУЧЕНИЕ</th>`);
     
-
+   
 
         for (let i = 0; i <= 3; i++) {
 
-            function error(string) {
-                if (games[k][i+2][12] == string) { 
-                    games[k][i+2][12] = 'default'
-                }
-            }
+            // function error(string) {
+            //     if (games[k][i+2][12] == string) { 
+            //         games[k][i+2][12] = 'default'
+            //     }
+            // }
             let operLoop;
             if (k == 2) { operLoop = ['assault','gunner','medic','sniper'];}
             if (k == 3) { operLoop = ['assaultR','gunnerR','medicR','sniperR'];}
-
             let img = new Image();
-            img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + games[k][i+2][12] + "_large.png";
+            
+            img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + caliber[k+5][i][5] + "_large.png";
+            
             img.onload = function() {
                 document.querySelector(`.team${k-1}Table > tbody > tr.${operLoop[i]} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
             };
             img.onerror = function() {
-            document.querySelector(`.team${k-1}Table > * > tr.${operLoop[i]} >.imgBaner`).insertAdjacentHTML('afterbegin', `
+       
+                document.querySelector(`.team${k-1}Table > * > tr.${operLoop[i]} >.imgBaner`).insertAdjacentHTML('afterbegin', `
                 
-            <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${games[k][i+2][12]}">
+            <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${caliber[k+5][i][5]}">
 
             `);
+
             };
 
+        
 
-
-
-
+            console.log(games[k][i+2][3]);
+            console.log(caliber[k+5][i][8][1]);
             document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('beforeend',`
             
             <tr class = 'line ${operLoop[i]}'>
@@ -432,7 +430,7 @@ let roleName;
                     <svg class = "${operLoop[i]}Logo"><title>${operLoop[i]}</title><use xlink:href="#${operLoop[i]}"></use></svg>
                 </td>
                 <td>
-                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(games[k][i+2][3],k)}_Small.png" alt="">
+                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${oper(caliber[k+5][i][8][1],k)}_Small.png" alt="">
                 </td>
                 <td>
                     <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
@@ -471,7 +469,7 @@ let roleName;
             </tr>
         `)};
     }
-
+    
 
     function topStat(selector, type) {
         if (!selector || typeof selector !== "string") {
