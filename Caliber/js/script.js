@@ -421,8 +421,6 @@ let roleName;
 
         
 
-            console.log(games[k][i+2][3]);
-            console.log(caliber[k+5][i][8][1]);
             document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('beforeend',`
             
             <tr class = 'line ${operLoop[i]}'>
@@ -434,20 +432,20 @@ let roleName;
                 </td>
                 <td>
                     <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
-                        <span class="lvlText">${games[k][i+2][0]}</span>    
+                        <span class="lvlText">${caliber[k+5][i][3]}</span>    
                         <div class="bevel">
                             <span class = "nameOp">${roleName}</span>
-                            <span class = "lvlOp">${games[k][i+2][1]}</span>
+                            <span class = "lvlOp">${caliber[k+5][i][8][18]}</span>
                         </div>
                     </div>
                 </td>
                 <td class = "imgBaner">
                 
-                    <span class = "rank">${games[k][i+2][2]}</span>
-                    <span class = "name" style = "position: absolute">${games[k][i+2][6]}</span>
+                    <span class = "rank">${caliber[k+5][i][4]}</span>
+                    <span class = "name" style = "position: absolute">${caliber[k+5][i][2]}</span>
                 </td>
-                <td>
-                ${games[k][i+2][4]}
+                <td data-gr = "${String(caliber[k+5][i][1]).slice(0,5)}" class = "groups group-${i}">
+                ${String(caliber[k+5][i][1]).slice(0,5)}
                     <div class = "perks">
                         <svg class="perk _1"><title>${caliber[k+5][i+0][8][15][0]}</title><use xlink:href="#${caliber[k+5][i+0][8][15][0]}"></use></svg>
                         <svg class="perk _2"><title>${caliber[k+5][i+0][8][15][1]}</title><use xlink:href="#${caliber[k+5][i+0][8][15][1]}"></use></svg>
@@ -524,6 +522,14 @@ let roleName;
         topStat('.assists','max');
         topStat('.recive','min');
         topStat('.deaths','min');
+
+ 
+        if (document.querySelectorAll('[data-gr="43575"]').length > 1) {
+            document.querySelectorAll('[data-gr="43575"]').forEach(element => {
+                element.style.borderLeft = "4px solid lime"; 
+             });
+         }
+
        // console.log(`User ${maxIndex} has the highest player kills with ${max}`);
         
 // Находим все элементы use в SVG
