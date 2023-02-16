@@ -73,6 +73,20 @@ function convertSecondsToTime(seconds) {
     
     })();
 
+    function score(teamNumber) {
+        let data = caliber2.Log.Rounds;
+        const teamKey = `winner_team_${teamNumber}`;
+        const counts = data.reduce((acc, cur) => {
+          if (cur.winner_team === teamNumber) {
+            acc[teamKey] += 1;
+          }
+          return acc;
+        }, { [teamKey]: 0 });
+        return counts[teamKey];
+      }
+
+      console.log(score(0));
+
 (function () {
 
     function color(color, text) {
