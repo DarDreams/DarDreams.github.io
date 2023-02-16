@@ -17,6 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
          caliber[8] = [caliber[7][4],caliber[7][5],caliber[7][6],caliber[7][7]];
+         caliber[7].splice(-4);
 
 
          console.log(caliber);
@@ -73,20 +74,43 @@ function convertSecondsToTime(seconds) {
     })();
 
 (function () {
-    function color(color) {
+
+    function color(color, text) {
+        document.querySelector("div.winLose > div").innerText = text;
         document.querySelector("div.winLose > svg > path").style.fill = color;
+        document.querySelector("div.winLoseText").style.color = color;
         
     }
-    const winLose = document.querySelector("div.winLose > div");
-    for (let i = 0; i < 7; i++) {
-    if (games[2][0] == 3 && caliber[7][i][2] == 'MASTER') {color('#6aa5ee');} else {
-    }
+    
+    if (caliber[7].some(player => player[2] == 'MASTER')) {
+        //console.log('НАШЕЛ!');
         
-        color('#ff0000');
-        winLose.style.color ="#ff0000";
-        document.querySelector("div.winLose > div").style.letterSpacing = '3px';
-        document.querySelector("div.winLose > div").innerText = 'ПОРАЖЕНИЕ!'
+        if (games[2][0] == 3) {   
+          color('#6aa5ee', 'ПОБЕДА!');
+        } else {
+          color('#6aa5ee', 'ПОРАЖЕНИЕ!');
+        }
+    } else if (caliber[8].some(player => player[2] === 'MASTER')) {
+        
+        if (games[3][0] == 3) {
+
+          color('#ff323b', 'ПОБЕДА!');
+        } else {
+          color('#ff323b', 'ПОРАЖЕНИЕ!');
+        }
     }
+      
+
+
+            // color('#ff0000');
+            // //winLose.style.color ="#ff0000";
+            // winLose.style.letterSpacing = '3px';
+            // winLose.innerText = 'ПОРАЖЕНИЕ!';
+            
+         
+       // return
+    
+    
 })()
 
 
@@ -119,8 +143,9 @@ let roleName;
             if (role == 'S' && division == '22SPN') {roleName = 'ТЕНЬ'};
         }; 
 
-        if (year == '' && division == 'SSO') {
-            res = `BLR_${division}${year}_${role}`; 
+        //console.log(`yearo=${year}, div=${division}`)
+        if (year == '' && division == 'BELSSO') {
+            res = `BLR_${division.slice(3,6)}${year}_${role}`;
             if (role == 'A') {roleName = 'ЛАЗУТЧИК'};
             if (role == 'G') {roleName = 'ЗУБР'};
             if (role == 'M') {roleName = 'КАВАЛЬ'};
@@ -365,8 +390,9 @@ let roleName;
                     games[k][i+2][12] = 'default'
                 }
             }
-
-            let operLoop = ['assault','gunner','medic','sniper'];
+            let operLoop;
+            if (k == 2) { operLoop = ['assault','gunner','medic','sniper'];}
+            if (k == 3) { operLoop = ['assaultR','gunnerR','medicR','sniperR'];}
 
             let img = new Image();
             img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + games[k][i+2][12] + "_large.png";
@@ -488,9 +514,36 @@ let roleName;
         topStat('.deaths','min');
        // console.log(`User ${maxIndex} has the highest player kills with ${max}`);
         
-       document.querySelectorAll('.team2Table>tbody>tr>td>svg').forEach(element => {
-                element.fill = 'red';
-            });
+// Находим все элементы use в SVG
+// Get all <use> elements that refer to the SVG sprite
+// const useElements = document.querySelectorAll('.team2Table > tbody > tr > td > svg use');
+
+// // Loop over each <use> element
+// useElements.forEach(useElement => {
+//   // Get the ID of the SVG sprite being referenced
+//   const spriteId = useElement.getAttribute('xlink:href').substring(1);
+
+//   // Get the SVG sprite element
+//   const spriteElement = document.getElementById(spriteId);
+
+//   // Clone the SVG sprite element
+//   const clonedSpriteElement = spriteElement.cloneNode(true);
+
+//   // Create a new <use> element and copy over its attributes
+//   const newUseElement = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+//   const attributes = useElement.getAttributeNames();
+//   attributes.forEach(attributeName => {
+//     newUseElement.setAttribute(attributeName, useElement.getAttribute(attributeName));
+//   });
+
+//   // Replace the original <use> element with the cloned SVG sprite
+//   useElement.parentNode.replaceChild(newUseElement, useElement);
+//   newUseElement.appendChild(clonedSpriteElement);
+// });
+
+
+  
+
    
 
 document.querySelectorAll('.nameOp').forEach(element => {
