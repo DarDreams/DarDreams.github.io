@@ -60,6 +60,10 @@ window.addEventListener('DOMContentLoaded', () => {
         if (caliber2.Log.Data[1] == 'lv_karhad_emirresidence_evening') {
             map.innerText = 'Резиденция Эмира';
         }
+        if (caliber2.Log.Data[1] == "lv_karhad_caravanserai_night") {
+            map.innerText = 'Караван Сарай';
+        }
+
     })();
         
 //  SCORE
