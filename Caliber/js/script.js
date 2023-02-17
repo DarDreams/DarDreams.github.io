@@ -46,26 +46,59 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   
 //   MAPS
+ 
+    
     (function (){
         const mode = document.querySelector('.mode');
         const time = document.querySelector('.time');
         const map = document.querySelector('.map');
-        if (caliber[4] == 'pvp') {
-            mode.innerText = `Столкновение`;
-        };
-        time.innerText = convertSecondsToTime(caliber2.Log.MatchTimeSeconds);
-        if (caliber2.Log.Data[1].match(/^(.*?)\s[^\s]+$/g) == 'lv_zalessye_radarbase_overcast') {
-            map.innerText = 'Залесье';
-        }
-        if (caliber2.Log.Data[1] == 'lv_karhad_emirresidence_evening') {
-            map.innerText = 'Резиденция Эмира';
-        }
-        if (caliber2.Log.Data[1] == "lv_karhad_caravanserai_night") {
-            map.innerText = 'Караван Сарай';
-        }
+        function mapCut(str) {
+            const maps = [
+            [
+                'lv_zalessye_radarbase_overcast',
+                'lv_karhad_emirresidence_evening',
+                'lv_karhad_caravanserai_night',
+                'lv_zalessye_dam_default',
+                'lv_zalessye_passage_overcast'
+            ],
+                [
+                'Залесье',
+                'Резиденция Эмира',
+                'Караван Сарай',
+                'Дамба'
+                ]
+            ]
+            maps[0].forEach(element,i => {
+                if (caliber2.Log.Data[1] == mapCut(element)) { map.innerText = maps[1][i]};
+                return str.split("_").slice(0, -1).join("_");
+            });
 
-    })();
+            if (caliber[4] == 'pvp') {
+                mode.innerText = `Столкновение`;
         
+            time.innerText = convertSecondsToTime(caliber2.Log.MatchTimeSeconds);
+    };
+}
+    })();
+    //     if (caliber2.Log.Data[1] == mapCut('lv_zalessye_radarbase_overcast')) {
+    //         map.innerText = 'Залесье';
+    //     }
+    //     if (caliber2.Log.Data[1] == mapCut('lv_karhad_emirresidence_evening')) {
+    //         map.innerText = 'Резиденция Эмира';
+    //     }
+    //     if (caliber2.Log.Data[1] == mapCut("lv_karhad_caravanserai_night")) {
+    //         map.innerText = 'Караван Сарай';
+    //     }
+    //     if (caliber2.Log.Data[1] == mapCut("lv_zalessye_dam_default")) {
+    //         map.innerText = 'Дамба';
+    //     }
+    // }();
+        
+   
+        
+      
+    
+
 //  SCORE
     function score(teamNumber) {
         let data = caliber2.Log.Rounds;
