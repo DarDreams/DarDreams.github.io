@@ -137,6 +137,8 @@ html {
         font-size: 18px;
         font-weight: 600;
         z-index: 9;
+        width: 20px;
+        text-align: center;
         transform: translate(-40px, 2px);
     }
 
@@ -234,7 +236,7 @@ html {
     .bluePoint3 {
         transform: scaleX(-1) translate(273px, -460px);
     }
-    .winLose>svg{
+    .winLose > svg{
         position: absolute;
         transform: translate(103px, -130px);
     }
