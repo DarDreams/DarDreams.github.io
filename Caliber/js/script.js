@@ -59,16 +59,21 @@ window.addEventListener('DOMContentLoaded', () => {
                 'lv_karhad_emirresidence_evening',
                 'lv_karhad_caravanserai_night',
                 'lv_zalessye_dam_default',
-                'lv_zalessye_passage_overcast'
+                'lv_zalessye_passage_overcast',
+                "lv_karhad_hospital_default"
             ],
                 [
-                'Залесье',
+                'Залесье Радар',
                 'Резиденция Эмира',
                 'Караван Сарай',
-                'Дамба'
+                'Дамба',
+                'Проход',
+                'Госпиталь',
+                ''
                 ]
             ]
             maps[0].forEach(element,i => {
+                console.log(caliber2.Log.Data[1],mapCut(element));
                 if (caliber2.Log.Data[1] == mapCut(element)) { map.innerText = maps[1][i]};
                 return str.split("_").slice(0, -1).join("_");
             });
