@@ -1,6 +1,12 @@
-@import 'linies.scss';
+//@import 'linies.scss';
 
 html {
+    body {
+        margin: 0;
+        padding: 0;
+      }
+    
+
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
     font-family: "Roboto", sans-serif;
     background-image: url('https://cdn.playcaliber.com/site/media/wallpapers/2021/09/08/wallpapers-ksk_1920.jpg');
@@ -9,7 +15,7 @@ html {
     background-size: cover;
     background-repeat: no-repeat;
     //font-family: "Consolas", Sans-Serif;
-    position: relative;
+    //position: relative;
 
     ::-webkit-scrollbar{
         width:5px;
@@ -30,59 +36,59 @@ html {
         border-width:0;
     }
     
-   
+    
+}
 
-    .container {
-        margin-top: 130px;
+.container_tables {
+display: block;
+margin-top: 25px;
+//position: absolute;
+table {
+    margin: 0 auto;
+    transform: scale(.8);
+    //margin: 15px auto;
+    text-align: center;
+    background: #1919192d;
+    color: #ffffff;
+    border-collapse: collapse;
+    
+    th {
+        font-size: 13.5px;
+        font-weight: 200;
+        color:white;
+        text-align: center;
+        padding-right: 25px;
+
+        &:nth-child(5) {
+            padding-right: 100px;
+        }
     }
 
-    table {
-        transform: scale(.8);
-        margin: 15px auto;
-        text-align: center;
-        background: #1919192d;
-        color: #ffffff;
-        border-collapse: collapse;
-        
-        th {
-            font-size: 13.5px;
-            font-weight: 200;
-            color:white;
-            text-align: center;
+    td {
+        background: #0000007d;
+        //padding-right: 15px;
+        width: 80px;
+        &:nth-child(5) {
+            padding-right: 100px;
+        }
+        &:nth-child(6) {
             padding-right: 25px;
-
-            &:nth-child(5) {
-                padding-right: 100px;
-            }
         }
-    
-        td {
-            background: #0000007d;
-            //padding-right: 15px;
-            width: 80px;
-            &:nth-child(5) {
-                padding-right: 100px;
-            }
-            &:nth-child(6) {
-                padding-right: 25px;
-            }
-            &:nth-child(7) {
-                padding-right: 25px;
-            }
-            &:nth-child(8) {
-                padding-right: 25px;
-            }
-            &:nth-child(9) {
-                padding-right: 25px;
-            }
-            &:nth-child(10) {
-                padding-right: 25px;
-            }
+        &:nth-child(7) {
+            padding-right: 25px;
         }
-        tr {
-            padding: 0;
+        &:nth-child(8) {
+            padding-right: 25px;
         }
-
+        &:nth-child(9) {
+            padding-right: 25px;
+        }
+        &:nth-child(10) {
+            padding-right: 25px;
+        }
+    }
+    tr {
+        padding: 0;
     }
     .rank {
         z-index: 9;
@@ -93,7 +99,6 @@ html {
         width: 30px;
         background-color:rgba(0, 0, 0, 0.5);
     }
-
     .assaultLogo, .gunnerLogo, .medicLogo, .sniperLogo,
     .assaultRLogo, .gunnerRLogo, .medicRLogo, .sniperRLogo {
         width: 45px;
@@ -104,7 +109,6 @@ html {
         width: 80px;
         transform: translate(-10px, 3px);
     }
-
     .lvlOp {
         position: absolute;
         z-index: 9;
@@ -113,7 +117,6 @@ html {
         font-size: 12px;
         transform: translate(20px, 2px);
     }
-
     .nameOp {
         font-size: 11px;
         //font-stretch: ultra-condensed;
@@ -122,7 +125,6 @@ html {
         position: absolute;
         transform: translate(-42px, 4px);
     }
-
     .bevel {
         width: 72px;
         height: 20px;
@@ -130,7 +132,6 @@ html {
         transform: translate(-84px, 33px);
         //opacity: .7;
     }
-
     .lvlText {
         position: absolute;
         color: black;
@@ -141,19 +142,16 @@ html {
         text-align: center;
         transform: translate(-40px, 2px);
     }
-
     .baner {
         border-radius: 5px;
         transform: translate(-85px, 4px);
     }
-
     .name {
         position: absolute;
         font-size: 16px;
         font-weight: 500;
         transform: translate(-310px, 30px);
     }
-
     .wrapper > svg {
         z-index: 9;
         position: absolute;
@@ -171,7 +169,6 @@ html {
             font-weight: 800;
         }
     }
-
     .perks {
         transform: translate(250px, -6px);
         .perk {
@@ -180,9 +177,6 @@ html {
             fill: white;
             position: absolute;
             border: 0.1px solid rgba(255,255,255,0.11);
-            
-        
-            
             &._1 {
                 transform: translate(-376px, -30px);
             }
@@ -197,78 +191,74 @@ html {
             }
         }
     }
-    h1 {
-        color: #fff;
-        transform: translate(-128px, 78px);
-       // margin-left: calc(100vw / 2);
-    }
-    .redPoints {
-        //display: block;
-        position: absolute;
-        //display: flex;
-        //justify-content: center;
-        width: 30px;
-         left: 1000px;
-         top: -60px;
-        //margin: 0 auto;
-        //height: 20px;
-        
-       // transform: translate(10px 10px);
-    }
-    .redPoint1 {
-        transform: translate(0px, 0px);
-        }
-    .redPoint2 {
-        left: 48.8vw;
-        top: -10px;
-        transform: translate(34px, -92px);
-        }    
-    .redPoint3 {
-        transform: translate(67px, -184px);
-        }
 
-    .bluePoint1 {
-        transform: scaleX(-1) translate(205px, -276px);
-    }
-    .bluePoint2 {
-        transform: scaleX(-1) translate(239px, -368px);
-    }
-    .bluePoint3 {
-        transform: scaleX(-1) translate(273px, -460px);
-    }
-    .winLose > svg{
-        position: absolute;
-        transform: translate(103px, -130px);
+}
+}
+.container {
+    display: inline-block;
+    .winLose > svg {
+        left: 0;
+        display: inline-block;
+        margin-left: 100px;
     }
     .winLoseText {
+        display: inline-block;
         color : #6aa5ee;
-        position: absolute;
+        //position: absolute;
         font-size: 60px;
         font-weight: 600;
         letter-spacing: 10px;
-        transform: translate(205px, -90px);
     }
-    .stats {
-        //position: absolute;
-        color: white;
-        font-size: 30px;
-        font-weight: 600;
-        .mode {
-            position: absolute;
-            right: 10px;
-            top: 0;
+}
+.timeScore {
+display: inline-block;
+h1 {
+    color: #fff;
+    margin: auto 10px;
+}
+}
+    .redPoints {
+        margin-top: -150px;
+        
+        text-align: center;
+        .points {
+            margin-right: 3px;
         }
-        .time {
-            position: absolute;
-            transform: translate(868px, -35px);
+        .blue {
+            transform: scaleX(-1)
         }
-        .map {
-            position: absolute;
-            right: 56px;
-            top: 37px;
-            //transform: translate(1389px, -90px);
+}
+.stats {
+    top: 0;
+    //display: flex;
+    position: relative;
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+    .wrapper {
+        position: absolute;
+        width: 300px;
+        height: 500px;
+        right: 0;
+        .container {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 0px;
+        }
+        img {
+            width: 30px;
+            height: 30px;
         }
     }
+    .mode {
+        text-align: center;
+    }
+}
 
-    
+
+
+@media (max-width: 1400px) {
+    body {
+        transform: scale(0.5);
+    }
 }

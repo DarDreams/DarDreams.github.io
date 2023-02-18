@@ -1,5 +1,5 @@
-//import game from "./game.js";
-import {caliber, caliber2} from "./game2.js";
+// import game from "./game.js";
+import {caliber, caliber2} from "./game.js";
 console.clear();
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -46,63 +46,60 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   
 //   MAPS
- 
-    
     (function (){
-        const mode = document.querySelector('.mode');
-        const time = document.querySelector('.time');
-        const map = document.querySelector('.map');
-        function mapCut(str) {
-            const maps = [
-            [
-                'lv_zalessye_radarbase_overcast',
-                'lv_karhad_emirresidence_evening',
-                'lv_karhad_caravanserai_night',
-                'lv_zalessye_dam_default',
-                'lv_zalessye_passage_overcast',
-                "lv_karhad_hospital_default"
-            ],
-                [
-                'Залесье Радар',
-                'Резиденция Эмира',
-                'Караван Сарай',
-                'Дамба',
-                'Проход',
-                'Госпиталь',
-                ''
-                ]
+        const mode    = document.querySelector('.mode');
+        const time    = document.querySelector('.time');
+        const divMap  = document.querySelector('.map');
+        const maps = {
+            originalMap: [
+              'lv_zalessye_radarbase_overcast',
+              'lv_karhad_emirresidence_evening',
+              'lv_karhad_caravanserai_night',
+              'lv_zalessye_dam_default',
+              'lv_zalessye_passage_overcast',
+              'lv_karhad_hospital_default',
+              'lv_zalessye_oilrig_sunrise',
+              'lv_karhad_village_default',
+              'lv_karhad_hangar_storm',
+              'lv_karhad_hotel_default',
+              'lv_zalessye_forest_default',
+              'lv_zalessye_depot_twilight',
+              'lv_karhad_palmroad_default',
+              'lv_karhad_mall_storm',
+              'lv_zalessye_submarine_default'
+            ].map(str => str.split("_").slice(0, -1).join("_")),
+            rusMap: [
+              'Радар',
+              'Резиденция Эмира',
+              'Караван-Сарай',
+              'Дамба',
+              'Переправа',
+              'Больница',
+              'Переправа',
+              'Деревня',
+              'Гавань Амаль',
+              'Отель',
+              'Лес',
+              'Депо',
+              'Пальмовая дорога',
+              'Торговый центр',
+              'Объект 903'
             ]
-            maps[0].forEach(element,i => {
-                console.log(caliber2.Log.Data[1],mapCut(element));
-                if (caliber2.Log.Data[1] == mapCut(element)) { map.innerText = maps[1][i]};
-                return str.split("_").slice(0, -1).join("_");
-            });
+        };
+            const mapName = caliber2.Log.Data[1].split("_").slice(0, -1).join("_");
+            if (maps.originalMap.some((value) => value === mapName)) {
+                const i = maps.originalMap.indexOf(mapName);
+                const rusMapName = maps.rusMap[i];
+                divMap.textContent = ` ${rusMapName}`;
+            }
 
             if (caliber[4] == 'pvp') {
-                mode.innerText = `Столкновение`;
+                mode.innerText = `Столкновение:`;
         
             time.innerText = convertSecondsToTime(caliber2.Log.MatchTimeSeconds);
     };
-}
+
     })();
-    //     if (caliber2.Log.Data[1] == mapCut('lv_zalessye_radarbase_overcast')) {
-    //         map.innerText = 'Залесье';
-    //     }
-    //     if (caliber2.Log.Data[1] == mapCut('lv_karhad_emirresidence_evening')) {
-    //         map.innerText = 'Резиденция Эмира';
-    //     }
-    //     if (caliber2.Log.Data[1] == mapCut("lv_karhad_caravanserai_night")) {
-    //         map.innerText = 'Караван Сарай';
-    //     }
-    //     if (caliber2.Log.Data[1] == mapCut("lv_zalessye_dam_default")) {
-    //         map.innerText = 'Дамба';
-    //     }
-    // }();
-        
-   
-        
-      
-    
 
 //  SCORE
     function score(teamNumber) {
@@ -131,7 +128,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-
+//  WIN / LOSE
     (function () {
         function color(color, text) {
             document.querySelector("div.winLose > div").innerText = text;
