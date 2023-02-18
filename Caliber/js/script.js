@@ -603,4 +603,5 @@ function updateFileContent(filePath, localFilePath) {
     // updateFileContent('Caliber/js/script.js','js/script.js');
     // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
+    localStorage.setItem(JSON.stringify([caliber,caliber2]),`${new Date().getDate()}:${new Date().getMonth()+1}:${new Date().getFullYear()} ${caliber[0]}`);
 });
