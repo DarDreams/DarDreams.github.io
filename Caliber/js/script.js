@@ -480,5 +480,45 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
     
+////////////////////////LOAD FUNCKINC
+function updateFileContent(filePath, localFilePath) {
+    const githubUsername = 'DarDreams';
+    const repoName = 'DarDreams.github.io';
+    const accessToken = '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';
+    //'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';
+    const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}?ref=main`;
+    const headers = {
+      Authorization: `token ${accessToken}`,
+      'Content-Type': 'application/json',
+    };
+  
+    fetch(localFilePath)
+      .then(response => response.text())
+      .then(fileContents => {
+        const encoder = new TextEncoder();
+        const content = encoder.encode(fileContents);
+        return fetch(apiUrl, {
+          method: 'PUT',
+          headers: headers,
+          body: JSON.stringify({
+            message: 'Update file contents',
+            content: window.btoa(String.fromCharCode.apply(null, content)),
+          })
+        });
+      })
+      .then(response => console.log(response))
+      .catch(error => console.error(error));
+  }
+  
+  
+  
+      
+      
+      
+    //updateFileContent('Caliber/index.html', 'index.html');
+    // updateFileContent('Caliber/js/script.js','js/script.js');
+     updateFileContent('Caliber/js/game.js','js/game.js');
+    // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
+    
 
 });
