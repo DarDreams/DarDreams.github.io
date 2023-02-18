@@ -482,6 +482,8 @@ window.addEventListener('DOMContentLoaded', () => {
     
 //  CALENDAR 
     document.querySelector('.redPoints').insertAdjacentHTML("afterend",`
+    <button id="show-panel">></button>
+    <div class="slide-out-panel">
         <div class="calendar">
             <div class="container">
                 <h1></h1>
@@ -502,7 +504,17 @@ window.addEventListener('DOMContentLoaded', () => {
                 </table>
             </div>
         </div>
+    </div>
     `);
+
+    const button = document.getElementById('show-panel');
+    const panel = document.querySelector('.slide-out-panel');
+
+    button.addEventListener('click', () => {
+        panel.classList.toggle('show');
+      if (button.innerText == '>') {button.innerText = '<'} else {button.innerText = ">"}
+    });
+
     const calendarBody = document.getElementById("calendar-body");
     const today = new Date();
     const currentMonth = today.getMonth();
