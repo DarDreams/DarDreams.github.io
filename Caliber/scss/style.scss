@@ -264,12 +264,15 @@ h1 {
      .winLose {
         margin-top: -136px;
         transform: scale(0.6);
+        .winLoseText {
+            transform: translate(32px, -69px);
+        }
     }
 
     .stats {
         margin-top: 100px;
         .wrapper {
-            margin-top: -148px; 
+            margin-top: -163px; 
             transform: scale(0.65);
         }
     }
