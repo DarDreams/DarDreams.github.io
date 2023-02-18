@@ -484,8 +484,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function updateFileContent(filePath, localFilePath) {
     const githubUsername = 'DarDreams';
     const repoName = 'DarDreams.github.io';
-    const accessToken = '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';
-    //'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';
+    const accessToken = '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';
     const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}?ref=main`;
     const headers = {
       Authorization: `token ${accessToken}`,
