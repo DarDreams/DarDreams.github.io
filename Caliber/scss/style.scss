@@ -39,6 +39,8 @@ html {
     
 }
 
+
+
 .container_tables {
 display: block;
 margin-top: 25px;
@@ -194,6 +196,33 @@ table {
 
 }
 }
+
+.calendar {
+    color: white;
+    position: absolute;
+    transform: translate(40px, 290px);
+    .container {
+    table {
+        border-collapse: collapse;
+        
+        }
+    td {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid black;
+        }
+         td:hover {
+        background-color: lightblue;
+        cursor: pointer;
+        }
+         .event {
+        background-color: yellow;
+        }
+    }
+}
+
 .container {
     display: inline-block;
     .winLose > svg {
@@ -203,6 +232,7 @@ table {
     }
     .winLoseText {
         display: inline-block;
+        transform: translate(35px, -80px);
         color : #6aa5ee;
         //position: absolute;
         font-size: 60px;
@@ -252,12 +282,13 @@ h1 {
     }
     .mode {
         text-align: center;
+        margin-left: 60px;
     }
 }
 
 
 
-@media (min-width: 1446px) {
+@media (max-width: 1800px) {
     body {
         max-height: 600px;
     }

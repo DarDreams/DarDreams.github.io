@@ -480,6 +480,85 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
     
+//  CALENDAR 
+    document.querySelector('.redPoints').insertAdjacentHTML("afterend",`
+        <div class="calendar">
+            <div class="container">
+                <h1></h1>
+                <table>
+                    <thead>
+                        <tr>
+                        <th>Пн</th>
+                        <th>Вт</th>
+                        <th>Ср</th>
+                        <th>Чт</th>
+                        <th>Пт</th>
+                        <th>Сб</th>
+                        <th>Вс</th>
+                        </tr>
+                    </thead>
+                <tbody id="calendar-body">
+                </tbody>
+                </table>
+            </div>
+        </div>
+    `);
+    const calendarBody = document.getElementById("calendar-body");
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+
+    function getDaysInMonth(month, year) {
+    return new Date(year, month + 1, 0).getDate();
+    }
+
+    function generateCalendar(month, year) {
+    // Очищаем календарь перед созданием нового
+    calendarBody.innerHTML = "";
+    
+    // Получаем количество дней в месяце
+    const daysInMonth = getDaysInMonth(month, year);
+    // Получаем первый день месяца
+    const firstDayOfMonth = new Date(year, month, 0).getDay();
+    
+    let date = 1;
+    // Создаем ячейки для каждого дня месяца
+    for (let i = 0; i < 6; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < 7; j++) {
+        const cell = document.createElement("td");
+        if (i === 0 && j < firstDayOfMonth) {
+            // Пустые ячейки до первого дня месяца
+            cell.textContent = "";
+        } else if (date > daysInMonth) {
+            // Пустые ячейки после последнего дня месяца
+            cell.textContent = "";
+        } else {
+            // Добавляем дату
+            cell.textContent = date;
+            date++;
+
+            // Назначаем обработчик клика на ячейку
+            cell.addEventListener("click", function() {
+            const eventText = prompt("Введите описание события для " + year + "-" + (month+1) + "-" + this.textContent + ":");
+            if (eventText) {
+                const event = document.createElement("div");
+                event.textContent = eventText;
+                event.classList.add("event");
+                this.appendChild(event);
+            }
+            });
+        }
+        row.appendChild(cell);
+        }
+        calendarBody.appendChild(row);
+    }
+    }
+
+    // Создаем календарь на текущий месяц и год
+    generateCalendar(currentMonth, currentYear);
+
+
 ////////////////////////LOAD FUNCKINC
 function updateFileContent(filePath, localFilePath) {
     const githubUsername = 'DarDreams';
@@ -508,16 +587,8 @@ function updateFileContent(filePath, localFilePath) {
       .then(response => console.log(response))
       .catch(error => console.error(error));
   }
-  
-  
-  
-      
-      
-      
     //updateFileContent('Caliber/index.html', 'index.html');
     // updateFileContent('Caliber/js/script.js','js/script.js');
-     updateFileContent('Caliber/js/game.js','js/game.js');
+    // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
-    
-
 });
