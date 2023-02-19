@@ -40,119 +40,38 @@ window.addEventListener('DOMContentLoaded', () => {
         //const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const sec = Math.floor(seconds % 60);
-        return `${minutes
-        .toString()
-        .padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        return `${minutes.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     }
   
-//   MAPS
-    (function (){
-        const mode    = document.querySelector('.mode');
-        const time    = document.querySelector('.time');
-        const divMap  = document.querySelector('.map');
-        const maps = {
-            originalMap: [
-              'lv_zalessye_radarbase_overcast',
-              'lv_karhad_emirresidence_evening',
-              'lv_karhad_caravanserai_night',
-              'lv_zalessye_dam_default',
-              'lv_zalessye_passage_overcast',
-              'lv_karhad_hospital_default',
-              'lv_zalessye_oilrig_sunrise',
-              'lv_karhad_village_default',
-              'lv_karhad_hangar_storm',
-              'lv_karhad_hotel_default',
-              'lv_zalessye_forest_default',
-              'lv_zalessye_depot_twilight',
-              'lv_karhad_palmroad_default',
-              'lv_karhad_mall_storm',
-              'lv_zalessye_submarine_default'
-            ].map(str => str.split("_").slice(0, -1).join("_")),
-            rusMap: [
-              'Радар',
-              'Резиденция Эмира',
-              'Караван-Сарай',
-              'Дамба',
-              'Переправа',
-              'Больница',
-              'Переправа',
-              'Деревня',
-              'Гавань Амаль',
-              'Отель',
-              'Лес',
-              'Депо',
-              'Пальмовая дорога',
-              'Торговый центр',
-              'Объект 903'
-            ]
-        };
-            const mapName = caliber2.Log.Data[1].split("_").slice(0, -1).join("_");
-            if (maps.originalMap.some((value) => value === mapName)) {
-                const i = maps.originalMap.indexOf(mapName);
-                const rusMapName = maps.rusMap[i];
-                divMap.textContent = ` ${rusMapName}`;
-            }
-
-            if (caliber[4] == 'pvp') {
-                mode.innerText = `Столкновение:`;
-        
-            time.innerText = convertSecondsToTime(caliber2.Log.MatchTimeSeconds);
-    };
-
-    })();
-
-//  SCORE
-    function score(teamNumber) {
-        let data = caliber2.Log.Rounds;
-        const teamKey = `winner_team_${teamNumber}`;
-        const counts = data.reduce((acc, cur) => {
-            if (cur.winner_team === teamNumber) {
-            acc[teamKey] += 1;
-            }
-            return acc;
-        }, { [teamKey]: 0 });
-        return counts[teamKey];
-    }
-
-    (function () {
-        let color = ["blue","red"]
-        color.forEach((color,i) => {
-            function setColor(n) {
-                document.querySelector(`.${color}Point${n}>path`).style.fillOpacity = '1';
-            }
-            if (score(i) == 1) {setColor(1)}
-            if (score(i) == 2) {setColor(1);setColor(2)}
-            if (score(i) == 3) {setColor(1);setColor(2);setColor(3);}
-        });
-    })();
 
 
 
-//  WIN / LOSE
-    (function () {
-        function color(color, text) {
-            document.querySelector("div.winLose > div").innerText = text;
-            document.querySelector("div.winLose > svg > path").style.fill = color;
-            document.querySelector("div.winLoseText").style.color = color;
-        }
-        if (caliber[7].some(player => player[2] == 'MASTER')) {
-            if (score(0) == 3) {   
-            color('#6aa5ee', 'ПОБЕДА!');
-            } else {
-            color('#6aa5ee', 'ПОРАЖЕНИЕ!');
-            }
-        } else if (caliber[8].some(player => player[2] === 'MASTER')) {
-            if (score(1) == 3) {
-            color('#ff323b', 'ПОБЕДА!');
-            } else {
-            color('#ff323b', 'ПОРАЖЕНИЕ!');
-            }
-        }
-    })()
+
+
+//  UPLOAD ALL DATAS
+function upload(data1, data2) {
+    document.querySelector(`.team1Table`).innerHTML = '';
+    document.querySelector(`.team2Table`).innerHTML = '';
+    for (let k = 2; k < 4; k++) {
+    document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('afterbegin',`
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>ГРУППА</th>
+    <th>ЛИКВИДИРОВАЛ</th>
+    <th>ПОГИБ</th>
+    <th>СОДЕЙСТВИЯ</th>
+    <th>УРОН</th>
+    <th>ПОЛУЧЕНИЕ</th>`);
+        for (let i = 0; i <= 3; i++) {
+            let operLoop;
+            if (k == 2) { operLoop = ['assault','gunner','medic','sniper'];}
+            if (k == 3) { operLoop = ['assaultR','gunnerR','medicR','sniperR'];}
 
 //  OPER
     let roleName;
-    function oper(collection, k) {
+    function oper(collection) {
         collection = collection.toUpperCase();
         let res;
         let division = collection.replace(/(\d+)?.$/g,''); 
@@ -181,7 +100,6 @@ window.addEventListener('DOMContentLoaded', () => {
             if (role == 'S' && division == '22SPN') {roleName = 'ТЕНЬ'};
         }; 
 
-        //console.log(`yearo=${year}, div=${division}`)
         if (year == '' && division == 'BELSSO') {
             res = `BLR_${division.slice(3,6)}${year}_${role}`;
             if (role == 'A') {roleName = 'ЛАЗУТЧИК'};
@@ -263,14 +181,12 @@ window.addEventListener('DOMContentLoaded', () => {
             if (role == 'S' && division == 'JIAOLONG') {roleName = 'ЦАНЛУН'};
         };
         if (division == 'CST')      {
-          //  res = `USA_${division}${year}_${role}`;
             if (role == 'A' && division == 'CST') {
                 roleName = 'СЛАЙ';
-                //document.querySelector('img.oper').src = 'img/sly.png';
+         
             }; 
             if (role == 'G' && division == 'CST') {
                 roleName = 'ФОРТРЕСС';
-
             };
             if (role == 'M' && division == 'CST') {
                 roleName = 'БОУНС';
@@ -282,52 +198,29 @@ window.addEventListener('DOMContentLoaded', () => {
         return res
         
     };
-
-
-
-    for (let k = 2; k < 4; k++) {
-    document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('afterbegin',`
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th>ГРУППА</th>
-    <th>ЛИКВИДИРОВАЛ</th>
-    <th>ПОГИБ</th>
-    <th>СОДЕЙСТВИЯ</th>
-    <th>УРОН</th>
-    <th>ПОЛУЧЕНИЕ</th>`);
-        for (let i = 0; i <= 3; i++) {
-            // function error(string) {
-            //     if (games[k][i+2][12] == string) { 
-            //         games[k][i+2][12] = 'default'
-            //     }
-            // }
-            let operLoop;
-            if (k == 2) { operLoop = ['assault','gunner','medic','sniper'];}
-            if (k == 3) { operLoop = ['assaultR','gunnerR','medicR','sniperR'];}
-
             const operator = {
-                role: operLoop[i],
-                emblem: caliber[k+5][i][5],
-                avatar: oper(caliber[k+5][i][8][1],k),
-                lvlText:caliber[k+5][i][3],
-                nameOp:roleName,
-                lvlOp:caliber[k+5][i][8][18],
-                rank:caliber[k+5][i][4],
-                name:caliber[k+5][i][2],
-                group:String(caliber[k+5][i][1]).slice(0,4),
-                perks:[caliber[k+5][i+0][8][15][0],caliber[k+5][i+0][8][15][1],caliber[k+5][i+0][8][15][2],caliber[k+5][i+0][8][15][3]],
-                kills:caliber2.Log.Users[k-2][i].PlayerKills,
-                deaths:caliber2.Log.Users[k-2][i].Deaths,
-                assists:caliber2.Log.Users[k-2][i].Assists,
-                damage:Math.floor(caliber2.Log.Users[k-2][i].DamageDealt),
-                recive:Math.floor(caliber2.Log.Users[k-2][i].DamageReceived)
+                role    : operLoop[i],
+                emblem  : data1[k+5][i][5],
+                avatar  : oper(data1[k+5][i][8][1]),
+                lvlText : data1[k+5][i][3],
+                nameOp  : roleName,
+                lvlOp   : data1[k+5][i][8][18],
+                rank    : data1[k+5][i][4],
+                name    : data1[k+5][i][2],
+                group   : String(data1[k+5][i][1]).slice(0,4),
+                perks   : [data1[k+5][i+0][8][15][0],data1[k+5][i+0][8][15][1],data1[k+5][i+0][8][15][2],data1[k+5][i+0][8][15][3]],
+                kills   : data2.Log.Users[k-2][i].PlayerKills,
+                deaths  : data2.Log.Users[k-2][i].Deaths,
+                assists : data2.Log.Users[k-2][i].Assists,
+                damage  : Math.floor(data2.Log.Users[k-2][i].DamageDealt),
+                recive  : Math.floor(data2.Log.Users[k-2][i].DamageReceived)
             };    
+
+            
 
             let img = new Image();
             
-            img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + caliber[k+5][i][5] + "_large.png";
+            img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
             
             img.onload = function() {
                 document.querySelector(`.team${k-1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
@@ -343,7 +236,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
             };
         
-
+            //debugger;
+            console.log(operator.avatar);
             document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('beforeend',`
             
             <tr class = 'line ${operator.role}'>
@@ -390,8 +284,27 @@ window.addEventListener('DOMContentLoaded', () => {
             </tr>
         `)};
     }
+
+    // CHANGE CST OPERS
+    document.querySelectorAll('.nameOp').forEach(element => {
+        if (element.innerText == 'СЛАЙ') {
+            element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/sly.png";
+            //operator.avatar = 'img/sly.png';
+        }
+        if (element.innerText == 'ФОРТРЕСС') {
+            element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/fortress.png";
+            //operator.avatar = 'img/fortress.png';
+        }
+        if (element.innerText == 'БОУНС') {
+            element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/bounce.png";
+        }
+        if (element.innerText == 'АВАЛАНШ') {
+            element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/avalansh.png";
+        }
+    });
+
     
-//  TOP-STATS
+    //  TOP-STATS
     function topStat(selector, type) {
         if (!selector || typeof selector !== "string") {
           console.error("Invalid selector argument, expected a string but got " + selector);
@@ -438,7 +351,6 @@ window.addEventListener('DOMContentLoaded', () => {
           }
         }
       }
-    
         topStat('.damages','max');
         topStat('.kills','max');
         topStat('.assists','max');
@@ -446,39 +358,136 @@ window.addEventListener('DOMContentLoaded', () => {
         topStat('.deaths','min');
 
 //  GROUPS COLORS
-        (function () {                             
-            let color;
-            let k = 0;
-            let group = document.querySelectorAll('.groups');
-            group.forEach((element,i) => {
-                if (i == 4) {k = 0};
-                let grValue = element.innerText.trim();
-                let groupElements = document.querySelectorAll(`[data-gr="${grValue}"]`);
-                if (groupElements.length > 1) {
-                     (k > 2) ? color = '#ff323b': color = 'lime';
-                    k++;
-                    groupElements.forEach((groupElement) => {
-                    groupElement.style.borderLeft = `4px solid ${color}`;
-                });
-                }
+    (function () {                             
+        let color;
+        let k = 0;
+        let group = document.querySelectorAll('.groups');
+        group.forEach((element,i) => {
+            if (i == 4) {k = 0};
+            let grValue = element.innerText.trim();
+            let groupElements = document.querySelectorAll(`[data-gr="${grValue}"]`);
+            if (groupElements.length > 1) {
+                 (k > 2) ? color = '#ff323b': color = 'lime';
+                k++;
+                groupElements.forEach((groupElement) => {
+                groupElement.style.borderLeft = `4px solid ${color}`;
             });
-        })();
+            }
+        });
+    })();
 
+    //   MAPS
+    (function (){
+        const mode    = document.querySelector('.mode');
+        const time    = document.querySelector('.time');
+        const divMap  = document.querySelector('.map');
+        const maps = {
+            originalMap: [
+              'lv_zalessye_radarbase_overcast',
+              'lv_karhad_emirresidence_evening',
+              'lv_karhad_caravanserai_night',
+              'lv_zalessye_dam_default',
+              'lv_zalessye_passage_overcast',
+              'lv_karhad_hospital_default',
+              'lv_zalessye_oilrig_sunrise',
+              'lv_karhad_village_default',
+              'lv_karhad_hangar_storm',
+              'lv_karhad_hotel_default',
+              'lv_zalessye_forest_default',
+              'lv_zalessye_depot_twilight',
+              'lv_karhad_palmroad_default',
+              'lv_karhad_mall_storm',
+              'lv_zalessye_submarine_default'
+            ].map(str => str.split("_").slice(0, -1).join("_")),
+            rusMap: [
+              'Радар',
+              'Резиденция Эмира',
+              'Караван-Сарай',
+              'Дамба',
+              'Переправа',
+              'Больница',
+              'Переправа',
+              'Деревня',
+              'Гавань Амаль',
+              'Отель',
+              'Лес',
+              'Депо',
+              'Пальмовая дорога',
+              'Торговый центр',
+              'Объект 903'
+            ]
+        };
+            const mapName = data2.Log.Data[1].split("_").slice(0, -1).join("_");
+            if (maps.originalMap.some((value) => value === mapName)) {
+                const i = maps.originalMap.indexOf(mapName);
+                const rusMapName = maps.rusMap[i];
+                divMap.textContent = ` ${rusMapName}`;
+            }
 
-    document.querySelectorAll('.nameOp').forEach(element => {
-        if (element.innerText == 'СЛАЙ') {
-            element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/sly.png";
+            if (caliber[4] == 'pvp') {
+                mode.innerText = `Столкновение:`;
+        
+            time.innerText = convertSecondsToTime(data2.Log.MatchTimeSeconds);
+    };
+
+    })();
+
+    //  WIN / LOSE
+    (function () {
+        function color(color, text) {
+            document.querySelector("div.winLose > div").innerText = text;
+            document.querySelector("div.winLose > svg > path").style.fill = color;
+            document.querySelector("div.winLoseText").style.color = color;
         }
-        if (element.innerText == 'ФОРТРЕСС') {
-            element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/fortress.png";
+        if (data1[7].some(player => player[2] == 'MASTER')) {
+            if (score(0) == 3) {   
+            color('#6aa5ee', 'ПОБЕДА!');
+            } else {
+            color('#6aa5ee', 'ПОРАЖЕНИЕ!');
+            }
+        } else if (data1[8].some(player => player[2] === 'MASTER')) {
+            if (score(1) == 3) {
+            color('#ff323b', 'ПОБЕДА!');
+            } else {
+            color('#ff323b', 'ПОРАЖЕНИЕ!');
+            }
         }
-        if (element.innerText == 'БОУНС') {
-            element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/bounce.png";
-        }
-        if (element.innerText == 'АВАЛАНШ') {
-            element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/avalansh.png";
-        }
-    });
+    })()
+
+    //  SCORE
+    function score(teamNumber) {
+        let data = data2.Log.Rounds;
+        const teamKey = `winner_team_${teamNumber}`;
+        const counts = data.reduce((acc, cur) => {
+            if (cur.winner_team === teamNumber) {
+            acc[teamKey] += 1;
+            }
+            return acc;
+        }, { [teamKey]: 0 });
+        return counts[teamKey];
+    }
+    //  COLOR POINTS
+    (function () {
+        let color = ["blue","red"]
+        color.forEach((color,i) => {
+            document.querySelector(`.${color}Point1>path`).style.fillOpacity = '0';
+            document.querySelector(`.${color}Point2>path`).style.fillOpacity = '0';
+            document.querySelector(`.${color}Point3>path`).style.fillOpacity = '0';
+            function setColor(n) {
+                
+                document.querySelector(`.${color}Point${n}>path`).style.fillOpacity = '1';
+            }
+            
+            if (score(i) == 1) {setColor(1)}
+            if (score(i) == 2) {setColor(1);setColor(2)}
+            if (score(i) == 3) {setColor(1);setColor(2);setColor(3);}
+        });
+    })();
+
+} ////// END ALL DATAS
+
+upload(caliber,caliber2);
+
     
 //  CALENDAR 
     document.querySelector('.redPoints').insertAdjacentHTML("afterend",`
@@ -571,37 +580,85 @@ window.addEventListener('DOMContentLoaded', () => {
     generateCalendar(currentMonth, currentYear);
 
 
-////////////////////////LOAD FUNCKINC
-function updateFileContent(filePath, localFilePath) {
-    const githubUsername = 'DarDreams';
-    const repoName = 'DarDreams.github.io';
-    const accessToken = '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';
-    const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}?ref=main`;
-    const headers = {
-      Authorization: `token ${accessToken}`,
-      'Content-Type': 'application/json',
-    };
+//  BUTTON OPEN DIFFERENT DATA BASE
+
+const fileInput = document.getElementById('file-input');
+const label = document.querySelector('.custom-file-input');
+
+label.addEventListener('mouseover',function (e) {
+    const path = 'C:\\Users\\%username%\\AppData\\LocalLow\\1CGS\\Caliber\\Replays';
+    const textarea = document.createElement('textarea');
+    textarea.textContent = path;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    //alert('Путь скопирован в буфер обмена');
+});
   
-    fetch(localFilePath)
-      .then(response => response.text())
-      .then(fileContents => {
-        const encoder = new TextEncoder();
-        const content = encoder.encode(fileContents);
-        return fetch(apiUrl, {
-          method: 'PUT',
-          headers: headers,
-          body: JSON.stringify({
-            message: 'Update file contents',
-            content: window.btoa(String.fromCharCode.apply(null, content)),
-          })
-        });
-      })
-      .then(response => console.log(response))
-      .catch(error => console.error(error));
-  }
+fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = (event) => {
+        let caliber_b = [];
+        let caliber_b2 = [];
+        let data = event.target.result.match(/^(.*\n){0,2}.*/g);
+        data = data[0].replaceAll(/[^\x20-\x7E]+/g);
+        data = data.replaceAll(/[^ -~]+/g);
+        data = data.replace(/.*?({.*)/, "$1");
+        caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
+        caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
+
+        function fix(obj) {
+            let brokenObject = obj;
+            let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+            fixedObject = JSON.parse(fixedObject);
+            return fixedObject;
+        }
+        
+        caliber_b  = fix(caliber_b);
+        caliber_b2 = fix(caliber_b2);
+
+        caliber_b[8] = caliber_b[7].splice(4);
+        caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0],caliber_b2.Log.Users[1],caliber_b2.Log.Users[2],caliber_b2.Log.Users[3]]
+        caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4],caliber_b2.Log.Users[5],caliber_b2.Log.Users[6],caliber_b2.Log.Users[7]]
+        caliber_b2.Log.Users.splice(2);
+        upload(caliber_b, caliber_b2);
+    }
+});
+
+////////////////////////LOAD FUNCKINC
+// function updateFileContent(filePath, localFilePath) {
+//     const githubUsername = 'DarDreams';
+//     const repoName = 'DarDreams.github.io';
+//     const accessToken = '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';
+//     const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}?ref=main`;
+//     const headers = {
+//       Authorization: `token ${accessToken}`,
+//       'Content-Type': 'application/json',
+//     };
+  
+//     fetch(localFilePath)
+//       .then(response => response.text())
+//       .then(fileContents => {
+//         const encoder = new TextEncoder();
+//         const content = encoder.encode(fileContents);
+//         return fetch(apiUrl, {
+//           method: 'PUT',
+//           headers: headers,
+//           body: JSON.stringify({
+//             message: 'Update file contents',
+//             content: window.btoa(String.fromCharCode.apply(null, content)),
+//           })
+//         });
+//       })
+//       .then(response => console.log(response))
+//       .catch(error => console.error(error));
+//   }
     //updateFileContent('Caliber/index.html', 'index.html');
     // updateFileContent('Caliber/js/script.js','js/script.js');
     // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
-    localStorage.setItem(JSON.stringify([caliber,caliber2]),`${new Date().getDate()}:${new Date().getMonth()+1}:${new Date().getFullYear()} ${caliber[0]}`);
+   // localStorage.setItem(JSON.stringify([caliber,caliber2]),`${new Date().getDate()}:${new Date().getMonth()+1}:${new Date().getFullYear()} ${caliber[0]}`);
 });
