@@ -49,6 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 //  UPLOAD ALL DATAS
+
 function upload(data1, data2) {
     document.querySelector(`.team1Table`).innerHTML = '';
     document.querySelector(`.team2Table`).innerHTML = '';
@@ -237,7 +238,6 @@ function upload(data1, data2) {
             };
         
             //debugger;
-            console.log(operator.avatar);
             document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('beforeend',`
             
             <tr class = 'line ${operator.role}'>
@@ -421,7 +421,7 @@ function upload(data1, data2) {
             if (maps.originalMap.some((value) => value === mapName)) {
                 const i = maps.originalMap.indexOf(mapName);
                 const rusMapName = maps.rusMap[i];
-                divMap.textContent = ` ${rusMapName}`;
+                divMap.textContent = `\u00A0${rusMapName}`;
             }
 
             if (caliber[4] == 'pvp') {
@@ -484,16 +484,40 @@ function upload(data1, data2) {
         });
     })();
 
+
+    function setZero (num) {
+        if (num >= 0 && num < 10) {
+            return `0${num}`;
+        } else {
+            return num;
+        }
+    }
+
+const day   = setZero(new Date().getDate());
+const month = setZero(new Date().getMonth()+1);
+const year  = new Date().getFullYear();
+const map   = document.querySelector('.map').textContent.trim();
+const id    = data1[0];
+const win   = document.querySelector("div.winLoseText").textContent.slice(0,document.querySelector("div.winLoseText").textContent.length-1);
+const time  = 'time';
+
+localStorage.setItem(`${day}:${month}:${year} ${id} ${win} ${map}`,JSON.stringify([data1,data2]));
+
 } ////// END ALL DATAS
 
-upload(caliber,caliber2);
+upload(caliber, caliber2);
 
     
 //  CALENDAR 
+    
     document.querySelector('.redPoints').insertAdjacentHTML("afterend",`
     <button id="show-panel">></button>
     <div class="slide-out-panel">
         <div class="calendar">
+            <div class="custom-file-input">
+		        <input type="file" id="file-input" accept=".bytes">
+		        <label for="file-input"></label>
+	        </div>
             <div class="container">
                 <h1></h1>
                 <table>
@@ -516,12 +540,16 @@ upload(caliber,caliber2);
     </div>
     `);
 
+    document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin",`<div id="list-container"></div>`);
     const button = document.getElementById('show-panel');
     const panel = document.querySelector('.slide-out-panel');
+    const tables = document.querySelector('.container_tables');
 
     button.addEventListener('click', () => {
         panel.classList.toggle('show');
+        tables.classList.toggle('show');
       if (button.innerText == '>') {button.innerText = '<'} else {button.innerText = ">"}
+      //document.querySelector('.team1Table, .team2Table').left = 500;
     });
 
     const calendarBody = document.getElementById("calendar-body");
@@ -534,68 +562,81 @@ upload(caliber,caliber2);
     }
 
     function generateCalendar(month, year) {
-    // Очищаем календарь перед созданием нового
-    calendarBody.innerHTML = "";
-    
-    // Получаем количество дней в месяце
-    const daysInMonth = getDaysInMonth(month, year);
-    // Получаем первый день месяца
-    const firstDayOfMonth = new Date(year, month, 0).getDay();
-    
-    let date = 1;
-    // Создаем ячейки для каждого дня месяца
-    for (let i = 0; i < 6; i++) {
-        const row = document.createElement("tr");
-        for (let j = 0; j < 7; j++) {
-        const cell = document.createElement("td");
-        if (i === 0 && j < firstDayOfMonth) {
-            // Пустые ячейки до первого дня месяца
-            cell.textContent = "";
-        } else if (date > daysInMonth) {
-            // Пустые ячейки после последнего дня месяца
-            cell.textContent = "";
-        } else {
-            // Добавляем дату
-            cell.textContent = date;
-            date++;
+        calendarBody.innerHTML = "";
+        const daysInMonth = getDaysInMonth(month, year);
+        const firstDayOfMonth = new Date(year, month, 0).getDay();
+        let date = 1;
+        for (let i = 0; i < 5; i++) {
+            const row = document.createElement("tr");
+            for (let j = 0; j < 7; j++) {
+                const cell = document.createElement("td");
+                if (i === 0 && j < firstDayOfMonth) {
+                // Пустые ячейки до первого дня месяца
+                    cell.textContent = "";
+                } else if (date > daysInMonth) {
+                // Пустые ячейки после последнего дня месяца
+                    cell.textContent = "";
+                } else {
+                // Добавляем дату
+                    cell.textContent = date;
+                    date++;
+                // Назначаем обработчик клика на ячейку
+                
+                    cell.addEventListener("click", function() {
+                //const eventText = prompt("Введите описание события для " + year + "-" + (month+1) + "-" + this.textContent + ":");
+                    
+                    const listContainer = document.getElementById('list-container');
+                    const keys = Object.keys(localStorage);
 
-            // Назначаем обработчик клика на ячейку
-            cell.addEventListener("click", function() {
-            const eventText = prompt("Введите описание события для " + year + "-" + (month+1) + "-" + this.textContent + ":");
-            if (eventText) {
-                const event = document.createElement("div");
-                event.textContent = eventText;
-                event.classList.add("event");
-                this.appendChild(event);
+                    listContainer.innerHTML = '';
+                    keys.forEach(key => {
+                        if (this.textContent == key.match(/\d+/g)[0]) {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = key;
+                            listItem.addEventListener('click', () => {
+                                myFunction(key);
+                            });
+                            const date  = listItem.textContent.split(' ')[0];
+                            const id    = listItem.textContent.split(' ')[1];
+                            const win   = listItem.textContent.split(' ')[2];
+                            const map   = listItem.textContent.split(' ')[3]
+                            console.log(id,map,win,date);
+                            listContainer.appendChild(listItem);
+                        }
+                    });
+                    function myFunction(key) {
+                        let data = JSON.parse(localStorage.getItem(key));
+                        console.log(data[0]);
+                        upload(data[0],data[1]);
+                    }
+                    });
+                }
+                row.appendChild(cell);
             }
-            });
+            calendarBody.appendChild(row);
         }
-        row.appendChild(cell);
-        }
-        calendarBody.appendChild(row);
     }
-    }
-
     // Создаем календарь на текущий месяц и год
     generateCalendar(currentMonth, currentYear);
 
-
 //  BUTTON OPEN DIFFERENT DATA BASE
 
-const fileInput = document.getElementById('file-input');
 const label = document.querySelector('.custom-file-input');
 
-label.addEventListener('mouseover',function (e) {
-    const path = 'C:\\Users\\%username%\\AppData\\LocalLow\\1CGS\\Caliber\\Replays';
-    const textarea = document.createElement('textarea');
-    textarea.textContent = path;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    //alert('Путь скопирован в буфер обмена');
+label.addEventListener('click', () => {
+  const path = '%USERPROFILE%\\AppData\\LocalLow\\1CGS\\Caliber\\Replays';
+  const textarea = document.createElement('textarea');
+  textarea.textContent = path;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+  //console.log('Путь скопирован в буфер обмена');
 });
-  
+
+
+
+const fileInput = document.getElementById('file-input');
 fileInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -660,5 +701,5 @@ fileInput.addEventListener('change', (event) => {
     // updateFileContent('Caliber/js/script.js','js/script.js');
     // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
-   // localStorage.setItem(JSON.stringify([caliber,caliber2]),`${new Date().getDate()}:${new Date().getMonth()+1}:${new Date().getFullYear()} ${caliber[0]}`);
+    
 });
