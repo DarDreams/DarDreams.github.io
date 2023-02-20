@@ -514,9 +514,12 @@ upload(caliber, caliber2);
     <button id="show-panel">></button>
     <div class="slide-out-panel">
         <div class="calendar">
-            <div class="custom-file-input">
-		        <input type="file" id="file-input" accept=".bytes">
-		        <label for="file-input"></label>
+        <img class = 'rec' src='../img/REC.png'>    
+        <div class="custom-file-input">
+            <input type="file" id="file-input" accept=".bytes">
+                <label for="file-input">
+                <img class ='folder' src='../img/FOLDER.png'>
+                </label>
 	        </div>
             <div class="container">
                 <h1></h1>
@@ -550,6 +553,17 @@ upload(caliber, caliber2);
         tables.classList.toggle('show');
       if (button.innerText == '>') {button.innerText = '<'} else {button.innerText = ">"}
       //document.querySelector('.team1Table, .team2Table').left = 500;
+    });
+
+    const rec = document.querySelector('.rec');
+    rec.addEventListener('click', function (){
+        if (localStorage.getItem("rec") == "false" || !localStorage.getItem("rec")) {
+            localStorage.setItem("rec", true);
+            rec.style.filter = "";
+        } else {
+            localStorage.setItem("rec", false);
+            rec.style.filter = "grayscale(100%)";
+        }
     });
 
     const calendarBody = document.getElementById("calendar-body");
@@ -599,10 +613,51 @@ upload(caliber, caliber2);
                             const date  = listItem.textContent.split(' ')[0];
                             const id    = listItem.textContent.split(' ')[1];
                             const win   = listItem.textContent.split(' ')[2];
-                            const map   = listItem.textContent.split(' ')[3]
-                            console.log(id,map,win,date);
+                            const map   = listItem.textContent.split(' ')[3];
+                            const time  = `${new Date().getHours()}:${new Date().getMinutes()}`;
+                            listItem.innerHTML  = `${id} ${map} Столкновение ${win} ${date}`;
                             listContainer.appendChild(listItem);
+                            const words = listItem.textContent.split(' ');
+                            listItem.textContent = ''; 
+
+                            for (let i = 0; i < words.length; i++) {
+                              const span = document.createElement('span');
+                              span.textContent = words[i];
+                              listItem.appendChild(span);
+                            }
+                            //listContainer.appendChild(item);
                         }
+                    });
+                    const listItems = document.querySelectorAll('#list-container > li');
+                    listItems.forEach(item => {
+                    const lastSpan = item.querySelector('span:last-child');
+                    const firstSpan = item.querySelector('span:first-child');
+                    firstSpan.insertAdjacentHTML('afterbegin',`
+                        <svg class='star' viewBox="281.634 158.464 106.675 70" width="106.675" height="70">
+                        <defs>
+                            <mask id="mask" x="0" y="0" width="69" height="69">
+                            <rect x="278.691" y="158.464" width="69" height="69" fill="white"></rect>
+                            <path d="M 294.111 189.782 L 302.188 189.782 L 304.683 182.109 L 307.179 189.782 L 315.256 189.782 L 308.722 194.524 L 311.218 202.197 L 304.683 197.455 L 298.149 202.197 L 300.645 194.524 L 294.111 189.782 Z" fill="black"></path>
+                            </mask>
+                        </defs>
+                        <g class="layer" transform="matrix(1, 0, 0, 1, 319.590825, 158.343768)" height="70&quot; class=&quot;layer">
+                            <title>Layer 1</title>
+                            <path d="m-0.20636,0.12021l68.92459,0l-0.12566,34.50001l0.12566,34.50016l-68.92459,0l15.4421,-34.50016l-15.4421,-34.50001z" fill="#9f9f9f" id="svg_1" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" transform="rotate(-180 34.2559 34.6203)"></path>
+                        </g>
+                        <rect width="70" height="70" fill="#9f9f9f" mask="url(#mask)" x="281.634" y="158.464"></rect>
+                        </svg>
+                    `)
+                    lastSpan.insertAdjacentHTML('beforeend', '<img class="basket" src="img/basket.png"></img>');
+                    
+
+                    const imgBasket = document.querySelectorAll('.basket')
+                    imgBasket.forEach(function (item){
+                        item.addEventListener('click',(e) => {
+                            e.path[2].remove();
+                            localStorage.removeItem(keys.filter(key => key.includes(e.path[2].children[0].textContent)))
+                        });
+                    });
+
                     });
                     function myFunction(key) {
                         let data = JSON.parse(localStorage.getItem(key));
