@@ -551,22 +551,23 @@ upload(caliber, caliber2);
     button.addEventListener('click', () => {
         panel.classList.toggle('show');
         tables.classList.toggle('show');
+        record(false);
       if (button.innerText == '>') {button.innerText = '<'} else {button.innerText = ">"}
       //document.querySelector('.team1Table, .team2Table').left = 500;
     });
     //function rec() {
         const rec = document.querySelector('.rec');
-
-        rec.addEventListener('click', function rec(){
+    function record (bool=true) {
+        rec.addEventListener('click', function (){
             if (localStorage.getItem("rec") == "false" || !localStorage.getItem("rec")) {
-                localStorage.setItem("rec", true);
+             if (bool == true) {   localStorage.setItem("rec", true) };
                 rec.style.filter = "";
             } else {
-                localStorage.setItem("rec", false);
-                rec.style.filter = "grayscale(100%)";
+                if (bool == true) {localStorage.setItem("rec", false)};
+                rec.style.filter = "grayscale(1)";
             }
         });
-   // }
+   }
 
     
 
