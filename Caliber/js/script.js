@@ -554,17 +554,21 @@ upload(caliber, caliber2);
       if (button.innerText == '>') {button.innerText = '<'} else {button.innerText = ">"}
       //document.querySelector('.team1Table, .team2Table').left = 500;
     });
+    //function rec() {
+        const rec = document.querySelector('.rec');
 
-    const rec = document.querySelector('.rec');
-    rec.addEventListener('click', function (){
-        if (localStorage.getItem("rec") == "false" || !localStorage.getItem("rec")) {
-            localStorage.setItem("rec", true);
-            rec.style.filter = "";
-        } else {
-            localStorage.setItem("rec", false);
-            rec.style.filter = "grayscale(100%)";
-        }
-    });
+        rec.addEventListener('click', function rec(){
+            if (localStorage.getItem("rec") == "false" || !localStorage.getItem("rec")) {
+                localStorage.setItem("rec", true);
+                rec.style.filter = "";
+            } else {
+                localStorage.setItem("rec", false);
+                rec.style.filter = "grayscale(100%)";
+            }
+        });
+   // }
+
+    
 
     const calendarBody = document.getElementById("calendar-body");
     const today = new Date();
@@ -649,7 +653,7 @@ upload(caliber, caliber2);
                     `)
                     lastSpan.insertAdjacentHTML('beforeend', '<img class="basket" src="img/basket.png"></img>');
                     
-
+                    
                     const imgBasket = document.querySelectorAll('.basket')
                     imgBasket.forEach(function (item){
                         item.addEventListener('click',(e) => {
