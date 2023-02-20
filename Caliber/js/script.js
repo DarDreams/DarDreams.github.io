@@ -514,11 +514,11 @@ upload(caliber, caliber2);
     <button id="show-panel">></button>
     <div class="slide-out-panel">
         <div class="calendar">
-        <img class = 'rec' src='/../img/REC.png'>    
+        <img class = 'rec' src='img/REC.png'>    
         <div class="custom-file-input">
             <input type="file" id="file-input" accept=".bytes">
                 <label for="file-input">
-                <img class ='folder' src='/../img/FOLDER.png'>
+                <img class ='folder' src='img/FOLDER.png'>
                 </label>
 	        </div>
             <div class="container">
