@@ -514,11 +514,11 @@ upload(caliber, caliber2);
     <button id="show-panel">></button>
     <div class="slide-out-panel">
         <div class="calendar">
-        <img class = 'rec' src='../img/REC.png'>    
+        <img class = 'rec' src='/../img/REC.png'>    
         <div class="custom-file-input">
             <input type="file" id="file-input" accept=".bytes">
                 <label for="file-input">
-                <img class ='folder' src='../img/FOLDER.png'>
+                <img class ='folder' src='/../img/FOLDER.png'>
                 </label>
 	        </div>
             <div class="container">
@@ -547,30 +547,43 @@ upload(caliber, caliber2);
     const button = document.getElementById('show-panel');
     const panel = document.querySelector('.slide-out-panel');
     const tables = document.querySelector('.container_tables');
+    const recElem = document.querySelector('.rec');
 
     button.addEventListener('click', () => {
+        console.log(localStorage.getItem("rec"));
+       if (localStorage.getItem("rec") == "false" || !localStorage.getItem("rec")) {
+         recElem.style.filter = 'grayscale(1%)'
+        } else {
+             recElem.style.filter = 'grayscale(-1%)';
+        }
         panel.classList.toggle('show');
         tables.classList.toggle('show');
-        record(false);
+        
       if (button.innerText == '>') {button.innerText = '<'} else {button.innerText = ">"}
       //document.querySelector('.team1Table, .team2Table').left = 500;
     });
     //function rec() {
-        const rec = document.querySelector('.rec');
-        function record (bool = true) {
-            if (localStorage.getItem("rec") == "false" || !localStorage.getItem("rec")) {
-                rec.style.filter = "grayscale(1)";
-            }
-                rec.addEventListener('click', function (){
+        //const rec = document.querySelector('.rec');
+        
+            
+            recElem.addEventListener('click', function() {
+                    
+                if (localStorage.getItem("rec") == "true") {
+                    localStorage.setItem("rec", false);
+                    recElem.style.filter = "grayscale(-1%)";
+                  } else {
+                    localStorage.setItem("rec", true);
+                    recElem.style.filter = "grayscale(1%)";
+                  }
+                });
                 
-                if (bool == true) {   localStorage.setItem("rec", true) ;
-                    rec.style.filter = "";
-                } else {
-                    if (bool == true) {localStorage.setItem("rec", false)};
-                    rec.style.filter = "grayscale(1)";
-                }
-            });
-   }
+                
+                
+                
+          //})
+          //record(false)
+          
+   
 
     
 
