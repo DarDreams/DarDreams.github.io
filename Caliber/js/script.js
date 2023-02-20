@@ -2,7 +2,7 @@
 import {caliber, caliber2} from "./game.js";
 console.clear();
 window.addEventListener('DOMContentLoaded', () => {
-
+let id, alldata;
         // function objectToArray(obj) {
         //     return Object.values(obj).map((value) => {
         //       if (typeof value === 'object' && value !== null) {
@@ -50,21 +50,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //  UPLOAD ALL DATAS
 
-function upload(data1, data2) {
+ function upload(data1, data2) {
     document.querySelector(`.team1Table`).innerHTML = '';
     document.querySelector(`.team2Table`).innerHTML = '';
     for (let k = 2; k < 4; k++) {
-    document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('afterbegin',`
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th>ГРУППА</th>
-    <th>ЛИКВИДИРОВАЛ</th>
-    <th>ПОГИБ</th>
-    <th>СОДЕЙСТВИЯ</th>
-    <th>УРОН</th>
-    <th>ПОЛУЧЕНИЕ</th>`);
+        document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('afterbegin',`
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>ГРУППА</th>
+        <th>ЛИКВИДИРОВАЛ</th>
+        <th>ПОГИБ</th>
+        <th>СОДЕЙСТВИЯ</th>
+        <th>УРОН</th>
+        <th>ПОЛУЧЕНИЕ</th>`);
         for (let i = 0; i <= 3; i++) {
             let operLoop;
             if (k == 2) { operLoop = ['assault','gunner','medic','sniper'];}
@@ -219,22 +219,18 @@ function upload(data1, data2) {
 
             
 
-            let img = new Image();
-            
+            let img =  new Image();
             img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
             
-            img.onload = function() {
+            img.onload =  function() {
                 document.querySelector(`.team${k-1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
             };
         
-            img.onerror = function() {
-       
+            img.onerror =  function() {
                 document.querySelector(`.team${k-1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
-                
             <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${operator.emblem}">
-
             `);
-
+            //setTimeout(function () {console.log('hi');}, 500);
             };
         
             //debugger;
@@ -485,28 +481,10 @@ function upload(data1, data2) {
     })();
 
 
-    function setZero (num) {
-        if (num >= 0 && num < 10) {
-            return `0${num}`;
-        } else {
-            return num;
-        }
-    }
+ 
 
-const day   = setZero(new Date().getDate());
-const month = setZero(new Date().getMonth()+1);
-const year  = new Date().getFullYear();
-const map   = document.querySelector('.map').textContent.trim();
-const id    = data1[0];
-const win   = document.querySelector("div.winLoseText").textContent.slice(0,document.querySelector("div.winLoseText").textContent.length-1);
-const time  = 'time';
-
-function save() {
-    if (localStorage.getItem('rec') == 'true') {
-        localStorage.setItem(`${day}:${month}:${year} ${id} ${win} ${map}`,JSON.stringify([data1,data2]));
-    }
-}
-save();
+ id         = data1[0];
+ alldata    = [data1, data2]
 
 } ////// END ALL DATAS
 
@@ -562,11 +540,7 @@ upload(caliber, caliber2);
         recElem.style.filter = "grayscale(100%)";
     }
       if (button.innerText == '>') {button.innerText = '<'} else {button.innerText = ">"}
-      //document.querySelector('.team1Table, .team2Table').left = 500;
     });
-    //function rec() {
-        //const rec = document.querySelector('.rec');
-       // function record(clickable) {
             
             
             recElem.addEventListener('click', function() {
@@ -623,13 +597,17 @@ upload(caliber, caliber2);
 
                     listContainer.innerHTML = '';
                     keys.forEach(key => {
-                        console.log(key);
+                        //console.log(key);
                         if (key == 'rec') {return};
                         if (this.textContent == key.match(/\d+/g)[0]) {
                             const listItem = document.createElement('li');
                             listItem.textContent = key;
-                            listItem.addEventListener('click', () => {
+                            listItem.addEventListener('click', (e) => {
+                                e.path[1].classList.add('disabled');
+                                document.querySelectorAll('#list-container > li').forEach((element) => {element.classList.remove('disabled');})
+                                e.path[1].classList.add('disabled');
                                 myFunction(key);
+                                
                             });
                             const date  = listItem.textContent.split(' ')[0];
                             const id    = listItem.textContent.split(' ')[1];
@@ -680,8 +658,9 @@ upload(caliber, caliber2);
                     });
 
                     });
-                    function myFunction(key) {
+                     function myFunction(key) {
                         let data = JSON.parse(localStorage.getItem(key));
+                        //console.log(key);
                         console.log(data[0]);
                         upload(data[0],data[1]);
                     }
@@ -715,6 +694,7 @@ label.addEventListener('click', () => {
 const fileInput = document.getElementById('file-input');
 fileInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
+    const createdDate = new Date(file.lastModified);
     const reader = new FileReader();
     reader.readAsText(file);
     reader.onload = (event) => {
@@ -742,7 +722,31 @@ fileInput.addEventListener('change', (event) => {
         caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4],caliber_b2.Log.Users[5],caliber_b2.Log.Users[6],caliber_b2.Log.Users[7]]
         caliber_b2.Log.Users.splice(2);
         upload(caliber_b, caliber_b2);
+        save();
     }
+
+//const month = setZero(new Date().getMonth()+1);
+//const year  = new Date().getFullYear();
+
+
+function setZero (num) {
+    if (num >= 0 && num < 10) {
+        return `0${num}`;
+    } else {
+        return num;
+    }
+}
+
+function save() {
+    const map   = document.querySelector('.map').textContent.trim();
+    const win   = document.querySelector("div.winLoseText").textContent.slice(0,document.querySelector("div.winLoseText").textContent.length-1);
+    const day  = `${setZero(createdDate.getDate())}:${setZero(createdDate.getMonth()+1)}.${createdDate.getFullYear()}`;
+    if (localStorage.getItem('rec') == 'true') {
+        localStorage.setItem(`${day} ${id} ${win} ${map}`,JSON.stringify([alldata[0],alldata[1]]));
+    }
+}
+save();
+
 });
 
 ////////////////////////LOAD FUNCKINC
