@@ -557,16 +557,19 @@ upload(caliber, caliber2);
     });
     //function rec() {
         const rec = document.querySelector('.rec');
-    function record (bool=true) {
-        rec.addEventListener('click', function (){
+        function record (bool = true) {
             if (localStorage.getItem("rec") == "false" || !localStorage.getItem("rec")) {
-             if (bool == true) {   localStorage.setItem("rec", true) };
-                rec.style.filter = "";
-            } else {
-                if (bool == true) {localStorage.setItem("rec", false)};
                 rec.style.filter = "grayscale(1)";
             }
-        });
+                rec.addEventListener('click', function (){
+                
+                if (bool == true) {   localStorage.setItem("rec", true) ;
+                    rec.style.filter = "";
+                } else {
+                    if (bool == true) {localStorage.setItem("rec", false)};
+                    rec.style.filter = "grayscale(1)";
+                }
+            });
    }
 
     
