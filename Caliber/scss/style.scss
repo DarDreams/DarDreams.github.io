@@ -317,7 +317,7 @@ img.rec {
     height: 40px;
     padding: 3px;
     border: 1px solid grey;
-    //filter: grayscale(1%);
+    filter: grayscale(100%);
     &:hover {
         border: 4px solid white;
         padding: 0px;

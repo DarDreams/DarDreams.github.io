@@ -501,7 +501,12 @@ const id    = data1[0];
 const win   = document.querySelector("div.winLoseText").textContent.slice(0,document.querySelector("div.winLoseText").textContent.length-1);
 const time  = 'time';
 
-localStorage.setItem(`${day}:${month}:${year} ${id} ${win} ${map}`,JSON.stringify([data1,data2]));
+function save() {
+    if (localStorage.getItem('rec') == 'true') {
+        localStorage.setItem(`${day}:${month}:${year} ${id} ${win} ${map}`,JSON.stringify([data1,data2]));
+    }
+}
+save();
 
 } ////// END ALL DATAS
 
@@ -550,38 +555,31 @@ upload(caliber, caliber2);
     const recElem = document.querySelector('.rec');
 
     button.addEventListener('click', () => {
-        console.log(localStorage.getItem("rec"));
-       if (localStorage.getItem("rec") == "false" || !localStorage.getItem("rec")) {
-         recElem.style.filter = 'grayscale(1%)'
-        } else {
-             recElem.style.filter = 'grayscale(-1%)';
-        }
         panel.classList.toggle('show');
         tables.classList.toggle('show');
-        
+    if (localStorage.getItem("rec") === "true") {recElem.style.filter = "grayscale(0%)";    
+    } else {
+        recElem.style.filter = "grayscale(100%)";
+    }
       if (button.innerText == '>') {button.innerText = '<'} else {button.innerText = ">"}
       //document.querySelector('.team1Table, .team2Table').left = 500;
     });
     //function rec() {
         //const rec = document.querySelector('.rec');
-        
+       // function record(clickable) {
+            
             
             recElem.addEventListener('click', function() {
-                    
-                if (localStorage.getItem("rec") == "true") {
-                    localStorage.setItem("rec", false);
-                    recElem.style.filter = "grayscale(-1%)";
-                  } else {
-                    localStorage.setItem("rec", true);
-                    recElem.style.filter = "grayscale(1%)";
-                  }
-                });
                 
-                
-                
-                
-          //})
-          //record(false)
+                if (localStorage.getItem("rec") === "false" || !localStorage.getItem("rec")) {
+                  localStorage.setItem("rec", true);
+                  recElem.style.filter = "grayscale(0%)";
+                } else {
+                  localStorage.setItem("rec", false);
+                  recElem.style.filter = "grayscale(100%)";
+                }
+                save();
+            });
           
    
 
@@ -625,6 +623,8 @@ upload(caliber, caliber2);
 
                     listContainer.innerHTML = '';
                     keys.forEach(key => {
+                        console.log(key);
+                        if (key == 'rec') {return};
                         if (this.textContent == key.match(/\d+/g)[0]) {
                             const listItem = document.createElement('li');
                             listItem.textContent = key;
@@ -651,7 +651,7 @@ upload(caliber, caliber2);
                     });
                     const listItems = document.querySelectorAll('#list-container > li');
                     listItems.forEach(item => {
-                    const lastSpan = item.querySelector('span:last-child');
+                    const lastSpan  = item.querySelector('span:last-child');
                     const firstSpan = item.querySelector('span:first-child');
                     firstSpan.insertAdjacentHTML('afterbegin',`
                         <svg class='star' viewBox="281.634 158.464 106.675 70" width="106.675" height="70">
