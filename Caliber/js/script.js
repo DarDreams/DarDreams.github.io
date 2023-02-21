@@ -217,7 +217,99 @@ let id, alldata;
                 recive  : Math.floor(data2.Log.Users[k-2][i].DamageReceived)
             };    
 
-            
+            const perksRus = {
+                "expansive_bullets" : "Экаспансивные пули",
+                "tungsten_coating" : "Вольфрамовое покрытие пуль",
+                "stay_frosty" : "Хладнокровие",
+                "null" : "Нет",
+                "fast_revive" : "Скорая помощь",
+                "inner_strength" : "Внутренний резерв",
+                "sixth_sense" : "Шестое чувство",
+                "healing_factor" : "Фактор лечения",
+                "will_to_live" : "Тяга к жизни",
+                "shoulder_to_shoulder" : "Плечем к плечу",
+                "heavy_barrel" : "Тяжелый ствол",
+                "die_hard" : "Крепки орешек",
+                "merciless" : "Беспощадность",
+                "strong_stim" : "Усиленные стимуляторы",
+                "lightweight_equipment" : "Облегченная разгрузка",
+                "robotic_calibrations" : "Калибробвка техники",
+                "prudence" : "Расчетливость",
+                "dead_silence" : "Скрытое перемещение",
+                "in_the_crosshairs" : "Под прицелом",
+                "cold_blood" : "Хладнокровие",
+                "self_healing" : "Самолечение",
+                "own_priorities" : "Свои приоритеты",
+                "adaptive_armor" : "Адаптивная броня",
+                "advanced_training" : "Углубленная подготовка",
+                "altitude_training" : "Высотная подготовка",
+                "ambush" : "Засада",
+                "armor_piercing_rounds" : "Бронебойные патроны",
+                "armor_pouch" : "",
+                "barrel_cutting" : "Прецизионная нарезка ствола",
+                "battle_hardening" : "Боевая закалка",
+                "blood_rage" : "Прилив адреналина",
+                "booster_pouch" : "Усиленные стимуляторы",
+                "cold_math" : "Холодный расчет",
+                "combined_armor" : "Комбинированые пластины",
+                "counter_attack" : "Контратака",
+                "direct_acting_shutter" : "Модернизация затворного механизма",
+                "field_medicine" : "",
+                "fireres_materials" : "Герметичные материалы",
+                "flatness" : "Настильность",
+                "forend_processing" : "Обработка цевья",
+                "head_hunter" : "Охота за головами",
+                "head_protection" : "Защита головы",
+                "heavy_ammunition" : "Тяжелые боеприпасы",
+                "heavyweight_marathon" : "Вооруженные забег",
+                "hemoglobin_serum" : "Сывортока гемоглобина",
+                "improved_formula" : "Улучшенная формула",
+                "last_frontier" : "Одинокий волк",
+                "quick_release_magazines" : "Быстрсъемные магазины",
+                "regenerative_materials" : "Регенерирующие материалы",
+                "retaliation" : "Возмездие",
+                "second_wind" : "Второе дыхание",
+                "shrapnel_layer" : "Противоосколочный слой",
+                "spare_syringe" : "Запасной шприц",
+                "stealth_warrior" : "Скрытый воин",
+                "strong_nerves" : "Крепкие нервы",
+                "subdermal_meldonium" : "Субдермальный мельдоний",
+                "subdermal_morphine" : "Субдермальный морфин",
+                "super_sensitive_trigger" : "Чувтсвительный спусковой крючок",
+                "take_aim" : "Стрелковая позиция",
+                "thermal_imager" : "Тепловизор",
+                "tight_fit" : "Плотное прилегание",
+                "well_rested" : "Хороший отдых",
+                "AmmoPack" : "",
+                "ArmorPack" : "",
+                "TeamArmorPack" : "",
+                "TeamAmmoPack" : "",
+                "HealthPackOld" : "",
+                "HealthPack" : "",
+                "SpecialRevive" : "",
+                "StaminaRegenBooster" : ""
+            }
+        
+            function hint() {
+                const element = document.querySelector('.element');
+                const hint = document.createElement('div');
+                hint.classList.add('hint');
+                hint.textContent = 'Your hint text goes here';
+                element.appendChild(hint);
+
+                element.addEventListener('mousemove', function(event) {
+                    const x = event.pageX - element.offsetLeft;
+                    const y = event.pageY - element.offsetTop;
+                    hint.style.display = 'block';
+                    hint.style.top = `${y + 5}px`;
+                    hint.style.left = `${x + 5}px`;
+                });
+
+                element.addEventListener('mouseout', function() {
+                hint.style.display = 'none';
+});
+            }
+                
 
             let img =  new Image();
             img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
@@ -260,10 +352,10 @@ let id, alldata;
                 <td data-gr = "${operator.group}" class = "groups">
                 ${operator.group}
                     <div class = "perks">
-                        <svg class="perk _1"><title>${operator.perks[0]}</title><use xlink:href="#${operator.perks[0]}"></use></svg>
-                        <svg class="perk _2"><title>${operator.perks[1]}</title><use xlink:href="#${operator.perks[1]}"></use></svg>
-                        <svg class="perk _3"><title>${operator.perks[2]}</title><use xlink:href="#${operator.perks[2]}"></use></svg>
-                        <svg class="perk _4"><title>${operator.perks[3]}</title><use xlink:href="#${operator.perks[3]}"></use></svg>
+                        <svg class="perk _1"><title>${perksRus[operator.perks[0]]}</title><use xlink:href="#${operator.perks[0]}"></use></svg>
+                        <svg class="perk _2"><title>${perksRus[operator.perks[1]]}</title><use xlink:href="#${operator.perks[1]}"></use></svg>
+                        <svg class="perk _3"><title>${perksRus[operator.perks[2]]}</title><use xlink:href="#${operator.perks[2]}"></use></svg>
+                        <svg class="perk _4"><title>${perksRus[operator.perks[3]]}</title><use xlink:href="#${operator.perks[3]}"></use></svg>
                     </div>
                 </td>
                 <td class = "kills"  >${operator.kills}</td>
@@ -781,5 +873,6 @@ save();
     // updateFileContent('Caliber/js/script.js','js/script.js');
     // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
-    
+
+
 });
