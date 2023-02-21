@@ -196,7 +196,7 @@ $('button.slick-prev').html("&#10154;");
 				let curObj = document.querySelectorAll('.counter')[0].parentElement.querySelector('h3').textContent.toLowerCase().split(" ");
 				let divCount	= e.target.parentElement.querySelector('.counter-value');
 				let divPrice 	= e.target.parentElement.querySelector('.precio');
-
+				
 				divCount.value++;
 				//cards.filter()
 				//console.log(cards.curObj[0],curObj[1].precio);
@@ -206,7 +206,7 @@ $('button.slick-prev').html("&#10154;");
 				let divCount	= e.target.parentElement.querySelector('.counter-value');
 				let divPrice 	= e.target.parentElement.querySelector('.precio');
 
-				
+				if (divCount.value < 0) {divCount = 0}
 				divCount.value--;
 				divPrice.textContent = `${cards.hummus.chili.precio * Number(divCount.value)} €`;
 			}
