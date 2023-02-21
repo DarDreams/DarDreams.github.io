@@ -206,8 +206,8 @@ $('button.slick-prev').html("&#10154;");
 				let divCount	= e.target.parentElement.querySelector('.counter-value');
 				let divPrice 	= e.target.parentElement.querySelector('.precio');
 
-				if (divCount.value < 0) {divCount = 0}
-				divCount.value--;
+				if (divCount.value <= 0) {divCount = 0}else{divCount.value--;}
+				
 				divPrice.textContent = `${cards.hummus.chili.precio * Number(divCount.value)} €`;
 			}
 			
