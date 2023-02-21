@@ -116,19 +116,9 @@ let animate = "animate__bounceInRight"
 
 /////////////PRODUCTOS//////////////
 
-$(".productos__items").slick({
-  slidesToScroll: 3,
-  slidesToShow: 3,
-  arrows: true,
-  autoplay: true,
-  autoplaySpeed: 1,
-  rows: 2,
-  //prevArrow: $(".slick-prev"),
-  infinite: true
-});
 
-$('button.slick-next').html("&#10154;");
-$('button.slick-prev').html("&#10154;");
+
+
 
 
 
@@ -149,12 +139,17 @@ cards = {
 			name: "Hummus Chili",
 			img: "img/productos/hummus/chili.png",
 			precio:5
+		},
+		clasico: {
+			name: "Hummus Clasico",
+			img: "img/productos/hummus/clasico.png",
+			precio:10
 		}
   	}
 };
 
 function createCards(img, name, precio) {
-  document.querySelector('.productos__items').insertAdjacentHTML('afterbegin',`
+  document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
     <div class = "productos__items_item">
       <img src="${img}" alt="">
       <h3 class="cap">${name}</h3>
@@ -172,35 +167,45 @@ function createCards(img, name, precio) {
 }
 
 createCards(cards.hummus.chili.img, cards.hummus.chili.name, cards.hummus.chili.precio);
-createCards(cards.hummus.chili.img, cards.hummus.chili.name, cards.hummus.chili.precio);
+
+createCards(cards.hummus.clasico.img, cards.hummus.clasico.name, cards.hummus.clasico.precio);
 
 
 
+$(".productos__items").slick({
+	slidesToScroll: 3,
+	slidesToShow: 3,
+	arrows: true,
+	//autoplay: true,
+	autoplaySpeed: 1,
+	rows: 2,
+	//prevArrow: $(".slick-prev"),
+	infinite: true
+});
+$('button.slick-next').html("&#10154;");
+$('button.slick-prev').html("&#10154;");
 /////////////
 
-//$('.counter-up').click(function(e) {
-	// const countUp = document.querySelectorAll('.counter-up');
-	// const countDown = document.querySelectorAll('.counter-up');
 
-		//let divEdit = target.target.previousElementSibling;
-		
-		//let price = parseInt(divPrice.textContent, 10);
-		
+		//sosi huy
 
 	const divCounter = document.querySelectorAll('.counter');
 		divCounter.forEach(function (el){
 			el.addEventListener('click', function (e) {  
 			if (e.target.className == 'counter-up') {
-				let divCount	= e.target.previousElementSibling
-				let divPrice 	= e.target.nextElementSibling;
+				let curObj = document.querySelectorAll('.counter')[0].parentElement.querySelector('h3').textContent.toLowerCase().split(" ");
+				let divCount	= e.target.parentElement.querySelector('.counter-value');
+				let divPrice 	= e.target.parentElement.querySelector('.precio');
 
 				divCount.value++;
+				//cards.filter()
+				//console.log(cards.curObj[0],curObj[1].precio);
 				divPrice.textContent = `${cards.hummus.chili.precio * Number(divCount.value)} €`;
 			}
 			if (e.target.className == 'counter-down') {
-				let divCount	= e.target.nextElementSibling;
-				//let count 		= Number(divCount.value);
-				let divPrice 	= e.target.prevElementSibling;
+				let divCount	= e.target.parentElement.querySelector('.counter-value');
+				let divPrice 	= e.target.parentElement.querySelector('.precio');
+
 				
 				divCount.value--;
 				divPrice.textContent = `${cards.hummus.chili.precio * Number(divCount.value)} €`;
