@@ -20,54 +20,54 @@
                 height: 200px;
                 width: 300px;
                 object-fit: cover;
-                }
+            }
             .cap {
                 margin-top: 10px;
                 color: white;
                 text-align: center;
-                }
-            .precio {
-                color: red;
+            }
+            .counter {
+                display: block;
                 text-align: center;
+                // align-items: center;
+                // justify-content: center;
+                // margin-bottom: 10px;
+                .precio {
+                    display: block;
+                    color: red;
+                    text-align: center;
+                    }
+                button {
+                    display: table;
+                    width: 100px;
+                    background-color: black;
+                    color: white;
+                    border: 1px solid var(--red);
+                    margin: 0 auto;
+                    margin-bottom: 20px;
+                    border-radius: 5px;
                 }
-            button {
-                display: table;
-                width: 100px;
-                background-color: black;
-                color: white;
-                border: 1px solid var(--red);
-                margin: 0 auto;
-                margin-bottom: 20px;
-                border-radius: 5px;
-                }
-                .counter {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-bottom: 10px;
-                  }
-                  
-                  .counter-down, .counter-up {
+                .counter-down, .counter-up {
+                    display: inline-block;
                     margin: auto 0;
                     width: 30px;
                     height: 30px;
                     border: 1px solid red;
                     border-radius: 50%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
+                    //display: flex;
+                    //justify-content: center;
+                    //align-items: center;
                     cursor: pointer;
-                  }
-                  
-                  .counter-value {
+                }
+                .counter-value {
                     width: 40px;
                     height: 30px;
                     text-align: center;
                     border: 1px solid red;
                     border-radius: 5px;
                     margin: 0 10px;
-                  } 
-                
+                } 
+            }
         }
     }   
     

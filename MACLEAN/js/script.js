@@ -23,7 +23,7 @@ $(document).ready(function(){
   $(".inicio").hide();
   $(".empresa").hide();
   $(".contactos").hide();
-  $(".productos").hide();
+  //$(".productos").hide();
 
   $(".overlay").hide();
   $(".menu__overlay").hide();
@@ -144,13 +144,13 @@ $(".logo").click(function(){
 ///////tienda
 
 cards = {
-  hummus : {
-    chili : {
-    name: "Hummus Chili",
-    img: "img/productos/hummus/chili.png",
-    precio:5
-    }
-  }
+	hummus : {
+		chili : {
+			name: "Hummus Chili",
+			img: "img/productos/hummus/chili.png",
+			precio:5
+		}
+  	}
 };
 
 function createCards(img, name, precio) {
@@ -162,9 +162,11 @@ function createCards(img, name, precio) {
           <button class="counter-down">-</button>
           <input type="text" value="0" class="counter-value"/>
           <button class="counter-up">+</button>
+		  <h4 class="precio">${precio} €</h4>
+		  <button>Comprar</button>
       </div>
-      <h4 class="precio">${precio} €</h4>
-      <button>Comprar</button>
+      
+      
     </div>
   `);
 }
@@ -177,27 +179,35 @@ createCards(cards.hummus.chili.img, cards.hummus.chili.name, cards.hummus.chili.
 /////////////
 
 //$('.counter-up').click(function(e) {
-  const countUp = document.querySelectorAll('.counter-up');
-  const countDown = document.querySelectorAll('.counter-up');
+	// const countUp = document.querySelectorAll('.counter-up');
+	// const countDown = document.querySelectorAll('.counter-up');
 
-  countUp.forEach(element => {
-    element.addEventListener('click', function (e) {  
-      //console.log(e.target);
-     // console.log(this);
-     // console.log(this.previousSibling.previousSibling.value);
-    var value = parseInt(this.previousSibling.previousSibling.value, 10);
-    this.previousSibling.previousSibling.value = value + 1;
-    console.log(this.NextSibling.NextSibling);
-    // = card.hummus.chili.precio * value;
-    });
-  });
+		//let divEdit = target.target.previousElementSibling;
+		
+		//let price = parseInt(divPrice.textContent, 10);
+		
 
-$('.counter-down').click(function() {
-  var value = parseInt($('.counter-value').val(), 10);
-  $('.counter-value').val(value - 1);
-});
+	const divCounter = document.querySelectorAll('.counter');
+		divCounter.forEach(function (el){
+			el.addEventListener('click', function (e) {  
+			if (e.target.className == 'counter-up') {
+				let divCount	= e.target.previousElementSibling
+				let divPrice 	= e.target.nextElementSibling;
 
-
+				divCount.value++;
+				divPrice.textContent = `${cards.hummus.chili.precio * Number(divCount.value)} €`;
+			}
+			if (e.target.className == 'counter-down') {
+				let divCount	= e.target.nextElementSibling;
+				//let count 		= Number(divCount.value);
+				let divPrice 	= e.target.prevElementSibling;
+				
+				divCount.value--;
+				divPrice.textContent = `${cards.hummus.chili.precio * Number(divCount.value)} €`;
+			}
+			
+		});
+	});
 
 
 
