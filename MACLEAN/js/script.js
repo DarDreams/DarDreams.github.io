@@ -133,43 +133,91 @@ $(".logo").click(function(){
 
 ///////tienda
 
-cards = {
-	hummus : {
+const cards = {
+    hummus : {
 		chili : {
+            id: 1,
 			name: "Hummus Chili",
 			img: "img/productos/hummus/chili.png",
 			precio:5
 		},
 		clasico: {
+            id: 2,
 			name: "Hummus Clasico",
 			img: "img/productos/hummus/clasico.png",
 			precio:10
-		}
-  	}
+		},
+        cilantro:{
+            id: 3,
+            name: "Hummus Cilantro",
+			img: "img/productos/hummus/cilantro.png",
+			precio:100
+        }
+  	},
+    tomate : {
+        seco : {
+            id: 4,
+            name: "Tomate Seco",
+            img: "img/productos/hummus/tomate_seco.png",
+            precio:1
+        }
+    },
+    pimiento: {
+        asado: {
+            id: 5,
+            name: "Pimiento Asado",
+			img: "img/productos/hummus/pimiento_asado.png",
+			precio:50
+        }
+    }
 };
 
-function createCards(img, name, precio) {
+let carrito = [[],[]];
+
+function createCards(id, img, name, precio) {
   document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
     <div class = "productos__items_item">
       <img src="${img}" alt="">
       <h3 class="cap">${name}</h3>
       <div class="counter">
           <button class="counter-down">-</button>
-          <input type="text" value="0" class="counter-value"/>
+          <input data-id="${id}"type="text" value="1"  maxlength="2" class="counter-value"/>
           <button class="counter-up">+</button>
 		  <h4 class="precio">${precio} €</h4>
-		  <button>Comprar</button>
+		  <button class = 'addItem'>Añadir</button>
       </div>
-      
-      
     </div>
   `);
 }
 
-createCards(cards.hummus.chili.img, cards.hummus.chili.name, cards.hummus.chili.precio);
+function createCarrito(img, name, price, total) {
+    document.body.insertAdjacentHTML('afterbegin',`
+        <div class = 'carrito'>
+            <div class='container'>
+                <img src='${img}' alt=''>
+                <span class = 'nameItemOfCarrito'>${name}</span>
+                <span class = 'priceItemOfCarrito'>${price}</span>
+                <hr>
+                <span class = 'total'>TOTAL  = ${total}</span>
+                <hr>
+                <button class = 'comprarOfCarrito'>Finalizar pedido</button>
+            </div>
+        </div>
+    `)
+    console.log(carrito);
+}
 
-createCards(cards.hummus.clasico.img, cards.hummus.clasico.name, cards.hummus.clasico.precio);
+// for (let i = 0; i < carrito.length; i++) {
 
+// }
+
+
+
+for (let key of Object.keys(cards)) {
+    for (let name of Object.keys(cards[key])) {
+    createCards(cards[key][name].id,cards[key][name].img,cards[key][name].name,cards[key][name].precio);
+    }
+}
 
 
 $(".productos__items").slick({
@@ -188,37 +236,50 @@ $('button.slick-prev').html("&#10154;");
 
 
 		//sosi huy
+        function calcSum (e) {
+            let curObj      = e.target.parentElement.parentElement.querySelector('h3').textContent.toLowerCase().split(" ");
+            let divCount	= e.target.parentElement.querySelector('.counter-value');
+            let divPrice 	= e.target.parentElement.querySelector('.precio');
+            if (e.target.className == 'counter-up') {
+                if (divCount.value > 98) {
+                    divCount.value = 99
+                } else {
+                    divCount.value++
+                };
+              
+            };
+            if (e.target.className == 'counter-down') {
+                
+                if (divCount.value < 2) {
+                    divCount.value = 1
+                } else {
+				 	divCount.value--
+                };
+            }
+            divPrice.textContent = `${cards[curObj[0]][curObj[1]].precio * Number(divCount.value)} €`;
+        }
 
 	const divCounter = document.querySelectorAll('.counter');
 		divCounter.forEach(function (el){
 			el.addEventListener('click', function (e) {  
 			if (e.target.className == 'counter-up') {
-				let curObj = document.querySelectorAll('.counter')[0].parentElement.querySelector('h3').textContent.toLowerCase().split(" ");
-				let divCount	= e.target.parentElement.querySelector('.counter-value');
-				let divPrice 	= e.target.parentElement.querySelector('.precio');
-				
-				divCount.value++;
-				//cards.filter()
-				//console.log(cards.curObj[0],curObj[1].precio);
-				divPrice.textContent = `${cards.hummus.chili.precio * Number(divCount.value)} €`;
+				calcSum(e);
 			}
 			if (e.target.className == 'counter-down') {
-				let divCount	= e.target.parentElement.querySelector('.counter-value');
-				let divPrice 	= e.target.parentElement.querySelector('.precio');
-
-				if (divCount.value <= 0) {divCount = 0}else{
-					divCount.value--;
-					divPrice.textContent = `${cards.hummus.chili.precio * Number(divCount.value)} €`;
-				}
-				
-				
+                calcSum(e);
 			}
-			
+            if (e.target.className == 'counter-value') {
+                e.target.addEventListener('input', function () {
+                    e.target.value = e.target.value.replace(/[^\d.]/g, '');
+                    calcSum(e);
+                }) 
+            }
+            if (e.target.className == 'addItem') {
+                carrito[0].push(e.target.parentElement.querySelector('.counter-value').getAttribute('data-id'));
+                carrito[1].push(e.target.parentElement.querySelector('.counter-value').value);
+                createCarrito('img/productos/hummus/chili.png','sex','500','2300');
+            }
 		});
 	});
-
-
-
-
-
+    document.querySelectorAll('.addItem')[0].click();
 });

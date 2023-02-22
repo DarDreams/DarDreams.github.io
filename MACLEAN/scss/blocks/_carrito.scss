@@ -1,0 +1,41 @@
+.carrito {
+    position: absolute;
+    width: 250px;
+    color: white;
+    //height: 800px;
+    right: 0;
+    top: 150px;
+    .container {
+        img {
+            display: inline;
+            width: 10%;
+            height: 10%;
+        }
+        .nameItemOfCarrito {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .priceItemOfCarrito {
+             //display: inline;
+            // text-align: right;
+            //vertical-align: auto;
+            // clear: both;
+            // margin-left: 10px;
+        }
+        .total {
+            display: block;
+            margin-top: 10px;
+            
+        }
+        .comprarOfCarrito {
+            display: table;
+            width: 200px;
+            background-color: black;
+            color: white;
+            border: 1px solid var(--red);
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+    }
+}
