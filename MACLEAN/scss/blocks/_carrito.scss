@@ -33,6 +33,7 @@
         overflow-x: hidden;
         display: grid;
         .item {
+            
             display: grid;
             grid-template-rows: 1fr, 30px;
             grid-template-columns: 96px 125px;

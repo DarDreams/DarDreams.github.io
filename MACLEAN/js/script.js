@@ -245,7 +245,7 @@ function createCards(id, img, name, precio) {
   `);
 }
 document.body.insertAdjacentHTML('afterbegin',`
-    <div style = "display:none" class = 'carrito'>
+    <div style = "opacity:0" class = 'carrito'>
     <div class='container'>
     </div>
         <span class = 'total'>TOTAL  = </span>
@@ -255,9 +255,9 @@ document.body.insertAdjacentHTML('afterbegin',`
 let todo = 0;
 
 function createCarrito(img, name, count, price, total) {
-    document.querySelector('.carrito').style.display = '';
+    document.querySelector('.carrito').style.opacity = '1';
     document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
-                <div class = 'item'>
+                <div style="opacity:0" class = 'item'>
                     <img src='${img}' alt=''>
                     <span class = 'nameItemOfCarrito'>${name}</span>
                     <span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count*price}€</span>
