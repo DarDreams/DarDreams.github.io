@@ -23,13 +23,13 @@ $(document).ready(function(){
   $(".inicio").hide();
   $(".empresa").hide();
   $(".contactos").hide();
-  //$(".productos").hide();
+  $(".productos").hide();
 
   $(".overlay").hide();
   $(".menu__overlay").hide();
 
 
-  $('footer').hide();
+  //$('footer').hide();
 
 
   $(window).scroll(function() {
@@ -133,44 +133,98 @@ $(".logo").click(function(){
 
 ///////tienda
 
-const cards = {
-    hummus : {
-		chili : {
-            id: 1,
+const cards = [
+     {
+            id: 11,
 			name: "Hummus Chili",
-			img: "img/productos/hummus/chili.png",
-			precio:5
-		},
-		clasico: {
-            id: 2,
-			name: "Hummus Clasico",
-			img: "img/productos/hummus/clasico.png",
-			precio:10
-		},
-        cilantro:{
-            id: 3,
-            name: "Hummus Cilantro",
-			img: "img/productos/hummus/cilantro.png",
-			precio:100
-        }
-  	},
-    tomate : {
-        seco : {
-            id: 4,
-            name: "Tomate Seco",
-            img: "img/productos/hummus/tomate_seco.png",
-            precio:1
-        }
+			img: "img/productos/mbote_hummus_chili.png",
+			precio:11
     },
-    pimiento: {
-        asado: {
-            id: 5,
-            name: "Pimiento Asado",
-			img: "img/productos/hummus/pimiento_asado.png",
-			precio:50
-        }
+	{
+            id: 12,
+			name: "Hummus Clasico",
+			img: "img/productos/mbote_hummus_clasico.png",
+			precio:12
+    },
+    {
+            id: 13,
+            name: "Hummus Cilantro",
+			img: "img/productos/mbote_hummus_cilantro.png",
+			precio:13
+    },
+    {
+            id: 14,
+            name: "Hummus Pimiento Asado",
+			img: "img/productos/mbote_hummus_pimiento_asado.png",
+			precio:14
+    },
+    {
+            id: 15,
+            name: "Hummus Tomate Seco",
+			img: "img/productos/mbote_hummus_pimiento_asado.png",
+			precio:15
+    },
+    {
+        id: 21,
+        name: "Mermelada de Tomate",
+        img: "img/productos/mbote_mermelada_de_tomate.png",
+        precio:21
+    },
+    {
+        id: 22,
+        name: "Mermelada de Pimiento",
+        img: "img/productos/mbote_mermelada_de_pimiento.png",
+        precio:22
+    },
+    {
+        id: 23,
+        name: "Mermelada de Calabaza",
+        img: "img/productos/mbote_mermelada_de_calabaza.png",
+        precio:23
+    },
+    {
+        id: 31,
+        name: "Mousse de Berenjena",
+        img: "img/productos/mbote_mousse_de_berenjena.png",
+        precio:31
+    },
+    {
+        id: 41,
+        name: "Crema de pimientos y Alcaparaz",
+        img: "img/productos/mbote_crema_de_pimientos_y_alcaparaz.png",
+        precio:41
+    },
+    {
+        id: 51,
+        name: "Ensalada Alboran",
+        img: "img/productos/bote_ensalada_alboran.png",
+        precio:51
+    },
+    {
+        id: 61,
+        name: "Pisto",
+        img: "img/productos/bote_pisto.png",
+        precio:61
+    },
+    {
+        id: 71,
+        name: "Ensalada Alboran",
+        img: "img/productos/bote_salsa_de_pimiento.png",
+        precio:71
+    },
+    {
+        id: 81,
+        name: "Tomate Frito Casero",
+        img: "img/productos/bote_tomate_frito_casero.png",
+        precio:81
+    },
+    {
+        id: 82,
+        name: "Tomate Frito Casero Sabor Intenso",
+        img: "img/productos/bote_tomate_frito_casero_sabor_intenso.png",
+        precio:82
     }
-};
+];
 
 let carrito = [[],[]];
 
@@ -193,8 +247,9 @@ function createCards(id, img, name, precio) {
 document.body.insertAdjacentHTML('afterbegin',`
     <div style = "display:none" class = 'carrito'>
     <div class='container'>
-    <span class = 'total'>TOTAL  = </span>
-    <button class = 'comprarOfCarrito'>Finalizar pedido</button>
+    </div>
+        <span class = 'total'>TOTAL  = </span>
+        <button class = 'comprarOfCarrito'>Finalizar pedido</button>
 `);
 
 let todo = 0;
@@ -205,14 +260,13 @@ function createCarrito(img, name, count, price, total) {
                 <div class = 'item'>
                     <img src='${img}' alt=''>
                     <span class = 'nameItemOfCarrito'>${name}</span>
-                    <span class = 'priceItemOfCarrito'>${count}x${price}€</span>
-                    <hr>
+                    <span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count*price}€</span>
                 </div>
             </div>
         </div>
     `)
     todo += total;
-    document.querySelector('.total').innerHTML = `<span class = 'total'>TOTAL  = ${todo} </span>`;
+    document.querySelector('.total').innerText = `TOTAL = ${todo} €`;
     console.log(carrito);
 }
 
@@ -221,69 +275,60 @@ function createCarrito(img, name, count, price, total) {
 
 function loadCarrito() {
     function getItem(id) {
-        return Object.values(cards).flatMap(Object.values).find(item => item.id === id);
+        return cards.find(item => item.id === Number(id));
     }
-    //createCarrito('img/productos/hummus/chili.png','sex','500','2300');
-    //const id = 2;
-    //const item = Object.values(cards).flatMap(Object.values).find(item => item.id === id);
-
-    //console.log(result);
 
 
 
-    const img   = getItem(Number(carrito[0])).img;
+    const img     = getItem(Number(carrito[0])).img;
     const count   = carrito[1];
-    const price = getItem(Number(carrito[0])).precio;
-    const name = getItem(Number(carrito[0])).name;
-    createCarrito(img, name, count, price, count*price);
-    // const total =
-    //createCards()
+    const price   = getItem(Number(carrito[0])).precio;
+    const name    = getItem(Number(carrito[0])).name;
+    createCarrito(img, name, count, price, count * price);
 }
 
-for (let key of Object.keys(cards)) {
-    for (let name of Object.keys(cards[key])) {
-    createCards(cards[key][name].id,cards[key][name].img,cards[key][name].name,cards[key][name].precio);
+        
+        for (let i = 0; i < cards.length;i++) {
+        createCards(cards[i].id,cards[i].img,cards[i].name,cards[i].precio);
     }
-}
 
 
 $(".productos__items").slick({
 	slidesToScroll: 3,
 	slidesToShow: 3,
 	arrows: true,
-	//autoplay: true,
+	autoplay: true,
 	autoplaySpeed: 1,
 	rows: 2,
 	//prevArrow: $(".slick-prev"),
-	infinite: true
+	infinite: false
 });
+
 $('button.slick-next').html("&#10154;");
 $('button.slick-prev').html("&#10154;");
 /////////////
-
-
-		//sosi huy
         function calcSum (e) {
-            let curObj      = e.target.parentElement.parentElement.querySelector('h3').textContent.toLowerCase().split(" ");
-            let divCount	= e.target.parentElement.querySelector('.counter-value');
-            let divPrice 	= e.target.parentElement.querySelector('.precio');
+            let id       = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
+            let item     = cards.find(item => item.id === Number(id));
+
+            let divCount = e.target.parentElement.querySelector('.counter-value');
+            let divPrice = e.target.parentElement.querySelector('.precio');
+            
             if (e.target.className == 'counter-up') {
                 if (divCount.value > 98) {
                     divCount.value = 99
                 } else {
                     divCount.value++
                 };
-              
             };
             if (e.target.className == 'counter-down') {
-                
                 if (divCount.value < 2) {
                     divCount.value = 1
                 } else {
 				 	divCount.value--
                 };
             }
-            divPrice.textContent = `${cards[curObj[0]][curObj[1]].precio * Number(divCount.value)} €`;
+            divPrice.textContent = `${item.precio * Number(divCount.value)} €`;
         }
 
 	const divCounter = document.querySelectorAll('.counter');
@@ -308,5 +353,7 @@ $('button.slick-prev').html("&#10154;");
             }
 		});
 	});
-    document.querySelectorAll('.addItem')[0].click();
+    for (let i = 0; i< cards.length;i++) {
+        //document.querySelectorAll('.addItem')[i].click();
+    }
 });
