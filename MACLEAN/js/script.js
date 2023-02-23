@@ -174,6 +174,7 @@ const cards = {
 
 let carrito = [[],[]];
 
+
 function createCards(id, img, name, precio) {
   document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
     <div class = "productos__items_item">
@@ -189,29 +190,55 @@ function createCards(id, img, name, precio) {
     </div>
   `);
 }
+document.body.insertAdjacentHTML('afterbegin',`
+    <div style = "display:none" class = 'carrito'>
+    <div class='container'>
+    <span class = 'total'>TOTAL  = </span>
+    <button class = 'comprarOfCarrito'>Finalizar pedido</button>
+`);
 
-function createCarrito(img, name, price, total) {
-    document.body.insertAdjacentHTML('afterbegin',`
-        <div class = 'carrito'>
-            <div class='container'>
-                <img src='${img}' alt=''>
-                <span class = 'nameItemOfCarrito'>${name}</span>
-                <span class = 'priceItemOfCarrito'>${price}</span>
-                <hr>
-                <span class = 'total'>TOTAL  = ${total}</span>
-                <hr>
-                <button class = 'comprarOfCarrito'>Finalizar pedido</button>
+let todo = 0;
+
+function createCarrito(img, name, count, price, total) {
+    document.querySelector('.carrito').style.display = '';
+    document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
+                <div class = 'item'>
+                    <img src='${img}' alt=''>
+                    <span class = 'nameItemOfCarrito'>${name}</span>
+                    <span class = 'priceItemOfCarrito'>${count}x${price}€</span>
+                    <hr>
+                </div>
             </div>
         </div>
     `)
+    todo += total;
+    document.querySelector('.total').innerHTML = `<span class = 'total'>TOTAL  = ${todo} </span>`;
     console.log(carrito);
 }
 
-// for (let i = 0; i < carrito.length; i++) {
-
-// }
 
 
+
+function loadCarrito() {
+    function getItem(id) {
+        return Object.values(cards).flatMap(Object.values).find(item => item.id === id);
+    }
+    //createCarrito('img/productos/hummus/chili.png','sex','500','2300');
+    //const id = 2;
+    //const item = Object.values(cards).flatMap(Object.values).find(item => item.id === id);
+
+    //console.log(result);
+
+
+
+    const img   = getItem(Number(carrito[0])).img;
+    const count   = carrito[1];
+    const price = getItem(Number(carrito[0])).precio;
+    const name = getItem(Number(carrito[0])).name;
+    createCarrito(img, name, count, price, count*price);
+    // const total =
+    //createCards()
+}
 
 for (let key of Object.keys(cards)) {
     for (let name of Object.keys(cards[key])) {
@@ -275,9 +302,9 @@ $('button.slick-prev').html("&#10154;");
                 }) 
             }
             if (e.target.className == 'addItem') {
-                carrito[0].push(e.target.parentElement.querySelector('.counter-value').getAttribute('data-id'));
-                carrito[1].push(e.target.parentElement.querySelector('.counter-value').value);
-                createCarrito('img/productos/hummus/chili.png','sex','500','2300');
+                carrito[0] = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
+                carrito[1] = e.target.parentElement.querySelector('.counter-value').value;
+                loadCarrito();
             }
 		});
 	});

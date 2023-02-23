@@ -6,36 +6,49 @@
     right: 0;
     top: 150px;
     .container {
-        img {
-            display: inline;
-            width: 10%;
-            height: 10%;
+        .item {
+            display: grid;
+            grid-template:repeat(5,1fr)/repeat(2,1fr);
+            width: 250px;
+            img {
+                grid-row-start: 1;
+                grid-row-end: 3;
+                //display: inline;
+                width: 45%;
+                height: 45%;
+            }
+            .nameItemOfCarrito {
+                grid-column-start: 2;
+                //position: absolute;
+                //display: inline-block;
+                text-align: center;
+                vertical-align: top;
+            }
+            .priceItemOfCarrito {
+                grid-column-start: 2;
+                //grid-row-start: 2;
+                text-align: center;
+                //position: absolute;
+                //display: inline-block;
+                // text-align: right;
+                //vertical-align: bottom;
+                // clear: both;
+                // margin-left: 10px;
+            }
+            .total {
+                display: block;
+                margin-top: 10px;
+                
+            }
+            .comprarOfCarrito {
+                //display: table;
+                width: 200px;
+                background-color: black;
+                color: white;
+                border: 1px solid var(--red);
+                margin-bottom: 20px;
+                border-radius: 5px;
+            }
         }
-        .nameItemOfCarrito {
-            display: inline-block;
-            vertical-align: top;
-        }
-        .priceItemOfCarrito {
-             //display: inline;
-            // text-align: right;
-            //vertical-align: auto;
-            // clear: both;
-            // margin-left: 10px;
-        }
-        .total {
-            display: block;
-            margin-top: 10px;
-            
-        }
-        .comprarOfCarrito {
-            display: table;
-            width: 200px;
-            background-color: black;
-            color: white;
-            border: 1px solid var(--red);
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-
     }
 }
