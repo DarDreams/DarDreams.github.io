@@ -44,7 +44,97 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
+    const perksRus = {
+        "expansive_bullets": ["Экаспансивные пули",`Попадание по противнику из
+        основного оружия повышает
+        последующий урон от горения,
+        газов и кровотечения.
+        Увеличение урона: +25/30/35%
+        длительность: 8 сек.`],
+        "tungsten_coating": "Вольфрамовое покрытие пуль",
+        "stay_frosty": "Хладнокровие",
+        "null": "Нет",
+        "fast_revive": "Скорая помощь",
+        "inner_strength": "Внутренний резерв",
+        "sixth_sense": "Шестое чувство",
+        "healing_factor": "Фактор лечения",
+        "will_to_live": "Тяга к жизни",
+        "shoulder_to_shoulder": "Плечем к плечу",
+        "heavy_barrel": "Тяжелый ствол",
+        "die_hard": "Крепки орешек",
+        "merciless": "Беспощадность",
+        "strong_stim": "Усиленные стимуляторы",
+        "lightweight_equipment": "Облегченная разгрузка",
+        "robotic_calibrations": "Калибробвка техники",
+        "prudence": "Расчетливость",
+        "dead_silence": "Скрытое перемещение",
+        "in_the_crosshairs": "Под прицелом",
+        "cold_blood": "Хладнокровие",
+        "self_healing": ["Самолечение",`Здоровье оперативника начинает
+        восстанавливаться, если он не
+        получал урон В Течение неКОТОРОГО
+        времени.
+        
+        Задержка перед восстановлением:
+        5/4/3 сек.
+        Скорость восстановления: 0.5/1/1.5
+        ОЗ/сек.`],
+        "own_priorities": "Свои приоритеты",
+        "adaptive_armor": "Адаптивная броня",
+        "advanced_training": "Углубленная подготовка",
+        "altitude_training": "Высотная подготовка",
+        "ambush": "Засада",
+        "armor_piercing_rounds": "Бронебойные патроны",
+        "armor_pouch": "",
+        "barrel_cutting": "Прецизионная нарезка ствола",
+        "battle_hardening": "Боевая закалка",
+        "blood_rage": "Прилив адреналина",
+        "booster_pouch": "Усиленные стимуляторы",
+        "cold_math": "Холодный расчет",
+        "combined_armor": "Комбинированые пластины",
+        "counter_attack": "Контратака",
+        "direct_acting_shutter": ["Модернизация затворного механизма",`Увеличивает скорострельность
+        ОСНОВНОГО ОРУЖИЯ, ПОЗВОЛЯЕТ вести
+        стрельбу из винтовок с продольно-
+        скользящим затвором, не отрываясь
+        ОТ прицела.
+        
+        Скорострельность: +0.1/О.15/0.2 в/сек.`],
+        "field_medicine": "",
+        "fireres_materials": "Герметичные материалы",
+        "flatness": "Настильность",
+        "forend_processing": "Обработка цевья",
+        "head_hunter": "Охота за головами",
+        "head_protection": "Защита головы",
+        "heavy_ammunition": "Тяжелые боеприпасы",
+        "heavyweight_marathon": "Вооруженные забег",
+        "hemoglobin_serum": "Сывортока гемоглобина",
+        "improved_formula": "Улучшенная формула",
+        "last_frontier": "Одинокий волк",
+        "quick_release_magazines": "Быстрсъемные магазины",
+        "regenerative_materials": "Регенерирующие материалы",
+        "retaliation": "Возмездие",
+        "second_wind": "Второе дыхание",
+        "shrapnel_layer": "Противоосколочный слой",
+        "spare_syringe": "Запасной шприц",
+        "stealth_warrior": "Скрытый воин",
+        "strong_nerves": "Крепкие нервы",
+        "subdermal_meldonium": "Субдермальный мельдоний",
+        "subdermal_morphine": "Субдермальный морфин",
+        "super_sensitive_trigger": "Чувтсвительный спусковой крючок",
+        "take_aim": "Стрелковая позиция",
+        "thermal_imager": "Тепловизор",
+        "tight_fit": "Плотное прилегание",
+        "well_rested": "Хороший отдых",
+        "AmmoPack": "",
+        "ArmorPack": "",
+        "TeamArmorPack": "",
+        "TeamAmmoPack": "",
+        "HealthPackOld": "",
+        "HealthPack": "",
+        "SpecialRevive": "",
+        "StaminaRegenBooster": ""
+    }
 
     //  UPLOAD ALL DATAS
 
@@ -345,98 +435,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     recive: Math.floor(data2.Log.Users[k - 2][i].DamageReceived)
                 };
 
-                const perksRus = {
-                    "expansive_bullets": "Экаспансивные пули",
-                    "tungsten_coating": "Вольфрамовое покрытие пуль",
-                    "stay_frosty": "Хладнокровие",
-                    "null": "Нет",
-                    "fast_revive": "Скорая помощь",
-                    "inner_strength": "Внутренний резерв",
-                    "sixth_sense": "Шестое чувство",
-                    "healing_factor": "Фактор лечения",
-                    "will_to_live": "Тяга к жизни",
-                    "shoulder_to_shoulder": "Плечем к плечу",
-                    "heavy_barrel": "Тяжелый ствол",
-                    "die_hard": "Крепки орешек",
-                    "merciless": "Беспощадность",
-                    "strong_stim": "Усиленные стимуляторы",
-                    "lightweight_equipment": "Облегченная разгрузка",
-                    "robotic_calibrations": "Калибробвка техники",
-                    "prudence": "Расчетливость",
-                    "dead_silence": "Скрытое перемещение",
-                    "in_the_crosshairs": "Под прицелом",
-                    "cold_blood": "Хладнокровие",
-                    "self_healing": "Самолечение",
-                    "own_priorities": "Свои приоритеты",
-                    "adaptive_armor": "Адаптивная броня",
-                    "advanced_training": "Углубленная подготовка",
-                    "altitude_training": "Высотная подготовка",
-                    "ambush": "Засада",
-                    "armor_piercing_rounds": "Бронебойные патроны",
-                    "armor_pouch": "",
-                    "barrel_cutting": "Прецизионная нарезка ствола",
-                    "battle_hardening": "Боевая закалка",
-                    "blood_rage": "Прилив адреналина",
-                    "booster_pouch": "Усиленные стимуляторы",
-                    "cold_math": "Холодный расчет",
-                    "combined_armor": "Комбинированые пластины",
-                    "counter_attack": "Контратака",
-                    "direct_acting_shutter": "Модернизация затворного механизма",
-                    "field_medicine": "",
-                    "fireres_materials": "Герметичные материалы",
-                    "flatness": "Настильность",
-                    "forend_processing": "Обработка цевья",
-                    "head_hunter": "Охота за головами",
-                    "head_protection": "Защита головы",
-                    "heavy_ammunition": "Тяжелые боеприпасы",
-                    "heavyweight_marathon": "Вооруженные забег",
-                    "hemoglobin_serum": "Сывортока гемоглобина",
-                    "improved_formula": "Улучшенная формула",
-                    "last_frontier": "Одинокий волк",
-                    "quick_release_magazines": "Быстрсъемные магазины",
-                    "regenerative_materials": "Регенерирующие материалы",
-                    "retaliation": "Возмездие",
-                    "second_wind": "Второе дыхание",
-                    "shrapnel_layer": "Противоосколочный слой",
-                    "spare_syringe": "Запасной шприц",
-                    "stealth_warrior": "Скрытый воин",
-                    "strong_nerves": "Крепкие нервы",
-                    "subdermal_meldonium": "Субдермальный мельдоний",
-                    "subdermal_morphine": "Субдермальный морфин",
-                    "super_sensitive_trigger": "Чувтсвительный спусковой крючок",
-                    "take_aim": "Стрелковая позиция",
-                    "thermal_imager": "Тепловизор",
-                    "tight_fit": "Плотное прилегание",
-                    "well_rested": "Хороший отдых",
-                    "AmmoPack": "",
-                    "ArmorPack": "",
-                    "TeamArmorPack": "",
-                    "TeamAmmoPack": "",
-                    "HealthPackOld": "",
-                    "HealthPack": "",
-                    "SpecialRevive": "",
-                    "StaminaRegenBooster": ""
-                }
+                
 
-                function hint() {
-                    const element = document.querySelector('.element');
-                    const hint = document.createElement('div');
-                    hint.classList.add('hint');
-                    hint.textContent = 'Your hint text goes here';
-                    element.appendChild(hint);
-
-                    element.addEventListener('mousemove', function(event) {
-                        const x = event.pageX - element.offsetLeft;
-                        const y = event.pageY - element.offsetTop;
-                        hint.style.display = 'block';
-                        hint.style.top = `${y + 5}px`;
-                        hint.style.left = `${x + 5}px`;
-                    });
-
-                    element.addEventListener('mouseout', function() {
-                        hint.style.display = 'none';
-                    });
-                }
+                
 
 
                 let img = new Image();
@@ -480,10 +481,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 <td data-gr = "${operator.group}" class = "groups">
                 ${operator.group}
                     <div class = "perks">
-                        <svg class="perk _1"><title>${perksRus[operator.perks[0]]}</title><use xlink:href="#${operator.perks[0]}"></use></svg>
-                        <svg class="perk _2"><title>${perksRus[operator.perks[1]]}</title><use xlink:href="#${operator.perks[1]}"></use></svg>
-                        <svg class="perk _3"><title>${perksRus[operator.perks[2]]}</title><use xlink:href="#${operator.perks[2]}"></use></svg>
-                        <svg class="perk _4"><title>${perksRus[operator.perks[3]]}</title><use xlink:href="#${operator.perks[3]}"></use></svg>
+                        <svg class="perk _1"><title>${perksRus[operator.perks[0]][0]}</title><use xlink:href="#${operator.perks[0]}"></use></svg>
+                        <svg class="perk _2"><title>${perksRus[operator.perks[1]][0]}</title><use xlink:href="#${operator.perks[1]}"></use></svg>
+                        <svg class="perk _3"><title>${perksRus[operator.perks[2]][0]}</title><use xlink:href="#${operator.perks[2]}"></use></svg>
+                        <svg class="perk _4"><title>${perksRus[operator.perks[3]][0]}</title><use xlink:href="#${operator.perks[3]}"></use></svg>
                     </div>
                 </td>
                 <td class = "kills"  >${operator.kills}</td>
@@ -982,29 +983,33 @@ window.addEventListener('DOMContentLoaded', () => {
         
         
     });
-    console.log("ga");
 
-    function showHint() {
-        const element = document.querySelector('[class*="perk"]._1');
+
+    document.querySelectorAll('.perk').forEach(function(s) {
+        showHint(s)
+    })
+
+    function showHint(selector) {
+        const element = selector;
         const hint = document.createElement('div');
         hint.classList.add('hint');
-        hint.textContent = 'Your hint text goes here';
+        console.log(element.textContent);
+        hint.textContent = Object.values(perksRus).find(key => key.includes(element.textContent));
         document.body.insertAdjacentElement('afterbegin', hint);
 
-        element.addEventListener('mousedown', function(event) {
-            const x = event.pageX;// - element.offsetLeft;
-            const y = event.pageY; //- element.offsetTop;
-            //console.log(element.offsetLeft,element.offsetTop);
-            hint.style.display = 'block';
-            hint.style.top = `${y + 5}px`;
-            hint.style.left = `${x + 5}px`;
-        });
+            element.addEventListener('mousedown', function(event) {
+                const x = event.pageX;// - element.offsetLeft;
+                const y = event.pageY; //- element.offsetTop;
+                //console.log(element.offsetLeft,element.offsetTop);
+                hint.style.display = 'block';
+                hint.style.top = `${y + 5}px`;
+                hint.style.left = `${x + 5}px`;
+            });
 
         element.addEventListener('mouseup', function() {
             hint.style.display = 'none';
         });
     }
-    showHint();
 
     function saveData(createdDate) {
         function setZero(num) {
