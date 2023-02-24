@@ -993,7 +993,6 @@ window.addEventListener('DOMContentLoaded', () => {
         const element = selector;
         const hint = document.createElement('div');
         hint.classList.add('hint');
-        console.log(element.textContent);
         hint.textContent = Object.values(perksRus).find(key => key.includes(element.textContent));
         document.body.insertAdjacentElement('afterbegin', hint);
 
@@ -1065,4 +1064,15 @@ window.addEventListener('DOMContentLoaded', () => {
     setInterval(() => {
         location.reload(true);
     }, 60000);
+
+    const WebSocket = require('ws');
+    const wss = new WebSocket.Server({ port: 8080 });
+    console.log('WebSocket server started');
+    wss.on('connection', (ws) => {
+    console.log('WebSocket connection established');
+    ws.send('Hello, client!');
+    setTimeout(() => {
+    ws.send('reload');
+    }, 5000);
+});
 });
