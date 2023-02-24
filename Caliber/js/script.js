@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     const perksRus = {
-        "expansive_bullets": ["Экаспансивные пули",`Попадание по противнику из
+        "expansive_bullets": ["Экспансивные пули",`Попадание по противнику из
         основного оружия повышает
         последующий урон от горения,
         газов и кровотечения.
@@ -107,7 +107,12 @@ window.addEventListener('DOMContentLoaded', () => {
         "head_hunter": "Охота за головами",
         "head_protection": "Защита головы",
         "heavy_ammunition": "Тяжелые боеприпасы",
-        "heavyweight_marathon": "Вооруженные забег",
+        "heavyweight_marathon": ["Вооруженные забег",`Длительные тренировки
+        значительно улучшили физические
+        параметры оперативника, увеличив
+        скорость передвижения с
+        ОСНОВНЫМ оружием В рывке.
+        Скорость рывка: +5/10/15%`],
         "hemoglobin_serum": "Сывортока гемоглобина",
         "improved_formula": "Улучшенная формула",
         "last_frontier": "Одинокий волк",
