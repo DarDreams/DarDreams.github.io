@@ -1062,7 +1062,7 @@ window.addEventListener('DOMContentLoaded', () => {
     saveData(new Date());
 
     setInterval(() => {
-        console.log(document.querySelector('.slide-out-panel').clientLeft);
+        //console.log(document.querySelector('.slide-out-panel').clientLeft);
         if (document.querySelector('.slide-out-panel').classList.contains('show') == false){
             location.reload(true);
         }
