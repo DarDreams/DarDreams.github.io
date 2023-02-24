@@ -1062,17 +1062,20 @@ window.addEventListener('DOMContentLoaded', () => {
     saveData(new Date());
 
     setInterval(() => {
-        location.reload(true);
+        document.querySelector('.slide-out-panel').clientLeft
+        if (document.querySelector('.slide-out-panel').clientLeft < 0){
+            location.reload(true);
+        }
     }, 60000);
 
-    const WebSocket = require('ws');
-    const wss = new WebSocket.Server({ port: 8080 });
-    console.log('WebSocket server started');
-    wss.on('connection', (ws) => {
-    console.log('WebSocket connection established');
-    ws.send('Hello, client!');
-    setTimeout(() => {
-    ws.send('reload');
-    }, 5000);
-});
+//     const WebSocket = require('ws');
+//     const wss = new WebSocket.Server({ port: 8080 });
+//     console.log('WebSocket server started');
+//     wss.on('connection', (ws) => {
+//     console.log('WebSocket connection established');
+//     ws.send('Hello, client!');
+//     setTimeout(() => {
+//     ws.send('reload');
+//     }, 5000);
+// });
 });
