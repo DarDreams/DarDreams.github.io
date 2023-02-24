@@ -1061,4 +1061,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
 
     saveData(new Date());
+
+    setInterval(() => {
+        location.reload(true);
+    }, 60000);
 });
