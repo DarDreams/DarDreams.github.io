@@ -135,7 +135,7 @@ $(".logo").click(function(){
 
 const cards = [
      {
-            id: 11,
+      id: 11,
 			name: "Hummus Chili",
 			img: "img/productos/mbote_hummus_chili.png",
 			precio:11
@@ -153,7 +153,7 @@ const cards = [
 			precio:13
     },
     {
-            id: 14,
+      id: 14,
             name: "Hummus Pimiento Asado",
 			img: "img/productos/mbote_hummus_pimiento_asado.png",
 			precio:14
@@ -257,7 +257,7 @@ let todo = 0;
 function createCarrito(img, name, count, price, total) {
     document.querySelector('.carrito').style.opacity = '1';
     document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
-                <div style="opacity:0" class = 'item'>
+                <div style="opacity:1" class = 'item'>
                     <img src='${img}' alt=''>
                     <span class = 'nameItemOfCarrito'>${name}</span>
                     <span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count*price}€</span>

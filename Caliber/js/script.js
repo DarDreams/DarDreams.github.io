@@ -849,7 +849,7 @@ window.addEventListener('DOMContentLoaded', () => {
                                 const listItem = document.createElement('li');
                                 listItem.textContent = key;
                                 listItem.addEventListener('click', (e) => {
-                                    e.path[1].classList.add('disabled');
+                                    //e.path[1].classList.add('disabled');
                                     document.querySelectorAll('#list-container > li').forEach((element) => {
                                         element.classList.remove('disabled');
                                     })
