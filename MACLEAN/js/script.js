@@ -23,7 +23,7 @@ $(document).ready(function(){
   $(".inicio").hide();
   $(".empresa").hide();
   $(".contactos").hide();
-  //$(".productos").hide();
+  $(".productos").hide();
 
   $(".overlay").hide();
   $(".menu__overlay").hide();
@@ -259,11 +259,11 @@ document.body.insertAdjacentHTML('afterbegin',`
 let todo = 0;
 
 function createCarrito(img, name, count, price, total) {
- // $('.carrito').fadeIn();
- // $('.carrito').fadeOut(1000);
+  //$('.item').fadeIn();
+  //$('.item').fadeOut(1000);
     document.querySelector('.carrito').style.opacity = '1';
     document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
-                <div style="opacity:1" class = 'item'>
+                <div style="opacity:0" class = 'item'>
                     <img src='${img}' alt=''>
                     <span class = 'nameItemOfCarrito'>${name}</span>
                     <span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count*price}€</span>
