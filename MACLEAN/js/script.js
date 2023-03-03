@@ -23,7 +23,7 @@ $(document).ready(function(){
   $(".inicio").hide();
   $(".empresa").hide();
   $(".contactos").hide();
-  $(".productos").hide();
+  //$(".productos").hide();
 
   $(".overlay").hide();
   $(".menu__overlay").hide();
@@ -65,6 +65,7 @@ let animate = "animate__bounceInRight"
     $(".empresa").fadeOut(1000);
     $(".contactos").fadeOut(1000);
     $(".productos").fadeOut(1000);
+    $(".carrito").fadeOut(1000);
 
     anime(".inicio", animate);
   });
@@ -76,6 +77,7 @@ let animate = "animate__bounceInRight"
     $(".contactos").fadeOut(1000);
     $(".productos").fadeOut(1000);
     $(".inicio").fadeOut(1000);
+    $(".carrito").fadeOut(1000);
 
     anime(".empresa", animate);
   });
@@ -86,6 +88,7 @@ let animate = "animate__bounceInRight"
     $(".inicio").fadeOut(1000);
     $(".empresa").fadeOut(1000);
     $(".productos").fadeOut(1000);
+    $(".carrito").fadeOut(1000);
     $(".contactos").show();
 
     anime(".contactos", animate);
@@ -98,6 +101,7 @@ let animate = "animate__bounceInRight"
     $(".empresa").fadeOut(1000);
     $(".contactos").fadeOut(1000);
     $(".productos").show();
+    $(".carrito").fadeIn();
     $('.productos__items').slick('slickPause');
     anime(".productos", animate);
   });

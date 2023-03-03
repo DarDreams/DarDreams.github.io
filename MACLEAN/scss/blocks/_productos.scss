@@ -1,6 +1,9 @@
 .productos {
     .container {
-text-align: center;
+    //text-align: center;
+    //left: 50%;
+    //margin-left: -50px;
+    //transform: translateX(50%);
     }
     //width: 1140px;
     // margin-top: 250px;
@@ -89,27 +92,30 @@ text-align: center;
 
 button.slick-next {
     //position: absolute;
-    background: #000;
+    background: transparent;
+    border: 1px solid transparent;
     color: red;
     //left: 0;
     //top: 50%;
     //border: 1px solid red;
    // transform: translateY(270px) translateX(1100px);
+  
    position: absolute;
-   right: 0 ;
+   right: 30px ;
    top:35%;
    font-size: 40px;
 
 }
 
 button.slick-prev {
+    background: transparent;
+    border: 1px solid transparent;
     //position: absolute;
-    background: #000;
     color: red;
    // left: 0;
     //top: 0;
     position: absolute;
-    left: -40px;
+        left: -40px;
     top: 35% ;
     
     //border: 1px solid red;
