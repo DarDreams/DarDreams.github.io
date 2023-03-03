@@ -259,6 +259,8 @@ document.body.insertAdjacentHTML('afterbegin',`
 let todo = 0;
 
 function createCarrito(img, name, count, price, total) {
+ // $('.carrito').fadeIn();
+ // $('.carrito').fadeOut(1000);
     document.querySelector('.carrito').style.opacity = '1';
     document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
                 <div style="opacity:1" class = 'item'>
