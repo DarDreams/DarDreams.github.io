@@ -449,7 +449,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
 
                 img.onload = function() {
+                    try {
                     document.querySelector(`.team${k-1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
+                } catch {
+                    console.error('Ошибка в загрузке картинки');
+                }
                 };
 
                 img.onerror = function() {
@@ -727,8 +731,11 @@ window.addEventListener('DOMContentLoaded', () => {
         alldata = [data1, data2]
 
     } ////// END ALL DATAS
-
+try {
     upload(caliber, caliber2);
+} catch {
+    console.error("Ошибка в функции upload");
+}
 
 
     //  CALENDAR FUNCTION
@@ -1063,8 +1070,11 @@ window.addEventListener('DOMContentLoaded', () => {
     // updateFileContent('Caliber/js/script.js','js/script.js');
     // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
-
+try {
     saveData(new Date());
+} catch {
+    console.error("Ошибка в функции SaveData");
+}
 
     setInterval(() => {
         //console.log(document.querySelector('.slide-out-panel').clientLeft);
