@@ -232,6 +232,11 @@ const cards = [
 
 let carrito = [[],[]];
 
+//
+
+  
+
+
 
 function createCards(id, img, name, precio) {
   document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
@@ -253,7 +258,7 @@ document.body.insertAdjacentHTML('afterbegin',`
     <div class='container'>
     </div>
         <span class = 'total'>TOTAL  = </span>
-        <button class = 'comprarOfCarrito'>Finalizar pedido</button>
+        <button id = "checkout-button" class = 'comprarOfCarrito'>Finalizar pedido</button>
 `);
 
 let todo = 0;
@@ -364,7 +369,7 @@ $('button.slick-prev').html("&#10154;");
     }
 
 
-document.body.insertAdjacentHTML("afterbegin",'<input type="file" id="file-input"></input>');
+document.body.insertAdjacentHTML("beforeend",'<input type="file" id="file-input"></input>');
 
 var fileInput = document.getElementById('file-input');
 fileInput.addEventListener('change', function() {
@@ -391,6 +396,52 @@ fileInput.addEventListener('change', function() {
 });
 
 
+//PAYMENTS
+//var stripe = Stripe('pk_test_51Mgmo9AEMEnLyKBGJ6m9lTkrSi9ii03Fncmlr6b6guWmis4k5UPFFBCixvmf79RtZWRyTVGsOOJ3If0fNqcXdzgX00AYMLt2tJ');
+//var session = {
+//  items: [
+//     { sku: 'tomate', quantity: 4 },
+//     //{ sku: 'sku_456', quantity: 2 }
+//   ],
+//   success_url: 'https://google.com',
+//   cancel_url: 'https://yandex.ru'
+// };
 
+// stripe.redirectToCheckout({
+//   sessionId: 'your_session_id'
+// }).then(function(result) {
+//   if (result.error) {
+//     // Вывести ошибку пользователю
+//     console.log(result.error.message);
+//   }
+// });
+
+
+// const productId = 'prod_NTYT5Wbd4IXzw3';
+// const quantity = 5;
+// const price = 5;
+
+// // Вызываем метод update объекта Product, указывая обновленные данные
+// stripe.products.update(productId, {
+//   metadata: {
+//     quantity: quantity
+//   },
+//   price: price
+// }).then(product => {
+//   console.log(product);
+//   // Здесь можно использовать полученный объект Product для создания ссылки на оплату
+// }).catch(error => {
+//   console.error(error);
+// });
+
+
+// var stripe = Stripe('pk_test_51Mgmo9AEMEnLyKBGJ6m9lTkrSi9ii03Fncmlr6b6guWmis4k5UPFFBCixvmf79RtZWRyTVGsOOJ3If0fNqcXdzgX00AYMLt2tJ');
+//   var button = document.getElementById('checkout-button');
+
+//   button.addEventListener('click', function() {
+//     stripe.redirectToCheckout({
+//       sessionId: 'checkout_session_id'
+//     });
+//   });
 
 });

@@ -54,5 +54,14 @@ body {
 	//background: url("../img/main_test.jpg") no-repeat 10%/cover;
     background: url("../img/bg.png") no-repeat center/cover;
   	z-index: -1;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.65); /* Здесь 0.5 - это значение непрозрачности, вы можете изменить его */
+      }
 }
 
