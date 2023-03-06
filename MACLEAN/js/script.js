@@ -364,26 +364,33 @@ $('button.slick-prev').html("&#10154;");
     }
 
 
-// Получаем данные изображения из буфера обмена
-var data = event.clipboardData.items[0].getAsFile();
+document.body.insertAdjacentHTML("afterbegin",'<input type="file" id="file-input"></input>');
 
-// Создаем объект FileReader для чтения данных изображения
-var reader = new FileReader();
-
-// Устанавливаем функцию обратного вызова для чтения данных изображения
-reader.onload = function(event) {
-  // Создаем новый элемент изображения
-  var image = new Image();
+var fileInput = document.getElementById('file-input');
+fileInput.addEventListener('change', function() {
+  // Получаем выбранный файл
+  var file = fileInput.files[0];
   
-  // Устанавливаем URL изображения как данные, полученные из FileReader
-  image.src = event.target.result;
+  // Создаем объект FileReader для чтения данных файла
+  var reader = new FileReader();
   
-  // Устанавливаем изображение как фоновое изображение для элемента body
-  document.body.style.backgroundImage = "url(" + image.src + ")";
-};
+  // Устанавливаем функцию обратного вызова для чтения данных файла
+  reader.onload = function(event) {
+    // Создаем новый элемент изображения
+    var image = new Image();
+    
+    // Устанавливаем URL изображения как данные, полученные из FileReader
+    image.src = event.target.result;
+    
+    // Устанавливаем изображение как фоновое изображение для элемента body
+    document.querySelector('.background').style.backgroundImage = "url(" + image.src + ")";
+  };
+  
+  // Читаем данные файла в объект FileReader
+  reader.readAsDataURL(file);
+});
 
-// Читаем данные изображения в объект FileReader
-reader.readAsDataURL(data);
+
 
 
 });
