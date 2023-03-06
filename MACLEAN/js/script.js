@@ -362,4 +362,28 @@ $('button.slick-prev').html("&#10154;");
     for (let i = 0; i< cards.length;i++) {
         //document.querySelectorAll('.addItem')[i].click();
     }
+
+
+// Получаем данные изображения из буфера обмена
+var data = event.clipboardData.items[0].getAsFile();
+
+// Создаем объект FileReader для чтения данных изображения
+var reader = new FileReader();
+
+// Устанавливаем функцию обратного вызова для чтения данных изображения
+reader.onload = function(event) {
+  // Создаем новый элемент изображения
+  var image = new Image();
+  
+  // Устанавливаем URL изображения как данные, полученные из FileReader
+  image.src = event.target.result;
+  
+  // Устанавливаем изображение как фоновое изображение для элемента body
+  document.body.style.backgroundImage = "url(" + image.src + ")";
+};
+
+// Читаем данные изображения в объект FileReader
+reader.readAsDataURL(data);
+
+
 });
