@@ -139,13 +139,13 @@ $(".logo").click(function(){
 
 const cards = [
      {
-      id: 11,
+            id: 'price_1Miz3OAEMEnLyKBGotD96Yjf',
 			name: "Hummus Chili",
 			img: "img/productos/mbote_hummus_chili.png",
 			precio:11
     },
 	{
-            id: 12,
+            id: "price_1MizLsAEMEnLyKBGU5CGPCnr",
 			name: "Hummus Clasico",
 			img: "img/productos/mbote_hummus_clasico.png",
 			precio:12
@@ -231,6 +231,7 @@ const cards = [
 ];
 
 let carrito = [[],[]];
+let carritoTotal = [];
 
 //
 
@@ -278,7 +279,11 @@ function createCarrito(img, name, count, price, total) {
     `)
     todo += total;
     document.querySelector('.total').innerText = `TOTAL = ${todo} €`;
-    console.log(carrito);
+
+	//console.log("carrito = ", carrito);
+	carritoTotal.push({...carrito});
+	console.clear();
+	console.log("total = ", carritoTotal);
 }
 
 
@@ -286,15 +291,17 @@ function createCarrito(img, name, count, price, total) {
 
 function loadCarrito() {
     function getItem(id) {
-        return cards.find(item => item.id === Number(id));
+        return cards.find(item => item.id == id);
     }
 
 
 
-    const img     = getItem(Number(carrito[0])).img;
+    console.log(carrito[0]);
+	const img     = getItem(carrito[0]).img;
+	
     const count   = carrito[1];
-    const price   = getItem(Number(carrito[0])).precio;
-    const name    = getItem(Number(carrito[0])).name;
+    const price   = getItem(carrito[0]).precio;
+    const name    = getItem(carrito[0]).name;
     createCarrito(img, name, count, price, count * price);
 }
 
@@ -312,7 +319,7 @@ $(".productos__items").slick({
 	autoplaySpeed: 1,
 	rows: 2,
 	//prevArrow: $(".slick-prev"),
-	infinite: false
+	infinite: true
 });
 
 $('button.slick-next').html("&#10154;");
@@ -320,7 +327,7 @@ $('button.slick-prev').html("&#10154;");
 /////////////
         function calcSum (e) {
             let id       = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
-            let item     = cards.find(item => item.id === Number(id));
+            let item     = cards.find(item => item.id ==id);
 
             let divCount = e.target.parentElement.querySelector('.counter-value');
             let divPrice = e.target.parentElement.querySelector('.precio');
@@ -368,80 +375,70 @@ $('button.slick-prev').html("&#10154;");
         //document.querySelectorAll('.addItem')[i].click();
     }
 
+//  CHANGE BG
 
-document.body.insertAdjacentHTML("beforeend",'<input class = "bg" type="file" id="file-input"></input>');
 
-var fileInput = document.getElementById('file-input');
-fileInput.addEventListener('change', function() {
-  // Получаем выбранный файл
-  var file = fileInput.files[0];
+
+
+//document.body.insertAdjacentHTML("beforeend",'<input class = "bg" type="file" id="file-input"></input>');
+
+// var fileInput = document.getElementById('file-input');
+// fileInput.addEventListener('change', function() {
+//   // Получаем выбранный файл
+//   var file = fileInput.files[0];
   
-  // Создаем объект FileReader для чтения данных файла
-  var reader = new FileReader();
+//   // Создаем объект FileReader для чтения данных файла
+//   var reader = new FileReader();
   
-  // Устанавливаем функцию обратного вызова для чтения данных файла
-  reader.onload = function(event) {
-    // Создаем новый элемент изображения
-    var image = new Image();
+//   // Устанавливаем функцию обратного вызова для чтения данных файла
+//   reader.onload = function(event) {
+//     // Создаем новый элемент изображения
+//     var image = new Image();
     
-    // Устанавливаем URL изображения как данные, полученные из FileReader
-    image.src = event.target.result;
+//     // Устанавливаем URL изображения как данные, полученные из FileReader
+//     image.src = event.target.result;
     
-    // Устанавливаем изображение как фоновое изображение для элемента body
-    document.querySelector('.background').style.backgroundImage = "url(" + image.src + ")";
-  };
+//     // Устанавливаем изображение как фоновое изображение для элемента body
+//     document.querySelector('.background').style.backgroundImage = "url(" + image.src + ")";
+//   };
   
-  // Читаем данные файла в объект FileReader
-  reader.readAsDataURL(file);
-});
-
-
-//PAYMENTS
-//var stripe = Stripe('pk_test_51Mgmo9AEMEnLyKBGJ6m9lTkrSi9ii03Fncmlr6b6guWmis4k5UPFFBCixvmf79RtZWRyTVGsOOJ3If0fNqcXdzgX00AYMLt2tJ');
-//var session = {
-//  items: [
-//     { sku: 'tomate', quantity: 4 },
-//     //{ sku: 'sku_456', quantity: 2 }
-//   ],
-//   success_url: 'https://google.com',
-//   cancel_url: 'https://yandex.ru'
-// };
-
-// stripe.redirectToCheckout({
-//   sessionId: 'your_session_id'
-// }).then(function(result) {
-//   if (result.error) {
-//     // Вывести ошибку пользователю
-//     console.log(result.error.message);
-//   }
+//   // Читаем данные файла в объект FileReader
+//   reader.readAsDataURL(file);
 // });
 
 
-// const productId = 'prod_NTYT5Wbd4IXzw3';
-// const quantity = 5;
-// const price = 5;
-
-// // Вызываем метод update объекта Product, указывая обновленные данные
-// stripe.products.update(productId, {
-//   metadata: {
-//     quantity: quantity
-//   },
-//   price: price
-// }).then(product => {
-//   console.log(product);
-//   // Здесь можно использовать полученный объект Product для создания ссылки на оплату
-// }).catch(error => {
-//   console.error(error);
-// });
+//  PAYMENTS
+document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
+	
+	sell(carritoTotal.map(item => ({
+		price: item[0],
+		quantity: Number(item[1])
+	})));
+	
+ });
 
 
-// var stripe = Stripe('pk_test_51Mgmo9AEMEnLyKBGJ6m9lTkrSi9ii03Fncmlr6b6guWmis4k5UPFFBCixvmf79RtZWRyTVGsOOJ3If0fNqcXdzgX00AYMLt2tJ');
-//   var button = document.getElementById('checkout-button');
+function sell(obj) {
+	try {
+    var stripe = Stripe('pk_test_51Mgmo9AEMEnLyKBGJ6m9lTkrSi9ii03Fncmlr6b6guWmis4k5UPFFBCixvmf79RtZWRyTVGsOOJ3If0fNqcXdzgX00AYMLt2tJ');
 
-//   button.addEventListener('click', function() {
-//     stripe.redirectToCheckout({
-//       sessionId: 'checkout_session_id'
-//     });
-//   });
+  	stripe.redirectToCheckout({
+    lineItems: obj,
+		mode: 'payment',
+		successUrl: 'http://127.0.0.1:3000/index.html',
+		cancelUrl: 'http://127.0.0.1:3000/index.html'
+	}).then(function (result) {
+		if (result.error) {
+		console.log(result.error.message);
+		}
+	});
+}catch{console.log('yep');}
+}
+
+// lineItems: [{
+//     price: 'price_123',
+//     quantity: 1
+//   }],
+
 
 });
