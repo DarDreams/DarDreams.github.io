@@ -268,7 +268,7 @@ function createCarrito(img, name, count, price, total) {
   //$('.item').fadeOut(1000);
     document.querySelector('.carrito').style.opacity = '1';
     document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
-                <div style="opacity:0" class = 'item'>
+                <div style="opacity:1" class = 'item'>
                     <img src='${img}' alt=''>
                     <span class = 'nameItemOfCarrito'>${name}</span>
                     <span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count*price}€</span>
@@ -369,7 +369,7 @@ $('button.slick-prev').html("&#10154;");
     }
 
 
-document.body.insertAdjacentHTML("beforeend",'<input type="file" id="file-input"></input>');
+document.body.insertAdjacentHTML("beforeend",'<input class = "bg" type="file" id="file-input"></input>');
 
 var fileInput = document.getElementById('file-input');
 fileInput.addEventListener('change', function() {
