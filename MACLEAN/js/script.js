@@ -419,7 +419,6 @@ document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
 
 
 function sell(obj) {
-	try {
     var stripe = Stripe('pk_test_51Mgmo9AEMEnLyKBGJ6m9lTkrSi9ii03Fncmlr6b6guWmis4k5UPFFBCixvmf79RtZWRyTVGsOOJ3If0fNqcXdzgX00AYMLt2tJ');
 
   	stripe.redirectToCheckout({
@@ -432,7 +431,7 @@ function sell(obj) {
 		console.log(result.error.message);
 		}
 	});
-}catch{console.log('yep');}
+	console.clear();
 }
 
 // lineItems: [{
