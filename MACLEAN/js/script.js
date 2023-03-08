@@ -419,7 +419,7 @@ document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
 
 
 function sell(obj) {
-    var stripe = Stripe('pk_test_51Mgmo9AEMEnLyKBGJ6m9lTkrSi9ii03Fncmlr6b6guWmis4k5UPFFBCixvmf79RtZWRyTVGsOOJ3If0fNqcXdzgX00AYMLt2tJ');
+    var stripe = Stripe('');
 
   	stripe.redirectToCheckout({
     lineItems: obj,
