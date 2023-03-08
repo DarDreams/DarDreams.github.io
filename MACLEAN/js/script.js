@@ -410,10 +410,10 @@ $('button.slick-prev').html("&#10154;");
 //  PAYMENTS
 document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
 	
-	sell(carritoTotal.map(item => ({
-		price: item[0],
-		quantity: Number(item[1])
-	})));
+	// sell(carritoTotal.map(item => ({
+	// 	price: item[0],
+	// 	quantity: Number(item[1])
+	// })));
 	
  });
 
