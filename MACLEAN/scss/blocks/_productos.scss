@@ -20,10 +20,64 @@
     top: 0;
     &__items {
         
+//////////////////////////////////////  FLIPPED
 
+.item {
+   
+}
+
+.item__front, .item__back {
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // width: 100%;
+    // height: 100%;
+    // backface-visibility: hidden;
+    // transition: transform 0.5s ease;
+}
+
+.item__front {
+        position: absolute;
+    top: 0;
+    left: 0;
+    height: 434px;
+    //transform: rotateY(0deg);
+    backface-visibility: hidden;
+    transition: transform 0.5s ease;
+}
+  
+.item__back {
+   // display: none;
+    backface-visibility:hidden;
+    text-align: center;
+    top: 0;
+    position: absolute;
+    max-height: 434px;
+    transform: rotateY(180deg);
+    transition: transform 0.5s ease;
+    .inf {
+        text-align: left;
+    }
+    .sellos img {
+        position: absolute;
+        display: none;
+    }
+}
+
+
+//////////////////////////////////////////////
     //width: 300px;
         &_item {
-
+            //  position: static;
+            //  height: 434px;
+            perspective: 1000px;
+            color: white;
+            backface-visibility: hidden;
+            transition: transform 0.5s ease;
+            height: 434px;
+            // top: 0;
+            // left: 0;
+            // width: 100%;
             //border: 1px solid red;
             
             max-width: 300px;

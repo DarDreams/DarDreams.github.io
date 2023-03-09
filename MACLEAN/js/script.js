@@ -23,7 +23,7 @@ $(document).ready(function(){
   $(".inicio").hide();
   $(".empresa").hide();
   $(".contactos").hide();
-  $(".productos").hide();
+  //$(".productos").hide();
 
   $(".overlay").hide();
   $(".menu__overlay").hide();
@@ -240,20 +240,48 @@ let carritoTotal = [];
 
 
 function createCards(id, img, name, precio) {
-  document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
-    <div class = "productos__items_item">
-      <img src="${img}" alt="">
-      <h3 class="cap">${name}</h3>
-      <div class="counter">
-          <button class="counter-down">-</button>
-          <input data-id="${id}"type="text" value="1"  maxlength="2" class="counter-value"/>
-          <button class="counter-up">+</button>
-		  <h4 class="precio">${precio} €</h4>
-		  <button class = 'addItem'>Añadir</button>
-      </div>
-    </div>
+ 	document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
+		<div class = "productos__items_item item">
+			<div class = "item__front">
+				<img src="${img}" alt="">
+				<h3 class="cap">${name}</h3>
+				<div class="counter">
+					<button class="counter-down">-</button>
+					<input data-id="${id}"type="text" value="1"  maxlength="2" class="counter-value"/>
+					<button class="counter-up">+</button>
+					<h4 class="precio">${precio} €</h4>
+					<button class = 'addItem'>Añadir</button>
+				</div>
+			</div>
+			<div class="item__back">
+				<h3>PISTO de Verduras 200g</h3>	
+				<p>Descriptioin Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.</p>
+				<p>Ingredientes:Tomate,Pimiento,Berenjena, Calabacin,Aceitedeolivavirgenextra:3%,Sal</p>
+				<p class = "inf">INFORMACIÓN NUTRICIONAL:<br>
+					Valor medio por cada 100g de producto.<br>
+					Valor energético 72kj/301Kcal.<br>
+					Hidratos de Carbono: 5,58g.<br>
+					Grasas: 5,63g.<br>
+					Grasas saturadas: 0,78g.<br>
+					Proteinas: 0,79g.<br>
+					Azúcares: 2,44g.<br>
+					Sal: 0,5g.<br>
+				</p>
+				<div class = 'sellos'>
+					<img class = 'natural' src = 'img/productos/sellos/natural.png'>
+					<img class = 'sin_gluten' src = 'img/productos/sellos/sin_gluten.png'>
+					<img class = 'sin_lactosa' src = 'img/productos/sellos/sin_lactosa.png'>
+					<img class = 'aove' src = 'img/productos/sellos/aove.png'>
+					<img class = 'picante' src = 'img/productos/sellos/picante.png'>
+				</div>
+			</div>
+		</div>
   `);
 }
+
+
+
+
 document.body.insertAdjacentHTML('afterbegin',`
     <div style = "opacity:0" class = 'carrito'>
     <div class='container'>
@@ -315,7 +343,7 @@ $(".productos__items").slick({
 	slidesToScroll: 3,
 	slidesToShow: 3,
 	arrows: true,
-	autoplay: true,
+	//autoplay: true,
 	autoplaySpeed: 1,
 	rows: 2,
 	//prevArrow: $(".slick-prev"),
@@ -438,6 +466,28 @@ function sell(obj) {
 //     price: 'price_123',
 //     quantity: 1
 //   }],
+
+const item = document.querySelectorAll('.item');
+item.forEach(cd => {
+  const img = cd.querySelector('img');
+  const back = cd.querySelector('.item__back');
+  
+  img.addEventListener('click', () => {
+    cd.classList.toggle('flipped');
+
+    if (cd.classList.contains("flipped")) {
+      cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
+      cd.querySelector('.item__back').style.transform = "rotateY(0deg)";
+    } else {
+      cd.querySelector('.item__front').style.transform = "rotateY(0deg)";
+      cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
+    }
+  });
+
+  back.addEventListener('click', () => {
+    img.click();
+  });
+});
 
 
 });
