@@ -128,67 +128,189 @@ let animate = "animate__bounceInRight"
 
 
 
-$(".logo").click(function(){
-  location.reload();
+	$(".logo").click(function(){
+	location.reload();
 
-});
+	});
 
 
 
 ///////tienda
 
+const natural 	  = "img/sellos/natural.png";
+const sin_gluten  = "img/sellos/sin_gluten.png";
+const sin_lactosa = "img/sellos/sin_lactosa.png";
+const aove        = "img/sellos/aove.png";
+
 const cards = [
-     {
-      id: 'price_1Miz3OAEMEnLyKBGotD96Yjf',
-			name: "Hummus Chili",
-			img: "img/productos/mbote_hummus_chili.png",
-			precio:11
+	{
+      	id: 'price_1Miz3OAEMEnLyKBGotD96Yjf',
+		name: "Hummus Chili",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Garbanzos, Agua de cocción, Aceite de oliva virgen extra: 5%. Tahini fabricación propia, Jugo de limón, Ajo, Chili en polvo, Sal, Vinagre en polvo, Comino, Goma xantana.",
+		informacion: br(`
+			Valor Energético: 649,57 Kj/155,14 Kcal
+			Proteínas : 5,80 g
+			Hidratos de carbono: 11,6 g
+			- Azúcares 2,45 g
+			Grasas: 11,6 g
+			- Ácidos Grasos Saturados 1,7 g
+			Sal 0,47 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
+		img: "img/productos/mbote_hummus_chili.png",
+		precio:11
     },
 	{
-      id: "price_1MizLsAEMEnLyKBGU5CGPCnr",
-			name: "Hummus Clasico",
-			img: "img/productos/mbote_hummus_clasico.png",
-			precio:12
+		id: "price_1MizLsAEMEnLyKBGU5CGPCnr",
+		name: "Hummus Clasico",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Garbanzos, Agua de cocción, Aceite de oliva virgen extra: 5% Tahini fabricación propia, Jugo de limón, Ajo, Sal, Vinagre en polvo, Comino, Goma xantana.	",
+		informacion: br(`
+			Valor Energético: 613,4 Kj/146,5 Kcal
+			Proteínas : 5,30 g
+			Hidratos de carbono: 11,6 g
+			- Azúcares 2,17 g
+			Grasas: 8,41 g
+			- Ácidos Grasos Saturados 1,0 g
+			Sal 0,46 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
+		img: "img/productos/mbote_hummus_clasico.png",
+		precio:12
     },
     {
-      id: 13,
-      name: "Hummus Cilantro",
-			img: "img/productos/mbote_hummus_cilantro.png",
-			precio:13
+		id: 13,
+		name: "Hummus Cilantro",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Garbanzos, Agua de cocción, Cilantro, Aceite de oliva virgen extra: 5%, Tahini fabricación propia, Jugo de limón, Ajo, Sal, Vinagre en polvo, Comino, Goma xantana.",
+		informacion: br(`
+			Valor Energético: 613,4 Kj/146,5 Kcal
+			Proteínas : 5,30 g
+			Hidratos de carbono: 11,6 g
+			- Azúcares 2,17 g
+			Grasas: 8,41 g
+			- Ácidos Grasos Saturados 1,0 g
+			Sal 0,46 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
+		img: "img/productos/mbote_hummus_cilantro.png",
+		precio:13
     },
     {
-      id: 14,
-      name: "Hummus Pimiento Asado",
-			img: "img/productos/mbote_hummus_pimiento_asado.png",
-			precio:14
+      	id: 14,
+     	name: "Hummus Pimiento Asado",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Garbanzos, Agua de cocción, Pimiento rojo asado al carbón, Aceite de oliva virgen extra: 5%. Tahini fabricación propia, Jugo de limón, Ajo, Sal, Vinagre en polvo, Comino, Goma xantana.",
+		informacion: br(`
+			Valor Energético: 625,8 Kj/149,56 Kcal
+			Proteínas : 5,30 g
+			Hidratos de carbono: 10,33 g
+				- Azúcares 2,38 g
+			Grasas: 8,41 g
+				- Ácidos Grasos Saturados 1,0 g
+			Sal 0,46 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
+		img: "img/productos/mbote_hummus_pimiento_asado.png",
+		precio:14
     },
     {
-    id: 15,
-    name: "Hummus Tomate Seco",
-			img: "img/productos/mbote_hummus_pimiento_asado.png",
-			precio:15
+		id: 15,
+		name: "Hummus Tomato Seco",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Garbanzos, Agua de cocción, Tomate seco, Aceite de oliva virgen extra: 5%, Tahini fabricación propia, Jugo de limón, Ajo, Sal, Vinagre en polvo, Comino, Goma xantana.",
+		informacion: br(`
+			Valor Energético: 649,57 Kj/155,14 Kcal
+			Proteínas : 5,80 g
+			Hidratos de carbono: 11,6 g
+			- Azúcares 2,45 g
+			Grasas: 11,6 g
+			- Ácidos Grasos Saturados 1,7 g
+			Sal 0,47 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
+		img: "img/productos/mbote_hummus_tomato_seco.png",
+		precio:15
     },
     {
         id: 21,
         name: "Mermelada de Tomate",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Tomate, Azúcar de caña, Limón y Goma guar.",
+		informacion: br(`
+			Valor Energético: 172 Kj/748 Kcal
+			Proteínas : 0,8 g
+			Hidratos de carbono: 36 g
+			- Azúcares 23,6 g
+			Grasas: 2,7 g
+			- Ácidos Grasos Saturados 0,59 g
+			Sal 0,13 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, natural], 
         img: "img/productos/mbote_mermelada_de_tomate.png",
         precio:21
     },
     {
         id: 22,
         name: "Mermelada de Pimiento",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Pimiento sweet Palermo, Azúcar de caña, Limón y goma guar.",
+		informacion: br(`
+			Valor Energético: 542 Kj/128 Kcal
+			Proteínas : 0,7 g
+			Hidratos de carbono: 30 g
+			- Azúcares 28 g
+			Grasas: 0,4 g
+			- Ácidos Grasos Saturados 0,1 g
+			Sal 0,196 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
         img: "img/productos/mbote_mermelada_de_pimiento.png",
         precio:22
     },
     {
         id: 23,
         name: "Mermelada de Calabaza",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Calabaza, Azúcar de caña, Limón y Goma guar.",
+		informacion: br(`
+			Valor Energético: 142 Kj/594 Kcal
+			Proteínas : 0,46 g
+			Hidratos de carbono: 36,29g
+			- Azúcares 34,19 g
+			Grasas: 0,21 g
+			- Ácidos Grasos Saturados 0,0 g
+			Sal 0,0 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, natural],
         img: "img/productos/mbote_mermelada_de_calabaza.png",
         precio:23
     },
     {
         id: 31,
         name: "Mousse de Berenjena",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Berenjena, Cebolla, Almendra, Aceite de oliva virgen extra: 5%, Sal, Ajo, Arroz, Fibra de guisante, Vinagre en polvo, Comino, Pimienta, Matalauva, Orégano, Canela, Pimentón.",
+		informacion: br(`
+			Valor Energético: 1104,77 Kj/263 Kcal
+			Proteínas : 8,98 g
+			Hidratos de carbono: 7,33 g
+			- Azúcares 2,53 g
+			Grasas: 21,98 g
+			- Ácidos Grasos Saturados 6,10 g
+			Sal 1,33 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
         img: "img/productos/mbote_mousse_de_berenjena.png",
         precio:31
     },
@@ -244,17 +366,21 @@ const cards = [
     }
 ];
 
+function br(text) {
+	return text.replace(/\n/g, "<br>");
+}
+
+
 let carrito = [[],[]];
 let carritoTotal = [];
 
 //
 
   
+let hey = [1,2,3,4]
+let huy = {"qwe":"sdf", "sdf":"Fsdf"}
 
-
-
-function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, ...sellos) {
-  console.log(sellos[0]);
+function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, sellos, number) {
  	document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
 		<div class = "productos__items_item item">
 			<div class = "item__front">
@@ -276,16 +402,20 @@ function createCards(id, img, name, precio, peso, descr, ingredientes, informaci
 					${informacion}
 				</p>
 				<div class = 'sellos'>
-					<img class = 'natural' src     = '${sellos[0]}'>
-					<img class = 'sin_gluten' src  = '${sellos[1]}'>
-					<img class = 'sin_lactosa' src = '${sellos[2]}'>
-					<img class = 'aove' src        = '${sellos[3]}'>
-					<img class = 'picante' src     = '${sellos[4]}'>
-          <img class = 'no_sal' src      = '${sellos[5]}'>
+
 				</div>
 			</div>
 		</div>
   `);
+  try {
+	//console.log(number);
+    for (let i = 0; i < sellos.length; i++) {
+		
+    document.querySelectorAll('.sellos')[number].insertAdjacentHTML('afterbegin',`
+      	<img src = "${sellos[i]}">
+    `)
+  }
+    } catch {}
 }
 
 
@@ -344,7 +474,7 @@ function loadCarrito() {
 
         
         for (let i = 0; i < cards.length;i++) {
-        createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos);
+        createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
     }
 
 
