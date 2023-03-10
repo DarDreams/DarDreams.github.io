@@ -141,6 +141,7 @@ const natural 	  = "img/sellos/natural.png";
 const sin_gluten  = "img/sellos/sin_gluten.png";
 const sin_lactosa = "img/sellos/sin_lactosa.png";
 const aove        = "img/sellos/aove.png";
+const no_sal      = "img/sellos/no_sal.png"
 
 const cards = [
 	{
@@ -317,12 +318,37 @@ const cards = [
     {
         id: 41,
         name: "Crema de pimientos y Alcaparaz",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Pimiento Palermo, Cebolla, Aceite de oliva virgen extra: 7%, Vino Pedro Ximénez, Alcaparra, Sal, Pimentón picante.",
+		informacion: br(`
+			Valor Energético: 97,3 Kj/429.6 Kcal
+			Proteínas : 1,4 g
+			Hidratos de carbono: 4,1 g
+			- Azúcares 2,0 g
+			Grasas: 7,5 g
+			- Ácidos Saturados 1,3 g
+			Sal 0,4 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
         img: "img/productos/mbote_crema_de_pimientos_y_alcaparaz.png",
         precio:41
     },
     {
         id: 51,
         name: "Ensalada Alboran",
+		peso: "420g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Tomate cherry, Pimiento, Aceite de oliva virgen extra: 1%.",
+		informacion: br(`
+			Valor Energético 197kj/47 Kcal.
+			Hidratos de Carbono: 7,1 g.
+			Grasas: 1,6 g.
+			Ácidos grasos saturados: 0,2 g.
+			Proteinas: 1,0 g.
+			Azúcares: 3,9 g.
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural, no_sal],
         img: "img/productos/bote_ensalada_alboran.png",
         precio:51
     },
@@ -332,35 +358,71 @@ const cards = [
         peso: "420g",
         descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
         ingredientes: "Tomate, Pimiento, Berenjena, Calabacin, AOVE:3%, Sal",
-        informacion: `
-        Valor medio 100g de producto.<br>
-        Valor energético 72kj/301Kcal.<br>
-        Hidratos de Carbono: 5,58g.<br>
-        Grasas: 5,63g.<br>
-        Grasas saturadas: 0,78g.<br>
-        Proteinas: 0,79g.<br>
-        Azúcares: 2,44g.<br>
-        Sal: 0,5g.<br>
-        `,
-        sellos: ["img/sellos/sin_gluten.png","img/sellos/sin_lactosa.png","img/sellos/aove.png","img/sellos/natural.png"],
+        informacion: br(`
+        Valor energético 72kj/301Kcal.
+        Hidratos de Carbono: 5,58g.
+        Grasas: 5,63g.
+        Grasas saturadas: 0,78g.
+        Proteinas: 0,79g.
+        Azúcares: 2,44g.
+        Sal: 0,5g.
+        `),
+        sellos: [sin_gluten, sin_lactosa, aove, natural],
         img: "img/productos/bote_pisto.png",
         precio:61
     },
     {
         id: 71,
-        name: "Ensalada Alboran",
+        name: "Salsa De Pimiento Dulce",
+		peso: "420g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Pimiento sweet palermo, Azúcar de caña, Aceite de oliva virgen extra, Sal, Goma guar y Vinagre en polvo.",
+		informacion: br(`
+			Valor Energético 355,64 kj/85 Kcal.
+			Proteinas: 2,6 g
+			Hidratos de Carbono: 11 g
+				- Azúcares: 2,1 g
+			Grasas: 0,7 g
+				- Ácidos grasos saturados: 0,2 g
+			Sal: 1,2 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
         img: "img/productos/bote_salsa_de_pimiento.png",
         precio:71
     },
     {
         id: 81,
         name: "Tomate Frito Casero",
+		peso: "420g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Tomate, Aceite de oliva virgen extra: 3%, Sal y Azúcar de caña.",
+		informacion: br(`
+			Valor energético 200kj/45 Kcal.
+			Hidratos de Carbono: 10,1 g..
+			Grasas saturadas: 0,3 g.
+			Proteingas: 1,1 g.
+			Azúcares: 0,2 g.
+			Cloruro de Sodico: 0,1 g.
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
         img: "img/productos/bote_tomate_frito_casero.png",
         precio:81
     },
     {
         id: 82,
         name: "Tomate Frito Casero Sabor Intenso",
+		peso: "420g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Tomate, Aceite de oliva virgen extra: 3%, Sal y Azúcar de caña",
+		informacion: br(`
+			Valor energético 200kj/45 Kcal.
+			Hidratos de Carbono: 10,1 g..
+			Grasas saturadas: 0,3 g.
+			Proteingas: 1,1 g.
+			Azúcares: 0,2 g.
+			Cloruro de Sodico: 0,1 g.
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
         img: "img/productos/bote_tomate_frito_casero_sabor_intenso.png",
         precio:82
     }
@@ -395,10 +457,11 @@ function createCards(id, img, name, precio, peso, descr, ingredientes, informaci
 				</div>
 			</div>
 			<div class="item__back">
-				<h3>${name} ${peso}</h3>	
-				<p>${descr}</p>
-				<p>Ingredientes: ${ingredientes}</p>
+				<h3 title = "${name} ${peso}" class = "caption">${name} ${peso}</h3>	
+				<p class = "description">${descr}</p>
+				<p class = "ingredientes" title = "${ingredientes}">Ingredientes: ${ingredientes}</p>
 				<p class = "inf">INFORMACIÓN NUTRICIONAL:<br>
+				Valor medio 100g de producto.
 					${informacion}
 				</p>
 				<div class = 'sellos'>
@@ -412,7 +475,7 @@ function createCards(id, img, name, precio, peso, descr, ingredientes, informaci
     for (let i = 0; i < sellos.length; i++) {
 		
     document.querySelectorAll('.sellos')[number].insertAdjacentHTML('afterbegin',`
-      	<img src = "${sellos[i]}">
+      	<img title = "${sellos[i].replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '').replace("_"," ")}"src = "${sellos[i]}">
     `)
   }
     } catch {}
@@ -484,6 +547,7 @@ $(".productos__items").slick({
 	arrows: true,
 	//autoplay: true,
 	autoplaySpeed: 1,
+	draggable: false,
 	rows: 2,
 	//prevArrow: $(".slick-prev"),
 	infinite: true
