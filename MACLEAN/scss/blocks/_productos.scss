@@ -57,10 +57,22 @@
     transition: transform 0.5s ease;
     .inf {
         text-align: left;
+        font-size: 14px;
     }
-    .sellos img {
-        position: absolute;
-        display: none;
+    .sellos {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row; /* Расположение элементов в две колонки */
+        justify-content: center; /* Центрирование элементов */
+        width: 100px;
+        img {
+            flex-basis: 20%; /* Задание ширины элементов на 50% */
+            box-sizing: border-box;
+            min-width: 50px;
+            min-height: 50px;
+            margin-bottom: -140px;
+            transform: translate(230px,-272px);
+        }
     }
 }
 

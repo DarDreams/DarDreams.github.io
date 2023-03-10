@@ -29,7 +29,7 @@ $(document).ready(function(){
   $(".menu__overlay").hide();
 
 
-  //$('footer').hide();
+  $('footer').hide();
 
 
   $(window).scroll(function() {
@@ -139,32 +139,32 @@ $(".logo").click(function(){
 
 const cards = [
      {
-            id: 'price_1Miz3OAEMEnLyKBGotD96Yjf',
+      id: 'price_1Miz3OAEMEnLyKBGotD96Yjf',
 			name: "Hummus Chili",
 			img: "img/productos/mbote_hummus_chili.png",
 			precio:11
     },
 	{
-            id: "price_1MizLsAEMEnLyKBGU5CGPCnr",
+      id: "price_1MizLsAEMEnLyKBGU5CGPCnr",
 			name: "Hummus Clasico",
 			img: "img/productos/mbote_hummus_clasico.png",
 			precio:12
     },
     {
-            id: 13,
-            name: "Hummus Cilantro",
+      id: 13,
+      name: "Hummus Cilantro",
 			img: "img/productos/mbote_hummus_cilantro.png",
 			precio:13
     },
     {
       id: 14,
-            name: "Hummus Pimiento Asado",
+      name: "Hummus Pimiento Asado",
 			img: "img/productos/mbote_hummus_pimiento_asado.png",
 			precio:14
     },
     {
-            id: 15,
-            name: "Hummus Tomate Seco",
+    id: 15,
+    name: "Hummus Tomate Seco",
 			img: "img/productos/mbote_hummus_pimiento_asado.png",
 			precio:15
     },
@@ -207,6 +207,20 @@ const cards = [
     {
         id: 61,
         name: "Pisto",
+        peso: "420g",
+        descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+        ingredientes: "Tomate, Pimiento, Berenjena, Calabacin, AOVE:3%, Sal",
+        informacion: `
+        Valor medio 100g de producto.<br>
+        Valor energético 72kj/301Kcal.<br>
+        Hidratos de Carbono: 5,58g.<br>
+        Grasas: 5,63g.<br>
+        Grasas saturadas: 0,78g.<br>
+        Proteinas: 0,79g.<br>
+        Azúcares: 2,44g.<br>
+        Sal: 0,5g.<br>
+        `,
+        sellos: ["img/sellos/sin_gluten.png","img/sellos/sin_lactosa.png","img/sellos/aove.png","img/sellos/natural.png"],
         img: "img/productos/bote_pisto.png",
         precio:61
     },
@@ -239,7 +253,8 @@ let carritoTotal = [];
 
 
 
-function createCards(id, img, name, precio) {
+function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, ...sellos) {
+  console.log(sellos[0]);
  	document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
 		<div class = "productos__items_item item">
 			<div class = "item__front">
@@ -254,25 +269,19 @@ function createCards(id, img, name, precio) {
 				</div>
 			</div>
 			<div class="item__back">
-				<h3>PISTO de Verduras 200g</h3>	
-				<p>Descriptioin Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.</p>
-				<p>Ingredientes:Tomate,Pimiento,Berenjena, Calabacin,Aceitedeolivavirgenextra:3%,Sal</p>
+				<h3>${name} ${peso}</h3>	
+				<p>${descr}</p>
+				<p>Ingredientes: ${ingredientes}</p>
 				<p class = "inf">INFORMACIÓN NUTRICIONAL:<br>
-					Valor medio por cada 100g de producto.<br>
-					Valor energético 72kj/301Kcal.<br>
-					Hidratos de Carbono: 5,58g.<br>
-					Grasas: 5,63g.<br>
-					Grasas saturadas: 0,78g.<br>
-					Proteinas: 0,79g.<br>
-					Azúcares: 2,44g.<br>
-					Sal: 0,5g.<br>
+					${informacion}
 				</p>
 				<div class = 'sellos'>
-					<img class = 'natural' src = 'img/productos/sellos/natural.png'>
-					<img class = 'sin_gluten' src = 'img/productos/sellos/sin_gluten.png'>
-					<img class = 'sin_lactosa' src = 'img/productos/sellos/sin_lactosa.png'>
-					<img class = 'aove' src = 'img/productos/sellos/aove.png'>
-					<img class = 'picante' src = 'img/productos/sellos/picante.png'>
+					<img class = 'natural' src     = '${sellos[0]}'>
+					<img class = 'sin_gluten' src  = '${sellos[1]}'>
+					<img class = 'sin_lactosa' src = '${sellos[2]}'>
+					<img class = 'aove' src        = '${sellos[3]}'>
+					<img class = 'picante' src     = '${sellos[4]}'>
+          <img class = 'no_sal' src      = '${sellos[5]}'>
 				</div>
 			</div>
 		</div>
@@ -324,7 +333,7 @@ function loadCarrito() {
 
 
 
-    console.log(carrito[0]);
+    //console.log(carrito[0]);
 	const img     = getItem(carrito[0]).img;
 	
     const count   = carrito[1];
@@ -335,7 +344,7 @@ function loadCarrito() {
 
         
         for (let i = 0; i < cards.length;i++) {
-        createCards(cards[i].id,cards[i].img,cards[i].name,cards[i].precio);
+        createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos);
     }
 
 
