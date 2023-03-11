@@ -23,7 +23,9 @@ try {
     caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
     caliber2.Log.Users[1] = [caliber2.Log.Users[4], caliber2.Log.Users[5], caliber2.Log.Users[6], caliber2.Log.Users[7]]
     caliber2.Log.Users.splice(2);
-} catch {}
+} catch (e) {
+    console.error("ошибка в пересборке объекта - ", e.message);
+}
 
 
 
@@ -44,7 +46,6 @@ try {
         return `${minutes.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     }
 
-
     const perksRus = {
         "expansive_bullets": ["Экспансивные пули",`Попадание по противнику из
         основного оружия повышает
@@ -55,6 +56,7 @@ try {
         "tungsten_coating": "Вольфрамовое покрытие пуль",
         "stay_frosty": "Хладнокровие",
         "null": "Нет",
+        "lone_wolf": "Одинокий волк",
         "fast_revive": "Скорая помощь",
         "inner_strength": "Внутренний резерв",
         "sixth_sense": "Шестое чувство",
@@ -141,6 +143,7 @@ try {
         "SpecialRevive": "",
         "StaminaRegenBooster": ""
     }
+    
 
     //  UPLOAD ALL DATAS
 
@@ -441,7 +444,9 @@ try {
                     recive: Math.floor(data2.Log.Users[k - 2][i].DamageReceived)
                 };
 
-                
+                // console.clear();
+                // console.log("[3][0] - |",operator.perks[3],"|");
+                // console.log("data[0] - ", data1);
 
                 
 
@@ -729,13 +734,14 @@ try {
 
 
         id = data1[0];
+        
         alldata = [data1, data2]
 
     } ////// END ALL DATAS
 try {
     upload(caliber, caliber2);
-} catch {
-    console.error("Ошибка в функции upload");
+} catch (e) {
+    console.error("Ошибка в функции upload - ",e.message);
 }
 
 
@@ -753,7 +759,20 @@ try {
                 </label>
 	        </div>
             <div class="container">
-                <h1></h1>
+            <select id="month-selector">
+                <option value="1">Январь</option>
+                <option value="2">Февраль</option>
+                <option value="3">Март</option>
+                <option value="4">Апрель</option>
+                <option value="5">Май</option>
+                <option value="6">Июнь</option>
+                <option value="7">Июль</option>
+                <option value="8">Август</option>
+                <option value="9">Сентябрь</option>
+                <option value="10">Октябр</option>
+                <option value="11">Ноябрь</option>
+                <option value="12">Декабрь</option>
+            </select>
                 <table>
                     <thead>
                         <tr>
@@ -773,6 +792,7 @@ try {
         </div>
     </div>
     `);
+    
 
     document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `<div id="list-container"></div>`);
     const button = document.getElementById('show-panel');
@@ -813,37 +833,41 @@ try {
 
     const calendarBody = document.getElementById("calendar-body");
     const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentYear = today.getFullYear();
+    const month = today.getMonth();
+    const year = today.getFullYear();
 
     function getDaysInMonth(month, year) {
-        return new Date(year, month + 1, 0).getDate();
-    }
-
-    function generateCalendar(month, year) {
+        return new Date(year, month+1, 0).getDate();
+      }
+      
+      function generateCalendar(month, year) {
         calendarBody.innerHTML = "";
         const daysInMonth = getDaysInMonth(month, year);
-        const firstDayOfMonth = new Date(year, month, 0).getDay();
+        //console.log(daysInMonth);
+        let firstDayOfMonth = new Date(year, month, 1).getDay()-1;
+        if (firstDayOfMonth === -1) {
+            firstDayOfMonth = 6;
+          }
+        //console.log("первый день месяца - ",firstDayOfMonth);
         let date = 1;
-        for (let i = 0; i < 5; i++) {
-            const row = document.createElement("tr");
-            for (let j = 0; j < 7; j++) {
-                const cell = document.createElement("td");
-                if (i === 0 && j < firstDayOfMonth) {
-                    // Пустые ячейки до первого дня месяца
-                    cell.textContent = "";
-                } else if (date > daysInMonth) {
-                    // Пустые ячейки после последнего дня месяца
-                    cell.textContent = "";
-                } else {
-                    // Добавляем дату
-                    cell.textContent = date;
-                    date++;
-                    // Назначаем обработчик клика на ячейку
+        let numRows = Math.ceil((daysInMonth + firstDayOfMonth) / 7);
+        for (let i = 0; i < numRows; i++) {
+          const row = document.createElement("tr");
+          for (let j = 0; j < 7; j++) {
+            const cell = document.createElement("td");
+            if (i === 0 && j < firstDayOfMonth) {
+              // Пустые ячейки до первого дня месяца
+              cell.textContent = "";
+            } else if (date > daysInMonth) {
+              // Пустые ячейки после последнего дня месяца
+              cell.textContent = "";
+            } else {
+              // Добавляем дату
+              cell.textContent = date;
+              date++;
+              // Назначаем обработчик клика на ячейку
 
                     cell.addEventListener("click", function() {
-                        //const eventText = prompt("Введите описание события для " + year + "-" + (month+1) + "-" + this.textContent + ":");
-
                         const listContainer = document.getElementById('list-container');
                         const keys = Object.keys(localStorage);
 
@@ -853,22 +877,23 @@ try {
                             if (key == 'rec') {
                                 return
                             };
-                            if (this.textContent == key.match(/\d+/g)[0]) {
+                           // console.log(`(${setZero(this.textContent)} == ${key.match(/\d+/g)[0]} && ${setZero(month_selector.value)} == ${key.match(/\d+/g)[1]}`);
+                            if (setZero(this.textContent) == key.match(/\d+/g)[0] && setZero(month_selector.value) == key.match(/\d+/g)[1]) {
                                 const listItem = document.createElement('li');
                                 listItem.textContent = key;
                                 listItem.addEventListener('click', (e) => {
                                     //e.path[1].classList.add('disabled');
                                     document.querySelectorAll('#list-container > li').forEach((element) => {
-                                        element.classList.remove('disabled');
+                                       // element.classList.remove('disabled');
                                     })
-                                    e.path[1].classList.add('disabled');
+                                   // e.path[1].classList.add('disabled');
                                     myFunction(key);
 
                                 });
                                 const date = listItem.textContent.split(' ')[0];
-                                const id = listItem.textContent.split(' ')[1];
-                                const win = listItem.textContent.split(' ')[2];
-                                const map = listItem.textContent.split(' ')[3];
+                                const id   = listItem.textContent.split(' ')[1];
+                                const win  = listItem.textContent.split(' ')[2];
+                                const map  = listItem.textContent.split(' ')[3];
                                 const time = `${new Date().getHours()}:${new Date().getMinutes()}`;
                                 listItem.innerHTML = `${id} ${map} Столкновение ${win} ${date}`;
                                 listContainer.appendChild(listItem);
@@ -908,10 +933,11 @@ try {
                             const imgBasket = document.querySelectorAll('.basket')
                             imgBasket.forEach(function(item) {
                                 item.addEventListener('click', (e) => {
-                                    e.path[2].remove();
-                                    console.log(e.path[2].children[0].innerText.match(/(\w{1,8}.*$)/g)[0]);
+                                    console.log(e.target.parentElement.parentElement);
+                                    e.target.parentElement.parentElement.remove();
+                                    //console.log(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0]);
                                     localStorage.removeItem(Object.keys(localStorage).
-                                    find(key => key.includes(e.path[2].children[0].innerText.match(/(\w{1,8}.*$)/g)[0])));
+                                    find(key => key.includes(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0])));
                                 });
                             });
 
@@ -929,7 +955,15 @@ try {
         }
     }
     // Создаем календарь на текущий месяц и год
-    generateCalendar(currentMonth, currentYear);
+    const month_selector = document.querySelector("#month-selector");
+    month_selector.value = new Date().getMonth()+1;
+    //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
+    generateCalendar(month_selector.value-1, new Date().getFullYear());
+
+    month_selector.addEventListener('change', () => {
+        generateCalendar(month_selector.value-1, new Date().getFullYear());
+      });
+    //generateCalendar(currentMonth, currentYear);
 
     //  BUTTON OPEN DIFFERENT DATA BASE
 
@@ -979,7 +1013,7 @@ try {
             caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
             caliber_b2.Log.Users.splice(2);
             upload(caliber_b, caliber_b2);
-            saveData();
+            //saveData();
         }
 
         //const month = setZero(new Date().getMonth()+1);
@@ -1023,14 +1057,15 @@ try {
         });
     }
 
-    function saveData(createdDate) {
-        function setZero(num) {
-            if (num >= 0 && num < 10) {
-                return `0${num}`;
-            } else {
-                return num;
-            }
+    function setZero(num) {
+        if (num >= 0 && num < 10) {
+            return `0${num}`;
+        } else {
+            return num;
         }
+    }
+    function saveData(createdDate) {
+        
         const map = document.querySelector('.map').textContent.trim();
         const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
         const day = `${setZero(createdDate.getDate())}:${setZero(createdDate.getMonth()+1)}.${createdDate.getFullYear()}`;
@@ -1073,8 +1108,8 @@ try {
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
 try {
     saveData(new Date());
-} catch {
-    console.error("Ошибка в функции SaveData");
+} catch (e){
+    console.error("Ошибка в функции SaveData - ", e.message);
 }
 
     setInterval(() => {
