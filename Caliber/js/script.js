@@ -18,11 +18,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //let games = objectToArray(game);
 
-
+try {
     caliber[8] = caliber[7].splice(4);
     caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
     caliber2.Log.Users[1] = [caliber2.Log.Users[4], caliber2.Log.Users[5], caliber2.Log.Users[6], caliber2.Log.Users[7]]
     caliber2.Log.Users.splice(2);
+} catch {}
 
 
 

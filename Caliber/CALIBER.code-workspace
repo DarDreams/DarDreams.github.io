@@ -7,5 +7,7 @@
 			"path": "../JAVA/Food"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Caliber"
+	}
 }
