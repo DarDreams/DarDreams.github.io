@@ -110,6 +110,7 @@ html {
             padding: 0;
         }
         tbody {
+            cursor: pointer;
             .rank {
                 z-index: 9;
                 transform: translate(-116px, 8px);
