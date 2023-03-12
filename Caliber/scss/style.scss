@@ -45,12 +45,11 @@ html {
     position: absolute;
     width: 200px;
     display: none;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    border-radius: 5px;
+    background-color: #222222;
+    color: #898989;
     padding: 10px;
-    box-shadow: 2px 2px 4px rgba(251, 249, 249, 0.3);
     font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
   }
 
 
@@ -109,7 +108,7 @@ html {
         tr {
             padding: 0;
         }
-        tbody {
+        tbody:not(:nth-child(1)) > tr {
             cursor: pointer;
             .rank {
                 z-index: 9;

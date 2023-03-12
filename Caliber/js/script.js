@@ -75,7 +75,7 @@ try {
         "cold_blood": "Хладнокровие",
         "self_healing": ["Самолечение",`Здоровье оперативника начинает
         восстанавливаться, если он не
-        получал урон В Течение неКОТОРОГО
+        получал урон в течении некоторого
         времени.
         
         Задержка перед восстановлением:
@@ -458,7 +458,7 @@ try {
                     try {
                     document.querySelector(`.team${k-1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
                 } catch {
-                    console.error('Ошибка в загрузке картинки');
+                    console.error('Ошибка при загрузке картинки');
                 }
                 };
 
@@ -1040,7 +1040,11 @@ try {
         const element = selector;
         const hint = document.createElement('div');
         hint.classList.add('hint');
+        try {
         hint.textContent = Object.values(perksRus).find(key => key.includes(element.textContent));
+        
+        console.log(Object.values(perksRus[1]).find(key => key.includes(element.textContent)[1]));
+        }catch {}
         document.body.insertAdjacentElement('afterbegin', hint);
 
             element.addEventListener('mousedown', function(event) {
@@ -1129,4 +1133,6 @@ try {
 //     ws.send('reload');
 //     }, 5000);
 // });
+
+
 });
