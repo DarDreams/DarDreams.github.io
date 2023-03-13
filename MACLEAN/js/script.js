@@ -690,13 +690,33 @@ item.forEach(cd => {
 		cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
     }
   });
-
  	 back.addEventListener('click', () => {
     	img.click();
-		console.log(cd);
-		cd.querySelector(':before').style.opacity = 0;
+		if (cd.querySelector(':before')) {cd.querySelector(':before').style.opacity = 0;}
  	 });
 });
+
+
+if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
+	// Удалить все элементы на странице
+	document.body.innerHTML = '';
+	
+	// Отобразить сообщение на нескольких языках
+	const lang = navigator.language;
+	let message;
+	if (lang === 'ru') {
+	  message = 'Сайт не доступен с мобильных устройств';
+	} else if (lang === 'es') {
+	  message = 'El sitio no está disponible en dispositivos móviles';
+	} else {
+	  message = 'The site is not available on mobile devices';
+	}
+	const messageElement = document.createElement('div');
+	messageElement.textContent = message;
+	document.body.appendChild(messageElement);
+  }
+
+  
 
 
 });  //////////////////  END

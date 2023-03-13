@@ -817,7 +817,7 @@ try {
         <div class="calendar">
         <img class = 'rec' src='img/REC.png'>    
         <div class="custom-file-input">
-            <input type="file" id="file-input" accept=".bytes">
+            <input type="file" multiple id="file-input" accept=".bytes">
                 <label for="file-input">
                 <img class ='folder' src='img/FOLDER.png'>
                 </label>

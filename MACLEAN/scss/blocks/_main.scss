@@ -73,3 +73,31 @@ body {
     top:50%;
 }
 
+
+@media (max-width: 768px) {
+    * {
+        visibility: hidden;
+    }
+    body:before {
+      content: "Disculpe, ahora el sitio no está disponible en teléfonos móviles";
+      display: block;
+      white-space: pre-wrap;
+      visibility: visible;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      width: 100%;
+      text-align: center;
+      transform: translate(-50% -50%);
+      font-size: 2em;
+      color: #fff;
+      padding: 20px;
+      background-color: #f00;
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+      color: #fff;
+      
+    }
+  }
+  
+  
