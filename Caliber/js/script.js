@@ -104,11 +104,11 @@ try {
         Скорость передвижения: +8/12/15%`],
 
         "healing_factor": ["Фактор лечения",
-        `Оперативник восстанавливает
+        br(`Оперативник восстанавливает
         больше здоровья при лечении из любого источника.
         
         Увеличение получаемого лечения:
-        +20/25/30%`],
+        +20/25/30%`)],
 
         "will_to_live": ["Тяга к жизни",
         `Оперативник может быстрее
@@ -142,9 +142,10 @@ try {
         "cold_blood": "Хладнокровие",
 
         "self_healing": ["Самолечение",
-        `Здоровье оперативника начинает восстанавливаться, если он не получал урон в течении некоторого времени. 
+        br(`Здоровье оперативника начинает восстанавливаться,
+        если он не получал урон в течении некоторого времени. 
         Задержка перед восстановлением: 5/4/3 сек.
-        Скорость восстановления: 0.5/1/1.5ОЗ/сек.`],
+        Скорость восстановления: 0.5/1/1.5ОЗ/сек.`)],
 
         "own_priorities": "Свои приоритеты",
         "adaptive_armor": "Адаптивная броня",
@@ -206,6 +207,10 @@ try {
         "HealthPack": "",
         "SpecialRevive": "",
         "StaminaRegenBooster": ""
+    }
+    
+    function br(text) {
+        return text.replace(/\n/g, "<br>");
     }
     
 
@@ -1106,8 +1111,9 @@ try {
         hint.classList.add('hint');
         try {
         hint.innerHTML = Object.values(perksRus).find(key => key.includes(element.textContent));
+        console.log(typeof(hint));
         
-        console.log(Object.values(perksRus).find(key => key.includes(element.textContent))[1]);
+        console.log(selector,Object.values(perksRus).find(key => key.includes(element.textContent)));
         }catch (e){console.error(e.message)}
         document.body.insertAdjacentElement('afterbegin', hint);
 
