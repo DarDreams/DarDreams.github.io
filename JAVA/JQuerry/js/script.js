@@ -15,19 +15,6 @@ $(document).ready(function() {
         }, 2000);
     })
 
-    function* generator() {
-        yield 'S';
-        yield 'c';
-        yield 'r';
-        yield 'i';
-        yield 'p';
-        yield 't';
-    };
 
-    const str = generator();
-
-    console.log(str.next().value);
-    console.log(str.next().value);
-    console.log(str.next().value);
 
 });//// END
