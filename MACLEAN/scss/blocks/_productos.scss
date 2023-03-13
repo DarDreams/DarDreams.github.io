@@ -1,3 +1,54 @@
+:root {
+    --opacity: 1;
+  }
+
+  .item {
+    box-sizing: border-box;
+    position: relative;
+    
+  }
+  
+  .item::before,
+  .item::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 0px;
+    height: 0;
+    border: 2px solid transparent;
+    transition: all 0.6s ease;
+  }
+  
+  .item::before {
+    opacity: 0;
+    top: -0px;
+    left: -0px;
+    border-top-color: red;
+    border-left-color: red;
+  }
+  
+  .item::after {
+   opacity: 0;
+    bottom: -0px;
+    right: -0px;
+    border-bottom-color: red;
+    border-right-color: red;
+  }
+  
+  .item:hover::before,
+  .item:hover::after {
+      
+    width: 100%;
+    height: 100%;
+       opacity: 1;
+  }
+
+
+  .item.flipped:before,
+  .item.flipped:after {
+    opacity: 0;
+  }
+
 .productos {
     .container {
     //text-align: center;
@@ -114,7 +165,7 @@
             color: white;
             backface-visibility: hidden;
             transition: transform 0.5s ease;
-            height: 434px;
+            height: 360px;
             // top: 0;
             // left: 0;
             // width: 100%;

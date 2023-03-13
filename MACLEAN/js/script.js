@@ -672,25 +672,31 @@ function sell(obj) {
 
 const item = document.querySelectorAll('.item');
 item.forEach(cd => {
-  const img = cd.querySelector('img');
-  const back = cd.querySelector('.item__back');
+
+	const img = cd.querySelector('img');
+	const back = cd.querySelector('.item__back');
   
-  img.addEventListener('click', () => {
-    cd.classList.toggle('flipped');
+	
+
+	img.addEventListener('click', () => {
+		cd.classList.toggle('flipped');
+		
 
     if (cd.classList.contains("flipped")) {
-      cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
-      cd.querySelector('.item__back').style.transform = "rotateY(0deg)";
+      	cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
+      	cd.querySelector('.item__back').style.transform = "rotateY(0deg)";
     } else {
-      cd.querySelector('.item__front').style.transform = "rotateY(0deg)";
-      cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
+      	cd.querySelector('.item__front').style.transform = "rotateY(0deg)";
+		cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
     }
   });
 
-  back.addEventListener('click', () => {
-    img.click();
-  });
+ 	 back.addEventListener('click', () => {
+    	img.click();
+		console.log(cd);
+		cd.querySelector(':before').style.opacity = 0;
+ 	 });
 });
 
 
-});
+});  //////////////////  END
