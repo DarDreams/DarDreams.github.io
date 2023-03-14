@@ -11,7 +11,7 @@ function br(text) {
 	return text.replace(/\n/g, "<br>");
 }
 
-const cards = [
+const cards2 = [
 	{
       	id: 'price_1Miz3OAEMEnLyKBGotD96Yjf',
 		name: "Hummus Chili",
@@ -487,4 +487,4 @@ const cards = [
 ];
 
 
-export {cards}
+export {cards2}
