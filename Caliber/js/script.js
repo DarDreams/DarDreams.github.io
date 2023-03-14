@@ -1110,7 +1110,7 @@ try {
         const hint = document.createElement('div');
         hint.classList.add('hint');
         try {
-        hint.innerHTML = Object.values(perksRus).find(key => key.includes(element.textContent));
+        hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]);
         console.log(typeof(hint));
         
         console.log(selector,Object.values(perksRus).find(key => key.includes(element.textContent)));

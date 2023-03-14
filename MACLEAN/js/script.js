@@ -23,13 +23,13 @@ $(document).ready(function(){
   $(".inicio").hide();
   $(".empresa").hide();
   $(".contactos").hide();
-  //$(".productos").hide();
+  $(".productos").hide();
 
   $(".overlay").hide();
   $(".menu__overlay").hide();
 
 
-  $('footer').hide();
+  //$('footer').hide();
 
 
   $(window).scroll(function() {
@@ -118,7 +118,7 @@ let animate = "animate__bounceInRight"
     }
   });
 
-/////////////PRODUCTOS//////////////
+/////////////PRODUCTOS///////////////
 
 
 
@@ -129,19 +129,22 @@ let animate = "animate__bounceInRight"
 
 
 	$(".logo").click(function(){
-	location.reload();
-
+		document.querySelector('.logo__roca').src = `img/LOGO3.png?${Date.now()};`
+		location.reload(true);
 	});
 
 
 
-///////tienda
+////////tienda
 
 const natural 	  = "img/sellos/natural.png";
 const sin_gluten  = "img/sellos/sin_gluten.png";
 const sin_lactosa = "img/sellos/sin_lactosa.png";
 const aove        = "img/sellos/aove.png";
-const no_sal      = "img/sellos/no_sal.png"
+const no_sal      = "img/sellos/no_sal.png";
+const picanteM    = "img/sellos/picante_mild.png"
+const picanteH    = "img/sellos/picante_hot.png"
+const picanteE    = "img/sellos/picante_extra.png"
 
 const cards = [
 	{
@@ -162,6 +165,25 @@ const cards = [
 		sellos: [sin_gluten, sin_lactosa, aove, natural],
 		img: "img/productos/mbote_hummus_chili.png",
 		precio:11
+    },
+	{
+        id: 83,
+        name: "Mousse de tomate seco",
+		peso: "200g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Pasta de tomate cherry pera (elaboración propia).Tomate seco, Calabaza, Agua, Cebolla, Aceite de oliva virgen extra: 3%, Goma guar, Fibra de guisante, Almendra, Ajo, Sal, Vinagre en polvo, Pimentón Ahumado picante, Pimienta.",
+		informacion: br(`
+			Valor Energético: 564,84 Kj/135 Kcal
+			Proteínas : 1,80 g
+			Hidratos de carbono: 13,5 g
+			- Azúcares 3,1 g
+			Grasas: 29,23 g
+			- Ácidos Grasos Saturados 3,80 g
+			Sal 0,8 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
+        img: "img/productos/mbote_mousse_de_tomate_seco.png",
+        precio:82
     },
 	{
 		id: "price_1MizLsAEMEnLyKBGU5CGPCnr",
@@ -273,7 +295,7 @@ const cards = [
 			- Ácidos Grasos Saturados 0,1 g
 			Sal 0,196 g
 		`),
-		sellos: [sin_gluten, sin_lactosa, aove, natural],
+		sellos: [sin_gluten, sin_lactosa, natural],
         img: "img/productos/mbote_mermelada_de_pimiento.png",
         precio:22
     },
@@ -425,6 +447,101 @@ const cards = [
 		sellos: [sin_gluten, sin_lactosa, aove, natural],
         img: "img/productos/bote_tomate_frito_casero_sabor_intenso.png",
         precio:82
+    },
+	{
+        id: 84,
+        name: "Salsa De Tomate con Jalapeño",
+		peso: "230g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Tomate, jalapeño, Aceite virgen extra, Ajo, Sal y Vinagre en polvo",
+		informacion: br(`
+			Valor Energético: 117 Kj/28 Kcal
+			Proteínas : 1 g
+			Hidratos de carbono: 3 g
+			- Azúcares 1,3 g
+			Grasas: 0,4 g
+			- Ácidos Grasos Saturados 0,1 g
+			Sal: 1 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural, picanteM],
+        img: "img/productos/sbote_salsa_de_tomate_con_jalapeno.png",
+        precio:82
+    },
+	{
+        id: 84,
+        name: "Salsa De Pimiento con Habanero",
+		peso: "230g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Pimiento sweet palermo, Habanero, Aceite de oliva virgen extra, Sal y Vinagre en polvo.",
+		informacion: br(`
+			Valor Energético: 79 Kj/19 Kcal
+			Proteínas : 0,3 g
+			Hidratos de carbono: 3,5 g
+			- Azúcares 0,8 g
+			Grasas: 0,4 g
+			- Ácidos Grasos Saturados 0,1 g
+			Sal 1,7 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural, picanteH],
+        img: "img/productos/sbote_salsa_de_pimiento_con_habanero.png",
+        precio:82
+    },
+	{
+        id: 85,
+        name: "Pasta De Habanero",
+		peso: "230g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Pimiento habanero, Limón, Agua, Aceite de oliva virgen extra y Vinagre en polvo.",
+		informacion: br(`
+			Valor Energético: 85 Kj/20 Kcal
+			Proteínas : 0,72 g
+			Hidratos de carbono: 4,75 g
+			- Azúcares 3,01 g
+			Grasas: 0,26 g
+			- Ácidos Grasos Saturados 0,06 g
+			Sal: 0,9 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural, picanteE],
+        img: "img/productos/sbote_pasta_de_habanero.png",
+        precio:82
+    },
+	{
+        id: 85,
+        name: "Salsa de Tomate Con Pimiento Asado",
+		peso: "230g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Tomate , Pimiento, Cebolla, Aceite de oliva virgen extra, Sal,  Ajo,  Vinagre en polvo, Pimentón ahumado y Goma guar.",
+		informacion: br(`
+			Valor Energético: 347 Kj/83 Kcal
+			Proteínas : 1,40 g
+			Hidratos de carbono: 5,5 g
+			- Azúcares 2,7 g
+			Grasas: 5,2 g
+			- Ácidos Grasos Saturados 0,5 g
+			Sal 0,9 g
+		`),
+		sellos: [sin_gluten, sin_lactosa, aove, natural],
+        img: "img/productos/sbote_salsa_de_tomate_con_pimiento_asado.png",
+        precio:82
+    },
+	{
+        id: 85,
+        name: "Salsa Barbacoa",
+		peso: "230g",
+		descr: "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		ingredientes: "Tomate cherry, Cebolla, Melaza de caña, Aceite de oliva virgen extra, Salsa de soja, Ajo, Vinagre en polvo, Sal, Pimentón picante, Pimentón dulce.",
+		informacion: br(`
+			Valor Energético: 314 Kj/75 Kcal
+			Proteínas : 1,8 g
+			Hidratos de carbono: 12,8 g
+			- Azúcares 3,9 g
+			Grasas: 1,8 g
+			- Ácidos Grasos Saturados 0,27 g
+			Sal 0,8 g
+		`),
+		sellos: [sin_lactosa, aove, natural],
+        img: "img/productos/sbote_salsa_barbacoa.png",
+        precio:82
     }
 ];
 
@@ -545,12 +662,12 @@ $(".productos__items").slick({
 	slidesToScroll: 3,
 	slidesToShow: 3,
 	arrows: true,
-	//autoplay: true,
+	autoplay: true,
 	autoplaySpeed: 1,
 	draggable: false,
 	rows: 2,
 	//prevArrow: $(".slick-prev"),
-	infinite: true
+	infinite: false
 });
 
 $('button.slick-next').html("&#10154;");
