@@ -142,14 +142,25 @@ let animate = "animate__bounceInRight"
 
 ////////tienda
 
-// const natural 	  = "img/sellos/natural.png";
-// const sin_gluten  = "img/sellos/sin_gluten.png";
-// const sin_lactosa = "img/sellos/sin_lactosa.png";
-// const aove        = "img/sellos/aove.png";
-// const no_sal      = "img/sellos/no_sal.png";
-// const picanteM    = "img/sellos/picante_mild.png"
-// const picanteH    = "img/sellos/picante_hot.png"
-// const picanteE    = "img/sellos/picante_extra.png"
+const natural 	  = "img/sellos/natural.png";
+const sin_gluten  = "img/sellos/sin_gluten.png";
+const sin_lactosa = "img/sellos/sin_lactosa.png";
+const aove        = "img/sellos/aove.png";
+const no_sal      = "img/sellos/no_sal.png";
+const picanteM    = "img/sellos/picante_mild.png"
+const picanteH    = "img/sellos/picante_hot.png"
+const picanteE    = "img/sellos/picante_extra.png"
+
+
+axios.get('db.json')
+  .then(function (response) {
+    const data = JSON.parse(response.data);
+    console.log(data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
 
 // const cards = [
 // 	{
