@@ -446,5 +446,119 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 	console.log(error," База данных не найдена");
 });
 
+
+
+
+
+
+//MODAL
+
+	document.body.insertAdjacentHTML('afterbegin',`
+<div class="modal">
+	<div class="modal-content">
+		<span class="close">&times;</span>
+		<form id="addCardForm">
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name"><br>
+
+			<label for="peso">Peso:</label>
+			<input type="text" id="peso" name="peso"><br>
+
+			<label for="descr">Description:</label>
+			<textarea id="descr" name="descr"></textarea><br>
+
+			<label for="ingredientes">Ingredientes:</label>
+			<textarea id="ingredientes" name="ingredientes"></textarea>
+
+			<label for="informacion">Informacion:</label>
+			<textarea id="informacion" name="informacion"></textarea>
+
+			<label> Sellos:</label>
+
+			<div class = "sellosAdd">
+				<Br>
+				<img id='imagePicante' src=''>
+				<img src='img/sellos/natural.png'>
+				<img src='img/sellos/sin_gluten.png'>
+				<img src='img/sellos/sin_lactosa.png'>
+				<img src='img/sellos/no_sal.png'>
+				<img src='img/sellos/aove.png'>
+				<br>
+
+				<select id="imageSelect">
+					<option value="">None</option>
+					<option value="img/sellos/picanteM.png">Mild</option>
+					<option value="img/sellos/picanteH.png">Hot</option>
+					<option value="img/sellos/picanteE.png">Extra</option>
+				</select>
+
+
+				<input type="checkbox" id="natural" name="sellos">
+				<input type="checkbox" id="sin_gluten" name="sellos">
+				<input type="checkbox" id="sin_lactosa" name="sellos">
+				<input type="checkbox" id="no_sal" name="sellos">
+				<input type="checkbox" id="aove" name="sellos">
+
+			</div>
+
+			<label for="precio">Precio:</label>
+			<input type="number" id="precio" name="precio">
+
+			<input type="submit" value="Add card">
+		</form>
+	</div>
+</div>
+	`)
+
+	const select = document.getElementById("imageSelect");
+	const image = document.getElementById("imagePicante");
+
+	select.addEventListener("change", function() {
+		const selectedValue = select.value;
+		image.src = selectedValue;
+	});
+
+	const addCardForm = document.getElementById('addCardForm');
+
+	addCardForm.addEventListener('submit', function(event) {
+	event.preventDefault(); // Отменяем отправку формы
+	
+	// Получаем значения из полей ввода
+	const name 			= document.getElementById('name').value;
+	const peso			= document.getElementById('peso').value;
+	const descr 		= document.getElementById('descr').value;
+	const ingredientes	= document.getElementById('ingredientes').value;
+	const informacion	= document.getElementById('informacion').value.split('\n');
+	const picante 		= document.getElementById('imagePicante').value;
+	const natural		= document.getElementById('natural').value;
+	const sin_gluten 	= document.getElementById('sin_gluten').value;
+	const sin_lactosa	= document.getElementById('sin_lactosa').value;
+	const no_sal 		= document.getElementById('no_sal').value;
+	const aove 			= document.getElementById('aove').value;
+	const precio 		= document.getElementById('precio').value;
+	
+	// Создаем новый объект card
+	const newCard = {
+		id: "price_" + Math.random().toString(36).substr(2, 9),
+		name: name,
+		peso: peso,
+		descr: descr,
+		ingredientes: ingredientes,
+		informacion: informacion,
+		sellos: [picante, natural, sin_gluten, sin_lactosa, no_sal, aove],
+		precio: precio
+	};
+	
+	// Добавляем новый объект в массив cards
+	cards.push(newCard);
+	
+	// Очищаем поля ввода
+	addCardForm.reset();
+	
+	// Выводим обновленный массив cards в консоль
+	console.log(cards);
+	});
+
+
 });  //////////////////  END
 
