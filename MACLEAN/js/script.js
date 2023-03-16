@@ -511,20 +511,33 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 
 	const elem = document.querySelectorAll('input[name="sellos"]');
 
-	let arrSellos = [];
+	 let arrSellos = [];
 
-	elem.forEach((element, index) => {
-		element.addEventListener('change', function (e) {
-		  // обновляем значения в массиве arrSellos
-		  arrSellos[index] = this.checked;
-		  arrSellos[index + 1] = e[index + 1].checked;
-		  arrSellos[index + 2] = e[index + 2].checked;
-		  arrSellos[index + 3] = e[index + 3].checked;
-		  arrSellos[index + 4] = e[index + 4].checked;
+	// elem.forEach((element, index) => {
+	// 	element.addEventListener('change', function () {
+	// 	  arrSellos[index] = elem[index]?.checked ? elem[index].id : null;
+	// 	  arrSellos[index + 1] = elem[index + 1]?.checked ? elem[index + 1].id : null;
+	// 	  arrSellos[index + 2] = elem[index + 2]?.checked ? elem[index + 2].id : null;
+	// 	  arrSellos[index + 3] = elem[index + 3]?.checked ? elem[index + 3].id : null;
+	// 	  arrSellos[index + 4] = elem[index + 4]?.checked ? elem[index + 4].id : null;
 		  
-		  console.log(arrSellos);
-		});
-	  });
+	// 	  // Убираем лишние null в конце массива
+	// 	  arrSellos = arrSellos.filter(Boolean);
+	  
+	// 	  console.log(arrSellos);
+	// 	});
+	// });
+
+	// arrSellos.unshift('d');
+
+	//   document.querySelector('#imageSelect').addEventListener('change',(e) => {
+	// 	arrSellos[0] = e.target.selectedIndex > 0 ? e.target.value.match(/(\w+).png/)[1] : null;
+	// 	if (e.target.selectedIndex === 0) {
+	// 	  arrSellos.splice(0, 1);
+	// 	}
+	// 	console.log(e.target.selectedIndex);
+	// 	console.log(arrSellos);
+	//   });
 	  
 	  
 	  
@@ -542,17 +555,17 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 		const descr 		= document.getElementById('descr').value;
 		const ingredientes	= document.getElementById('ingredientes').value;
 		const informacion	= document.getElementById('informacion').value.split('\n');
-		const picante 		= document.getElementById('imagePicante').value;
-		const natural		= document.getElementById('natural').value;
-		const sin_gluten 	= document.getElementById('sin_gluten').value;
-		const sin_lactosa	= document.getElementById('sin_lactosa').value;
-		const no_sal 		= document.getElementById('no_sal').value;
-		const aove 			= document.getElementById('aove').value;
+		// const picante 		= document.getElementById('imagePicante').value;
+		// const natural		= document.getElementById('natural').value;
+		// const sin_gluten 	= document.getElementById('sin_gluten').value;
+		// const sin_lactosa	= document.getElementById('sin_lactosa').value;
+		// const no_sal 		= document.getElementById('no_sal').value;
+		// const aove 			= document.getElementById('aove').value;
 		const precio 		= document.getElementById('precio').value;
 		
 		// Создаем новый объект card
 
-
+		
 
 		const newCard = {
 			id: id,
@@ -561,12 +574,14 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 			descr: descr,
 			ingredientes: ingredientes,
 			informacion: informacion,
-			sellos: [picante, natural.checked && natural.id, sin_gluten, sin_lactosa, no_sal, aove],
+			sellos: [],
 			precio: precio
 		};
 		
 
-		
+		document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
+			newCard.sellos.push(element.id)
+		});
 		
 
 		// Добавляем новый объект в массив cards
