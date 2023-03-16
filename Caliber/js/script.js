@@ -296,13 +296,15 @@ try {
             `Замена стандартных патронов для
             основного оружия на бронебойные.
 
-            Бронепробиваемость: +5/1О/15%`
+            Бронепробиваемость: +5/10/15%`
         ],
         "armor_pouch": ["",
         ``
         ],
         "barrel_cutting": ["Прецизионная нарезка ствола",
-        ``
+            `Нарезка ствола уменьшает
+            максимальный разброс оружия.
+            Уменьшение разброса: -10/15/20%`
         ],
         "battle_hardening": ["Боевая закалка",
             `Тренировки активного
@@ -394,16 +396,39 @@ try {
             оружия: +15/20/25%`
         ],
         "forend_processing": ["Обработка цевья",
-        ``
+        `Специальная обработка цевья
+        позволяет более эффективно гасить
+        отдачу. 
+
+        Уменьшение отдачи: -10/15/20%`
         ],
         "head_hunter": ["Охота за головами",
-        ``
+            `Ликвидация противника выстрелом
+            в голову моментально
+            восстанавливает оперативнику
+            выносливость.
+
+            Восстановление выносливости:
+            50/70/90 ОВ`
         ],
         "head_protection": ["Защита головы",
-        ``
+            `Усиленная защита, добавляющая
+            пассивное сопротивление урону в
+            голову.
+            
+            Сопротивление урону в голову:
+            +15/20/25%.`
         ],
         "heavy_ammunition": ["Тяжелые боеприпасы",
-        ``
+            `Резерв «Боеприпасы» более не
+            восстанавливает боезапас
+            основного и дополнительного
+            оружия. Вместо этого он
+            восстанавливает спецсредство.
+            Интервал перед повторным
+            применением: 720/480/360 сек.
+            Длительность применения
+            увеличивается до 5 сек.`
         ],
 
         "heavyweight_marathon": ["Вооруженные забег",
@@ -412,62 +437,175 @@ try {
             параметры оперативника, увеличив
             скорость передвижения с
             основным оружием в рывке.
+
             Скорость рывка: +5/10/15%`
         ],
 
         "hemoglobin_serum": ["Сывортока гемоглобина",
-        ``
+            `Экспериментальная сыворотка.
+            Увеличивает максимальный запас
+            здоровья оперативника.
+
+            Увеличение здоровья: +5/10/15 ОЗ`
         ],
         "improved_formula": ["Улучшенная формула",
-        ``
+            `Реанимация союзника
+            восстанавливает выносливость
+            оперативнику и увеличивает
+            скорость передвижения союзника.
+            Длительность: 5 сек.
+
+            Восстановление выносливости:
+            100/125/160 ОВ
+            Скорость передвижения:
+            +10/15/20%`
         ],
         "last_frontier": ["Одинокий волк",
-        ``
+            `За каждого выведенного из строя
+            союзника оперативник получает
+            ДОПОЛНИТЕЛЬНОЭ сопрОТИВЛЕНие
+            урону от пуль и взрывов.
+            Сопротивление: +3/ 4/ 5%`
         ],
         "quick_release_magazines": ["Быстрсъемные магазины",
-        ``
+            `Улучшенная система хранения
+            магазинов увеличивает скорость
+            перезарядки основного и 
+            дополнительного оружия
+
+            Скорость перезарядки: +20/30/40%`
         ],
         "regenerative_materials": ["Регенерирующие материалы",
-        ``
+            `Экспериментальная система
+            регенерации брони. Автоматически
+            восстанавливает броню, если
+            оперативник некоторое время не
+            получал урона.
+
+            Задержка перед восстановлением:
+            5/4/3 сек.
+            Скорость восстановления: 0.5/1/1.5
+            ОБ/сек.`
         ],
         "retaliation": ["Возмездие",
-        ``
+            `Ликвидация противника в течение 3
+            секунд после получения от него
+            стрелкового урона моментально
+            восстанавливает здоровье
+            оперативника.
+            
+            Восстановление здоровья: 8/12/15
+            03`
         ],
         "second_wind": ["Второе дыхание",
-        ``
+            `После реанимации оперативник
+            восстанавливает здоровье в
+            течение 2.5 сек.
+            
+            Восстановление здоровья:
+            30/40/50 03`
         ],
         "shrapnel_layer": ["Противоосколочный слой",
-        ``
+            `Дополнительное покрытие брони
+            противоосколочным слоем снижает
+            урон от взрывов.
+            
+            Снижение урона: 30/40/50%`
         ],
         "spare_syringe": ["Запасной шприц",
-        ``
+            `Увеличение запаса шприцов
+            реанимации.
+            Запас шприцов: +1/2/3 шт.`
         ],
         "stealth_warrior": ["Скрытый воин",
-        ``
+            `Когда оперативник находится в
+            дыму, он быстрее передвигается и
+            наносит больше урона основным и
+            дополнительным оружием.
+
+            Повышение скорости
+            передвижения в дыму: +9/ 12/ 15%
+            Увеличение урона основного и
+            дополнительного оружия в дыму:
+            +6/8/10%`
         ],
         "strong_nerves": ["Крепкие нервы",
-        ``
+            `Особый психологический тренинг
+            позволяет сократить длительность
+            эффектов «Подавление» и
+            «Оглушение».
+            
+            Длительность эффектов: 
+            -20/30/40%`
         ],
         "subdermal_meldonium": ["Субдермальный мельдоний",
-        ``
+            `Система поддержания
+            боеспособности оперативника.
+            После уничтожения собственной
+            брони восстанавливает
+            выносливость.
+            
+            Восстановление выносливости:
+            120/150/210 за 4/3,5/3 сек.
+            Срабатывает один раз за раунд.
+            Требует предварительного наличия
+            брони.`
         ],
         "subdermal_morphine": ["Субдермальный морфин",
-        ``
+            `Система экстренного лечения.
+            После уничтожения собственной
+            брони восстанавливает здоровье.
+
+            Длительность: 5 сек.
+            Лечение: 30/35/40 ОЗ
+            
+            Срабатывает один раз за раунд.
+            Требует предварительного наличия
+            брони.`
         ],
         "super_sensitive_trigger": ["Чувтсвительный спусковой крючок",
-        ``
+            `Регулировка спускового механизма
+            позволяет увеличить
+            скорострельность дополнительного
+            оружия.
+
+            Скорострельность: +0.5/1/1.5 в/сек.`
         ],
         "take_aim": ["Стрелковая позиция",
-        ``
+            `Прицелившись, оперативник
+            группируется и максимально
+            скрывает свой силуэт. Через 2/1/0.5
+            сек. после начала прицеливания .
+            оперативник получает на 10/12/15%
+            меньше урона от пуль и взрывов.`
         ],
         "thermal_imager": ["Тепловизор",
-        ``
+            `Оперативник активирует
+            тепловизор: при прицеливании
+            враги, скрытые дымом,
+            подсвечиваются.
+            
+            Время активации: 1/0.5/0.25 сек.`
         ],
         "tight_fit": ["Плотное прилегание",
-        ``
+            `Правильно подобранная
+            экипировка значительно повышает
+            комфорт бойца. При полном запасе
+            брони оперативник быстрее
+            восстанавливает выносливость.
+
+            Дополнительное восстановление
+            выносливости: 4/6/8 ОВ/сек.`
         ],
         "well_rested": ["Хороший отдых",
-        ``
+            `Хорошо отдохнувший боец лучше
+            сопротивляется негативным
+            эффектам. При запасе
+            выносливости более 400/350/300
+            ОВ. оперативник иммунен к
+            эффектам «Оглушение»,
+            «Замедление», «Капкан» и
+            «Скованность».`
         ],
         "AmmoPack": "",
         "ArmorPack": "",
@@ -854,8 +992,100 @@ try {
                 <tr><th></th></tr>
             </tr>
         `)
-            };
+        //console.log(operator.role);
+        //console.log(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`);
+        //console.log(document.querySelector(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`));
+        const perks = document.querySelectorAll(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
+
+        perks.forEach(function(s) {
+        showHint(s, caliber[k+4][i])//,caliber[k+4][i][8][15])
+        //console.log(caliber[k+4][i][8]);
+        })
+
+        function showHint(selector, ...spread) {
+            const element = selector;
+            const hint = document.createElement('div');
+            hint.classList.add('hint');
+        try {
+           // let h = spread[0][20];
+           // let q = spread[0][8][15][1].toString();
+           // console.log(q);
+            //let r = h.tight_fit; //работает
+             //let r = spread[0][20][`${spread[0][8][15][1]}`] // нет , почему? и ка ксделать чтобы работало?
+            
+
+            //console.log(perk1,perk2,perk3,perk4);
+
+           // let lvlPerks = spread[0][20][0].find(key => key.includes(spread[0][8][15]));
+           // lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
+            hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g,"<br>");
+
+            let perk1 = spread[0][20][`${spread[0][8][15][0]}`];
+            let perk2 = spread[0][20][`${spread[0][8][15][1]}`];
+            let perk3 = spread[0][20][`${spread[0][8][15][2]}`];
+            let perk4 = spread[0][20][`${spread[0][8][15][3]}`];
+            if (perk1 == 2) {
+               // console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));    
+                let numbers = hint.innerHTML.match(/\d+\/(\d+)\/d+/g);
+                let firstNumber = numbers[0].split('/')[2];
+                let highlightedText = hint.innerHTML.replace(firstNumber, '<b>' + firstNumber + '</b>');
+                console.log(highlightedText);
+
+            }
+            //console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));
+            
+        } catch (e){console.error(e.message)}
+        //console.log(element);
+            element.parentElement.parentElement.parentElement.parentElement.insertAdjacentElement('afterbegin', hint);
+    
+                element.addEventListener('mousedown', function(event) {
+                   // const rect = element.parentElement.parentElement.parentElement.getBoundingClientRect(); // получаем координаты элемента
+                    const x = event.pageX// - rect.left; // вычисляем координаты относительно элемента
+                    const y = event.pageY //- rect.top;
+                    hint.style.display = 'block';
+                    hint.style.top = `${y - 150}px`;
+                    hint.style.left = `${x - 280}px`;
+                    
+                });
+    
+            document.body.addEventListener('mouseup', function() {
+                hint.style.display = 'none';
+            });
         }
+            };
+            
+        }
+
+        //  HINT
+       
+    // document.querySelectorAll('.perk').forEach(function(s) {
+    //     showHint(s)
+    // })
+
+    // function showHint(selector) {
+    //     const element = selector;
+    //     const hint = document.createElement('div');
+    //     hint.classList.add('hint');
+    // try {
+    //     //lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
+    //     hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g,"<br>");
+        
+    // } catch (e){console.error(e.message)}
+    //     document.body.insertAdjacentElement('afterbegin', hint);
+
+    //         element.addEventListener('mousedown', function(event) {
+    //             const x = event.pageX;// - element.offsetLeft;
+    //             const y = event.pageY; //- element.offsetTop;
+    //             //console.log(element.offsetLeft,element.offsetTop);
+    //             hint.style.display = 'block';
+    //             hint.style.top = `${y + 5}px`;
+    //             hint.style.left = `${x + 5}px`;
+    //         });
+
+    //     document.body.addEventListener('mouseup', function() {
+    //         hint.style.display = 'none';
+    //     });
+    // }
 
         // CHANGE CST OPERS
         document.querySelectorAll('.nameOp').forEach(element => {
@@ -1354,52 +1584,11 @@ try {
             upload(caliber_b, caliber_b2);
             //saveData();
         }
-
-        //const month = setZero(new Date().getMonth()+1);
-        //const year  = new Date().getFullYear();
-
-
-       
-
        saveData(createdDate);
-
-        
-
-        
-        
         
     });
 
 
-    document.querySelectorAll('.perk').forEach(function(s) {
-        showHint(s)
-    })
-
-    function showHint(selector) {
-        const element = selector;
-        const hint = document.createElement('div');
-        hint.classList.add('hint');
-        try {
-        hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g,"<br>");
-       // console.log(typeof(hint));
-        
-       // console.log(selector,Object.values(perksRus).find(key => key.includes(element.textContent)));
-        }catch (e){console.error(e.message)}
-        document.body.insertAdjacentElement('afterbegin', hint);
-
-            element.addEventListener('mousedown', function(event) {
-                const x = event.pageX;// - element.offsetLeft;
-                const y = event.pageY; //- element.offsetTop;
-                //console.log(element.offsetLeft,element.offsetTop);
-                hint.style.display = 'block';
-                hint.style.top = `${y + 5}px`;
-                hint.style.left = `${x + 5}px`;
-            });
-
-        document.body.addEventListener('mouseup', function() {
-            hint.style.display = 'none';
-        });
-    }
 
     function setZero(num) {
         if (num >= 0 && num < 10) {
@@ -1461,7 +1650,7 @@ try {
         if (document.querySelector('.slide-out-panel').classList.contains('show') == false){
             location.reload(true);
         }
-    }, 60000);
+    }, 600000000);
 
 //     const WebSocket = require('ws');
 //     const wss = new WebSocket.Server({ port: 8080 });
