@@ -509,9 +509,9 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 
 	const addCardForm = document.getElementById('addCardForm');
 
-	const elem = document.querySelectorAll('input[name="sellos"]');
+	//const elem = document.querySelectorAll('input[name="sellos"]');
 
-	 let arrSellos = [];
+	 //let arrSellos = [];
 
 	// elem.forEach((element, index) => {
 	// 	element.addEventListener('change', function () {
@@ -538,14 +538,14 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 	// 	console.log(e.target.selectedIndex);
 	// 	console.log(arrSellos);
 	//   });
-	  
-	  
-	  
-	  
-
-
-
+	let tempSellos = [];
 	addCardForm.addEventListener('submit', function(event) {
+		
+		tempSellos.length = 0;
+
+		// if (newCard.sellos.length > 0) {
+		// 	newCard.sellos.length = 0;
+		// };
 		event.preventDefault(); // Отменяем отправку формы
 		
 		// Получаем значения из полей ввода
@@ -580,20 +580,35 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 		
 
 		document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
-			newCard.sellos.push(element.id)
+			tempSellos.push(element.id)
 		});
-		
 
-		// Добавляем новый объект в массив cards
+		const combobox = document.querySelector('#imageSelect');
+		if (combobox.selectedIndex > 0) {
+			//console.log(combobox.value.match(/(\w+).png/)[1]);
+			tempSellos.push(combobox.value.match(/(\w+).png/)[1])
+		}
+
+		newCard.sellos = tempSellos;
+		
 		cards.push(newCard);
-		
-		// Очищаем поля ввода
-		addCardForm.reset();
-		
-		// Выводим обновленный массив cards в консоль
-		console.log(cards);
-	});
 
+		addCardForm.reset();
+		console.log(combobox.src);
+		document.querySelector('#imagePicante').src = 'img/sellos/none.png'
+		//combobox.selectedIndex = 0;
+
+		axios.post('db.json', cards)
+			.then(response => {
+			console.log(response.data);
+			})
+			.catch(error => {
+			console.log(error);
+		});
+
+	});
+	
+	//console.log(cards);
 
 });  //////////////////  END
 
