@@ -925,7 +925,7 @@ try {
                 // console.log("[3][0] - |",operator.perks[3],"|");
                 // console.log("data[0] - ", data1);
 
-                
+                console.log(caliber[k+5][i][2]," - ",caliber[k+5][i][16][1]);
 
 
                 let img = new Image();
