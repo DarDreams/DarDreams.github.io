@@ -310,13 +310,13 @@
         "descr" : "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
         "ingredientes" : "Tomate, Pimiento, Berenjena, Calabacin, AOVE:3%, Sal",
         "informacion" : [
-        "Valor energético 72kj/301Kcal.",
-        "Hidratos de Carbono: 5,58g.",
-        "Grasas: 5,63g.",
-        "Grasas saturadas: 0,78g.",
-        "Proteinas: 0,79g.",
-        "Azúcares: 2,44g.",
-        "Sal: 0,5g."
+			"Valor energético 72kj/301Kcal.",
+			"Hidratos de Carbono: 5,58g.",
+			"Grasas: 5,63g.",
+			"Grasas saturadas: 0,78g.",
+			"Proteinas: 0,79g.",
+			"Azúcares: 2,44g.",
+			"Sal: 0,5g."
         ],
         "sellos" : ["sin_gluten", "sin_lactosa", "aove", "natural"],
         "img" : "img/productos/bote_pisto.png",

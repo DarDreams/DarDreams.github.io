@@ -37,7 +37,7 @@ $(document).ready(function(){
 	axios.get('db.json')
 	.then(function (response) {
 	const data = response.data;
-	cards = data.cards;
+	if (!data.cards) {cards = data} else {cards = data.cards};
 	console.log(cards);
 
   $(".inicio").hide();
@@ -542,18 +542,8 @@ item.forEach(cd => {
 		const ingredientes	= document.getElementById('ingredientes').value;
 		const image			= document.getElementById('img').value;
 		const informacion	= document.getElementById('informacion').value.split('\n');
-		// const picante 		= document.getElementById('imagePicante').value;
-		// const natural		= document.getElementById('natural').value;
-		// const sin_gluten 	= document.getElementById('sin_gluten').value;
-		// const sin_lactosa	= document.getElementById('sin_lactosa').value;
-		// const no_sal 		= document.getElementById('no_sal').value;
-		// const aove 			= document.getElementById('aove').value;
 		const precio 		= document.getElementById('precio').value;
 		
-		// Создаем новый объект card
-
-		
-
 		const newCard = {
 			id: id,
 			name: name,
@@ -562,7 +552,7 @@ item.forEach(cd => {
 			ingredientes: ingredientes,
 			informacion: informacion,
 			sellos: [],
-			image: `img/sellos/${image}`,
+			img: `img/productos/${image}`,
 			precio: precio
 		};
 		
@@ -573,7 +563,6 @@ item.forEach(cd => {
 
 		const combobox = document.querySelector('#imageSelect');
 		if (combobox.selectedIndex > 0) {
-			//console.log(combobox.value.match(/(\w+).png/)[1]);
 			tempSellos.push(combobox.value.match(/(\w+).png/)[1])
 		}
 
@@ -588,16 +577,11 @@ item.forEach(cd => {
 
 		function updateData() {
 			
-			let test = {
-				slon:"net",
-				tord:"da"
-			}
-			
 			// Отправляем AJAX-запрос на сервер
 			$.ajax({
-			  url: 'https://www.conservasalboran.es/db.json', // адрес вашего сервера
+			  url: 'https://www.conservasalboran.es/php/query.php', // адрес вашего сервера
 			  type: 'POST', // метод запроса
-			  data: JSON.stringify(test), // данные, которые нужно отправить на сервер
+			  data: JSON.stringify(cards), // данные, которые нужно отправить на сервер
 			  contentType: "application/json; charset=utf-8",
 			  dataType: "json", // тип данных, которые отправляем
 			  success: function(response) {
@@ -619,11 +603,35 @@ item.forEach(cd => {
 	//console.log(cards);
 
 
-	document.querySelector('.b_mail').addEventListener('click', () => {
-		if (document.querySelector('.e_mail').value == 'add') {
+	  
+
+
+	document.querySelector('.b_mail').addEventListener('click', (e) => {
+		e.preventDefault();
+		if (document.querySelector('.e_mail').value == 'ADD') {
 			document.querySelector('.modal').style.display = 'block';
+			document.querySelector('.e_mail').value ='';
 		}
 	});
+
+	document.querySelector('.e_mail').addEventListener('keydown', (event) =>{
+		if (event.shiftKey) {
+			console.log('test');
+			document.querySelector('.e_mail').setAttribute("type", "password");
+		} else {document.querySelector('.e_mail').setAttribute("type", "text");}
+	})
+
+
+	setTimeout(() => {
+		document.querySelector('.slick-next').addEventListener('mousedown', function(event) {
+			if (event.shiftKey) {
+				var slick = $('.productos__items').slick('getSlick');
+				var slideCount = slick.slideCount;
+				var lastIndex = slideCount - 3;
+				slick.slickGoTo(lastIndex);
+			}
+		  });
+	}, 1000);
 
 });  //////////////////  END
 
