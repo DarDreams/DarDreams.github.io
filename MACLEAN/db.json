@@ -171,6 +171,25 @@
         "img" : "img/productos/mbote_mermelada_de_calabaza.png",
         "precio" :23
     },
+	{
+        "id" : 85,
+        "name" : "Mermelada De Aceite De Oliva Virgen Extra",
+		"peso" : "200g",
+		"descr" : "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
+		"ingredientes" : "Aceite de oliva virgen extra: 44%, Agua, Azúcar de caña, Goma xantana y Jugo de limon.",
+		"informacion" : [
+			"Valor Energético: 2474 Kj/592 Kcal",
+			"Proteínas : 0,1 g",
+			"Hidratos de carbono: 19,15 g",
+			   "- Azúcares 6,3 g",
+			"Grasas: 54,4 g",
+			   "- Ácidos Grasos Saturados 9,35 g",
+			"Sal 0,1 g"
+		],
+		"sellos" : ["sin_lactosa", "sin_gluten", "aove", "natural"],
+        "img" : "img/productos/mbote_mermelada_de_aceite_de_oliva.png",
+        "precio" :82
+    },
     {
         "id" : 31,
         "name" : "Mousse de Berenjena",
@@ -432,25 +451,6 @@
 		],
 		"sellos" : ["sin_gluten", "sin_lactosa", "aove", "natural"],
         "img" : "img/productos/sbote_salsa_de_tomate_con_pimiento_asado.png",
-        "precio" :82
-    },
-	{
-        "id" : 85,
-        "name" : "Salsa Barbacoa",
-		"peso" : "230g",
-		"descr" : "Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum harum labore error quae.",
-		"ingredientes" : "Tomate cherry, Cebolla, Melaza de caña, Aceite de oliva virgen extra, Salsa de soja, Ajo, Vinagre en polvo, Sal, Pimentón picante, Pimentón dulce.",
-		"informacion" : [
-			"Valor Energético: 314 Kj/75 Kcal",
-			"Proteínas : 1,8 g",
-			"Hidratos de carbono: 12,8 g",
-			"- Azúcares 3,9 g",
-			"Grasas: 1,8 g",
-			"- Ácidos Grasos Saturados 0,27 g",
-			"Sal 0,8 g"
-		],
-		"sellos" : ["sin_lactosa", "aove", "natural"],
-        "img" : "img/productos/sbote_salsa_barbacoa.png",
         "precio" :82
     },
 	{

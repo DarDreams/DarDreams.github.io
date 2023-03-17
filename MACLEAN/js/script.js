@@ -115,6 +115,7 @@ let animate = "animate__bounceInRight"
   });
 
   $(".productos_link").click(function(){
+	$('button.slick-prev').click();
     $("html, body").animate({scrollTop: 0+"px"});
     $(".overlay").fadeIn();
     $(".inicio").fadeOut(1000);
@@ -170,6 +171,7 @@ function createCards(id, img, name, precio, peso, descr, ingredientes, informaci
 			<div class = "item__front">
 				<img src="${img}" alt="">
 				<h3 class="cap">${name}</h3>
+				<!--  
 				<div class="counter">
 					<button class="counter-down">-</button>
 					<input data-id="${id}"type="text" value="1"  maxlength="2" class="counter-value"/>
@@ -177,6 +179,7 @@ function createCards(id, img, name, precio, peso, descr, ingredientes, informaci
 					<h4 class="precio">${precio} €</h4>
 					<button class = 'addItem'>Añadir</button>
 				</div>
+				-->
 			</div>
 			<div class="item__back">
 				<h3 title = "${name} ${peso}" class = "caption">${name} ${peso}</h3>	
@@ -259,23 +262,30 @@ function loadCarrito() {
     createCarrito(img, name, count, price, count * price);
 }
 
-console.log(cards);
+ //console.log(cards);
 for (let i = 0; i < cards.length;i++) {
 	createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
 }
 
+	$(".productos__items").slick({
+		//waitForAnimate: true,
+		initialSlide: 0,
+		slidesToScroll: 1,
+		slidesToShow: 3,
+		arrows: true,
+		//fade: true,
+		//dots: true,
+		//dotsClass: 'slick-dots',
+		//autoplay: true,
+		autoplaySpeed: 1,
+		draggable: false,
+		rows: 2,
+		//prevArrow: $(".slick-prev"),
+		infinite: false
+	});
 
-$(".productos__items").slick({
-	slidesToScroll: 3,
-	slidesToShow: 3,
-	arrows: true,
-	autoplay: true,
-	autoplaySpeed: 1,
-	draggable: false,
-	rows: 2,
-	//prevArrow: $(".slick-prev"),
-	infinite: false
-});
+	
+
 
 $('button.slick-next').html("&#10154;");
 $('button.slick-prev').html("&#10154;");
@@ -330,38 +340,6 @@ $('button.slick-prev').html("&#10154;");
         //document.querySelectorAll('.addItem')[i].click();
     }
 
-//  CHANGE BG
-
-
-
-
-//document.body.insertAdjacentHTML("beforeend",'<input class = "bg" type="file" id="file-input"></input>');
-
-// var fileInput = document.getElementById('file-input');
-// fileInput.addEventListener('change', function() {
-//   // Получаем выбранный файл
-//   var file = fileInput.files[0];
-  
-//   // Создаем объект FileReader для чтения данных файла
-//   var reader = new FileReader();
-  
-//   // Устанавливаем функцию обратного вызова для чтения данных файла
-//   reader.onload = function(event) {
-//     // Создаем новый элемент изображения
-//     var image = new Image();
-    
-//     // Устанавливаем URL изображения как данные, полученные из FileReader
-//     image.src = event.target.result;
-    
-//     // Устанавливаем изображение как фоновое изображение для элемента body
-//     document.querySelector('.background').style.backgroundImage = "url(" + image.src + ")";
-//   };
-  
-//   // Читаем данные файла в объект FileReader
-//   reader.readAsDataURL(file);
-// });
-
-
 //  PAYMENTS
 document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
 	
@@ -408,7 +386,8 @@ item.forEach(cd => {
 
     if (cd.classList.contains("flipped")) {
       	cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
-      	cd.querySelector('.item__back').style.transform = "rotateY(0deg)";
+      	cd.querySelector('.item__back').style.transform = "rotateY(0deg) translateX(-8%) ";
+
     } else {
       	cd.querySelector('.item__front').style.transform = "rotateY(0deg)";
 		cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
@@ -421,24 +400,7 @@ item.forEach(cd => {
 });
 
 
-if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
-	// Удалить все элементы на странице
-	document.body.innerHTML = '';
-	
-	// Отобразить сообщение на нескольких языках
-	const lang = navigator.language;
-	let message;
-	if (lang === 'ru') {
-	  message = 'Сайт не доступен с мобильных устройств';
-	} else if (lang === 'es') {
-	  message = 'El sitio no está disponible en dispositivos móviles';
-	} else {
-	  message = 'The site is not available on mobile devices';
-	}
-	const messageElement = document.createElement('div');
-	messageElement.textContent = message;
-	document.body.appendChild(messageElement);
-  }
+
 
   
 })
@@ -459,10 +421,12 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 			<span class="close">&times;</span>
 			<form id="addCardForm">
 				<div class='small'>
-					<input placeholder='id' class="id" type="text" id="id" name="id">
-					<input placeholder='name'type="text" id="name" name="name">
-					<input placeholder='peso'type="number" min max id="peso" name="peso">
-					<input placeholder='precio' type="number" id="precio" name="precio">
+					<input autocomplete="off" placeholder='id' class="id" type="text" id="id" name="id">
+					<input autocomplete="off" placeholder='name'type="text" id="name" name="name">
+					<input autocomplete="off" placeholder='peso'type="number" min max id="peso" name="peso">
+					<input autocomplete="off" placeholder='precio' type="number" id="precio" name="precio">
+					<input autocomplete="off" type="text" id="img" name="img">
+					<input autocomplete="off" accept="image/jpeg, image/png" type="file" id="open" name="open">
 				</div>
 				<div class='big'>
 					<textarea placeholder='description' id="descr" name="descr"></textarea>
@@ -539,6 +503,28 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 	// 	console.log(arrSellos);
 	//   });
 	let tempSellos = [];
+
+	const inputElement = document.getElementById("open");
+	const imgElement = document.getElementById("img");
+	
+	imgElement.addEventListener("dblclick", function() {
+	  inputElement.click();
+	});
+	
+	inputElement.addEventListener("change", function() {
+	  const file = inputElement.files[0];
+	  const reader = new FileReader();
+	
+	  reader.addEventListener("load", function() {
+		imgElement.value = file.name;
+	  });
+	
+	  if (file) {
+		reader.readAsDataURL(file);
+	  }
+	});
+	
+
 	addCardForm.addEventListener('submit', function(event) {
 		
 		tempSellos.length = 0;
@@ -554,6 +540,7 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 		const peso			= document.getElementById('peso').value;
 		const descr 		= document.getElementById('descr').value;
 		const ingredientes	= document.getElementById('ingredientes').value;
+		const image			= document.getElementById('img').value;
 		const informacion	= document.getElementById('informacion').value.split('\n');
 		// const picante 		= document.getElementById('imagePicante').value;
 		// const natural		= document.getElementById('natural').value;
@@ -575,6 +562,7 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 			ingredientes: ingredientes,
 			informacion: informacion,
 			sellos: [],
+			image: `img/sellos/${image}`,
 			precio: precio
 		};
 		
@@ -598,17 +586,44 @@ if (/Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 768) {
 		document.querySelector('#imagePicante').src = 'img/sellos/none.png'
 		//combobox.selectedIndex = 0;
 
-		axios.post('db.json', cards)
-			.then(response => {
-			console.log(response.data);
-			})
-			.catch(error => {
-			console.log(error);
-		});
+		function updateData() {
+			
+			let test = {
+				slon:"net",
+				tord:"da"
+			}
+			
+			// Отправляем AJAX-запрос на сервер
+			$.ajax({
+			  url: 'https://www.conservasalboran.es/db.json', // адрес вашего сервера
+			  type: 'POST', // метод запроса
+			  data: JSON.stringify(test), // данные, которые нужно отправить на сервер
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json", // тип данных, которые отправляем
+			  success: function(response) {
+				console.log('Данные успешно обновлены');
+				console.log(response); // ответ от сервера
+			  },
+			  error: function(error) {
+				console.error('Ошибка при обновлении данных');
+				console.error(error); // сообщение об ошибке
+			  }
+			});
+		  }
+
+		  updateData();
+		  
 
 	});
 	
 	//console.log(cards);
+
+
+	document.querySelector('.b_mail').addEventListener('click', () => {
+		if (document.querySelector('.e_mail').value == 'add') {
+			document.querySelector('.modal').style.display = 'block';
+		}
+	});
 
 });  //////////////////  END
 
