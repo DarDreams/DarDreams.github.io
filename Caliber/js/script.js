@@ -1006,7 +1006,7 @@ try {
             const element = selector;
             const hint = document.createElement('div');
             hint.classList.add('hint');
-        try {
+       try {
            // let h = spread[0][20];
            // let q = spread[0][8][15][1].toString();
            // console.log(q);
@@ -1020,19 +1020,21 @@ try {
            // lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
             hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g,"<br>");
 
-                console.log(spread[0]);
-            let perk1 = spread[0][20][`${spread[0][20][0]}`];
-            let perk2 = spread[0][20][`${spread[0][20][1]}`];
-            let perk3 = spread[0][20][`${spread[0][20][2]}`];
-            let perk4 = spread[0][20][`${spread[0][20][3]}`];
-            if (perk1 == 2) {
-               // console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));    
-                let numbers = hint.innerHTML.match(/\d+\/(\d+)\/d+/g);
-                let firstNumber = numbers[0].split('/')[2];
-                let highlightedText = hint.innerHTML.replace(firstNumber, '<b>' + firstNumber + '</b>');
-                console.log(highlightedText);
+               // console.log(spread[0][8][15][0]);
+            // let perk1 = spread[0][20][`${spread[0][8][15][0]}`];
+            // let perk2 = spread[0][20][`${spread[0][8][15][1]}`];
+            // let perk3 = spread[0][20][`${spread[0][8][15][2]}`];
+            // let perk4 = spread[0][20][`${spread[0][8][15][3]}`];
+            // //console.log(perk4);
 
-            }
+            // if (perk1 == 1) {
+            //    // console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));    
+            //     let numbers = hint.innerHTML.match(/\d+\/(\d+)\/d+/g);
+            //     let firstNumber = numbers[0].split('/')[2];
+            //     let highlightedText = hint.innerHTML.replace(firstNumber, '<b>' + firstNumber + '</b>');
+            //     console.log(highlightedText);
+
+            // }
             //console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));
             
         } catch (e){console.error(e.message)}
