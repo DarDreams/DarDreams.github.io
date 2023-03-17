@@ -1020,10 +1020,11 @@ try {
            // lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
             hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g,"<br>");
 
-            let perk1 = spread[0][20][`${spread[0][8][15][0]}`];
-            let perk2 = spread[0][20][`${spread[0][8][15][1]}`];
-            let perk3 = spread[0][20][`${spread[0][8][15][2]}`];
-            let perk4 = spread[0][20][`${spread[0][8][15][3]}`];
+                console.log(spread[0]);
+            let perk1 = spread[0][20][`${spread[0][20][0]}`];
+            let perk2 = spread[0][20][`${spread[0][20][1]}`];
+            let perk3 = spread[0][20][`${spread[0][20][2]}`];
+            let perk4 = spread[0][20][`${spread[0][20][3]}`];
             if (perk1 == 2) {
                // console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));    
                 let numbers = hint.innerHTML.match(/\d+\/(\d+)\/d+/g);
