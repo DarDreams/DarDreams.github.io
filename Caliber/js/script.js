@@ -3,7 +3,7 @@ import {
     caliber,
     caliber2
 } from "./game.js";
-console.clear();
+//console.clear();
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
     // function objectToArray(obj) {
