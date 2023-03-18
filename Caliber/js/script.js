@@ -910,7 +910,7 @@ try {
                     lvlText: data1[k + 5][i][3],
                     nameOp: roleName,
                     lvlOp: data1[k + 5][i][8][18],
-                    rank: data1[k + 5][i][4],
+                    rank: data1[k + 5][i][16][2],
                     name: data1[k + 5][i][2],
                     group: String(data1[k + 5][i][1]).slice(0, 4),
                     perks: [data1[k + 5][i + 0][8][15][0], data1[k + 5][i + 0][8][15][1], data1[k + 5][i + 0][8][15][2], data1[k + 5][i + 0][8][15][3]],
