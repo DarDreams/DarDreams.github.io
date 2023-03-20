@@ -32,121 +32,113 @@
 
 
 $(document).ready(function(){
-
-	let cards = {};
-	axios.get('db.json')
-	.then(function (response) {
+let cards = {};
+axios.get('db.json')
+.then(function (response) {
 	const data = response.data;
 	if (!data.cards) {cards = data} else {cards = data.cards};
-	console.log(cards);
+	console.log("first - ",cards);
 
-  $(".inicio").hide();
-  $(".empresa").hide();
-  $(".contactos").hide();
-  $(".productos").hide();
+	$(".inicio").hide();
+	$(".empresa").hide();
+	$(".contactos").hide();
+	$(".productos").hide();
 
-  $(".overlay").hide();
-  $(".menu__overlay").hide();
+	$(".overlay").hide();
+	$(".menu__overlay").hide();
 
 
   //$('footer').hide();
 
 
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 180) {
-      $(".pageup").fadeIn();
-    } else {
-      $(".pageup").fadeOut();
-    }
-  });
+	$(window).scroll(function() {
+	if ($(this).scrollTop() > 180) {
+		$(".pageup").fadeIn();
+	} else {
+		$(".pageup").fadeOut();
+	}
+	});
 
-  $(".pageup").click(function(){
-    const _href = $(this).attr("href");
-    $("html, body").animate({scrollTop: 0+"px"});
-    return false;
-  });
+	$(".pageup").click(function(){
+	const _href = $(this).attr("href");
+	$("html, body").animate({scrollTop: 0+"px"});
+	return false;
+	});
   
 ////////////////////////////////////////////
-function anime(cl1,cl2) {
-  $(cl1).addClass(cl2);
-  $(cl1).on('animationend', function() {
-    $(cl1).removeClass(cl2);});
-}
+	function anime(cl1,cl2) {
+	$(cl1).addClass(cl2);
+	$(cl1).on('animationend', function() {
+		$(cl1).removeClass(cl2);});
+	}
 
 
 
 ////////////////ANIMATE//////////////////////
-let animate = "animate__bounceInRight"
+	let animate = "animate__bounceInRight";
 
-  $(".inicio_link").click(function(){
-    $("html, body").animate({scrollTop: 0+"px"});
-    $(".overlay").fadeIn();
-    $(".inicio").show();
-    $(".empresa").fadeOut(1000);
-    $(".contactos").fadeOut(1000);
-    $(".productos").fadeOut(1000);
-    $(".carrito").fadeOut(1000);
+	$(".inicio_link").click(function(){
+		$("html, body").animate({scrollTop: 0+"px"});
+		$(".overlay").fadeIn();
+		$(".inicio").show();
+		$(".empresa").fadeOut(1000);
+		$(".contactos").fadeOut(1000);
+		$(".productos").fadeOut(1000);
+		$(".carrito").fadeOut(1000);
 
-    anime(".inicio", animate);
-  });
+		anime(".inicio", animate);
+	});
 
-  $(".empresa_link").click(function(){
-    $("html, body").animate({scrollTop: 0+"px"});
-    $(".overlay").fadeIn();
-    $(".empresa").show();
-    $(".contactos").fadeOut(1000);
-    $(".productos").fadeOut(1000);
-    $(".inicio").fadeOut(1000);
-    $(".carrito").fadeOut(1000);
+	$(".empresa_link").click(function(){
+		$("html, body").animate({scrollTop: 0+"px"});
+		$(".overlay").fadeIn();
+		$(".empresa").show();
+		$(".contactos").fadeOut(1000);
+		$(".productos").fadeOut(1000);
+		$(".inicio").fadeOut(1000);
+		$(".carrito").fadeOut(1000);
 
-    anime(".empresa", animate);
-  });
+		anime(".empresa", animate);
+	});
 
-  $(".contactos_link").click(function(){
-    $("html, body").animate({scrollTop: 0+"px"});
-    $(".overlay").fadeIn();
-    $(".inicio").fadeOut(1000);
-    $(".empresa").fadeOut(1000);
-    $(".productos").fadeOut(1000);
-    $(".carrito").fadeOut(1000);
-    $(".contactos").show();
+	$(".contactos_link").click(function(){
+		$("html, body").animate({scrollTop: 0+"px"});
+		$(".overlay").fadeIn();
+		$(".inicio").fadeOut(1000);
+		$(".empresa").fadeOut(1000);
+		$(".productos").fadeOut(1000);
+		$(".carrito").fadeOut(1000);
+		$(".contactos").show();
 
-    anime(".contactos", animate);
-  });
+		anime(".contactos", animate);
+	});
 
-  $(".productos_link").click(function(){
-	$('button.slick-prev').click();
-    $("html, body").animate({scrollTop: 0+"px"});
-    $(".overlay").fadeIn();
-    $(".inicio").fadeOut(1000);
-    $(".empresa").fadeOut(1000);
-    $(".contactos").fadeOut(1000);
-    $(".productos").show();
-    $(".carrito").fadeIn();
-    $('.productos__items').slick('slickPause');
-    anime(".productos", animate);
-  });
+	$(".productos_link").click(function(){
+		$('button.slick-prev').click();
+		$("html, body").animate({scrollTop: 0+"px"});
+		$(".overlay").fadeIn();
+		$(".inicio").fadeOut(1000);
+		$(".empresa").fadeOut(1000);
+		$(".contactos").fadeOut(1000);
+		$(".productos").show();
+		$(".carrito").fadeIn();
+		$('.productos__items').slick('slickPause');
+		anime(".productos", animate);
+	});
 
-  //////////////SCROLL////////////////////
+	//////////////SCROLL////////////////////
 
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 50) {
-      $(".menu__overlay").fadeIn();
-       $("header").addClass("header_mini");
-    } else {
-      $(".menu__overlay").fadeOut();
-      $("header").removeClass("header_mini");
-    }
-  });
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 50) {
+		$(".menu__overlay").fadeIn();
+		$("header").addClass("header_mini");
+		} else {
+		$(".menu__overlay").fadeOut();
+		$("header").removeClass("header_mini");
+		}
+	});
 
 /////////////PRODUCTOS///////////////
-
-
-
-
-
-
-
 
 
 	$(".logo").click(function(){
@@ -154,118 +146,117 @@ let animate = "animate__bounceInRight"
 		location.reload(true);
 	});
 
-
-
 ////////tienda
 
-let carrito = [[],[]];
-let carritoTotal = [];
+	let carrito = [[],[]];
+	let carritoTotal = [];
 
 //
 
 
-function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, sellos, number) {
-	informacion = informacion.join('<br>');
- 	document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
-		<div class = "productos__items_item item">
-			<div class = "item__front">
-				<img src="${img}" alt="">
-				<h3 class="cap">${name}</h3>
-				<!--  
-				<div class="counter">
-					<button class="counter-down">-</button>
-					<input data-id="${id}"type="text" value="1"  maxlength="2" class="counter-value"/>
-					<button class="counter-up">+</button>
-					<h4 class="precio">${precio} €</h4>
-					<button class = 'addItem'>Añadir</button>
+	function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, sellos, number) {
+		informacion = informacion.join('<br>');
+		document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
+			<div class = "productos__items_item item">
+				<div class = "item__front">
+					<img src="${img}" alt="">
+					<h3 class="cap">${name}</h3>
+					<!--  
+					<div class="counter">
+						<button class="counter-down">-</button>
+						<input data-id="${id}"type="text" value="1"  maxlength="2" class="counter-value"/>
+						<button class="counter-up">+</button>
+						<h4 class="precio">${precio} €</h4>
+						<button class = 'addItem'>Añadir</button>
+					</div>
+					-->
 				</div>
-				-->
-			</div>
-			<div class="item__back">
-				<h3 title = "${name} ${peso}" class = "caption">${name} ${peso}</h3>	
-				<p class = "description">${descr}</p>
-				<p class = "ingredientes" title = "${ingredientes}">Ingredientes: ${ingredientes}</p>
-				<p class = "inf">INFORMACIÓN NUTRICIONAL:<br>
-				Valor medio 100g de producto.<br>
-					${informacion}
-				</p>
-				<div class = 'sellos'>
+				<div class="item__back">
+					<h3 title = "${name} ${peso}" class = "caption">${name} ${peso}</h3>	
+					<p class = "description">${descr}</p>
+					<p class = "ingredientes" title = "${ingredientes}">Ingredientes: ${ingredientes}</p>
+					<p class = "inf">INFORMACIÓN NUTRICIONAL:<br>
+					Valor medio 100g de producto.<br>
+						${informacion}
+					</p>
+					<div class = 'sellos'>
 
+					</div>
 				</div>
 			</div>
+			`);
+		try {
+		//console.log(number);
+
+
+		for (let i = 0; i < sellos.length; i++) {
+			document.querySelectorAll('.sellos')[number].insertAdjacentHTML('afterbegin',`
+				<img title = "${sellos[i].replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '').replace("_"," ")}"src = "img/sellos/${sellos[i]}.png">
+			`);
+		}
+		} catch (e) {
+			console.error(e.message)
+		}
+	}
+
+
+
+
+	document.body.insertAdjacentHTML('afterbegin',`
+		<div style = "opacity:0" class = 'carrito'>
+		<div class='container'>
 		</div>
-  `);
-  try {
-	//console.log(number);
+			<span class = 'total'>TOTAL  = </span>
+			<button id = "checkout-button" class = 'comprarOfCarrito'>Finalizar pedido</button>
+	`);
+
+	let todo = 0;
+
+	function createCarrito(img, name, count, price, total) {
+	//$('.item').fadeIn();
+	//$('.item').fadeOut(1000);
+		document.querySelector('.carrito').style.opacity = '1';
+		document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
+					<div style="opacity:1" class = 'item'>
+						<img src='${img}' alt=''>
+						<span class = 'nameItemOfCarrito'>${name}</span>
+						<span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count*price}€</span>
+					</div>
+				</div>
+			</div>
+		`)
+		todo += total;
+		document.querySelector('.total').innerText = `TOTAL = ${todo} €`;
+
+		//console.log("carrito = ", carrito);
+		carritoTotal.push({...carrito});
+		console.clear();
+		console.log("total = ", carritoTotal);
+	}
 
 
-    for (let i = 0; i < sellos.length; i++) {
+
+
+	function loadCarrito() {
+		function getItem(id) {
+			return cards.find(item => item.id == id);
+		}
+
+
+
+		//console.log(carrito[0]);
+		const img     = getItem(carrito[0]).img;
 		
-    document.querySelectorAll('.sellos')[number].insertAdjacentHTML('afterbegin',`
-      	<img title = "${sellos[i].replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '').replace("_"," ")}"src = "img/sellos/${sellos[i]}.png">
-    `)
-  }
-    } catch {}
-}
-
-
-
-
-document.body.insertAdjacentHTML('afterbegin',`
-    <div style = "opacity:0" class = 'carrito'>
-    <div class='container'>
-    </div>
-        <span class = 'total'>TOTAL  = </span>
-        <button id = "checkout-button" class = 'comprarOfCarrito'>Finalizar pedido</button>
-`);
-
-let todo = 0;
-
-function createCarrito(img, name, count, price, total) {
-  //$('.item').fadeIn();
-  //$('.item').fadeOut(1000);
-    document.querySelector('.carrito').style.opacity = '1';
-    document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
-                <div style="opacity:1" class = 'item'>
-                    <img src='${img}' alt=''>
-                    <span class = 'nameItemOfCarrito'>${name}</span>
-                    <span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count*price}€</span>
-                </div>
-            </div>
-        </div>
-    `)
-    todo += total;
-    document.querySelector('.total').innerText = `TOTAL = ${todo} €`;
-
-	//console.log("carrito = ", carrito);
-	carritoTotal.push({...carrito});
-	console.clear();
-	console.log("total = ", carritoTotal);
-}
-
-
-
-
-function loadCarrito() {
-    function getItem(id) {
-        return cards.find(item => item.id == id);
-    }
-
-
-
-    //console.log(carrito[0]);
-	const img     = getItem(carrito[0]).img;
-	
-    const count   = carrito[1];
-    const price   = getItem(carrito[0]).precio;
-    const name    = getItem(carrito[0]).name;
-    createCarrito(img, name, count, price, count * price);
-}
+		const count   = carrito[1];
+		const price   = getItem(carrito[0]).precio;
+		const name    = getItem(carrito[0]).name;
+		createCarrito(img, name, count, price, count * price);
+	}
 
  //console.log(cards);
-for (let i = 0; i < cards.length;i++) {
-	createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
-}
+	for (let i = 0; i < cards.length;i++) {
+		createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
+	}
 
 	$(".productos__items").slick({
 		//waitForAnimate: true,
@@ -287,32 +278,32 @@ for (let i = 0; i < cards.length;i++) {
 	
 
 
-$('button.slick-next').html("&#10154;");
-$('button.slick-prev').html("&#10154;");
+	$('button.slick-next').html("&#10154;");
+	$('button.slick-prev').html("&#10154;");
 /////////////
-        function calcSum (e) {
-            let id       = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
-            let item     = cards.find(item => item.id ==id);
+	function calcSum (e) {
+		let id       = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
+		let item     = cards.find(item => item.id ==id);
 
-            let divCount = e.target.parentElement.querySelector('.counter-value');
-            let divPrice = e.target.parentElement.querySelector('.precio');
-            
-            if (e.target.className == 'counter-up') {
-                if (divCount.value > 98) {
-                    divCount.value = 99
-                } else {
-                    divCount.value++
-                };
-            };
-            if (e.target.className == 'counter-down') {
-                if (divCount.value < 2) {
-                    divCount.value = 1
-                } else {
-				 	divCount.value--
-                };
-            }
-            divPrice.textContent = `${item.precio * Number(divCount.value)} €`;
-        }
+		let divCount = e.target.parentElement.querySelector('.counter-value');
+		let divPrice = e.target.parentElement.querySelector('.precio');
+		
+		if (e.target.className == 'counter-up') {
+			if (divCount.value > 98) {
+				divCount.value = 99
+			} else {
+				divCount.value++
+			};
+		};
+		if (e.target.className == 'counter-down') {
+			if (divCount.value < 2) {
+				divCount.value = 1
+			} else {
+				divCount.value--
+			};
+		}
+		divPrice.textContent = `${item.precio * Number(divCount.value)} €`;
+	}
 
 	const divCounter = document.querySelectorAll('.counter');
 		divCounter.forEach(function (el){
@@ -341,76 +332,66 @@ $('button.slick-prev').html("&#10154;");
     }
 
 //  PAYMENTS
-document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
-	
-	// sell(carritoTotal.map(item => ({
-	// 	price: item[0],
-	// 	quantity: Number(item[1])
-	// })));
-	
- });
-
-
-function sell(obj) {
-    var stripe = Stripe('');
-
-  	stripe.redirectToCheckout({
-    lineItems: obj,
-		mode: 'payment',
-		successUrl: 'http://127.0.0.1:3000/index.html',
-		cancelUrl: 'http://127.0.0.1:3000/index.html'
-	}).then(function (result) {
-		if (result.error) {
-		console.log(result.error.message);
-		}
+	document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
+		
+		// sell(carritoTotal.map(item => ({
+		// 	price: item[0],
+		// 	quantity: Number(item[1])
+		// })));
+		
 	});
-	console.clear();
-}
+
+ 
+	function sell(obj) {
+		var stripe = Stripe('');
+
+		stripe.redirectToCheckout({
+		lineItems: obj,
+			mode: 'payment',
+			successUrl: 'http://127.0.0.1:3000/index.html',
+			cancelUrl: 'http://127.0.0.1:3000/index.html'
+		}).then(function (result) {
+			if (result.error) {
+			console.log(result.error.message);
+			}
+		});
+		console.clear();
+	}
 
 // lineItems: [{
 //     price: 'price_123',
 //     quantity: 1
 //   }],
 
-const item = document.querySelectorAll('.item');
-item.forEach(cd => {
+	const item = document.querySelectorAll('.item');
+	item.forEach(cd => {
 
-	const img = cd.querySelector('img');
-	const back = cd.querySelector('.item__back');
-  
+		const img = cd.querySelector('img');
+		const back = cd.querySelector('.item__back');
 	
-
-	img.addEventListener('click', () => {
-		cd.classList.toggle('flipped');
 		
 
-    if (cd.classList.contains("flipped")) {
-      	cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
-      	cd.querySelector('.item__back').style.transform = "rotateY(0deg) translateX(-8%) ";
+		img.addEventListener('click', () => {
+			cd.classList.toggle('flipped');
+			
 
-    } else {
-      	cd.querySelector('.item__front').style.transform = "rotateY(0deg)";
-		cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
-    }
-  });
- 	 back.addEventListener('click', () => {
-    	img.click();
-		if (cd.querySelector(':before')) {cd.querySelector(':before').style.opacity = 0;}
- 	 });
-});
+		if (cd.classList.contains("flipped")) {
+			cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
+			cd.querySelector('.item__back').style.transform = "rotateY(0deg) translateX(-8%) ";
 
-
+		} else {
+			cd.querySelector('.item__front').style.transform = "rotateY(0deg)";
+			cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
+		}
+	});
+		back.addEventListener('click', () => {
+			img.click();
+			if (cd.querySelector(':before')) {cd.querySelector(':before').style.opacity = 0;}
+		});
+	});
 
 
   
-})
-.catch(function (error) {
-	console.log(error," База данных не найдена");
-});
-
-
-
-
 
 
 //MODAL
@@ -422,10 +403,10 @@ item.forEach(cd => {
 			<form id="addCardForm">
 				<div class='small'>
 					<input autocomplete="off" placeholder='id' class="id" type="text" id="id" name="id">
-					<input autocomplete="off" placeholder='name'type="text" id="name" name="name">
-					<input autocomplete="off" placeholder='peso'type="number" min max id="peso" name="peso">
+					<input autocomplete="off" placeholder='name' type="text" id="name" name="name">
+					<input autocomplete="off" placeholder='peso' type="text" min max id="peso" name="peso">
 					<input autocomplete="off" placeholder='precio' type="number" id="precio" name="precio">
-					<input autocomplete="off" type="text" id="img" name="img">
+					<input autocomplete="off" placeholder='path' type="text" id="img" name="img">
 					<input autocomplete="off" accept="image/jpeg, image/png" type="file" id="open" name="open">
 				</div>
 				<div class='big'>
@@ -458,10 +439,64 @@ item.forEach(cd => {
 					<input type="checkbox" id="aove" name="sellos">
 				</div>
 				<input type="submit" value="Add card">
+				<button class = 'aplicarCambios'>Aplicar cambios</button>
 			</form>
 		</div>
 	</div>
-	`)
+	`);
+	document.querySelector('#addCardForm').insertAdjacentHTML('afterbegin','<div class="list"><ul></ul></div>');
+	for (let product of Object.values(cards)) {
+			document.querySelector('.list > ul').insertAdjacentHTML('beforeend',`
+			<li>${product.name}</li>
+		`);
+	}
+
+	function clearForm() {
+		return new Promise(resolve => {
+		  const form = document.querySelector('#addCardForm');
+		  form.reset();
+		  document.querySelector('#imagePicante').src = 'img/sellos/none.png';
+		  resolve();
+		});
+	  }
+
+	const itemsList = document.querySelectorAll('.list > ul > li');
+	itemsList.forEach((e) => {
+		e.addEventListener('click', (event) => {
+			clearForm().then(() => {
+				const index = Array.from(itemsList).indexOf(event.target);
+				document.querySelector('#id').value  		     = cards[index].id;
+				document.querySelector('#name').value  			 = cards[index].name;
+				document.querySelector('#peso').value   		 = cards[index].peso;
+				document.querySelector('#precio').value			 = cards[index].precio;
+				document.querySelector('#img').value 			 = cards[index].img;
+				document.querySelector('#descr').value   		 = cards[index].descr;
+				document.querySelector('#ingredientes').value    = cards[index].ingredientes;
+				document.querySelector('#informacion').value     = cards[index].informacion;
+				for (let i = 0; i < cards[index].sellos.length; i++) {
+					switch(cards[index].sellos[i]) {
+						case 'picanteM':
+							document.querySelector('#imageSelect').selectedIndex = 1;
+							document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+							break;
+						case 'picanteH':
+							document.querySelector('#imageSelect').selectedIndex = 2;
+							document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+							break;
+						case 'picanteE':
+							document.querySelector('#imageSelect').selectedIndex = 3;
+							document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+							break;
+						default:
+						document.querySelector(`#${cards[index].sellos[i]}`).checked = true;
+					}
+				  }
+				   
+			})
+		});
+	});
+	
+	//document.querySelector('.small').insertAdjacentElement('beforebegin',divList);
 
 	const select = document.getElementById("imageSelect");
 	const image = document.getElementById("imagePicante");
@@ -632,6 +667,12 @@ item.forEach(cd => {
 			}
 		  });
 	}, 1000);
+
+
+})
+.catch(function (error) {
+	console.log(error," База данных не найдена");
+});
 
 });  //////////////////  END
 
