@@ -153,7 +153,6 @@ axios.get('db.json')
 
 //
 
-
 	function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, sellos, number) {
 		informacion = informacion.join('<br>');
 		document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
@@ -228,21 +227,15 @@ axios.get('db.json')
 		todo += total;
 		document.querySelector('.total').innerText = `TOTAL = ${todo} €`;
 
-		//console.log("carrito = ", carrito);
 		carritoTotal.push({...carrito});
 		console.clear();
 		console.log("total = ", carritoTotal);
 	}
 
-
-
-
 	function loadCarrito() {
 		function getItem(id) {
 			return cards.find(item => item.id == id);
 		}
-
-
 
 		//console.log(carrito[0]);
 		const img     = getItem(carrito[0]).img;
@@ -274,9 +267,6 @@ axios.get('db.json')
 		//prevArrow: $(".slick-prev"),
 		infinite: false
 	});
-
-	
-
 
 	$('button.slick-next').html("&#10154;");
 	$('button.slick-prev').html("&#10154;");
@@ -332,31 +322,28 @@ axios.get('db.json')
     }
 
 //  PAYMENTS
-	document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
-		
+	// document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
 		// sell(carritoTotal.map(item => ({
 		// 	price: item[0],
 		// 	quantity: Number(item[1])
 		// })));
-		
-	});
-
+	// });
  
-	function sell(obj) {
-		var stripe = Stripe('');
+	// function sell(obj) {
+	// 	var stripe = Stripe('');
 
-		stripe.redirectToCheckout({
-		lineItems: obj,
-			mode: 'payment',
-			successUrl: 'http://127.0.0.1:3000/index.html',
-			cancelUrl: 'http://127.0.0.1:3000/index.html'
-		}).then(function (result) {
-			if (result.error) {
-			console.log(result.error.message);
-			}
-		});
-		console.clear();
-	}
+	// 	stripe.redirectToCheckout({
+	// 	lineItems: obj,
+	// 		mode: 'payment',
+	// 		successUrl: 'http://127.0.0.1:3000/index.html',
+	// 		cancelUrl: 'http://127.0.0.1:3000/index.html'
+	// 	}).then(function (result) {
+	// 		if (result.error) {
+	// 		console.log(result.error.message);
+	// 		}
+	// 	});
+	// 	console.clear();
+	// }
 
 // lineItems: [{
 //     price: 'price_123',
@@ -368,12 +355,9 @@ axios.get('db.json')
 
 		const img = cd.querySelector('img');
 		const back = cd.querySelector('.item__back');
-	
-		
 
 		img.addEventListener('click', () => {
 			cd.classList.toggle('flipped');
-			
 
 		if (cd.classList.contains("flipped")) {
 			cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
@@ -389,10 +373,6 @@ axios.get('db.json')
 			if (cd.querySelector(':before')) {cd.querySelector(':before').style.opacity = 0;}
 		});
 	});
-
-
-  
-
 
 //MODAL
 
@@ -414,7 +394,6 @@ axios.get('db.json')
 					<textarea placeholder='ingredientes' id="ingredientes" name="ingredientes"></textarea>
 					<textarea placeholder='informacion' id="informacion" name="informacion"></textarea>
 				</div>
-				
 
 				<div class = "sellosAdd">
 					<img id='imagePicante' src='img/sellos/none.png'>
@@ -445,76 +424,105 @@ axios.get('db.json')
 	</div>
 	`);
 
-	document.querySelector('#addCardForm').insertAdjacentHTML('afterbegin','<div class="list"><ul></ul></div>');
-	for (let product of Object.values(cards)) {
-			document.querySelector('.list > ul').insertAdjacentHTML('beforeend',`
-			<li>${product.name}
-				<img class='trash' src='img/trash.png'>
-			</li>
-		`);
+	function createList() {
+		document.querySelector('#addCardForm').insertAdjacentHTML('afterbegin','<div class="list"><ul></ul></div>');
+		for (let product of Object.values(cards)) {
+				document.querySelector('.list > ul').insertAdjacentHTML('beforeend',`
+				<li>${product.name}
+					<img class='trash' src='img/trash.png'>
+				</li>
+			`);
+		}
 	}
-
-	document.querySelectorAll('.trash').forEach((element) => {
-		element.addEventListener('click', (event) => {
-			event.preventDefault();
-			event.target.parentElement.remove();
-			// const itemsList = document.querySelectorAll('.list > ul > li');
-			// const index = Array.from(itemsList).indexOf(event.target);
-		    console.log(document.querySelector('#id').value);
-			cards.splice(cards.findIndex(card => card.id == document.querySelector('#id').value, 1));
+	createList();
+	function createEventTrash() {
+		document.querySelectorAll('.trash').forEach((element) => {
+			element.addEventListener('click', (event) => {
+				event.preventDefault();
+				event.target.parentElement.remove();
+				
+				clearList().then(() => {
+					createList();
+					createEventsList();
+					createEventTrash();
+				});
+				cards.splice(cards.findIndex(card => card.id == document.querySelector('#id').value), 1);
+			});
 		});
-	});
+		console.log(cards);
+	}
+	createEventTrash();
+
+	function clearList() {
+		return new Promise(resolve => {
+			document.querySelector('.list').remove();
+			resolve();
+		})
+	};
 
 	function clearForm() {
 		return new Promise(resolve => {
 		  const form = document.querySelector('#addCardForm');
 		  form.reset();
 		  document.querySelector('#imagePicante').src = 'img/sellos/none.png';
+		  //document.querySelector('.list').remove();
 		  resolve();
 		});
-	  }
+	}
 
-	const itemsList = document.querySelectorAll('.list > ul > li');
-	itemsList.forEach((e) => {
-		e.addEventListener('click', (event) => {
-			clearForm().then(() => {
-			//try {
-				const index = Array.from(itemsList).indexOf(event.target);
-				document.querySelector('#id').value  		     = cards[index].id;
-				document.querySelector('#name').value  			 = cards[index].name;
-				document.querySelector('#peso').value   		 = cards[index].peso;
-				document.querySelector('#precio').value			 = cards[index].precio;
-				document.querySelector('#img').value 			 = cards[index].img;
-				document.querySelector('#descr').value   		 = cards[index].descr;
-				document.querySelector('#ingredientes').value    = cards[index].ingredientes;
-				document.querySelector('#informacion').value     = cards[index].informacion;
-				for (let i = 0; i < cards[index].sellos.length; i++) {
-					switch(cards[index].sellos[i]) {
-						case 'picanteM':
-							document.querySelector('#imageSelect').selectedIndex = 1;
-							document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
-							break;
-						case 'picanteH':
-							document.querySelector('#imageSelect').selectedIndex = 2;
-							document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
-							break;
-						case 'picanteE':
-							document.querySelector('#imageSelect').selectedIndex = 3;
-							document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
-							break;
-						default:
-						document.querySelector(`#${cards[index].sellos[i]}`).checked = true;
-					}
-				  }
-				//} catch {}   
-			})
+	function clearActive() {
+		const itemsList = document.querySelectorAll('.list > ul > li');
+		itemsList.forEach((e)=> {
+			e.classList.remove('active');
 		});
-	});
-	
-	//document.querySelector('.small').insertAdjacentElement('beforebegin',divList);
+		
+	}
+
+	function createEventsList() {
+		const itemsList = document.querySelectorAll('.list > ul > li');
+		itemsList.forEach((e) => {
+			e.addEventListener('click', (event) => {
+			clearActive();
+			e.classList.add('active');
+				clearForm().then(() => {
+				//try {
+					const index = Array.from(itemsList).indexOf(event.target);
+					document.querySelector('#id').value  		     = cards[index].id;
+					document.querySelector('#name').value  			 = cards[index].name;
+					document.querySelector('#peso').value   		 = cards[index].peso;
+					document.querySelector('#precio').value			 = cards[index].precio;
+					document.querySelector('#img').value 			 = cards[index].img;
+					document.querySelector('#descr').value   		 = cards[index].descr;
+					document.querySelector('#ingredientes').value    = cards[index].ingredientes;
+					document.querySelector('#informacion').value     = cards[index].informacion;
+
+					for (let i = 0; i < cards[index].sellos.length; i++) {
+						switch(cards[index].sellos[i]) {
+							case 'picanteM':
+								document.querySelector('#imageSelect').selectedIndex = 1;
+								document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+								break;
+							case 'picanteH':
+								document.querySelector('#imageSelect').selectedIndex = 2;
+								document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+								break;
+							case 'picanteE':
+								document.querySelector('#imageSelect').selectedIndex = 3;
+								document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+								break;
+							default:
+							document.querySelector(`#${cards[index].sellos[i]}`).checked = true;
+						}
+					}
+					//} catch {}   
+				})
+			});
+		});
+	}
+	createEventsList();
 
 	const select = document.getElementById("imageSelect");
-	const image = document.getElementById("imagePicante");
+	const image  = document.getElementById("imagePicante");
 
 	select.addEventListener("change", function() {
 		const selectedValue = select.value;
@@ -522,7 +530,6 @@ axios.get('db.json')
 	});
 
 	const addCardForm = document.getElementById('addCardForm');
-
 
 	let tempSellos = [];
 
@@ -547,15 +554,8 @@ axios.get('db.json')
 	});
 	
 	addCardForm.addEventListener('submit', function(event) {
-		
 		tempSellos.length = 0;
-
-		// if (newCard.sellos.length > 0) {
-		// 	newCard.sellos.length = 0;
-		// };
-		event.preventDefault(); // Отменяем отправку формы
-
-		// Получаем значения из полей ввода
+		event.preventDefault(); 
 		const id 			= document.getElementById('id').value;
 		const name 			= document.getElementById('name').value;
 		const peso			= document.getElementById('peso').value;
@@ -593,7 +593,6 @@ axios.get('db.json')
 		addCardForm.reset();
 		console.log(combobox.src);
 		document.querySelector('#imagePicante').src = 'img/sellos/none.png'
-		//combobox.selectedIndex = 0;
 
 		function updateData() {
 			
@@ -618,6 +617,7 @@ axios.get('db.json')
 		  updateData();
 
 	});
+
 	// APLICAR BUTTON
 
 	function updateCard(id, updatedCard) {
@@ -626,15 +626,15 @@ axios.get('db.json')
 			console.error(`Карточка с id ${id} не найдена`);
 			return;
 		}
-		const card = cards[index];
-		card.name = updatedCard.name;
-		card.peso = updatedCard.peso;
-		card.descr = updatedCard.descr;
+		const card 		  = cards[index];
+		card.name 		  = updatedCard.name;
+		card.peso 		  = updatedCard.peso;
+		card.descr		  = updatedCard.descr;
 		card.ingredientes = updatedCard.ingredientes;
-		card.img = updatedCard.img;
-		card.informacion = updatedCard.informacion;
-		card.sellos = updatedCard.sellos;
-		card.precio = updatedCard.precio;
+		card.img 		  = updatedCard.img;
+		card.informacion  = updatedCard.informacion;
+		card.sellos 	  = updatedCard.sellos;
+		card.precio 	  = updatedCard.precio;
 
 		const formData = new FormData();
 		formData.append('id', card.id);
@@ -649,11 +649,10 @@ axios.get('db.json')
 	};
 
 
-	document.querySelector('#addCardForm>button').addEventListener('click', (e) => {
+	document.querySelector('#addCardForm > button').addEventListener('click', (e) => {
 		e.preventDefault();
 		let aplSellos = [];
 		document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
-			
 			aplSellos.push(element.id);
 	   	});
 
