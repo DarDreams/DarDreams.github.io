@@ -25,7 +25,7 @@
         
         .list {
             //display: block;
-            cursor: pointer;
+            
             grid-column-start: 1;
             grid-row: 1/4;
             font-size: 20px;
@@ -38,9 +38,26 @@
             color: white;
            // border: 1px ridge red;
             li {
+                cursor: pointer;
+                position: relative;
+                width: 520px;
+                margin-bottom: 5px;
                 // 
+                .trash {
+                    opacity: 30%;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 25px;
+                    height: 17px;
+                    right: 0;
+                    filter: invert(1);
+                    &:hover {
+                        opacity: 100%;
+                    }
+                }
                 &:hover {
-                    border: 2px ridge red;
+                    color:red;
                 }
             }
         }

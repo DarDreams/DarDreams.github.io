@@ -444,12 +444,26 @@ axios.get('db.json')
 		</div>
 	</div>
 	`);
+
 	document.querySelector('#addCardForm').insertAdjacentHTML('afterbegin','<div class="list"><ul></ul></div>');
 	for (let product of Object.values(cards)) {
 			document.querySelector('.list > ul').insertAdjacentHTML('beforeend',`
-			<li>${product.name}</li>
+			<li>${product.name}
+				<img class='trash' src='img/trash.png'>
+			</li>
 		`);
 	}
+
+	document.querySelectorAll('.trash').forEach((element) => {
+		element.addEventListener('click', (event) => {
+			event.preventDefault();
+			event.target.parentElement.remove();
+			// const itemsList = document.querySelectorAll('.list > ul > li');
+			// const index = Array.from(itemsList).indexOf(event.target);
+		    console.log(document.querySelector('#id').value);
+			cards.splice(cards.findIndex(card => card.id == document.querySelector('#id').value, 1));
+		});
+	});
 
 	function clearForm() {
 		return new Promise(resolve => {
@@ -464,6 +478,7 @@ axios.get('db.json')
 	itemsList.forEach((e) => {
 		e.addEventListener('click', (event) => {
 			clearForm().then(() => {
+			//try {
 				const index = Array.from(itemsList).indexOf(event.target);
 				document.querySelector('#id').value  		     = cards[index].id;
 				document.querySelector('#name').value  			 = cards[index].name;
@@ -491,7 +506,7 @@ axios.get('db.json')
 						document.querySelector(`#${cards[index].sellos[i]}`).checked = true;
 					}
 				  }
-				   
+				//} catch {}   
 			})
 		});
 	});
@@ -508,35 +523,7 @@ axios.get('db.json')
 
 	const addCardForm = document.getElementById('addCardForm');
 
-	//const elem = document.querySelectorAll('input[name="sellos"]');
 
-	 //let arrSellos = [];
-
-	// elem.forEach((element, index) => {
-	// 	element.addEventListener('change', function () {
-	// 	  arrSellos[index] = elem[index]?.checked ? elem[index].id : null;
-	// 	  arrSellos[index + 1] = elem[index + 1]?.checked ? elem[index + 1].id : null;
-	// 	  arrSellos[index + 2] = elem[index + 2]?.checked ? elem[index + 2].id : null;
-	// 	  arrSellos[index + 3] = elem[index + 3]?.checked ? elem[index + 3].id : null;
-	// 	  arrSellos[index + 4] = elem[index + 4]?.checked ? elem[index + 4].id : null;
-		  
-	// 	  // Убираем лишние null в конце массива
-	// 	  arrSellos = arrSellos.filter(Boolean);
-	  
-	// 	  console.log(arrSellos);
-	// 	});
-	// });
-
-	// arrSellos.unshift('d');
-
-	//   document.querySelector('#imageSelect').addEventListener('change',(e) => {
-	// 	arrSellos[0] = e.target.selectedIndex > 0 ? e.target.value.match(/(\w+).png/)[1] : null;
-	// 	if (e.target.selectedIndex === 0) {
-	// 	  arrSellos.splice(0, 1);
-	// 	}
-	// 	console.log(e.target.selectedIndex);
-	// 	console.log(arrSellos);
-	//   });
 	let tempSellos = [];
 
 	const inputElement = document.getElementById("open");
@@ -559,7 +546,6 @@ axios.get('db.json')
 	  }
 	});
 	
-
 	addCardForm.addEventListener('submit', function(event) {
 		
 		tempSellos.length = 0;
@@ -568,7 +554,7 @@ axios.get('db.json')
 		// 	newCard.sellos.length = 0;
 		// };
 		event.preventDefault(); // Отменяем отправку формы
-		
+
 		// Получаем значения из полей ввода
 		const id 			= document.getElementById('id').value;
 		const name 			= document.getElementById('name').value;
@@ -590,7 +576,6 @@ axios.get('db.json')
 			img: `img/productos/${image}`,
 			precio: precio
 		};
-		
 
 		document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
 			tempSellos.push(element.id)
@@ -631,15 +616,58 @@ axios.get('db.json')
 		  }
 
 		  updateData();
-		  
 
 	});
-	
-	//console.log(cards);
+	// APLICAR BUTTON
+
+	function updateCard(id, updatedCard) {
+		const index = cards.findIndex(card => card.id == id);
+		if (index === -1) {
+			console.error(`Карточка с id ${id} не найдена`);
+			return;
+		}
+		const card = cards[index];
+		card.name = updatedCard.name;
+		card.peso = updatedCard.peso;
+		card.descr = updatedCard.descr;
+		card.ingredientes = updatedCard.ingredientes;
+		card.img = updatedCard.img;
+		card.informacion = updatedCard.informacion;
+		card.sellos = updatedCard.sellos;
+		card.precio = updatedCard.precio;
+
+		const formData = new FormData();
+		formData.append('id', card.id);
+		formData.append('name', card.name);
+		formData.append('peso', card.peso);
+		formData.append('descr', card.descr);
+		formData.append('ingredientes', card.ingredientes);
+		formData.append('img', card.img);
+		formData.append('informacion', card.informacion);
+		formData.append('sellos', card.sellos.join(','));
+		formData.append('precio', card.precio);
+	};
 
 
-	  
+	document.querySelector('#addCardForm>button').addEventListener('click', (e) => {
+		e.preventDefault();
+		let aplSellos = [];
+		document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
+			
+			aplSellos.push(element.id);
+	   	});
 
+		updateCard(document.querySelector('#id').value, {
+			name: document.querySelector('#name').value,
+			peso: document.querySelector('#peso').value,
+			descr: document.querySelector('#descr').value,
+			ingredientes: document.querySelector('#ingredientes').value,
+			img: document.querySelector('#img').value,
+			informacion: document.querySelector('#informacion').value,
+			sellos: aplSellos,
+			precio: document.querySelector('#precio').value
+		});
+	});
 
 	document.querySelector('.b_mail').addEventListener('click', (e) => {
 		e.preventDefault();
@@ -667,7 +695,6 @@ axios.get('db.json')
 			}
 		  });
 	}, 1000);
-
 
 })
 .catch(function (error) {
