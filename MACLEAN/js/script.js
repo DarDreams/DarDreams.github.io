@@ -25,7 +25,6 @@
 
 
 
-
 	
 
 
@@ -379,8 +378,8 @@ axios.get('db.json')
 	document.body.insertAdjacentHTML('afterbegin',`
 	<div class="modal">
 		<div class="modal-content">
-			<span class="close">&times;</span>
 			<form id="addCardForm">
+			<span class="close">&times;</span>
 				<div class='small'>
 					<input autocomplete="off" placeholder='id' class="id" type="text" id="id" name="id">
 					<input autocomplete="off" placeholder='name' type="text" id="name" name="name">
@@ -434,7 +433,9 @@ axios.get('db.json')
 			`);
 		}
 	}
+
 	createList();
+
 	function createEventTrash() {
 		document.querySelectorAll('.trash').forEach((element) => {
 			element.addEventListener('click', (event) => {
@@ -445,8 +446,26 @@ axios.get('db.json')
 					createList();
 					createEventsList();
 					createEventTrash();
+			
+						// Отправляем AJAX-запрос на сервер
+						$.ajax({
+						  url: 'https://www.conservasalboran.es/php/query.php', // адрес вашего сервера
+						  type: 'POST', // метод запроса
+						  data: JSON.stringify(cards), // данные, которые нужно отправить на сервер
+						  contentType: "application/json; charset=utf-8",
+						  dataType: "json", // тип данных, которые отправляем
+						  success: function(response) {
+							console.log('Данные успешно обновлены');
+							console.log(response); // ответ от сервера
+						  },
+						  error: function(error) {
+							console.error('Ошибка при обновлении данных');
+							console.error(error); // сообщение об ошибке
+						  }
+						});
 				});
 				cards.splice(cards.findIndex(card => card.id == document.querySelector('#id').value), 1);
+				
 			});
 		});
 		console.log(cards);
@@ -558,7 +577,7 @@ axios.get('db.json')
 		event.preventDefault(); 
 		const id 			= document.getElementById('id').value;
 		const name 			= document.getElementById('name').value;
-		const peso			= document.getElementById('peso').value;
+		const peso			= document.getElementById('peso').value.replace("g",'');
 		const descr 		= document.getElementById('descr').value;
 		const ingredientes	= document.getElementById('ingredientes').value;
 		const image			= document.getElementById('img').value;
@@ -594,6 +613,12 @@ axios.get('db.json')
 		console.log(combobox.src);
 		document.querySelector('#imagePicante').src = 'img/sellos/none.png'
 
+		clearList().then(() => {
+			createList();
+			createEventsList();
+			createEventTrash();
+		});
+
 		function updateData() {
 			
 			// Отправляем AJAX-запрос на сервер
@@ -617,6 +642,24 @@ axios.get('db.json')
 		  updateData();
 
 	});
+
+
+function clickImgCheck() {
+	const images = document.querySelectorAll(".sellosAdd img");
+	images.forEach((image) => {
+		const imageName = image.src.split("/").pop().split(".")[0];
+		const checkbox = document.querySelector(`#${imageName}`);
+		if (checkbox) {
+			image.addEventListener("click", () => {
+				checkbox.checked = !checkbox.checked;
+			});
+		};
+	});
+}
+
+clickImgCheck();
+
+
 
 	// APLICAR BUTTON
 
@@ -646,6 +689,23 @@ axios.get('db.json')
 		formData.append('informacion', card.informacion);
 		formData.append('sellos', card.sellos.join(','));
 		formData.append('precio', card.precio);
+
+			
+			$.ajax({
+			  url: 'https://www.conservasalboran.es/php/query.php', 
+			  type: 'POST', 
+			  data: JSON.stringify(cards), 
+			  contentType: "application/json; charset=utf-8",
+			  dataType: "json", 
+			  success: function(response) {
+				console.log('Данные успешно обновлены');
+				console.log(response); 
+			  },
+			  error: function(error) {
+				console.error('Ошибка при обновлении данных');
+				console.error(error); 
+			  }
+			});
 	};
 
 
@@ -668,17 +728,37 @@ axios.get('db.json')
 		});
 	});
 
-	document.querySelector('.b_mail').addEventListener('click', (e) => {
-		e.preventDefault();
-		if (document.querySelector('.e_mail').value == 'ADD') {
-			document.querySelector('.modal').style.display = 'block';
-			document.querySelector('.e_mail').value ='';
-		}
-	});
+	function modalShow() {
+		document.querySelector('.b_mail').addEventListener('click', (e) => {
+			e.preventDefault();
+			if (document.querySelector('.e_mail').value == 'ADD') {
+				window.scrollTo({top: 60, behavior: 'smooth'});
+				document.querySelector('.modal').style.display = 'block';
+				document.querySelectorAll('.background, .logo, .menu, section, footer').forEach((element) => {
+					element.style.filter = 'blur(4px)';
+					element.style.pointerEvents = 'none';
+				});
+				document.querySelector('.e_mail').value ='';
+			}
+		});
+	}
+
+	modalShow();
+
+	function modalHide() {
+		document.querySelector('.close').addEventListener('click', () => {
+			document.querySelector('.modal').style.display = 'none';
+			document.querySelectorAll('.background, .logo, .menu, section, footer').forEach((element) => {
+				element.style.filter = '';
+				element.style.pointerEvents = '';
+			});
+		});
+	}
+
+	modalHide();
 
 	document.querySelector('.e_mail').addEventListener('keydown', (event) =>{
 		if (event.shiftKey) {
-			console.log('test');
 			document.querySelector('.e_mail').setAttribute("type", "password");
 		} else {document.querySelector('.e_mail').setAttribute("type", "text");}
 	})

@@ -1,24 +1,5 @@
 {
  "cards" : [
-{
-"id" : "TEST",
-		"name" : "TEST",
-		"peso" : "TEST",
-		"descr" : "TEST",
-		"ingredientes" : "TEST",
-		"informacion" : [
-			"TEST",
-			"TEST",
-			"TEST",
-			"TEST",
-			"TEST",
-			"TEST",
-			"TEST"
-		],
-		"sellos" : [],
-		"img" : "TEST",
-		"precio" :11
-},
 	{
       	"id" : "price_1Miz3OAEMEnLyKBGotD96Yjf",
 		"name" : "Hummus Chili",
