@@ -620,8 +620,6 @@ axios.get('db.json')
 		});
 
 		function updateData() {
-			
-			// Отправляем AJAX-запрос на сервер
 			$.ajax({
 			  url: 'https://www.conservasalboran.es/php/query.php', // адрес вашего сервера
 			  type: 'POST', // метод запроса
@@ -774,6 +772,33 @@ clickImgCheck();
 			}
 		  });
 	}, 1000);
+
+
+		$('.contactos__informacion__mensaje_form').submit(function(e) {
+		  e.preventDefault();
+		  var name    = $('.name').val();
+		  var tel	  = $('.tel').val();
+		  var email   = $('.email').val();
+		  var mensaje = $('.text').val();
+	  
+		  $.ajax({
+			type: 'POST',
+			url: 'https://www.conservasalboran.es/php/mail.php', // укажите правильный путь к файлу на сервере
+			data: {
+				to: 'dardreams@gmail.com', 
+				subject: 'Mensaje de conservasalboran.es',
+				body: 'Nombre: ' + name + '\nTeléfono: ' + tel + '\nEmail: ' + email + '\nMensaje: ' + mensaje
+			},
+			success: function() {
+			 	console.log('Message sent!');
+			},
+			error: function() {
+				console.log('Message failed to send.');
+			}
+		  });
+		});
+	  
+
 
 })
 .catch(function (error) {
