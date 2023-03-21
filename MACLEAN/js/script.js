@@ -785,6 +785,7 @@ clickImgCheck();
 			type: 'POST',
 			url: 'https://www.conservasalboran.es/php/mail.php', // укажите правильный путь к файлу на сервере
 			data: {
+				mail: email,
 				to: 'dardreams@gmail.com', 
 				subject: 'Mensaje de conservasalboran.es',
 				body: 'Nombre: ' + name + '\nTeléfono: ' + tel + '\nEmail: ' + email + '\nMensaje: ' + mensaje
