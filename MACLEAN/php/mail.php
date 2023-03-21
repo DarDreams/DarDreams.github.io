@@ -3,7 +3,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $to = $_POST['to'];
   $subject = $_POST['subject'];
   $body = $_POST['body'];
-  $headers = 'From: webmaster@example.com' . "\r\n" .
+  $mail = $_POST['mail'];
+  $headers = 'From: ' . $mail . "\r\n" .
              'Reply-To: webmaster@example.com' . "\r\n" .
              'X-Mailer: PHP/' . phpversion();
 
