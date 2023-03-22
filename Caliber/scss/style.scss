@@ -122,6 +122,14 @@ html {
                 width: 30px;
                 background-color:rgba(0, 0, 0, 0.5);
             }
+            .rankEmbed {
+                position: absolute;
+                width: 60px;
+                height: 30px;
+                transform: translate(-146px, 35px) rotateY(180deg);
+                transform: translate(-427px, 37px) rotateY(0deg);
+            }
+
             .assaultLogo, .gunnerLogo, .medicLogo, .sniperLogo,
             .assaultRLogo, .gunnerRLogo, .medicRLogo, .sniperRLogo {
                 width: 45px;
@@ -163,7 +171,7 @@ html {
                 z-index: 9;
                 width: 20px;
                 text-align: center;
-                transform: translate(-40px, 2px);
+                transform: translate(-40px, -11px);
             }
             .baner {
                 border-radius: 5px;
@@ -187,6 +195,7 @@ html {
                 height: 40px;
                 border-radius: 10px;
                 transform: translate(-47px, -10px);
+                transform: translate(-47px, -23px);
                 fill: #cbcccb9b;
                 span {
                     position: relative;
@@ -519,6 +528,7 @@ h1 {
     }
      .winLose {
         margin-top: -136px;
+        margin-left: -136px;
         transform: scale(0.7);
         .winLoseText {
             transform: translate(32px, -69px);
