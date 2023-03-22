@@ -930,9 +930,9 @@ try {
                         { min: 0, max: 100, rank: ["#804E26", "III"] },
                         { min: 100, max: 200, rank: "#804E26 II" },
                         { min: 200, max: 300, rank: "#804E26 I" },
-                        { min: 300, max: 400, rank: "#3A4F54 III" },
-                        { min: 400, max: 500, rank: "#3A4F54 II" },
-                        { min: 500, max: 600, rank: "#3A4F54 I" },
+                        { min: 300, max: 400, rank: "#5D5D5D III" },
+                        { min: 400, max: 500, rank: "#5D5D5D II" },
+                        { min: 500, max: 600, rank: "#5D5D5D I" },
                         { min: 600, max: 700, rank: "#D08B14 III" },
                         { min: 700, max: 800, rank: "#D08B14 II" },
                         { min: 800, max: 900, rank: "#D08B14 I" },
@@ -951,11 +951,11 @@ try {
                                     return `${ranges[i].rank}`;
                                 case "#804E26 I":
                                     return `${ranges[i].rank}`;
-                                case "#3A4F54 III":
+                                case "#5D5D5D III":
                                     return `${ranges[i].rank}`;
-                                case "#3A4F54 II":
+                                case "#5D5D5D II":
                                     return `${ranges[i].rank}`;
-                                case "#3A4F54 I":
+                                case "#5D5D5D I":
                                     return `${ranges[i].rank}`;
                                 case "#D08B14 III":
                                     return `${ranges[i].rank}`;
