@@ -939,7 +939,7 @@ try {
                         { min: 900, max: 1000, rank: "#692B71 III" },
                         { min: 1000, max: 1100, rank: "#692B71 II" },
                         { min: 1100, max: 1200, rank: "#692B71 I" },
-                        { min: 1200, max: 9999, rank: "#303749 I" }
+                        { min: 1200, max: 9999, rank: "#46B5C3 I" }
                     ];
                 
                     for (let i = 0; i < ranges.length; i++) {
@@ -969,7 +969,7 @@ try {
                                     return `${ranges[i].rank}`;
                                 case "#692B71 I":
                                     return `${ranges[i].rank}`;
-                                case "#303749 I":
+                                case "#46B5C3 I":
                                     return `${ranges[i].rank}`;
                             }
                         }
