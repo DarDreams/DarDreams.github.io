@@ -1,35 +1,3 @@
-// import {
-//     cards2
-// } from "./cards.js";
-// console.log(cards2);
-
-// const hamburger = document.querySelector(".hamburger"),
-//       menu = document.querySelector(".menu"),
-//       closeElem = document.querySelector(".menu__close");
-
-// hamburger.addEventListener("click",() => {
-//     menu.classList.add("active");
-// });
-
-// closeElem.addEventListener("click",() => {
-//     menu.classList.remove("active");
-// });
-
-
-// const counters = document.querySelectorAll(".skills__rating"),
-//       lines = document.querySelectorAll(".skills__progress-bar span");
-
-// counters.forEach((item, i) => {
-//     lines[i].style.width = item.innerHTML;
-// });
-
-
-
-	
-
-
-
-
 $(document).ready(function(){
 let cards = {};
 axios.get('db.json')
@@ -136,6 +104,21 @@ axios.get('db.json')
 		$("header").removeClass("header_mini");
 		}
 	});
+
+
+//////HAMBURGER
+
+document.body.insertAdjacentHTML('afterbegin',`
+
+<div class="hamburger">
+		<span class="button">&#x2630;</span>
+</div>
+`);
+
+document.querySelector('.hamburger>.button').addEventListener('click', () => {
+	document.querySelector('.menu>nav>ul').classList.toggle('mobile');
+})
+
 
 /////////////PRODUCTOS///////////////
 

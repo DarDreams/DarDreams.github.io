@@ -49,9 +49,8 @@ body {
 .background {
     left: 0;
     top: 0;
-	//width: calc(100vw - 4px);
+	//width: 100vw;
 	height: 100vh;
-	//background: url("../img/main_test.jpg") no-repeat 10%/cover;
     background: url("../img/bg0.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -75,30 +74,133 @@ body {
 
 
 @media (max-width: 768px) {
-   // @media (max-width: 2000px) {
-    * {
+    .logo {
+        zoom: 0.5;
+        margin-left: -80px;
+    }
+    .background {
+        background: url("../img/bg_min.png");
+        background-repeat: no-repeat;
+        background-size: 768px 767px;
+        width: 100vw;
+    }
+
+    .menu {
+        display: none;
+    }
+
+      .menu, .mobile{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        background-color: rgba($color: #000000, $alpha: 0.8);
+        left: 0;
+        text-align: center;
+        height: 50%;
+        font-size: 40px;
+        transition: all 1s ease;
+        li a {
+            font-size: 30px;
+        }
+    }
+
+    .menu__overlay {
         visibility: hidden;
     }
-    body:before {
-      content: "Disculpe, ahora el sitio no está disponible en teléfonos móviles";
-      display: block;
-      white-space: pre-wrap;
-      visibility: visible;
-      position: absolute;
-      top: 50%;
-      left: 50%;
 
-      width: 100%;
-      text-align: center;
-      transform: translate(-50% -50%);
-      font-size: 2em;
-      color: #fff;
-      padding: 20px;
-      background-color: #f00;
-      box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
-      color: #fff;
-      
+    .pageup {
+        visibility: hidden;
     }
-  }
+
+
+    section.footer {
+        padding: 0;
+        margin: 0;
+        grid-template-columns: 50% 50%;
+        justify-items: center;
+        align-items:center;
+    
+        .footer__logo__wrapper {
+            transform: translateY(-50%);
+            &_textdown {
+                margin-top:5px;
+            }
+        }
+
+        .footer__text_left {
+            transform: translateY(76%);
+            grid-row-start: 1;
+            position: relative;
+            font-size: 14px;
+        }
+    
+        .footer__informacion  {
+          transform: translateY(-8%);
+        }
+        .footer__news {
+            display: none;
+        }
+
+    }
+   
+    .hamburger {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    
+            
+        }
+       .button {
+            z-index: 99;
+            position: fixed;
+            width: 35px;
+            height: 35px;
+            color: black;
+            background-color: white;
+            font-size: 20px;
+            text-align: center;
+            line-height: 1.8;
+            transform: translate(-50%, 100%);
+            right: 0;
+            border-radius: 100%
+       }
+
+
+
+
+
+
+
+
+
+
+
+}///////////////////// END
+   // @media (max-width: 2000px) {
+//     * {
+//         visibility: hidden;
+//     }
+//     body:before {
+//       content: "Disculpe, ahora el sitio no está disponible en teléfonos móviles";
+//       display: block;
+//       white-space: pre-wrap;
+//       visibility: visible;
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+
+//       width: 100%;
+//       text-align: center;
+//       transform: translate(-50% -50%);
+//       font-size: 2em;
+//       color: #fff;
+//       padding: 20px;
+//       background-color: #f00;
+//       box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+//       color: #fff;
+      
+//     }
   
   
