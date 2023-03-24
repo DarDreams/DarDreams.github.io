@@ -921,13 +921,10 @@ window.addEventListener('DOMContentLoaded', () => {
                     recive: Math.floor(data2.Log.Users[k - 2][i].DamageReceived)
                 };
 
-                // console.clear();
-                // console.log("[3][0] - |",operator.perks[3],"|");
-                // console.log("data[0] - ", data1);
 
                 function getRange(number) {
                     const ranges = [
-                        { min: 0, max: 100, rank: ["#804E26", "III"] },
+                        { min: 0,   max: 100, rank: "#804E26 III" },
                         { min: 100, max: 200, rank: "#804E26 II" },
                         { min: 200, max: 300, rank: "#804E26 I" },
                         { min: 300, max: 400, rank: "#5D5D5D III" },
@@ -1285,15 +1282,17 @@ window.addEventListener('DOMContentLoaded', () => {
                 const rusMapName = maps.rusMap[i];
                 divMap.textContent = `\u00A0${rusMapName}`;
             }
-
+            
             if (caliber[4] == 'pvp') {
                 mode.innerText = `Столкновение:`;
-
-                time.innerText = convertSecondsToTime(data2.Log.MatchTimeSeconds);
             };
 
+            if (caliber[4] == 'hacking') {
+                mode.innerText = `Взлом:`;
+            };
+            time.innerText = convertSecondsToTime(data2.Log.MatchTimeSeconds);
         })();
-
+        
         //  WIN / LOSE
         (function () {
             function color(color, text) {
@@ -1332,67 +1331,42 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         
         //  COLOR POINTS
+      
+
         (function () {
-            for (let j = 0; j < data2.Log.Rounds.length; j++) {
-                let color = ["blue", "red"]
-
-                color.forEach((color, i) => {
-                    //console.log(data2.Log.Rounds[i].winner_team); 
-                    let colorTeam;
-                    (data2.Log.Rounds[j].winner_team == 1) ? colorTeam = '#6aa5ee' : colorTeam = '#ff323b';  
-                    document.querySelector(`.${color}Points`).insertAdjacentHTML('beforeend', `
-                            <svg class="${color}Point${j+1} points ${color}" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
-                            <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="${colorTeam}" fill-opacity="1" stroke="${colorTeam}" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
-                            </svg>
-                    `);
-                    
-                    // function setColor(n) {
-                    //     document.querySelector(`.${color}Point${n}>path`).style.fillOpacity = '1';
-                    // }
-                    //console.log(score(i));
-
-                    
 
 
-                    // if (score(i) == 1) {
-                    //     setColor(1)
-                    // }
-                    // if (score(i) == 2) {
-                    //     setColor(1);
-                    //     setColor(2)
-                    // }
-                    // if (score(i) == 3) {
-                    //     setColor(1);
-                    //     setColor(2);
-                    //     setColor(3);
-                    // }
-                    // if (score(i) == 4) {
-                    //     setColor(1);
-                    //     setColor(2);
-                    //     setColor(3);
-                    //     setColor(4);
-                    // }
-                });
+            let color = ["blue", "red"];
+            let colorTeam = '';
+            let visible = 0;
+
+            for (let j = 0; j < data2.Log.MaxRoundsWon*2; j++) {
+                if (data2.Log.Rounds[j].winner_team == 0) {
+                    visible = 1;
+                } else { 
+                    visible = 0;
+                };
+                document.querySelector(`.bluePoints`).insertAdjacentHTML('beforeend', `
+                        <svg class="bluePoint${j + 1} points blue" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
+                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="${(visible == 0)?visible=1:visible=0}" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
+                        </svg>
+                `);
+                document.querySelector(`.redPoints`).insertAdjacentHTML('beforeend', `
+                        <svg class="redPoint${j + 1} points red" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
+                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="${(visible == 1)?visible=0:visible=1}" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
+                        </svg>
+                `);
             }
-            document.querySelector('.timeScore').insertAdjacentHTML('afterbegin', `
-                <h1>СЧЁТ</h1>
-                <h1 class="time"></h1>
-            `);
 
         })();
-
-
-
-
         id = data1[0];
-
         alldata = [data1, data2]
 
     } ////// END ALL DATAS
     try {
         upload(caliber, caliber2);
     } catch (e) {
-        console.error("Ошибка в функции upload - ", e.message);
+        console.error("Ошибка в функции upload - ", e.message,);
     }
 
 
