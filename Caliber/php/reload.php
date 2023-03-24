@@ -1,9 +1,8 @@
+
+
+<!-- 'https://dardreams.ptservice.kz/caliber/js/game.js' -->
+
 <?php
-If (1 == 1) {
-    $result = значению;
-    } else {
-    $result = false;
-    }
-    
-    header("Location: ../index.html");
+
 ?>
+

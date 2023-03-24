@@ -980,7 +980,7 @@ try {
                 
                 //console.log(getRange(1012)); // диапазон №6 (500-600) - Серебро 3
 
-                console.log(caliber[k+5][i][2]," - ",caliber[k+5][i][16][1]," - ",caliber[k+5][i][16][2]," - ",caliber[k+5][i][16][3]," - ",caliber[k+5][i][16][4]," - ",caliber[k+5][i][16][6]);
+              //  console.log(caliber[k+5][i][2]," - ",caliber[k+5][i][16][1]," - ",caliber[k+5][i][16][2]," - ",caliber[k+5][i][16][3]," - ",caliber[k+5][i][16][4]," - ",caliber[k+5][i][16][6]);
 
 
                 let img = new Image();
@@ -1647,6 +1647,41 @@ try {
         
     });
 
+////////////ПЫТАЮСЬ СДЕЛАТЬ ПЕРЕЗАГРУЗКУ НО НЕ МОГУ(////////////////
+
+// задаем путь к файлу, который нужно проверять
+const filePath = 'js/game.js';
+
+// переменная для хранения времени последнего изменения файла
+let lastModifiedTime = null;
+
+// функция, которая будет вызываться каждые 10 секунд
+function checkFile() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('HEAD', filePath);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        const currentModifiedTime = xhr.getResponseHeader('Last-Modified');
+        if (lastModifiedTime !== null && lastModifiedTime !== currentModifiedTime) {
+          location.reload();
+        } else {
+          console.log('Файл не изменился. Последнее изменение: ' + currentModifiedTime);
+        }
+        lastModifiedTime = currentModifiedTime;
+      } else {
+        console.log('Ошибка проверки файла: ' + xhr.status);
+      }
+    }
+  };
+  xhr.send();
+}
+
+// запускаем проверку каждые 10 секунд
+setInterval(checkFile, 10000);
+
+
+////////////////////////////
 
 
     function setZero(num) {
