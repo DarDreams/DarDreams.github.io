@@ -1337,10 +1337,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 let color = ["blue", "red"]
 
                 color.forEach((color, i) => {
-                    console.log(data2.Log.Rounds[i].winner_team); 
+                    //console.log(data2.Log.Rounds[i].winner_team); 
+                    let colorTeam;
+                    (data2.Log.Rounds[j].winner_team == 1) ? colorTeam = '#6aa5ee' : colorTeam = '#ff323b';  
                     document.querySelector(`.${color}Points`).insertAdjacentHTML('beforeend', `
                             <svg class="${color}Point${j+1} points ${color}" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
-                            <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="0" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
+                            <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="${colorTeam}" fill-opacity="1" stroke="${colorTeam}" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
                             </svg>
                     `);
                     
