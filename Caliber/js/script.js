@@ -1457,18 +1457,7 @@ try {
     });
 
 
-    setInterval(function(){
-        $.ajax({
-          url: 'https://dardreams.ptservice.kz/caliber/reload.php',
-          type: 'POST',
-          data: { },
-          success: function(data) {
-            if(data == 'reload') {
-              location.reload();
-            }
-          }
-        });
-      }, 60000);
+  
 
     const calendarBody = document.getElementById("calendar-body");
     const today = new Date();
