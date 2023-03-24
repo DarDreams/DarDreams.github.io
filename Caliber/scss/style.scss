@@ -2,17 +2,19 @@
 
 html {
     cursor: url('../img/def.cur'), auto;
+
     body {
         margin: 0;
         padding: 0;
         overflow: hidden;
 
-          
-      }
-    
+
+    }
+
 
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto",
+    sans-serif;
     background-image: url('https://cdn.playcaliber.com/site/media/wallpapers/2021/09/08/wallpapers-ksk_1920.jpg');
     background-color: black;
     background-position: bottom -250px right -60px;
@@ -21,26 +23,27 @@ html {
     //font-family: "Consolas", Sans-Serif;
     //position: relative;
 
-    ::-webkit-scrollbar{
-        width:5px;
+    ::-webkit-scrollbar {
+        width: 5px;
     }
-    ::-webkit-scrollbar-thumb{
-        border-width:1px 1px 1px 2px;
+
+    ::-webkit-scrollbar-thumb {
+        border-width: 1px 1px 1px 2px;
         border-color: rgb(0, 0, 0);
         background-color: rgb(0, 0, 0);
     }
-    
-    ::-webkit-scrollbar-thumb:hover{
+
+    ::-webkit-scrollbar-thumb:hover {
         border-width: 1px 1px 1px 2px;
         border-color: rgb(255, 0, 0);
         background-color: rgb(255, 0, 0);
     }
-    
-    ::-webkit-scrollbar-track{
-        border-width:0;
+
+    ::-webkit-scrollbar-track {
+        border-width: 0;
     }
-    
-    
+
+
 }
 
 .hint {
@@ -53,19 +56,20 @@ html {
     padding: 10px;
     font-size: 14px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-  }
+}
 
 
 .container_tables.show {
     transform: translateX(20%);
     transition: 1s ease;
-    
+
 }
 
 .container_tables {
     transition: all .8s ease-in-out;
     display: block;
     margin-top: 0px;
+
     table {
         margin: 0 auto;
         transform: scale(.8);
@@ -73,10 +77,11 @@ html {
         background: #1919192d;
         color: #ffffff;
         border-collapse: collapse;
+
         th {
             font-size: 13.5px;
             font-weight: 200;
-            color:white;
+            color: white;
             text-align: center;
             padding-right: 25px;
 
@@ -89,30 +94,39 @@ html {
             background: #0000007d;
             //padding-right: 15px;
             width: 80px;
+
             &:nth-child(5) {
                 padding-right: 100px;
             }
+
             &:nth-child(6) {
                 padding-right: 25px;
             }
+
             &:nth-child(7) {
                 padding-right: 25px;
             }
+
             &:nth-child(8) {
                 padding-right: 25px;
             }
+
             &:nth-child(9) {
                 padding-right: 25px;
             }
+
             &:nth-child(10) {
                 padding-right: 25px;
             }
         }
+
         tr {
             padding: 0;
         }
-        tbody:not(:nth-child(1)) > tr {
+
+        tbody:not(:nth-child(1))>tr {
             cursor: pointer;
+
             .rank {
                 z-index: 9;
                 transform: translate(-116px, 8px);
@@ -120,8 +134,9 @@ html {
                 //text-align: right;
                 font-size: 12px;
                 width: 30px;
-                background-color:rgba(0, 0, 0, 0.5);
+                background-color: rgba(0, 0, 0, 0.5);
             }
+
             .rankEmbed {
                 position: absolute;
                 width: 60px;
@@ -130,16 +145,24 @@ html {
                 transform: translate(-427px, 37px) rotateY(0deg);
             }
 
-            .assaultLogo, .gunnerLogo, .medicLogo, .sniperLogo,
-            .assaultRLogo, .gunnerRLogo, .medicRLogo, .sniperRLogo {
+            .assaultLogo,
+            .gunnerLogo,
+            .medicLogo,
+            .sniperLogo,
+            .assaultRLogo,
+            .gunnerRLogo,
+            .medicRLogo,
+            .sniperRLogo {
                 width: 45px;
                 height: 45px;
                 //fill: #6aa5ee;
             }
+
             .oper {
                 width: 80px;
                 transform: translate(-10px, 3px);
             }
+
             .lvlOp {
                 position: absolute;
                 z-index: 9;
@@ -148,6 +171,7 @@ html {
                 font-size: 12px;
                 transform: translate(20px, 2px);
             }
+
             .nameOp {
                 font-size: 11px;
                 //font-stretch: ultra-condensed;
@@ -156,6 +180,7 @@ html {
                 position: absolute;
                 transform: translate(-42px, 4px);
             }
+
             .bevel {
                 width: 72px;
                 height: 20px;
@@ -163,6 +188,7 @@ html {
                 transform: translate(-84px, 33px);
                 //opacity: .7;
             }
+
             .lvlText {
                 position: absolute;
                 color: black;
@@ -173,10 +199,12 @@ html {
                 text-align: center;
                 transform: translate(-40px, -11px);
             }
+
             .baner {
                 border-radius: 5px;
                 transform: translate(-85px, 4px);
             }
+
             .name {
                 position: absolute;
                 font-size: 20px;
@@ -188,7 +216,8 @@ html {
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            .wrapper > svg {
+
+            .wrapper>svg {
                 z-index: 9;
                 position: absolute;
                 width: 40px;
@@ -197,6 +226,7 @@ html {
                 transform: translate(-47px, -10px);
                 transform: translate(-47px, -23px);
                 fill: #cbcccb9b;
+
                 span {
                     position: relative;
                     font-size: 22px;
@@ -206,31 +236,38 @@ html {
                     font-weight: 800;
                 }
             }
+
             .perks {
                 transform: translate(250px, -6px);
+
                 .perk {
                     width: 30px;
                     height: 30px;
                     fill: white;
                     position: absolute;
-                    border: 0.1px solid rgba(255,255,255,0.11);
+                    border: 0.1px solid rgba(255, 255, 255, 0.11);
+
                     &._1 {
                         transform: translate(-376px, -30px);
                     }
+
                     &._2 {
                         transform: translate(-350px, -30px);
                     }
+
                     &._3 {
                         transform: translate(-376px, 0px);
                     }
+
                     &._4 {
                         transform: translate(-350px, 0px);
                     }
                 }
             }
+
             &:hover {
                 transform: scale(1.05);
-                transition: ease .5s  !important;
+                transition: ease .5s !important;
             }
         }
     }
@@ -248,33 +285,38 @@ html {
     //background-color: white;
     //box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     transition: left 1s ease;
+
     & input[type="file"] {
         display: none;
     }
+
     #list-container {
         display: none;
-        overflow-y:auto;
+        overflow-y: auto;
         height: 300px;
     }
 }
-  
+
 .slide-out-panel.show {
     left: 0;
     margin-top: 10px;
+
     #list-container {
         text-align: center;
         padding: 10px;
         display: block;
         color: grey;
         position: absolute;
-        top:46%;
-        
+        top: 46%;
+
         cursor: pointer;
+
         ul {
             list-style: none;
             margin-left: 0;
             padding: 0;
-          }
+        }
+
         li {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -288,16 +330,19 @@ html {
             margin-left: 20px;
             cursor: pointer;
             border: 1px solid rgba(128, 128, 128, 0.51);
+
             & span {
                 text-align: left;
+
                 & img.basket {
                     display: none;
                     position: absolute;
                     width: 20px;
                     height: 20px;
                     margin-left: 5%;
-                    margin-top:-3px;
+                    margin-top: -3px;
                 }
+
                 & svg.star {
                     opacity: 0;
                     width: 54px;
@@ -307,6 +352,7 @@ html {
                     margin-top: -18px;
                 }
             }
+
             & span:nth-child(1) {
                 width: 127px;
                 padding-left: 50px;
@@ -316,26 +362,30 @@ html {
                 text-overflow: ellipsis;
             }
         }
+
         li:hover {
             color: white;
             padding: 8px 28px 8px 8px;
             border: 3px solid white;
+
             & span {
                 & img.basket {
                     display: inline;
                     opacity: .5;
+
                     &:hover {
                         opacity: 1;
                     }
                 }
-                & svg.star {  
-                    display: inline;    
+
+                & svg.star {
+                    display: inline;
                     opacity: 1;
                 }
             }
-        }     
+        }
     }
-}  
+}
 
 img.rec {
     top: 21%;
@@ -345,63 +395,69 @@ img.rec {
     padding: 3px;
     border: 1px solid grey;
     filter: grayscale(100%);
+
     &:hover {
         border: 4px solid white;
         padding: 0px;
     }
 }
+
 .custom-file-input {
     position: absolute;
     top: 21%;
+
     & input[type="file"] {
-            display: none;
+        display: none;
     }
+
     & label {
         display: inline-block;
-        
+
         transform: translateX(7px);
         cursor: pointer;
-        }
+    }
 
-        img.folder {
-            left: 50px;
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            padding: 3px;
-            border: 1px solid grey;
-            &:hover {
-                border: 4px solid white;
-                padding: 0px;
-            }
+    img.folder {
+        left: 50px;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        padding: 3px;
+        border: 1px solid grey;
+
+        &:hover {
+            border: 4px solid white;
+            padding: 0px;
         }
-        & label:hover {
+    }
+
+    & label:hover {
         //background-color: #e6e6e6;
         //padding: 0px 0px 0px 1px ;
         //border: 1px solid white;
         cursor: pointer;
-        }
-        
-        & label:active {
+    }
+
+    & label:active {
         //background-color: #d9d9d9;
         // cursor: pointer;
-        }
-        
-        & label::before {
-       
+    }
+
+    & label::before {
+
         cursor: pointer;
         content: "";
         font-size: 14px;
         font-weight: 400;
         display: inline-block;
         color: #6aa5ee;
-        }
-        
+    }
+
     //   & input[type="file"]:focus + label::before {
     //     outline: 1px dotted #000;
     //     outline: -webkit-focus-ring-color auto 5px;
     //   }
-        
+
 }
 
 #month-selector {
@@ -409,9 +465,9 @@ img.rec {
     width: 226px;
     font-size: 16px;
 }
-   
-  
-  button#show-panel {
+
+
+button#show-panel {
     z-index: 2;
     position: fixed;
     top: 20%;
@@ -421,99 +477,133 @@ img.rec {
     color: white;
     border: 1px solid grey;
     padding: 1px;
-    &:hover{
+
+    &:hover {
         padding: 0px;
         border: 2px solid white;
     }
-  }
+}
 
 .calendar {
     color: white;
     margin-left: 20px;
-   // position: absolute;
-   // transform: translate(40px, 290px);
+
+    // position: absolute;
+    // transform: translate(40px, 290px);
     .container {
         position: absolute;
         top: 25%;
+
         //transform: translateY(-50%);
-    table {
-        border-collapse: collapse;
-        
+        table {
+            border-collapse: collapse;
+
         }
-    td {
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        vertical-align: middle;
-        border: 1px solid black;
+
+        td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid black;
         }
-         td:hover {
-        background-color: #6aa5ee;
-        cursor: pointer;
+
+        td:hover {
+            background-color: #6aa5ee;
+            cursor: pointer;
         }
-         .event {
-        background-color: red;
+
+        .event {
+            background-color: red;
         }
     }
 }
 
 .container {
     display: inline-block;
-    .winLose > svg {
+
+    .winLose>svg {
         left: 0;
         display: inline-block;
         margin-left: 100px;
     }
+
     .winLoseText {
         display: inline-block;
         transform: translate(35px, -80px);
-        color : #6aa5ee;
+        color: #6aa5ee;
         //position: absolute;
         font-size: 60px;
         font-weight: 600;
         letter-spacing: 10px;
     }
 }
+
 .timeScore {
-display: inline-block;
-h1 {
-    color: #fff;
-    margin: auto 40px;
+
+    // display: inline-block;
+    h1 {
+        color: #fff;
+        margin: auto 40px;
+    }
 }
-}
-.redPoints {
-        margin-top: -150px;
-        
-        text-align: center;
+
+.allPoints {
+    display: flex;
+    justify-content: center;
+    margin-top: -120px;
+
+    .redPoints {
+        svg>path {
+            stroke: #ff323b;
+        }
+
+        .red {
+            transform: scaleX(-1) rotateX(-180%)
+        }
+    }
+
+    .bluePoints {
+        svg>path {
+            stroke: #6aa5ee;
+        }
+
         .points {
             margin-right: 3px;
         }
+
         .blue {
             transform: scaleX(-1)
         }
+    }
 }
+
 .stats {
     top: 0;
     position: relative;
     color: white;
     font-size: 30px;
     font-weight: 600;
+
     .wrapper {
         position: absolute;
         width: 400px;
         height: 500px;
         right: 0;
         top: 44px;
+
         .container {
             display: flex;
             justify-content: center;
             margin-top: 0px;
         }
+
         img {
             width: 30px;
             height: 30px;
         }
     }
+
     .mode {
         text-align: center;
         //margin-left: 60px;
@@ -526,10 +616,12 @@ h1 {
     body {
         max-height: 600px;
     }
-     .winLose {
+
+    .winLose {
         margin-top: -136px;
         margin-left: -136px;
         transform: scale(0.7);
+
         .winLoseText {
             transform: translate(32px, -69px);
         }
@@ -537,17 +629,19 @@ h1 {
 
     .stats {
         margin-top: 100px;
+
         .wrapper {
-            margin-top: -163px; 
+            margin-top: -163px;
             transform: scale(0.65);
         }
     }
+
     .container_tables {
         margin-top: -135px;
         transform: scale(0.75);
     }
 
-    .redPoints {
+    .redPoints .bluePoints {
         margin-top: -138px;
         transform: scale(0.75);
 

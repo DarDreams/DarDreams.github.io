@@ -18,14 +18,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //let games = objectToArray(game);
 
-try {
-    caliber[8] = caliber[7].splice(4);
-    caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
-    caliber2.Log.Users[1] = [caliber2.Log.Users[4], caliber2.Log.Users[5], caliber2.Log.Users[6], caliber2.Log.Users[7]]
-    caliber2.Log.Users.splice(2);
-} catch (e) {
-    console.error("ошибка в пересборке объекта - ", e.message);
-}
+    try {
+        caliber[8] = caliber[7].splice(4);
+        caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
+        caliber2.Log.Users[1] = [caliber2.Log.Users[4], caliber2.Log.Users[5], caliber2.Log.Users[6], caliber2.Log.Users[7]]
+        caliber2.Log.Users.splice(2);
+    } catch (e) {
+        console.error("ошибка в пересборке объекта - ", e.message);
+    }
 
 
 
@@ -85,7 +85,7 @@ try {
             Сопротивление: +3/4/5%`
         ],
 
-        "fast_revive": ["Скорая помощь", 
+        "fast_revive": ["Скорая помощь",
             `Благодаря специальной
             тренеровке, оперативник быстрее
             реанимирует союзников.
@@ -299,7 +299,7 @@ try {
             Бронепробиваемость: +5/10/15%`
         ],
         "armor_pouch": ["",
-        ``
+            ``
         ],
         "barrel_cutting": ["Прецизионная нарезка ствола",
             `Нарезка ствола уменьшает
@@ -379,10 +379,10 @@ try {
         ],
 
         "field_medicine": ["",
-        ``
+            ``
         ],
         "fireres_materials": ["Герметичные материалы",
-        ``
+            ``
         ],
         "flatness": ["Настильность",
             `Модификация ствола позволяет
@@ -396,7 +396,7 @@ try {
             оружия: +15/20/25%`
         ],
         "forend_processing": ["Обработка цевья",
-        `Специальная обработка цевья
+            `Специальная обработка цевья
         позволяет более эффективно гасить
         отдачу. 
 
@@ -616,11 +616,11 @@ try {
         "SpecialRevive": "",
         "StaminaRegenBooster": ""
     }
-    
+
     function br(text) {
         return text.replace(/\n/g, "<br>");
     }
-    
+
 
     //  UPLOAD ALL DATAS
 
@@ -628,7 +628,7 @@ try {
         document.querySelector(`.team1Table`).innerHTML = '';
         document.querySelector(`.team2Table`).innerHTML = '';
         for (let k = 2; k < 4; k++) {
-            document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('afterbegin', `
+            document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('afterbegin', `
         <th></th>
         <th></th>
         <th></th>
@@ -716,7 +716,7 @@ try {
                     };
 
                     if (year == '' && division == 'BELSSO') {
-                        res = `BLR_${division.slice(3,6)}${year}_${role}`;
+                        res = `BLR_${division.slice(3, 6)}${year}_${role}`;
                         if (role == 'A') {
                             roleName = 'ЛАЗУТЧИК'
                         };
@@ -941,7 +941,7 @@ try {
                         { min: 1100, max: 1200, rank: "#692B71 I" },
                         { min: 1200, max: 9999, rank: "#46B5C3 I" }
                     ];
-                
+
                     for (let i = 0; i < ranges.length; i++) {
                         if (number >= ranges[i].min && number < ranges[i].max) {
                             switch (ranges[i].rank) {
@@ -974,34 +974,34 @@ try {
                             }
                         }
                     }
-                
+
                     return "Число не входит в диапазон";
                 }
-                
+
                 //console.log(getRange(1012)); // диапазон №6 (500-600) - Серебро 3
 
-              //  console.log(caliber[k+5][i][2]," - ",caliber[k+5][i][16][1]," - ",caliber[k+5][i][16][2]," - ",caliber[k+5][i][16][3]," - ",caliber[k+5][i][16][4]," - ",caliber[k+5][i][16][6]);
+                //  console.log(caliber[k+5][i][2]," - ",caliber[k+5][i][16][1]," - ",caliber[k+5][i][16][2]," - ",caliber[k+5][i][16][3]," - ",caliber[k+5][i][16][4]," - ",caliber[k+5][i][16][6]);
 
 
                 let img = new Image();
                 img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
 
-                img.onload = function() {
+                img.onload = function () {
                     try {
-                    document.querySelector(`.team${k-1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
-                } catch {
-                    console.error('Ошибка при загрузке картинки');
-                }
+                        document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
+                    } catch {
+                        console.error('Ошибка при загрузке картинки');
+                    }
                 };
 
-                img.onerror = function() {
-                    document.querySelector(`.team${k-1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
+                img.onerror = function () {
+                    document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
             <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${operator.emblem}">
             `);
                     //setTimeout(function () {console.log('hi');}, 500);
                 };
                 //debugger;
-                document.querySelector(`.team${k-1}Table`).insertAdjacentHTML('beforeend', `
+                document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('beforeend', `
             
             <tr class = 'line ${operator.role}'>
                 <td>
@@ -1022,7 +1022,7 @@ try {
                 <td class = "imgBaner">
                 
                     <span class = "rank">${operator.rank}</span>
-                    <svg class='rankEmbed' width="522" height="270" viewBox="70 0 386 270" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M333.06 5.745 5.67 5.669l-.001 258.54h503.533L333.06 5.746Z" stroke-width="20" stroke="#000" fill="${getRange(operator.rank).replaceAll("I","")}" vector-effect="null"/><text transform="translate(8.797 94.414)" font-family="Roboto" font-size="12" font-weight="400" fill="#000" text-anchor="middle" data-use-rich-text="true"><tspan data-start-offset="0" style="white-space:pre" fill="#FFF" stroke-width="0" font-family="Roboto, sans-serif" font-size="140" font-weight="700" letter-spacing="0" word-spacing="0" x="184.122" dy="110"><![CDATA[${getRange(operator.rank).match(/\s.*/g)[0]}]]>
+                    <svg class='rankEmbed' width="522" height="270" viewBox="70 0 386 270" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M333.06 5.745 5.67 5.669l-.001 258.54h503.533L333.06 5.746Z" stroke-width="20" stroke="#000" fill="${getRange(operator.rank).replaceAll("I", "")}" vector-effect="null"/><text transform="translate(8.797 94.414)" font-family="Roboto" font-size="12" font-weight="400" fill="#000" text-anchor="middle" data-use-rich-text="true"><tspan data-start-offset="0" style="white-space:pre" fill="#FFF" stroke-width="0" font-family="Roboto, sans-serif" font-size="140" font-weight="700" letter-spacing="0" word-spacing="0" x="184.122" dy="110"><![CDATA[${getRange(operator.rank).match(/\s.*/g)[0]}]]>
 </tspan></text></svg>
                     <span class = "name" style = "position: absolute">${operator.name}</span>
                 </td>
@@ -1048,103 +1048,103 @@ try {
                 <tr><th></th></tr>
             </tr>
         `)
-        //console.log(operator.role);
-        //console.log(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`);
-        //console.log(document.querySelector(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`));
-        const perks = document.querySelectorAll(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
+                //console.log(operator.role);
+                //console.log(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`);
+                //console.log(document.querySelector(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`));
+                const perks = document.querySelectorAll(`.team${k - 1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
 
-        perks.forEach(function(s) {
-        showHint(s, caliber[k+4][i])//,caliber[k+4][i][8][15])
-        //console.log(caliber[k+4][i][8]);
-        })
+                perks.forEach(function (s) {
+                    showHint(s, caliber[k + 4][i])//,caliber[k+4][i][8][15])
+                    //console.log(caliber[k+4][i][8]);
+                })
 
-        function showHint(selector, ...spread) {
-            const element = selector;
-            const hint = document.createElement('div');
-            hint.classList.add('hint');
-       try {
-           // let h = spread[0][20];
-           // let q = spread[0][8][15][1].toString();
-           // console.log(q);
-            //let r = h.tight_fit; //работает
-             //let r = spread[0][20][`${spread[0][8][15][1]}`] // нет , почему? и ка ксделать чтобы работало?
-            
+                function showHint(selector, ...spread) {
+                    const element = selector;
+                    const hint = document.createElement('div');
+                    hint.classList.add('hint');
+                    try {
+                        // let h = spread[0][20];
+                        // let q = spread[0][8][15][1].toString();
+                        // console.log(q);
+                        //let r = h.tight_fit; //работает
+                        //let r = spread[0][20][`${spread[0][8][15][1]}`] // нет , почему? и ка ксделать чтобы работало?
 
-            //console.log(perk1,perk2,perk3,perk4);
 
-           // let lvlPerks = spread[0][20][0].find(key => key.includes(spread[0][8][15]));
-           // lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
-            hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g,"<br>");
+                        //console.log(perk1,perk2,perk3,perk4);
 
-               // console.log(spread[0][8][15][0]);
-            // let perk1 = spread[0][20][`${spread[0][8][15][0]}`];
-            // let perk2 = spread[0][20][`${spread[0][8][15][1]}`];
-            // let perk3 = spread[0][20][`${spread[0][8][15][2]}`];
-            // let perk4 = spread[0][20][`${spread[0][8][15][3]}`];
-            // //console.log(perk4);
+                        // let lvlPerks = spread[0][20][0].find(key => key.includes(spread[0][8][15]));
+                        // lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
+                        hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g, "<br>");
 
-            // if (perk1 == 1) {
-            //    // console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));    
-            //     let numbers = hint.innerHTML.match(/\d+\/(\d+)\/d+/g);
-            //     let firstNumber = numbers[0].split('/')[2];
-            //     let highlightedText = hint.innerHTML.replace(firstNumber, '<b>' + firstNumber + '</b>');
-            //     console.log(highlightedText);
+                        // console.log(spread[0][8][15][0]);
+                        // let perk1 = spread[0][20][`${spread[0][8][15][0]}`];
+                        // let perk2 = spread[0][20][`${spread[0][8][15][1]}`];
+                        // let perk3 = spread[0][20][`${spread[0][8][15][2]}`];
+                        // let perk4 = spread[0][20][`${spread[0][8][15][3]}`];
+                        // //console.log(perk4);
 
-            // }
-            //console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));
-            
-        } catch (e){console.error(e.message)}
-        //console.log(element);
-            element.parentElement.parentElement.parentElement.parentElement.insertAdjacentElement('afterbegin', hint);
-    
-                element.addEventListener('mousedown', function(event) {
-                   // const rect = element.parentElement.parentElement.parentElement.getBoundingClientRect(); // получаем координаты элемента
-                    const x = event.pageX// - rect.left; // вычисляем координаты относительно элемента
-                    const y = event.pageY //- rect.top;
-                    hint.style.display = 'block';
-                    hint.style.top = `${y - 150}px`;
-                    hint.style.left = `${x - 280}px`;
-                    
-                });
-    
-            document.body.addEventListener('mouseup', function() {
-                hint.style.display = 'none';
-            });
-        }
+                        // if (perk1 == 1) {
+                        //    // console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));    
+                        //     let numbers = hint.innerHTML.match(/\d+\/(\d+)\/d+/g);
+                        //     let firstNumber = numbers[0].split('/')[2];
+                        //     let highlightedText = hint.innerHTML.replace(firstNumber, '<b>' + firstNumber + '</b>');
+                        //     console.log(highlightedText);
+
+                        // }
+                        //console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));
+
+                    } catch (e) { console.error(e.message) }
+                    //console.log(element);
+                    element.parentElement.parentElement.parentElement.parentElement.insertAdjacentElement('afterbegin', hint);
+
+                    element.addEventListener('mousedown', function (event) {
+                        // const rect = element.parentElement.parentElement.parentElement.getBoundingClientRect(); // получаем координаты элемента
+                        const x = event.pageX// - rect.left; // вычисляем координаты относительно элемента
+                        const y = event.pageY //- rect.top;
+                        hint.style.display = 'block';
+                        hint.style.top = `${y - 150}px`;
+                        hint.style.left = `${x - 280}px`;
+
+                    });
+
+                    document.body.addEventListener('mouseup', function () {
+                        hint.style.display = 'none';
+                    });
+                }
             };
-            
+
         }
 
         //  HINT
-       
-    // document.querySelectorAll('.perk').forEach(function(s) {
-    //     showHint(s)
-    // })
 
-    // function showHint(selector) {
-    //     const element = selector;
-    //     const hint = document.createElement('div');
-    //     hint.classList.add('hint');
-    // try {
-    //     //lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
-    //     hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g,"<br>");
-        
-    // } catch (e){console.error(e.message)}
-    //     document.body.insertAdjacentElement('afterbegin', hint);
+        // document.querySelectorAll('.perk').forEach(function(s) {
+        //     showHint(s)
+        // })
 
-    //         element.addEventListener('mousedown', function(event) {
-    //             const x = event.pageX;// - element.offsetLeft;
-    //             const y = event.pageY; //- element.offsetTop;
-    //             //console.log(element.offsetLeft,element.offsetTop);
-    //             hint.style.display = 'block';
-    //             hint.style.top = `${y + 5}px`;
-    //             hint.style.left = `${x + 5}px`;
-    //         });
+        // function showHint(selector) {
+        //     const element = selector;
+        //     const hint = document.createElement('div');
+        //     hint.classList.add('hint');
+        // try {
+        //     //lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
+        //     hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g,"<br>");
 
-    //     document.body.addEventListener('mouseup', function() {
-    //         hint.style.display = 'none';
-    //     });
-    // }
+        // } catch (e){console.error(e.message)}
+        //     document.body.insertAdjacentElement('afterbegin', hint);
+
+        //         element.addEventListener('mousedown', function(event) {
+        //             const x = event.pageX;// - element.offsetLeft;
+        //             const y = event.pageY; //- element.offsetTop;
+        //             //console.log(element.offsetLeft,element.offsetTop);
+        //             hint.style.display = 'block';
+        //             hint.style.top = `${y + 5}px`;
+        //             hint.style.left = `${x + 5}px`;
+        //         });
+
+        //     document.body.addEventListener('mouseup', function() {
+        //         hint.style.display = 'none';
+        //     });
+        // }
 
         // CHANGE CST OPERS
         document.querySelectorAll('.nameOp').forEach(element => {
@@ -1218,7 +1218,7 @@ try {
         topStat('.deaths', 'min');
 
         //  GROUPS COLORS
-        (function() {
+        (function () {
             let color;
             let k = 0;
             let group = document.querySelectorAll('.groups');
@@ -1229,7 +1229,7 @@ try {
                 let grValue = element.innerText.trim();
                 let groupElements = document.querySelectorAll(`[data-gr="${grValue}"]`);
                 if (groupElements.length > 1) {
-                    (k > 2) ? color = '#ff323b': color = 'lime';
+                    (k > 2) ? color = '#ff323b' : color = 'lime';
                     k++;
                     groupElements.forEach((groupElement) => {
                         groupElement.style.borderLeft = `4px solid ${color}`;
@@ -1239,7 +1239,7 @@ try {
         })();
 
         //   MAPS
-        (function() {
+        (function () {
             const mode = document.querySelector('.mode');
             const time = document.querySelector('.time');
             const divMap = document.querySelector('.map');
@@ -1295,20 +1295,20 @@ try {
         })();
 
         //  WIN / LOSE
-        (function() {
+        (function () {
             function color(color, text) {
                 document.querySelector("div.winLose > div").innerText = text;
                 document.querySelector("div.winLose > svg > path").style.fill = color;
                 document.querySelector("div.winLoseText").style.color = color;
             }
             if (data1[7].some(player => player[2] == 'MASTER')) {
-                if (score(0) == 3) {
+                if (score(0) == data2.Log.Rounds) {
                     color('#6aa5ee', 'ПОБЕДА!');
                 } else {
                     color('#6aa5ee', 'ПОРАЖЕНИЕ!');
                 }
             } else if (data1[8].some(player => player[2] === 'MASTER')) {
-                if (score(1) == 3) {
+                if (score(1) == data2.Log.Rounds) {
                     color('#ff323b', 'ПОБЕДА!');
                 } else {
                     color('#ff323b', 'ПОРАЖЕНИЕ!');
@@ -1330,52 +1330,73 @@ try {
             });
             return counts[teamKey];
         }
+        
         //  COLOR POINTS
-        (function() {
-            let color = ["blue", "red"]
-            color.forEach((color, i) => {
-                document.querySelector(`.${color}Point1>path`).style.fillOpacity = '0';
-                document.querySelector(`.${color}Point2>path`).style.fillOpacity = '0';
-                document.querySelector(`.${color}Point3>path`).style.fillOpacity = '0';
+        (function () {
+            for (let j = 0; j < data2.Log.Rounds.length; j++) {
+                let color = ["blue", "red"]
 
-                function setColor(n) {
+                color.forEach((color, i) => {
+                    console.log(data2.Log.Rounds[i].winner_team); 
+                    document.querySelector(`.${color}Points`).insertAdjacentHTML('beforeend', `
+                            <svg class="${color}Point${j+1} points ${color}" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
+                            <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="0" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
+                            </svg>
+                    `);
+                    
+                    // function setColor(n) {
+                    //     document.querySelector(`.${color}Point${n}>path`).style.fillOpacity = '1';
+                    // }
+                    //console.log(score(i));
 
-                    document.querySelector(`.${color}Point${n}>path`).style.fillOpacity = '1';
-                }
+                    
 
-                if (score(i) == 1) {
-                    setColor(1)
-                }
-                if (score(i) == 2) {
-                    setColor(1);
-                    setColor(2)
-                }
-                if (score(i) == 3) {
-                    setColor(1);
-                    setColor(2);
-                    setColor(3);
-                }
-            });
+
+                    // if (score(i) == 1) {
+                    //     setColor(1)
+                    // }
+                    // if (score(i) == 2) {
+                    //     setColor(1);
+                    //     setColor(2)
+                    // }
+                    // if (score(i) == 3) {
+                    //     setColor(1);
+                    //     setColor(2);
+                    //     setColor(3);
+                    // }
+                    // if (score(i) == 4) {
+                    //     setColor(1);
+                    //     setColor(2);
+                    //     setColor(3);
+                    //     setColor(4);
+                    // }
+                });
+            }
+            document.querySelector('.timeScore').insertAdjacentHTML('afterbegin', `
+                <h1>СЧЁТ</h1>
+                <h1 class="time"></h1>
+            `);
+
         })();
 
 
 
 
         id = data1[0];
-        
+
         alldata = [data1, data2]
 
     } ////// END ALL DATAS
-try {
-    upload(caliber, caliber2);
-} catch (e) {
-    console.error("Ошибка в функции upload - ",e.message);
-}
+    try {
+        upload(caliber, caliber2);
+    } catch (e) {
+        console.error("Ошибка в функции upload - ", e.message);
+    }
 
 
     //  CALENDAR FUNCTION
 
-    document.querySelector('.redPoints').insertAdjacentHTML("afterend", `
+    document.querySelector('.allPoints').insertAdjacentHTML("afterend", `
     <button id="show-panel">></button>
     <div class="slide-out-panel">
         <div class="calendar">
@@ -1420,7 +1441,7 @@ try {
         </div>
     </div>
     `);
-    
+
 
     document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `<div id="list-container"></div>`);
     const button = document.getElementById('show-panel');
@@ -1444,7 +1465,7 @@ try {
     });
 
 
-    recElem.addEventListener('click', function() {
+    recElem.addEventListener('click', function () {
 
         if (localStorage.getItem("rec") === "false" || !localStorage.getItem("rec")) {
             localStorage.setItem("rec", true);
@@ -1457,7 +1478,7 @@ try {
     });
 
 
-  
+
 
     const calendarBody = document.getElementById("calendar-body");
     const today = new Date();
@@ -1465,37 +1486,37 @@ try {
     const year = today.getFullYear();
 
     function getDaysInMonth(month, year) {
-        return new Date(year, month+1, 0).getDate();
-      }
-      
-      function generateCalendar(month, year) {
+        return new Date(year, month + 1, 0).getDate();
+    }
+
+    function generateCalendar(month, year) {
         calendarBody.innerHTML = "";
         const daysInMonth = getDaysInMonth(month, year);
         //console.log(daysInMonth);
-        let firstDayOfMonth = new Date(year, month, 1).getDay()-1;
+        let firstDayOfMonth = new Date(year, month, 1).getDay() - 1;
         if (firstDayOfMonth === -1) {
             firstDayOfMonth = 6;
-          }
+        }
         //console.log("первый день месяца - ",firstDayOfMonth);
         let date = 1;
         let numRows = Math.ceil((daysInMonth + firstDayOfMonth) / 7);
         for (let i = 0; i < numRows; i++) {
-          const row = document.createElement("tr");
-          for (let j = 0; j < 7; j++) {
-            const cell = document.createElement("td");
-            if (i === 0 && j < firstDayOfMonth) {
-              // Пустые ячейки до первого дня месяца
-              cell.textContent = "";
-            } else if (date > daysInMonth) {
-              // Пустые ячейки после последнего дня месяца
-              cell.textContent = "";
-            } else {
-              // Добавляем дату
-              cell.textContent = date;
-              date++;
-              // Назначаем обработчик клика на ячейку
+            const row = document.createElement("tr");
+            for (let j = 0; j < 7; j++) {
+                const cell = document.createElement("td");
+                if (i === 0 && j < firstDayOfMonth) {
+                    // Пустые ячейки до первого дня месяца
+                    cell.textContent = "";
+                } else if (date > daysInMonth) {
+                    // Пустые ячейки после последнего дня месяца
+                    cell.textContent = "";
+                } else {
+                    // Добавляем дату
+                    cell.textContent = date;
+                    date++;
+                    // Назначаем обработчик клика на ячейку
 
-                    cell.addEventListener("click", function() {
+                    cell.addEventListener("click", function () {
                         const listContainer = document.getElementById('list-container');
                         const keys = Object.keys(localStorage);
 
@@ -1505,23 +1526,23 @@ try {
                             if (key == 'rec') {
                                 return
                             };
-                           // console.log(`(${setZero(this.textContent)} == ${key.match(/\d+/g)[0]} && ${setZero(month_selector.value)} == ${key.match(/\d+/g)[1]}`);
+                            // console.log(`(${setZero(this.textContent)} == ${key.match(/\d+/g)[0]} && ${setZero(month_selector.value)} == ${key.match(/\d+/g)[1]}`);
                             if (setZero(this.textContent) == key.match(/\d+/g)[0] && setZero(month_selector.value) == key.match(/\d+/g)[1]) {
                                 const listItem = document.createElement('li');
                                 listItem.textContent = key;
                                 listItem.addEventListener('click', (e) => {
                                     //e.path[1].classList.add('disabled');
                                     document.querySelectorAll('#list-container > li').forEach((element) => {
-                                       // element.classList.remove('disabled');
+                                        // element.classList.remove('disabled');
                                     })
-                                   // e.path[1].classList.add('disabled');
+                                    // e.path[1].classList.add('disabled');
                                     myFunction(key);
 
                                 });
                                 const date = listItem.textContent.split(' ')[0];
-                                const id   = listItem.textContent.split(' ')[1];
-                                const win  = listItem.textContent.split(' ')[2];
-                                const map  = listItem.textContent.split(' ')[3];
+                                const id = listItem.textContent.split(' ')[1];
+                                const win = listItem.textContent.split(' ')[2];
+                                const map = listItem.textContent.split(' ')[3];
                                 const time = `${new Date().getHours()}:${new Date().getMinutes()}`;
                                 listItem.innerHTML = `${id} ${map} Столкновение ${win} ${date}`;
                                 listContainer.appendChild(listItem);
@@ -1559,13 +1580,13 @@ try {
 
 
                             const imgBasket = document.querySelectorAll('.basket')
-                            imgBasket.forEach(function(item) {
+                            imgBasket.forEach(function (item) {
                                 item.addEventListener('click', (e) => {
                                     console.log(e.target.parentElement.parentElement);
                                     e.target.parentElement.parentElement.remove();
                                     //console.log(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0]);
                                     localStorage.removeItem(Object.keys(localStorage).
-                                    find(key => key.includes(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0])));
+                                        find(key => key.includes(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0])));
                                 });
                             });
 
@@ -1584,13 +1605,13 @@ try {
     }
     // Создаем календарь на текущий месяц и год
     const month_selector = document.querySelector("#month-selector");
-    month_selector.value = new Date().getMonth()+1;
+    month_selector.value = new Date().getMonth() + 1;
     //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
-    generateCalendar(month_selector.value-1, new Date().getFullYear());
+    generateCalendar(month_selector.value - 1, new Date().getFullYear());
 
     month_selector.addEventListener('change', () => {
-        generateCalendar(month_selector.value-1, new Date().getFullYear());
-      });
+        generateCalendar(month_selector.value - 1, new Date().getFullYear());
+    });
     //generateCalendar(currentMonth, currentYear);
 
     //  BUTTON OPEN DIFFERENT DATA BASE
@@ -1643,45 +1664,45 @@ try {
             upload(caliber_b, caliber_b2);
             //saveData();
         }
-       saveData(createdDate);
-        
+        saveData(createdDate);
+
     });
 
-////////////ПЫТАЮСЬ СДЕЛАТЬ ПЕРЕЗАГРУЗКУ НО НЕ МОГУ(////////////////
+    ////////////ПЫТАЮСЬ СДЕЛАТЬ ПЕРЕЗАГРУЗКУ НО НЕ МОГУ(////////////////
 
-// задаем путь к файлу, который нужно проверять
-const filePath = 'js/game.js';
+    // задаем путь к файлу, который нужно проверять
+    const filePath = 'js/game.js';
 
-// переменная для хранения времени последнего изменения файла
-let lastModifiedTime = null;
+    // переменная для хранения времени последнего изменения файла
+    let lastModifiedTime = null;
 
-// функция, которая будет вызываться каждые 10 секунд
-function checkFile() {
-  const xhr = new XMLHttpRequest();
-  xhr.open('HEAD', filePath);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        const currentModifiedTime = xhr.getResponseHeader('Last-Modified');
-        if (lastModifiedTime !== null && lastModifiedTime !== currentModifiedTime) {
-          location.reload();
-        } else {
-          console.log('Файл не изменился. Последнее изменение: ' + currentModifiedTime);
-        }
-        lastModifiedTime = currentModifiedTime;
-      } else {
-        console.log('Ошибка проверки файла: ' + xhr.status);
-      }
+    // функция, которая будет вызываться каждые 10 секунд
+    function checkFile() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('HEAD', filePath);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const currentModifiedTime = xhr.getResponseHeader('Last-Modified');
+                    if (lastModifiedTime !== null && lastModifiedTime !== currentModifiedTime) {
+                        location.reload(true);
+                    } else {
+                        console.log('Файл не изменился. Последнее изменение: ' + currentModifiedTime);
+                    }
+                    lastModifiedTime = currentModifiedTime;
+                } else {
+                    console.log('Ошибка проверки файла: ' + xhr.status);
+                }
+            }
+        };
+        xhr.send();
     }
-  };
-  xhr.send();
-}
 
-// запускаем проверку каждые 10 секунд
-setInterval(checkFile, 10000);
+    // запускаем проверку каждые 10 секунд
+    setInterval(checkFile, 10000);
 
 
-////////////////////////////
+    ////////////////////////////
 
 
     function setZero(num) {
@@ -1692,10 +1713,10 @@ setInterval(checkFile, 10000);
         }
     }
     function saveData(createdDate) {
-        
+
         const map = document.querySelector('.map').textContent.trim();
         const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
-        const day = `${setZero(createdDate.getDate())}:${setZero(createdDate.getMonth()+1)}.${createdDate.getFullYear()}`;
+        const day = `${setZero(createdDate.getDate())}:${setZero(createdDate.getMonth() + 1)}.${createdDate.getFullYear()}`;
         if (localStorage.getItem('rec') == 'true') {
             localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
         }
@@ -1733,29 +1754,29 @@ setInterval(checkFile, 10000);
     // updateFileContent('Caliber/js/script.js','js/script.js');
     // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
-try {
-    saveData(new Date());
-} catch (e){
-    console.error("Ошибка в функции SaveData - ", e.message);
-}
+    try {
+        saveData(new Date());
+    } catch (e) {
+        console.error("Ошибка в функции SaveData - ", e.message);
+    }
 
     setInterval(() => {
         //console.log(document.querySelector('.slide-out-panel').clientLeft);
-        if (document.querySelector('.slide-out-panel').classList.contains('show') == false){
+        if (document.querySelector('.slide-out-panel').classList.contains('show') == false) {
             location.reload(true);
         }
     }, 600000000);
 
-//     const WebSocket = require('ws');
-//     const wss = new WebSocket.Server({ port: 8080 });
-//     console.log('WebSocket server started');
-//     wss.on('connection', (ws) => {
-//     console.log('WebSocket connection established');
-//     ws.send('Hello, client!');
-//     setTimeout(() => {
-//     ws.send('reload');
-//     }, 5000);
-// });
+    //     const WebSocket = require('ws');
+    //     const wss = new WebSocket.Server({ port: 8080 });
+    //     console.log('WebSocket server started');
+    //     wss.on('connection', (ws) => {
+    //     console.log('WebSocket connection established');
+    //     ws.send('Hello, client!');
+    //     setTimeout(() => {
+    //     ws.send('reload');
+    //     }, 5000);
+    // });
 
 
 });
