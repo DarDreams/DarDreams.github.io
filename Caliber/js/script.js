@@ -1659,7 +1659,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (xhr.status === 200) {
                     const currentModifiedTime = xhr.getResponseHeader('Last-Modified');
                     if (lastModifiedTime !== null && lastModifiedTime !== currentModifiedTime) {
-                        location.reload(true);
+                       // location.reload(true);
+                       location.href = location.href + '?rand=' + Math.random();
                     } else {
                         console.log('Файл не изменился. Последнее изменение: ' + currentModifiedTime);
                     }
