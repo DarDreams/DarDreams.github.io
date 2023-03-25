@@ -1336,8 +1336,6 @@ window.addEventListener('DOMContentLoaded', () => {
         (function () {
 
 
-            let color = ["blue", "red"];
-            let colorTeam = '';
             let visible = 0;
 
             for (let j = 0; j < data2.Log.MaxRoundsWon*2; j++) {
