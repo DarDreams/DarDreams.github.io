@@ -6,7 +6,7 @@ import {
 //console.clear();
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
-    
+
     /* #region  FUNTION OBJECT TO ARRAY */
     // function objectToArray(obj) {
     //     return Object.values(obj).map((value) => {
@@ -924,6 +924,24 @@ window.addEventListener('DOMContentLoaded', () => {
                 };
 
 
+                function imageLoad(src, selector, html, selector2, html2) {
+                    let img = new Image();
+                    img.src = src ;
+
+                    img.onload = function () {
+                        try {
+                            document.querySelector(selector).insertAdjacentHTML('afterbegin', html);
+                        } catch {
+                            console.error('Ошибка при загрузке картинки');
+                        }
+                    };
+
+                    img.onerror = function () {
+                        document.querySelector(selector2).insertAdjacentHTML('afterbegin', html2);
+                        //setTimeout(function () {console.log('hi');}, 500);
+                    };
+                } 
+
                 /* #region  RATING RANGE */
                 function getRange(number) {
                     const ranges = [
@@ -978,22 +996,27 @@ window.addEventListener('DOMContentLoaded', () => {
                     return "Число не входит в диапазон";
                 }
                 /* #endregion */
+                imageLoad(`https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${operator.emblem}_large.png`,
+                          `.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`,
+                          `<img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${operator.emblem}_large.png">`,
+                          `.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`,
+                          `<img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${operator.emblem}">`,
+                );
+                // let img = new Image();
+                // img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
 
-                let img = new Image();
-                img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
-
-                img.onload = function () {
-                    try {
-                        document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${this.src}">`);
-                    } catch {
-                        console.error('Ошибка при загрузке картинки');
-                    }
-                };
+                // img.onload = function () {
+                //     try {
+                //         document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}">`);
+                //     } catch {
+                //         console.error('Ошибка при загрузке картинки');
+                //     }
+                // };
 
                 img.onerror = function () {
                     document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
-            <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${operator.emblem}">
-            `);
+                    <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${operator.emblem}">
+                    `);
                     //setTimeout(function () {console.log('hi');}, 500);
                 };
                 //debugger;
