@@ -6,6 +6,7 @@ import {
 //console.clear();
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
+    /* #region  FUNTION OBJECT TO ARRAY */
     // function objectToArray(obj) {
     //     return Object.values(obj).map((value) => {
     //       if (typeof value === 'object' && value !== null) {
@@ -17,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //   }
 
     //let games = objectToArray(game);
-
+    /* #endregion */
     try {
         caliber[8] = caliber[7].splice(4);
         caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
@@ -27,17 +28,11 @@ window.addEventListener('DOMContentLoaded', () => {
         console.error("ошибка в пересборке объекта - ", e.message);
     }
 
-
-
-
     console.log(caliber);
     console.log(caliber2);
     // console.log(games);
     // console.log(games[2][0+2][5][0]);
     // console.log(caliber[2+5][0+0][8][15][0]);
-
-
-
 
     function convertSecondsToTime(seconds) {
         //const hours = Math.floor(seconds / 3600);
@@ -46,6 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
         return `${minutes.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     }
 
+    /* #region  PERK RUS */
     const perksRus = {
         "expansive_bullets": ["Экспансивные пули",
             `Попадание по противнику из
@@ -620,10 +616,9 @@ window.addEventListener('DOMContentLoaded', () => {
     function br(text) {
         return text.replace(/\n/g, "<br>");
     }
+    /* #endregion */
 
-
-    //  UPLOAD ALL DATAS
-
+    /* #region  ALL DATAS */
     function upload(data1, data2) {
         document.querySelector(`.team1Table`).innerHTML = '';
         document.querySelector(`.team2Table`).innerHTML = '';
@@ -648,7 +643,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     operLoop = ['assaultR', 'gunnerR', 'medicR', 'sniperR'];
                 }
 
-                //  OPER
+                /* #region  OPER */
                 let roleName;
 
                 function oper(collection) {
@@ -902,7 +897,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     //console.log(res);
                     return res
 
-                };
+                }
+                /* #endregion */;
                 const operator = {
                     role: operLoop[i],
                     emblem: data1[k + 5][i][5],
@@ -922,9 +918,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 };
 
 
+                /* #region  RATING RANGE */
                 function getRange(number) {
                     const ranges = [
-                        { min: 0,   max: 100, rank: "#804E26 III" },
+                        { min: 0, max: 100, rank: "#804E26 III" },
                         { min: 100, max: 200, rank: "#804E26 II" },
                         { min: 200, max: 300, rank: "#804E26 I" },
                         { min: 300, max: 400, rank: "#5D5D5D III" },
@@ -974,11 +971,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     return "Число не входит в диапазон";
                 }
-
-                //console.log(getRange(1012)); // диапазон №6 (500-600) - Серебро 3
-
-                //  console.log(caliber[k+5][i][2]," - ",caliber[k+5][i][16][1]," - ",caliber[k+5][i][16][2]," - ",caliber[k+5][i][16][3]," - ",caliber[k+5][i][16][4]," - ",caliber[k+5][i][16][6]);
-
+                /* #endregion */
 
                 let img = new Image();
                 img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
@@ -1020,7 +1013,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 
                     <span class = "rank">${operator.rank}</span>
                     <svg class='rankEmbed' width="522" height="270" viewBox="70 0 386 270" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M333.06 5.745 5.67 5.669l-.001 258.54h503.533L333.06 5.746Z" stroke-width="20" stroke="#000" fill="${getRange(operator.rank).replaceAll("I", "")}" vector-effect="null"/><text transform="translate(8.797 94.414)" font-family="Roboto" font-size="12" font-weight="400" fill="#000" text-anchor="middle" data-use-rich-text="true"><tspan data-start-offset="0" style="white-space:pre" fill="#FFF" stroke-width="0" font-family="Roboto, sans-serif" font-size="140" font-weight="700" letter-spacing="0" word-spacing="0" x="184.122" dy="110"><![CDATA[${getRange(operator.rank).match(/\s.*/g)[0]}]]>
-</tspan></text></svg>
+                    </tspan></text></svg>
                     <span class = "name" style = "position: absolute">${operator.name}</span>
                 </td>
                 <td data-gr = "${operator.group}" class = "groups">
@@ -1112,7 +1105,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        //  HINT
+        /* #region  HINT */
 
         // document.querySelectorAll('.perk').forEach(function(s) {
         //     showHint(s)
@@ -1142,8 +1135,9 @@ window.addEventListener('DOMContentLoaded', () => {
         //         hint.style.display = 'none';
         //     });
         // }
+        /* #endregion */
 
-        // CHANGE CST OPERS
+        /* #region  CHANGE CST OPERS */
         document.querySelectorAll('.nameOp').forEach(element => {
             if (element.innerText == 'СЛАЙ') {
                 element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/sly.png";
@@ -1160,9 +1154,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/avalansh.png";
             }
         });
+        /* #endregion */
 
 
-        //  TOP-STATS
+        /* #region  TOP-STATS */
         function topStat(selector, type) {
             if (!selector || typeof selector !== "string") {
                 console.error("Invalid selector argument, expected a string but got " + selector);
@@ -1213,8 +1208,9 @@ window.addEventListener('DOMContentLoaded', () => {
         topStat('.assists', 'max');
         topStat('.recive', 'min');
         topStat('.deaths', 'min');
+        /* #endregion */
 
-        //  GROUPS COLORS
+        /* #region  GROUPS COLORS */
         (function () {
             let color;
             let k = 0;
@@ -1234,8 +1230,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
         })();
+        /* #endregion */
 
-        //   MAPS
+        // #region  MAPS
         (function () {
             const mode = document.querySelector('.mode');
             const time = document.querySelector('.time');
@@ -1282,7 +1279,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 const rusMapName = maps.rusMap[i];
                 divMap.textContent = `\u00A0${rusMapName}`;
             }
-            
+
             if (caliber[4] == 'pvp') {
                 mode.innerText = `Столкновение:`;
             };
@@ -1292,8 +1289,8 @@ window.addEventListener('DOMContentLoaded', () => {
             };
             time.innerText = convertSecondsToTime(data2.Log.MatchTimeSeconds);
         })();
-        
-        //  WIN / LOSE
+        // #endregion MAPS
+        //  #region WIN / LOSE
         (function () {
             function color(color, text) {
                 document.querySelector("div.winLose > div").innerText = text;
@@ -1313,9 +1310,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     color('#ff323b', 'ПОРАЖЕНИЕ!');
                 }
             }
-        })()
-
-        //  SCORE
+        })();
+        // #endregion WIN / LOSE
+        //  #region SCORE
         function score(teamNumber) {
             let data = data2.Log.Rounds;
             const teamKey = `winner_team_${teamNumber}`;
@@ -1329,47 +1326,47 @@ window.addEventListener('DOMContentLoaded', () => {
             });
             return counts[teamKey];
         }
-        
-        //  COLOR POINTS
-      
-
+        // #endregion
+        //  #region COLOR POINTS
         (function () {
 
 
             let visible = 0;
 
-            for (let j = 0; j < data2.Log.MaxRoundsWon*2; j++) {
+            for (let j = 0; j < data2.Log.MaxRoundsWon * 2; j++) {
                 if (data2.Log.Rounds[j].winner_team == 0) {
                     visible = 1;
-                } else { 
+                } else {
                     visible = 0;
                 };
                 document.querySelector(`.bluePoints`).insertAdjacentHTML('beforeend', `
                         <svg class="bluePoint${j + 1} points blue" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
-                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="${(visible == 0)?visible=1:visible=0}" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
+                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="${(visible == 0) ? visible = 1 : visible = 0}" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
                         </svg>
                 `);
                 document.querySelector(`.redPoints`).insertAdjacentHTML('beforeend', `
                         <svg class="redPoint${j + 1} points red" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
-                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="${(visible == 1)?visible=0:visible=1}" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
+                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="${(visible == 1) ? visible = 0 : visible = 1}" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
                         </svg>
                 `);
             }
 
         })();
+        // #endregion
+
         id = data1[0];
         alldata = [data1, data2]
 
-    } ////// END ALL DATAS
+    }
+
     try {
         upload(caliber, caliber2);
     } catch (e) {
         console.error("Ошибка в функции upload - ", e.message,);
     }
+    /* #endregion END ALL DATAS*/
 
-
-    //  CALENDAR FUNCTION
-
+    /* #region  CALENDAR */
     document.querySelector('.allPoints').insertAdjacentHTML("afterend", `
     <button id="show-panel">></button>
     <div class="slide-out-panel">
@@ -1450,9 +1447,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         save();
     });
-
-
-
 
     const calendarBody = document.getElementById("calendar-body");
     const today = new Date();
@@ -1640,17 +1634,16 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         saveData(createdDate);
 
-    });
+    }); //#endregion CALENDAR
+    /* #endregion */
 
-    ////////////ПЫТАЮСЬ СДЕЛАТЬ ПЕРЕЗАГРУЗКУ НО НЕ МОГУ(////////////////
+    /* #region  REFRESH PAGE */
 
-    // задаем путь к файлу, который нужно проверять
+
     const filePath = 'js/game.js';
 
-    // переменная для хранения времени последнего изменения файла
     let lastModifiedTime = null;
 
-    // функция, которая будет вызываться каждые 10 секунд
     function checkFile() {
         const xhr = new XMLHttpRequest();
         xhr.open('HEAD', filePath);
@@ -1659,8 +1652,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (xhr.status === 200) {
                     const currentModifiedTime = xhr.getResponseHeader('Last-Modified');
                     if (lastModifiedTime !== null && lastModifiedTime !== currentModifiedTime) {
-                       // location.reload(true);
-                       location.href = location.href + '?rand=' + Math.random();
+                        // location.reload(true);
+                        location.href = location.href + '?rand=' + Math.random();
                     } else {
                         console.log('Файл не изменился. Последнее изменение: ' + currentModifiedTime);
                     }
@@ -1675,11 +1668,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // запускаем проверку каждые 10 секунд
     setInterval(checkFile, 10000);
+    /* #endregion */
 
-
-    ////////////////////////////
-
-
+    /* #region  FUNCTION SET_ZERO */
     function setZero(num) {
         if (num >= 0 && num < 10) {
             return `0${num}`;
@@ -1687,8 +1678,10 @@ window.addEventListener('DOMContentLoaded', () => {
             return num;
         }
     }
-    function saveData(createdDate) {
+    /* #endregion */
 
+    /* #region  FUNCTION SAVE DATA */
+    function saveData(createdDate) {
         const map = document.querySelector('.map').textContent.trim();
         const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
         const day = `${setZero(createdDate.getDate())}:${setZero(createdDate.getMonth() + 1)}.${createdDate.getFullYear()}`;
@@ -1696,7 +1689,9 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
         }
     }
+    /* #endregion */
 
+    /* #region  LOAD FUCKING GITHUB */
     ////////////////////////LOAD FUNCKINC
     // function updateFileContent(filePath, localFilePath) {
     //     const githubUsername = 'DarDreams';
@@ -1729,29 +1724,20 @@ window.addEventListener('DOMContentLoaded', () => {
     // updateFileContent('Caliber/js/script.js','js/script.js');
     // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
+    
     try {
         saveData(new Date());
     } catch (e) {
         console.error("Ошибка в функции SaveData - ", e.message);
     }
-
-    setInterval(() => {
-        //console.log(document.querySelector('.slide-out-panel').clientLeft);
-        if (document.querySelector('.slide-out-panel').classList.contains('show') == false) {
-            location.reload(true);
-        }
-    }, 600000000);
-
-    //     const WebSocket = require('ws');
-    //     const wss = new WebSocket.Server({ port: 8080 });
-    //     console.log('WebSocket server started');
-    //     wss.on('connection', (ws) => {
-    //     console.log('WebSocket connection established');
-    //     ws.send('Hello, client!');
-    //     setTimeout(() => {
-    //     ws.send('reload');
-    //     }, 5000);
-    // });
-
+    /* #endregion */
+    /* #region  REFRESH EVERY 60 SEC */
+    // setInterval(() => {
+    //     //console.log(document.querySelector('.slide-out-panel').clientLeft);
+    //     if (document.querySelector('.slide-out-panel').classList.contains('show') == false) {
+    //         location.reload(true);
+    //     }
+    // }, 600000000);
+    /* #endregion */
 
 });
