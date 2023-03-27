@@ -1,143 +1,156 @@
-$(document).ready(function(){
-let cards = {};
-axios.get('db.json')
-.then(function (response) {
-	const data = response.data;
-	if (!data.cards) {cards = data} else {cards = data.cards};
-	console.log("first - ",cards);
+$(document).ready(function () {
+	const mediaQuery768 = window.matchMedia('(max-width: 768px)');
+	let cards = {};
+	axios.get('db.json')
+		.then(function (response) {
+			const data = response.data;
+			if (!data.cards) { cards = data } else { cards = data.cards };
+			console.log("first - ", cards);
 
-	$(".inicio").hide();
-	$(".empresa").hide();
-	$(".contactos").hide();
-	$(".productos").hide();
+			$(".inicio").hide();
+			$(".empresa").hide();
+			$(".contactos").hide();
+			$(".productos").hide();
 
-	$(".overlay").hide();
-	$(".menu__overlay").hide();
-
-
-  //$('footer').hide();
+			$(".overlay").hide();
+			$(".menu__overlay").hide();
 
 
-	$(window).scroll(function() {
-	if ($(this).scrollTop() > 180) {
-		$(".pageup").fadeIn();
-	} else {
-		$(".pageup").fadeOut();
-	}
-	});
-
-	$(".pageup").click(function(){
-	const _href = $(this).attr("href");
-	$("html, body").animate({scrollTop: 0+"px"});
-	return false;
-	});
-  
-////////////////////////////////////////////
-	function anime(cl1,cl2) {
-	$(cl1).addClass(cl2);
-	$(cl1).on('animationend', function() {
-		$(cl1).removeClass(cl2);});
-	}
+			//$('footer').hide();
 
 
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 180) {
+					$(".pageup").fadeIn();
+				} else {
+					$(".pageup").fadeOut();
+				}
+			});
 
-////////////////ANIMATE//////////////////////
-	let animate = "animate__bounceInRight";
+			$(".pageup").click(function () {
+				const _href = $(this).attr("href");
+				$("html, body").animate({ scrollTop: 0 + "px" });
+				return false;
+			});
 
-	$(".inicio_link").click(function(){
-		$("html, body").animate({scrollTop: 0+"px"});
-		$(".overlay").fadeIn();
-		$(".inicio").show();
-		$(".empresa").fadeOut(1000);
-		$(".contactos").fadeOut(1000);
-		$(".productos").fadeOut(1000);
-		$(".carrito").fadeOut(1000);
-
-		anime(".inicio", animate);
-	});
-
-	$(".empresa_link").click(function(){
-		$("html, body").animate({scrollTop: 0+"px"});
-		$(".overlay").fadeIn();
-		$(".empresa").show();
-		$(".contactos").fadeOut(1000);
-		$(".productos").fadeOut(1000);
-		$(".inicio").fadeOut(1000);
-		$(".carrito").fadeOut(1000);
-
-		anime(".empresa", animate);
-	});
-
-	$(".contactos_link").click(function(){
-		$("html, body").animate({scrollTop: 0+"px"});
-		$(".overlay").fadeIn();
-		$(".inicio").fadeOut(1000);
-		$(".empresa").fadeOut(1000);
-		$(".productos").fadeOut(1000);
-		$(".carrito").fadeOut(1000);
-		$(".contactos").show();
-
-		anime(".contactos", animate);
-	});
-
-	$(".productos_link").click(function(){
-		$('button.slick-prev').click();
-		$("html, body").animate({scrollTop: 0+"px"});
-		$(".overlay").fadeIn();
-		$(".inicio").fadeOut(1000);
-		$(".empresa").fadeOut(1000);
-		$(".contactos").fadeOut(1000);
-		$(".productos").show();
-		$(".carrito").fadeIn();
-		$('.productos__items').slick('slickPause');
-		anime(".productos", animate);
-	});
-
-	//////////////SCROLL////////////////////
-
-	$(window).scroll(function() {
-		if ($(this).scrollTop() > 50) {
-		$(".menu__overlay").fadeIn();
-		$("header").addClass("header_mini");
-		} else {
-		$(".menu__overlay").fadeOut();
-		$("header").removeClass("header_mini");
-		}
-	});
+			////////////////////////////////////////////
+			function anime(cl1, cl2) {
+				$(cl1).addClass(cl2);
+				$(cl1).on('animationend', function () {
+					$(cl1).removeClass(cl2);
+				});
+			}
 
 
-//////HAMBURGER
 
-document.body.insertAdjacentHTML('afterbegin',`
+			////////////////ANIMATE//////////////////////
+			let animate = "animate__bounceInRight";
 
-<div class="hamburger">
-		<span class="button">&#x2630;</span>
-</div>
-`);
+			$(".inicio_link").click(function () {
+				$("html, body").animate({ scrollTop: 0 + "px" });
+				$(".overlay").fadeIn();
+				$(".inicio").show();
+				$(".empresa").fadeOut(1000);
+				$(".contactos").fadeOut(1000);
+				$(".productos").fadeOut(1000);
+				$(".carrito").fadeOut(1000);
 
-document.querySelector('.hamburger>.button').addEventListener('click', () => {
-	document.querySelector('.menu>nav>ul').classList.toggle('mobile');
-})
+				anime(".inicio", animate);
+			});
+
+			$(".empresa_link").click(function () {
+				$("html, body").animate({ scrollTop: 0 + "px" });
+				$(".overlay").fadeIn();
+				$(".empresa").show();
+				$(".contactos").fadeOut(1000);
+				$(".productos").fadeOut(1000);
+				$(".inicio").fadeOut(1000);
+				$(".carrito").fadeOut(1000);
+
+				anime(".empresa", animate);
+			});
+
+			$(".contactos_link").click(function () {
+				$("html, body").animate({ scrollTop: 0 + "px" });
+				$(".overlay").fadeIn();
+				$(".inicio").fadeOut(1000);
+				$(".empresa").fadeOut(1000);
+				$(".productos").fadeOut(1000);
+				$(".carrito").fadeOut(1000);
+				$(".contactos").show();
+
+				anime(".contactos", animate);
+			});
+
+			$(".productos_link").click(function () {
+				$('button.slick-prev').click();
+				$("html, body").animate({ scrollTop: 0 + "px" });
+				$(".overlay").fadeIn();
+				$(".inicio").fadeOut(1000);
+				$(".empresa").fadeOut(1000);
+				$(".contactos").fadeOut(1000);
+				$(".productos").show();
+				$(".carrito").fadeIn();
+				$('.productos__items').slick('slickPause');
+				anime(".productos", animate);
+			});
+
+			//////////////SCROLL////////////////////
+
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 50) {
+					$(".menu__overlay").fadeIn();
+					$("header").addClass("header_mini");
+				} else {
+					$(".menu__overlay").fadeOut();
+					$("header").removeClass("header_mini");
+				}
+			});
 
 
-/////////////PRODUCTOS///////////////
+			//////HAMBURGER
+
+			document.body.insertAdjacentHTML('afterbegin', `
+				<div class="hamburger">
+						<span class="button">&#x2630;</span>
+				</div>
+			`);
+
+			const divMenu = document.querySelector('.menu');
+			//const divMobile = ;
+
+			document.querySelector('.hamburger>.button').addEventListener('click', () => {
+				document.querySelector('.menu>nav>ul').classList.toggle('mobile');
+				if (mediaQuery768.matches) {
+					if (divMenu.style.display == 'flex') {
+						divMenu.style.display = "none";
+					} else {
+						divMenu.style.display = 'flex';
+						document.querySelector('.mobile').style.height = '110%';
+						document.querySelector('.mobile').style.transition = 'all 1s ease';
+					}
+				}
+			})
 
 
-	$(".logo").click(function(){
-		document.querySelector('.logo__roca').src = `img/LOGO3.png?${Date.now()};`
-		location.reload(true);
-	});
+			/////////////PRODUCTOS///////////////
 
-////////tienda
 
-	let carrito = [[],[]];
-	let carritoTotal = [];
+			$(".logo").click(function () {
+				document.querySelector('.logo__roca').src = `img/LOGO3.png?${Date.now()};`
+				location.reload(true);
+			});
 
-//
+			////////tienda
 
-	function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, sellos, number) {
-		informacion = informacion.join('<br>');
-		document.querySelector('.productos__items').insertAdjacentHTML('beforeend',`
+			let carrito = [[], []];
+			let carritoTotal = [];
+
+			//
+
+			function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, sellos, number) {
+				informacion = informacion.join('<br>');
+				document.querySelector('.productos__items').insertAdjacentHTML('beforeend', `
 			<div class = "productos__items_item item">
 				<div class = "item__front">
 					<img src="${img}" alt="">
@@ -166,24 +179,24 @@ document.querySelector('.hamburger>.button').addEventListener('click', () => {
 				</div>
 			</div>
 			`);
-		try {
-		//console.log(number);
+				try {
+					//console.log(number);
 
 
-		for (let i = 0; i < sellos.length; i++) {
-			document.querySelectorAll('.sellos')[number].insertAdjacentHTML('afterbegin',`
-				<img title = "${sellos[i].replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '').replace("_"," ")}"src = "img/sellos/${sellos[i]}.png">
+					for (let i = 0; i < sellos.length; i++) {
+						document.querySelectorAll('.sellos')[number].insertAdjacentHTML('afterbegin', `
+				<img title = "${sellos[i].replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '').replace("_", " ")}"src = "img/sellos/${sellos[i]}.png">
 			`);
-		}
-		} catch (e) {
-			console.error(e.message)
-		}
-	}
+					}
+				} catch (e) {
+					console.error(e.message)
+				}
+			}
 
 
 
 
-	document.body.insertAdjacentHTML('afterbegin',`
+			document.body.insertAdjacentHTML('afterbegin', `
 		<div style = "opacity:0" class = 'carrito'>
 		<div class='container'>
 		</div>
@@ -191,174 +204,174 @@ document.querySelector('.hamburger>.button').addEventListener('click', () => {
 			<button id = "checkout-button" class = 'comprarOfCarrito'>Finalizar pedido</button>
 	`);
 
-	let todo = 0;
+			let todo = 0;
 
-	function createCarrito(img, name, count, price, total) {
-	//$('.item').fadeIn();
-	//$('.item').fadeOut(1000);
-		document.querySelector('.carrito').style.opacity = '1';
-		document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin',`
+			function createCarrito(img, name, count, price, total) {
+				//$('.item').fadeIn();
+				//$('.item').fadeOut(1000);
+				document.querySelector('.carrito').style.opacity = '1';
+				document.querySelector('.carrito > .container').insertAdjacentHTML('afterbegin', `
 					<div style="opacity:1" class = 'item'>
 						<img src='${img}' alt=''>
 						<span class = 'nameItemOfCarrito'>${name}</span>
-						<span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count*price}€</span>
+						<span class = 'priceItemOfCarrito'>${count} x ${price}€ = ${count * price}€</span>
 					</div>
 				</div>
 			</div>
 		`)
-		todo += total;
-		document.querySelector('.total').innerText = `TOTAL = ${todo} €`;
+				todo += total;
+				document.querySelector('.total').innerText = `TOTAL = ${todo} €`;
 
-		carritoTotal.push({...carrito});
-		console.clear();
-		console.log("total = ", carritoTotal);
-	}
-
-	function loadCarrito() {
-		function getItem(id) {
-			return cards.find(item => item.id == id);
-		}
-
-		//console.log(carrito[0]);
-		const img     = getItem(carrito[0]).img;
-		
-		const count   = carrito[1];
-		const price   = getItem(carrito[0]).precio;
-		const name    = getItem(carrito[0]).name;
-		createCarrito(img, name, count, price, count * price);
-	}
-
- //console.log(cards);
-	for (let i = 0; i < cards.length;i++) {
-		createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
-	}
-
-	$(".productos__items").slick({
-		//waitForAnimate: true,
-		initialSlide: 0,
-		slidesToScroll: 1,
-		slidesToShow: 3,
-		arrows: true,
-		//fade: true,
-		//dots: true,
-		//dotsClass: 'slick-dots',
-		//autoplay: true,
-		autoplaySpeed: 1,
-		draggable: false,
-		rows: 2,
-		//prevArrow: $(".slick-prev"),
-		infinite: false
-	});
-
-	$('button.slick-next').html("&#10154;");
-	$('button.slick-prev').html("&#10154;");
-/////////////
-	function calcSum (e) {
-		let id       = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
-		let item     = cards.find(item => item.id ==id);
-
-		let divCount = e.target.parentElement.querySelector('.counter-value');
-		let divPrice = e.target.parentElement.querySelector('.precio');
-		
-		if (e.target.className == 'counter-up') {
-			if (divCount.value > 98) {
-				divCount.value = 99
-			} else {
-				divCount.value++
-			};
-		};
-		if (e.target.className == 'counter-down') {
-			if (divCount.value < 2) {
-				divCount.value = 1
-			} else {
-				divCount.value--
-			};
-		}
-		divPrice.textContent = `${item.precio * Number(divCount.value)} €`;
-	}
-
-	const divCounter = document.querySelectorAll('.counter');
-		divCounter.forEach(function (el){
-			el.addEventListener('click', function (e) {  
-			if (e.target.className == 'counter-up') {
-				calcSum(e);
+				carritoTotal.push({ ...carrito });
+				console.clear();
+				console.log("total = ", carritoTotal);
 			}
-			if (e.target.className == 'counter-down') {
-                calcSum(e);
+
+			function loadCarrito() {
+				function getItem(id) {
+					return cards.find(item => item.id == id);
+				}
+
+				//console.log(carrito[0]);
+				const img = getItem(carrito[0]).img;
+
+				const count = carrito[1];
+				const price = getItem(carrito[0]).precio;
+				const name = getItem(carrito[0]).name;
+				createCarrito(img, name, count, price, count * price);
 			}
-            if (e.target.className == 'counter-value') {
-                e.target.addEventListener('input', function () {
-                    e.target.value = e.target.value.replace(/[^\d.]/g, '');
-                    calcSum(e);
-                }) 
-            }
-            if (e.target.className == 'addItem') {
-                carrito[0] = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
-                carrito[1] = e.target.parentElement.querySelector('.counter-value').value;
-                loadCarrito();
-            }
-		});
-	});
-    for (let i = 0; i< cards.length;i++) {
-        //document.querySelectorAll('.addItem')[i].click();
-    }
 
-//  PAYMENTS
-	// document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
-		// sell(carritoTotal.map(item => ({
-		// 	price: item[0],
-		// 	quantity: Number(item[1])
-		// })));
-	// });
- 
-	// function sell(obj) {
-	// 	var stripe = Stripe('');
+			//console.log(cards);
+			for (let i = 0; i < cards.length; i++) {
+				createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
+			}
 
-	// 	stripe.redirectToCheckout({
-	// 	lineItems: obj,
-	// 		mode: 'payment',
-	// 		successUrl: 'http://127.0.0.1:3000/index.html',
-	// 		cancelUrl: 'http://127.0.0.1:3000/index.html'
-	// 	}).then(function (result) {
-	// 		if (result.error) {
-	// 		console.log(result.error.message);
-	// 		}
-	// 	});
-	// 	console.clear();
-	// }
+			$(".productos__items").slick({
+				//waitForAnimate: true,
+				initialSlide: 0,
+				slidesToScroll: 1,
+				slidesToShow: 3,
+				arrows: true,
+				//fade: true,
+				//dots: true,
+				//dotsClass: 'slick-dots',
+				//autoplay: true,
+				autoplaySpeed: 1,
+				draggable: false,
+				rows: 2,
+				//prevArrow: $(".slick-prev"),
+				infinite: false
+			});
 
-// lineItems: [{
-//     price: 'price_123',
-//     quantity: 1
-//   }],
+			$('button.slick-next').html("&#10154;");
+			$('button.slick-prev').html("&#10154;");
+			/////////////
+			function calcSum(e) {
+				let id = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
+				let item = cards.find(item => item.id == id);
 
-	const item = document.querySelectorAll('.item');
-	item.forEach(cd => {
+				let divCount = e.target.parentElement.querySelector('.counter-value');
+				let divPrice = e.target.parentElement.querySelector('.precio');
 
-		const img = cd.querySelector('img');
-		const back = cd.querySelector('.item__back');
+				if (e.target.className == 'counter-up') {
+					if (divCount.value > 98) {
+						divCount.value = 99
+					} else {
+						divCount.value++
+					};
+				};
+				if (e.target.className == 'counter-down') {
+					if (divCount.value < 2) {
+						divCount.value = 1
+					} else {
+						divCount.value--
+					};
+				}
+				divPrice.textContent = `${item.precio * Number(divCount.value)} €`;
+			}
 
-		img.addEventListener('click', () => {
-			cd.classList.toggle('flipped');
+			const divCounter = document.querySelectorAll('.counter');
+			divCounter.forEach(function (el) {
+				el.addEventListener('click', function (e) {
+					if (e.target.className == 'counter-up') {
+						calcSum(e);
+					}
+					if (e.target.className == 'counter-down') {
+						calcSum(e);
+					}
+					if (e.target.className == 'counter-value') {
+						e.target.addEventListener('input', function () {
+							e.target.value = e.target.value.replace(/[^\d.]/g, '');
+							calcSum(e);
+						})
+					}
+					if (e.target.className == 'addItem') {
+						carrito[0] = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
+						carrito[1] = e.target.parentElement.querySelector('.counter-value').value;
+						loadCarrito();
+					}
+				});
+			});
+			for (let i = 0; i < cards.length; i++) {
+				//document.querySelectorAll('.addItem')[i].click();
+			}
 
-		if (cd.classList.contains("flipped")) {
-			cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
-			cd.querySelector('.item__back').style.transform = "rotateY(0deg) translateX(-8%) ";
+			//  PAYMENTS
+			// document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
+			// sell(carritoTotal.map(item => ({
+			// 	price: item[0],
+			// 	quantity: Number(item[1])
+			// })));
+			// });
 
-		} else {
-			cd.querySelector('.item__front').style.transform = "rotateY(0deg)";
-			cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
-		}
-	});
-		back.addEventListener('click', () => {
-			img.click();
-			if (cd.querySelector(':before')) {cd.querySelector(':before').style.opacity = 0;}
-		});
-	});
+			// function sell(obj) {
+			// 	var stripe = Stripe('');
 
-//MODAL
+			// 	stripe.redirectToCheckout({
+			// 	lineItems: obj,
+			// 		mode: 'payment',
+			// 		successUrl: 'http://127.0.0.1:3000/index.html',
+			// 		cancelUrl: 'http://127.0.0.1:3000/index.html'
+			// 	}).then(function (result) {
+			// 		if (result.error) {
+			// 		console.log(result.error.message);
+			// 		}
+			// 	});
+			// 	console.clear();
+			// }
 
-	document.body.insertAdjacentHTML('afterbegin',`
+			// lineItems: [{
+			//     price: 'price_123',
+			//     quantity: 1
+			//   }],
+
+			const item = document.querySelectorAll('.item');
+			item.forEach(cd => {
+
+				const img = cd.querySelector('img');
+				const back = cd.querySelector('.item__back');
+
+				img.addEventListener('click', () => {
+					cd.classList.toggle('flipped');
+
+					if (cd.classList.contains("flipped")) {
+						cd.querySelector('.item__front').style.transform = "rotateY(180deg)";
+						cd.querySelector('.item__back').style.transform = "rotateY(0deg) translateX(-8%) ";
+
+					} else {
+						cd.querySelector('.item__front').style.transform = "rotateY(0deg)";
+						cd.querySelector('.item__back').style.transform = "rotateY(180deg)";
+					}
+				});
+				back.addEventListener('click', () => {
+					img.click();
+					if (cd.querySelector(':before')) { cd.querySelector(':before').style.opacity = 0; }
+				});
+			});
+
+			//MODAL
+
+			document.body.insertAdjacentHTML('afterbegin', `
 	<div class="modal">
 		<div class="modal-content">
 			<form id="addCardForm">
@@ -406,388 +419,388 @@ document.querySelector('.hamburger>.button').addEventListener('click', () => {
 	</div>
 	`);
 
-	function createList() {
-		document.querySelector('#addCardForm').insertAdjacentHTML('afterbegin','<div class="list"><ul></ul></div>');
-		for (let product of Object.values(cards)) {
-				document.querySelector('.list > ul').insertAdjacentHTML('beforeend',`
+			function createList() {
+				document.querySelector('#addCardForm').insertAdjacentHTML('afterbegin', '<div class="list"><ul></ul></div>');
+				for (let product of Object.values(cards)) {
+					document.querySelector('.list > ul').insertAdjacentHTML('beforeend', `
 				<li>${product.name}
 					<img class='trash' src='img/trash.png'>
 				</li>
 			`);
-		}
-	}
+				}
+			}
 
-	createList();
+			createList();
 
-	function createEventTrash() {
-		document.querySelectorAll('.trash').forEach((element) => {
-			element.addEventListener('click', (event) => {
+			function createEventTrash() {
+				document.querySelectorAll('.trash').forEach((element) => {
+					element.addEventListener('click', (event) => {
+						event.preventDefault();
+						event.target.parentElement.remove();
+
+						clearList().then(() => {
+							createList();
+							createEventsList();
+							createEventTrash();
+
+							// Отправляем AJAX-запрос на сервер
+							$.ajax({
+								url: 'https://www.conservasalboran.es/php/query.php', // адрес вашего сервера
+								type: 'POST', // метод запроса
+								data: JSON.stringify(cards), // данные, которые нужно отправить на сервер
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", // тип данных, которые отправляем
+								success: function (response) {
+									console.log('Данные успешно обновлены');
+									console.log(response); // ответ от сервера
+								},
+								error: function (error) {
+									console.error('Ошибка при обновлении данных');
+									console.error(error); // сообщение об ошибке
+								}
+							});
+						});
+						cards.splice(cards.findIndex(card => card.id == document.querySelector('#id').value), 1);
+
+					});
+				});
+				console.log(cards);
+			}
+			createEventTrash();
+
+			function clearList() {
+				return new Promise(resolve => {
+					document.querySelector('.list').remove();
+					resolve();
+				})
+			};
+
+			function clearForm() {
+				return new Promise(resolve => {
+					const form = document.querySelector('#addCardForm');
+					form.reset();
+					document.querySelector('#imagePicante').src = 'img/sellos/none.png';
+					//document.querySelector('.list').remove();
+					resolve();
+				});
+			}
+
+			function clearActive() {
+				const itemsList = document.querySelectorAll('.list > ul > li');
+				itemsList.forEach((e) => {
+					e.classList.remove('active');
+				});
+
+			}
+
+			function createEventsList() {
+				const itemsList = document.querySelectorAll('.list > ul > li');
+				itemsList.forEach((e) => {
+					e.addEventListener('click', (event) => {
+						clearActive();
+						e.classList.add('active');
+						clearForm().then(() => {
+							//try {
+							const index = Array.from(itemsList).indexOf(event.target);
+							document.querySelector('#id').value = cards[index].id;
+							document.querySelector('#name').value = cards[index].name;
+							document.querySelector('#peso').value = cards[index].peso;
+							document.querySelector('#precio').value = cards[index].precio;
+							document.querySelector('#img').value = cards[index].img;
+							document.querySelector('#descr').value = cards[index].descr;
+							document.querySelector('#ingredientes').value = cards[index].ingredientes;
+							document.querySelector('#informacion').value = cards[index].informacion;
+
+							for (let i = 0; i < cards[index].sellos.length; i++) {
+								switch (cards[index].sellos[i]) {
+									case 'picanteM':
+										document.querySelector('#imageSelect').selectedIndex = 1;
+										document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+										break;
+									case 'picanteH':
+										document.querySelector('#imageSelect').selectedIndex = 2;
+										document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+										break;
+									case 'picanteE':
+										document.querySelector('#imageSelect').selectedIndex = 3;
+										document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
+										break;
+									default:
+										document.querySelector(`#${cards[index].sellos[i]}`).checked = true;
+								}
+							}
+							//} catch {}   
+						})
+					});
+				});
+			}
+			createEventsList();
+
+			const select = document.getElementById("imageSelect");
+			const image = document.getElementById("imagePicante");
+
+			select.addEventListener("change", function () {
+				const selectedValue = select.value;
+				image.src = selectedValue;
+			});
+
+			const addCardForm = document.getElementById('addCardForm');
+
+			let tempSellos = [];
+
+			const inputElement = document.getElementById("open");
+			const imgElement = document.getElementById("img");
+
+			imgElement.addEventListener("dblclick", function () {
+				inputElement.click();
+			});
+
+			inputElement.addEventListener("change", function () {
+				const file = inputElement.files[0];
+				const reader = new FileReader();
+
+				reader.addEventListener("load", function () {
+					imgElement.value = file.name;
+				});
+
+				if (file) {
+					reader.readAsDataURL(file);
+				}
+			});
+
+			addCardForm.addEventListener('submit', function (event) {
+				tempSellos.length = 0;
 				event.preventDefault();
-				event.target.parentElement.remove();
-				
+				const id = document.getElementById('id').value;
+				const name = document.getElementById('name').value;
+				const peso = document.getElementById('peso').value.replace("g", '');
+				const descr = document.getElementById('descr').value;
+				const ingredientes = document.getElementById('ingredientes').value;
+				const image = document.getElementById('img').value;
+				const informacion = document.getElementById('informacion').value.split('\n');
+				const precio = document.getElementById('precio').value;
+
+				const newCard = {
+					id: id,
+					name: name,
+					peso: peso + 'g',
+					descr: descr,
+					ingredientes: ingredientes,
+					informacion: informacion,
+					sellos: [],
+					img: `img/productos/${image}`,
+					precio: precio
+				};
+
+				document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
+					tempSellos.push(element.id)
+				});
+
+				const combobox = document.querySelector('#imageSelect');
+				if (combobox.selectedIndex > 0) {
+					tempSellos.push(combobox.value.match(/(\w+).png/)[1])
+				}
+
+				newCard.sellos = tempSellos;
+
+				cards.push(newCard);
+
+				addCardForm.reset();
+				console.log(combobox.src);
+				document.querySelector('#imagePicante').src = 'img/sellos/none.png'
+
 				clearList().then(() => {
 					createList();
 					createEventsList();
 					createEventTrash();
-			
-						// Отправляем AJAX-запрос на сервер
-						$.ajax({
-						  url: 'https://www.conservasalboran.es/php/query.php', // адрес вашего сервера
-						  type: 'POST', // метод запроса
-						  data: JSON.stringify(cards), // данные, которые нужно отправить на сервер
-						  contentType: "application/json; charset=utf-8",
-						  dataType: "json", // тип данных, которые отправляем
-						  success: function(response) {
+				});
+
+				function updateData() {
+					$.ajax({
+						url: 'https://www.conservasalboran.es/php/query.php', // адрес вашего сервера
+						type: 'POST', // метод запроса
+						data: JSON.stringify(cards), // данные, которые нужно отправить на сервер
+						contentType: "application/json; charset=utf-8",
+						dataType: "json", // тип данных, которые отправляем
+						success: function (response) {
 							console.log('Данные успешно обновлены');
 							console.log(response); // ответ от сервера
-						  },
-						  error: function(error) {
+						},
+						error: function (error) {
 							console.error('Ошибка при обновлении данных');
 							console.error(error); // сообщение об ошибке
-						  }
-						});
-				});
-				cards.splice(cards.findIndex(card => card.id == document.querySelector('#id').value), 1);
-				
-			});
-		});
-		console.log(cards);
-	}
-	createEventTrash();
-
-	function clearList() {
-		return new Promise(resolve => {
-			document.querySelector('.list').remove();
-			resolve();
-		})
-	};
-
-	function clearForm() {
-		return new Promise(resolve => {
-		  const form = document.querySelector('#addCardForm');
-		  form.reset();
-		  document.querySelector('#imagePicante').src = 'img/sellos/none.png';
-		  //document.querySelector('.list').remove();
-		  resolve();
-		});
-	}
-
-	function clearActive() {
-		const itemsList = document.querySelectorAll('.list > ul > li');
-		itemsList.forEach((e)=> {
-			e.classList.remove('active');
-		});
-		
-	}
-
-	function createEventsList() {
-		const itemsList = document.querySelectorAll('.list > ul > li');
-		itemsList.forEach((e) => {
-			e.addEventListener('click', (event) => {
-			clearActive();
-			e.classList.add('active');
-				clearForm().then(() => {
-				//try {
-					const index = Array.from(itemsList).indexOf(event.target);
-					document.querySelector('#id').value  		     = cards[index].id;
-					document.querySelector('#name').value  			 = cards[index].name;
-					document.querySelector('#peso').value   		 = cards[index].peso;
-					document.querySelector('#precio').value			 = cards[index].precio;
-					document.querySelector('#img').value 			 = cards[index].img;
-					document.querySelector('#descr').value   		 = cards[index].descr;
-					document.querySelector('#ingredientes').value    = cards[index].ingredientes;
-					document.querySelector('#informacion').value     = cards[index].informacion;
-
-					for (let i = 0; i < cards[index].sellos.length; i++) {
-						switch(cards[index].sellos[i]) {
-							case 'picanteM':
-								document.querySelector('#imageSelect').selectedIndex = 1;
-								document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
-								break;
-							case 'picanteH':
-								document.querySelector('#imageSelect').selectedIndex = 2;
-								document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
-								break;
-							case 'picanteE':
-								document.querySelector('#imageSelect').selectedIndex = 3;
-								document.querySelector('#imagePicante').src = document.querySelector('#imageSelect').value;
-								break;
-							default:
-							document.querySelector(`#${cards[index].sellos[i]}`).checked = true;
 						}
-					}
-					//} catch {}   
-				})
+					});
+				}
+
+				updateData();
+
 			});
-		});
-	}
-	createEventsList();
-
-	const select = document.getElementById("imageSelect");
-	const image  = document.getElementById("imagePicante");
-
-	select.addEventListener("change", function() {
-		const selectedValue = select.value;
-		image.src = selectedValue;
-	});
-
-	const addCardForm = document.getElementById('addCardForm');
-
-	let tempSellos = [];
-
-	const inputElement = document.getElementById("open");
-	const imgElement = document.getElementById("img");
-	
-	imgElement.addEventListener("dblclick", function() {
-	  inputElement.click();
-	});
-	
-	inputElement.addEventListener("change", function() {
-	  const file = inputElement.files[0];
-	  const reader = new FileReader();
-	
-	  reader.addEventListener("load", function() {
-		imgElement.value = file.name;
-	  });
-	
-	  if (file) {
-		reader.readAsDataURL(file);
-	  }
-	});
-	
-	addCardForm.addEventListener('submit', function(event) {
-		tempSellos.length = 0;
-		event.preventDefault(); 
-		const id 			= document.getElementById('id').value;
-		const name 			= document.getElementById('name').value;
-		const peso			= document.getElementById('peso').value.replace("g",'');
-		const descr 		= document.getElementById('descr').value;
-		const ingredientes	= document.getElementById('ingredientes').value;
-		const image			= document.getElementById('img').value;
-		const informacion	= document.getElementById('informacion').value.split('\n');
-		const precio 		= document.getElementById('precio').value;
-		
-		const newCard = {
-			id: id,
-			name: name,
-			peso: peso+'g',
-			descr: descr,
-			ingredientes: ingredientes,
-			informacion: informacion,
-			sellos: [],
-			img: `img/productos/${image}`,
-			precio: precio
-		};
-
-		document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
-			tempSellos.push(element.id)
-		});
-
-		const combobox = document.querySelector('#imageSelect');
-		if (combobox.selectedIndex > 0) {
-			tempSellos.push(combobox.value.match(/(\w+).png/)[1])
-		}
-
-		newCard.sellos = tempSellos;
-		
-		cards.push(newCard);
-
-		addCardForm.reset();
-		console.log(combobox.src);
-		document.querySelector('#imagePicante').src = 'img/sellos/none.png'
-
-		clearList().then(() => {
-			createList();
-			createEventsList();
-			createEventTrash();
-		});
-
-		function updateData() {
-			$.ajax({
-			  url: 'https://www.conservasalboran.es/php/query.php', // адрес вашего сервера
-			  type: 'POST', // метод запроса
-			  data: JSON.stringify(cards), // данные, которые нужно отправить на сервер
-			  contentType: "application/json; charset=utf-8",
-			  dataType: "json", // тип данных, которые отправляем
-			  success: function(response) {
-				console.log('Данные успешно обновлены');
-				console.log(response); // ответ от сервера
-			  },
-			  error: function(error) {
-				console.error('Ошибка при обновлении данных');
-				console.error(error); // сообщение об ошибке
-			  }
-			});
-		  }
-
-		  updateData();
-
-	});
 
 
-function clickImgCheck() {
-	const images = document.querySelectorAll(".sellosAdd img");
-	images.forEach((image) => {
-		const imageName = image.src.split("/").pop().split(".")[0];
-		const checkbox = document.querySelector(`#${imageName}`);
-		if (checkbox) {
-			image.addEventListener("click", () => {
-				checkbox.checked = !checkbox.checked;
-			});
-		};
-	});
-}
-
-clickImgCheck();
-
-
-
-	// APLICAR BUTTON
-
-	function updateCard(id, updatedCard) {
-		const index = cards.findIndex(card => card.id == id);
-		if (index === -1) {
-			console.error(`Карточка с id ${id} не найдена`);
-			return;
-		}
-		const card 		  = cards[index];
-		card.name 		  = updatedCard.name;
-		card.peso 		  = updatedCard.peso;
-		card.descr		  = updatedCard.descr;
-		card.ingredientes = updatedCard.ingredientes;
-		card.img 		  = updatedCard.img;
-		card.informacion  = updatedCard.informacion;
-		card.sellos 	  = updatedCard.sellos;
-		card.precio 	  = updatedCard.precio;
-
-		const formData = new FormData();
-		formData.append('id', card.id);
-		formData.append('name', card.name);
-		formData.append('peso', card.peso);
-		formData.append('descr', card.descr);
-		formData.append('ingredientes', card.ingredientes);
-		formData.append('img', card.img);
-		formData.append('informacion', card.informacion);
-		formData.append('sellos', card.sellos.join(','));
-		formData.append('precio', card.precio);
-
-			
-			$.ajax({
-			  url: 'https://www.conservasalboran.es/php/query.php', 
-			  type: 'POST', 
-			  data: JSON.stringify(cards), 
-			  contentType: "application/json; charset=utf-8",
-			  dataType: "json", 
-			  success: function(response) {
-				console.log('Данные успешно обновлены');
-				console.log(response); 
-			  },
-			  error: function(error) {
-				console.error('Ошибка при обновлении данных');
-				console.error(error); 
-			  }
-			});
-	};
-
-
-	document.querySelector('#addCardForm > button').addEventListener('click', (e) => {
-		e.preventDefault();
-		let aplSellos = [];
-		document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
-			aplSellos.push(element.id);
-	   	});
-
-		updateCard(document.querySelector('#id').value, {
-			name: document.querySelector('#name').value,
-			peso: document.querySelector('#peso').value,
-			descr: document.querySelector('#descr').value,
-			ingredientes: document.querySelector('#ingredientes').value,
-			img: document.querySelector('#img').value,
-			informacion: document.querySelector('#informacion').value,
-			sellos: aplSellos,
-			precio: document.querySelector('#precio').value
-		});
-	});
-
-	function modalShow() {
-		document.querySelector('.b_mail').addEventListener('click', (e) => {
-			e.preventDefault();
-			if (document.querySelector('.e_mail').value == 'ADD') {
-				window.scrollTo({top: 60, behavior: 'smooth'});
-				document.querySelector('.modal').style.display = 'block';
-				document.querySelectorAll('.background, .logo, .menu, section, footer').forEach((element) => {
-					element.style.filter = 'blur(4px)';
-					element.style.pointerEvents = 'none';
+			function clickImgCheck() {
+				const images = document.querySelectorAll(".sellosAdd img");
+				images.forEach((image) => {
+					const imageName = image.src.split("/").pop().split(".")[0];
+					const checkbox = document.querySelector(`#${imageName}`);
+					if (checkbox) {
+						image.addEventListener("click", () => {
+							checkbox.checked = !checkbox.checked;
+						});
+					};
 				});
-				document.querySelector('.e_mail').value ='';
 			}
-		});
-	}
 
-	modalShow();
+			clickImgCheck();
 
-	function modalHide() {
-		document.querySelector('.close').addEventListener('click', () => {
-			document.querySelector('.modal').style.display = 'none';
-			document.querySelectorAll('.background, .logo, .menu, section, footer').forEach((element) => {
-				element.style.filter = '';
-				element.style.pointerEvents = '';
+
+
+			// APLICAR BUTTON
+
+			function updateCard(id, updatedCard) {
+				const index = cards.findIndex(card => card.id == id);
+				if (index === -1) {
+					console.error(`Карточка с id ${id} не найдена`);
+					return;
+				}
+				const card = cards[index];
+				card.name = updatedCard.name;
+				card.peso = updatedCard.peso;
+				card.descr = updatedCard.descr;
+				card.ingredientes = updatedCard.ingredientes;
+				card.img = updatedCard.img;
+				card.informacion = updatedCard.informacion;
+				card.sellos = updatedCard.sellos;
+				card.precio = updatedCard.precio;
+
+				const formData = new FormData();
+				formData.append('id', card.id);
+				formData.append('name', card.name);
+				formData.append('peso', card.peso);
+				formData.append('descr', card.descr);
+				formData.append('ingredientes', card.ingredientes);
+				formData.append('img', card.img);
+				formData.append('informacion', card.informacion);
+				formData.append('sellos', card.sellos.join(','));
+				formData.append('precio', card.precio);
+
+
+				$.ajax({
+					url: 'https://www.conservasalboran.es/php/query.php',
+					type: 'POST',
+					data: JSON.stringify(cards),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function (response) {
+						console.log('Данные успешно обновлены');
+						console.log(response);
+					},
+					error: function (error) {
+						console.error('Ошибка при обновлении данных');
+						console.error(error);
+					}
+				});
+			};
+
+
+			document.querySelector('#addCardForm > button').addEventListener('click', (e) => {
+				e.preventDefault();
+				let aplSellos = [];
+				document.querySelectorAll('input[name="sellos"]:checked').forEach(element => {
+					aplSellos.push(element.id);
+				});
+
+				updateCard(document.querySelector('#id').value, {
+					name: document.querySelector('#name').value,
+					peso: document.querySelector('#peso').value,
+					descr: document.querySelector('#descr').value,
+					ingredientes: document.querySelector('#ingredientes').value,
+					img: document.querySelector('#img').value,
+					informacion: document.querySelector('#informacion').value,
+					sellos: aplSellos,
+					precio: document.querySelector('#precio').value
+				});
 			});
-		});
-	}
 
-	modalHide();
-
-	document.querySelector('.e_mail').addEventListener('keydown', (event) =>{
-		if (event.shiftKey) {
-			document.querySelector('.e_mail').setAttribute("type", "password");
-		} else {document.querySelector('.e_mail').setAttribute("type", "text");}
-	})
-
-
-	setTimeout(() => {
-		document.querySelector('.slick-next').addEventListener('mousedown', function(event) {
-			if (event.shiftKey) {
-				var slick = $('.productos__items').slick('getSlick');
-				var slideCount = slick.slideCount;
-				var lastIndex = slideCount - 3;
-				slick.slickGoTo(lastIndex);
+			function modalShow() {
+				document.querySelector('.b_mail').addEventListener('click', (e) => {
+					e.preventDefault();
+					if (document.querySelector('.e_mail').value == 'ADD') {
+						window.scrollTo({ top: 60, behavior: 'smooth' });
+						document.querySelector('.modal').style.display = 'block';
+						document.querySelectorAll('.background, .logo, .menu, section, footer').forEach((element) => {
+							element.style.filter = 'blur(4px)';
+							element.style.pointerEvents = 'none';
+						});
+						document.querySelector('.e_mail').value = '';
+					}
+				});
 			}
-		  });
-	}, 1000);
 
+			modalShow();
 
-		$('.contactos__informacion__mensaje_form').submit(function(e) {
-		  e.preventDefault();
-		  var name    = $('.name').val();
-		  var tel	  = $('.tel').val();
-		  var email   = $('.email').val();
-		  var mensaje = $('.text').val();
-	  
-		  $.ajax({
-			type: 'POST',
-			url: 'https://www.conservasalboran.es/php/mail.php', // укажите правильный путь к файлу на сервере
-			data: {
-				mail: email,
-				to: 'dardreams@gmail.com', 
-				subject: 'Mensaje de conservasalboran.es',
-				body: 'Nombre: ' + name + '\nTeléfono: ' + tel + '\nEmail: ' + email + '\nMensaje: ' + mensaje
-			},
-			success: function() {
-			 	console.log('Message sent!');
-			},
-			error: function() {
-				console.log('Message failed to send.');
+			function modalHide() {
+				document.querySelector('.close').addEventListener('click', () => {
+					document.querySelector('.modal').style.display = 'none';
+					document.querySelectorAll('.background, .logo, .menu, section, footer').forEach((element) => {
+						element.style.filter = '';
+						element.style.pointerEvents = '';
+					});
+				});
 			}
-		  });
+
+			modalHide();
+
+			document.querySelector('.e_mail').addEventListener('keydown', (event) => {
+				if (event.shiftKey) {
+					document.querySelector('.e_mail').setAttribute("type", "password");
+				} else { document.querySelector('.e_mail').setAttribute("type", "text"); }
+			})
+
+
+			setTimeout(() => {
+				document.querySelector('.slick-next').addEventListener('mousedown', function (event) {
+					if (event.shiftKey) {
+						var slick = $('.productos__items').slick('getSlick');
+						var slideCount = slick.slideCount;
+						var lastIndex = slideCount - 3;
+						slick.slickGoTo(lastIndex);
+					}
+				});
+			}, 1000);
+
+
+			$('.contactos__informacion__mensaje_form').submit(function (e) {
+				e.preventDefault();
+				var name = $('.name').val();
+				var tel = $('.tel').val();
+				var email = $('.email').val();
+				var mensaje = $('.text').val();
+
+				$.ajax({
+					type: 'POST',
+					url: 'https://www.conservasalboran.es/php/mail.php', // укажите правильный путь к файлу на сервере
+					data: {
+						mail: email,
+						to: 'dardreams@gmail.com',
+						subject: 'Mensaje de conservasalboran.es',
+						body: 'Nombre: ' + name + '\nTeléfono: ' + tel + '\nEmail: ' + email + '\nMensaje: ' + mensaje
+					},
+					success: function () {
+						console.log('Message sent!');
+					},
+					error: function () {
+						console.log('Message failed to send.');
+					}
+				});
+			});
+
+
+
+		})
+		.catch(function (error) {
+			console.log(error, " База данных не найдена");
 		});
-	  
-
-
-})
-.catch(function (error) {
-	console.log(error," База данных не найдена");
-});
 
 });  //////////////////  END
 
