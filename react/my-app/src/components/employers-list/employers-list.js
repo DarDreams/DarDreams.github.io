@@ -1,7 +1,7 @@
 import EmployersListItem from "../employers-list-item/employers-list-item"
 import './employers-list.css'
 
-const EployersList = ({data, onDelete, onToggleProp}) => {
+const EmployersList = ({data, onDelete, onToggleProp}) => {
 
     const elements = data.map(item => {
     const {id, ...itemProps} = item;
@@ -26,4 +26,4 @@ const EployersList = ({data, onDelete, onToggleProp}) => {
 }
 
 
-export default EployersList
+export default EmployersList
