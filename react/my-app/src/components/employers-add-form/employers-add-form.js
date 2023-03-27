@@ -1,14 +1,13 @@
-import "./employers-add-form.css"
+//import "./employers-add-form.css"
+import "./employers-add-form.scss"
 import { Component } from "react"
 
 class EmployersAddForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+
+        state = {
             name: '',
             salary: ''
         }
-    }
     
     onValueChange = (e) => {
         this.setState({
