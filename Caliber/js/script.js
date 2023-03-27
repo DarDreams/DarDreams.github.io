@@ -6,6 +6,7 @@ import {
 //console.clear();
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
+    
     /* #region  FUNTION OBJECT TO ARRAY */
     // function objectToArray(obj) {
     //     return Object.values(obj).map((value) => {
@@ -19,6 +20,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //let games = objectToArray(game);
     /* #endregion */
+  
+    /* #region CREATE OBJECT CALIBER */
     try {
         caliber[8] = caliber[7].splice(4);
         caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
@@ -33,13 +36,16 @@ window.addEventListener('DOMContentLoaded', () => {
     // console.log(games);
     // console.log(games[2][0+2][5][0]);
     // console.log(caliber[2+5][0+0][8][15][0]);
+    /* #endregion */
 
+    /* #region  CONVERT_SECONDS */
     function convertSecondsToTime(seconds) {
         //const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const sec = Math.floor(seconds % 60);
         return `${minutes.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     }
+    /* #endregion */
 
     /* #region  PERK RUS */
     const perksRus = {
@@ -1724,13 +1730,14 @@ window.addEventListener('DOMContentLoaded', () => {
     // updateFileContent('Caliber/js/script.js','js/script.js');
     // updateFileContent('Caliber/js/game.js','js/game.js');
     // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
-    
+
     try {
         saveData(new Date());
     } catch (e) {
         console.error("Ошибка в функции SaveData - ", e.message);
     }
     /* #endregion */
+
     /* #region  REFRESH EVERY 60 SEC */
     // setInterval(() => {
     //     //console.log(document.querySelector('.slide-out-panel').clientLeft);
