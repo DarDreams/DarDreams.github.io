@@ -433,11 +433,14 @@ window.addEventListener('DOMContentLoaded', () => {
             увеличивается до 5 сек.`
         ],
 
-        "stim_medpacks": ["Медпакет какой то",
-            `Что то он делает
-        я знаю что, но нужно
-        это выяснить, а пока 
-        к смелости +5/6/7% `],
+        "stim_medpacks": ["Стимулирующие медикаменты",
+            `Применение резерва "Медпакет"
+            восстанавливает не только
+            здоровье, но и выносливость.
+
+            Восстановление выносливости:
+            50/60/80 ОВ в течении 3 сек.
+            `],
 
         "heavyweight_marathon": ["Вооруженные забег",
             `Длительные тренировки
@@ -1336,6 +1339,7 @@ window.addEventListener('DOMContentLoaded', () => {
             time.innerText = convertSecondsToTime(data2.Log.MatchTimeSeconds);
         })();
         // #endregion MAPS
+     
         //  #region WIN / LOSE
         (function () {
             function color(color, text) {
@@ -1358,6 +1362,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         })();
         // #endregion WIN / LOSE
+        
         //  #region SCORE
         function score(teamNumber) {
             let data = data2.Log.Rounds;
@@ -1373,31 +1378,28 @@ window.addEventListener('DOMContentLoaded', () => {
             return counts[teamKey];
         }
         // #endregion
+        
         //  #region COLOR POINTS
         (function () {
-
-
             let visible = 0;
-
-            for (let j = 0; j < data2.Log.MaxRoundsWon * 2; j++) {
-                if (data2.Log.Rounds[j].winner_team == 0) {
-                    visible = 1;
-                } else {
-                    visible = 0;
-                };
-                document.querySelector(`.bluePoints`).insertAdjacentHTML('beforeend', `
-                        <svg class="bluePoint${j + 1} points blue" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
-                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="${(visible == 0) ? visible = 1 : visible = 0}" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
-                        </svg>
-                `);
-                document.querySelector(`.redPoints`).insertAdjacentHTML('beforeend', `
-                        <svg class="redPoint${j + 1} points red" viewBox = "0 0 70 206" xmlns="http://www.w3.org/2000/svg"  width="30px">
-                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="${(visible == 1) ? visible = 0 : visible = 1}" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/></svg>
-                        </svg>
-                `);
+            for (let j = 0; j < data2.Log.MaxRoundsWon; j++) {
+              if (data2.Log.Rounds[j].winner_team == 0) {
+                visible = 1;
+              } else {
+                visible = 0;
+              };
+              document.querySelector('.bluePoints').insertAdjacentHTML('afterbegin', `
+                <svg class="bluePoint${j + 1} points blue" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+                  <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="${visible}" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+                </svg>
+              `);
+              document.querySelector('.redPoints').insertAdjacentHTML('beforeend', `
+                <svg class="redPoint${j + 1} points red" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+                  <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="${visible ? 0 : 1}" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+                </svg>
+              `);
             }
-
-        })();
+          })();
         // #endregion
 
         id = data1[0];
