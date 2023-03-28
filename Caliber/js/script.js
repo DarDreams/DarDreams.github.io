@@ -1392,14 +1392,15 @@ window.addEventListener('DOMContentLoaded', () => {
                         <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="0" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
                     </svg>
                 `);
-
-                winBlue.forEach((e,q) => {
+                    console.log(winBlue);
+                winBlue.forEach(function (element,q) {
+                    console.log(q+1);
                     document.querySelector(`.bluePoint${q+1} > path`).style.fillOpacity = 1;
                 });
 
-                winRed.forEach((e,q) => {
-                    document.querySelector(`.redPoint${q+1} > path`).style.fillOpacity  = 1;
-                });
+                // winRed.forEach((e,q) => {
+                //     document.querySelector(`.redPoint${q+1} > path`).style.fillOpacity  = 1;
+                // });
 
                 }
             }
