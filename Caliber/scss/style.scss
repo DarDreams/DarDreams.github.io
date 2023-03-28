@@ -205,6 +205,11 @@ html {
                 transform: translate(-85px, 4px);
             }
 
+            tspan {
+                white-space: normal !important;
+                color: white;
+            }
+            
             .name {
                 position: absolute;
                 font-size: 20px;

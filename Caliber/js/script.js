@@ -1380,26 +1380,69 @@ window.addEventListener('DOMContentLoaded', () => {
         // #endregion
         
         //  #region COLOR POINTS
-        (function () {
-            let visible = 0;
-            for (let j = 0; j < data2.Log.MaxRoundsWon; j++) {
-              if (data2.Log.Rounds[j].winner_team == 0) {
-                visible = 1;
-              } else {
-                visible = 0;
-              };
-              document.querySelector('.bluePoints').insertAdjacentHTML('afterbegin', `
-                <svg class="bluePoint${j + 1} points blue" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-                  <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="${visible}" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
-                </svg>
-              `);
-              document.querySelector('.redPoints').insertAdjacentHTML('beforeend', `
-                <svg class="redPoint${j + 1} points red" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-                  <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="${visible ? 0 : 1}" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
-                </svg>
-              `);
+
+        function setScore() {
+            const winBlue = data2.Log.Rounds.filter(item => item.winner_team === 0);
+            const winRed  = data2.Log.Rounds.filter(item => item.winner_team === 1);
+            const color = ['blue', 'red'];
+            for (let i = 0; i < 2; i++) {
+                for (let k = 0; k < data2.Log.MaxRoundsWon; k++) {
+                    document.querySelector(`.${color[i]}Points`).insertAdjacentHTML('afterbegin', `
+                    <svg class="${color[i]}Point${i} points ${color[i]}" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="0" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+                    </svg>
+                `);
+
+                winBlue.forEach(() => {
+                    document.querySelector(`.bluePoint${i} > path`).style.fillOpacity = 1;
+                });
+
+                // winRed.forEach(() => {
+                //     document.querySelector(`.redPoint${i} > path`).style.fillOpacity  = 1;
+                // });
+
+                }
             }
-          })();
+
+            // winBlue.forEach((e, iq) => {
+            //     document.querySelector(`.bluePoint${i}`).insertAdjacentHTML('afterbegin', `
+            //         <svg class="bluePoint${i} points blue" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+            //             <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="1" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+            //         </svg>
+            //     `);
+            // });
+            // winRed.forEach((element, i) => {
+            //     document.querySelector('.redPoints').insertAdjacentHTML('beforeend', `
+            //         <svg class="redPoint${i} points red" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+            //         <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="1" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+            //         </svg>
+            //     `);
+            // });
+
+        }
+        setScore();
+
+
+        // (function () {
+        //     let visible = 0;
+        //     for (let j = 0; j < data2.Log.MaxRoundsWon; j++) {
+        //       if (data2.Log.Rounds[j].winner_team == 0) {
+        //         visible = 1;
+        //       } else {
+        //         visible = 0;
+        //       };
+        //       document.querySelector('.bluePoints').insertAdjacentHTML('afterbegin', `
+        //         <svg class="bluePoint${j + 1} points blue" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+        //           <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="${visible}" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+        //         </svg>
+        //       `);
+        //       document.querySelector('.redPoints').insertAdjacentHTML('beforeend', `
+        //         <svg class="redPoint${j + 1} points red" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+        //           <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="${visible ? 0 : 1}" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+        //         </svg>
+        //       `);
+        //     }
+        //   })();
         // #endregion
 
         id = data1[0];
