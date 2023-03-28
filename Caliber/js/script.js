@@ -7,7 +7,7 @@ import {
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
 
-    /* #region  FUNTION OBJECT TO ARRAY */
+    /* #region  FUNCTION OBJECT TO ARRAY */
     // function objectToArray(obj) {
     //     return Object.values(obj).map((value) => {
     //       if (typeof value === 'object' && value !== null) {
@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //let games = objectToArray(game);
     /* #endregion */
-  
+
     /* #region CREATE OBJECT CALIBER */
     try {
         caliber[8] = caliber[7].splice(4);
@@ -432,6 +432,12 @@ window.addEventListener('DOMContentLoaded', () => {
             Длительность применения
             увеличивается до 5 сек.`
         ],
+
+        "stim_medpacks": ["Медпакет какой то",
+            `Что то он делает
+        я знаю что, но нужно
+        это выяснить, а пока 
+        к смелости +5/6/7% `],
 
         "heavyweight_marathon": ["Вооруженные забег",
             `Длительные тренировки
@@ -979,8 +985,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     return "Число не входит в диапазон";
                 }
                 /* #endregion */
-                console.log(operator.emblem);
-                console.log(`caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.png`);
+                //console.log(operator.emblem);
+                //console.log("caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.pn\g");
                 let img = new Image();
                 img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
 
@@ -996,36 +1002,48 @@ window.addEventListener('DOMContentLoaded', () => {
                     document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
                     <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${operator.emblem}">
                     `);
-                    //setTimeout(function () {console.log('hi');}, 500);
                 };
 
-                // let img2 = new Image();
-                // img2.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
+                /* #region  FUNCTION CHECK IMAGES */
 
-                // img2.onload = function () {
-                //     try {
-                //         document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.oper`).insertAdjacentHTML('afterbegin', `<img class = "oper" src="${img2.src}">`);
-                //     } catch {
-                //         console.error('Ошибка при загрузке картинки');
-                //     }
-                // };
+                function checkImage(imageSrc) {
+                    return new Promise((resolve, reject) => {
+                        var img = new Image();
+                        img.onload = function () {
+                            img.src = imageSrc;
+                            resolve("Image is loaded and exists.");
+                        };
+                        img.onerror = function () {
+                            img.src = `https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png`;
+                            reject("Error loading image.");
+                        };
 
-                // img2.onerror = function () {
-                //     document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.oper`).insertAdjacentHTML('afterbegin', `
-                //     <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png" alt="">
-                //     `);
-                //     //setTimeout(function () {console.log('hi');}, 500);
-                // };
+                    });
+                }
 
-                //debugger;
+                async function setImage(imageUrl, selector) {
+                    try {
+                        await checkImage(imageUrl);
+                        let image = document.querySelector(selector);
+                        image.setAttribute('src', imageUrl);
+                    } catch (error) {
+                        console.log('Ошибка в загрузке картинке - ', error);
+                    }
+                }
+                //setImage(`https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png`, '.oper');
+                //setImage(`https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png`, '.baner');
+
+                /* #endregion */
+
+                /* #region  INPUT TABLE OPERATORS */
                 document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('beforeend', `
             
-            <tr class = 'line ${operator.role}'>
+                <tr class = 'line ${operator.role}'>
                 <td>
                     <svg class = "${operator.role}Logo"><title>${operator.role}</title><use xlink:href="#${operator.role}"></use></svg>
                 </td>
                 <td>
-                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png" alt="">
+                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png" alt=""> 
                 </td>
                 <td>
                     <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
@@ -1065,6 +1083,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <tr><th></th></tr>
             </tr>
         `)
+                /* #endregion */
                 //console.log(operator.role);
                 //console.log(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`);
                 //console.log(document.querySelector(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`));
@@ -1386,11 +1405,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    try {
-        upload(caliber, caliber2);
-    } catch (e) {
-        console.error("Ошибка в функции upload - ", e.message,);
-    }
+    // try {
+    upload(caliber, caliber2);
+    // } catch (e) {
+    //     console.error("Ошибка в функции upload - ", e.message);
+    // }
     /* #endregion END ALL DATAS*/
 
     /* #region  CALENDAR */

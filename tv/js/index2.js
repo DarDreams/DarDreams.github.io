@@ -4,7 +4,7 @@ $(".tv_bitva").hide();
 $(".tv_punch").hide();
 $(".overlay").hide();
 
-
+//test
     if (($("body").width() > $(".tv").width()) || ($("body").height()>$(".tv").height())) 
     {
         let topTV = $("body").height()-$(".tv").height()+15;
