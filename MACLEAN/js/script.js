@@ -47,7 +47,14 @@ $(document).ready(function () {
 			let animate = "animate__bounceInRight";
 
 			$(".inicio_link").click(function () {
-				$("html, body").animate({ scrollTop: 0 + "px" });
+				const divFooter = document.querySelector('.footer');
+				divFooter.style.cssText = `
+				position: fixed;
+				margin-bottom: 0;
+				`;
+				
+				//$("html, body").animate({ scrollTop: 0 + "px" });
+				
 				$(".overlay").fadeIn();
 				$(".inicio").show();
 				$(".empresa").fadeOut(1000);
@@ -56,6 +63,7 @@ $(document).ready(function () {
 				$(".carrito").fadeOut(1000);
 
 				anime(".inicio", animate);
+				document.querySelector('html, body').scrollIntoView({ behavior: 'smooth' });
 			});
 
 			$(".empresa_link").click(function () {
@@ -114,6 +122,8 @@ $(document).ready(function () {
 			});
 
 
+			
+
 			//////HAMBURGER
 
 			document.body.insertAdjacentHTML('afterbegin', `
@@ -127,20 +137,46 @@ $(document).ready(function () {
 			//const divMobile = ;
 
 			document.querySelector('.hamburger>.button').addEventListener('click', () => {
-				document.querySelector('.menu>nav>ul').classList.toggle('mobile');
 				document.querySelector('.menu>nav>ul').classList.add('animate__animated');
+				document.querySelector('.background').addEventListener('click', () => {
+					document.querySelector('.button').click();
+					document.querySelector('.background').onclick = null;
+				});
+
+
+				console.log('click');
+				document.querySelector('.menu>nav>ul').classList.add('mobile');
+
 				//const divMobile = ;
 				if (mediaQuery768.matches) {
 					if (document.querySelector('.menu>nav>ul').classList.contains('mobile')) {
 						divMenu.style.display = 'flex';
-						document.querySelector('.mobile').classList.add('animate__slideInDown');
-						divBurger.style.transform = 'translate(-50%, 100%) rotate(-90deg)';
+						document.querySelector('.mobile').classList.add('animate__slideInRight');
+						divBurger.style.transform = 'translate(-50%, 100%) rotate(90deg)';
 					} else {
-						divBurger.style.transition = ".3s";
-						divBurger.style.transform = 'translate(-50%, 100%) rotate(0deg)';
-						divMenu.style.display = "none";
-						document.querySelector('.mobile').classList.remove('animate__slideInDown');
+						document.querySelector('.menu>nav>ul').classList.add('animate__slideOutRight');
+						//divBurger.style.transition = ".3s";
+						divBurger.style.transform = 'translate(-70%, 100%) rotate(0deg)';
+						
+
+						setTimeout(() => {
+							document.querySelector('.menu>nav>ul').classList.add(' animate__slideOutRight');
+							document.querySelector('.menu>nav>ul').classList.remove('mobile');
+						}, 100);
+						setTimeout(() => {
+						//	document.querySelector('.menu>nav>ul').classList.remove('animate__slideInRight');
+						
+						}, 200);
+						setTimeout(() => {
+						//	document.querySelector('.menu>nav>ul').classList.remove('animate__slideInRight');
+						}, 300);
+						setTimeout(() => {
+						//	divMenu.style.display = "none";
+						}, 400);
 					}
+				} else {
+					console.log('click_out');
+					document.querySelector('.menu>nav>ul').classList.remove('mobile');
 				}
 			})
 
@@ -150,7 +186,7 @@ $(document).ready(function () {
 
 			$(".logo").click(function () {
 				document.querySelector('.logo__roca').src = `img/LOGO3.png?${Date.now()};`
-				location.reload(true);
+				location.href = location.href + '?rand=' + Math.random();
 			});
 
 			////////tienda

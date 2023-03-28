@@ -32,3 +32,18 @@
 }
 
 
+@media (max-width: 768px) {
+    .inicio { 
+        width: 100vw;
+        left: 0;
+        margin: 0;
+        padding: 50px 10px;
+        position: absolute;
+        height: fit-content;
+        //min-height: 10vh;
+        //max-height: 200px;
+        //bottom: 0;
+        overflow-y: auto;
+        top: 0;
+    }
+}

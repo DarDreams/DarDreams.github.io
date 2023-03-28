@@ -62,7 +62,7 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 103%;
         background-color: rgba(0, 0, 0, 76%); /* Здесь 0.5 - это значение непрозрачности, вы можете изменить его */
       }
 }
@@ -74,6 +74,9 @@ body {
 
 
 @media (max-width: 768px) {
+    body {
+        height: 120vh;
+    }
     .logo {
         zoom: 0.5;
         margin-left: -80px;
@@ -86,10 +89,16 @@ body {
     }
 
     .menu {
-      //  opacity: 0;
-      display: none;
+        width: 200px;
+        text-transform: uppercase;
+        text-justify: inter-word;
+        display: none;
         ul {
-            border: 1px ridge var(--red);
+            position: absolute;
+            right: 0;
+            top:-40px;
+            
+          //  border: 1px ridge var(--red);
         }
 
     }
@@ -103,8 +112,9 @@ body {
         padding: 0;
         background-color: rgba($color: #000000, $alpha: 0.8);
         left: 0;
+        height: 100vh;
         text-align: center;
-        margin: -24px -10px;
+        //margin: -100px -56px;
         font-size: 30px;
         li a {
             font-size: 20px;
@@ -153,13 +163,12 @@ body {
     }
    
     .hamburger {
-        z-index: 99;
+        z-index: 999;
         position: fixed;
-        width: 100%;
-        height: 100%;
+        right: 0;
+        //width: 10px;
+        //height: 10px;
         transition: all 1s ease;
-    
-            
         }
        .button {
             z-index: 99;
@@ -178,7 +187,13 @@ body {
        }
 
 
-
+       .background {
+        &:before {
+            content: '';
+            height: 100%;
+            background-color: rgba(0, 0, 0, 76%); /* Здесь 0.5 - это значение непрозрачности, вы можете изменить его */
+          }
+        }
 
 
 
