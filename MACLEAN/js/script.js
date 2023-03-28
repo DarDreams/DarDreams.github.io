@@ -142,9 +142,14 @@ $(document).ready(function () {
 					document.querySelector('.button').click();
 					document.querySelector('.background').onclick = null;
 				});
+				if (document.querySelector('.menu>nav>ul').getBoundingClientRect().left > 0) {
+					document.querySelector('.menu>nav>ul').classList.toggle('animate__slideOutRight');
+					document.querySelector('.menu>nav>ul').classList.toggle('mobile');
+				} else  {
+				}
 
 
-				console.log('click');
+				
 				document.querySelector('.menu>nav>ul').classList.add('mobile');
 
 				//const divMobile = ;
@@ -174,9 +179,6 @@ $(document).ready(function () {
 						//	divMenu.style.display = "none";
 						}, 400);
 					}
-				} else {
-					console.log('click_out');
-					document.querySelector('.menu>nav>ul').classList.remove('mobile');
 				}
 			})
 
@@ -185,8 +187,8 @@ $(document).ready(function () {
 
 
 			$(".logo").click(function () {
-				document.querySelector('.logo__roca').src = `img/LOGO3.png?${Date.now()};`
-				location.href = location.href + '?rand=' + Math.random();
+				document.querySelector('.logo__roca').src = `img/LOGO3.png`;
+				location.href = location.origin + '?rand=' + Math.random();
 			});
 
 			////////tienda
