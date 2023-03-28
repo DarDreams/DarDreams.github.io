@@ -1388,18 +1388,18 @@ window.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < 2; i++) {
                 for (let k = 0; k < data2.Log.MaxRoundsWon; k++) {
                     document.querySelector(`.${color[i]}Points`).insertAdjacentHTML('afterbegin', `
-                    <svg class="${color[i]}Point${i} points ${color[i]}" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+                    <svg class="${color[i]}Point${k+1} points ${color[i]}" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
                         <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="0" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
                     </svg>
                 `);
 
-                winBlue.forEach(() => {
-                    document.querySelector(`.bluePoint${i} > path`).style.fillOpacity = 1;
+                winBlue.forEach((e,q) => {
+                    document.querySelector(`.bluePoint${q+1} > path`).style.fillOpacity = 1;
                 });
 
-                // winRed.forEach(() => {
-                //     document.querySelector(`.redPoint${i} > path`).style.fillOpacity  = 1;
-                // });
+                winRed.forEach((e,q) => {
+                    document.querySelector(`.redPoint${q+1} > path`).style.fillOpacity  = 1;
+                });
 
                 }
             }
