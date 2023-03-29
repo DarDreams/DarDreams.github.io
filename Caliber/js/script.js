@@ -1009,30 +1009,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 /* #region  FUNCTION CHECK IMAGES */
 
-                function checkImage(imageSrc) {
-                    return new Promise((resolve, reject) => {
-                        var img = new Image();
-                        img.onload = function () {
-                            img.src = imageSrc;
-                            resolve("Image is loaded and exists.");
-                        };
-                        img.onerror = function () {
-                            img.src = `https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png`;
-                            reject("Error loading image.");
-                        };
+                // function checkImage(imageSrc) {
+                //     return new Promise((resolve, reject) => {
+                //         var img = new Image();
+                //         img.onload = function () {
+                //             img.src = imageSrc;
+                //             resolve("Image is loaded and exists.");
+                //         };
+                //         img.onerror = function () {
+                //             img.src = `https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png`;
+                //             reject("Error loading image.");
+                //         };
 
-                    });
-                }
+                //     });
+                // }
 
-                async function setImage(imageUrl, selector) {
-                    try {
-                        await checkImage(imageUrl);
-                        let image = document.querySelector(selector);
-                        image.setAttribute('src', imageUrl);
-                    } catch (error) {
-                        console.log('Ошибка в загрузке картинке - ', error);
-                    }
-                }
+                // async function setImage(imageUrl, selector) {
+                //     try {
+                //         await checkImage(imageUrl);
+                //         let image = document.querySelector(selector);
+                //         image.setAttribute('src', imageUrl);
+                //     } catch (error) {
+                //         console.log('Ошибка в загрузке картинке - ', error);
+                //     }
+                // }
                 //setImage(`https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png`, '.oper');
                 //setImage(`https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png`, '.baner');
 
@@ -1384,66 +1384,28 @@ window.addEventListener('DOMContentLoaded', () => {
         function setScore() {
             const winBlue = data2.Log.Rounds.filter(item => item.winner_team === 0);
             const winRed  = data2.Log.Rounds.filter(item => item.winner_team === 1);
-            const color = ['blue', 'red'];
+            const color   = ['blue', 'red', '#6aa5ee', '#ff323b'];
+            const colorH  = ['#6aa5ee','#ff323b'];
             for (let i = 0; i < 2; i++) {
                 for (let k = 0; k < data2.Log.MaxRoundsWon; k++) {
-                    document.querySelector(`.${color[i]}Points`).insertAdjacentHTML('afterbegin', `
+                    document.querySelector(`.${color[i]}Points`).insertAdjacentHTML('beforeend', `
                     <svg class="${color[i]}Point${k+1} points ${color[i]}" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="0" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="${color[i+2]}" fill-opacity="0" stroke="${color[i+2]}" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
                     </svg>
                 `);
-                    console.log(winBlue);
-                winBlue.forEach(function (element,q) {
-                    console.log(q+1);
-                    document.querySelector(`.bluePoint${q+1} > path`).style.fillOpacity = 1;
-                });
-
-                // winRed.forEach((e,q) => {
-                //     document.querySelector(`.redPoint${q+1} > path`).style.fillOpacity  = 1;
-                // });
-
                 }
             }
+            winBlue.forEach(function (e,j) {
+                        document.querySelector(`.bluePoint${j+1} > path`).style.fillOpacity = 1;
+                      });
 
-            // winBlue.forEach((e, iq) => {
-            //     document.querySelector(`.bluePoint${i}`).insertAdjacentHTML('afterbegin', `
-            //         <svg class="bluePoint${i} points blue" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-            //             <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="1" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
-            //         </svg>
-            //     `);
-            // });
-            // winRed.forEach((element, i) => {
-            //     document.querySelector('.redPoints').insertAdjacentHTML('beforeend', `
-            //         <svg class="redPoint${i} points red" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-            //         <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="1" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
-            //         </svg>
-            //     `);
-            // });
+            winRed.forEach((e,q) => {
+                document.querySelector(`.redPoint${q+1} > path`).style.fillOpacity  = 1;
+            });
 
         }
         setScore();
 
-
-        // (function () {
-        //     let visible = 0;
-        //     for (let j = 0; j < data2.Log.MaxRoundsWon; j++) {
-        //       if (data2.Log.Rounds[j].winner_team == 0) {
-        //         visible = 1;
-        //       } else {
-        //         visible = 0;
-        //       };
-        //       document.querySelector('.bluePoints').insertAdjacentHTML('afterbegin', `
-        //         <svg class="bluePoint${j + 1} points blue" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-        //           <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#6aa5ee" fill-opacity="${visible}" stroke="#6aa5ee" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
-        //         </svg>
-        //       `);
-        //       document.querySelector('.redPoints').insertAdjacentHTML('beforeend', `
-        //         <svg class="redPoint${j + 1} points red" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-        //           <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="#ff323b" fill-opacity="${visible ? 0 : 1}" stroke="#ff323b" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
-        //         </svg>
-        //       `);
-        //     }
-        //   })();
         // #endregion
 
         id = data1[0];
@@ -1781,42 +1743,9 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
         }
     }
-    /* #endregion */
+   
 
-    /* #region  LOAD FUCKING GITHUB */
-    ////////////////////////LOAD FUNCKINC
-    // function updateFileContent(filePath, localFilePath) {
-    //     const githubUsername = 'DarDreams';
-    //     const repoName = 'DarDreams.github.io';
-    //     const accessToken = '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';
-    //     const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}?ref=main`;
-    //     const headers = {
-    //       Authorization: `token ${accessToken}`,
-    //       'Content-Type': 'application/json',
-    //     };
-
-    //     fetch(localFilePath)
-    //       .then(response => response.text())
-    //       .then(fileContents => {
-    //         const encoder = new TextEncoder();
-    //         const content = encoder.encode(fileContents);
-    //         return fetch(apiUrl, {
-    //           method: 'PUT',
-    //           headers: headers,
-    //           body: JSON.stringify({
-    //             message: 'Update file contents',
-    //             content: window.btoa(String.fromCharCode.apply(null, content)),
-    //           })
-    //         });
-    //       })
-    //       .then(response => console.log(response))
-    //       .catch(error => console.error(error));
-    //   }
-    //updateFileContent('Caliber/index.html', 'index.html');
-    // updateFileContent('Caliber/js/script.js','js/script.js');
-    // updateFileContent('Caliber/js/game.js','js/game.js');
-    // updateFileContent('Caliber/css/style.min.css','css/style.min.css');
-
+   
     try {
         saveData(new Date());
     } catch (e) {
