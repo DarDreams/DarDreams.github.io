@@ -4,9 +4,10 @@ import {
     caliber2
 } from "./game.js";
 //console.clear();
+console.log("cal = ", caliber);
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
-
+    
     /* #region  FUNCTION OBJECT TO ARRAY */
     // function objectToArray(obj) {
     //     return Object.values(obj).map((value) => {
@@ -22,11 +23,22 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
 
     /* #region CREATE OBJECT CALIBER */
+
+    function newObj () {
+        const caliberNew = {
+            0: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
+            1: [caliber2] 
+        };
+    
+        return caliberNew;
+    }
+    console.log('newobj = ',newObj());
+
     try {
-        caliber[8] = caliber[7].splice(4);
-        caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
-        caliber2.Log.Users[1] = [caliber2.Log.Users[4], caliber2.Log.Users[5], caliber2.Log.Users[6], caliber2.Log.Users[7]]
-        caliber2.Log.Users.splice(2);
+        // caliber[8] = caliber[7].splice(4);
+        // caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
+        // caliber2.Log.Users[1] = [caliber2.Log.Users[4], caliber2.Log.Users[5], caliber2.Log.Users[6], caliber2.Log.Users[7]]
+        // caliber2.Log.Users.splice(2);
     } catch (e) {
         console.error("ошибка в пересборке объекта - ", e.message);
     }
@@ -1204,7 +1216,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
         /* #endregion */
-
 
         /* #region  TOP-STATS */
         function topStat(selector, type) {
