@@ -1,4 +1,4 @@
-import img from './error.gif';
+//import img from 'https://media.tenor.com/fzCt8ROqlngAAAAM/error-error404.gif';
 
 const ErrorMessage = () => {
     return (
@@ -11,7 +11,8 @@ const ErrorMessage = () => {
                 objectFit: 'contain',
                 margin: "0 auto"
             }}
-            src={img}
+            src="https://media.tenor.com/fzCt8ROqlngAAAAM/error-error404.gif"
+            alt = "error"
        />
     )
 }
