@@ -1374,12 +1374,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 const rusMapName = maps.rusMap[i];
                 divMap.textContent = `\u00A0${rusMapName}`;
             }
-
-            if (caliber[4] == 'pvp') {
+            if (data1[1].split("_")[3] == 'pvp') {
                 mode.innerText = `Столкновение:`;
             };
 
-            if (caliber[4] == 'hacking') {
+            if (data1[1].split("_")[3] == 'hacking') {
                 mode.innerText = `Взлом:`;
             };
             time.innerText = convertSecondsToTime(data2.MatchTimeSeconds);
