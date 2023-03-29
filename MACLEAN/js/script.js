@@ -49,8 +49,8 @@ $(document).ready(function () {
 			$(".inicio_link").click(function () {
 				const divFooter = document.querySelector('.footer');
 				divFooter.style.cssText = `
-				position: fixed;
-				margin-bottom: 0;
+				//position: fixed;
+				 margin-bottom: 0;
 				`;
 				
 				//$("html, body").animate({ scrollTop: 0 + "px" });
@@ -133,55 +133,41 @@ $(document).ready(function () {
 			`);
 
 			const divMenu = document.querySelector('section.menu');
-			const divBurger = document.querySelector('.button');
-			//const divMobile = ;
+			const divBurger = document.querySelector('span.button');
+			const divList = document.querySelector('.menu>nav>ul');
+			const divBackground = document.querySelector('.background');
 
-			document.querySelector('.hamburger>.button').addEventListener('click', () => {
-				document.querySelector('.menu>nav>ul').classList.add('animate__animated');
-				document.querySelector('.background').addEventListener('click', () => {
-					document.querySelector('.button').click();
-					document.querySelector('.background').onclick = null;
-				});
-				if (document.querySelector('.menu>nav>ul').getBoundingClientRect().left > 0) {
-					document.querySelector('.menu>nav>ul').classList.toggle('animate__slideOutRight');
-					document.querySelector('.menu>nav>ul').classList.toggle('mobile');
-				} else  {
-				}
-
-
+			divBurger.addEventListener('click', () => {
+				divList.classList.add('animate__animated');
+				divBackground.onclick = () => {
+					if (divList.classList.contains('animate__slideOutRight') == false) {
+						divBurger.click();
+						divBurger.removeAttribute('style');
+					} 
+					
+					divBackground.onclick = null;
+				};
 				
-				document.querySelector('.menu>nav>ul').classList.add('mobile');
-
-				//const divMobile = ;
+				if (divList.getBoundingClientRect().left > 0) {
+					divList.classList.toggle('animate__slideOutRight');
+					divList.classList.toggle('mobile');
+					
+				}
+				
+				divList.classList.add('mobile');
+				
 				if (mediaQuery768.matches) {
-					if (document.querySelector('.menu>nav>ul').classList.contains('mobile')) {
+					if (divList.classList.contains('mobile')) {
 						divMenu.style.display = 'flex';
 						document.querySelector('.mobile').classList.add('animate__slideInRight');
 						divBurger.style.transform = 'translate(-50%, 100%) rotate(90deg)';
 					} else {
-						document.querySelector('.menu>nav>ul').classList.add('animate__slideOutRight');
-						//divBurger.style.transition = ".3s";
-						divBurger.style.transform = 'translate(-70%, 100%) rotate(0deg)';
-						
-
-						setTimeout(() => {
-							document.querySelector('.menu>nav>ul').classList.add(' animate__slideOutRight');
-							document.querySelector('.menu>nav>ul').classList.remove('mobile');
-						}, 100);
-						setTimeout(() => {
-						//	document.querySelector('.menu>nav>ul').classList.remove('animate__slideInRight');
-						
-						}, 200);
-						setTimeout(() => {
-						//	document.querySelector('.menu>nav>ul').classList.remove('animate__slideInRight');
-						}, 300);
-						setTimeout(() => {
-						//	divMenu.style.display = "none";
-						}, 400);
 					}
 				}
+				if (getComputedStyle(document.querySelector('span.button')).transform[10] == 1)  {
+					divBurger.removeAttribute('style');
+				}
 			})
-
 
 			/////////////PRODUCTOS///////////////
 

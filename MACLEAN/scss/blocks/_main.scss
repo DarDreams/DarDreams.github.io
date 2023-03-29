@@ -47,6 +47,7 @@ body {
 }
 
 .background {
+    margin-top: -24px;
     left: 0;
     top: 0;
 	//width: 100vw;
@@ -84,7 +85,8 @@ body {
     .background {
         background: url("../img/bg_min.png");
         background-repeat: no-repeat;
-        background-size: 768px 767px;
+        background-size: auto;
+        background-position: bottom;
         width: 100vw;
     }
 
@@ -97,6 +99,7 @@ body {
             position: absolute;
             right: 0;
             top:-40px;
+            --animate-duration: .5s;
             
           //  border: 1px ridge var(--red);
         }
@@ -168,7 +171,7 @@ body {
         right: 0;
         //width: 10px;
         //height: 10px;
-        transition: all 1s ease;
+        transition: all 1.5s ease;
         }
        .button {
             z-index: 99;
@@ -183,7 +186,7 @@ body {
             transform: translate(-50%, 100%) rotate(0deg);
             right: 0;
             border-radius: 100%;
-            transition: 1.5s all ease;
+            transition: 0.5s all ease;
        }
 
 
