@@ -1,13 +1,10 @@
-// import game from "./game.js";
 import {
-    caliber,
-    caliber2
+    caliber as caliberImport,
+    caliber2 as caliberImport2
 } from "./game.js";
-//console.clear();
-console.log("cal = ", caliber);
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
-    
+
     /* #region  FUNCTION OBJECT TO ARRAY */
     // function objectToArray(obj) {
     //     return Object.values(obj).map((value) => {
@@ -23,31 +20,73 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
 
     /* #region CREATE OBJECT CALIBER */
-
-    function newObj () {
+    //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
+    let caliberFunc = function () {
         const caliberNew = {
-            0: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
-            1: [caliber2] 
+            data: [caliberImport[0],
+            caliberImport[2],
+            [caliberImport[7][0], caliberImport[7][1], caliberImport[7][2], caliberImport[7][3]],
+            [caliberImport[7][4], caliberImport[7][5], caliberImport[7][6], caliberImport[7][7]]
+            ],
+            log: {
+                Users: [
+                    [caliberImport2.Log.Users[0], caliberImport2.Log.Users[1], caliberImport2.Log.Users[2], caliberImport2.Log.Users[3]],
+                    [caliberImport2.Log.Users[4], caliberImport2.Log.Users[5], caliberImport2.Log.Users[6], caliberImport2.Log.Users[7]]
+                ],
+                MatchTimeSeconds: caliberImport2.Log.MatchTimeSeconds,
+                MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
+                PlayerReport: caliberImport2.Log.PlayerReports,
+                Rounds: caliberImport2.Log.Rounds
+            }
+
         };
-    
+
+        for (let i = 2; i <= 3; i++) {
+            for (let j = 0; j <= 3; j++) {
+                if (Array.isArray(caliberNew.data[i][j][11])) {
+                    caliberNew.data[i][j][11].splice(0);
+                }
+                if (Array.isArray(caliberNew.data[i][j][9])) {
+                    caliberNew.data[i][j][9].splice(0);
+                }
+            }
+        }
+        caliberNew.log.Users.forEach(element => {
+            delete element.QuestCounters;
+        });
+
+
         return caliberNew;
     }
-    console.log('newobj = ',newObj());
 
-    try {
-        // caliber[8] = caliber[7].splice(4);
-        // caliber2.Log.Users[0] = [caliber2.Log.Users[0], caliber2.Log.Users[1], caliber2.Log.Users[2], caliber2.Log.Users[3]]
-        // caliber2.Log.Users[1] = [caliber2.Log.Users[4], caliber2.Log.Users[5], caliber2.Log.Users[6], caliber2.Log.Users[7]]
-        // caliber2.Log.Users.splice(2);
-    } catch (e) {
-        console.error("ошибка в пересборке объекта - ", e.message);
-    }
+    let caliber = caliberFunc();
+    console.log('CALIBER_DATAS - ', caliber);
 
-    console.log(caliber);
-    console.log(caliber2);
-    // console.log(games);
-    // console.log(games[2][0+2][5][0]);
-    // console.log(caliber[2+5][0+0][8][15][0]);
+    /* #region  OLD VERSION */
+    // caliberNew.data[2][0][11].splice(0);
+    // caliberNew.data[2][0][9].splice(0);
+    // caliberNew.data[2][1][11].splice(0);
+    // caliberNew.data[2][1][9].splice(0);
+    // caliberNew.data[2][2][11].splice(0);
+    // caliberNew.data[2][2][9].splice(0);
+    // caliberNew.data[2][2][9].splice(0);
+    // caliberNew.data[2][3][11].splice(0);
+    // caliberNew.data[3][0][11].splice(0);
+    // caliberNew.data[3][0][9].splice(0);
+    // caliberNew.data[3][1][11].splice(0);
+    // caliberNew.data[3][1][9].splice(0);
+    // caliberNew.data[3][2][11].splice(0);
+    // caliberNew.data[3][2][9].splice(0);
+    // caliberNew.data[3][3][11].splice(0);
+    // caliberNew.data[3][3][9].splice(0);
+    /* #endregion */
+
+    // try {
+
+    // } catch (e) {
+    //     console.error("ошибка в пересборке объекта - ", e.message);
+    // }
+
     /* #endregion */
 
     /* #region  CONVERT_SECONDS */
@@ -928,20 +967,20 @@ window.addEventListener('DOMContentLoaded', () => {
                 /* #endregion */;
                 const operator = {
                     role: operLoop[i],
-                    emblem: data1[k + 5][i][5],
-                    avatar: oper(data1[k + 5][i][8][1]),
-                    lvlText: data1[k + 5][i][3],
+                    emblem: data1[k][i][5],
+                    avatar: oper(data1[k][i][8][1]),
+                    lvlText: data1[k][i][3],
                     nameOp: roleName,
-                    lvlOp: data1[k + 5][i][8][18],
-                    rank: data1[k + 5][i][16][2],
-                    name: data1[k + 5][i][2],
-                    group: String(data1[k + 5][i][1]).slice(0, 4),
-                    perks: [data1[k + 5][i + 0][8][15][0], data1[k + 5][i + 0][8][15][1], data1[k + 5][i + 0][8][15][2], data1[k + 5][i + 0][8][15][3]],
-                    kills: data2.Log.Users[k - 2][i].PlayerKills,
-                    deaths: data2.Log.Users[k - 2][i].Deaths,
-                    assists: data2.Log.Users[k - 2][i].Assists,
-                    damage: Math.floor(data2.Log.Users[k - 2][i].DamageDealt),
-                    recive: Math.floor(data2.Log.Users[k - 2][i].DamageReceived)
+                    lvlOp: data1[k][i][8][18],
+                    rank: data1[k][i][16][2],
+                    name: data1[k][i][2],
+                    group: String(data1[k][i][1]).slice(0, 4),
+                    perks: [data1[k][i + 0][8][15][0], data1[k][i + 0][8][15][1], data1[k][i + 0][8][15][2], data1[k][i + 0][8][15][3]],
+                    kills: data2.Users[k - 2][i].PlayerKills,
+                    deaths: data2.Users[k - 2][i].Deaths,
+                    assists: data2.Users[k - 2][i].Assists,
+                    damage: Math.floor(data2.Users[k - 2][i].DamageDealt),
+                    recive: Math.floor(data2.Users[k - 2][i].DamageReceived)
                 };
 
 
@@ -1099,14 +1138,10 @@ window.addEventListener('DOMContentLoaded', () => {
             </tr>
         `)
                 /* #endregion */
-                //console.log(operator.role);
-                //console.log(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`);
-                //console.log(document.querySelector(`.team${k-1}Table>tbody>tr.${operator.role}>td>.perks`));
                 const perks = document.querySelectorAll(`.team${k - 1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
 
                 perks.forEach(function (s) {
-                    showHint(s, caliber[k + 4][i])//,caliber[k+4][i][8][15])
-                    //console.log(caliber[k+4][i][8]);
+                    showHint(s, data1[k][i])
                 })
 
                 function showHint(selector, ...spread) {
@@ -1333,7 +1368,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     'Объект 903'
                 ]
             };
-            const mapName = data2.Log.Data[1].split("_").slice(0, -1).join("_");
+            const mapName = data1[1].split("_").slice(0, -1).join("_");
             if (maps.originalMap.some((value) => value === mapName)) {
                 const i = maps.originalMap.indexOf(mapName);
                 const rusMapName = maps.rusMap[i];
@@ -1347,10 +1382,10 @@ window.addEventListener('DOMContentLoaded', () => {
             if (caliber[4] == 'hacking') {
                 mode.innerText = `Взлом:`;
             };
-            time.innerText = convertSecondsToTime(data2.Log.MatchTimeSeconds);
+            time.innerText = convertSecondsToTime(data2.MatchTimeSeconds);
         })();
         // #endregion MAPS
-     
+
         //  #region WIN / LOSE
         (function () {
             function color(color, text) {
@@ -1358,14 +1393,14 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelector("div.winLose > svg > path").style.fill = color;
                 document.querySelector("div.winLoseText").style.color = color;
             }
-            if (data1[7].some(player => player[2] == 'MASTER')) {
-                if (score(0) == data2.Log.Rounds) {
+            if (data1[2].some(player => player[2] == 'MASTER')) {
+                if (score(0) == data2.Rounds) {
                     color('#6aa5ee', 'ПОБЕДА!');
                 } else {
                     color('#6aa5ee', 'ПОРАЖЕНИЕ!');
                 }
-            } else if (data1[8].some(player => player[2] === 'MASTER')) {
-                if (score(1) == data2.Log.Rounds) {
+            } else if (data1[3].some(player => player[2] === 'MASTER')) {
+                if (score(1) == data2.Rounds) {
                     color('#ff323b', 'ПОБЕДА!');
                 } else {
                     color('#ff323b', 'ПОРАЖЕНИЕ!');
@@ -1373,10 +1408,10 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         })();
         // #endregion WIN / LOSE
-        
+
         //  #region SCORE
         function score(teamNumber) {
-            let data = data2.Log.Rounds;
+            let data = data2.Rounds;
             const teamKey = `winner_team_${teamNumber}`;
             const counts = data.reduce((acc, cur) => {
                 if (cur.winner_team === teamNumber) {
@@ -1389,29 +1424,29 @@ window.addEventListener('DOMContentLoaded', () => {
             return counts[teamKey];
         }
         // #endregion
-        
+
         //  #region COLOR POINTS
 
         function setScore() {
-            const winBlue = data2.Log.Rounds.filter(item => item.winner_team === 0);
-            const winRed  = data2.Log.Rounds.filter(item => item.winner_team === 1);
-            const color   = ['blue', 'red', '#6aa5ee', '#ff323b'];
-            const colorH  = ['#6aa5ee','#ff323b'];
+            const winBlue = data2.Rounds.filter(item => item.winner_team === 0);
+            const winRed = data2.Rounds.filter(item => item.winner_team === 1);
+            const color = ['blue', 'red', '#6aa5ee', '#ff323b', 'afterbegin', 'beforeend'];
+            //const colorH = ['#6aa5ee', '#ff323b'];
             for (let i = 0; i < 2; i++) {
-                for (let k = 0; k < data2.Log.MaxRoundsWon; k++) {
-                    document.querySelector(`.${color[i]}Points`).insertAdjacentHTML('beforeend', `
-                    <svg class="${color[i]}Point${k+1} points ${color[i]}" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="${color[i+2]}" fill-opacity="0" stroke="${color[i+2]}" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+                for (let k = 0; k < data2.MaxRoundsWon; k++) {
+                    document.querySelector(`.${color[i]}Points`).insertAdjacentHTML(color[i + 4], `
+                    <svg class="${color[i]}Point${k + 1} points ${color[i]}" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="${color[i + 2]}" fill-opacity="0" stroke="${color[i + 2]}" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
                     </svg>
                 `);
                 }
             }
-            winBlue.forEach(function (e,j) {
-                        document.querySelector(`.bluePoint${j+1} > path`).style.fillOpacity = 1;
-                      });
+            winBlue.forEach(function (e, j) {
+                document.querySelector(`.bluePoint${j + 1} > path`).style.fillOpacity = 1;
+            });
 
-            winRed.forEach((e,q) => {
-                document.querySelector(`.redPoint${q+1} > path`).style.fillOpacity  = 1;
+            winRed.forEach((e, q) => {
+                document.querySelector(`.redPoint${q + 1} > path`).style.fillOpacity = 1;
             });
 
         }
@@ -1425,7 +1460,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // try {
-    upload(caliber, caliber2);
+    upload(caliber.data, caliber.log);
     // } catch (e) {
     //     console.error("Ошибка в функции upload - ", e.message);
     // }
@@ -1510,7 +1545,7 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem("rec", false);
             recElem.style.filter = "grayscale(100%)";
         }
-        save();
+        //save();
     });
 
     const calendarBody = document.getElementById("calendar-body");
@@ -1611,6 +1646,17 @@ window.addEventListener('DOMContentLoaded', () => {
                     `)
                             lastSpan.insertAdjacentHTML('beforeend', '<img class="basket" src="img/basket.png"></img>');
 
+                            /* #region  AJAX UPLOAD DB */
+                            // $.ajax({
+                            //     url: 'games.json',
+                            //     dataType: 'json',
+                            //     success: function (db) {
+                            //     },
+                            //     error: function () {
+                            //         console.log("База данных не найдена");
+                            //     }
+                            // });
+                            /* #endregion */
 
                             const imgBasket = document.querySelectorAll('.basket')
                             imgBasket.forEach(function (item) {
@@ -1647,7 +1693,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     //generateCalendar(currentMonth, currentYear);
 
-    //  BUTTON OPEN DIFFERENT DATA BASE
+    // #region BUTTON OPEN DIFFERENT DATA BASE
 
     const label = document.querySelector('.custom-file-input');
 
@@ -1661,8 +1707,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.removeChild(textarea);
         //console.log('Путь скопирован в буфер обмена');
     });
-
-
+    // #endregion
 
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
@@ -1751,26 +1796,38 @@ window.addEventListener('DOMContentLoaded', () => {
         const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
         const day = `${setZero(createdDate.getDate())}:${setZero(createdDate.getMonth() + 1)}.${createdDate.getFullYear()}`;
         if (localStorage.getItem('rec') == 'true') {
-            localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
+           // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
+           localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
         }
     }
-   
 
-   
-    try {
+
+
+    //try {
         saveData(new Date());
-    } catch (e) {
-        console.error("Ошибка в функции SaveData - ", e.message);
-    }
+    // } catch (e) {
+    //     console.error("Ошибка в функции SaveData - ", e.message);
+    // }
     /* #endregion */
 
-    /* #region  REFRESH EVERY 60 SEC */
-    // setInterval(() => {
-    //     //console.log(document.querySelector('.slide-out-panel').clientLeft);
-    //     if (document.querySelector('.slide-out-panel').classList.contains('show') == false) {
-    //         location.reload(true);
-    //     }
-    // }, 600000000);
+    /* #region  AJAX UPDATE DATABASE */
+    function updateDB() {
+        $.ajax({
+            url: '../query.php', // адрес вашего сервера
+            type: 'POST', // метод запроса
+            data: JSON.stringify(caliber), // данные, которые нужно отправить на сервер
+            contentType: "application/json; charset=utf-8",
+            dataType: "json", // тип данных, которые отправляем
+            success: function (response) {
+                console.log('Данные успешно обновлены');
+                console.log(response); // ответ от сервера
+            },
+            error: function (error) {
+                console.error('Ошибка при обновлении данных');
+                console.error(error); // сообщение об ошибке
+            }
+        });
+    }
     /* #endregion */
 
 });
