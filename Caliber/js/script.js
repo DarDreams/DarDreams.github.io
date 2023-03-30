@@ -1470,11 +1470,12 @@ window.addEventListener('DOMContentLoaded', () => {
     <button id="show-panel">></button>
     <div class="slide-out-panel">
         <div class="calendar">
-        <img class = 'rec' src='img/REC.png'>    
+            
         <div class="custom-file-input">
             <input type="file" multiple id="file-input" accept=".bytes">
+            <img class = 'rec icons' src='img/REC.png'>
                 <label for="file-input">
-                <img class ='folder' src='img/FOLDER.png'>
+                <img class ='folder icons' src='img/FOLDER.png'>
                 </label>
 	        </div>
             <div class="container">
@@ -1741,6 +1742,9 @@ window.addEventListener('DOMContentLoaded', () => {
             
             let caliber_file = caliberFunc(caliber_b, caliber_b2)
             //console.log(huy);
+                document.querySelectorAll('.points').forEach(item => {
+                    item.remove();
+                })
                 upload(caliber_file.data, caliber_file.log);
             
             //saveData();
@@ -1812,6 +1816,13 @@ window.addEventListener('DOMContentLoaded', () => {
     //     console.error("Ошибка в функции SaveData - ", e.message);
     // }
     /* #endregion */
+
+
+    window.onload = function() {
+        document.querySelector('.container_tables').style.opacity = "1";
+       console.log('LOADED');
+      //  document.getElementById("loader").style.display = "none";
+      };
 
     /* #region  AJAX UPDATE DATABASE */
     function updateDB() {
