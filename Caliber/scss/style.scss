@@ -11,6 +11,14 @@ html {
 
     }
 
+    .vLoading {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        width: 150px;
+        height: 150px;
+    }
 
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
     font-family: "Roboto",
@@ -124,8 +132,13 @@ html {
             padding: 0;
         }
 
+        tbody:first-child {
+            margin-bottom: 10px;
+        }
+
         tbody:not(:nth-child(1))>tr {
             cursor: pointer;
+            
 
             .rank {
                 z-index: 9;
@@ -271,8 +284,10 @@ html {
             }
 
             &:hover {
-                transform: scale(1.05);
-                transition: ease .5s !important;
+                background-color:rgba(255, 255, 255, 50%);
+                outline: 4px ridge white;
+               // transform: scale(1.05);
+              //  transition: ease .5s !important;
             }
         }
     }
@@ -590,10 +605,11 @@ button#show-panel {
     font-weight: 600;
 
     .wrapper {
+        //outline: 1px ridge red;
         position: absolute;
         width: 400px;
         height: 500px;
-        right: 0;
+        right: 20px;
         top: 44px;
 
         .container {
@@ -610,6 +626,10 @@ button#show-panel {
 
     .mode {
         text-align: center;
+        left: 50%;
+        //width: 100%;
+        //overflow-x: hidden;
+        //margin-left: 10px;
         transform: translateX(5%);
         //margin-left: 60px;
     }
@@ -632,6 +652,16 @@ button#show-panel {
         }
     }
 
+    .allPoints {
+        zoom: 0.85;
+        margin-top:-140px;
+    }
+
+    .team1Table {
+        position:relative; 
+        top: 40px;
+    }
+
     .stats {
         margin-top: 100px;
 
@@ -650,5 +680,14 @@ button#show-panel {
         margin-top: -138px;
         transform: scale(0.75);
 
+    }
+
+    button#show-panel {
+        transform: scale(0.75);
+        left: -5px; 
+    }
+
+    .container_tables.show {
+        transform: scale(0.75);
     }
 }

@@ -2,6 +2,9 @@ import {
     caliber as caliberImport01,
     caliber2 as caliberImport02
 } from "./game.js";
+
+
+
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
 
@@ -1820,7 +1823,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     window.onload = function() {
         document.querySelector('.container_tables').style.opacity = "1";
-       console.log('LOADED');
+        document.querySelector('.vLoading').style.display = 'none';
       //  document.getElementById("loader").style.display = "none";
       };
 
