@@ -1,0 +1,41 @@
+// body {
+//     display: grid;
+//    // border: 2px ridge red;
+//     grid-template-rows: 50%, 50%, 200px;
+// }
+
+// header {
+//     grid-row-start: 1
+// }
+
+// .inicio, .empresa, .productos, .contactos{
+//     grid-row-start: 2;
+// }
+
+// .background {
+//     z-index: 0;
+// }
+
+// .footer {
+//     grid-row-start: 3
+// }
+
+// @media (max-width: 768px) {
+//     footer {
+//         display: none;
+//         position: fixed;
+//         bottom: 0;
+//         //height: 100%;
+//         .footer {
+//            // zoom: 70%;
+//             position: fixed;
+//             bottom: 0px;
+//             width: 100vw;
+//             height: 200px;
+//             //padding-top: 15vh;
+//             margin-bottom: -150px;
+//             //height: 100%;
+//         }
+//     }
+
+// }

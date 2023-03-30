@@ -60,8 +60,11 @@
                     border: 1px solid var(--red);
                     border-radius: 4px;
                 }
-                .button {
+                .button_submit {
+                    position: relative;
+                    margin: 0 auto;
                     width: 200px;
+                    margin-bottom: 15px;
                     font-size: 20px;
                     background-color:black;
                     color: white;

@@ -1,4 +1,10 @@
+
+
+
 $(document).ready(function () {
+
+
+
 	const mediaQuery768 = window.matchMedia('(max-width: 768px)');
 	let cards = {};
 	axios.get('db.json')
@@ -44,14 +50,24 @@ $(document).ready(function () {
 
 
 			////////////////ANIMATE//////////////////////
+
+			function menuGoRight() {
+				if (mediaQuery768.matches) {
+					if (divList.classList.contains('animate__slideOutRight') == false) {
+						divBurger.click();
+						divBurger.removeAttribute('style');
+					} 
+				}
+			}
 			let animate = "animate__bounceInRight";
 
 			$(".inicio_link").click(function () {
-				const divFooter = document.querySelector('.footer');
-				divFooter.style.cssText = `
-				//position: fixed;
-				 margin-bottom: 0;
-				`;
+				menuGoRight();
+				// const divFooter = document.querySelector('.footer');
+				// divFooter.style.cssText = `
+				// //position: fixed;
+				//  margin-bottom: 0;
+				// `;
 				
 				//$("html, body").animate({ scrollTop: 0 + "px" });
 				
@@ -67,6 +83,7 @@ $(document).ready(function () {
 			});
 
 			$(".empresa_link").click(function () {
+				menuGoRight();
 				$("html, body").animate({ scrollTop: 0 + "px" });
 				$(".overlay").fadeIn();
 				$(".empresa").show();
@@ -79,6 +96,7 @@ $(document).ready(function () {
 			});
 
 			$(".contactos_link").click(function () {
+				menuGoRight();
 				$("html, body").animate({ scrollTop: 0 + "px" });
 				$(".overlay").fadeIn();
 				$(".inicio").fadeOut(1000);
@@ -91,6 +109,7 @@ $(document).ready(function () {
 			});
 
 			$(".productos_link").click(function () {
+				menuGoRight();
 				$('button.slick-prev').click();
 				$("html, body").animate({ scrollTop: 0 + "px" });
 				$(".overlay").fadeIn();
@@ -837,6 +856,8 @@ $(document).ready(function () {
 		.catch(function (error) {
 			console.log(error, " База данных не найдена");
 		});
+
+
 
 });  //////////////////  END
 
