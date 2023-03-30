@@ -1,6 +1,6 @@
 import {
-    caliber as caliberImport,
-    caliber2 as caliberImport2
+    caliber as caliberImport01,
+    caliber2 as caliberImport02
 } from "./game.js";
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
-    let caliberFunc = function () {
+    let caliberFunc = function (caliberImport, caliberImport2) {
         const caliberNew = {
             data: [caliberImport[0],
             caliberImport[2],
@@ -59,7 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
         return caliberNew;
     }
 
-    let caliber = caliberFunc();
+    let caliber = caliberFunc(caliberImport01, caliberImport02);
     console.log('CALIBER_DATAS - ', caliber);
 
     /* #region  OLD VERSION */
@@ -1734,11 +1734,15 @@ window.addEventListener('DOMContentLoaded', () => {
             caliber_b = fix(caliber_b);
             caliber_b2 = fix(caliber_b2);
 
-            caliber_b[8] = caliber_b[7].splice(4);
-            caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0], caliber_b2.Log.Users[1], caliber_b2.Log.Users[2], caliber_b2.Log.Users[3]]
-            caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
-            caliber_b2.Log.Users.splice(2);
-            upload(caliber_b, caliber_b2);
+            // caliber_b[8] = caliber_b[7].splice(4);
+            // caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0], caliber_b2.Log.Users[1], caliber_b2.Log.Users[2], caliber_b2.Log.Users[3]]
+            // caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
+            // caliber_b2.Log.Users.splice(2);
+            
+            let caliber_file = caliberFunc(caliber_b, caliber_b2)
+            //console.log(huy);
+                upload(caliber_file.data, caliber_file.log);
+            
             //saveData();
         }
         saveData(createdDate);
