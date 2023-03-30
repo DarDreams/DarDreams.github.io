@@ -8,8 +8,16 @@ html {
         padding: 0;
         overflow: hidden;
 
+        .operBg {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
 
     }
+
+
 
     .vLoading {
         position: absolute;
@@ -23,7 +31,7 @@ html {
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
     font-family: "Roboto",
     sans-serif;
-    background-image: url('https://cdn.playcaliber.com/site/media/wallpapers/2021/09/08/wallpapers-ksk_1920.jpg');
+    //background-image: url('https://cdn.playcaliber.com/site/media/wallpapers/2021/09/08/wallpapers-ksk_1920.jpg');
     background-color: black;
     background-position: bottom -250px right -60px;
     background-size: cover;
@@ -55,7 +63,7 @@ html {
 }
 
 .hint {
-    z-index: 999;
+    //z-index: 999;
     position: absolute;
     width: 250px;
     display: none;
@@ -74,6 +82,7 @@ html {
 }
 
 .container_tables {
+    z-index: 999;
     transition: all .8s ease-in-out;
     display: block;
     margin-top: 0px;
@@ -133,7 +142,7 @@ html {
         }
 
         tbody:first-child {
-            margin-bottom: 10px;
+            transform: translateY(-10px);
         }
 
         tbody:not(:nth-child(1))>tr {
