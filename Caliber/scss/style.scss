@@ -5,6 +5,7 @@ html {
    // cursor: url('../img/def.cur'), auto;
 
     body {
+        cursor: default;
         @media (max-width: 1800px) {
             zoom:70%;
         }
@@ -23,11 +24,13 @@ html {
             }
             
             img.operBg {
+                //outline: 2px ridge red;
                 position: fixed;
+                background-size: cover;
                 left: 50%;
                 transform: translateX(-50%);
+                //top:calc(100vh - 83%);
                 bottom: 0;
-                background-size: cover;
                 z-index: -1;
                 @media (max-width: 1800px) {
                     zoom:110%;
@@ -81,8 +84,13 @@ html {
 
 }
 
+.hintAll {
+    width: 100vw;
+    //height: 100vh;
+}
+
 .hint {
-    //z-index: 999;
+    z-index: 999;
     position: absolute;
     width: 250px;
     display: none;
@@ -449,6 +457,7 @@ html {
     }
 }
 .icons {
+    cursor: pointer;
     position: absolute;
     //top: 0%;
     z-index: 5;
@@ -517,12 +526,14 @@ img.folder {
 }
 
 #month-selector {
+    cursor: pointer;
     margin: 30px 0 10px;
     width: 226px;
     font-size: 16px;
 }
 
 button#show-panel {
+    cursor: pointer;
     height: calc(135px / 1.5 );
     width: calc(50px / 1.5);
     color: grey;
@@ -556,6 +567,7 @@ button#show-panel {
     // position: absolute;
     // transform: translate(40px, 290px);
     .container {
+        z-index: -1;
         position: absolute;
         top: 24%;
 
@@ -608,7 +620,7 @@ button#show-panel {
 }
 
 .timeScore {
-
+    margin-top: 5px;
     h1 {
         color: #fff;
         margin: auto 40px;
@@ -698,8 +710,24 @@ button#show-panel {
         //margin-left: 60px;
     }
     .geo {
+        z-index: 10;
         cursor: pointer;
+        &:hover {
+            transform: scale(1.2);
+        }
     }
+   
+}
+
+.imgMap {
+    position: absolute;
+    z-index: 9;
+    height: 90%;
+    width: 90%;
+    object-fit:contain;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
 

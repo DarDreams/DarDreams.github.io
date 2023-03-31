@@ -1163,6 +1163,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                         // let lvlPerks = spread[0][20][0].find(key => key.includes(spread[0][8][15]));
                         // lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
+                        
                         hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g, "<br>");
 
                         // console.log(spread[0][8][15][0]);
@@ -1186,13 +1187,15 @@ window.addEventListener('DOMContentLoaded', () => {
                     //console.log(element);
                     element.parentElement.parentElement.parentElement.parentElement.insertAdjacentElement('afterbegin', hint);
 
-                    element.addEventListener('mousedown', function (event) {
-                        // const rect = element.parentElement.parentElement.parentElement.getBoundingClientRect(); // получаем координаты элемента
+                    element.parentElement.parentElement.parentElement.parentElement.addEventListener('mousedown', function (event) {
+                        const rect = element.parentElement.parentElement.parentElement.getBoundingClientRect(); // получаем координаты элемента
                         const x = event.pageX// - rect.left; // вычисляем координаты относительно элемента
                         const y = event.pageY //- rect.top;
+                        console.log(rect.left,"x",rect.top);
+                        console.log(`${x}x${y}`);
                         hint.style.display = 'block';
-                        hint.style.top = `${y - 150}px`;
-                        hint.style.left = `${x - 280}px`;
+                        hint.style.top = `${y}px`;
+                        hint.style.left = `${x}px`;
 
                     });
 
@@ -1821,10 +1824,23 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
 
     document.querySelector('.geo').addEventListener('click',() => {
-        console.log(`${caliber.data[1].split('_')[1]}_${caliber.data[1].split('_')[2]}`);
-        //window.open(`https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_karhad_caravanserai_hacking.png`, "_blank");
-
+        let map = caliber.data[1].split('_').slice(1, -1).join('_');
+       // window.open(`https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${map}_hacking.png`, "_blank");
+       if (!document.querySelector('.imgMap')) {
+        document.body.insertAdjacentHTML('afterbegin',`
+            <img class="imgMap" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${map}_hacking.png">
+            `);
+       } else document.querySelector('.imgMap').remove();
+        //$('.imgMap').fadeToggle(1000);
     })
+
+    // document.querySelector('#show-panel').insertAdjacentHTML('afterbegin',`
+    // <iframe src="https://caliberfan.ru/support/rekruit/#col-12 col-md-3 col-lg-3"></iframe>
+    // `);
+
+    // document.querySelector('iframe.content').onload = function () {
+    //     this.contentWindow.scrollTo(0, 479);
+    // }
 
     window.onload = function() {
         document.querySelector('.container_tables').style.opacity = "1";
