@@ -1820,6 +1820,11 @@ window.addEventListener('DOMContentLoaded', () => {
     // }
     /* #endregion */
 
+    document.querySelector('.geo').addEventListener('click',() => {
+        console.log(`${caliber.data[1].split('_')[1]}_${caliber.data[1].split('_')[2]}`);
+        //window.open(`https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_karhad_caravanserai_hacking.png`, "_blank");
+
+    })
 
     window.onload = function() {
         document.querySelector('.container_tables').style.opacity = "1";

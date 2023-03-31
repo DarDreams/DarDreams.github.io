@@ -622,11 +622,17 @@ button#show-panel {
     display: flex;
     //justify-content: center;
     margin-top: 0px;
-    top: 0;
+    top: 5px;
 
     .redPoints {
         svg > path {
             stroke: #ff323b;
+        }
+
+        .points {
+            &:hover {
+                transform: scale(105%);
+            }
         }
 
         .red {
@@ -641,6 +647,9 @@ button#show-panel {
 
         .points {
             margin-right: 3px;
+            &:hover {
+                transform: scale(105%) scaleX(-1);
+            }
         }
 
         .blue {
@@ -687,6 +696,9 @@ button#show-panel {
         //margin-left: 10px;
         transform: translateX(5%);
         //margin-left: 60px;
+    }
+    .geo {
+        cursor: pointer;
     }
 }
 
