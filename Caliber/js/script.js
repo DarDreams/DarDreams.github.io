@@ -1185,17 +1185,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     } catch (e) { console.error(e.message) }
                     //console.log(element);
-                    element.parentElement.parentElement.parentElement.parentElement.insertAdjacentElement('afterbegin', hint);
+                    //element.parentElement.parentElement.parentElement.parentElement.insertAdjacentElement('afterbegin', hint);
+                    document.querySelector('.allHints').insertAdjacentElement('afterbegin', hint);
 
                     element.parentElement.parentElement.parentElement.parentElement.addEventListener('mousedown', function (event) {
                         const rect = element.parentElement.parentElement.parentElement.getBoundingClientRect(); // получаем координаты элемента
                         const x = event.pageX// - rect.left; // вычисляем координаты относительно элемента
                         const y = event.pageY //- rect.top;
                         console.log(rect.left,"x",rect.top);
+                        console.log(event.clientX);
                         console.log(`${x}x${y}`);
                         hint.style.display = 'block';
-                        hint.style.top = `${y}px`;
-                        hint.style.left = `${x}px`;
+                        hint.style.top = `${rect.top}px`;
+                        hint.style.left = `${rect.left}px`;
 
                     });
 
