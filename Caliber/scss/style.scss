@@ -1,5 +1,6 @@
 //@import 'linies.scss';
 
+
 html {
     cursor: url('../img/def.cur'), auto;
 
@@ -9,11 +10,21 @@ html {
         overflow: hidden;
 
         .operBg {
+            outline: 1px ridge red;
             position: absolute;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(20%);
             z-index: -1;
+        
+            @media (max-width: 1800px) {
+                outline: 1px ridge red;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%) translateY(0%);
+                z-index: -1;
+            }
         }
+
 
     }
 
@@ -24,8 +35,8 @@ html {
         left: 50%;
         transform: translate(-50%, -50%);
         top: 50%;
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
     }
 
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
@@ -550,10 +561,13 @@ button#show-panel {
 .container {
     display: inline-block;
 
-    .winLose>svg {
+    .winLose{
+        zoom: 75%;
+    svg {
         left: 0;
         display: inline-block;
         margin-left: 100px;
+    }
     }
 
     .winLoseText {
@@ -561,7 +575,7 @@ button#show-panel {
         transform: translate(35px, -80px);
         color: #6aa5ee;
         //position: absolute;
-        font-size: 60px;
+        font-size: 70px;
         font-weight: 600;
         letter-spacing: 10px;
     }
@@ -569,7 +583,6 @@ button#show-panel {
 
 .timeScore {
 
-    // display: inline-block;
     h1 {
         color: #fff;
         margin: auto 40px;
@@ -577,9 +590,13 @@ button#show-panel {
 }
 
 .allPoints {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: center;
-    margin-top: -120px;
+    //justify-content: center;
+    margin-top: 0px;
+    top: 0;
 
     .redPoints {
         svg > path {
