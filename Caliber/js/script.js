@@ -1865,6 +1865,13 @@ window.addEventListener('DOMContentLoaded', () => {
     //     this.contentWindow.scrollTo(0, 479);
     // }
 
+    function summRank() {
+        document.querySelectorAll('.rank').forEach(element => {
+            element.textContent+=element.textContent;
+            console.log(element.textContent);
+        });
+    }
+
     window.onload = function() {
         document.querySelector('.container_tables').style.opacity = "1";
         document.querySelector('.vLoading').style.display = 'none';
