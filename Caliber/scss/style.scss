@@ -2,30 +2,38 @@
 
 
 html {
-    cursor: url('../img/def.cur'), auto;
+   // cursor: url('../img/def.cur'), auto;
 
     body {
+        @media (max-width: 1800px) {
+            zoom:70%;
+        }
+        
         margin: 0;
         padding: 0;
         overflow: hidden;
 
-        .operBg {
-            outline: 1px ridge red;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%) translateY(20%);
-            z-index: -1;
-        
-            @media (max-width: 1800px) {
-                outline: 1px ridge red;
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%) translateY(0%);
+            img.foneBg {
+                position: fixed;
+                background-size: cover;
                 z-index: -1;
+                @media (max-width: 1800px) {
+                  width: 100%;
+                }
             }
-        }
-
-
+            
+            img.operBg {
+                position: fixed;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 0;
+                background-size: cover;
+                z-index: -1;
+                @media (max-width: 1800px) {
+                    zoom:110%;
+                }
+            }
+        
     }
 
 
@@ -92,19 +100,28 @@ html {
 
 }
 
+
+// symbol > polygon {
+//     transform: scale(0.8) translate(15%, 10%);
+// }
+
 .container_tables {
     z-index: 999;
     transition: all .8s ease-in-out;
     display: block;
     margin-top: 0px;
+    @media (max-width: 1800px) {
+        zoom:110%;
+    }
 
     table {
         margin: 0 auto;
-        transform: scale(.8);
+        transform: scale(.75);
         text-align: center;
         background: #1919192d;
         color: #ffffff;
         border-collapse: collapse;
+        
 
         th {
             font-size: 13.5px;
@@ -190,6 +207,7 @@ html {
                 height: 45px;
                 //fill: #6aa5ee;
             }
+
 
             .oper {
                 width: 80px;
@@ -310,6 +328,10 @@ html {
               //  transition: ease .5s !important;
             }
         }
+    }
+
+    .team2Table {
+        margin-top: -70px;
     }
 }
 
@@ -500,18 +522,19 @@ img.folder {
     font-size: 16px;
 }
 
-
 button#show-panel {
-    height: 135px;
-    width: 50px;
+    height: calc(135px / 1.5 );
+    width: calc(50px / 1.5);
     color: grey;
     font-size: 40px;
     font-weight: 800;
     font-family: "consolas";
     z-index: 2;
     position: fixed;
-    outline:2px solid grey;
-    top: 5%;
+    //outline:1px solid grey;
+    top: 50%;
+    transition: all 1s ease;
+    transform: translateY(-50%);
     left: 0;
     background-color: black;
     //border: 1px solid grey;
@@ -522,6 +545,9 @@ button#show-panel {
         outline: 2px solid white;
     }
 }
+.slide-out-panel.show + button#show-panel {
+    top: 10%;
+  }
 
 .calendar {
     color: white;
@@ -621,22 +647,27 @@ button#show-panel {
             transform: scaleX(-1)
         }
     }
+    &:hover {
+        outline: 2px ridge red;
+    }
 }
 
 .stats {
+    
     top: 0;
     position: relative;
     color: white;
     font-size: 30px;
     font-weight: 600;
+    right: 0px;
 
     .wrapper {
         //outline: 1px ridge red;
         position: absolute;
-        width: 400px;
-        height: 500px;
+        width: auto;
+        height: auto;
         right: 20px;
-        top: 44px;
+        top: 14px;
 
         .container {
             display: flex;
@@ -663,57 +694,57 @@ button#show-panel {
 
 
 
-@media (max-width: 1800px) {
-    body {
-        max-height: 600px;
-    }
+// @media (max-width: 1800px) {
+//     body {
+//         max-height: 600px;
+//     }
 
-    .winLose {
-        margin-top: -136px;
-        margin-left: -136px;
-        transform: scale(0.7);
+//     .winLose {
+//         margin-top: -136px;
+//         margin-left: -136px;
+//         transform: scale(0.7);
 
-        .winLoseText {
-            transform: translate(32px, -69px);
-        }
-    }
+//         .winLoseText {
+//             transform: translate(32px, -69px);
+//         }
+//     }
 
-    .allPoints {
-        zoom: 0.85;
-        margin-top:-140px;
-    }
+//     .allPoints {
+//         zoom: 0.85;
+//         margin-top:-140px;
+//     }
 
-    .team1Table {
-        position:relative; 
-        top: 40px;
-    }
+//     .team1Table {
+//         position:relative; 
+//         top: 40px;
+//     }
 
-    .stats {
-        margin-top: 100px;
+//     .stats {
+//         margin-top: 100px;
 
-        .wrapper {
-            margin-top: -163px;
-            transform: scale(0.65);
-        }
-    }
+//         .wrapper {
+//             margin-top: -163px;
+//             transform: scale(0.65);
+//         }
+//     }
 
-    .container_tables {
-        margin-top: -135px;
-        transform: scale(0.75);
-    }
+//     .container_tables {
+//         margin-top: -135px;
+//         transform: scale(0.75);
+//     }
 
-    .redPoints .bluePoints {
-        margin-top: -138px;
-        transform: scale(0.75);
+//     .redPoints .bluePoints {
+//         margin-top: -138px;
+//         transform: scale(0.75);
 
-    }
+//     }
 
-    button#show-panel {
-        transform: scale(0.75);
-        left: -5px; 
-    }
+//     button#show-panel {
+//         transform: scale(0.75);
+//         left: -5px; 
+//     }
 
-    .container_tables.show {
-        transform: scale(0.75);
-    }
-}
+//     .container_tables.show {
+//         transform: scale(0.75);
+//     }
+// }

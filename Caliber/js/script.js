@@ -1470,10 +1470,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  CALENDAR */
     document.querySelector('.allPoints').insertAdjacentHTML("afterend", `
-    <button id="show-panel">></button>
+    
     <div class="slide-out-panel">
         <div class="calendar">
-            
         <div class="custom-file-input">
             <input type="file" multiple id="file-input" accept=".bytes">
             <img class = 'rec icons' src='img/REC.png'>
@@ -1514,6 +1513,7 @@ window.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
     </div>
+    <button id="show-panel">></button>
     `);
 
 
