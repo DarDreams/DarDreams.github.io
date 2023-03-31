@@ -17,6 +17,7 @@ html {
             img.foneBg {
                 position: fixed;
                 background-size: cover;
+                //object-fit: contain;
                 z-index: -1;
                 @media (max-width: 1800px) {
                   width: 100%;
@@ -84,17 +85,19 @@ html {
 
 }
 
-.allHints {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    //height: 100vh;
-}
+// .allHints {
+//     width: 100vw;
+//     height: 100vh;
+//     position: absolute;
+//     //height: 100vh;
+// }
 
 .hint {
     z-index: 999;
     position: absolute;
+    max-height: 200px;
     width: 250px;
+    height: auto;
     display: none;
     background-color: #222222;
     color: #898989;

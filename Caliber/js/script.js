@@ -1144,10 +1144,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 const perks = document.querySelectorAll(`.team${k - 1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
 
                 perks.forEach(function (s) {
-                    showHint(s, data1[k][i])
-                })
+                    s.addEventListener('mousedown', function(event) {
+                      showHint(s, data1[k][i], event.pageX, event.pageY);
+                    });
+                  });
 
-                function showHint(selector, ...spread) {
+                  function showHint(selector, ...spread) {
                     const element = selector;
                     const hint = document.createElement('div');
                     hint.classList.add('hint');
@@ -1185,25 +1187,44 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     } catch (e) { console.error(e.message) }
                     //console.log(element);
-                    //element.parentElement.parentElement.parentElement.parentElement.insertAdjacentElement('afterbegin', hint);
-                    document.querySelector('.allHints').insertAdjacentElement('afterbegin', hint);
-
-                    element.parentElement.parentElement.parentElement.parentElement.addEventListener('mousedown', function (event) {
-                        const rect = element.parentElement.parentElement.parentElement.getBoundingClientRect(); // получаем координаты элемента
-                        const x = event.pageX// - rect.left; // вычисляем координаты относительно элемента
-                        const y = event.pageY //- rect.top;
-                        console.log(rect.left,"x",rect.top);
-                        console.log(event.clientX);
-                        console.log(`${x}x${y}`);
-                        hint.style.display = 'block';
-                        hint.style.top = `${rect.top}px`;
-                        hint.style.left = `${rect.left}px`;
-
-                    });
+                    document.body.insertAdjacentElement('afterbegin', hint);
+                    const x = event.clientX + window.pageXOffset;
+                    hint.style.top = `${spread[2] + 5}px`;
+                    //hint.style.left = `${spread[3] + 5}px`;
+                    hint.style.left = `${x + 5}px`;
+                    hint.style.display = 'block';
 
                     document.body.addEventListener('mouseup', function () {
-                        hint.style.display = 'none';
-                    });
+                        hint.remove();
+                      });
+                    
+                      document.addEventListener('mouseup', function () {
+                        hint.remove();
+                      });
+                    // element.addEventListener('mousedown', function(event) {
+                    //     console.log(event.target.parentElement);
+                    //     const x = event.pageX;// - element.offsetLeft;
+                    //     const y = event.pageY; //- element.offsetTop;
+                    //     //console.log(element.offsetLeft,element.offsetTop);
+                    //     hint.style.display = 'block';
+                    //     hint.style.top = `${y + 5}px`;
+                    //     hint.style.left = `${x + 5}px`;
+                    // });
+
+                    // document.addEventListener('mousedown', e => {
+                    //     // Получить текущие координаты курсора
+                    //     const x = e.clientX;
+                    //     const y = e.clientY;
+                        
+                    //     // Установить позицию .hint относительно координат курсора
+                    //     hint.style.left = `${x + 10}px`;
+                    //     hint.style.top = `${y + 10}px`;
+                        
+                    //     // Показать .hint
+                    //     console.log(e.target);
+                    //     hint.style.display = 'block';
+                    //   });
+
                 }
             };
 
