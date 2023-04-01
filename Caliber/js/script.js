@@ -1864,18 +1864,30 @@ window.addEventListener('DOMContentLoaded', () => {
     // document.querySelector('iframe.content').onload = function () {
     //     this.contentWindow.scrollTo(0, 479);
     // }
-
+    // function summRank() {
+    //     document.querySelectorAll('table.team1Table > tbody > tr> td > span.rank').forEach(element => {
+    //         let rank = +rank + +element.textContent;
+    //         //element.textContent= 
+    //         return res
+    //     });
+    // }
     function summRank() {
-        document.querySelectorAll('.rank').forEach(element => {
-            element.textContent+=element.textContent;
-            console.log(element.textContent);
+        document.querySelectorAll('table.team1Table > tbody > tr> td > span.rank').forEach(element => {
+            let rank = rank + element.textContent;
+            //element.textContent= 
+            console.log(rank);
+            return rank
         });
-    }
+        console.log(summRank());
 
     window.onload = function() {
         document.querySelector('.container_tables').style.opacity = "1";
         document.querySelector('.vLoading').style.display = 'none';
       //  document.getElementById("loader").style.display = "none";
+
+      
+    }
+
       };
 
     /* #region  AJAX UPDATE DATABASE */
