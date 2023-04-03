@@ -8,6 +8,7 @@
     <title>Caliber</title>
     <link rel="stylesheet" href="css/style.min.css">
 	<link rel="shortcut icon" href="https://playcaliber.com/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
 
     
@@ -21,7 +22,7 @@
 	</div>
 	
 	<img class='vLoading' src="img/loading.gif" alt="">
-	<div style="display:none" class="stats">
+	<div style="display:none" class="stats animate__animated">
 			<div class="wrapper">
 				<div class="mode"></div>
 				<div class="container">
@@ -30,7 +31,7 @@
 				</div>
 			</div>
 	</div>
-	<div class = "container">
+	<div class = "container winLoseCont animate__animated">
 		<div style="display:none" class = "winLose">
 			<svg width="70" height="172" xmlns="http://www.w3.org/2000/svg">
 				<path d="m-.44-.254 70.668.138-.143 127.673-70.382 42.978L-.441-.254z" fill="#6aa5ee" class="layer"/><path stroke="#fff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2" class="layer" d="M34.822 47.395 60.48 73.054 35.179 98.356 9.52 72.696z" fill="none"/>
@@ -41,10 +42,10 @@
 			<div class="winLoseText">ПОБЕДА!</div>
 		</div>
 	</div>
-	<div class="allPoints">
+	<div style='display:none' class="allPoints animate__animated">
 		<div class = "bluePoints">
 		</div>
-		<div class="timeScore">	
+		<div class="timeScore animate__animated">	
 			<h1 style="display:none">СЧЁТ</h1>
 			<h1 class="time"></h1>		
 		</div>
@@ -53,7 +54,7 @@
 	</div>
     <div 
 	style='opacity: 0' 
-	class="container_tables">
+	class="container_tables animate__animated">
 		<table class="team1Table">    
 		</table>  
 		<div class="different">

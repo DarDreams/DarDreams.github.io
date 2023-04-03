@@ -1903,11 +1903,19 @@ catch (e) {
 
 
     window.onload = function() {
+        document.querySelector('.container_tables').classList.add('animate__zoomIn')
         document.querySelector('.container_tables').style.opacity = "1";
+        
         document.querySelector('.vLoading').style.display = 'none';
-        document.querySelector('.winLose').style.display = 'unset';
+        document.querySelector('.winLose').style.display = '';
+        document.querySelector('.winLoseCont').classList.add('animate__fadeInTopLeft')
         document.querySelector('.timeScore>h1').style.display = 'unset';
+        document.querySelector('.timeScore').classList.add('animate__heartBeat')
         document.querySelector('.stats').style.display = 'block';
+        document.querySelector('.stats').classList.add('animate__fadeInTopRight')
+        document.querySelector(`.allPoints`).style.display = "";
+        document.querySelector(`.allPoints`).classList.add('animate__fadeInDown')
+        document.querySelector(`.allPoints`).style.transform = 'translateX(-50%) !important';
     //  document.getElementById("loader").style.display = "none";
     }
     
