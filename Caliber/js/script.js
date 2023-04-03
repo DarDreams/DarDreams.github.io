@@ -24,6 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
+
     let caliberFunc = function (caliberImport, caliberImport2) {
         const caliberNew = {
             data: [caliberImport[0],
@@ -41,7 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 PlayerReport: caliberImport2.Log.PlayerReports,
                 Rounds: caliberImport2.Log.Rounds
             }
-
         };
 
         for (let i = 2; i <= 3; i++) {
@@ -57,8 +57,6 @@ window.addEventListener('DOMContentLoaded', () => {
         caliberNew.log.Users.forEach(element => {
             delete element.QuestCounters;
         });
-
-
         return caliberNew;
     }
 
@@ -1845,7 +1843,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //     console.error("Ошибка в функции SaveData - ", e.message);
     // }
     /* #endregion */
-
+try {
     document.querySelector('.geo').addEventListener('click',() => {
         let map = caliber.data[1].split('_').slice(1, -1).join('_');
        // window.open(`https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${map}_hacking.png`, "_blank");
@@ -1856,6 +1854,10 @@ window.addEventListener('DOMContentLoaded', () => {
        } else document.querySelector('.imgMap').remove();
         //$('.imgMap').fadeToggle(1000);
     })
+}
+catch (e) {
+    console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);
+}
 
     // document.querySelector('#show-panel').insertAdjacentHTML('afterbegin',`
     // <iframe src="https://caliberfan.ru/support/rekruit/#col-12 col-md-3 col-lg-3"></iframe>
@@ -1871,43 +1873,58 @@ window.addEventListener('DOMContentLoaded', () => {
     //         return res
     //     });
     // }
-    function summRank() {
-        document.querySelectorAll('table.team1Table > tbody > tr> td > span.rank').forEach(element => {
-            let rank = rank + element.textContent;
-            //element.textContent= 
-            console.log(rank);
-            return rank
+  
+    function summRank(selector) {
+        let rank = 0;
+        document.querySelectorAll(`.${selector} > tbody > tr > td > span.rank`).forEach(element => {
+          rank += +element.textContent;
         });
-        console.log(summRank());
+        document.querySelector(`.different`).insertAdjacentHTML('beforeend',`
+            <span class='${selector}Diff'>${rank}</span>
+        `)
+        //return rank;
+      }
+    
+    function different() {
+        const team1Diff = +document.querySelector('.team1TableDiff').textContent;
+        const team2Diff = +document.querySelector('.team2TableDiff').textContent;
+        document.querySelector(`.team1TableDiff`).insertAdjacentHTML('afterend',`
+            <span class='diffTeams'>${Math.abs(team1Diff - team2Diff)}</span>
+        `);
+        let max = Math.max(+team1Diff, +team2Diff);
+        //console.log(diff);
+        //document.querySelector(`span:contains('2444')`)
+        $(`span:contains('${max}')`).css('color', '#c49a30');  ;
+    } 
+      
+    summRank('team1Table');
+    summRank('team2Table');
+    different();
+
 
     window.onload = function() {
         document.querySelector('.container_tables').style.opacity = "1";
         document.querySelector('.vLoading').style.display = 'none';
-      //  document.getElementById("loader").style.display = "none";
-
-      
+    //  document.getElementById("loader").style.display = "none";
     }
-
-      };
-
+    
     /* #region  AJAX UPDATE DATABASE */
-    function updateDB() {
-        $.ajax({
-            url: '../query.php', // адрес вашего сервера
-            type: 'POST', // метод запроса
-            data: JSON.stringify(caliber), // данные, которые нужно отправить на сервер
-            contentType: "application/json; charset=utf-8",
-            dataType: "json", // тип данных, которые отправляем
-            success: function (response) {
-                console.log('Данные успешно обновлены');
-                console.log(response); // ответ от сервера
-            },
-            error: function (error) {
-                console.error('Ошибка при обновлении данных');
-                console.error(error); // сообщение об ошибке
-            }
-        });
-    }
+    // function updateDB() {
+    //     $.ajax({
+    //         url: '../query.php', // адрес вашего сервера
+    //         type: 'POST', // метод запроса
+    //         data: JSON.stringify(caliber), // данные, которые нужно отправить на сервер
+    //         contentType: "application/json; charset=utf-8",
+    //         dataType: "json", // тип данных, которые отправляем
+    //         success: function (response) {
+    //             console.log('Данные успешно обновлены');
+    //             console.log(response); // ответ от сервера
+    //         },
+    //         error: function (error) {
+    //             console.error('Ошибка при обновлении данных');
+    //             console.error(error); // сообщение об ошибке
+    //         }
+    //     });
+    // }
     /* #endregion */
-
 });
