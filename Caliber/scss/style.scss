@@ -1,15 +1,14 @@
 //@import 'linies.scss';
 
-
 html {
-   // cursor: url('../img/def.cur'), auto;
+    cursor: url('../img/cur.png'), auto;
    -webkit-user-select: none;
    -moz-user-select: none;
    -ms-user-select: none;
    user-select: none;
-   
+
     body {
-        cursor: default;
+        cursor: url('../img/cur.png'), auto;
         @media (max-width: 1800px) {
             zoom:70%;
         }
@@ -192,8 +191,7 @@ html {
         }
 
         tbody:not(:nth-child(1))>tr {
-            cursor: pointer;
-            
+            cursor: url('../img/grab.png'), auto;
 
             .rank {
                 z-index: 9;
@@ -413,7 +411,7 @@ html {
         position: absolute;
         top: 46%;
 
-        cursor: pointer;
+        cursor: url('../img/grab.png'), auto;
 
         ul {
             list-style: none;
@@ -432,7 +430,7 @@ html {
             border-radius: 3px;
             margin-bottom: 5px;
             margin-left: 20px;
-            cursor: pointer;
+            cursor: url('../img/grab.png'), auto;
             border: 1px solid rgba(128, 128, 128, 0.51);
 
             & span {
@@ -491,7 +489,7 @@ html {
     }
 }
 .icons {
-    cursor: pointer;
+    cursor: url('../img/grab.png'), auto;
     position: absolute;
     //top: 0%;
     z-index: 5;
@@ -525,7 +523,7 @@ img.folder {
         display: inline-block;
 
         transform: translateX(7px);
-        cursor: pointer;
+        cursor: url('../img/grab.png'), auto;
     }
 
    
@@ -534,7 +532,7 @@ img.folder {
         //background-color: #e6e6e6;
         //padding: 0px 0px 0px 1px ;
         //border: 1px solid white;
-        cursor: pointer;
+        cursor: url('../img/grab.png'), auto;
     }
 
     & label:active {
@@ -544,7 +542,7 @@ img.folder {
 
     & label::before {
 
-        cursor: pointer;
+        cursor: url('../img/grab.png'), auto;
         content: "";
         font-size: 14px;
         font-weight: 400;
@@ -559,15 +557,15 @@ img.folder {
 
 }
 
-#month-selector {
-    cursor: pointer;
+#month-selector  {
+    cursor: url('../img/grab.png'), auto;
     margin: 30px 0 10px;
     width: 226px;
     font-size: 16px;
 }
 
 button#show-panel {
-    cursor: pointer;
+    cursor: url('../img/grab.png'), auto;
     height: calc(135px / 1.5 );
     width: calc(50px / 1.5);
     color: grey;
@@ -621,7 +619,7 @@ button#show-panel {
 
         td:hover {
             background-color: #6aa5ee;
-            cursor: pointer;
+            cursor: url('../img/grab.png'), auto;
         }
 
         .event {
@@ -744,7 +742,7 @@ button#show-panel {
     }
     .geo {
         z-index: 10;
-        cursor: pointer;
+        cursor: url('../img/grab.png'), auto;
         &:hover {
             transform: scale(1.2);
         }
@@ -755,8 +753,8 @@ button#show-panel {
 .imgMap {
     position: absolute;
     z-index: 9;
-    height: 90%;
-    width: 90%;
+    height: 85%;
+    width: 85%;
     object-fit:contain;
     left: 50%;
     top: 50%;

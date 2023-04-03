@@ -1921,10 +1921,40 @@ catch (e) {
         document.querySelector(`.redPoints`).classList.add('animate__fadeInDown');
         document.querySelector('.timeScore > h1').style.display = '';
         document.querySelector('.timeScore').classList.add('animate__fadeInDown')
-        document.querySelector('.timeScore').classList.add('animate__delay-900ms')
-        
-    //  document.getElementById("loader").style.display = "none";
+        document.querySelector('.timeScore').style.setProperty('--animate-duration', '1.2s');
     }
+
+
+    function sounds() {
+        const tr = document.querySelectorAll('.line');
+        tr.forEach(element => {
+            element.addEventListener('mouseover', () => {
+                const audio = new Audio('../mp3/menu.mp3');
+                audio.volume = 0.5;
+                audio.play();
+                })
+        })
+
+        const points = document.querySelectorAll('.points');
+        points.forEach(element => {
+            element.addEventListener('mouseover', () => {
+                const audio = new Audio('../mp3/move.mp3');
+                audio.volume = 0.5;
+                audio.play();
+                })
+        })
+
+        document.body.addEventListener('mousedown', () => {
+            if (event.button === 0) {
+                const audio = new Audio('../mp3/click.mp3');
+                audio.volume = 0.1;
+                audio.play();
+            }
+        });
+        document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
+    }
+
+    sounds()
     
     /* #region  AJAX UPDATE DATABASE */
     // function updateDB() {
