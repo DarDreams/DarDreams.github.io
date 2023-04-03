@@ -1047,7 +1047,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 img.onload = function () {
                     try {
-                        document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}">`);
+                        document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}" onerror='img/default.png'>`);
                     } catch {
                         console.error('Ошибка при загрузке картинки');
                     }
@@ -1905,6 +1905,9 @@ catch (e) {
     window.onload = function() {
         document.querySelector('.container_tables').style.opacity = "1";
         document.querySelector('.vLoading').style.display = 'none';
+        document.querySelector('.winLose').style.display = 'unset';
+        document.querySelector('.timeScore>h1').style.display = 'unset';
+        document.querySelector('.stats').style.display = 'block';
     //  document.getElementById("loader").style.display = "none";
     }
     

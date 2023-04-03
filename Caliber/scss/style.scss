@@ -224,6 +224,7 @@ html {
 
 
             .oper {
+                pointer-events:none;
                 width: 80px;
                 transform: translate(-10px, 3px);
             }
@@ -266,6 +267,7 @@ html {
             }
 
             .baner {
+                pointer-events:none;
                 border-radius: 5px;
                 transform: translate(-85px, 4px);
             }
