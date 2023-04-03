@@ -1047,7 +1047,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 img.onload = function () {
                     try {
-                        document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}" onerror='img/default.png'>`);
+                        document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}" onerror="this.src='img/default.png'">`);
                     } catch {
                         console.error('Ошибка при загрузке картинки');
                     }
@@ -1547,8 +1547,13 @@ window.addEventListener('DOMContentLoaded', () => {
     const tables = document.querySelector('.container_tables');
     const recElem = document.querySelector('.rec');
 
+    button.addEventListener('mousemove', () => {
+        document.querySelector('.container_tables').classList.remove('animate__animated');
+    });
+
     button.addEventListener('click', () => {
         panel.classList.toggle('show');
+        //tables.classList.add('animate__animated');
         tables.classList.toggle('show');
         if (localStorage.getItem("rec") === "true") {
             recElem.style.filter = "grayscale(0%)";
@@ -1904,18 +1909,20 @@ catch (e) {
 
     window.onload = function() {
         document.querySelector('.container_tables').classList.add('animate__zoomIn')
-        document.querySelector('.container_tables').style.opacity = "1";
         
+        document.querySelector('.container_tables').style.opacity = "1";
         document.querySelector('.vLoading').style.display = 'none';
         document.querySelector('.winLose').style.display = '';
         document.querySelector('.winLoseCont').classList.add('animate__fadeInTopLeft')
-        document.querySelector('.timeScore>h1').style.display = 'unset';
-        document.querySelector('.timeScore').classList.add('animate__heartBeat')
-        document.querySelector('.stats').style.display = 'block';
-        document.querySelector('.stats').classList.add('animate__fadeInTopRight')
+        document.querySelector('.stats').style.display = '';
+        document.querySelector('.stats > .wrapper').classList.add('animate__fadeInTopRight')
         document.querySelector(`.allPoints`).style.display = "";
-        document.querySelector(`.allPoints`).classList.add('animate__fadeInDown')
-        document.querySelector(`.allPoints`).style.transform = 'translateX(-50%) !important';
+        document.querySelector(`.bluePoints`).classList.add('animate__fadeInDown');
+        document.querySelector(`.redPoints`).classList.add('animate__fadeInDown');
+        document.querySelector('.timeScore > h1').style.display = '';
+        document.querySelector('.timeScore').classList.add('animate__fadeInDown')
+        document.querySelector('.timeScore').classList.add('animate__delay-900ms')
+        
     //  document.getElementById("loader").style.display = "none";
     }
     

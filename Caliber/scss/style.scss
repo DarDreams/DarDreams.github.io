@@ -3,7 +3,11 @@
 
 html {
    // cursor: url('../img/def.cur'), auto;
-
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   
     body {
         cursor: default;
         @media (max-width: 1800px) {
@@ -16,6 +20,7 @@ html {
 
             img.foneBg {
                 position: fixed;
+                pointer-events:none;
                 background-size: cover;
                 //object-fit: contain;
                 z-index: -1;
@@ -111,7 +116,6 @@ html {
 .container_tables.show {
     transform: translateX(20%);
     transition: 1s ease;
-
 }
 
 
@@ -662,7 +666,6 @@ button#show-panel {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    //justify-content: center;
     margin-top: 0px;
     top: 5px;
 
