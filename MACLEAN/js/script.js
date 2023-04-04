@@ -21,9 +21,6 @@ $(document).ready(function () {
 			$(".menu__overlay").hide();
 
 
-			//$('footer').hide();
-
-
 			$(window).scroll(function () {
 				if ($(this).scrollTop() > 180) {
 					$(".pageup").fadeIn();
@@ -62,13 +59,6 @@ $(document).ready(function () {
 
 			$(".inicio_link").click(function () {
 				menuGoRight();
-				// const divFooter = document.querySelector('.footer');
-				// divFooter.style.cssText = `
-				// //position: fixed;
-				//  margin-bottom: 0;
-				// `;
-				
-				//$("html, body").animate({ scrollTop: 0 + "px" });
 				
 				$(".overlay").fadeIn();
 				$(".inicio").show();
@@ -299,23 +289,44 @@ $(document).ready(function () {
 			for (let i = 0; i < cards.length; i++) {
 				createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
 			}
-
+			
 			$(".productos__items").slick({
-				//waitForAnimate: true,
 				initialSlide: 0,
 				slidesToScroll: 1,
 				slidesToShow: 3,
 				arrows: true,
-				//fade: true,
-				//dots: true,
-				//dotsClass: 'slick-dots',
-				//autoplay: true,
 				autoplaySpeed: 1,
 				draggable: false,
 				rows: 2,
-				//prevArrow: $(".slick-prev"),
 				infinite: false
 			});
+			  
+			// 	if (!mediaQuery768.matches) {
+			// 		//document.body.style.overflow = 'hidden';
+			// 		var productosItems = $(".productos__items");
+			// 		if (productosItems.length > 0) {
+			// 			if (productosItems.hasClass('slick-initialized')) {
+			// 				productosItems.slick('unslick');
+			// 			}
+			// 			productosItems.slick({
+			// 				vertical: true,
+			// 				rows: 3,
+			// 				draggable: true,
+			// 				swipe: true,
+			// 				//swipeToSlide: true,
+			// 				verticalSwiping: true,
+			// 				swipeDirection: 'vertical',
+			// 				arrows: false,
+			// 				slidesToShow: 1
+			// 			});
+			// 		}
+			// 	}
+
+			
+			
+			  
+			
+			
 
 			$('button.slick-next').html("&#10154;");
 			$('button.slick-prev').html("&#10154;");
@@ -812,16 +823,16 @@ $(document).ready(function () {
 			})
 
 
-			setTimeout(() => {
-				document.querySelector('.slick-next').addEventListener('mousedown', function (event) {
-					if (event.shiftKey) {
-						var slick = $('.productos__items').slick('getSlick');
-						var slideCount = slick.slideCount;
-						var lastIndex = slideCount - 3;
-						slick.slickGoTo(lastIndex);
-					}
-				});
-			}, 1000);
+			// setTimeout(() => {
+			// 	document.querySelector('.slick-next').addEventListener('mousedown', function (event) {
+			// 		if (event.shiftKey) {
+			// 			var slick = $('.productos__items').slick('getSlick');
+			// 			var slideCount = slick.slideCount;
+			// 			var lastIndex = slideCount - 3;
+			// 			slick.slickGoTo(lastIndex);
+			// 		}
+			// 	});
+			// }, 1000);
 
 
 			$('.contactos__informacion__mensaje_form').submit(function (e) {
