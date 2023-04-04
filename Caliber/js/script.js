@@ -711,6 +711,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
 
                 /* #region  OPER */
+                
                 let roleName;
 
                 function oper(collection) {
@@ -966,6 +967,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 }
                 /* #endregion */;
+                if (data1[k][i][16][2] == null) {data1[k][i][16][2] = 0};
+                console.log(data1[k][i][16][2]);
                 const operator = {
                     role: operLoop[i],
                     emblem: data1[k][i][5],
