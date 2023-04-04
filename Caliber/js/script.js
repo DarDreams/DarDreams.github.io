@@ -1933,7 +1933,7 @@ catch (e) {
         tr.forEach(element => {
             element.addEventListener('mouseover', () => {
                 const audio = new Audio('../mp3/menu.mp3');
-                audio.volume = 0.5;
+                audio.volume = 0.1;
                 audio.play();
                 })
         })
@@ -1942,7 +1942,7 @@ catch (e) {
         points.forEach(element => {
             element.addEventListener('mouseover', () => {
                 const audio = new Audio('../mp3/move.mp3');
-                audio.volume = 0.5;
+                audio.volume = 0.1;
                 audio.play();
                 })
         })
@@ -1950,7 +1950,7 @@ catch (e) {
         document.body.addEventListener('mousedown', () => {
             if (event.button === 0) {
                 const audio = new Audio('../mp3/click.mp3');
-                audio.volume = 0.1;
+                audio.volume = 0.01;
                 audio.play();
             }
         });
