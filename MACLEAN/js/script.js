@@ -290,6 +290,35 @@ $(document).ready(function () {
 				createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
 			}
 			
+
+			// function slider () {
+			// 	const slider = document.querySelector('.productos__items');
+			// 	const prev = document.querySelector('.prev');
+			// 	const next = document.querySelector('.next');
+			// 	const slideWidth = slider.clientWidth;
+			// 	const slidesCount = slider.children.length;
+			// 	const maxOffset = slideWidth * (slidesCount - 1);
+			// 	let offset = 0;
+
+			// 	prev.addEventListener('click', () => {
+			// 		offset += slideWidth;
+			// 		if (offset > 0) {
+			// 			offset = -maxOffset;
+			// 		}
+			// 		slider.style.transform = `translateX(${offset}px)`;
+			// 	});
+
+			// 	next.addEventListener('click', () => {
+			// 		offset -= slideWidth;
+			// 		if (offset < -maxOffset) {
+			// 			offset = 0;
+			// 		}
+			// 		slider.style.transform = `translateX(${offset}px)`;
+			// 	});
+			// }
+
+			//slider();
+
 			$(".productos__items").slick({
 				initialSlide: 0,
 				slidesToScroll: 1,
@@ -301,7 +330,16 @@ $(document).ready(function () {
 				infinite: false
 			});
 			  
-			// 	if (!mediaQuery768.matches) {
+console.log(mediaQuery768.matches);
+			 	if (!mediaQuery768.matches) {
+					$('.productos__items').slick('slickSetOption', {
+						vertical: true,
+						swipe: true,
+						verticalSwiping: true,
+						swipeToSlide: true,
+						arrows: false
+					});
+				}
 			// 		//document.body.style.overflow = 'hidden';
 			// 		var productosItems = $(".productos__items");
 			// 		if (productosItems.length > 0) {
@@ -320,7 +358,7 @@ $(document).ready(function () {
 			// 				slidesToShow: 1
 			// 			});
 			// 		}
-			// 	}
+			 	
 
 			
 			
