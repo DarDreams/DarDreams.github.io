@@ -157,7 +157,8 @@
 }
 
 .slick-list {
-    padding-left: 30px;
+    padding-left: 60px;
+    margin-left: 20px;
 }
 
 ///////////////////////////////////////////////
@@ -247,8 +248,8 @@ button.slick-next {
     color: red;
     outline: none;
     position: absolute;
-    right: 30px ;
-    top:35%;
+    right: 0px ;
+    top:45%;
     font-size: 50px;
     transition: transform 0.2s ease;
     &:hover {
@@ -258,13 +259,14 @@ button.slick-next {
 }
 
 button.slick-prev {
+    z-index: 9;
     background: transparent;
     border: 1px solid transparent;
     color: red;
     position: absolute;
     outline: none;
-    left: -40px;
-    top: 35% ;
+    left: 0px;
+    top: 45% ;
     transform:  rotate(180deg);
     font-size: 50px;
     transition: transform 0.2s ease;

@@ -37,13 +37,16 @@ body {
 // }
 
 .overlay {
+    //outline: 1px ridge red;
+    position: absolute;
     display: inline-block;
-    margin: 180px calc(var(--mid) - 60px) 10px;
-    //border: 1px solid red;
-    left: 0;
+    /* margin: 180px calc(var(--mid) - 60px) 10px; */
+    margin-top: 180px;
+    left: 50%;
+    transform: translate(-50%);
     width: 1350px;
     height: calc(100vh - 200px);
-    background-color: rgba(0, 0, 0,.47);
+    background-color: rgba(0,0,0,.47);
     opacity: .65;
     z-index: 0;
 }
@@ -86,9 +89,13 @@ body {
     .overlay {
         width: 0;
     }
-    .logo {
-        zoom: 0.5;
-        margin-left: -80px;
+    section.logo {
+         left:0;
+        // width: 100vw;
+        zoom: 50%;
+        //margin-left: 0 auto;
+        //left: 50%;
+        //transform: translateX(-25%);
     }
     .background {
         background: url("../img/bg_min.png");
@@ -104,6 +111,8 @@ body {
             background-color: rgba(0, 0, 0, 76%); /* Здесь 0.5 - это значение непрозрачности, вы можете изменить его */
           }
     }
+
+
 
     .menu {
         width: 200px;
@@ -164,6 +173,7 @@ body {
     }
 
      .productos{
+        
         //height: 100vh;
         //width: 100%;
         //margin: 50%;
@@ -181,15 +191,19 @@ body {
         //max-height: 200px;
         //bottom: 0;
         //overflow: hidden;
-        top: 0px !important;
+        top: 50% !important;
+        transform: translateY(-40%) !important;
 
     }
     .productos__items_item {
         //margin-top: 80px;
-        left: 50%;
+        left: 50% ;
         transform: translateX(-50%);
     }
 
+    .item__front>img {
+        transform: scale(1.3) !important;
+    }
 
 
     .item:hover::before,
@@ -199,6 +213,11 @@ body {
 
     .slick-list {
         padding: 0 !important;
+        height: 350px !important;
+    }
+
+    .item {
+        height: 350px !important;
     }
 
     .carrito {
@@ -218,6 +237,7 @@ body {
          justify-content: center;
          overflow-y: hidden;
         // zoom: 50%;
+
          iframe {
             left: 0;
             right: 0;

@@ -313,11 +313,10 @@ $(document).ready(function () {
 
 			/* #region  LOAD SLICK SLIDER */
 
-			// setTimeout(() => {
 				$(".productos__items").slick({
 					waitForAnimate: false,
 					waitForLoad: true,
-					lazyLoad: 'ondemand',
+					//lazyLoad: 'ondemand',
 					//initialSlide: 0,
 					slidesToScroll: 1,
 					slidesToShow: 3,
@@ -329,30 +328,36 @@ $(document).ready(function () {
 				});
 				$('button.slick-next').html("&#10154;");
 				$('button.slick-prev').html("&#10154;");
-			// }, 100);
 
-			// setInterval(() => {
 				if (mediaQuery768.matches) {
 					let productosItems = $(".productos__items");
 					if (productosItems.hasClass('slick-initialized')) {
 						productosItems.slick('unslick');
 					}
 					productosItems.slick({
+						// vertical: true,
+						// touchMove: true,
+						// rows: 1,
+						// slidesToShow: 1,
+						// swipe: true,
+						// swipeToSlide: true,
+						// verticalSwiping: true,
+						// swipeDirection: 'vertical',
+						// arrows: false,
+						// infinite: false
 						vertical: true,
-						//touchThreshold: false,
 						touchMove: true,
-						//draggable: true,
-						rows: 2,
+						rows: 1,
 						swipe: true,
 						swipeToSlide: true,
 						verticalSwiping: true,
 						swipeDirection: 'vertical',
 						arrows: false,
 						slidesToShow: 1,
+						slidesPerRow: 1,
 						infinite: false
 					});
 				}
-			// }, 100);
 			/* #endregion */
 
 
