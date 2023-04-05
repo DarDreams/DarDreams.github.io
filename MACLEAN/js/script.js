@@ -1,9 +1,4 @@
-
-
 $(document).ready(function () {
-
-
-
 	const mediaQuery768 = window.matchMedia('(max-width: 768px)');
 	let cards = {};
 	axios.get('db.json')
@@ -15,7 +10,8 @@ $(document).ready(function () {
 			$(".inicio").hide();
 			$(".empresa").hide();
 			$(".contactos").hide();
-			$(".productos").hide();
+			//$(".productos").hide();
+			document.querySelector('.productos').style.visibility = 'hidden';
 
 			$(".overlay").hide();
 			$(".menu__overlay").hide();
@@ -43,23 +39,20 @@ $(document).ready(function () {
 				});
 			}
 
-
-
-			////////////////ANIMATE//////////////////////
-
+			/* #region  MENU */
 			function menuGoRight() {
 				if (mediaQuery768.matches) {
 					if (divList.classList.contains('animate__slideOutRight') == false) {
 						divBurger.click();
 						divBurger.removeAttribute('style');
-					} 
+					}
 				}
 			}
 			let animate = "animate__bounceInRight";
 
 			$(".inicio_link").click(function () {
 				menuGoRight();
-				
+
 				$(".overlay").fadeIn();
 				$(".inicio").show();
 				$(".empresa").fadeOut(1000);
@@ -99,7 +92,8 @@ $(document).ready(function () {
 
 			$(".productos_link").click(function () {
 				menuGoRight();
-				$('button.slick-prev').click();
+				document.querySelector('.productos').style.visibility = '';
+				//$('button.slick-prev').click();
 				$("html, body").animate({ scrollTop: 0 + "px" });
 				$(".overlay").fadeIn();
 				$(".inicio").fadeOut(1000);
@@ -107,12 +101,12 @@ $(document).ready(function () {
 				$(".contactos").fadeOut(1000);
 				$(".productos").show();
 				$(".carrito").fadeIn();
-				$('.productos__items').slick('slickPause');
+				//$('.productos__items').slick('slickPause');
 				anime(".productos", animate);
 			});
+			/* #endregion */
 
-			//////////////SCROLL////////////////////
-
+			/* #region  SCROLL */
 			$(window).scroll(function () {
 				if ($(this).scrollTop() > 50) {
 					$(".menu__overlay").fadeIn();
@@ -128,12 +122,9 @@ $(document).ready(function () {
 					}
 				}
 			});
+			/* #endregion */
 
-
-			
-
-			//////HAMBURGER
-
+			/* #region  HAMBURGER */
 			document.body.insertAdjacentHTML('afterbegin', `
 				<div class="hamburger">
 						<span class="button">&#x2630;</span>
@@ -151,19 +142,19 @@ $(document).ready(function () {
 					if (divList.classList.contains('animate__slideOutRight') == false) {
 						divBurger.click();
 						divBurger.removeAttribute('style');
-					} 
-					
+					}
+
 					divBackground.onclick = null;
 				};
-				
+
 				if (divList.getBoundingClientRect().left > 0) {
 					divList.classList.toggle('animate__slideOutRight');
 					divList.classList.toggle('mobile');
-					
+
 				}
-				
+
 				divList.classList.add('mobile');
-				
+
 				if (mediaQuery768.matches) {
 					if (divList.classList.contains('mobile')) {
 						divMenu.style.display = 'flex';
@@ -172,25 +163,23 @@ $(document).ready(function () {
 					} else {
 					}
 				}
-				if (getComputedStyle(document.querySelector('span.button')).transform[10] == 1)  {
+				if (getComputedStyle(document.querySelector('span.button')).transform[10] == 1) {
 					divBurger.removeAttribute('style');
 				}
 			})
+			/* #endregion */
 
-			/////////////PRODUCTOS///////////////
-
-
+			/* #region  PRODUCOTS */
 			$(".logo").click(function () {
 				document.querySelector('.logo__roca').src = `img/LOGO3.png`;
-				location.href = location.origin + '?rand=' + Math.random();
+				//location.href = location.origin + '?rand=' + Math.random();
+				location.reload(true);
 			});
 
-			////////tienda
+			/* #region  TIENDA */
 
 			let carrito = [[], []];
 			let carritoTotal = [];
-
-			//
 
 			function createCards(id, img, name, precio, peso, descr, ingredientes, informacion, sellos, number) {
 				informacion = informacion.join('<br>');
@@ -289,8 +278,10 @@ $(document).ready(function () {
 			for (let i = 0; i < cards.length; i++) {
 				createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
 			}
-			
+			/* #endregion */
 
+
+			/* #region  SLIDER MANUAL */
 			// function slider () {
 			// 	const slider = document.querySelector('.productos__items');
 			// 	const prev = document.querySelector('.prev');
@@ -318,57 +309,57 @@ $(document).ready(function () {
 			// }
 
 			//slider();
+			/* #endregion */
 
-			$(".productos__items").slick({
-				initialSlide: 0,
-				slidesToScroll: 1,
-				slidesToShow: 3,
-				arrows: true,
-				autoplaySpeed: 1,
-				draggable: false,
-				rows: 2,
-				infinite: false
-			});
-			  
-console.log(mediaQuery768.matches);
-			 	if (!mediaQuery768.matches) {
-					$('.productos__items').slick('slickSetOption', {
+			/* #region  LOAD SLICK SLIDER */
+
+			// setTimeout(() => {
+				$(".productos__items").slick({
+					waitForAnimate: false,
+					waitForLoad: true,
+					lazyLoad: 'ondemand',
+					//initialSlide: 0,
+					slidesToScroll: 1,
+					slidesToShow: 3,
+					arrows: true,
+					//autoplaySpeed: 1,
+					draggable: false,
+					rows: 2,
+					infinite: false
+				});
+				$('button.slick-next').html("&#10154;");
+				$('button.slick-prev').html("&#10154;");
+			// }, 100);
+
+			// setInterval(() => {
+				if (mediaQuery768.matches) {
+					let productosItems = $(".productos__items");
+					if (productosItems.hasClass('slick-initialized')) {
+						productosItems.slick('unslick');
+					}
+					productosItems.slick({
 						vertical: true,
+						//touchThreshold: false,
+						touchMove: true,
+						//draggable: true,
+						rows: 2,
 						swipe: true,
-						verticalSwiping: true,
 						swipeToSlide: true,
-						arrows: false
+						verticalSwiping: true,
+						swipeDirection: 'vertical',
+						arrows: false,
+						slidesToShow: 1,
+						infinite: false
 					});
 				}
-			// 		//document.body.style.overflow = 'hidden';
-			// 		var productosItems = $(".productos__items");
-			// 		if (productosItems.length > 0) {
-			// 			if (productosItems.hasClass('slick-initialized')) {
-			// 				productosItems.slick('unslick');
-			// 			}
-			// 			productosItems.slick({
-			// 				vertical: true,
-			// 				rows: 3,
-			// 				draggable: true,
-			// 				swipe: true,
-			// 				//swipeToSlide: true,
-			// 				verticalSwiping: true,
-			// 				swipeDirection: 'vertical',
-			// 				arrows: false,
-			// 				slidesToShow: 1
-			// 			});
-			// 		}
-			 	
+			// }, 100);
+			/* #endregion */
 
-			
-			
-			  
-			
-			
 
-			$('button.slick-next').html("&#10154;");
-			$('button.slick-prev').html("&#10154;");
-			/////////////
+			/* #endregion */
+
+
+			/* #region  CALC_SUM */
 			function calcSum(e) {
 				let id = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
 				let item = cards.find(item => item.id == id);
@@ -418,8 +409,9 @@ console.log(mediaQuery768.matches);
 			for (let i = 0; i < cards.length; i++) {
 				//document.querySelectorAll('.addItem')[i].click();
 			}
+			/* #endregion */
 
-			//  PAYMENTS
+			/* #region PAYMENTS*/
 			// document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
 			// sell(carritoTotal.map(item => ({
 			// 	price: item[0],
@@ -447,7 +439,9 @@ console.log(mediaQuery768.matches);
 			//     price: 'price_123',
 			//     quantity: 1
 			//   }],
+			/* #endregion */
 
+			/* #region  FLIP_CARD */
 			const item = document.querySelectorAll('.item');
 			item.forEach(cd => {
 
@@ -471,55 +465,55 @@ console.log(mediaQuery768.matches);
 					if (cd.querySelector(':before')) { cd.querySelector(':before').style.opacity = 0; }
 				});
 			});
+			/* #endregion */
 
-			//MODAL
-
+			/* #region  MODAL */
 			document.body.insertAdjacentHTML('afterbegin', `
-	<div class="modal">
-		<div class="modal-content">
-			<form id="addCardForm">
-			<span class="close">&times;</span>
-				<div class='small'>
-					<input autocomplete="off" placeholder='id' class="id" type="text" id="id" name="id">
-					<input autocomplete="off" placeholder='name' type="text" id="name" name="name">
-					<input autocomplete="off" placeholder='peso' type="text" min max id="peso" name="peso">
-					<input autocomplete="off" placeholder='precio' type="number" id="precio" name="precio">
-					<input autocomplete="off" placeholder='path' type="text" id="img" name="img">
-					<input autocomplete="off" accept="image/jpeg, image/png" type="file" id="open" name="open">
-				</div>
-				<div class='big'>
-					<textarea placeholder='description' id="descr" name="descr"></textarea>
-					<textarea placeholder='ingredientes' id="ingredientes" name="ingredientes"></textarea>
-					<textarea placeholder='informacion' id="informacion" name="informacion"></textarea>
-				</div>
+				<div class="modal">
+					<div class="modal-content">
+						<form id="addCardForm">
+						<span class="close">&times;</span>
+							<div class='small'>
+								<input autocomplete="off" placeholder='id' class="id" type="text" id="id" name="id">
+								<input autocomplete="off" placeholder='name' type="text" id="name" name="name">
+								<input autocomplete="off" placeholder='peso' type="text" min max id="peso" name="peso">
+								<input autocomplete="off" placeholder='precio' type="number" id="precio" name="precio">
+								<input autocomplete="off" placeholder='path' type="text" id="img" name="img">
+								<input autocomplete="off" accept="image/jpeg, image/png" type="file" id="open" name="open">
+							</div>
+							<div class='big'>
+								<textarea placeholder='description' id="descr" name="descr"></textarea>
+								<textarea placeholder='ingredientes' id="ingredientes" name="ingredientes"></textarea>
+								<textarea placeholder='informacion' id="informacion" name="informacion"></textarea>
+							</div>
 
-				<div class = "sellosAdd">
-					<img id='imagePicante' src='img/sellos/none.png'>
-					<img src='img/sellos/natural.png'>
-					<img src='img/sellos/sin_gluten.png'>
-					<img src='img/sellos/sin_lactosa.png'>
-					<img src='img/sellos/no_sal.png'>
-					<img src='img/sellos/aove.png'>
-					<br>
+							<div class = "sellosAdd">
+								<img id='imagePicante' src='img/sellos/none.png'>
+								<img src='img/sellos/natural.png'>
+								<img src='img/sellos/sin_gluten.png'>
+								<img src='img/sellos/sin_lactosa.png'>
+								<img src='img/sellos/no_sal.png'>
+								<img src='img/sellos/aove.png'>
+								<br>
 
-					<select id="imageSelect">
-						<option value="img/sellos/none.png">None</option>
-						<option value="img/sellos/picanteM.png">Mild</option>
-						<option value="img/sellos/picanteH.png">Hot</option>
-						<option value="img/sellos/picanteE.png">Extra</option>
-					</select>
+								<select id="imageSelect">
+									<option value="img/sellos/none.png">None</option>
+									<option value="img/sellos/picanteM.png">Mild</option>
+									<option value="img/sellos/picanteH.png">Hot</option>
+									<option value="img/sellos/picanteE.png">Extra</option>
+								</select>
 
-					<input type="checkbox" id="natural" name="sellos">
-					<input type="checkbox" id="sin_gluten" name="sellos">
-					<input type="checkbox" id="sin_lactosa" name="sellos">
-					<input type="checkbox" id="no_sal" name="sellos">
-					<input type="checkbox" id="aove" name="sellos">
+								<input type="checkbox" id="natural" name="sellos">
+								<input type="checkbox" id="sin_gluten" name="sellos">
+								<input type="checkbox" id="sin_lactosa" name="sellos">
+								<input type="checkbox" id="no_sal" name="sellos">
+								<input type="checkbox" id="aove" name="sellos">
+							</div>
+							<input type="submit" value="Add card">
+							<button class = 'aplicarCambios'>Aplicar cambios</button>
+						</form>
+					</div>
 				</div>
-				<input type="submit" value="Add card">
-				<button class = 'aplicarCambios'>Aplicar cambios</button>
-			</form>
-		</div>
-	</div>
 	`);
 
 			function createList() {
@@ -756,10 +750,7 @@ console.log(mediaQuery768.matches);
 
 			clickImgCheck();
 
-
-
-			// APLICAR BUTTON
-
+			/* #region  APLICAR BUTTON */
 			function updateCard(id, updatedCard) {
 				const index = cards.findIndex(card => card.id == id);
 				if (index === -1) {
@@ -804,6 +795,7 @@ console.log(mediaQuery768.matches);
 					}
 				});
 			};
+			/* #endregion */
 
 
 			document.querySelector('#addCardForm > button').addEventListener('click', (e) => {
@@ -853,6 +845,7 @@ console.log(mediaQuery768.matches);
 			}
 
 			modalHide();
+			/* #endregion */
 
 			document.querySelector('.e_mail').addEventListener('keydown', (event) => {
 				if (event.shiftKey) {
@@ -873,6 +866,7 @@ console.log(mediaQuery768.matches);
 			// }, 1000);
 
 
+			/* #region  FORM CONTACTO */
 			$('.contactos__informacion__mensaje_form').submit(function (e) {
 				e.preventDefault();
 				var name = $('.name').val();
@@ -897,15 +891,10 @@ console.log(mediaQuery768.matches);
 					}
 				});
 			});
-
-
-
+			/* #endregion */
 		})
 		.catch(function (error) {
 			console.log(error, " База данных не найдена");
 		});
-
-
-
 });  //////////////////  END
 
