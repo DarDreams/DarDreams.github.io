@@ -28,16 +28,16 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        for (let i = 2; i <= 3; i++) {
-            for (let j = 0; j <= 3; j++) {
-                if (Array.isArray(caliberNew.data[i][j][11])) {
-                    caliberNew.data[i][j][11].splice(0);
-                }
-                if (Array.isArray(caliberNew.data[i][j][9])) {
-                    caliberNew.data[i][j][9].splice(0);
-                }
-            }
-        }
+        // for (let i = 2; i <= 3; i++) {
+        //     for (let j = 0; j <= 3; j++) {
+        //         if (Array.isArray(caliberNew.data[i][j][11])) {
+        //             caliberNew.data[i][j][11].splice(0);
+        //         }
+        //         if (Array.isArray(caliberNew.data[i][j][9])) {
+        //             caliberNew.data[i][j][9].splice(0);
+        //         }
+        //     }
+        // }
         caliberNew.log.Users.forEach(element => {
             delete element.QuestCounters;
         });
@@ -706,7 +706,7 @@ window.addEventListener('DOMContentLoaded', () => {
                        operLoop = ['assault', 'gunner', 'medic', 'sniper'];
                     
                 }
-                
+                //operLoop = [];
                    
 
                   //  for (let i = 0 ; i < 4; i++) {
@@ -984,7 +984,6 @@ window.addEventListener('DOMContentLoaded', () => {
                // console.log(data1[k][i][16]);
                  if (!data1[k][i][16]) {
                     data1[k][i][16] = [0,0,0];
-  
                 };
                 // console.log(data1[k][i][16][2]);
                 const operator = {
