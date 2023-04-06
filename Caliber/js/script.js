@@ -3,24 +3,8 @@ import {
     caliber2 as caliberImport02
 } from "./game.js";
 
-
-
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
-
-    /* #region  FUNCTION OBJECT TO ARRAY */
-    // function objectToArray(obj) {
-    //     return Object.values(obj).map((value) => {
-    //       if (typeof value === 'object' && value !== null) {
-    //         return objectToArray(value);
-    //       } else {
-    //         return value;
-    //       }
-    //     });
-    //   }
-
-    //let games = objectToArray(game);
-    /* #endregion */
 
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
@@ -61,6 +45,18 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     let caliber = caliberFunc(caliberImport01, caliberImport02);
+
+    //const result = {
+        for (let q = 2; q < 4; q++) {
+        data: [
+          caliber.data[q].sort((a, b) => a[8][1].slice(-1).localeCompare(b[8][1].slice(-1))),
+          caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'a').sort((a, b) => a[8][1].localeCompare(b[8][1])),
+          caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'g').sort((a, b) => a[8][1].localeCompare(b[8][1])),
+          caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'm').sort((a, b) => a[8][1].localeCompare(b[8][1])),
+          caliber.data[q].filter(obj => obj[8][1].slice(-1) === 's').sort((a, b) => a[8][1].localeCompare(b[8][1])),
+        ]
+    }
+
     console.log('CALIBER_DATAS - ', caliber);
 
     /* #region  OLD VERSION */
@@ -101,6 +97,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  PERK RUS */
     const perksRus = {
+        "adrenaline_rush":["Андреналин Раш","Хз что это пока что :-)"],
         "expansive_bullets": ["Экспансивные пули",
             `Попадание по противнику из
             основного оружия повышает
@@ -689,6 +686,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function upload(data1, data2) {
         document.querySelector(`.team1Table`).innerHTML = '';
         document.querySelector(`.team2Table`).innerHTML = '';
+        let operLoop = [];
         for (let k = 2; k < 4; k++) {
             document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('afterbegin', `
         <th></th>
@@ -702,14 +700,30 @@ window.addEventListener('DOMContentLoaded', () => {
         <th>УРОН</th>
         <th>ПОЛУЧЕНИЕ</th>`);
             for (let i = 0; i <= 3; i++) {
-                let operLoop;
+                
+               // console.dir(`${data1[2][0][8][1].slice(-1)}niper`);
                 if (k == 2) {
-                    operLoop = ['assault', 'gunner', 'medic', 'sniper'];
+                       operLoop = ['assault', 'gunner', 'medic', 'sniper'];
+                    
                 }
-                if (k == 3) {
-                    operLoop = ['assaultR', 'gunnerR', 'medicR', 'sniperR'];
-                }
+                
+                   
 
+                  //  for (let i = 0 ; i < 4; i++) {
+                    
+                          
+                         // operLoop = ['assault', 'gunner', 'medic', 'sniper'];
+                
+                
+                if (k == 3) {
+                   // operLoop = [];
+                   // for (let i = 0 ; i < 4; i++) {
+                     
+                    //}
+                    operLoop = ['assaultR', 'gunnerR', 'medicR', 'sniperR'];
+                 //   operLoop = [`${data1[2][0][8][1].slice(-1)}niper`,`${data1[2][1][8][1].slice(-1)}niper`,`${data1[2][2][8][1].slice(-1)}niper`,`${data1[2][3][8][1].slice(-1)}niper`];
+                }
+                //console.dir(operLoop);
                 /* #region  OPER */
                 
                 let roleName;
@@ -967,8 +981,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 }
                 /* #endregion */;
-                if (data1[k][i][16][2] == null) {data1[k][i][16][2] = 0};
-                console.log(data1[k][i][16][2]);
+               // console.log(data1[k][i][16]);
+                 if (!data1[k][i][16]) {
+                    data1[k][i][16] = [0,0,0];
+  
+                };
+                // console.log(data1[k][i][16][2]);
                 const operator = {
                     role: operLoop[i],
                     emblem: data1[k][i][5],
@@ -1428,7 +1446,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 } else {
                     color('#6aa5ee', 'ПОРАЖЕНИЕ!');
                 }
-            } else if (data1[3].some(player => player[2] === 'MASTER')) {
+            } else if (data1[3].some(player => player[2] == 'MASTER')) {
                 if (score(1) == data2.Rounds) {
                     color('#ff323b', 'ПОБЕДА!');
                 } else {

@@ -169,6 +169,53 @@ $(document).ready(function () {
 			})
 			/* #endregion */
 
+			/* #region  INICIO */
+			document.querySelector('.inicio> .container').insertAdjacentHTML('afterbegin', `
+				<h2>
+					Estamos trabajando en la mejora de nuestro sitio web. En breve dispondremos de nuevos productos y contenidos. Disculpen las molestias.
+				</h2>
+				<br>
+				<h3 class="cap">Hummus  
+					«Creemos en trabajar por un mundo digno y justo, en el que la globalización suponga una oportunidad y no una amenaza.»
+				</h3>
+				<ul> 
+				<li>
+					Nacemos bajo la filosofía de ofrecer al consumidor un producto de calidad, elaborados con materia prima ecológica. Queremos contribuir con la producción de alimentos sanos, que promueva el bienestar de las personas y cuya producción apoye la expansión de la agricultura ecológica y de esta forma se genere un valor añadido en favor de todos los eslabones de la cadena de los productos, desde el campo hasta la mesa.
+				</li>
+				<br>
+				<li>
+					El objetivo es alcanzar una “calidad selecta de los productos”, utilizando materia prima con una calidad biológica insuperable, resaltando su sabor, proporcionando salud, nutrición y bienestar a través de una alimentación natural de la más alta calidad.
+				</li>
+				<br>
+				<li>
+					Nos basamos para nuestras elaboraciones en recetas tradicionales de nuestros antepasados, dándoles un toque de innovación e investigación introduciendo otros productos sustitutivos ( azúcar de abedul, eritritol), y aprovechar el poder de otros ( aloe vera, semillas de chía, jengibre…)
+				</li>
+				</ul>
+			`)
+			/* #endregion */
+
+			/* #region  EMPRESA */
+			document.querySelector('.empresa >.container').insertAdjacentHTML('afterbegin', `
+				<ul>
+				<li>
+					La empresa almeriense Conservas Alborán nace bajo la filosofía de ofrecer al consumidor un  producto natural  de calidad,  resaltando su sabor, proporcionando salud, nutrición y bienestar  a través de una alimentación natural de la más alta calidad.
+				</li>
+				<br>
+				<li>
+					Se ofrecen diversas líneas de productos naturales, vegano – naturales  y artesanales mezclando la cocina tradicional con la cocina moderna. Se ofertan distintos productos en  conservas  (ensalada de tomate cherry y pimiento asado al carbón, sobrasada vegetal, morcilla vegetal, cebollitas francesas en vinagre balsámico..), sopas frías y calientes, jaleas ( jalea de aove, jalea de arándanos..), salsas de verduras, caracoles en salsa.
+				</li>
+				<br>
+				<li>
+					En Conservas Alborán comprendemos que las principales preocupaciones de los consumidores de hoy, es consumir productos saludables, sin derivados industriales pero con un exquisito sabor. Por ello, elaboramos de forma artesana, sin conservantes ni colorantes, sin gluten, sin lactosa y con sustitutos del azúcar 100% naturales ( azúcar de abedul..), por lo que la mayoría de  nuestros productos son también aptos para celiacos, diabéticos tipo 2, intolerantes a la lactosa y gran parte de ellos son aptos para personas que lleven una dieta vegetariana o vegana.
+				</li>
+				<br>
+				<li>
+					Nos basamos para nuestras elaboraciones en recetas tradicionales de nuestros antepasados, dándoles un toque de innovación e investigación introduciendo otros productos sustitutivos ( azúcar de abedul), y aprovechar el poder de otros ( semillas de chía).
+				</li>
+				</ul>
+			`)
+			/* #endregion */
+
 			/* #region  PRODUCOTS */
 			$(".logo").click(function () {
 				document.querySelector('.logo__roca').src = `img/LOGO3.png`;
@@ -313,56 +360,55 @@ $(document).ready(function () {
 
 			/* #region  LOAD SLICK SLIDER */
 
-				$(".productos__items").slick({
-					waitForAnimate: false,
-					waitForLoad: true,
-					//lazyLoad: 'ondemand',
-					//initialSlide: 0,
-					slidesToScroll: 1,
-					slidesToShow: 3,
-					arrows: true,
-					//autoplaySpeed: 1,
-					draggable: false,
-					rows: 2,
+			$(".productos__items").slick({
+				waitForAnimate: false,
+				waitForLoad: true,
+				//lazyLoad: 'ondemand',
+				//initialSlide: 0,
+				slidesToScroll: 1,
+				slidesToShow: 3,
+				arrows: true,
+				//autoplaySpeed: 1,
+				draggable: false,
+				rows: 2,
+				infinite: false
+			});
+			$('button.slick-next').html("&#10154;");
+			$('button.slick-prev').html("&#10154;");
+
+			if (mediaQuery768.matches) {
+				let productosItems = $(".productos__items");
+				if (productosItems.hasClass('slick-initialized')) {
+					productosItems.slick('unslick');
+				}
+				productosItems.slick({
+					// vertical: true,
+					// touchMove: true,
+					// rows: 1,
+					// slidesToShow: 1,
+					// swipe: true,
+					// swipeToSlide: true,
+					// verticalSwiping: true,
+					// swipeDirection: 'vertical',
+					// arrows: false,
+					// infinite: false
+					vertical: true,
+					touchMove: true,
+					rows: 1,
+					swipe: true,
+					swipeToSlide: true,
+					verticalSwiping: true,
+					swipeDirection: 'vertical',
+					arrows: false,
+					slidesToShow: 1,
+					slidesPerRow: 1,
 					infinite: false
 				});
-				$('button.slick-next').html("&#10154;");
-				$('button.slick-prev').html("&#10154;");
-
-				if (mediaQuery768.matches) {
-					let productosItems = $(".productos__items");
-					if (productosItems.hasClass('slick-initialized')) {
-						productosItems.slick('unslick');
-					}
-					productosItems.slick({
-						// vertical: true,
-						// touchMove: true,
-						// rows: 1,
-						// slidesToShow: 1,
-						// swipe: true,
-						// swipeToSlide: true,
-						// verticalSwiping: true,
-						// swipeDirection: 'vertical',
-						// arrows: false,
-						// infinite: false
-						vertical: true,
-						touchMove: true,
-						rows: 1,
-						swipe: true,
-						swipeToSlide: true,
-						verticalSwiping: true,
-						swipeDirection: 'vertical',
-						arrows: false,
-						slidesToShow: 1,
-						slidesPerRow: 1,
-						infinite: false
-					});
-				}
+			}
 			/* #endregion */
 
 
 			/* #endregion */
-
 
 			/* #region  CALC_SUM */
 			function calcSum(e) {
