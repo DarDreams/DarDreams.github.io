@@ -1794,7 +1794,6 @@ window.addEventListener('DOMContentLoaded', () => {
             // caliber_b2.Log.Users.splice(2);
             
             let caliber_file = caliberFunc(caliber_b, caliber_b2)
-            //console.log(huy);
                 document.querySelectorAll('.points').forEach(item => {
                     item.remove();
                 })
