@@ -28,16 +28,16 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // for (let i = 2; i <= 3; i++) {
-        //     for (let j = 0; j <= 3; j++) {
-        //         if (Array.isArray(caliberNew.data[i][j][11])) {
-        //             caliberNew.data[i][j][11].splice(0);
-        //         }
-        //         if (Array.isArray(caliberNew.data[i][j][9])) {
-        //             caliberNew.data[i][j][9].splice(0);
-        //         }
-        //     }
-        // }
+        for (let i = 2; i <= 3; i++) {
+            for (let j = 0; j <= 3; j++) {
+                if (Array.isArray(caliberNew.data[i][j][11])) {
+                    caliberNew.data[i][j][11].splice(0);
+                }
+                if (Array.isArray(caliberNew.data[i][j][9])) {
+                    caliberNew.data[i][j][9].splice(0);
+                }
+            }
+        }
         caliberNew.log.Users.forEach(element => {
             delete element.QuestCounters;
         });
@@ -47,15 +47,15 @@ window.addEventListener('DOMContentLoaded', () => {
     let caliber = caliberFunc(caliberImport01, caliberImport02);
 
     //const result = {
-        for (let q = 2; q < 4; q++) {
-        data: [
-          caliber.data[q].sort((a, b) => a[8][1].slice(-1).localeCompare(b[8][1].slice(-1))),
-          caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'a').sort((a, b) => a[8][1].localeCompare(b[8][1])),
-          caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'g').sort((a, b) => a[8][1].localeCompare(b[8][1])),
-          caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'm').sort((a, b) => a[8][1].localeCompare(b[8][1])),
-          caliber.data[q].filter(obj => obj[8][1].slice(-1) === 's').sort((a, b) => a[8][1].localeCompare(b[8][1])),
-        ]
-    }
+    //     for (let q = 2; q < 4; q++) {
+    //     data: [
+    //       caliber.data[q].sort((a, b) => a[8][1].slice(-1).localeCompare(b[8][1].slice(-1))),
+    //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'a').sort((a, b) => a[8][1].localeCompare(b[8][1])),
+    //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'g').sort((a, b) => a[8][1].localeCompare(b[8][1])),
+    //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'm').sort((a, b) => a[8][1].localeCompare(b[8][1])),
+    //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 's').sort((a, b) => a[8][1].localeCompare(b[8][1])),
+    //     ]
+    // }
 
     console.log('CALIBER_DATAS - ', caliber);
 
