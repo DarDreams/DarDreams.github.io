@@ -57,6 +57,13 @@ window.addEventListener('DOMContentLoaded', () => {
     //     ]
     // }
 
+    caliber.data[2].sort((a, b) => {
+        const lastLetterA = a[8][1].slice(-1);
+        const lastLetterB = b[8][1].slice(-1);
+        return lastLetterA.localeCompare(lastLetterB);
+      });
+      
+
     console.log('CALIBER_DATAS - ', caliber);
 
     /* #region  OLD VERSION */
