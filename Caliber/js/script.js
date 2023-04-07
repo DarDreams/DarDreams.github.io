@@ -56,12 +56,13 @@ window.addEventListener('DOMContentLoaded', () => {
     //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 's').sort((a, b) => a[8][1].localeCompare(b[8][1])),
     //     ]
     // }
-
-    caliber.data[2].sort((a, b) => {
-        const lastLetterA = a[8][1].slice(-1);
-        const lastLetterB = b[8][1].slice(-1);
-        return lastLetterA.localeCompare(lastLetterB);
-      });
+    for (let p = 2; p < 4; p++) {
+        caliber.data[p].sort((a, b) => {
+            const lastLetterA = a[8][1].slice(-1);
+            const lastLetterB = b[8][1].slice(-1);
+            return lastLetterA.localeCompare(lastLetterB);
+        });
+    }
       
 
     console.log('CALIBER_DATAS - ', caliber);
@@ -125,13 +126,13 @@ window.addEventListener('DOMContentLoaded', () => {
             Эффективная дистанция основного оружия: -15%`
         ],
 
-        "stay_frosty": ["Хладнокровие",
-            `Когда оперативник находится под действием любого отрициательного
-            эффекта, он получает меньше
-            урона от пуль.
-        
-            Снижение урона: -10/12/15%`
-        ],
+        "stay_frosty": ["Готовность",
+            `Когда враг находится ближе 4/5/6
+            метров оп оперативника, оперативник
+            наносит ему больше урона основным и дополнительным оружием.
+            
+            Увеличение урона: +10/12/15%
+        `],
 
         "null": ["Нет", "Оперативник не прокачал этот тип навыка"],
 
