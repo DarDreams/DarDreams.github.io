@@ -400,7 +400,7 @@ window.addEventListener('DOMContentLoaded', () => {
             Стоимость применения рывка: 
             -15/20/25%.`
         ],
-        "lightweight_armor": ["",""],
+         "lightweight_armor": ["",""],
         "combined_armor": ["Комбинированые пластины",
             `Бронепластины с антисептическим
             слоем. При использовании резерва
@@ -438,8 +438,8 @@ window.addEventListener('DOMContentLoaded', () => {
             Скорострельность: +0.1/О.15/0.2 в/сек.`
         ],
 
-        "field_medicine": ["",
-            ``
+        "field_medicine": ["Полевая медицина",
+            `Не нашел этот навык`
         ],
         "fireres_materials": ["Герметичные материалы",
             ``
@@ -1120,6 +1120,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 /* #endregion */
 
                 /* #region  INPUT TABLE OPERATORS */
+                              
+
                 document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('beforeend', `
             
                 <tr class = 'line ${operator.role}'>
@@ -1148,10 +1150,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 <td data-gr = "${operator.group}" class = "groups">
                 ${operator.group}
                     <div class = "perks">
-                        <svg class="perk _1"><title>${perksRus[operator.perks[0]][0]}</title><use xlink:href="#${operator.perks[0]}"></use></svg>
-                        <svg class="perk _2"><title>${perksRus[operator.perks[1]][0]}</title><use xlink:href="#${operator.perks[1]}"></use></svg>
-                        <svg class="perk _3"><title>${perksRus[operator.perks[2]][0]}</title><use xlink:href="#${operator.perks[2]}"></use></svg>
-                        <svg class="perk _4"><title>${perksRus[operator.perks[3]][0]}</title><use xlink:href="#${operator.perks[3]}"></use></svg>
+                        <svg class="perk _1"><title>${operator.perks[0] in perksRus ? perksRus[operator.perks[0]][0] : operator.perks[0]}</title><use xlink:href="#${operator.perks[0]}"></use></svg>
+                        <svg class="perk _2"><title>${operator.perks[1] in perksRus ? perksRus[operator.perks[1]][0] : operator.perks[1]}</title><use xlink:href="#${operator.perks[1]}"></use></svg>
+                        <svg class="perk _3"><title>${operator.perks[2] in perksRus ? perksRus[operator.perks[2]][0] : operator.perks[2]}</title><use xlink:href="#${operator.perks[2]}"></use></svg>
+                        <svg class="perk _4"><title>${operator.perks[3] in perksRus ? perksRus[operator.perks[3]][0] : operator.perks[3]}</title><use xlink:href="#${operator.perks[3]}"></use></svg>
                     </div>
                 </td>
                 <td class = "kills"  >${operator.kills}</td>
