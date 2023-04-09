@@ -46,16 +46,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let caliber = caliberFunc(caliberImport01, caliberImport02);
 
-    //const result = {
-    //     for (let q = 2; q < 4; q++) {
-    //     data: [
-    //       caliber.data[q].sort((a, b) => a[8][1].slice(-1).localeCompare(b[8][1].slice(-1))),
-    //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'a').sort((a, b) => a[8][1].localeCompare(b[8][1])),
-    //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'g').sort((a, b) => a[8][1].localeCompare(b[8][1])),
-    //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 'm').sort((a, b) => a[8][1].localeCompare(b[8][1])),
-    //       caliber.data[q].filter(obj => obj[8][1].slice(-1) === 's').sort((a, b) => a[8][1].localeCompare(b[8][1])),
-    //     ]
-    // }
     for (let p = 2; p < 4; p++) {
         caliber.data[p].sort((a, b) => {
             const lastLetterA = a[8][1].slice(-1);
@@ -63,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
             return lastLetterA.localeCompare(lastLetterB);
         });
     }
-      
+
 
     console.log('CALIBER_DATAS - ', caliber);
 
@@ -105,7 +95,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  PERK RUS */
     const perksRus = {
-        "adrenaline_rush":["Андреналин Раш","Хз что это пока что :-)"],
+        "adrenaline_rush": ["Андреналин Раш", "Хз что это пока что :-)"],
         "expansive_bullets": ["Экспансивные пули",
             `Попадание по противнику из
             основного оружия повышает
@@ -400,7 +390,7 @@ window.addEventListener('DOMContentLoaded', () => {
             Стоимость применения рывка: 
             -15/20/25%.`
         ],
-         "lightweight_armor": ["",""],
+        "lightweight_armor": ["", ""],
         "combined_armor": ["Комбинированые пластины",
             `Бронепластины с антисептическим
             слоем. При использовании резерва
@@ -709,32 +699,32 @@ window.addEventListener('DOMContentLoaded', () => {
         <th>УРОН</th>
         <th>ПОЛУЧЕНИЕ</th>`);
             for (let i = 0; i <= 3; i++) {
-                
-               // console.dir(`${data1[2][0][8][1].slice(-1)}niper`);
+
+                // console.dir(`${data1[2][0][8][1].slice(-1)}niper`);
                 if (k == 2) {
-                       operLoop = ['assault', 'gunner', 'medic', 'sniper'];
-                    
+                    operLoop = ['assault', 'gunner', 'medic', 'sniper'];
+
                 }
                 //operLoop = [];
-                   
 
-                  //  for (let i = 0 ; i < 4; i++) {
-                    
-                          
-                         // operLoop = ['assault', 'gunner', 'medic', 'sniper'];
-                
-                
+
+                //  for (let i = 0 ; i < 4; i++) {
+
+
+                // operLoop = ['assault', 'gunner', 'medic', 'sniper'];
+
+
                 if (k == 3) {
-                   // operLoop = [];
-                   // for (let i = 0 ; i < 4; i++) {
-                     
+                    // operLoop = [];
+                    // for (let i = 0 ; i < 4; i++) {
+
                     //}
                     operLoop = ['assaultR', 'gunnerR', 'medicR', 'sniperR'];
-                 //   operLoop = [`${data1[2][0][8][1].slice(-1)}niper`,`${data1[2][1][8][1].slice(-1)}niper`,`${data1[2][2][8][1].slice(-1)}niper`,`${data1[2][3][8][1].slice(-1)}niper`];
+                    //   operLoop = [`${data1[2][0][8][1].slice(-1)}niper`,`${data1[2][1][8][1].slice(-1)}niper`,`${data1[2][2][8][1].slice(-1)}niper`,`${data1[2][3][8][1].slice(-1)}niper`];
                 }
                 //console.dir(operLoop);
                 /* #region  OPER */
-                
+
                 let roleName;
 
                 function oper(collection) {
@@ -990,9 +980,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 }
                 /* #endregion */;
-               // console.log(data1[k][i][16]);
-                 if (!data1[k][i][16]) {
-                    data1[k][i][16] = [0,0,0];
+                // console.log(data1[k][i][16]);
+                if (!data1[k][i][16]) {
+                    data1[k][i][16] = [0, 0, 0];
                 };
                 // console.log(data1[k][i][16][2]);
                 const operator = {
@@ -1120,7 +1110,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 /* #endregion */
 
                 /* #region  INPUT TABLE OPERATORS */
-                              
+
 
                 document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('beforeend', `
             
@@ -1173,12 +1163,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 const perks = document.querySelectorAll(`.team${k - 1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
 
                 perks.forEach(function (s) {
-                    s.addEventListener('mousedown', function(event) {
-                      showHint(s, data1[k][i], event.pageX, event.pageY);
+                    s.addEventListener('mousedown', function (event) {
+                        showHint(s, data1[k][i], event.pageX, event.pageY);
                     });
-                  });
+                });
 
-                  function showHint(selector, ...spread) {
+                function showHint(selector, ...spread) {
                     const element = selector;
                     const hint = document.createElement('div');
                     hint.classList.add('hint');
@@ -1194,7 +1184,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                         // let lvlPerks = spread[0][20][0].find(key => key.includes(spread[0][8][15]));
                         // lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
-                        
+
                         hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g, "<br>");
 
                         // console.log(spread[0][8][15][0]);
@@ -1225,11 +1215,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     document.body.addEventListener('mouseup', function () {
                         hint.remove();
-                      });
-                    
-                      document.addEventListener('mouseup', function () {
+                    });
+
+                    document.addEventListener('mouseup', function () {
                         hint.remove();
-                      });
+                    });
                     // element.addEventListener('mousedown', function(event) {
                     //     console.log(event.target.parentElement);
                     //     const x = event.pageX;// - element.offsetLeft;
@@ -1244,11 +1234,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     //     // Получить текущие координаты курсора
                     //     const x = e.clientX;
                     //     const y = e.clientY;
-                        
+
                     //     // Установить позицию .hint относительно координат курсора
                     //     hint.style.left = `${x + 10}px`;
                     //     hint.style.top = `${y + 10}px`;
-                        
+
                     //     // Показать .hint
                     //     console.log(e.target);
                     //     hint.style.display = 'block';
@@ -1802,13 +1792,13 @@ window.addEventListener('DOMContentLoaded', () => {
             // caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0], caliber_b2.Log.Users[1], caliber_b2.Log.Users[2], caliber_b2.Log.Users[3]]
             // caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
             // caliber_b2.Log.Users.splice(2);
-            
+
             let caliber_file = caliberFunc(caliber_b, caliber_b2)
-                document.querySelectorAll('.points').forEach(item => {
-                    item.remove();
-                })
-                upload(caliber_file.data, caliber_file.log);
-            
+            document.querySelectorAll('.points').forEach(item => {
+                item.remove();
+            })
+            upload(caliber_file.data, caliber_file.log);
+
             //saveData();
         }
         saveData(createdDate);
@@ -1865,34 +1855,34 @@ window.addEventListener('DOMContentLoaded', () => {
         const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
         const day = `${setZero(createdDate.getDate())}:${setZero(createdDate.getMonth() + 1)}.${createdDate.getFullYear()}`;
         if (localStorage.getItem('rec') == 'true') {
-           // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
-           localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
+            // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
+            localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
         }
     }
 
 
 
     //try {
-        saveData(new Date());
+    //saveData(new Date());
     // } catch (e) {
     //     console.error("Ошибка в функции SaveData - ", e.message);
     // }
     /* #endregion */
-try {
-    document.querySelector('.geo').addEventListener('click',() => {
-        let map = caliber.data[1].split('_').slice(1, -1).join('_');
-       // window.open(`https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${map}_hacking.png`, "_blank");
-       if (!document.querySelector('.imgMap')) {
-        document.body.insertAdjacentHTML('afterbegin',`
+    try {
+        document.querySelector('.geo').addEventListener('click', () => {
+            let map = caliber.data[1].split('_').slice(1, -1).join('_');
+            // window.open(`https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${map}_hacking.png`, "_blank");
+            if (!document.querySelector('.imgMap')) {
+                document.body.insertAdjacentHTML('afterbegin', `
             <img class="imgMap" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${map}_hacking.png">
             `);
-       } else document.querySelector('.imgMap').remove();
-        //$('.imgMap').fadeToggle(1000);
-    })
-}
-catch (e) {
-    console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);
-}
+            } else document.querySelector('.imgMap').remove();
+            //$('.imgMap').fadeToggle(1000);
+        })
+    }
+    catch (e) {
+        console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);
+    }
 
     // document.querySelector('#show-panel').insertAdjacentHTML('afterbegin',`
     // <iframe src="https://caliberfan.ru/support/rekruit/#col-12 col-md-3 col-lg-3"></iframe>
@@ -1908,38 +1898,38 @@ catch (e) {
     //         return res
     //     });
     // }
-  
+
     function summRank(selector) {
         let rank = 0;
         document.querySelectorAll(`.${selector} > tbody > tr > td > span.rank`).forEach(element => {
-          rank += +element.textContent;
+            rank += +element.textContent;
         });
-        document.querySelector(`.different`).insertAdjacentHTML('beforeend',`
+        document.querySelector(`.different`).insertAdjacentHTML('beforeend', `
             <span class='${selector}Diff'>${rank}</span>
         `)
         //return rank;
-      }
-    
+    }
+
     function different() {
         const team1Diff = +document.querySelector('.team1TableDiff').textContent;
         const team2Diff = +document.querySelector('.team2TableDiff').textContent;
-        document.querySelector(`.team1TableDiff`).insertAdjacentHTML('afterend',`
+        document.querySelector(`.team1TableDiff`).insertAdjacentHTML('afterend', `
             <span class='diffTeams'>${Math.abs(team1Diff - team2Diff)}</span>
         `);
         let max = Math.max(+team1Diff, +team2Diff);
         //console.log(diff);
         //document.querySelector(`span:contains('2444')`)
-        $(`span:contains('${max}')`).css('color', '#c49a30');  ;
-    } 
-      
+        $(`span:contains('${max}')`).css('color', '#c49a30');;
+    }
+
     summRank('team1Table');
     summRank('team2Table');
     different();
 
 
-    window.onload = function() {
+    window.onload = function () {
         document.querySelector('.container_tables').classList.add('animate__zoomIn')
-        
+
         document.querySelector('.container_tables').style.opacity = "1";
         document.querySelector('.vLoading').style.display = 'none';
         document.querySelector('.winLose').style.display = '';
@@ -1955,6 +1945,7 @@ catch (e) {
     }
 
 
+    /* #region  SOUNDS */
     function sounds() {
         const tr = document.querySelectorAll('.line');
         tr.forEach(element => {
@@ -1962,7 +1953,7 @@ catch (e) {
                 const audio = new Audio('../mp3/menu.mp3');
                 audio.volume = 0.1;
                 audio.play();
-                })
+            })
         })
 
         const points = document.querySelectorAll('.points');
@@ -1971,7 +1962,7 @@ catch (e) {
                 const audio = new Audio('../mp3/move.mp3');
                 audio.volume = 0.1;
                 audio.play();
-                })
+            })
         })
 
         document.body.addEventListener('mousedown', () => {
@@ -1983,26 +1974,41 @@ catch (e) {
         });
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
     }
-
-    sounds()
-    
-    /* #region  AJAX UPDATE DATABASE */
-    // function updateDB() {
-    //     $.ajax({
-    //         url: '../query.php', // адрес вашего сервера
-    //         type: 'POST', // метод запроса
-    //         data: JSON.stringify(caliber), // данные, которые нужно отправить на сервер
-    //         contentType: "application/json; charset=utf-8",
-    //         dataType: "json", // тип данных, которые отправляем
-    //         success: function (response) {
-    //             console.log('Данные успешно обновлены');
-    //             console.log(response); // ответ от сервера
-    //         },
-    //         error: function (error) {
-    //             console.error('Ошибка при обновлении данных');
-    //             console.error(error); // сообщение об ошибке
-    //         }
-    //     });
-    // }
     /* #endregion */
+ 
+    sounds()
+    /* #region  AJAX UPDATE DATABASE */
+    
+    function updateDB() {
+        var data = {
+          caliber: caliber,
+          metadata: {
+            mapName: "DEPO",
+            result: "Victory",
+            createdAt: new Date().toLocaleString(),
+            gameMode: "HACKING"
+          }
+        };
+      
+        $.ajax({
+          url: '/php/query.php',
+          type: 'POST',
+          data: JSON.stringify(data), // передаем объект data в виде JSON-строки
+          contentType: 'application/json', // устанавливаем тип контента
+          success: function (response) {
+            console.log('Данные успешно обновлены');
+            console.log(response);
+          },
+          error: function (error) {
+            console.error('Ошибка при обновлении данных');
+            console.error(error);
+          }
+        });
+      }
+      
+    
+    
+    
+    /* #endregion */
+    updateDB();
 });
