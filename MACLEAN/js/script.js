@@ -277,12 +277,12 @@ $(document).ready(function () {
 
 
 			document.body.insertAdjacentHTML('afterbegin', `
-		<div style = "opacity:0" class = 'carrito'>
-		<div class='container'>
-		</div>
-			<span class = 'total'>TOTAL  = </span>
-			<button id = "checkout-button" class = 'comprarOfCarrito'>Finalizar pedido</button>
-	`);
+			<!--	<div style = "opacity:0" class = 'carrito'> 
+				<div class='container'>
+				</div>
+				<span class = 'total'>TOTAL  = </span>
+				<button id = "checkout-button" class = 'comprarOfCarrito'>Finalizar pedido</button>-->
+			`);
 
 			let todo = 0;
 
