@@ -46,13 +46,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let caliber = caliberFunc(caliberImport01, caliberImport02);
 
-    for (let p = 2; p < 4; p++) {
-        caliber.data[p].sort((a, b) => {
-            const lastLetterA = a[8][1].slice(-1);
-            const lastLetterB = b[8][1].slice(-1);
-            return lastLetterA.localeCompare(lastLetterB);
-        });
-    }
+
+    /* #region  SORT OPERATORS */
+    caliber.data[2].sort((a, b) => {
+        const lastLetterA = a[8][1].slice(-1);
+        const lastLetterB = b[8][1].slice(-1);
+        return lastLetterA.localeCompare(lastLetterB);
+    });
+    
+    caliber.data[3].sort((a, b) => {
+        const lastLetterA = a[8][1].slice(-1);
+        const lastLetterB = b[8][1].slice(-1);
+        return lastLetterA.localeCompare(lastLetterB);
+    });
+    
+    /* #endregion */
+
+
+
 
 
     console.log('CALIBER_DATAS - ', caliber);
@@ -1975,37 +1986,37 @@ window.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
     }
     /* #endregion */
- 
+
     sounds()
     /* #region  AJAX UPDATE DATABASE */
-    
+
     function updateDB(map, res, mode) {
         var data = {
-          caliber: caliber,
-          metadata: {
-            mapName: map,
-            result: res,
-            createdAt: new Date().toLocaleString(),
-            gameMode: mode
-          }
+            caliber: caliber,
+            metadata: {
+                mapName: map,
+                result: res,
+                createdAt: new Date().toLocaleString(),
+                gameMode: mode
+            }
         };
-      
+
         $.ajax({
-          url: '/php/query.php',
-          type: 'POST',
-          data: JSON.stringify(data), // передаем объект data в виде JSON-строки
-          contentType: 'application/json', // устанавливаем тип контента
-          success: function (response) {
-            console.log('Данные успешно обновлены');
-            console.log(response);
-          },
-          error: function (error) {
-            console.error('Ошибка при обновлении данных');
-            console.error(error);
-          }
+            url: '/php/query.php',
+            type: 'POST',
+            data: JSON.stringify(data), // передаем объект data в виде JSON-строки
+            contentType: 'application/json', // устанавливаем тип контента
+            success: function (response) {
+                console.log('Данные успешно обновлены');
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Ошибка при обновлении данных');
+                console.error(error);
+            }
         });
-      }
-    
+    }
+
     /* #endregion */
-    updateDB("DEPO","WIN", "HACKING");
+    updateDB("DEPO", "WIN", "HACKING");
 });
