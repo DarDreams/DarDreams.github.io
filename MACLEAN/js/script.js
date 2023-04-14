@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	const mediaQuery768 = window.matchMedia('(max-width: 768px)');
+	const mediaQuery1900 = window.matchMedia('(max-width: 1900px)');
 	let cards = {};
 	axios.get('db.json')
 		.then(function (response) {
@@ -376,22 +377,28 @@ $(document).ready(function () {
 			$('button.slick-next').html("&#10154;");
 			$('button.slick-prev').html("&#10154;");
 
+			mediaQuery1900.addListener(function() {
+				$(".productos__items").slick({
+					waitForAnimate: false,
+					waitForLoad: true,
+					//lazyLoad: 'ondemand',
+					//initialSlide: 0,
+					slidesToScroll: 1,
+					slidesToShow: 3,
+					arrows: true,
+					//autoplaySpeed: 1,
+					draggable: false,
+					rows: 2,
+					infinite: false
+				});
+			});
+
 			if (mediaQuery768.matches) {
 				let productosItems = $(".productos__items");
 				if (productosItems.hasClass('slick-initialized')) {
 					productosItems.slick('unslick');
 				}
 				productosItems.slick({
-					// vertical: true,
-					// touchMove: true,
-					// rows: 1,
-					// slidesToShow: 1,
-					// swipe: true,
-					// swipeToSlide: true,
-					// verticalSwiping: true,
-					// swipeDirection: 'vertical',
-					// arrows: false,
-					// infinite: false
 					vertical: true,
 					touchMove: true,
 					rows: 1,
