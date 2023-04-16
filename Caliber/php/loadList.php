@@ -38,6 +38,20 @@ if ($handle = opendir($dir)) {
     closedir($handle);
 }
 
+// Получаем выбранную дату из запроса
+$date = $_POST['date'];
+
+// Создаем новый объект с id, соответствующим выбранной дате
+$newFile = array(
+    "name" => "file_" . $date, // имя файла может быть произвольным, здесь примерное значение
+    "result" => "",
+    "map" => "",
+    "created" => date("d.m.Y H:i:s", time()) // текущая дата и время
+);
+
+// Добавляем новый объект в массив $fileList
+$fileList[] = $newFile;
+
 // выводим список файлов в формате JSON
 echo json_encode($fileList);
 ?>

@@ -48,18 +48,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     /* #region  SORT OPERATORS */
-    caliber.data[2].sort((a, b) => {
-        const lastLetterA = a[8][1].slice(-1);
-        const lastLetterB = b[8][1].slice(-1);
-        return lastLetterA.localeCompare(lastLetterB);
-    });
-    
-    caliber.data[3].sort((a, b) => {
-        const lastLetterA = a[8][1].slice(-1);
-        const lastLetterB = b[8][1].slice(-1);
-        return lastLetterA.localeCompare(lastLetterB);
-    });
-    
+    // caliber.data[2].sort((a, b) => {
+    //     const lastLetterA = a[8][1].slice(-1);
+    //     const lastLetterB = b[8][1].slice(-1);
+    //     return lastLetterA.localeCompare(lastLetterB);
+    // });
+
+    // caliber.data[3].sort((a, b) => {
+    //     const lastLetterA = a[8][1].slice(-1);
+    //     const lastLetterB = b[8][1].slice(-1);
+    //     return lastLetterA.localeCompare(lastLetterB);
+    // });
+
     /* #endregion */
 
 
@@ -1648,97 +1648,112 @@ window.addEventListener('DOMContentLoaded', () => {
                     date++;
                     // Назначаем обработчик клика на ячейку
 
+                    function formatDate(date) {
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        return day + '.' + month + '.' + year;
+                    }
+
                     cell.addEventListener("click", function () {
-                        const listContainer = document.getElementById('list-container');
-                        const keys = Object.keys(localStorage);
+                        
+                        var selectedDate = new Date(2023, month_selector.value - 1, 1);
+                        var formattedDate = formatDate(selectedDate);
+                        updateFileList(formattedDate);
 
-                        listContainer.innerHTML = '';
-                        keys.forEach(key => {
-                            //console.log(key);
-                            if (key == 'rec') {
-                                return
-                            };
-                            // console.log(`(${setZero(this.textContent)} == ${key.match(/\d+/g)[0]} && ${setZero(month_selector.value)} == ${key.match(/\d+/g)[1]}`);
-                            if (setZero(this.textContent) == key.match(/\d+/g)[0] && setZero(month_selector.value) == key.match(/\d+/g)[1]) {
-                                const listItem = document.createElement('li');
-                                listItem.textContent = key;
-                                listItem.addEventListener('click', (e) => {
-                                    //e.path[1].classList.add('disabled');
-                                    document.querySelectorAll('#list-container > li').forEach((element) => {
-                                        // element.classList.remove('disabled');
-                                    })
-                                    // e.path[1].classList.add('disabled');
-                                    myFunction(key);
+                        /* #region  OLD CLICK CALENDAR */
+                        // const listContainer = document.getElementById('list-container');
+                        // const keys = Object.keys(localStorage);
 
-                                });
-                                const date = listItem.textContent.split(' ')[0];
-                                const id = listItem.textContent.split(' ')[1];
-                                const win = listItem.textContent.split(' ')[2];
-                                const map = listItem.textContent.split(' ')[3];
-                                const time = `${new Date().getHours()}:${new Date().getMinutes()}`;
-                                listItem.innerHTML = `${id} ${map} Столкновение ${win} ${date}`;
-                                listContainer.appendChild(listItem);
-                                const words = listItem.textContent.split(' ');
-                                listItem.textContent = '';
+                        // listContainer.innerHTML = '';
+                        // keys.forEach(key => {
+                        //     //console.log(key);
+                        //     if (key == 'rec') {
+                        //         return
+                        //     };
+                        //     // console.log(`(${setZero(this.textContent)} == ${key.match(/\d+/g)[0]} && ${setZero(month_selector.value)} == ${key.match(/\d+/g)[1]}`);
+                        //     console.log(key.match(/\d+/g)[0]);
+                        //     if (setZero(this.textContent) == key.match(/\d+/g)[0] && setZero(month_selector.value) == key.match(/\d+/g)[1]) {
+                        //         const listItem = document.createElement('li');
+                        //         listItem.textContent = key;
+                        //         listItem.addEventListener('click', (e) => {
+                        //             //e.path[1].classList.add('disabled');
+                        //             document.querySelectorAll('#list-container > li').forEach((element) => {
+                        //                 // element.classList.remove('disabled');
+                        //             })
+                        //             // e.path[1].classList.add('disabled');
+                        //             myFunction(key);
 
-                                for (let i = 0; i < words.length; i++) {
-                                    const span = document.createElement('span');
-                                    span.textContent = words[i];
-                                    listItem.appendChild(span);
-                                }
-                                //listContainer.appendChild(item);
-                            }
-                        });
-                        const listItems = document.querySelectorAll('#list-container > li');
-                        listItems.forEach(item => {
-                            const lastSpan = item.querySelector('span:last-child');
-                            const firstSpan = item.querySelector('span:first-child');
-                            firstSpan.insertAdjacentHTML('afterbegin', `
-                                <svg class='star' viewBox="281.634 158.464 106.675 70" width="106.675" height="70">
-                                <defs>
-                                    <mask id="mask" x="0" y="0" width="69" height="69">
-                                    <rect x="278.691" y="158.464" width="69" height="69" fill="white"></rect>
-                                    <path d="M 294.111 189.782 L 302.188 189.782 L 304.683 182.109 L 307.179 189.782 L 315.256 189.782 L 308.722 194.524 L 311.218 202.197 L 304.683 197.455 L 298.149 202.197 L 300.645 194.524 L 294.111 189.782 Z" fill="black"></path>
-                                    </mask>
-                                </defs>
-                                <g class="layer" transform="matrix(1, 0, 0, 1, 319.590825, 158.343768)" height="70&quot; class=&quot;layer">
-                                    <title>Layer 1</title>
-                                    <path d="m-0.20636,0.12021l68.92459,0l-0.12566,34.50001l0.12566,34.50016l-68.92459,0l15.4421,-34.50016l-15.4421,-34.50001z" fill="#9f9f9f" id="svg_1" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" transform="rotate(-180 34.2559 34.6203)"></path>
-                                </g>
-                                <rect width="70" height="70" fill="#9f9f9f" mask="url(#mask)" x="281.634" y="158.464"></rect>
-                                </svg>
-                            `)
-                            lastSpan.insertAdjacentHTML('beforeend', '<img class="basket" src="img/basket.png"></img>');
+                        //         });
+                        //         const date = listItem.textContent.split(' ')[0];
+                        //         const id = listItem.textContent.split(' ')[1];
+                        //         const win = listItem.textContent.split(' ')[2];
+                        //         const map = listItem.textContent.split(' ')[3];
+                        //         const time = `${new Date().getHours()}:${new Date().getMinutes()}`;
+                        //         listItem.innerHTML = `${id} ${map} Столкновение ${win} ${date}`;
+                        //         listContainer.appendChild(listItem);
+                        //         const words = listItem.textContent.split(' ');
+                        //         listItem.textContent = '';
 
-                            /* #region  AJAX UPLOAD DB */
-                            // $.ajax({
-                            //     url: 'games.json',
-                            //     dataType: 'json',
-                            //     success: function (db) {
-                            //     },
-                            //     error: function () {
-                            //         console.log("База данных не найдена");
-                            //     }
-                            // });
-                            /* #endregion */
+                        //         for (let i = 0; i < words.length; i++) {
+                        //             const span = document.createElement('span');
+                        //             span.textContent = words[i];
+                        //             listItem.appendChild(span);
+                        //         }
+                        //         //listContainer.appendChild(item);
+                        //     }
+                        // });
+                        // const listItems = document.querySelectorAll('#list-container > li');
+                        // listItems.forEach(item => {
+                        //     const lastSpan = item.querySelector('span:last-child');
+                        //     const firstSpan = item.querySelector('span:first-child');
+                        //     firstSpan.insertAdjacentHTML('afterbegin', `
+                        //         <svg class='star' viewBox="281.634 158.464 106.675 70" width="106.675" height="70">
+                        //         <defs>
+                        //             <mask id="mask" x="0" y="0" width="69" height="69">
+                        //             <rect x="278.691" y="158.464" width="69" height="69" fill="white"></rect>
+                        //             <path d="M 294.111 189.782 L 302.188 189.782 L 304.683 182.109 L 307.179 189.782 L 315.256 189.782 L 308.722 194.524 L 311.218 202.197 L 304.683 197.455 L 298.149 202.197 L 300.645 194.524 L 294.111 189.782 Z" fill="black"></path>
+                        //             </mask>
+                        //         </defs>
+                        //         <g class="layer" transform="matrix(1, 0, 0, 1, 319.590825, 158.343768)" height="70&quot; class=&quot;layer">
+                        //             <title>Layer 1</title>
+                        //             <path d="m-0.20636,0.12021l68.92459,0l-0.12566,34.50001l0.12566,34.50016l-68.92459,0l15.4421,-34.50016l-15.4421,-34.50001z" fill="#9f9f9f" id="svg_1" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" transform="rotate(-180 34.2559 34.6203)"></path>
+                        //         </g>
+                        //         <rect width="70" height="70" fill="#9f9f9f" mask="url(#mask)" x="281.634" y="158.464"></rect>
+                        //         </svg>
+                        //     `)
+                        //     lastSpan.insertAdjacentHTML('beforeend', '<img class="basket" src="img/basket.png"></img>');
 
-                            const imgBasket = document.querySelectorAll('.basket')
-                            imgBasket.forEach(function (item) {
-                                item.addEventListener('click', (e) => {
-                                    console.log(e.target.parentElement.parentElement);
-                                    e.target.parentElement.parentElement.remove();
-                                    //console.log(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0]);
-                                    localStorage.removeItem(Object.keys(localStorage).
-                                        find(key => key.includes(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0])));
-                                });
-                            });
+                        //     /* #region  AJAX UPLOAD DB */
+                        //     // $.ajax({
+                        //     //     url: 'games.json',
+                        //     //     dataType: 'json',
+                        //     //     success: function (db) {
+                        //     //     },
+                        //     //     error: function () {
+                        //     //         console.log("База данных не найдена");
+                        //     //     }
+                        //     // });
+                        //     /* #endregion */
 
-                        });
+                        //     const imgBasket = document.querySelectorAll('.basket')
+                        //     imgBasket.forEach(function (item) {
+                        //         item.addEventListener('click', (e) => {
+                        //             console.log(e.target.parentElement.parentElement);
+                        //             e.target.parentElement.parentElement.remove();
+                        //             //console.log(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0]);
+                        //             localStorage.removeItem(Object.keys(localStorage).
+                        //                 find(key => key.includes(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0])));
+                        //         });
+                        //     });
 
-                        function myFunction(key) {
-                            let data = JSON.parse(localStorage.getItem(key));
-                            upload(data[0], data[1]);
-                        }
+                        // });
+
+                        // function myFunction(key) {
+                        //     let data = JSON.parse(localStorage.getItem(key));
+                        //     upload(data[0], data[1]);
+                        // }
+                        /* #endregion */
                     });
                 }
                 row.appendChild(cell);
@@ -1751,6 +1766,27 @@ window.addEventListener('DOMContentLoaded', () => {
     month_selector.value = new Date().getMonth() + 1;
     //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
     generateCalendar(month_selector.value - 1, new Date().getFullYear());
+
+
+    /* #region  обновить список игр */
+    function updateFileList(date) {
+        // Отправляем POST-запрос на сервер
+        $.post("../php/loadList.php", { date: date }, function (data) {
+            // Парсим JSON-данные
+            var fileList = JSON.parse(data);
+
+            // Очищаем список файлов
+            $("#file-list").empty();
+
+            // Добавляем новые элементы в список файлов
+            for (var i = 0; i < fileList.length; i++) {
+                var file = fileList[i];
+                var listItem = $("<li>").text(file.name);
+                $("#file-list").append(listItem);
+            }
+        });
+    }
+    /* #endregion */
 
     month_selector.addEventListener('change', () => {
         generateCalendar(month_selector.value - 1, new Date().getFullYear());
