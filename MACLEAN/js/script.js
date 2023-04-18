@@ -217,7 +217,7 @@ $(document).ready(function () {
 			`)
 			/* #endregion */
 
-			/* #region  PRODUCOTS */
+			/* #region  PRODUCTS */
 			$(".logo").click(function () {
 				document.querySelector('.logo__roca').src = `img/LOGO3.png`;
 				//location.href = location.origin + '?rand=' + Math.random();
@@ -248,7 +248,7 @@ $(document).ready(function () {
 				</div>
 				<div class="item__back">
 					<h3 title = "${name} ${peso}" class = "caption">${name} ${peso}</h3>	
-					<p class = "description">${descr}</p>
+					<p class = "description" title ="${descr}">${descr}</p>
 					<p class = "ingredientes" title = "${ingredientes}">Ingredientes: ${ingredientes}</p>
 					<p class = "inf">INFORMACIÓN NUTRICIONAL:<br>
 					Valor medio 100g de producto.<br>
@@ -395,21 +395,21 @@ $(document).ready(function () {
 					slidesPerRow: 1,
 					infinite: false
 				});
-			} else if (mediaQuery1900.matches) {
-				//alert('');
-				$(".productos__items").slick({
-					waitForAnimate: false,
-					waitForLoad: true,
-					//lazyLoad: 'ondemand',
-					//initialSlide: 0,
-					slidesToScroll: 1,
-					slidesToShow: 3,
-					arrows: true,
-					//autoplaySpeed: 1,
-					draggable: false,
-					rows: 2,
-					infinite: false
-				});
+			// } else if (mediaQuery1900.matches) {
+			// 	//alert('');
+			// 	$(".productos__items").slick({
+			// 		waitForAnimate: false,
+			// 		waitForLoad: true,
+			// 		//lazyLoad: 'ondemand',
+			// 		//initialSlide: 0,
+			// 		slidesToScroll: 1,
+			// 		slidesToShow: 3,
+			// 		arrows: true,
+			// 		//autoplaySpeed: 1,
+			// 		draggable: false,
+			// 		rows: 2,
+			// 		infinite: false
+			// 	});
 			}
 			/* #endregion */
 
@@ -868,7 +868,7 @@ $(document).ready(function () {
 					descr: document.querySelector('#descr').value,
 					ingredientes: document.querySelector('#ingredientes').value,
 					img: document.querySelector('#img').value,
-					informacion: document.querySelector('#informacion').value,
+					informacion: document.querySelector('#informacion').value.split('.,'),
 					sellos: aplSellos,
 					precio: document.querySelector('#precio').value
 				});

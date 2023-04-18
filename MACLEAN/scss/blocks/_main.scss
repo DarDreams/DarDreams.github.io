@@ -36,6 +36,12 @@ body {
 // margin-top: -50px;
 // }
 
+.container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 240px);
+}
+
 .overlay {
     //outline: 1px ridge red;
     position: absolute;

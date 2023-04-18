@@ -109,14 +109,14 @@
     }
     .description {
         position: absolute;
+        text-transform: lowercase;
         top: 30px;
         font-size: 14px;
-        //width: 350px;
-        // height: 100px;
-        //white-space: nowrap; 
-        // overflow: hidden;
-        // text-overflow: ellipsis; 
-
+        display: -webkit-box; 
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3; 
     }
     .ingredientes {
         position: absolute;
@@ -253,7 +253,7 @@ button.slick-next {
     font-size: 50px;
     transition: transform 0.2s ease;
     &:hover {
-        transform: translateX(10px);
+        transform: translateX(5px);
     }
 
 }
@@ -271,7 +271,7 @@ button.slick-prev {
     font-size: 50px;
     transition: transform 0.2s ease;
     &:hover {
-        transform: rotate(180deg) translateX(10px);
+        transform: rotate(180deg) translateX(5px);
     }
 }
 
