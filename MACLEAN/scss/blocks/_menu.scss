@@ -7,6 +7,7 @@
 	z-index: 1;
 	//background: rgba(34,34,34,.2);
 	transition: var(--s) all;
+	text-transform:capitalize;
 	&__overlay {
 		position: fixed;
 		height: 250px;

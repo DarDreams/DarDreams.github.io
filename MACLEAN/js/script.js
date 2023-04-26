@@ -2,6 +2,7 @@ $(document).ready(function () {
 	const mediaQuery768 = window.matchMedia('(max-width: 768px)');
 	const mediaQuery1900 = window.matchMedia('(max-width: 1900px)');
 	let cards = {};
+	if (!localStorage.getItem("lang")) {localStorage.setItem("lang","es")};
 	axios.get('db.json')
 		.then(function (response) {
 			const data = response.data;
@@ -40,6 +41,69 @@ $(document).ready(function () {
 				});
 			}
 
+			let content = {
+				menu: ["inicio", "empresa", "productos", "contactos"],
+				footer:[`Empresa dedicada<Br>
+				a la fabricación de<Br>
+				conservas vegetales<br>
+				y platos preparados.`,"Inscríbete a nuestra newsletter infórmate de todos nuestros productos y novedades."],
+				inicio: `
+				<h2>
+					Estamos trabajando en la mejora de nuestro sitio web. En breve dispondremos de nuevos productos y contenidos. Disculpen las molestias.
+				</h2>
+				<br>
+				<h3 class="cap">Hummus  
+					«Creemos en trabajar por un mundo digno y justo, en el que la globalización suponga una oportunidad y no una amenaza.»
+				</h3>
+				<ul> 
+				<li>
+					Nacemos bajo la filosofía de ofrecer al consumidor un producto de calidad, elaborados con materia prima ecológica. Queremos contribuir con la producción de alimentos sanos, que promueva el bienestar de las personas y cuya producción apoye la expansión de la agricultura ecológica y de esta forma se genere un valor añadido en favor de todos los eslabones de la cadena de los productos, desde el campo hasta la mesa.
+				</li>
+				<br>
+				<li>
+					El objetivo es alcanzar una “calidad selecta de los productos”, utilizando materia prima con una calidad biológica insuperable, resaltando su sabor, proporcionando salud, nutrición y bienestar a través de una alimentación natural de la más alta calidad.
+				</li>
+				<br>
+				<li>
+					Nos basamos para nuestras elaboraciones en recetas tradicionales de nuestros antepasados, dándoles un toque de innovación e investigación introduciendo otros productos sustitutivos ( azúcar de abedul, eritritol), y aprovechar el poder de otros ( aloe vera, semillas de chía, jengibre…)
+				</li>
+				</ul>
+			`,
+				empresa: `
+				<ul>
+				<li>
+					La empresa almeriense Conservas Alborán nace bajo la filosofía de ofrecer al consumidor un  producto natural  de calidad,  resaltando su sabor, proporcionando salud, nutrición y bienestar  a través de una alimentación natural de la más alta calidad.
+				</li>
+				<br>
+				<li>
+					Se ofrecen diversas líneas de productos naturales, vegano – naturales  y artesanales mezclando la cocina tradicional con la cocina moderna. Se ofertan distintos productos en  conservas  (ensalada de tomate cherry y pimiento asado al carbón, sobrasada vegetal, morcilla vegetal, cebollitas francesas en vinagre balsámico..), sopas frías y calientes, jaleas ( jalea de aove, jalea de arándanos..), salsas de verduras, caracoles en salsa.
+				</li>
+				<br>
+				<li>
+					En Conservas Alborán comprendemos que las principales preocupaciones de los consumidores de hoy, es consumir productos saludables, sin derivados industriales pero con un exquisito sabor. Por ello, elaboramos de forma artesana, sin conservantes ni colorantes, sin gluten, sin lactosa y con sustitutos del azúcar 100% naturales ( azúcar de abedul..), por lo que la mayoría de  nuestros productos son también aptos para celiacos, diabéticos tipo 2, intolerantes a la lactosa y gran parte de ellos son aptos para personas que lleven una dieta vegetariana o vegana.
+				</li>
+				<br>
+				<li>
+					Nos basamos para nuestras elaboraciones en recetas tradicionales de nuestros antepasados, dándoles un toque de innovación e investigación introduciendo otros productos sustitutivos ( azúcar de abedul), y aprovechar el poder de otros ( semillas de chía).
+				</li>
+				</ul>
+			`
+			}
+
+			
+			function lang(selector,res) {
+				if (localStorage.getItem("lang") == "es") {
+					document.querySelector(selector).innerHTML = res;
+				} else {
+					translate(res).then(translatedText => {
+						document.querySelector(selector).innerHTML = translatedText;
+					}).catch(error => console.error(error));
+				}
+			}
+
+			for (let i = 0; i < 5; i++) {
+				lang(`.${content.menu[i]}_link`,content.menu[i])
+			}
 			/* #region  MENU */
 			function menuGoRight() {
 				if (mediaQuery768.matches) {
@@ -171,50 +235,26 @@ $(document).ready(function () {
 			/* #endregion */
 
 			/* #region  INICIO */
-			document.querySelector('.inicio> .container').insertAdjacentHTML('afterbegin', `
-				<h2>
-					Estamos trabajando en la mejora de nuestro sitio web. En breve dispondremos de nuevos productos y contenidos. Disculpen las molestias.
-				</h2>
-				<br>
-				<h3 class="cap">Hummus  
-					«Creemos en trabajar por un mundo digno y justo, en el que la globalización suponga una oportunidad y no una amenaza.»
-				</h3>
-				<ul> 
-				<li>
-					Nacemos bajo la filosofía de ofrecer al consumidor un producto de calidad, elaborados con materia prima ecológica. Queremos contribuir con la producción de alimentos sanos, que promueva el bienestar de las personas y cuya producción apoye la expansión de la agricultura ecológica y de esta forma se genere un valor añadido en favor de todos los eslabones de la cadena de los productos, desde el campo hasta la mesa.
-				</li>
-				<br>
-				<li>
-					El objetivo es alcanzar una “calidad selecta de los productos”, utilizando materia prima con una calidad biológica insuperable, resaltando su sabor, proporcionando salud, nutrición y bienestar a través de una alimentación natural de la más alta calidad.
-				</li>
-				<br>
-				<li>
-					Nos basamos para nuestras elaboraciones en recetas tradicionales de nuestros antepasados, dándoles un toque de innovación e investigación introduciendo otros productos sustitutivos ( azúcar de abedul, eritritol), y aprovechar el poder de otros ( aloe vera, semillas de chía, jengibre…)
-				</li>
-				</ul>
-			`)
+			lang('.inicio> .container', content.inicio)
+			// if (localStorage.getItem("lang") == "es") {
+			// 	document.querySelector('.inicio> .container').insertAdjacentHTML('afterbegin', content.inicio)
+			// } else {
+			// 	translate(content.inicio).then(translatedText => {
+			// 		document.querySelector('.inicio > .container').insertAdjacentHTML('afterbegin', translatedText);
+			// 	}).catch(error => console.error(error));
+			// }
 			/* #endregion */
 
 			/* #region  EMPRESA */
-			document.querySelector('.empresa >.container').insertAdjacentHTML('afterbegin', `
-				<ul>
-				<li>
-					La empresa almeriense Conservas Alborán nace bajo la filosofía de ofrecer al consumidor un  producto natural  de calidad,  resaltando su sabor, proporcionando salud, nutrición y bienestar  a través de una alimentación natural de la más alta calidad.
-				</li>
-				<br>
-				<li>
-					Se ofrecen diversas líneas de productos naturales, vegano – naturales  y artesanales mezclando la cocina tradicional con la cocina moderna. Se ofertan distintos productos en  conservas  (ensalada de tomate cherry y pimiento asado al carbón, sobrasada vegetal, morcilla vegetal, cebollitas francesas en vinagre balsámico..), sopas frías y calientes, jaleas ( jalea de aove, jalea de arándanos..), salsas de verduras, caracoles en salsa.
-				</li>
-				<br>
-				<li>
-					En Conservas Alborán comprendemos que las principales preocupaciones de los consumidores de hoy, es consumir productos saludables, sin derivados industriales pero con un exquisito sabor. Por ello, elaboramos de forma artesana, sin conservantes ni colorantes, sin gluten, sin lactosa y con sustitutos del azúcar 100% naturales ( azúcar de abedul..), por lo que la mayoría de  nuestros productos son también aptos para celiacos, diabéticos tipo 2, intolerantes a la lactosa y gran parte de ellos son aptos para personas que lleven una dieta vegetariana o vegana.
-				</li>
-				<br>
-				<li>
-					Nos basamos para nuestras elaboraciones en recetas tradicionales de nuestros antepasados, dándoles un toque de innovación e investigación introduciendo otros productos sustitutivos ( azúcar de abedul), y aprovechar el poder de otros ( semillas de chía).
-				</li>
-				</ul>
-			`)
+			lang('.empresa >.container', content.empresa)
+			// if (localStorage.getItem("lang") == "es") {
+			// 	document.querySelector('.empresa >.container').insertAdjacentHTML('afterbegin', content.empresa)
+			// } else {
+			// 	translate(content.empresa).then(translatedText => {
+			// 		document.querySelector('.empresa >.container').insertAdjacentHTML('afterbegin', translatedText);
+			// 	}).catch(error => console.error(error));
+			// }
+			//document.querySelector('.empresa >.container').insertAdjacentHTML('afterbegin', content.empresa)
 			/* #endregion */
 
 			/* #region  PRODUCTS */
@@ -328,6 +368,24 @@ $(document).ready(function () {
 			}
 			/* #endregion */
 
+			/* #region  FOOTER */
+			lang('.footer__text_left',content.footer[0]);
+			// if (localStorage.getItem("lang") == "es") {
+			// 	document.querySelector('.footer__text_left').innerHTML = content.footer[0];
+			// } else {
+			// 	translate(content.footer[0]).then(translatedText => {
+			// 		document.querySelector('.footer__text_left').innerHTML = translatedText;
+			// 	}).catch(error => console.error(error));
+			// }
+			lang(".footer__news_text",content.footer[1])
+			// if (localStorage.getItem("lang") == "es") {
+			// 	document.querySelector('.footer__text_left').innerHTML = content.footer[0];
+			// } else {
+			// 	translate(content.footer[0]).then(translatedText => {
+			// 		document.querySelector('.footer__text_left').innerHTML = translatedText;
+			// 	}).catch(error => console.error(error));
+			// }
+			/* #endregion */
 
 			/* #region  SLIDER MANUAL */
 			// function slider () {
@@ -395,21 +453,21 @@ $(document).ready(function () {
 					slidesPerRow: 1,
 					infinite: false
 				});
-			// } else if (mediaQuery1900.matches) {
-			// 	//alert('');
-			// 	$(".productos__items").slick({
-			// 		waitForAnimate: false,
-			// 		waitForLoad: true,
-			// 		//lazyLoad: 'ondemand',
-			// 		//initialSlide: 0,
-			// 		slidesToScroll: 1,
-			// 		slidesToShow: 3,
-			// 		arrows: true,
-			// 		//autoplaySpeed: 1,
-			// 		draggable: false,
-			// 		rows: 2,
-			// 		infinite: false
-			// 	});
+				// } else if (mediaQuery1900.matches) {
+				// 	//alert('');
+				// 	$(".productos__items").slick({
+				// 		waitForAnimate: false,
+				// 		waitForLoad: true,
+				// 		//lazyLoad: 'ondemand',
+				// 		//initialSlide: 0,
+				// 		slidesToScroll: 1,
+				// 		slidesToShow: 3,
+				// 		arrows: true,
+				// 		//autoplaySpeed: 1,
+				// 		draggable: false,
+				// 		rows: 2,
+				// 		infinite: false
+				// 	});
 			}
 			/* #endregion */
 
@@ -921,6 +979,28 @@ $(document).ready(function () {
 			// 		}
 			// 	});
 			// }, 1000);
+
+			function translate(textToTranslate) {
+				//var targetLanguage = 'en';
+				var targetLanguage = localStorage.getItem("lang");
+				var sourceLanguage = 'es';
+				var url = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw&q=' + encodeURIComponent(textToTranslate) + '&target=' + targetLanguage + '&source=' + sourceLanguage;
+
+				return fetch(url)
+					.then(response => response.json())
+					.then(data => {
+						var translatedText = data.data.translations[0].translatedText;
+						return translatedText;
+					})
+					.catch(error => console.error(error));
+			}
+
+
+
+
+			//   translate(content.inicio)
+			//   .then(result => console.log(result))
+			//   .catch(error => console.error(error));
 
 
 			/* #region  FORM CONTACTO */
