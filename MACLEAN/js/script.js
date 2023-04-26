@@ -2,7 +2,7 @@ $(document).ready(function () {
 	const mediaQuery768 = window.matchMedia('(max-width: 768px)');
 	const mediaQuery1900 = window.matchMedia('(max-width: 1900px)');
 	let cards = {};
-	if (!localStorage.getItem("lang")) {localStorage.setItem("lang","es")};
+	if (!localStorage.getItem("lang")) { localStorage.setItem("lang", "es") };
 	axios.get('db.json')
 		.then(function (response) {
 			const data = response.data;
@@ -43,10 +43,12 @@ $(document).ready(function () {
 
 			let content = {
 				menu: ["inicio", "empresa", "productos", "contactos"],
-				footer:[`Empresa dedicada<Br>
-				a la fabricación de<Br>
-				conservas vegetales<br>
-				y platos preparados.`,"Inscríbete a nuestra newsletter infórmate de todos nuestros productos y novedades."],
+				footer: [
+					`Empresa dedicada<Br>a la fabricación de<Br>conservas vegetales<br>y platos preparados.`,
+					"Inscríbete a nuestra newsletter infórmate de todos nuestros productos y novedades.",
+					"Información",
+					"introduce email"
+				],
 				inicio: `
 				<h2>
 					Estamos trabajando en la mejora de nuestro sitio web. En breve dispondremos de nuevos productos y contenidos. Disculpen las molestias.
@@ -90,20 +92,25 @@ $(document).ready(function () {
 			`
 			}
 
-			
-			function lang(selector,res) {
+			function lang(selector, res, cont) {
+				console.log("Selected language: " + localStorage.getItem("lang"));
 				if (localStorage.getItem("lang") == "es") {
-					document.querySelector(selector).innerHTML = res;
+					if (cont == "innerHTML") {
+						document.querySelector(selector).innerHTML = res;
+					} else {
+						document.querySelector(selector).textContent = res;
+					}
 				} else {
 					translate(res).then(translatedText => {
-						document.querySelector(selector).innerHTML = translatedText;
-					}).catch(error => console.error(error));
+						if (cont == "innerHTML") {
+							document.querySelector(selector).innerHTML = translatedText;
+						} else {
+							document.querySelector(selector).textContent = translatedText;
+						}
+					}).catch(error => console.error("error language ",error));
 				}
 			}
 
-			for (let i = 0; i < 5; i++) {
-				lang(`.${content.menu[i]}_link`,content.menu[i])
-			}
 			/* #region  MENU */
 			function menuGoRight() {
 				if (mediaQuery768.matches) {
@@ -234,27 +241,67 @@ $(document).ready(function () {
 			})
 			/* #endregion */
 
-			/* #region  INICIO */
-			lang('.inicio> .container', content.inicio)
-			// if (localStorage.getItem("lang") == "es") {
-			// 	document.querySelector('.inicio> .container').insertAdjacentHTML('afterbegin', content.inicio)
-			// } else {
-			// 	translate(content.inicio).then(translatedText => {
-			// 		document.querySelector('.inicio > .container').insertAdjacentHTML('afterbegin', translatedText);
-			// 	}).catch(error => console.error(error));
-			// }
+			/* #region  LANGUAGE */
+			document.body.insertAdjacentHTML("afterend", `
+				<label for="lang">language:</label>
+				<input list="langsList" id="lang" name="lang">
+				<datalist id="langsList">
+					<option value="en" label="English">
+					<option value="es" label="Español">
+					<option value="fr" label="Français">
+					<option value="de" label="Deutsch">
+					<option value="it" label="Italiano">
+					<option value="ru" label="Русский">
+					<option value="ja" label="日本語">
+					<option value="ko" label="한국어">
+					<option value="zh" label="中文">
+			  	</datalist>
+			`);
+
+			let langList = document.querySelector("#lang");
+			langList.addEventListener("input", () => {
+				localStorage.setItem("lang", langList.value);
+				setLang();
+				document.body.classList.add('blink');
+				setTimeout(() => {
+					document.body.classList.remove('blink');
+				}, 2000);
+			});
+			langList.addEventListener("click", () => {
+				langList.value = "";
+			});
 			/* #endregion */
 
-			/* #region  EMPRESA */
-			lang('.empresa >.container', content.empresa)
-			// if (localStorage.getItem("lang") == "es") {
-			// 	document.querySelector('.empresa >.container').insertAdjacentHTML('afterbegin', content.empresa)
-			// } else {
-			// 	translate(content.empresa).then(translatedText => {
-			// 		document.querySelector('.empresa >.container').insertAdjacentHTML('afterbegin', translatedText);
-			// 	}).catch(error => console.error(error));
-			// }
-			//document.querySelector('.empresa >.container').insertAdjacentHTML('afterbegin', content.empresa)
+			/* #region  SET LANGUAGE */
+			function setLang() {
+				for (let i = 0; i < 5; i++) {
+					lang(`.${content.menu[i]}_link`, content.menu[i], "innerHTML")
+				}
+				lang('.inicio> .container', content.inicio, "textContent")
+
+				lang('.empresa >.container', content.empresa, "innerHTML")
+
+				lang('.footer__text_left', content.footer[0], "innerHTML");
+
+				lang(".footer__news_text", content.footer[1], "textContent");
+
+				lang(".footer__informacion", `
+					Información: <br> <br><div class="footer__informacion_links">
+					<a class="inicio_link" href="#">Inicio</a><br>
+					<a class="empresa_link" href="#">Empresa</a><br>
+					<a class="productos_link" href="#">Productos</a><br>
+					<a class="contactos_link" href="#">Contactos</a>
+					</div>
+				`, "innerHTML");
+
+				if (localStorage.getItem("lang") == "es") {
+					document.querySelector('input.e_mail').placeholder = content.footer[3];
+				} else {
+					translate(content.footer[3]).then(translatedText => {
+						document.querySelector('input.e_mail').placeholder = translatedText;
+					}).catch(error => console.error(error));
+				}
+			}
 			/* #endregion */
 
 			/* #region  PRODUCTS */
@@ -366,25 +413,6 @@ $(document).ready(function () {
 			for (let i = 0; i < cards.length; i++) {
 				createCards(cards[i].id, cards[i].img, cards[i].name, cards[i].precio, cards[i].peso, cards[i].descr, cards[i].ingredientes, cards[i].informacion, cards[i].sellos, i);
 			}
-			/* #endregion */
-
-			/* #region  FOOTER */
-			lang('.footer__text_left',content.footer[0]);
-			// if (localStorage.getItem("lang") == "es") {
-			// 	document.querySelector('.footer__text_left').innerHTML = content.footer[0];
-			// } else {
-			// 	translate(content.footer[0]).then(translatedText => {
-			// 		document.querySelector('.footer__text_left').innerHTML = translatedText;
-			// 	}).catch(error => console.error(error));
-			// }
-			lang(".footer__news_text",content.footer[1])
-			// if (localStorage.getItem("lang") == "es") {
-			// 	document.querySelector('.footer__text_left').innerHTML = content.footer[0];
-			// } else {
-			// 	translate(content.footer[0]).then(translatedText => {
-			// 		document.querySelector('.footer__text_left').innerHTML = translatedText;
-			// 	}).catch(error => console.error(error));
-			// }
 			/* #endregion */
 
 			/* #region  SLIDER MANUAL */
@@ -968,18 +996,6 @@ $(document).ready(function () {
 				} else { document.querySelector('.e_mail').setAttribute("type", "text"); }
 			})
 
-
-			// setTimeout(() => {
-			// 	document.querySelector('.slick-next').addEventListener('mousedown', function (event) {
-			// 		if (event.shiftKey) {
-			// 			var slick = $('.productos__items').slick('getSlick');
-			// 			var slideCount = slick.slideCount;
-			// 			var lastIndex = slideCount - 3;
-			// 			slick.slickGoTo(lastIndex);
-			// 		}
-			// 	});
-			// }, 1000);
-
 			function translate(textToTranslate) {
 				//var targetLanguage = 'en';
 				var targetLanguage = localStorage.getItem("lang");
@@ -994,14 +1010,6 @@ $(document).ready(function () {
 					})
 					.catch(error => console.error(error));
 			}
-
-
-
-
-			//   translate(content.inicio)
-			//   .then(result => console.log(result))
-			//   .catch(error => console.error(error));
-
 
 			/* #region  FORM CONTACTO */
 			$('.contactos__informacion__mensaje_form').submit(function (e) {
