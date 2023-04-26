@@ -277,7 +277,7 @@ $(document).ready(function () {
 				for (let i = 0; i < 5; i++) {
 					lang(`.${content.menu[i]}_link`, content.menu[i], "innerHTML")
 				}
-				lang('.inicio> .container', content.inicio, "textContent")
+				lang('.inicio> .container', content.inicio, "innerHTML")
 
 				lang('.empresa >.container', content.empresa, "innerHTML")
 
