@@ -106,6 +106,8 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        text-transform: lowercase;
+        text-transform: capitalize;
     }
     .description {
         position: absolute;
@@ -193,6 +195,8 @@
                 margin-top: 30px;
                 color: white;
                 text-align: center;
+                text-transform: lowercase;
+                text-transform: capitalize;
               
             }
             .counter {

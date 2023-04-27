@@ -9,6 +9,7 @@ $(document).ready(function () {
 			if (!data.cards) { cards = data } else { cards = data.cards };
 			console.log("first - ", cards);
 
+			/* #region  ANIMATION */
 			$(".inicio").hide();
 			$(".empresa").hide();
 			$(".contactos").hide();
@@ -40,7 +41,9 @@ $(document).ready(function () {
 					$(cl1).removeClass(cl2);
 				});
 			}
+			/* #endregion */
 
+			/* #region  CONTENT TEXT */
 			let content = {
 				menu: ["inicio", "empresa", "productos", "contactos"],
 				footer: [
@@ -91,25 +94,9 @@ $(document).ready(function () {
 				</ul>
 			`
 			}
+			/* #endregion */
 
-			function lang(selector, res, cont) {
-				console.log("Selected language: " + localStorage.getItem("lang"));
-				if (localStorage.getItem("lang") == "es") {
-					if (cont == "innerHTML") {
-						document.querySelector(selector).innerHTML = res;
-					} else {
-						document.querySelector(selector).textContent = res;
-					}
-				} else {
-					translate(res).then(translatedText => {
-						if (cont == "innerHTML") {
-							document.querySelector(selector).innerHTML = translatedText;
-						} else {
-							document.querySelector(selector).textContent = translatedText;
-						}
-					}).catch(error => console.error("error language ",error));
-				}
-			}
+	
 
 			/* #region  MENU */
 			function menuGoRight() {
@@ -241,7 +228,7 @@ $(document).ready(function () {
 			})
 			/* #endregion */
 
-			/* #region  LANGUAGE */
+			/* #region  LANGUAGE INTERFACE*/
 			document.body.insertAdjacentHTML("afterend", `
 				<label for="lang">language:</label>
 				<input list="langsList" id="lang" name="lang">
@@ -273,6 +260,25 @@ $(document).ready(function () {
 			/* #endregion */
 
 			/* #region  SET LANGUAGE */
+			function lang(selector, res, cont) {
+				console.log("Selected language: " + localStorage.getItem("lang"));
+				if (localStorage.getItem("lang") == "es") {
+					if (cont == "innerHTML") {
+						document.querySelector(selector).innerHTML = res;
+					} else {
+						document.querySelector(selector).textContent = res;
+					}
+				} else {
+					translate(res).then(translatedText => {
+						if (cont == "innerHTML") {
+							document.querySelector(selector).innerHTML = translatedText;
+						} else {
+							document.querySelector(selector).textContent = translatedText;
+						}
+					}).catch(error => console.error("error language ", error));
+				}
+			}
+
 			function setLang() {
 				for (let i = 0; i < 5; i++) {
 					lang(`.${content.menu[i]}_link`, content.menu[i], "innerHTML")
@@ -610,7 +616,7 @@ $(document).ready(function () {
 			});
 			/* #endregion */
 
-			/* #region  MODAL */
+			/* #region  MODAL INTERFACE*/
 			document.body.insertAdjacentHTML('afterbegin', `
 				<div class="modal">
 					<div class="modal-content">
@@ -812,7 +818,7 @@ $(document).ready(function () {
 				tempSellos.length = 0;
 				event.preventDefault();
 				const id = document.getElementById('id').value;
-				const name = document.getElementById('name').value;
+				const name = document.getElementById('name').value.toLowerCase();
 				const peso = document.getElementById('peso').value.replace("g", '');
 				const descr = document.getElementById('descr').value;
 				const ingredientes = document.getElementById('ingredientes').value;
@@ -823,7 +829,7 @@ $(document).ready(function () {
 				const newCard = {
 					id: id,
 					name: name,
-					peso: peso + 'g',
+					peso: peso,// + 'g',
 					descr: descr,
 					ingredientes: ingredientes,
 					informacion: informacion,
@@ -892,6 +898,7 @@ $(document).ready(function () {
 			}
 
 			clickImgCheck();
+			/* #endregion */
 
 			/* #region  APLICAR BUTTON */
 			function updateCard(id, updatedCard) {
@@ -938,7 +945,7 @@ $(document).ready(function () {
 					}
 				});
 			};
-			/* #endregion */
+
 
 
 			document.querySelector('#addCardForm > button').addEventListener('click', (e) => {
@@ -953,18 +960,21 @@ $(document).ready(function () {
 					peso: document.querySelector('#peso').value,
 					descr: document.querySelector('#descr').value,
 					ingredientes: document.querySelector('#ingredientes').value,
-					img: document.querySelector('#img').value,
+					img: document.querySelector('#img').value.toLowerCase(),
 					informacion: document.querySelector('#informacion').value.split('.,'),
 					sellos: aplSellos,
 					precio: document.querySelector('#precio').value
 				});
 			});
+			/* #endregion */
 
+			/* #region  MODAL */
 			function modalShow() {
 				document.querySelector('.b_mail').addEventListener('click', (e) => {
 					e.preventDefault();
 					if (document.querySelector('.e_mail').value == 'ADD') {
 						window.scrollTo({ top: 60, behavior: 'smooth' });
+						document.body.style.overflow = "hidden";
 						document.querySelector('.modal').style.display = 'block';
 						document.querySelectorAll('.background, .logo, .menu, section, footer').forEach((element) => {
 							element.style.filter = 'blur(4px)';
@@ -977,8 +987,10 @@ $(document).ready(function () {
 
 			modalShow();
 
+
 			function modalHide() {
 				document.querySelector('.close').addEventListener('click', () => {
+					document.body.style.overflow = "";
 					document.querySelector('.modal').style.display = 'none';
 					document.querySelectorAll('.background, .logo, .menu, section, footer').forEach((element) => {
 						element.style.filter = '';
@@ -988,14 +1000,15 @@ $(document).ready(function () {
 			}
 
 			modalHide();
-			/* #endregion */
 
 			document.querySelector('.e_mail').addEventListener('keydown', (event) => {
 				if (event.shiftKey) {
 					document.querySelector('.e_mail').setAttribute("type", "password");
 				} else { document.querySelector('.e_mail').setAttribute("type", "text"); }
 			})
+			/* #endregion */
 
+			/* #region  TRANSLATE */
 			function translate(textToTranslate) {
 				//var targetLanguage = 'en';
 				var targetLanguage = localStorage.getItem("lang");
@@ -1010,6 +1023,7 @@ $(document).ready(function () {
 					})
 					.catch(error => console.error(error));
 			}
+			/* #endregion */
 
 			/* #region  FORM CONTACTO */
 			$('.contactos__informacion__mensaje_form').submit(function (e) {
