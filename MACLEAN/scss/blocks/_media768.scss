@@ -2,7 +2,7 @@
     @media (max-width: 768px) { ////////////////////////////MEDIA
 
     body {
-       // height: 100vh;
+        //height: 100vh;
         //width: 100vw !important;
         
     }
@@ -70,6 +70,14 @@
         }
     }
 
+    .container {
+        height: calc(100vh - 240px);
+    }
+
+    .empresa>.container {
+        margin: 5vh 0vw;
+        height:100vh;
+    }
 
     .menu__overlay {
         visibility: hidden;

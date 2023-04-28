@@ -5,6 +5,7 @@
         transition: var(--s) all;
         margin: 30px;
         width: 65%;
+        pointer-events: none;
     }
     position: fixed;
     

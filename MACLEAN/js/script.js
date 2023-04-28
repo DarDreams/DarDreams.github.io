@@ -46,6 +46,15 @@ $(document).ready(function () {
 			/* #region  CONTENT TEXT */
 			let content = {
 				menu: ["inicio", "empresa", "productos", "contactos"],
+				contactos: ["Teléfono de contacto +34 652 11 79 80",
+					"Email: administracion@conservasalboran.es",
+					"Dirección: Poligono Industrial Huécija, Paraje Los 15 socios. nave 3. cp 04409 Huecija (Almería) ESPAÑA",
+					"Escríbenos un mensaje:",
+					"Nombre y apellidos",
+					"Teléfono",
+					"Email",
+					"Mensaje",
+					"Enviar"],
 				footer: [
 					`Empresa dedicada<Br>a la fabricación de<Br>conservas vegetales<br>y platos preparados.`,
 					"Inscríbete a nuestra newsletter infórmate de todos nuestros productos y novedades.",
@@ -96,8 +105,6 @@ $(document).ready(function () {
 			}
 			/* #endregion */
 
-	
-
 			/* #region  MENU */
 			function menuGoRight() {
 				if (mediaQuery768.matches) {
@@ -108,61 +115,72 @@ $(document).ready(function () {
 				}
 			}
 			let animate = "animate__bounceInRight";
+			function setLinks() {
+				$(".inicio_link").click(function (e) {
+					e.preventDefault();
+					menuGoRight();
 
-			$(".inicio_link").click(function () {
-				menuGoRight();
+					$(".overlay").fadeIn();
+					$(".inicio").show();
+					$(".empresa").fadeOut(1000);
+					$(".contactos").fadeOut(1000);
+					$(".productos").fadeOut(1000);
+					$(".carrito").fadeOut(1000);
+					$(".footer").show();
 
-				$(".overlay").fadeIn();
-				$(".inicio").show();
-				$(".empresa").fadeOut(1000);
-				$(".contactos").fadeOut(1000);
-				$(".productos").fadeOut(1000);
-				$(".carrito").fadeOut(1000);
+					anime(".inicio", animate);
+					document.querySelector('html, body').scrollIntoView({ behavior: 'smooth' });
+				});
 
-				anime(".inicio", animate);
-				document.querySelector('html, body').scrollIntoView({ behavior: 'smooth' });
-			});
+				$(".empresa_link").click(function (e) {
+					e.preventDefault();
+					menuGoRight();
+					$("html, body").animate({ scrollTop: 0 + "px" });
+					$(".overlay").fadeIn();
+					$(".empresa").show();
+					$(".contactos").fadeOut(1000);
+					$(".productos").fadeOut(1000);
+					$(".inicio").fadeOut(1000);
+					$(".carrito").fadeOut(1000);
+					$(".footer").show();
 
-			$(".empresa_link").click(function () {
-				menuGoRight();
-				$("html, body").animate({ scrollTop: 0 + "px" });
-				$(".overlay").fadeIn();
-				$(".empresa").show();
-				$(".contactos").fadeOut(1000);
-				$(".productos").fadeOut(1000);
-				$(".inicio").fadeOut(1000);
-				$(".carrito").fadeOut(1000);
+					anime(".empresa", animate);
+				});
 
-				anime(".empresa", animate);
-			});
+				$(".contactos_link").click(function (e) {
+					e.preventDefault();
+					menuGoRight();
+					$("html, body").animate({ scrollTop: 0 + "px" });
+					$(".overlay").fadeIn();
+					$(".inicio").fadeOut(1000);
+					$(".empresa").fadeOut(1000);
+					$(".productos").fadeOut(1000);
+					$(".carrito").fadeOut(1000);
+					$(".footer").hide();
+					$(".contactos").show();
 
-			$(".contactos_link").click(function () {
-				menuGoRight();
-				$("html, body").animate({ scrollTop: 0 + "px" });
-				$(".overlay").fadeIn();
-				$(".inicio").fadeOut(1000);
-				$(".empresa").fadeOut(1000);
-				$(".productos").fadeOut(1000);
-				$(".carrito").fadeOut(1000);
-				$(".contactos").show();
+					anime(".contactos", animate);
+				});
 
-				anime(".contactos", animate);
-			});
+				$(".productos_link").click(function (e) {
+					e.preventDefault();
+					menuGoRight();
+					document.querySelector('.productos').style.visibility = '';
+					//$('button.slick-prev').click();
+					$("html, body").animate({ scrollTop: 0 + "px" });
+					$(".overlay").fadeIn();
+					$(".inicio").fadeOut(1000);
+					$(".empresa").fadeOut(1000);
+					$(".contactos").fadeOut(1000);
+					$(".productos").show();
+					$(".carrito").fadeIn();
+					$(".footer").hide();
+					//$('.productos__items').slick('slickPause');
+					anime(".productos", animate);
+				});
+			}
 
-			$(".productos_link").click(function () {
-				menuGoRight();
-				document.querySelector('.productos').style.visibility = '';
-				//$('button.slick-prev').click();
-				$("html, body").animate({ scrollTop: 0 + "px" });
-				$(".overlay").fadeIn();
-				$(".inicio").fadeOut(1000);
-				$(".empresa").fadeOut(1000);
-				$(".contactos").fadeOut(1000);
-				$(".productos").show();
-				$(".carrito").fadeIn();
-				//$('.productos__items').slick('slickPause');
-				anime(".productos", animate);
-			});
+			setLinks();
 			/* #endregion */
 
 			/* #region  SCROLL */
@@ -228,60 +246,74 @@ $(document).ready(function () {
 			})
 			/* #endregion */
 
-			/* #region  LANGUAGE INTERFACE*/
+			/* #region  LANGUAGE INTERFACE */
 			document.body.insertAdjacentHTML("afterend", `
-				<label for="lang">language:</label>
-				<input list="langsList" id="lang" name="lang">
+				
+				<input placeholder = "${localStorage.getItem("lang")}" list="langsList" id="lang" name="lang">
 				<datalist id="langsList">
-					<option value="en" label="English">
-					<option value="es" label="Español">
+					<option value="En" label="English">
+					<option value="Es" label="Español">
 					<option value="fr" label="Français">
-					<option value="de" label="Deutsch">
-					<option value="it" label="Italiano">
+					<option value="De" label="Deutsch">
+					<option value="It" label="Italiano">
 					<option value="ru" label="Русский">
-					<option value="ja" label="日本語">
-					<option value="ko" label="한국어">
-					<option value="zh" label="中文">
+					<option value="Ja" label="日本語">
+					<option value="Ko" label="한국어">
+					<option value="Zh" label="中文">
 			  	</datalist>
 			`);
 
 			let langList = document.querySelector("#lang");
+			
+			setLang(); // Первая загрузка
+			document.body.style.cssText = "";
+
 			langList.addEventListener("input", () => {
-				localStorage.setItem("lang", langList.value);
-				setLang();
-				document.body.classList.add('blink');
-				setTimeout(() => {
-					document.body.classList.remove('blink');
-				}, 2000);
-			});
-			langList.addEventListener("click", () => {
+				if (langList.value.toLowerCase() !== localStorage.getItem("lang").toLowerCase()) {
+					localStorage.setItem("lang", langList.value.toLowerCase());
+					setLang();
+				}	
+				if (langList.value.toLowerCase() == "es") {
+					document.body.style.opacity = "0";
+					setTimeout(() => {
+						document.body.style.transition = "all .1s ease";
+						document.body.style.cssText = "";
+					}, 500);
+				}
+				document.querySelector('#lang').placeholder = document.querySelector('#lang').value;
 				langList.value = "";
+				
 			});
 			/* #endregion */
 
 			/* #region  SET LANGUAGE */
 			function lang(selector, res, cont) {
-				console.log("Selected language: " + localStorage.getItem("lang"));
-				if (localStorage.getItem("lang") == "es") {
+			//	console.log("Selected language: " + localStorage.getItem("lang"));
+				if (localStorage.getItem("lang").toLowerCase() == "es") {
 					if (cont == "innerHTML") {
 						document.querySelector(selector).innerHTML = res;
-					} else {
+					} else if (cont == "textContent") {
 						document.querySelector(selector).textContent = res;
+					} else if (cont == "placeholder") {
+						document.querySelector(selector).placeholder = res;
 					}
 				} else {
 					translate(res).then(translatedText => {
 						if (cont == "innerHTML") {
 							document.querySelector(selector).innerHTML = translatedText;
-						} else {
+						} else if (cont == "textContent") {
 							document.querySelector(selector).textContent = translatedText;
+						} else if (cont == "placeholder") {
+							document.querySelector(selector).placeholder = translatedText;
 						}
+						//document.body.classList.remove('blink');
 					}).catch(error => console.error("error language ", error));
 				}
 			}
 
 			function setLang() {
-				for (let i = 0; i < 5; i++) {
-					lang(`.${content.menu[i]}_link`, content.menu[i], "innerHTML")
+				for (let i = 0; i < content.menu.length; i++) {
+					lang(`.${content.menu[i]}_link`, content.menu[i], "textContent")
 				}
 				lang('.inicio> .container', content.inicio, "innerHTML")
 
@@ -293,29 +325,108 @@ $(document).ready(function () {
 
 				lang(".footer__informacion", `
 					Información: <br> <br><div class="footer__informacion_links">
-					<a class="inicio_link" href="#">Inicio</a><br>
-					<a class="empresa_link" href="#">Empresa</a><br>
-					<a class="productos_link" href="#">Productos</a><br>
-					<a class="contactos_link" href="#">Contactos</a>
+					<a class="inicio_link" href="">Inicio</a><br>
+					<a class="empresa_link" href="">Empresa</a><br>
+					<a class="productos_link" href="">Productos</a><br>
+					<a class="contactos_link" href="">Contactos</a>
 					</div>
 				`, "innerHTML");
+				setLinks();
 
-				if (localStorage.getItem("lang") == "es") {
-					document.querySelector('input.e_mail').placeholder = content.footer[3];
+				lang("div.tel", content.contactos[0], "textContent");
+				lang(".email",content.contactos[1], "textContent");
+				lang(".direccion",content.contactos[2], "textContent");
+				lang(".contactos__informacion__mensaje_sub",content.contactos[3], "textContent");
+				lang(".name",  content.contactos[4], "placeholder");
+				lang("input.tel",   content.contactos[5], "placeholder");
+				lang("input.email", content.contactos[6], "placeholder");
+				lang("textarea.text",  content.contactos[7], "placeholder");
+				lang(".button_submit",  content.contactos[8], "textContent");
+				document.querySelector('iframe').src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1.1m3!1d2211.998792828823!2d-2.605439178379319!3d36.96124486917935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9217c8222779a86!2zMzbCsDU3JzQ2LjAiTiAywrAzNicxOC43Ilc!5e1!3m2!1ses!2ses!4v1672748299814!5m2!1s${localStorage.getItem("lang")}!2s${localStorage.getItem("lang")}` 
+				// document.querySelectorAll('.description').forEach(element => {
+				// 	console.log(element.className);
+				// 	lang(element.className, element.textContent,"textContent");
+				// });
+
+				function normalText(selector, cont) {
+					const html = new DOMParser().parseFromString(cont, 'text/html');
+					const text = html.body.textContent;
+					document.querySelector(selector).placeholder = text;
+				}
+
+				if (localStorage.getItem("lang").toLowerCase() == "es") {
+
+					normalText('input.e_mail', content.footer[3]);
+
+					//document.querySelector('input.e_mail').placeholder = content.footer[3];
 				} else {
 					translate(content.footer[3]).then(translatedText => {
-						document.querySelector('input.e_mail').placeholder = translatedText;
+						normalText('input.e_mail', translatedText);
 					}).catch(error => console.error(error));
 				}
 			}
 			/* #endregion */
 
-			/* #region  PRODUCTS */
+			/* #region  TRANSLATE */
+			function translate(textToTranslate) {
+				//var targetLanguage = 'en';
+				var targetLanguage = localStorage.getItem("lang").toLowerCase();
+				var sourceLanguage = 'es';
+				var url = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw&q=' + encodeURIComponent(textToTranslate) + '&target=' + targetLanguage + '&source=' + sourceLanguage;
+				const start = performance.now();
+				document.body.classList.add('blink');
+
+				return fetch(url)
+					.then(response => response.json())
+					.then(data => {
+						const end = performance.now(); 
+            			const time = end - start; 
+						//console.log(`Translation received in ${time} ms`);
+						 if (Math.round(time) <= 200) {
+							document.body.style.transition = `all 0.1s ease-out`;
+							document.querySelector(".blink").style.transition = `all 0.1s ease-in`;
+						} else {
+						document.body.style.transition = `all ${Math.round(time/3)}ms ease-out`;
+						document.querySelector(".blink").style.transition = `all ${Math.round(time/3)}ms ease-in`;
+						}
+						
+						var translatedText = data.data.translations[0].translatedText;
+						return translatedText;
+					})
+					.catch(error => {
+						console.error(error);
+						location.reload();
+					});
+			}
+
+			function watchLinkText(link, callback) {
+				const observer = new MutationObserver((mutationsList) => {
+				  for (const mutation of mutationsList) {
+					if (mutation.type === 'childList') {
+					  const newText = mutation.target.textContent;
+					  callback(newText);
+					}
+				  }
+				});
+				observer.observe(link, { childList: true });
+			  }
+			  
+			watchLinkText(document.querySelector('.inicio_link'), (newText) => {
+				setTimeout(() => {
+					document.body.classList.remove('blink');	
+				}, 500);
+				
+				//console.log(`Link text changed to: ${newText}`);
+			});
+			/* #endregion */
+
+			/* #region  LOGO */
 			$(".logo").click(function () {
 				document.querySelector('.logo__roca').src = `img/LOGO3.png`;
 				//location.href = location.origin + '?rand=' + Math.random();
 				location.reload(true);
 			});
+			/* #endregion */
 
 			/* #region  TIENDA */
 
@@ -505,9 +616,6 @@ $(document).ready(function () {
 			}
 			/* #endregion */
 
-
-			/* #endregion */
-
 			/* #region  CALC_SUM */
 			function calcSum(e) {
 				let id = e.target.parentElement.querySelector('.counter-value').getAttribute('data-id');
@@ -560,7 +668,7 @@ $(document).ready(function () {
 			}
 			/* #endregion */
 
-			/* #region PAYMENTS*/
+			/* #region  PAYMENTS*/
 			// document.querySelector('.comprarOfCarrito').addEventListener("click",function(){
 			// sell(carritoTotal.map(item => ({
 			// 	price: item[0],
@@ -616,7 +724,7 @@ $(document).ready(function () {
 			});
 			/* #endregion */
 
-			/* #region  MODAL INTERFACE*/
+			/* #region  MODAL INTERFACE */
 			document.body.insertAdjacentHTML('afterbegin', `
 				<div class="modal">
 					<div class="modal-content">
@@ -710,7 +818,7 @@ $(document).ready(function () {
 
 					});
 				});
-				console.log(cards);
+				//console.log(cards);
 			}
 			createEventTrash();
 
@@ -981,6 +1089,8 @@ $(document).ready(function () {
 							element.style.pointerEvents = 'none';
 						});
 						document.querySelector('.e_mail').value = '';
+					} else {
+						document.querySelector('.e_mail').value = '';
 					}
 				});
 			}
@@ -1006,23 +1116,6 @@ $(document).ready(function () {
 					document.querySelector('.e_mail').setAttribute("type", "password");
 				} else { document.querySelector('.e_mail').setAttribute("type", "text"); }
 			})
-			/* #endregion */
-
-			/* #region  TRANSLATE */
-			function translate(textToTranslate) {
-				//var targetLanguage = 'en';
-				var targetLanguage = localStorage.getItem("lang");
-				var sourceLanguage = 'es';
-				var url = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw&q=' + encodeURIComponent(textToTranslate) + '&target=' + targetLanguage + '&source=' + sourceLanguage;
-
-				return fetch(url)
-					.then(response => response.json())
-					.then(data => {
-						var translatedText = data.data.translations[0].translatedText;
-						return translatedText;
-					})
-					.catch(error => console.error(error));
-			}
 			/* #endregion */
 
 			/* #region  FORM CONTACTO */
