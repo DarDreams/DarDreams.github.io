@@ -3,6 +3,7 @@ import {
     caliber2 as caliberImport02
 } from "./game.js";
 
+
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
 
@@ -10,23 +11,24 @@ window.addEventListener('DOMContentLoaded', () => {
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
 
     let caliberFunc = function (caliberImport, caliberImport2) {
-        const caliberNew = {
-            data: [caliberImport[0],
-            caliberImport[2],
-            [caliberImport[7][0], caliberImport[7][1], caliberImport[7][2], caliberImport[7][3]],
-            [caliberImport[7][4], caliberImport[7][5], caliberImport[7][6], caliberImport[7][7]]
-            ],
-            log: {
-                Users: [
-                    [caliberImport2.Log.Users[0], caliberImport2.Log.Users[1], caliberImport2.Log.Users[2], caliberImport2.Log.Users[3]],
-                    [caliberImport2.Log.Users[4], caliberImport2.Log.Users[5], caliberImport2.Log.Users[6], caliberImport2.Log.Users[7]]
+            const caliberNew = {
+                data: [caliberImport[0],
+                caliberImport[2],
+                [caliberImport[7][0], caliberImport[7][1], caliberImport[7][2], caliberImport[7][3]],
+                [caliberImport[7][4], caliberImport[7][5], caliberImport[7][6], caliberImport[7][7]]
                 ],
-                MatchTimeSeconds: caliberImport2.Log.MatchTimeSeconds,
-                MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
-                PlayerReport: caliberImport2.Log.PlayerReports,
-                Rounds: caliberImport2.Log.Rounds
-            }
-        };
+                log: {
+                    Users: [
+                        [caliberImport2.Log.Users[0], caliberImport2.Log.Users[1], caliberImport2.Log.Users[2], caliberImport2.Log.Users[3]],
+                        [caliberImport2.Log.Users[4], caliberImport2.Log.Users[5], caliberImport2.Log.Users[6], caliberImport2.Log.Users[7]]
+                    ],
+                    MatchTimeSeconds: caliberImport2.Log.MatchTimeSeconds,
+                    MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
+                    PlayerReport: caliberImport2.Log.PlayerReports,
+                    Rounds: caliberImport2.Log.Rounds
+                }
+            };
+        
 
         for (let i = 2; i <= 3; i++) {
             for (let j = 0; j <= 3; j++) {
@@ -42,9 +44,13 @@ window.addEventListener('DOMContentLoaded', () => {
             delete element.QuestCounters;
         });
         return caliberNew;
+
     }
 
+
+   
     let caliber = caliberFunc(caliberImport01, caliberImport02);
+
 
 
     /* #region  SORT OPERATORS */
@@ -1031,7 +1037,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         { min: 900, max: 1000, rank: "#692B71 III" },
                         { min: 1000, max: 1100, rank: "#692B71 II" },
                         { min: 1100, max: 1200, rank: "#692B71 I" },
-                        { min: 1200, max: 9999, rank: "#46B5C3 I" }
+                        { min: 1200, max: 9999, rank: "#017dfe I" }
                     ];
 
                     for (let i = 0; i < ranges.length; i++) {
@@ -1061,7 +1067,7 @@ window.addEventListener('DOMContentLoaded', () => {
                                     return `${ranges[i].rank}`;
                                 case "#692B71 I":
                                     return `${ranges[i].rank}`;
-                                case "#46B5C3 I":
+                                case "#017dfe I":
                                     return `${ranges[i].rank}`;
                             }
                         }
@@ -1517,11 +1523,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    // try {
-    upload(caliber.data, caliber.log);
-    // } catch (e) {
-    //     console.error("Ошибка в функции upload - ", e.message);
-    // }
+     //try {
+
+     if (window.location.search.length > 0) {
+        loadData();
+    } else  {
+        upload(caliber.data, caliber.log);
+    }
+    
+     //} catch (e) {
+     //    console.error("Ошибка в функции upload - ", e.message);
+     //}
     /* #endregion END ALL DATAS*/
 
     /* #region  CALENDAR */
@@ -1845,6 +1857,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 item.remove();
             })
             upload(caliber_file.data, caliber_file.log);
+            updateDB(caliber_file);
 
             //saveData();
         }
@@ -1883,7 +1896,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // запускаем проверку каждые 10 секунд
-    setInterval(checkFile, 10000);
+    //setInterval(checkFile, 10000);
     /* #endregion */
 
     /* #region  FUNCTION SET_ZERO */
@@ -1990,8 +2003,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.timeScore').classList.add('animate__fadeInDown')
         document.querySelector('.timeScore').style.setProperty('--animate-duration', '1.2s');
     }
-
-
+ 
     /* #region  SOUNDS */
     function sounds() {
         const tr = document.querySelectorAll('.line');
@@ -2026,15 +2038,16 @@ window.addEventListener('DOMContentLoaded', () => {
     sounds()
     /* #region  AJAX UPDATE DATABASE */
 
-    function updateDB(map, res, mode) {
+    //function updateDB(map, res, mode) {
+    function updateDB(dataFile) {
         var data = {
-            caliber: caliber,
-            metadata: {
-                mapName: map,
-                result: res,
-                createdAt: new Date().toLocaleString(),
-                gameMode: mode
-            }
+            caliber: dataFile,
+            // metadata: {
+            //     mapName: map,
+            //     result: res,
+            //     createdAt: new Date().toLocaleString(),
+            //     gameMode: mode
+            // }
         };
 
         $.ajax({
@@ -2054,5 +2067,19 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     /* #endregion */
-    updateDB("DEPO", "WIN", "HACKING");
+
+    function loadData() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileName = urlParams.get('filename');
+        $.ajax({
+          url: `https://exlusive.pro/data/${fileName}.json`,
+          dataType: "json",
+          success: function ({caliber}) {
+            console.log("CALIBER_DATA_FILE:",caliber);
+            upload(caliber.data, caliber.log);
+          }
+        });
+      }
+    
+    updateDB(caliber);
 });
