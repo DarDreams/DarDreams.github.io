@@ -266,6 +266,9 @@ html {
                 width: 20px;
                 text-align: center;
                 transform: translate(-40px, -11px);
+                &:contains('100') {
+                    left: 200px;
+                }
             }
 
             .baner {
