@@ -1,57 +1,33 @@
 <?php
-// путь к директории с файлами
-$dir = "./data";
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  // Получаем дату из параметра запроса
+  $date = $_GET['date'];
 
-// массив с информацией о файлах
-$fileList = array();
+  // Сканируем папку и получаем список файлов
+  $files = scandir('data');
 
-// открываем директорию
-if ($handle = opendir($dir)) {
+  // Массив для хранения имен файлов с нужной датой
+  $result = [];
 
-    // перебираем файлы
-    while (false !== ($entry = readdir($handle))) {
-
-        // пропускаем текущую и родительскую директории
-        if ($entry == "." || $entry == "..") {
-            continue;
-        }
-
-        // получаем полный путь к файлу
-        $path = $dir . '/' . $entry;
-
-        // получаем информацию о файле
-        $fileInfo = pathinfo($path);
-
-        // получаем время создания файла в UNIX-формате
-        $created = filemtime($path);
-
-        // добавляем информацию о файле в массив
-        $fileList[] = array(
-            "name" => $fileInfo['filename'],
-            "result" => "",
-            "map" => "",
-            "created" => date("d.m.Y H:i:s", $created)
-        );
+  // Проходим по всем файлам в папке
+  foreach ($files as $file) {
+    // Игнорируем файлы, которые не являются JSON-файлами
+    if (pathinfo($file, PATHINFO_EXTENSION) !== 'json') {
+      continue;
     }
 
-    // закрываем директорию
-    closedir($handle);
+    // Получаем дату из имени файла
+    $filename = pathinfo($file, PATHINFO_FILENAME);
+    $filedate = DateTime::createFromFormat('d-m-Y', substr($filename, -10));
+
+    // Проверяем, соответствует ли дата в имени переданной дате
+    if ($filedate->format('d-m-Y') === $date) {
+      // Добавляем имя файла в результат
+      $result[] = $file;
+    }
+  }
+
+  // Выводим список файлов на клиент
+  echo json_encode($result);
 }
-
-// Получаем выбранную дату из запроса
-$date = $_POST['date'];
-
-// Создаем новый объект с id, соответствующим выбранной дате
-$newFile = array(
-    "name" => "file_" . $date, // имя файла может быть произвольным, здесь примерное значение
-    "result" => "",
-    "map" => "",
-    "created" => date("d.m.Y H:i:s", time()) // текущая дата и время
-);
-
-// Добавляем новый объект в массив $fileList
-$fileList[] = $newFile;
-
-// выводим список файлов в формате JSON
-echo json_encode($fileList);
 ?>

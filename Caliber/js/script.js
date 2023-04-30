@@ -1673,7 +1673,8 @@ window.addEventListener('DOMContentLoaded', () => {
                         
                         var selectedDate = new Date(2023, month_selector.value - 1, 1);
                         var formattedDate = formatDate(selectedDate);
-                        updateFileList(formattedDate);
+                        console.log(formattedDate);
+                        getFileList("28-04-2023");
 
                         /* #region  OLD CLICK CALENDAR */
                         // const listContainer = document.getElementById('list-container');
@@ -1781,25 +1782,26 @@ window.addEventListener('DOMContentLoaded', () => {
     //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
     generateCalendar(month_selector.value - 1, new Date().getFullYear());
 
-
+ 
     /* #region  обновить список игр */
-    function updateFileList(date) {
-        // Отправляем POST-запрос на сервер
-        $.post("../php/loadList.php", { date: date }, function (data) {
+    function getFileList(date) {
+        $.get("../php/loadList.php?date=" + date, function (data) {
             // Парсим JSON-данные
             var fileList = JSON.parse(data);
-
+    
+            console.log("fileList", fileList);
             // Очищаем список файлов
             $("#file-list").empty();
-
+    
             // Добавляем новые элементы в список файлов
             for (var i = 0; i < fileList.length; i++) {
                 var file = fileList[i];
-                var listItem = $("<li>").text(file.name);
+                var listItem = $("<li>").append($("<a>").attr("href", "../data/" + file.name).text(file.name));
                 $("#file-list").append(listItem);
             }
         });
     }
+    
     /* #endregion */
 
     month_selector.addEventListener('change', () => {
@@ -1860,13 +1862,14 @@ window.addEventListener('DOMContentLoaded', () => {
             })
             upload(caliber_file.data, caliber_file.log);
             updateDB(caliber_file);
-            history.pushState(null, null, `/?filename=${caliber_file.data[0]}`);
+           //history.pushState(null, null, `/?filename=${caliber_file.data[0]}_${saveData(createdDate)}`);
+           history.pushState(null, null, `/?filename=${caliber_file.data[0]}`);
            // window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
             //sounds(); 
 
             //saveData();
         }
-        saveData(createdDate);
+        //saveData(createdDate);
 
     }); //#endregion CALENDAR
     /* #endregion */
@@ -2066,6 +2069,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //function updateDB(map, res, mode) {
     function updateDB(dataFile) {
+        console.log(saveData(createdDate));
         var data = {
             caliber: dataFile,
             metadata: {
