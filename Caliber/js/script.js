@@ -1856,8 +1856,9 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.points').forEach(item => {
                 item.remove();
             })
-            upload(caliber_file.data, caliber_file.log);
+            //upload(caliber_file.data, caliber_file.log);
             updateDB(caliber_file);
+            window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
 
             //saveData();
         }
@@ -2023,14 +2024,17 @@ window.addEventListener('DOMContentLoaded', () => {
                 audio.play();
             })
         })
+ 
+        // document.body.addEventListener('mousedown', (event) => {
+        //     const container = event.target.closest('.container_tables');
+        //     if (event.button === 0 && !container) {
+        //       const audio = new Audio('../mp3/click.mp3');
+        //       audio.volume = 0.01;
+        //       audio.play();
+        //     }
+        //   });
+          
 
-        document.body.addEventListener('mousedown', () => {
-            if (event.button === 0) {
-                const audio = new Audio('../mp3/click.mp3');
-                audio.volume = 0.01;
-                audio.play();
-            }
-        });
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
     }
     /* #endregion */
@@ -2072,7 +2076,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const fileName = urlParams.get('filename');
         $.ajax({
-          url: `https://exlusive.pro/data/${fileName}.json`,
+          url: `../data/${fileName}.json`,
           dataType: "json",
           success: function ({caliber}) {
             console.log("CALIBER_DATA_FILE:",caliber);
