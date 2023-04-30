@@ -708,6 +708,7 @@ button#show-panel {
 .stats {
     
     top: 0;
+    z-index: 10;
     position: relative;
     color: white;
     font-size: 30px;

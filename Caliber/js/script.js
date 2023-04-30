@@ -6,7 +6,7 @@ import {
 
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
-
+    
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
 
@@ -1520,7 +1520,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         id = data1[0];
         alldata = [data1, data2]
-
+        sounds();
     }
 
      //try {
@@ -1529,7 +1529,9 @@ window.addEventListener('DOMContentLoaded', () => {
         loadData();
     } else  {
         upload(caliber.data, caliber.log);
+       
     }
+    
     
      //} catch (e) {
      //    console.error("Ошибка в функции upload - ", e.message);
@@ -1856,9 +1858,11 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.points').forEach(item => {
                 item.remove();
             })
-            //upload(caliber_file.data, caliber_file.log);
+            upload(caliber_file.data, caliber_file.log);
             updateDB(caliber_file);
-            window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
+            history.pushState(null, null, `/?filename=${caliber_file.data[0]}`);
+           // window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
+            //sounds(); 
 
             //saveData();
         }
@@ -2009,25 +2013,25 @@ window.addEventListener('DOMContentLoaded', () => {
     function sounds() {
         const tr = document.querySelectorAll('.line');
         tr.forEach(element => {
-            element.addEventListener('mouseover', () => {
-                const audio = new Audio('../mp3/menu.mp3');
-                audio.volume = 0.1;
-                audio.play();
-            })
+          element.addEventListener('mouseenter', () => {
+            const audio = new Audio('../mp3/menu.mp3');
+            audio.volume = 0.1;
+            audio.play();
+          })
         })
+        
 
         const points = document.querySelectorAll('.points');
         points.forEach(element => {
-            element.addEventListener('mouseover', () => {
-                const audio = new Audio('../mp3/move.mp3');
+            element.addEventListener('mouseenter', () => {
+                const audio = new Audio(`../mp3/move.mp3`);
                 audio.volume = 0.1;
                 audio.play();
             })
         })
  
-        // document.body.addEventListener('mousedown', (event) => {
-        //     const container = event.target.closest('.container_tables');
-        //     if (event.button === 0 && !container) {
+        // document.body.addEventListener('mousedown', () => {
+        //     if (event.button === 0) {
         //       const audio = new Audio('../mp3/click.mp3');
         //       audio.volume = 0.01;
         //       audio.play();
@@ -2039,7 +2043,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     /* #endregion */
 
-    sounds()
+    
     /* #region  AJAX UPDATE DATABASE */
 
     //function updateDB(map, res, mode) {
@@ -2083,7 +2087,9 @@ window.addEventListener('DOMContentLoaded', () => {
             upload(caliber.data, caliber.log);
           }
         });
+        //updateDB(caliber);
       }
     
-    updateDB(caliber);
-});
+    
+    //sounds();
+}); /////////////////END
