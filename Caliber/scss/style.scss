@@ -583,12 +583,13 @@ button#show-panel {
     transform: translateY(-50%);
     left: 0;
     background-color: black;
+    border: none;
     //border: 1px solid grey;
 
     &:hover {
         background-color: rgba(255, 255, 255, 50%);
         color: white;
-        outline: 2px solid white;
+        outline: 1px solid white;
     }
 }
 .slide-out-panel.show + button#show-panel {

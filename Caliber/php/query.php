@@ -4,8 +4,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $caliberData = $data['caliber']['data'][0];
   $metadataCreatedAt = strtotime($data['metadata']['createdAt']);
-  //$filename = $_SERVER['DOCUMENT_ROOT'] . "/data/" . $caliberData . '_' . $metadataCreatedAt . ".json"; // формируем имя файла на основе данных и времени создания
-  $filename = $_SERVER['DOCUMENT_ROOT'] . "/data/" . $caliberData . ".json"; // формируем имя файла на основе данных и времени создания
+  $filename = $_SERVER['DOCUMENT_ROOT'] . "/data/" . $caliberData . '_' . $metadataCreatedAt . ".json"; // формируем имя файла на основе данных и времени создания
+  //$filename = $_SERVER['DOCUMENT_ROOT'] . "/data/" . $caliberData . ".json"; // формируем имя файла на основе данных и времени создания
 
   // Проверяем существование папки /data, и создаем ее, если она не существует
   $dataFolderPath = $_SERVER['DOCUMENT_ROOT'] . "/data";
@@ -21,4 +21,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo 'Ошибка при сохранении данных';
   }
 }
-?>
+?> 

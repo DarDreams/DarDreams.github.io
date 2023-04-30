@@ -1822,11 +1822,11 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log('Путь скопирован в буфер обмена');
     });
     // #endregion
-
+    let createdDate;
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
-        const createdDate = new Date(file.lastModified);
+              createdDate = new Date(file.lastModified);
         const reader = new FileReader();
         reader.readAsText(file);
         reader.onload = (event) => {
@@ -1918,10 +1918,11 @@ window.addEventListener('DOMContentLoaded', () => {
     function saveData(createdDate) {
         const map = document.querySelector('.map').textContent.trim();
         const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
-        const day = `${setZero(createdDate.getDate())}:${setZero(createdDate.getMonth() + 1)}.${createdDate.getFullYear()}`;
+        const day = `${setZero(createdDate.getDate())}-${setZero(createdDate.getMonth() + 1)}-${createdDate.getFullYear()}`;
+        return day;
         if (localStorage.getItem('rec') == 'true') {
             // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
-            localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
+          //  localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
         }
     }
 
@@ -2020,23 +2021,40 @@ window.addEventListener('DOMContentLoaded', () => {
           })
         })
         
-
+ 
         const points = document.querySelectorAll('.points');
         points.forEach(element => {
             element.addEventListener('mouseenter', () => {
                 const audio = new Audio(`../mp3/move.mp3`);
-                audio.volume = 0.1;
+                audio.volume = 0.035;
+                audio.play();
+            })
+        })
+
+        const img = document.querySelectorAll('img');
+        img.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                const audio = new Audio(`../mp3/move.mp3`);
+                audio.volume = 0.035;
                 audio.play();
             })
         })
  
-        // document.body.addEventListener('mousedown', () => {
-        //     if (event.button === 0) {
-        //       const audio = new Audio('../mp3/click.mp3');
-        //       audio.volume = 0.01;
-        //       audio.play();
-        //     }
-        //   });
+        function addClickSound(selector) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                element.addEventListener('mousedown', () => {
+                    if (event.button === 0) {
+                        const audio = new Audio('../mp3/click.mp3');
+                        audio.volume = 0.01;
+                        audio.play();
+                    }
+                });
+            });
+        }
+        addClickSound('button');
+        addClickSound('tbody');
+        addClickSound('img');
           
 
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
@@ -2050,12 +2068,12 @@ window.addEventListener('DOMContentLoaded', () => {
     function updateDB(dataFile) {
         var data = {
             caliber: dataFile,
-            // metadata: {
-            //     mapName: map,
-            //     result: res,
-            //     createdAt: new Date().toLocaleString(),
-            //     gameMode: mode
-            // }
+            metadata: {
+                mapName: "map",
+                result: "res",
+                createdAt: saveData(createdDate),
+                gameMode: "mode"
+            }
         };
 
         $.ajax({
@@ -2073,7 +2091,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
+ 
     /* #endregion */
 
     function loadData() {
