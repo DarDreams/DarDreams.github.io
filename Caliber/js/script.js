@@ -2,8 +2,8 @@ import {
     caliber as caliberImport01,
     caliber2 as caliberImport02
 } from "./game.js";
-
-
+ 
+ 
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata;
     
@@ -1673,7 +1673,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         
                         var selectedDate = new Date(2023, month_selector.value - 1, 1);
                         var formattedDate = formatDate(selectedDate);
-                        console.log(formattedDate);
+                        //console.log(formattedDate);
                         getFileList("28-04-2023");
 
                         /* #region  OLD CLICK CALENDAR */
@@ -1785,22 +1785,26 @@ window.addEventListener('DOMContentLoaded', () => {
  
     /* #region  обновить список игр */
     function getFileList(date) {
-        $.get("../php/loadList.php?date=" + date, function (data) {
-            // Парсим JSON-данные
-            var fileList = JSON.parse(data);
-    
-            console.log("fileList", fileList);
-            // Очищаем список файлов
-            $("#file-list").empty();
-    
-            // Добавляем новые элементы в список файлов
-            for (var i = 0; i < fileList.length; i++) {
+            // Отправляем GET-запрос на сервер
+            $.get("../php/loadList.php", { date: date }, function (data) {
+              // Парсим JSON-данные
+              var fileList = JSON.parse(data);
+          
+              // Выводим полученный список файлов в консоль
+              console.log(fileList);
+          
+              // Очищаем список файлов
+              $("#file-list").empty();
+          
+              // Добавляем новые элементы в список файлов
+              for (var i = 0; i < fileList.length; i++) {
                 var file = fileList[i];
-                var listItem = $("<li>").append($("<a>").attr("href", "../data/" + file.name).text(file.name));
+                var listItem = $("<li>").text(file.name);
                 $("#file-list").append(listItem);
-            }
-        });
-    }
+              }
+            });
+          }
+          
     
     /* #endregion */
 
