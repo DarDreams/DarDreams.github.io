@@ -72,7 +72,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-    console.log('CALIBER_DATAS - ', caliber);
+    //console.log('CALIBER_DATAS - ', caliber);
 
     /* #region  OLD VERSION */
     // caliberNew.data[2][0][11].splice(0);
@@ -1672,9 +1672,12 @@ window.addEventListener('DOMContentLoaded', () => {
                     cell.addEventListener("click", function () {
                         
                         var selectedDate = new Date(2023, month_selector.value - 1, 1);
-                        var formattedDate = formatDate(selectedDate);
-                        //console.log(formattedDate);
-                        getFileList("28-04-2023");
+                        //var formattedDate = formatDate(selectedDate);
+
+                        console.log(`2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
+ 
+                        getFileList(`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
+                        //getFileList();
 
                         /* #region  OLD CLICK CALENDAR */
                         // const listContainer = document.getElementById('list-container');
@@ -1763,7 +1766,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         //     });
 
                         // });
-
+                       
                         // function myFunction(key) {
                         //     let data = JSON.parse(localStorage.getItem(key));
                         //     upload(data[0], data[1]);
@@ -1784,27 +1787,45 @@ window.addEventListener('DOMContentLoaded', () => {
 
  
     /* #region  обновить список игр */
-    function getFileList(date) {
-            // Отправляем GET-запрос на сервер
-            $.get("../php/loadList.php", { date: date }, function (data) {
-              // Парсим JSON-данные
-              var fileList = JSON.parse(data);
-          
-              // Выводим полученный список файлов в консоль
-              console.log(fileList);
-          
-              // Очищаем список файлов
-              $("#file-list").empty();
-          
-              // Добавляем новые элементы в список файлов
-              for (var i = 0; i < fileList.length; i++) {
-                var file = fileList[i];
-                var listItem = $("<li>").text(file.name);
-                $("#file-list").append(listItem);
-              }
+    function getFileList(folder) {
+        // Отправляем GET-запрос на сервер
+        $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
+          // Парсим JSON-данные
+          console.log(data);
+          document.querySelector("#list-container").innerHTML = "";
+            document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>")
+            data.forEach(element => {
+                //loadList(element);
+                 document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
+                    <li><span>${element}</span></li>
+                 `)
             });
-          }
-          
+            const divLi = document.querySelectorAll('#list-container > ul > li');
+            divLi.forEach(element => {
+                element.addEventListener('click', (e) => {
+                    console.log(e.target.textContent);
+                })
+            }); 
+           
+          //var fileList = JSON.parse(data);
+      
+          // Выводим полученный список файлов в консоль
+          //console.log(fileList);
+         
+      
+          // Очищаем список файлов
+          //$("#file-list").empty();
+      
+          // Добавляем новые элементы в список файлов
+        //   for (var i = 0; i < fileList.length; i++) {
+        //     var file = fileList[i];
+        //     var listItem = $("<li>").text(file.name);
+        //     $("#file-list").append(listItem);
+        //   }
+        });
+      }
+
+     
     
     /* #endregion */
 
@@ -1842,7 +1863,8 @@ window.addEventListener('DOMContentLoaded', () => {
             data = data[0].replaceAll(/[^\x20-\x7E]+/g);
             data = data.replaceAll(/[^ -~]+/g);
             data = data.replace(/.*?({.*)/, "$1");
-            caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
+            caliber_b  = data.match(/^(.*14":\[\]\})\w/s)[1];
+            try {
             caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
 
             function fix(obj) {
@@ -1854,7 +1876,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             caliber_b = fix(caliber_b);
             caliber_b2 = fix(caliber_b2);
-
+        
             // caliber_b[8] = caliber_b[7].splice(4);
             // caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0], caliber_b2.Log.Users[1], caliber_b2.Log.Users[2], caliber_b2.Log.Users[3]]
             // caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
@@ -1867,15 +1889,20 @@ window.addEventListener('DOMContentLoaded', () => {
             upload(caliber_file.data, caliber_file.log);
             updateDB(caliber_file);
            //history.pushState(null, null, `/?filename=${caliber_file.data[0]}_${saveData(createdDate)}`);
-           history.pushState(null, null, `/?filename=${caliber_file.data[0]}`);
+            history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
            // window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
             //sounds(); 
 
             //saveData();
+        } catch (e){
+             alert("Файл поврежден")
         }
+        }
+        
         //saveData(createdDate);
 
-    }); //#endregion CALENDAR
+    }); 
+    //#endregion CALENDAR
     /* #endregion */
 
     /* #region  REFRESH PAGE */
@@ -1925,21 +1952,14 @@ window.addEventListener('DOMContentLoaded', () => {
     function saveData(createdDate) {
         const map = document.querySelector('.map').textContent.trim();
         const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
-        const day = `${setZero(createdDate.getDate())}-${setZero(createdDate.getMonth() + 1)}-${createdDate.getFullYear()}`;
+        const day = `${createdDate.getFullYear()}/${setZero(createdDate.getMonth() + 1)}/${setZero(createdDate.getDate())}`;
         return day;
         if (localStorage.getItem('rec') == 'true') {
             // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
           //  localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
         }
     }
-
-
-
-    //try {
-    //saveData(new Date());
-    // } catch (e) {
-    //     console.error("Ошибка в функции SaveData - ", e.message);
-    // }
+  
     /* #endregion */
     try {
         document.querySelector('.geo').addEventListener('click', () => {
@@ -1956,21 +1976,6 @@ window.addEventListener('DOMContentLoaded', () => {
     catch (e) {
         console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);
     }
-
-    // document.querySelector('#show-panel').insertAdjacentHTML('afterbegin',`
-    // <iframe src="https://caliberfan.ru/support/rekruit/#col-12 col-md-3 col-lg-3"></iframe>
-    // `);
-
-    // document.querySelector('iframe.content').onload = function () {
-    //     this.contentWindow.scrollTo(0, 479);
-    // }
-    // function summRank() {
-    //     document.querySelectorAll('table.team1Table > tbody > tr> td > span.rank').forEach(element => {
-    //         let rank = +rank + +element.textContent;
-    //         //element.textContent= 
-    //         return res
-    //     });
-    // }
 
     function summRank(selector) {
         let rank = 0;
@@ -2018,13 +2023,19 @@ window.addEventListener('DOMContentLoaded', () => {
     }
  
     /* #region  SOUNDS */
+    
     function sounds() {
         const tr = document.querySelectorAll('.line');
         tr.forEach(element => {
           element.addEventListener('mouseenter', () => {
             const audio = new Audio('../mp3/menu.mp3');
             audio.volume = 0.1;
-            audio.play();
+        try {
+          //  audio.play();
+          audio.play().catch(function(error) {
+            console.log('Error playing sound: ' + error);
+        });
+        } catch {}
           })
         })
         
@@ -2034,7 +2045,12 @@ window.addEventListener('DOMContentLoaded', () => {
             element.addEventListener('mouseenter', () => {
                 const audio = new Audio(`../mp3/move.mp3`);
                 audio.volume = 0.035;
-                audio.play();
+            try {
+             //   audio.play();
+             audio.play().catch(function(error) {
+                console.log('Error playing sound: ' + error);
+            });
+            } catch {}
             })
         })
 
@@ -2043,7 +2059,12 @@ window.addEventListener('DOMContentLoaded', () => {
             element.addEventListener('mouseenter', () => {
                 const audio = new Audio(`../mp3/move.mp3`);
                 audio.volume = 0.035;
-                audio.play();
+            try {
+              //  audio.play();
+              audio.play().catch(function(error) {
+                console.log('Error playing sound: ' + error);
+            });
+            } catch {}
             })
         })
  
@@ -2054,7 +2075,10 @@ window.addEventListener('DOMContentLoaded', () => {
                     if (event.button === 0) {
                         const audio = new Audio('../mp3/click.mp3');
                         audio.volume = 0.01;
-                        audio.play();
+                        //audio.play();
+                        audio.play().catch(function(error) {
+                            console.log('Error playing sound: ' + error);
+                        });
                     }
                 });
             });
@@ -2062,51 +2086,58 @@ window.addEventListener('DOMContentLoaded', () => {
         addClickSound('button');
         addClickSound('tbody');
         addClickSound('img');
+        addClickSound('li');
           
 
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
     }
+
     /* #endregion */
 
     
     /* #region  AJAX UPDATE DATABASE */
 
     //function updateDB(map, res, mode) {
-    function updateDB(dataFile) {
-        console.log(saveData(createdDate));
-        var data = {
-            caliber: dataFile,
-            metadata: {
-                mapName: "map",
-                result: "res",
-                createdAt: saveData(createdDate),
-                gameMode: "mode"
-            }
-        };
-
-        $.ajax({
-            url: '/php/query.php',
-            type: 'POST',
-            data: JSON.stringify(data), // передаем объект data в виде JSON-строки
-            contentType: 'application/json', // устанавливаем тип контента
-            success: function (response) {
-                console.log('Данные успешно обновлены');
-                console.log(response);
-            },
-            error: function (error) {
-                console.error('Ошибка при обновлении данных');
-                console.error(error);
-            }
-        });
-    }
+        function updateDB(dataFile) {
+            var folderPath = "/data/" + saveData(createdDate) + "/";
+            console.log(folderPath);
+            var data = {
+                caliber: dataFile,
+                metadata: {
+                    mapName: "map",
+                    result: "res",
+                    createdAt: folderPath,
+                    gameMode: "mode"
+                },
+                folderPath: folderPath
+            };
+        
+            $.ajax({
+                url: '/php/query.php',
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function (response) {
+                    console.log('Данные успешно обновлены');
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.error('Ошибка при обновлении данных');
+                    console.error(error);
+                }
+            });
+        }
+        
  
     /* #endregion */
 
     function loadData() {
+       // console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
         const urlParams = new URLSearchParams(window.location.search);
         const fileName = urlParams.get('filename');
+        //console.log(`../${fileName}.json`);
         $.ajax({
-          url: `../data/${fileName}.json`,
+          url: `../${fileName}.json`,
           dataType: "json",
           success: function ({caliber}) {
             console.log("CALIBER_DATA_FILE:",caliber);
@@ -2114,8 +2145,7 @@ window.addEventListener('DOMContentLoaded', () => {
           }
         });
         //updateDB(caliber);
-      }
-    
-    
+    }
+      
     //sounds();
 }); /////////////////END
