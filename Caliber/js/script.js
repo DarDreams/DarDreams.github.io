@@ -1524,9 +1524,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
      //try {
-
+ 
      if (window.location.search.length > 0) {
-        loadData();
+        loadData(new URLSearchParams(window.location.search).get('filename'));
     } else  {
         upload(caliber.data, caliber.log);
        
@@ -1634,7 +1634,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function getDaysInMonth(month, year) {
         return new Date(year, month + 1, 0).getDate();
     }
-
+    var selectedDate,strPath;
     function generateCalendar(month, year) {
         calendarBody.innerHTML = "";
         const daysInMonth = getDaysInMonth(month, year);
@@ -1668,12 +1668,12 @@ window.addEventListener('DOMContentLoaded', () => {
                         var year = date.getFullYear();
                         return day + '.' + month + '.' + year;
                     }
-
+                    
                     cell.addEventListener("click", function () {
                         
-                        var selectedDate = new Date(2023, month_selector.value - 1, 1);
+                         selectedDate = new Date(2023, month_selector.value - 1, 1);
                         //var formattedDate = formatDate(selectedDate);
-
+                        strPath = `2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`;
                         console.log(`2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
  
                         getFileList(`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
@@ -1803,7 +1803,12 @@ window.addEventListener('DOMContentLoaded', () => {
             const divLi = document.querySelectorAll('#list-container > ul > li');
             divLi.forEach(element => {
                 element.addEventListener('click', (e) => {
-                    console.log(e.target.textContent);
+                    console.log(`data/${strPath}/${e.target.textContent.replace('.json','')}`);
+                    document.querySelector('.team1Table').innerHTML = '';
+                    document.querySelector('.team2Table').innerHTML = '';
+                    document.querySelector('.bluePoints').innerHTML = '';
+                    document.querySelector('.redPoints').innerHTML = '';
+                    loadData(`data/${strPath}/${e.target.textContent.replace('.json','')}`);
                 })
             }); 
            
@@ -2025,68 +2030,70 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #region  SOUNDS */
     
     function sounds() {
-        const tr = document.querySelectorAll('.line');
-        tr.forEach(element => {
-          element.addEventListener('mouseenter', () => {
-            const audio = new Audio('../mp3/menu.mp3');
-            audio.volume = 0.1;
-        try {
-          //  audio.play();
-          audio.play().catch(function(error) {
-            console.log('Error playing sound: ' + error);
-        });
-        } catch {}
-          })
-        })
+        // const tr = document.querySelectorAll('.line');
+        // tr.forEach(element => {
+        //   element.addEventListener('mouseenter', () => {
+        //     const audio = new Audio('../mp3/menu.mp3');
+        //     audio.volume = 0.1;
+        // try {
+        //   //  audio.play();
+        //   audio.play().catch(function(error) {
+        //     console.log('Error playing sound: ' + error);
+        // });
+        // } catch {}
+        //   })
+        // })
         
  
-        const points = document.querySelectorAll('.points');
-        points.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                const audio = new Audio(`../mp3/move.mp3`);
-                audio.volume = 0.035;
-            try {
-             //   audio.play();
-             audio.play().catch(function(error) {
-                console.log('Error playing sound: ' + error);
-            });
-            } catch {}
-            })
-        })
+        // const points = document.querySelectorAll('.points');
+        // points.forEach(element => {
+        //     element.addEventListener('mouseenter', () => {
+        //         const audio = new Audio(`../mp3/move.mp3`);
+        //         audio.volume = 0.035;
+        //     try {
+        //      //   audio.play();
+        //      audio.play().catch(function(error) {
+        //         console.log('Error playing sound: ' + error);
+        //     });
+        //     } catch {}
+        //     })
+        // })
 
-        const img = document.querySelectorAll('img');
-        img.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                const audio = new Audio(`../mp3/move.mp3`);
-                audio.volume = 0.035;
-            try {
-              //  audio.play();
-              audio.play().catch(function(error) {
-                console.log('Error playing sound: ' + error);
-            });
-            } catch {}
-            })
-        })
+        // const img = document.querySelectorAll('img');
+        // img.forEach(element => {
+        //     element.addEventListener('mouseenter', () => {
+        //         const audio = new Audio(`../mp3/move.mp3`);
+        //         audio.volume = 0.035;
+        //     try {
+        //       //  audio.play();
+        //       audio.play().catch(function(error) {
+        //         console.log('Error playing sound: ' + error);
+        //     });
+        //     } catch {}
+        //     })
+        // })
  
-        function addClickSound(selector) {
+        function addClickSound(selector, event, path, vol) {
             const elements = document.querySelectorAll(selector);
             elements.forEach(element => {
-                element.addEventListener('mousedown', () => {
-                    if (event.button === 0) {
-                        const audio = new Audio('../mp3/click.mp3');
-                        audio.volume = 0.01;
-                        //audio.play();
-                        audio.play().catch(function(error) {
-                            console.log('Error playing sound: ' + error);
-                        });
-                    }
+              element.addEventListener(event, e => {
+                if (event === 'click' && e.button !== 0) return;
+                const audio = new Audio(path);
+                audio.volume = vol;
+                audio.play().catch(function(error) {
+                  console.log('Error playing sound: ' + error);
                 });
+              });
             });
-        }
-        addClickSound('button');
-        addClickSound('tbody');
-        addClickSound('img');
-        addClickSound('li');
+          }
+          
+        addClickSound('.points',"mouseenter",'../mp3/move.mp3',0.035);
+        addClickSound('img',"mouseenter",'../mp3/move.mp3',0.035);
+        addClickSound('.line',"mouseenter",'../mp3/menu.mp3',0.1);
+        addClickSound('button',"mousedown",'../mp3/click.mp3',0.01);
+        addClickSound('tbody',"mousedown","../mp3/click.mp3",0.01);
+        addClickSound('img',"mousedown","../mp3/click.mp3",0.01);
+        addClickSound('li',"mousedown","../mp3/click.mp3",0.01);
           
 
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
@@ -2131,10 +2138,11 @@ window.addEventListener('DOMContentLoaded', () => {
  
     /* #endregion */
 
-    function loadData() {
+    function loadData(fileName) {
+        console.log(fileName);
        // console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
-        const urlParams = new URLSearchParams(window.location.search);
-        const fileName = urlParams.get('filename');
+        //const urlParams = new URLSearchParams(window.location.search);
+       // const fileName = urlParams.get('filename');
         //console.log(`../${fileName}.json`);
         $.ajax({
           url: `../${fileName}.json`,
@@ -2148,42 +2156,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
        
 
-    // function createCursorUrl(path, percent) {
-    //     return new Promise((resolve, reject) => {
-    //         const cursorImage = new Image();
-    //         cursorImage.crossOrigin = 'anonymous';
-    //         cursorImage.onload = () => {
-    //             const canvas = document.createElement('canvas');
-    //             canvas.width = cursorImage.naturalWidth * percent / 100;
-    //             canvas.height = cursorImage.naturalHeight * percent / 100;
-    //             const context = canvas.getContext('2d');
-    //             context.drawImage(cursorImage, 0, 0, canvas.width, canvas.height);
-    //             resolve(canvas.toDataURL());
-    //         };
-    //         cursorImage.onerror = reject;
-    //         cursorImage.src = path;
-    //     });
-    // }
 
-    // createCursorUrl('../img/grab.png', 90).then((cursorUrl) => {
-    //     const style = document.createElement('style');
-    //     style.textContent = `
-    //       .container_tables table tbody:not(:nth-child(1))>tr, li  {
-    //         cursor: url(${cursorUrl}), auto;
-    //       }
-    //     `;
-    //     document.head.appendChild(style);
-    // });
 
-    // createCursorUrl('../img/cur.png', 90).then((cursorUrl) => {
-    //     const style = document.createElement('style');
-    //     style.textContent = `
-    //       html, body, .custom-file-input>label, img, button  {
-    //         cursor: url(${cursorUrl}), auto;
-    //       }
-    //     `;
-    //     document.head.appendChild(style);
-    // });
 
     // const table = document.getElementById('team1Table');
     // const rows = table.getElementsByTagName('tr');
