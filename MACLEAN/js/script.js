@@ -1148,6 +1148,8 @@ $(document).ready(function () {
 				});
 			});
 			/* #endregion */
+		
+		
 		})
 		.catch(function (error) {
 			console.log(error, " База данных не найдена");

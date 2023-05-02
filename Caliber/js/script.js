@@ -2146,7 +2146,45 @@ window.addEventListener('DOMContentLoaded', () => {
         });
         //updateDB(caliber);
     }
-      
+       
+
+    // function createCursorUrl(path, percent) {
+    //     return new Promise((resolve, reject) => {
+    //         const cursorImage = new Image();
+    //         cursorImage.crossOrigin = 'anonymous';
+    //         cursorImage.onload = () => {
+    //             const canvas = document.createElement('canvas');
+    //             canvas.width = cursorImage.naturalWidth * percent / 100;
+    //             canvas.height = cursorImage.naturalHeight * percent / 100;
+    //             const context = canvas.getContext('2d');
+    //             context.drawImage(cursorImage, 0, 0, canvas.width, canvas.height);
+    //             resolve(canvas.toDataURL());
+    //         };
+    //         cursorImage.onerror = reject;
+    //         cursorImage.src = path;
+    //     });
+    // }
+
+    // createCursorUrl('../img/grab.png', 90).then((cursorUrl) => {
+    //     const style = document.createElement('style');
+    //     style.textContent = `
+    //       .container_tables table tbody:not(:nth-child(1))>tr, li  {
+    //         cursor: url(${cursorUrl}), auto;
+    //       }
+    //     `;
+    //     document.head.appendChild(style);
+    // });
+
+    // createCursorUrl('../img/cur.png', 90).then((cursorUrl) => {
+    //     const style = document.createElement('style');
+    //     style.textContent = `
+    //       html, body, .custom-file-input>label, img, button  {
+    //         cursor: url(${cursorUrl}), auto;
+    //       }
+    //     `;
+    //     document.head.appendChild(style);
+    // });
+
     // const table = document.getElementById('team1Table');
     // const rows = table.getElementsByTagName('tr');
     // const firstRow = rows[0];
