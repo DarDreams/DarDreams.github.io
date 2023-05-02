@@ -2147,5 +2147,18 @@ window.addEventListener('DOMContentLoaded', () => {
         //updateDB(caliber);
     }
       
+    // const table = document.getElementById('team1Table');
+    // const rows = table.getElementsByTagName('tr');
+    // const firstRow = rows[0];
+    // const secondRow = rows[1];
+    // const thirdRow = rows[2];
+    // const fourthRow = rows[3];
+
+    // // Получаем родительский элемент строк
+    // const rowParent = firstRow.parentNode;
+
+    // // Меняем местами строки
+    // rowParent.insertBefore(fourthRow, firstRow);
+    // rowParent.insertBefore(secondRow, thirdRow);
     //sounds();
 }); /////////////////END
