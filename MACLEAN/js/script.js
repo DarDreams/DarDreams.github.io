@@ -368,36 +368,40 @@ $(document).ready(function () {
 			/* #endregion */
 
 			/* #region  TRANSLATE */
-			function translate(textToTranslate) {
-				//var targetLanguage = 'en';
+			function translate(textToTranslate, retryCount = 0, maxRetries = 3) {
 				var targetLanguage = localStorage.getItem("lang").toLowerCase();
 				var sourceLanguage = 'es';
 				var url = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw&q=' + encodeURIComponent(textToTranslate) + '&target=' + targetLanguage + '&source=' + sourceLanguage;
 				const start = performance.now();
 				document.body.classList.add('blink');
-
+			  
 				return fetch(url)
-					.then(response => response.json())
-					.then(data => {
-						const end = performance.now(); 
-            			const time = end - start; 
-						//console.log(`Translation received in ${time} ms`);
-						 if (Math.round(time) <= 200) {
-							document.body.style.transition = `all 0.1s ease-out`;
-							document.querySelector(".blink").style.transition = `all 0.1s ease-in`;
-						} else {
-						document.body.style.transition = `all ${Math.round(time/3)}ms ease-out`;
-						document.querySelector(".blink").style.transition = `all ${Math.round(time/3)}ms ease-in`;
-						}
-						
-						var translatedText = data.data.translations[0].translatedText;
-						return translatedText;
-					})
-					.catch(error => {
-						console.error(error);
-						location.reload();
-					});
-			}
+				  .then(response => response.json())
+				  .then(data => {
+					const end = performance.now(); 
+					const time = end - start; 
+			  
+					if (Math.round(time) <= 200) {
+					  document.body.style.transition = `all 0.1s ease-out`;
+					  document.querySelector(".blink").style.transition = `all 0.1s ease-in`;
+					} else {
+					  document.body.style.transition = `all ${Math.round(time/3)}ms ease-out`;
+					  document.querySelector(".blink").style.transition = `all ${Math.round(time/3)}ms ease-in`;
+					}
+					
+					var translatedText = data.data.translations[0].translatedText;
+					return translatedText;
+				  })
+				  .catch(error => {
+					console.error(error);
+					if (retryCount < maxRetries) {
+					  return translate(textToTranslate, retryCount + 1, maxRetries);
+					} else {
+					  throw new Error('Max retries reached');
+					}
+				  });
+			  }
+			  
 
 			function watchLinkText(link, callback) {
 				const observer = new MutationObserver((mutationsList) => {

@@ -71,12 +71,35 @@
     }
 
     .container {
-        height: calc(100vh - 240px);
+        //height: calc(100vh - 240px);
+        height: 100vh;
+        margin: 0;
+        padding: 0;
     }
 
-    .empresa>.container {
-        margin: 5vh 0vw;
-        height:100vh;
+    .empresa {
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin-top: 40% !important;
+        padding: 0 2% !important;
+        width: 100vw;
+    }
+
+    .slick-list {
+        //top: 150px !important;
+        padding-top: 10vh !important;
+        height: 100vh !important;
+    }
+
+    .inicio {
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin-top: 40%  !important;
+        padding: 0 2% !important;
+        width: 100vw;
+        h2 {
+            margin:0;
+        }
     }
 
     .menu__overlay {
@@ -122,6 +145,7 @@
         //overflow: hidden;
         top: 50% !important;
         transform: translateY(-40%) !important;
+        
 
     }
     .productos__items_item {
