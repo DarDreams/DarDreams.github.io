@@ -374,33 +374,33 @@ $(document).ready(function () {
 				var url = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw&q=' + encodeURIComponent(textToTranslate) + '&target=' + targetLanguage + '&source=' + sourceLanguage;
 				const start = performance.now();
 				document.body.classList.add('blink');
-			  
+
 				return fetch(url)
-				  .then(response => response.json())
-				  .then(data => {
-					const end = performance.now(); 
-					const time = end - start; 
-			  
-					if (Math.round(time) <= 200) {
-					  document.body.style.transition = `all 0.1s ease-out`;
-					  document.querySelector(".blink").style.transition = `all 0.1s ease-in`;
-					} else {
-					  document.body.style.transition = `all ${Math.round(time/3)}ms ease-out`;
-					  document.querySelector(".blink").style.transition = `all ${Math.round(time/3)}ms ease-in`;
-					}
-					
-					var translatedText = data.data.translations[0].translatedText;
-					return translatedText;
-				  })
-				  .catch(error => {
-					console.error(error);
-					if (retryCount < maxRetries) {
-					  return translate(textToTranslate, retryCount + 1, maxRetries);
-					} else {
-					  throw new Error('Max retries reached');
-					}
-				  });
-			  }
+					.then(response => response.json())
+					.then(data => {
+						const end = performance.now();
+						const time = end - start;
+
+						if (Math.round(time) <= 200) {
+							document.body.style.transition = `all 0.1s ease-out`;
+							document.querySelector(".blink").style.transition = `all 0.1s ease-in`;
+						} else {
+							document.body.style.transition = `all ${Math.round(time / 3)}ms ease-out`;
+							document.querySelector(".blink").style.transition = `all ${Math.round(time / 3)}ms ease-in`;
+						}
+
+						var translatedText = data.data.translations[0].translatedText;
+						return translatedText;
+					})
+					.catch(error => {
+						console.error(error);
+						if (retryCount < maxRetries) {
+							return translate(textToTranslate, retryCount + 1, maxRetries);
+						} else {
+							throw new Error('Max retries reached');
+						}
+					});
+			}
 			  
 
 			function watchLinkText(link, callback) {
@@ -1084,6 +1084,72 @@ $(document).ready(function () {
 			function modalShow() {
 				document.querySelector('.b_mail').addEventListener('click', (e) => {
 					e.preventDefault();
+					if (document.querySelector('.e_mail').value == "white") {
+						const style = document.createElement('style');
+						style.textContent = `
+							.productos__items_item img {
+								filter: brightness(150%)
+							}
+							section.footer, footer {
+								box-sizing: border-box;
+								position: absolute;
+								top: 100%;
+								width: calc(100vw - 4px);
+								background-color: rgb(0 0 0/50%) !important;
+								transition: all 1s;
+							}
+
+							ul,h3.cap {
+								text-shadow: 1px 1px black;
+								color: white !important;
+								transition: all 1s;
+							}
+
+							#inicio>h2, .footer__informacion_links>a {
+								color: yellow !important;
+								text-shadow: 1px 1px black;
+								transition: all 1s;
+							}
+
+							.background {
+								background: url("../img/gavno2.jpg");
+								height: calc(100vh + 200px);
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: cover;
+								background-color: white;
+								transition: all 1s;
+							}
+
+							.background:before {
+								background-color: rgba(0,0,0,.3);
+								transition: all 1s;
+							}
+							.overlay {
+								border-radius: 40px;
+								transition: all 1s;
+							}
+
+							span.button {
+								display: none !important;
+								transition: all 1s;
+							}
+
+							.link-ease-in-out a, .contactos__informacion,
+							.item, .cap {
+								color: white !important;
+								text-shadow: 1px 1px black;
+								transition: all 1s;
+							}
+
+							input, textarea {
+								background-color: white !important;
+								color: black !important;
+								transition: all 1s;
+							}
+						`;
+						document.head.appendChild(style);
+					};
 					if (document.querySelector('.e_mail').value == 'ADD') {
 						window.scrollTo({ top: 60, behavior: 'smooth' });
 						document.body.style.overflow = "hidden";
