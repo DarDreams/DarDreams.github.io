@@ -2075,31 +2075,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
         function addClickSound(selector, event, path, vol) {
             const elements = document.querySelectorAll(selector);
-            elements.forEach(element => {
-              const eventName = 'on' + event;
-              if (typeof element[eventName] === 'function') {
-                const existingFunction = element[eventName];
-                element[eventName] = function (e) {
-                  existingFunction(e);
-                  if (event === 'click' && e.button !== 0) return;
-                  const audio = new Audio(path);
-                  audio.volume = vol;
-                  audio.play().catch(function(error) {
-                    console.log('Error playing sound: ' + error);
-                  });
-                };
-              } else {
-                element[eventName] = function (e) {
-                  if (event === 'click' && e.button !== 0) return;
-                  const audio = new Audio(path);
-                  audio.volume = vol;
-                  audio.play().catch(function(error) {
-                    console.log('Error playing sound: ' + error);
-                  });
-                };
-              }
-            });
+            for (let i = 0; i < elements.length; i++) {
+              const element = elements[i];
+              element.removeEventListener(event, handleClickSound);
+              element.addEventListener(event, handleClickSound);
+            }
+            
+            function handleClickSound(e) {
+              if (event === 'click' && e.button !== 0) return;
+              const audio = new Audio(path);
+              audio.volume = vol;
+              audio.play().catch(function(error) {
+                console.log('Error playing sound: ' + error);
+              });
+            }
           }
+          
+          
           
           
 
@@ -2110,10 +2102,10 @@ window.addEventListener('DOMContentLoaded', () => {
         addClickSound('.points', "mouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('img', "mouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('.line', "mouseenter", '../mp3/menu.mp3', 0.1);
-        addClickSound('button', "mousedown", '../mp3/click.mp3', 0.01);
-        addClickSound('tbody', "mousedown", "../mp3/click.mp3", 0.01);
-        addClickSound('img', "mousedown", "../mp3/click.mp3", 0.01);
-        addClickSound('li', "mousedown", "../mp3/click.mp3", 0.01);
+        addClickSound('button', "click", '../mp3/click.mp3', 0.01);
+        addClickSound('tbody', "click", "../mp3/click.mp3", 0.01);
+        addClickSound('img', "click", "../mp3/click.mp3", 0.01);
+        //addClickSound('li', "click", "../mp3/click.mp3", 0.01);
 
 
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
