@@ -1,6 +1,10 @@
 //@media (max-width: var(--mediaa)) { ////////////////////////////MEDIA
     @media (max-width: 768px) { ////////////////////////////MEDIA
 
+    :root {
+        --header: "inicio";
+    }
+
     body {
         overflow: hidden;
         //height: 100vh;
@@ -49,6 +53,17 @@
             --animate-duration: .5s;
             
           //  border: 1px ridge var(--red);
+        }
+        &:before {
+            content: var(--header);
+            position: relative;
+            left: 0;
+            transform: translateX(-140%);
+            //z-index: 99;
+            display: block;
+            font-size: 30px;
+            top: 3vh;
+            color: white;
         }
 
     }
@@ -101,14 +116,6 @@
         width: 100vw;
         h2 {
             margin:0;
-        }
-        &:before{
-            content: "INICIO";
-            position: relative;
-            display: block;
-            top:-1vh;
-            color: white;
-            text-align: center;
         }
     }
 

@@ -119,6 +119,7 @@ $(document).ready(function () {
 				$(".inicio_link").click(function (e) {
 					e.preventDefault();
 					menuGoRight();
+					//document.body.style.setProperty('--header', `${document.querySelector('a.inicio_link').textContent}`);
 
 					$(".overlay").fadeIn();
 					$(".inicio").show();
