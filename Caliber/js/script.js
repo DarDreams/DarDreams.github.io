@@ -5,7 +5,7 @@ import {
  
  
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata;
+    let id, alldata, setUrl;
     
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
@@ -50,56 +50,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
    
     let caliber = caliberFunc(caliberImport01, caliberImport02);
-
-
-
-    /* #region  SORT OPERATORS */
-    // caliber.data[2].sort((a, b) => {
-    //     const lastLetterA = a[8][1].slice(-1);
-    //     const lastLetterB = b[8][1].slice(-1);
-    //     return lastLetterA.localeCompare(lastLetterB);
-    // });
-
-    // caliber.data[3].sort((a, b) => {
-    //     const lastLetterA = a[8][1].slice(-1);
-    //     const lastLetterB = b[8][1].slice(-1);
-    //     return lastLetterA.localeCompare(lastLetterB);
-    // });
-
-    /* #endregion */
-
-
-
-
-
-    //console.log('CALIBER_DATAS - ', caliber);
-
-    /* #region  OLD VERSION */
-    // caliberNew.data[2][0][11].splice(0);
-    // caliberNew.data[2][0][9].splice(0);
-    // caliberNew.data[2][1][11].splice(0);
-    // caliberNew.data[2][1][9].splice(0);
-    // caliberNew.data[2][2][11].splice(0);
-    // caliberNew.data[2][2][9].splice(0);
-    // caliberNew.data[2][2][9].splice(0);
-    // caliberNew.data[2][3][11].splice(0);
-    // caliberNew.data[3][0][11].splice(0);
-    // caliberNew.data[3][0][9].splice(0);
-    // caliberNew.data[3][1][11].splice(0);
-    // caliberNew.data[3][1][9].splice(0);
-    // caliberNew.data[3][2][11].splice(0);
-    // caliberNew.data[3][2][9].splice(0);
-    // caliberNew.data[3][3][11].splice(0);
-    // caliberNew.data[3][3][9].splice(0);
-    /* #endregion */
-
-    // try {
-
-    // } catch (e) {
-    //     console.error("ошибка в пересборке объекта - ", e.message);
-    // }
-
-    /* #endregion */
 
     /* #region  CONVERT_SECONDS */
     function convertSecondsToTime(seconds) {
@@ -1190,37 +1140,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     const hint = document.createElement('div');
                     hint.classList.add('hint');
                     try {
-                        // let h = spread[0][20];
-                        // let q = spread[0][8][15][1].toString();
-                        // console.log(q);
-                        //let r = h.tight_fit; //работает
-                        //let r = spread[0][20][`${spread[0][8][15][1]}`] // нет , почему? и ка ксделать чтобы работало?
-
-
-                        //console.log(perk1,perk2,perk3,perk4);
-
-                        // let lvlPerks = spread[0][20][0].find(key => key.includes(spread[0][8][15]));
-                        // lvlPerk = (Object.keys(perksRus).find(key => key.includes(caliber[7][user][][20])))   
-
                         hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g, "<br>");
-
-                        // console.log(spread[0][8][15][0]);
-                        // let perk1 = spread[0][20][`${spread[0][8][15][0]}`];
-                        // let perk2 = spread[0][20][`${spread[0][8][15][1]}`];
-                        // let perk3 = spread[0][20][`${spread[0][8][15][2]}`];
-                        // let perk4 = spread[0][20][`${spread[0][8][15][3]}`];
-                        // //console.log(perk4);
-
-                        // if (perk1 == 1) {
-                        //    // console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));    
-                        //     let numbers = hint.innerHTML.match(/\d+\/(\d+)\/d+/g);
-                        //     let firstNumber = numbers[0].split('/')[2];
-                        //     let highlightedText = hint.innerHTML.replace(firstNumber, '<b>' + firstNumber + '</b>');
-                        //     console.log(highlightedText);
-
-                        // }
-                        //console.log((hint.innerHTML.match(/\d+([\.,]\d+)?(%|\b)/g)[0]));
-
                     } catch (e) { console.error(e.message) }
                     //console.log(element);
                     document.body.insertAdjacentElement('afterbegin', hint);
@@ -1521,6 +1441,9 @@ window.addEventListener('DOMContentLoaded', () => {
         id = data1[0];
         alldata = [data1, data2]
         sounds();
+        sortTable(".team1Table");
+        sortTable(".team2Table");
+        //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
     }
 
      //try {
@@ -1529,6 +1452,7 @@ window.addEventListener('DOMContentLoaded', () => {
         loadData(new URLSearchParams(window.location.search).get('filename'));
     } else  {
         upload(caliber.data, caliber.log);
+        //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
        
     }
     
@@ -1677,6 +1601,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         console.log(`2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
  
                         getFileList(`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
+                        setUrl;
                         //getFileList();
 
                         /* #region  OLD CLICK CALENDAR */
@@ -1809,6 +1734,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('.bluePoints').innerHTML = '';
                     document.querySelector('.redPoints').innerHTML = '';
                     loadData(`data/${strPath}/${e.target.textContent.replace('.json','')}`);
+                    console.log("zae...");
+                    history.pushState(null, null, `/?filename=data/${strPath}/${e.target.textContent.replace('.json','')}`);
                 })
             }); 
            
@@ -1894,7 +1821,11 @@ window.addEventListener('DOMContentLoaded', () => {
             upload(caliber_file.data, caliber_file.log);
             updateDB(caliber_file);
            //history.pushState(null, null, `/?filename=${caliber_file.data[0]}_${saveData(createdDate)}`);
-            history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+            
+            setUrl = function () {
+                history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+            }
+            setUrl;
            // window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
             //sounds(); 
 
@@ -2027,8 +1958,9 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.timeScore').style.setProperty('--animate-duration', '1.2s');
     }
  
+
     /* #region  SOUNDS */
-    
+
     function sounds() {
         // const tr = document.querySelectorAll('.line');
         // tr.forEach(element => {
@@ -2090,14 +2022,6 @@ window.addEventListener('DOMContentLoaded', () => {
               });
             }
           }
-          
-          
-          
-          
-
-
-
-
 
         addClickSound('.points', "mouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('img', "mouseenter", '../mp3/move.mp3', 0.035);
@@ -2166,10 +2090,35 @@ window.addEventListener('DOMContentLoaded', () => {
         });
         //updateDB(caliber);
     }
-       
+    
+    function sortTable(table) {
+        try {
+        const team1Table = document.querySelector(table);
 
-
-
+        const rowAssault = team1Table.querySelector("img.oper[src*='_A_']");
+        const rowGunner  = team1Table.querySelector("img.oper[src*='_G_']");
+        const rowMedic   = team1Table.querySelector("img.oper[src*='_M_']");
+        const rowSniper  = team1Table.querySelector("img.oper[src*='_S_']");
+        
+        const firstRow   = team1Table.querySelectorAll('tbody')[1];
+        team1Table.insertBefore(rowAssault.closest('tbody'), firstRow);
+        const secondRow  = team1Table.querySelectorAll('tbody')[2];
+        team1Table.insertBefore(rowGunner.closest('tbody'), secondRow);
+        const thirdRow   = team1Table.querySelectorAll('tbody')[3];
+        team1Table.insertBefore(rowMedic.closest('tbody'), thirdRow);
+        const fourthRow  = team1Table.querySelectorAll('tbody')[4];
+        team1Table.insertBefore(rowSniper.closest('tbody'), fourthRow);
+        } catch {}
+        document.querySelectorAll('.team1Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultLogo"><title>assault</title><use xlink:href="#assault"></use></svg>`
+        document.querySelectorAll('.team1Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerLogo"><title>assault</title><use xlink:href="#gunner"></use></svg>`
+        document.querySelectorAll('.team1Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicLogo"><title>assault</title><use xlink:href="#medic"></use></svg>`
+        document.querySelectorAll('.team1Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperLogo"><title>assault</title><use xlink:href="#sniper"></use></svg>`
+        /////////////
+        document.querySelectorAll('.team2Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultRLogo"><title>assault</title><use xlink:href="#assaultR"></use></svg>`
+        document.querySelectorAll('.team2Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerRLogo"><title>assault</title><use xlink:href="#gunnerR"></use></svg>`
+        document.querySelectorAll('.team2Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicRLogo"><title>assault</title><use xlink:href="#medicR"></use></svg>`
+        document.querySelectorAll('.team2Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperRLogo"><title>assault</title><use xlink:href="#sniperR"></use></svg>`
+    }
 
     // const table = document.getElementById('team1Table');
     // const rows = table.getElementsByTagName('tr');
