@@ -2,6 +2,7 @@
     @media (max-width: 768px) { ////////////////////////////MEDIA
 
     body {
+        overflow: hidden;
         //height: 100vh;
         //width: 100vw !important;
         
@@ -44,6 +45,7 @@
             position: absolute;
             right: 0;
             top:-40px;
+           height: 111vh;
             --animate-duration: .5s;
             
           //  border: 1px ridge var(--red);
@@ -72,7 +74,7 @@
 
     .container {
         //height: calc(100vh - 240px);
-        height: 100vh;
+        height: 80vh;
         margin: 0;
         padding: 0;
     }
@@ -99,6 +101,14 @@
         width: 100vw;
         h2 {
             margin:0;
+        }
+        &:before{
+            content: "INICIO";
+            position: relative;
+            display: block;
+            top:-1vh;
+            color: white;
+            text-align: center;
         }
     }
 
