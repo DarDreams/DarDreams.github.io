@@ -109,6 +109,10 @@
         top: 0;
     }
 
+    .empresa>.container>ul {
+        margin-top: 0px;
+    }
+
     .productos {
 
         //height: 100vh;
@@ -131,6 +135,14 @@
         top: 50% !important;
         transform: translateY(-40%) !important;
 
+    }
+
+    .contactos__informacion {
+        height: 40%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin-right: 20px;
+        padding-right: 20px;
     }
 
     .productos__items_item {
@@ -261,6 +273,7 @@
     }
 
     .button {
+        display: block !important;
         z-index: 99;
         position: fixed;
         width: 35px;

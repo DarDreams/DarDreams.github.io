@@ -2,13 +2,31 @@
     @media (max-width: 768px) { ////////////////////////////MEDIA
 
     :root {
-        --header: "inicio";
+        --header: "";
     }
 
     body {
         overflow: hidden;
         //height: 100vh;
         //width: 100vw !important;
+        &:before {
+            content: var(--header);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            //right: calc(50vw - 1em);
+            text-align: center;
+            //transform: translateX(-140%);
+            //display: block;
+            font-size: 30px;
+            text-transform: uppercase;
+            top: 13vh;
+            color: white;
+            text-shadow: 2px 2px #000;
+            box-shadow: 0px 4px 0px -1px red;
+            letter-spacing: 5px;
+        }
         
     }
 
@@ -40,36 +58,23 @@
 
 
 
-    .menu {
-        width: 200px;
-        text-transform: uppercase;
-        text-justify: inter-word;
-        display: none;
-        ul {
-            position: absolute;
-            right: 0;
-            top:-40px;
-           height: 111vh;
-            --animate-duration: .5s;
-            
-          //  border: 1px ridge var(--red);
+        .menu {
+            width: 200px;
+            text-transform: uppercase;
+            text-justify: inter-word;
+            display: none;
+    
+            ul {
+                position: absolute;
+                right: 0;
+                top: -40px;
+                height: 111vh;
+                --animate-duration: .5s;
+            }
+    
         }
-        &:before {
-            content: var(--header);
-            position: relative;
-            left: 0;
-            transform: translateX(-140%);
-            //z-index: 99;
-            display: block;
-            font-size: 30px;
-            top: 3vh;
-            color: white;
-        }
-
-    }
 
     .mobile {
-        //opacity: 1;
         display: flex;
         flex-direction: column-reverse;
         justify-content: center;
@@ -88,8 +93,7 @@
     }
 
     .container {
-        //height: calc(100vh - 240px);
-        height: 80vh;
+        height: 70vh;
         margin: 0;
         padding: 0;
     }
@@ -103,7 +107,6 @@
     }
 
     .slick-list {
-        //top: 150px !important;
         padding-top: 10vh !important;
         height: 100vh !important;
     }
@@ -165,6 +168,12 @@
         
 
     }
+
+    .contactos {
+        overflow-y: auto;
+        height: 100%;
+    }
+
     .productos__items_item {
         //margin-top: 80px;
         left: 50% ;
@@ -281,6 +290,7 @@
         transition: all 1.5s ease;
         }
        .button {
+            display: block !important;
             z-index: 99;
             position: fixed;
             width: 35px;

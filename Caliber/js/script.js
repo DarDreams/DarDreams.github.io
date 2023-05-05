@@ -1291,25 +1291,53 @@ window.addEventListener('DOMContentLoaded', () => {
         /* #endregion */
 
         /* #region  GROUPS COLORS */
+        // (function () {
+        //     let color;
+        //     let k = 0;
+        //     let group = document.querySelectorAll('.groups');
+        //     group.forEach((element, i) => {
+        //         if (i == 4) {
+        //             k = 0
+        //         };
+        //         let grValue = element.innerText.trim();
+        //         let groupElements = document.querySelectorAll(`[data-gr="${grValue}"]`);
+        //         if (groupElements.length > 1) {
+        //             (k > 2) ? color = '#ff323b' : color = 'lime';
+        //             k++;
+        //             groupElements.forEach((groupElement) => {
+        //                 groupElement.style.borderLeft = `4px solid ${color}`;
+        //             });
+        //         }
+        //     });
+        // })();
         (function () {
-            let color;
-            let k = 0;
-            let group = document.querySelectorAll('.groups');
-            group.forEach((element, i) => {
-                if (i == 4) {
-                    k = 0
-                };
-                let grValue = element.innerText.trim();
-                let groupElements = document.querySelectorAll(`[data-gr="${grValue}"]`);
+            let groups = {};
+            let elements = document.querySelectorAll('[data-gr]');
+            elements.forEach((element) => {
+                let grValue = element.getAttribute('data-gr');
+                let groupElements = groups[grValue] || (groups[grValue] = []);
+                groupElements.push(element);
+            });
+            let colors = ['lime', '#6aa5ee', 'yellow', 'orange'];  
+            let colorIndex = 0;
+            for (let key in groups) {
+                let groupElements = groups[key];
                 if (groupElements.length > 1) {
-                    (k > 2) ? color = '#ff323b' : color = 'lime';
-                    k++;
+                    let color = colors[colorIndex];
                     groupElements.forEach((groupElement) => {
                         groupElement.style.borderLeft = `4px solid ${color}`;
                     });
+                    colorIndex++;
+                    if (colorIndex >= colors.length) {
+                        break;
+                    }
                 }
-            });
+            }
         })();
+        
+        
+        
+        
         /* #endregion */
 
         // #region  MAPS
@@ -1728,13 +1756,12 @@ window.addEventListener('DOMContentLoaded', () => {
             const divLi = document.querySelectorAll('#list-container > ul > li');
             divLi.forEach(element => {
                 element.addEventListener('click', (e) => {
-                    console.log(`data/${strPath}/${e.target.textContent.replace('.json','')}`);
+                    //console.log(`data/${strPath}/${e.target.textContent.replace('.json','')}`);
                     document.querySelector('.team1Table').innerHTML = '';
                     document.querySelector('.team2Table').innerHTML = '';
                     document.querySelector('.bluePoints').innerHTML = '';
                     document.querySelector('.redPoints').innerHTML = '';
                     loadData(`data/${strPath}/${e.target.textContent.replace('.json','')}`);
-                    console.log("zae...");
                     history.pushState(null, null, `/?filename=data/${strPath}/${e.target.textContent.replace('.json','')}`);
                 })
             }); 
@@ -1962,75 +1989,31 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #region  SOUNDS */
 
     function sounds() {
-        // const tr = document.querySelectorAll('.line');
-        // tr.forEach(element => {
-        //   element.addEventListener('mouseenter', () => {
-        //     const audio = new Audio('../mp3/menu.mp3');
-        //     audio.volume = 0.1;
-        // try {
-        //   //  audio.play();
-        //   audio.play().catch(function(error) {
-        //     console.log('Error playing sound: ' + error);
-        // });
-        // } catch {}
-        //   })
-        // })
-
-
-        // const points = document.querySelectorAll('.points');
-        // points.forEach(element => {
-        //     element.addEventListener('mouseenter', () => {
-        //         const audio = new Audio(`../mp3/move.mp3`);
-        //         audio.volume = 0.035;
-        //     try {
-        //      //   audio.play();
-        //      audio.play().catch(function(error) {
-        //         console.log('Error playing sound: ' + error);
-        //     });
-        //     } catch {}
-        //     })
-        // })
-
-        // const img = document.querySelectorAll('img');
-        // img.forEach(element => {
-        //     element.addEventListener('mouseenter', () => {
-        //         const audio = new Audio(`../mp3/move.mp3`);
-        //         audio.volume = 0.035;
-        //     try {
-        //       //  audio.play();
-        //       audio.play().catch(function(error) {
-        //         console.log('Error playing sound: ' + error);
-        //     });
-        //     } catch {}
-        //     })
-        // })
-
         function addClickSound(selector, event, path, vol) {
             const elements = document.querySelectorAll(selector);
             for (let i = 0; i < elements.length; i++) {
-              const element = elements[i];
-              element.removeEventListener(event, handleClickSound);
-              element.addEventListener(event, handleClickSound);
+                const element = elements[i];
+                element[event] = handleClickSound;
             }
-            
+
             function handleClickSound(e) {
-              if (event === 'click' && e.button !== 0) return;
-              const audio = new Audio(path);
-              audio.volume = vol;
-              audio.play().catch(function(error) {
-                console.log('Error playing sound: ' + error);
-              });
+                if (event === 'click' && e.button !== 0) return;
+                const audio = new Audio(path);
+                audio.volume = vol;
+                audio.play().catch(function (error) {
+                    console.log('Error playing sound: ' + error);
+                });
             }
-          }
-
-        addClickSound('.points', "mouseenter", '../mp3/move.mp3', 0.035);
-        addClickSound('img', "mouseenter", '../mp3/move.mp3', 0.035);
-        addClickSound('.line', "mouseenter", '../mp3/menu.mp3', 0.1);
-        addClickSound('button', "click", '../mp3/click.mp3', 0.01);
-        addClickSound('tbody', "click", "../mp3/click.mp3", 0.01);
-        addClickSound('img', "click", "../mp3/click.mp3", 0.01);
-        //addClickSound('li', "click", "../mp3/click.mp3", 0.01);
-
+        } 
+   
+         addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
+         addClickSound('img', "onmouseenter", '../mp3/move.mp3', 0.035);
+         addClickSound('.line', "onmouseenter", '../mp3/menu.mp3', 0.1);
+         addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
+         addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
+         addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
+         addClickSound('li', "onclick", "../mp3/click.mp3", 0.01);
+         addClickSound('li', "onmouseenter", "../mp3/menu.mp3", 0.035);
 
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
     }
@@ -2108,7 +2091,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const thirdRow   = team1Table.querySelectorAll('tbody')[3];
             team1Table.insertBefore(rowMedic.closest('tbody'), thirdRow);
-            
+
             const fourthRow  = team1Table.querySelectorAll('tbody')[4];
             team1Table.insertBefore(rowSniper.closest('tbody'), fourthRow);
             

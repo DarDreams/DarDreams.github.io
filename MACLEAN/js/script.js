@@ -118,8 +118,8 @@ $(document).ready(function () {
 			function setLinks() {
 				$(".inicio_link").click(function (e) {
 					e.preventDefault();
+					document.body.style.setProperty('--header', "'"+document.querySelector("a.inicio_link").textContent+"'");
 					menuGoRight();
-					//document.body.style.setProperty('--header', `${document.querySelector('a.inicio_link').textContent}`);
 
 					$(".overlay").fadeIn();
 					$(".inicio").show();
@@ -136,6 +136,9 @@ $(document).ready(function () {
 				$(".empresa_link").click(function (e) {
 					e.preventDefault();
 					menuGoRight();
+
+					document.body.style.setProperty('--header', "'"+document.querySelector("a.empresa_link").textContent+"'");
+
 					$("html, body").animate({ scrollTop: 0 + "px" });
 					$(".overlay").fadeIn();
 					$(".empresa").show();
@@ -151,6 +154,9 @@ $(document).ready(function () {
 				$(".contactos_link").click(function (e) {
 					e.preventDefault();
 					menuGoRight();
+
+					document.body.style.setProperty('--header', "");
+
 					$("html, body").animate({ scrollTop: 0 + "px" });
 					$(".overlay").fadeIn();
 					$(".inicio").fadeOut(1000);
@@ -166,6 +172,9 @@ $(document).ready(function () {
 				$(".productos_link").click(function (e) {
 					e.preventDefault();
 					menuGoRight();
+
+					document.body.style.setProperty('--header', "'"+document.querySelector("a.productos_link").textContent+"'");
+
 					document.querySelector('.productos').style.visibility = '';
 					//$('button.slick-prev').click();
 					$("html, body").animate({ scrollTop: 0 + "px" });
@@ -213,17 +222,27 @@ $(document).ready(function () {
 			const divBurger = document.querySelector('span.button');
 			const divList = document.querySelector('.menu>nav>ul');
 			const divBackground = document.querySelector('.background');
+			const divInicio = document.querySelector('.inicio');
+			const divEmpresa = document.querySelector('.empresa');
+			const divProductos = document.querySelector('.productos');
+			const divContactos = document.querySelector('.contactos');
+
+			function hideMenu() {
+				if (divList.classList.contains('animate__slideOutRight') == false) {
+					divBurger.click();
+					divBurger.removeAttribute('style');
+				}
+				divBackground.onclick = null;
+			}
 
 			divBurger.addEventListener('click', () => {
 				divList.classList.add('animate__animated');
-				divBackground.onclick = () => {
-					if (divList.classList.contains('animate__slideOutRight') == false) {
-						divBurger.click();
-						divBurger.removeAttribute('style');
-					}
 
-					divBackground.onclick = null;
-				};
+				divBackground.onclick = hideMenu;
+				divInicio.onclick     = hideMenu;
+				divEmpresa.onclick    = hideMenu;
+				divProductos.onclick  = hideMenu;
+				divContactos.onclick  = hideMenu;
 
 				if (divList.getBoundingClientRect().left > 0) {
 					divList.classList.toggle('animate__slideOutRight');
@@ -601,8 +620,11 @@ $(document).ready(function () {
 					arrows: false,
 					slidesToShow: 1,
 					slidesPerRow: 1,
-					infinite: false
+					infinite: false,
+						waitForAnimate: false,
+						waitForLoad: true,
 				});
+				//slickGoTo(index)
 				// } else if (mediaQuery1900.matches) {
 				// 	//alert('');
 				// 	$(".productos__items").slick({
@@ -1081,7 +1103,7 @@ $(document).ready(function () {
 			});
 			/* #endregion */
 
-			/* #region  MODAL */
+			/* #region  MODAL & THEME WHITE */
 			function modalShow() {
 				document.querySelector('.b_mail').addEventListener('click', (e) => {
 					e.preventDefault();
@@ -1132,7 +1154,7 @@ $(document).ready(function () {
 							}
 
 							span.button {
-								display: none !important;
+							    display: none;
 								transition: all 1s;
 							}
 
