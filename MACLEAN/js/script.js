@@ -331,6 +331,25 @@ $(document).ready(function () {
 				}
 			}
 
+			async function langCards(text) {
+				if (localStorage.getItem("lang").toLowerCase() == "es") {
+				  return text;
+				} else {
+				  try {
+					const translatedText = await translate(text);
+					return translatedText;
+				  } catch (error) {
+					console.error("error language ", error);
+					return text;
+				  }
+				}
+			  }
+			  
+			
+			  
+			  
+			  
+
 			function setLang() {
 				for (let i = 0; i < content.menu.length; i++) {
 					lang(`.${content.menu[i]}_link`, content.menu[i], "textContent")
@@ -476,7 +495,7 @@ $(document).ready(function () {
 				</div>
 				<div class="item__back">
 					<h3 title = "${name} ${peso}" class = "caption">${name} ${peso}</h3>	
-					<p class = "description" title ="${descr}">${descr}</p>
+					<p class = "description" title =${descr}>${descr}</p>
 					<p class = "ingredientes" title = "${ingredientes}">Ingredientes: ${ingredientes}</p>
 					<p class = "inf">INFORMACIÓN NUTRICIONAL:<br>
 					Valor medio 100g de producto.<br>
@@ -624,7 +643,7 @@ $(document).ready(function () {
 						waitForAnimate: false,
 						waitForLoad: true,
 				});
-				//slickGoTo(index)
+				//$(".productos__items").slickGoTo(0);
 				// } else if (mediaQuery1900.matches) {
 				// 	//alert('');
 				// 	$(".productos__items").slick({
