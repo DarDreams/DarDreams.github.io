@@ -2093,45 +2093,35 @@ window.addEventListener('DOMContentLoaded', () => {
     
     function sortTable(table) {
         try {
-        const team1Table = document.querySelector(table);
+            const team1Table = document.querySelector(table);
 
-        const rowAssault = team1Table.querySelector("img.oper[src*='_A_']");
-        const rowGunner  = team1Table.querySelector("img.oper[src*='_G_']");
-        const rowMedic   = team1Table.querySelector("img.oper[src*='_M_']");
-        const rowSniper  = team1Table.querySelector("img.oper[src*='_S_']");
-        
-        const firstRow   = team1Table.querySelectorAll('tbody')[1];
-        team1Table.insertBefore(rowAssault.closest('tbody'), firstRow);
-        const secondRow  = team1Table.querySelectorAll('tbody')[2];
-        team1Table.insertBefore(rowGunner.closest('tbody'), secondRow);
-        const thirdRow   = team1Table.querySelectorAll('tbody')[3];
-        team1Table.insertBefore(rowMedic.closest('tbody'), thirdRow);
-        const fourthRow  = team1Table.querySelectorAll('tbody')[4];
-        team1Table.insertBefore(rowSniper.closest('tbody'), fourthRow);
+            const rowAssault = team1Table.querySelector("img.oper[src*='_A_']");
+            const rowGunner  = team1Table.querySelector("img.oper[src*='_G_']");
+            const rowMedic   = team1Table.querySelector("img.oper[src*='_M_']");
+            const rowSniper  = team1Table.querySelector("img.oper[src*='_S_']");
+            
+            const firstRow   = team1Table.querySelectorAll('tbody')[1];
+            team1Table.insertBefore(rowAssault.closest('tbody'), firstRow);
+
+            const secondRow  = team1Table.querySelectorAll('tbody')[2];
+            team1Table.insertBefore(rowGunner.closest('tbody'), secondRow);
+
+            const thirdRow   = team1Table.querySelectorAll('tbody')[3];
+            team1Table.insertBefore(rowMedic.closest('tbody'), thirdRow);
+            
+            const fourthRow  = team1Table.querySelectorAll('tbody')[4];
+            team1Table.insertBefore(rowSniper.closest('tbody'), fourthRow);
+            
+            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultLogo"><title>assault</title><use xlink:href="#assault"></use></svg>`
+            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerLogo"><title>assault</title><use xlink:href="#gunner"></use></svg>`
+            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicLogo"><title>assault</title><use xlink:href="#medic"></use></svg>`
+            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperLogo"><title>assault</title><use xlink:href="#sniper"></use></svg>`
+            /////////////
+            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultRLogo"><title>assault</title><use xlink:href="#assaultR"></use></svg>`
+            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerRLogo"><title>assault</title><use xlink:href="#gunnerR"></use></svg>`
+            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicRLogo"><title>assault</title><use xlink:href="#medicR"></use></svg>`
+            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperRLogo"><title>assault</title><use xlink:href="#sniperR"></use></svg>`
         } catch {}
-        document.querySelectorAll('.team1Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultLogo"><title>assault</title><use xlink:href="#assault"></use></svg>`
-        document.querySelectorAll('.team1Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerLogo"><title>assault</title><use xlink:href="#gunner"></use></svg>`
-        document.querySelectorAll('.team1Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicLogo"><title>assault</title><use xlink:href="#medic"></use></svg>`
-        document.querySelectorAll('.team1Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperLogo"><title>assault</title><use xlink:href="#sniper"></use></svg>`
-        /////////////
-        document.querySelectorAll('.team2Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultRLogo"><title>assault</title><use xlink:href="#assaultR"></use></svg>`
-        document.querySelectorAll('.team2Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerRLogo"><title>assault</title><use xlink:href="#gunnerR"></use></svg>`
-        document.querySelectorAll('.team2Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicRLogo"><title>assault</title><use xlink:href="#medicR"></use></svg>`
-        document.querySelectorAll('.team2Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperRLogo"><title>assault</title><use xlink:href="#sniperR"></use></svg>`
     }
 
-    // const table = document.getElementById('team1Table');
-    // const rows = table.getElementsByTagName('tr');
-    // const firstRow = rows[0];
-    // const secondRow = rows[1];
-    // const thirdRow = rows[2];
-    // const fourthRow = rows[3];
-
-    // // Получаем родительский элемент строк
-    // const rowParent = firstRow.parentNode;
-
-    // // Меняем местами строки
-    // rowParent.insertBefore(fourthRow, firstRow);
-    // rowParent.insertBefore(secondRow, thirdRow);
-    //sounds();
 }); /////////////////END
