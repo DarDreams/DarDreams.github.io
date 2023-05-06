@@ -2,33 +2,34 @@ import {
     caliber as caliberImport01,
     caliber2 as caliberImport02
 } from "./game.js";
- 
- 
+
+
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata, setUrl;
-    
+    let rankTeam = [];
+
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
 
     let caliberFunc = function (caliberImport, caliberImport2) {
-            const caliberNew = {
-                data: [caliberImport[0],
-                caliberImport[2],
-                [caliberImport[7][0], caliberImport[7][1], caliberImport[7][2], caliberImport[7][3]],
-                [caliberImport[7][4], caliberImport[7][5], caliberImport[7][6], caliberImport[7][7]]
+        const caliberNew = {
+            data: [caliberImport[0],
+            caliberImport[2],
+            [caliberImport[7][0], caliberImport[7][1], caliberImport[7][2], caliberImport[7][3]],
+            [caliberImport[7][4], caliberImport[7][5], caliberImport[7][6], caliberImport[7][7]]
+            ],
+            log: {
+                Users: [
+                    [caliberImport2.Log.Users[0], caliberImport2.Log.Users[1], caliberImport2.Log.Users[2], caliberImport2.Log.Users[3]],
+                    [caliberImport2.Log.Users[4], caliberImport2.Log.Users[5], caliberImport2.Log.Users[6], caliberImport2.Log.Users[7]]
                 ],
-                log: {
-                    Users: [
-                        [caliberImport2.Log.Users[0], caliberImport2.Log.Users[1], caliberImport2.Log.Users[2], caliberImport2.Log.Users[3]],
-                        [caliberImport2.Log.Users[4], caliberImport2.Log.Users[5], caliberImport2.Log.Users[6], caliberImport2.Log.Users[7]]
-                    ],
-                    MatchTimeSeconds: caliberImport2.Log.MatchTimeSeconds,
-                    MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
-                    PlayerReport: caliberImport2.Log.PlayerReports,
-                    Rounds: caliberImport2.Log.Rounds
-                }
-            };
-        
+                MatchTimeSeconds: caliberImport2.Log.MatchTimeSeconds,
+                MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
+                PlayerReport: caliberImport2.Log.PlayerReports,
+                Rounds: caliberImport2.Log.Rounds
+            }
+        };
+
 
         for (let i = 2; i <= 3; i++) {
             for (let j = 0; j <= 3; j++) {
@@ -48,7 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
-   
+
     let caliber = caliberFunc(caliberImport01, caliberImport02);
 
     /* #region  CONVERT_SECONDS */
@@ -670,7 +671,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 // console.dir(`${data1[2][0][8][1].slice(-1)}niper`);
                 if (k == 2) {
                     operLoop = ['assault', 'gunner', 'medic', 'sniper'];
-
+                    
                 }
                 //operLoop = [];
 
@@ -682,6 +683,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
                 if (k == 3) {
+                    
                     // operLoop = [];
                     // for (let i = 0 ; i < 4; i++) {
 
@@ -970,8 +972,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     recive: Math.floor(data2.Users[k - 2][i].DamageReceived)
                 };
 
-
-
                 /* #region  RATING RANGE */
                 function getRange(number) {
                     const ranges = [
@@ -1127,63 +1127,64 @@ window.addEventListener('DOMContentLoaded', () => {
             </tr>
         `)
                 /* #endregion */
-                const perks = document.querySelectorAll(`.team${k - 1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
+            const perks = document.querySelectorAll(`.team${k - 1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
 
-                perks.forEach(function (s) {
-                    s.addEventListener('mousedown', function (event) {
-                        showHint(s, data1[k][i], event.pageX, event.pageY);
-                    });
+            perks.forEach(function (s) {
+                s.addEventListener('mousedown', function (event) {
+                    showHint(s, data1[k][i], event.pageX, event.pageY);
+                });
+            });
+
+            function showHint(selector, ...spread) {
+                const element = selector;
+                const hint = document.createElement('div');
+                hint.classList.add('hint');
+                try {
+                    hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g, "<br>");
+                } catch (e) { console.error(e.message) }
+                //console.log(element);
+                document.body.insertAdjacentElement('afterbegin', hint);
+                const x = event.clientX + window.pageXOffset;
+                hint.style.top = `${spread[2] + 5}px`;
+                //hint.style.left = `${spread[3] + 5}px`;
+                hint.style.left = `${x + 5}px`;
+                hint.style.display = 'block';
+
+                document.body.addEventListener('mouseup', function () {
+                    hint.remove();
                 });
 
-                function showHint(selector, ...spread) {
-                    const element = selector;
-                    const hint = document.createElement('div');
-                    hint.classList.add('hint');
-                    try {
-                        hint.innerHTML = (Object.values(perksRus).find(key => key.includes(element.textContent))[1]).replaceAll(/\n/g, "<br>");
-                    } catch (e) { console.error(e.message) }
-                    //console.log(element);
-                    document.body.insertAdjacentElement('afterbegin', hint);
-                    const x = event.clientX + window.pageXOffset;
-                    hint.style.top = `${spread[2] + 5}px`;
-                    //hint.style.left = `${spread[3] + 5}px`;
-                    hint.style.left = `${x + 5}px`;
-                    hint.style.display = 'block';
+                document.addEventListener('mouseup', function () {
+                    hint.remove();
+                });
+                
+                // element.addEventListener('mousedown', function(event) {
+                //     console.log(event.target.parentElement);
+                //     const x = event.pageX;// - element.offsetLeft;
+                //     const y = event.pageY; //- element.offsetTop;
+                //     //console.log(element.offsetLeft,element.offsetTop);
+                //     hint.style.display = 'block';
+                //     hint.style.top = `${y + 5}px`;
+                //     hint.style.left = `${x + 5}px`;
+                // });
 
-                    document.body.addEventListener('mouseup', function () {
-                        hint.remove();
-                    });
+                // document.addEventListener('mousedown', e => {
+                //     // Получить текущие координаты курсора
+                //     const x = e.clientX;
+                //     const y = e.clientY;
 
-                    document.addEventListener('mouseup', function () {
-                        hint.remove();
-                    });
-                    // element.addEventListener('mousedown', function(event) {
-                    //     console.log(event.target.parentElement);
-                    //     const x = event.pageX;// - element.offsetLeft;
-                    //     const y = event.pageY; //- element.offsetTop;
-                    //     //console.log(element.offsetLeft,element.offsetTop);
-                    //     hint.style.display = 'block';
-                    //     hint.style.top = `${y + 5}px`;
-                    //     hint.style.left = `${x + 5}px`;
-                    // });
+                //     // Установить позицию .hint относительно координат курсора
+                //     hint.style.left = `${x + 10}px`;
+                //     hint.style.top = `${y + 10}px`;
 
-                    // document.addEventListener('mousedown', e => {
-                    //     // Получить текущие координаты курсора
-                    //     const x = e.clientX;
-                    //     const y = e.clientY;
-
-                    //     // Установить позицию .hint относительно координат курсора
-                    //     hint.style.left = `${x + 10}px`;
-                    //     hint.style.top = `${y + 10}px`;
-
-                    //     // Показать .hint
-                    //     console.log(e.target);
-                    //     hint.style.display = 'block';
-                    //   });
+                //     // Показать .hint
+                //     console.log(e.target);
+                //     hint.style.display = 'block';
+                //   });
 
                 }
             };
-
+            
         }
 
         /* #region  HINT */
@@ -1291,25 +1292,6 @@ window.addEventListener('DOMContentLoaded', () => {
         /* #endregion */
 
         /* #region  GROUPS COLORS */
-        // (function () {
-        //     let color;
-        //     let k = 0;
-        //     let group = document.querySelectorAll('.groups');
-        //     group.forEach((element, i) => {
-        //         if (i == 4) {
-        //             k = 0
-        //         };
-        //         let grValue = element.innerText.trim();
-        //         let groupElements = document.querySelectorAll(`[data-gr="${grValue}"]`);
-        //         if (groupElements.length > 1) {
-        //             (k > 2) ? color = '#ff323b' : color = 'lime';
-        //             k++;
-        //             groupElements.forEach((groupElement) => {
-        //                 groupElement.style.borderLeft = `4px solid ${color}`;
-        //             });
-        //         }
-        //     });
-        // })();
         (function () {
             let groups = {};
             let elements = document.querySelectorAll('[data-gr]');
@@ -1318,7 +1300,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 let groupElements = groups[grValue] || (groups[grValue] = []);
                 groupElements.push(element);
             });
-            let colors = ['lime', '#6aa5ee', 'yellow', 'orange'];  
+            let colors = ['lime', '#6aa5ee', 'yellow', 'orange'];
             let colorIndex = 0;
             for (let key in groups) {
                 let groupElements = groups[key];
@@ -1334,10 +1316,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             }
         })();
-        
-        
-        
-        
+
+
+
+
         /* #endregion */
 
         // #region  MAPS
@@ -1399,27 +1381,19 @@ window.addEventListener('DOMContentLoaded', () => {
         // #endregion MAPS
 
         //  #region WIN / LOSE
-        (function () {
+        function winLose() {
             function color(color, text) {
                 document.querySelector("div.winLose > div").innerText = text;
                 document.querySelector("div.winLose > svg > path").style.fill = color;
                 document.querySelector("div.winLoseText").style.color = color;
             }
-            if (data1[2].some(player => player[2] == 'MASTER')) {
-                if (score(0) == data2.Rounds) {
-                    color('#6aa5ee', 'ПОБЕДА!');
-                } else {
-                    color('#6aa5ee', 'ПОРАЖЕНИЕ!');
-                }
-            } else if (data1[3].some(player => player[2] == 'MASTER')) {
-                if (score(1) == data2.Rounds) {
-                    color('#ff323b', 'ПОБЕДА!');
-                } else {
-                    color('#ff323b', 'ПОРАЖЕНИЕ!');
-                }
+
+            if (score(0) > data2.Rounds.length - score(0)) {
+                color('#6aa5ee', 'ПОБЕДА!');
+            } else {
+                color('#ff323b', 'ПОБЕДА!');
             }
-        })();
-        // #endregion WIN / LOSE
+        };
 
         //  #region SCORE
         function score(teamNumber) {
@@ -1436,6 +1410,9 @@ window.addEventListener('DOMContentLoaded', () => {
             return counts[teamKey];
         }
         // #endregion
+        // #endregion 
+
+
 
         //  #region COLOR POINTS
 
@@ -1471,23 +1448,28 @@ window.addEventListener('DOMContentLoaded', () => {
         sounds();
         sortTable(".team1Table");
         sortTable(".team2Table");
+        winLose();
+        
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
     }
 
-     //try {
- 
-     if (window.location.search.length > 0) {
+    // summRank('team1Table');
+    // summRank('team2Table');
+    // different();
+    //try {
+
+    if (window.location.search.length > 0) {
         loadData(new URLSearchParams(window.location.search).get('filename'));
-    } else  {
+    } else {
         upload(caliber.data, caliber.log);
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-       
+
     }
-    
-    
-     //} catch (e) {
-     //    console.error("Ошибка в функции upload - ", e.message);
-     //}
+
+
+    //} catch (e) {
+    //    console.error("Ошибка в функции upload - ", e.message);
+    //}
     /* #endregion END ALL DATAS*/
 
     /* #region  CALENDAR */
@@ -1586,7 +1568,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function getDaysInMonth(month, year) {
         return new Date(year, month + 1, 0).getDate();
     }
-    var selectedDate,strPath;
+    var selectedDate, strPath;
     function generateCalendar(month, year) {
         calendarBody.innerHTML = "";
         const daysInMonth = getDaysInMonth(month, year);
@@ -1620,15 +1602,15 @@ window.addEventListener('DOMContentLoaded', () => {
                         var year = date.getFullYear();
                         return day + '.' + month + '.' + year;
                     }
-                    
+
                     cell.addEventListener("click", function () {
-                        
-                         selectedDate = new Date(2023, month_selector.value - 1, 1);
+
+                        selectedDate = new Date(2023, month_selector.value - 1, 1);
                         //var formattedDate = formatDate(selectedDate);
-                        strPath = `2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`;
-                        console.log(`2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
- 
-                        getFileList(`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
+                        strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
+                        console.log(`2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+
+                        getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                         setUrl;
                         //getFileList();
 
@@ -1719,7 +1701,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         //     });
 
                         // });
-                       
+
                         // function myFunction(key) {
                         //     let data = JSON.parse(localStorage.getItem(key));
                         //     upload(data[0], data[1]);
@@ -1738,18 +1720,18 @@ window.addEventListener('DOMContentLoaded', () => {
     //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
     generateCalendar(month_selector.value - 1, new Date().getFullYear());
 
- 
+
     /* #region  обновить список игр */
     function getFileList(folder) {
         // Отправляем GET-запрос на сервер
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
-          // Парсим JSON-данные
-          console.log(data);
-          document.querySelector("#list-container").innerHTML = "";
+            // Парсим JSON-данные
+            console.log(data);
+            document.querySelector("#list-container").innerHTML = "";
             document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>")
             data.forEach(element => {
                 //loadList(element);
-                 document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
+                document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                     <li><span>${element}</span></li>
                  `)
             });
@@ -1761,31 +1743,31 @@ window.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('.team2Table').innerHTML = '';
                     document.querySelector('.bluePoints').innerHTML = '';
                     document.querySelector('.redPoints').innerHTML = '';
-                    loadData(`data/${strPath}/${e.target.textContent.replace('.json','')}`);
-                    history.pushState(null, null, `/?filename=data/${strPath}/${e.target.textContent.replace('.json','')}`);
+                    loadData(`data/${strPath}/${e.target.textContent.replace('.json', '')}`);
+                    history.pushState(null, null, `/?filename=data/${strPath}/${e.target.textContent.replace('.json', '')}`);
                 })
-            }); 
-           
-          //var fileList = JSON.parse(data);
-      
-          // Выводим полученный список файлов в консоль
-          //console.log(fileList);
-         
-      
-          // Очищаем список файлов
-          //$("#file-list").empty();
-      
-          // Добавляем новые элементы в список файлов
-        //   for (var i = 0; i < fileList.length; i++) {
-        //     var file = fileList[i];
-        //     var listItem = $("<li>").text(file.name);
-        //     $("#file-list").append(listItem);
-        //   }
-        });
-      }
+            });
 
-     
-    
+            //var fileList = JSON.parse(data);
+
+            // Выводим полученный список файлов в консоль
+            //console.log(fileList);
+
+
+            // Очищаем список файлов
+            //$("#file-list").empty();
+
+            // Добавляем новые элементы в список файлов
+            //   for (var i = 0; i < fileList.length; i++) {
+            //     var file = fileList[i];
+            //     var listItem = $("<li>").text(file.name);
+            //     $("#file-list").append(listItem);
+            //   }
+        });
+    }
+
+
+
     /* #endregion */
 
     month_selector.addEventListener('change', () => {
@@ -1812,7 +1794,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
-              createdDate = new Date(file.lastModified);
+        createdDate = new Date(file.lastModified);
         const reader = new FileReader();
         reader.readAsText(file);
         reader.onload = (event) => {
@@ -1822,49 +1804,49 @@ window.addEventListener('DOMContentLoaded', () => {
             data = data[0].replaceAll(/[^\x20-\x7E]+/g);
             data = data.replaceAll(/[^ -~]+/g);
             data = data.replace(/.*?({.*)/, "$1");
-            caliber_b  = data.match(/^(.*14":\[\]\})\w/s)[1];
+            caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
             try {
-            caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
+                caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
 
-            function fix(obj) {
-                let brokenObject = obj;
-                let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
-                fixedObject = JSON.parse(fixedObject);
-                return fixedObject;
+                function fix(obj) {
+                    let brokenObject = obj;
+                    let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+                    fixedObject = JSON.parse(fixedObject);
+                    return fixedObject;
+                }
+
+                caliber_b = fix(caliber_b);
+                caliber_b2 = fix(caliber_b2);
+
+                // caliber_b[8] = caliber_b[7].splice(4);
+                // caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0], caliber_b2.Log.Users[1], caliber_b2.Log.Users[2], caliber_b2.Log.Users[3]]
+                // caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
+                // caliber_b2.Log.Users.splice(2);
+
+                let caliber_file = caliberFunc(caliber_b, caliber_b2)
+                document.querySelectorAll('.points').forEach(item => {
+                    item.remove();
+                })
+                upload(caliber_file.data, caliber_file.log);
+                updateDB(caliber_file);
+                //history.pushState(null, null, `/?filename=${caliber_file.data[0]}_${saveData(createdDate)}`);
+
+                setUrl = function () {
+                    history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+                }
+                setUrl;
+                // window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
+                //sounds(); 
+
+                //saveData();
+            } catch (e) {
+                alert("Файл поврежден")
             }
-
-            caliber_b = fix(caliber_b);
-            caliber_b2 = fix(caliber_b2);
-        
-            // caliber_b[8] = caliber_b[7].splice(4);
-            // caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0], caliber_b2.Log.Users[1], caliber_b2.Log.Users[2], caliber_b2.Log.Users[3]]
-            // caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
-            // caliber_b2.Log.Users.splice(2);
-
-            let caliber_file = caliberFunc(caliber_b, caliber_b2)
-            document.querySelectorAll('.points').forEach(item => {
-                item.remove();
-            })
-            upload(caliber_file.data, caliber_file.log);
-            updateDB(caliber_file);
-           //history.pushState(null, null, `/?filename=${caliber_file.data[0]}_${saveData(createdDate)}`);
-            
-            setUrl = function () {
-                history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-            }
-            setUrl;
-           // window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
-            //sounds(); 
-
-            //saveData();
-        } catch (e){
-             alert("Файл поврежден")
         }
-        }
-        
+
         //saveData(createdDate);
 
-    }); 
+    });
     //#endregion CALENDAR
     /* #endregion */
 
@@ -1919,10 +1901,10 @@ window.addEventListener('DOMContentLoaded', () => {
         return day;
         if (localStorage.getItem('rec') == 'true') {
             // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
-          //  localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
+            //  localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
         }
     }
-  
+
     /* #endregion */
     try {
         document.querySelector('.geo').addEventListener('click', () => {
@@ -1940,7 +1922,7 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);
     }
 
-    function summRank(selector) {
+    function summRank (selector) {
         let rank = 0;
         document.querySelectorAll(`.${selector} > tbody > tr > td > span.rank`).forEach(element => {
             rank += +element.textContent;
@@ -1948,26 +1930,31 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`.different`).insertAdjacentHTML('beforeend', `
             <span class='${selector}Diff'>${rank}</span>
         `)
-        //return rank;
+        return rank;
     }
 
     function different() {
+        if (document.querySelector(`.team1TableDiff`)) {document.querySelector(`.team1TableDiff`).innerHTML='';}
+        if (document.querySelector(`.team2TableDiff`)) {document.querySelector(`.team2TableDiff`).innerHTML='';}
+        if (document.querySelector(`.diffTeams`)) {document.querySelector(`.diffTeams`).innerHTML='';}
         const team1Diff = +document.querySelector('.team1TableDiff').textContent;
         const team2Diff = +document.querySelector('.team2TableDiff').textContent;
+
         document.querySelector(`.team1TableDiff`).insertAdjacentHTML('afterend', `
             <span class='diffTeams'>${Math.abs(team1Diff - team2Diff)}</span>
         `);
         let max = Math.max(+team1Diff, +team2Diff);
         //console.log(diff);
         //document.querySelector(`span:contains('2444')`)
-        $(`span:contains('${max}')`).css('color', '#c49a30');;
+        $(`team1Table span:contains('${max}')`).css('color', '#c49a30');;
     }
 
-    summRank('team1Table');
-    summRank('team2Table');
-    different();
+    // summRank('team1Table');
+    // summRank('team2Table');
+    //different();
 
 
+    /* #region  ANIMATION */
     window.onload = function () {
         document.querySelector('.container_tables').classList.add('animate__zoomIn')
 
@@ -1984,7 +1971,8 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.timeScore').classList.add('animate__fadeInDown')
         document.querySelector('.timeScore').style.setProperty('--animate-duration', '1.2s');
     }
- 
+    /* #endregion */
+
 
     /* #region  SOUNDS */
 
@@ -2004,97 +1992,98 @@ window.addEventListener('DOMContentLoaded', () => {
                     console.log('Error playing sound: ' + error);
                 });
             }
-        } 
-   
-         addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
-         addClickSound('img', "onmouseenter", '../mp3/move.mp3', 0.035);
-         addClickSound('.line', "onmouseenter", '../mp3/menu.mp3', 0.1);
-         addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
-         addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
-         addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
-         addClickSound('li', "onclick", "../mp3/click.mp3", 0.01);
-         addClickSound('li', "onmouseenter", "../mp3/menu.mp3", 0.035);
+        }
+
+        addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
+        addClickSound('img', "onmouseenter", '../mp3/move.mp3', 0.035);
+        addClickSound('.line', "onmouseenter", '../mp3/menu.mp3', 0.1);
+        addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
+        addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
+        addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
+        addClickSound('li', "onclick", "../mp3/click.mp3", 0.01);
+        addClickSound('li', "onmouseenter", "../mp3/menu.mp3", 0.035);
 
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
     }
 
     /* #endregion */
 
-    
+
     /* #region  AJAX UPDATE DATABASE */
 
     //function updateDB(map, res, mode) {
-        function updateDB(dataFile) {
-            var folderPath = "/data/" + saveData(createdDate) + "/";
-            console.log(folderPath);
-            var data = {
-                caliber: dataFile,
-                metadata: {
-                    mapName: "map",
-                    result: "res",
-                    createdAt: folderPath,
-                    gameMode: "mode"
-                },
-                folderPath: folderPath
-            };
-        
-            $.ajax({
-                url: '/php/query.php',
-                type: 'POST',
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                success: function (response) {
-                    console.log('Данные успешно обновлены');
-                    console.log(response);
-                },
-                error: function (error) {
-                    console.error('Ошибка при обновлении данных');
-                    console.error(error);
-                }
-            });
-        }
-        
- 
+    function updateDB(dataFile) {
+        var folderPath = "/data/" + saveData(createdDate) + "/";
+        console.log(folderPath);
+        var data = {
+            caliber: dataFile,
+            metadata: {
+                mapName: "map",
+                result: "res",
+                createdAt: folderPath,
+                gameMode: "mode"
+            },
+            folderPath: folderPath
+        };
+
+        $.ajax({
+            url: '/php/query.php',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log('Данные успешно обновлены');
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Ошибка при обновлении данных');
+                console.error(error);
+            }
+        });
+    }
+
+
     /* #endregion */
 
     function loadData(fileName) {
         console.log(fileName);
-       // console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
+        // console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
         //const urlParams = new URLSearchParams(window.location.search);
-       // const fileName = urlParams.get('filename');
+        // const fileName = urlParams.get('filename');
         //console.log(`../${fileName}.json`);
         $.ajax({
-          url: `../${fileName}.json`,
-          dataType: "json",
-          success: function ({caliber}) {
-            console.log("CALIBER_DATA_FILE:",caliber);
-            upload(caliber.data, caliber.log);
-          }
+            url: `../${fileName}.json`,
+            dataType: "json",
+            success: function ({ caliber }) {
+                console.log("CALIBER_DATA_FILE:", caliber);
+                upload(caliber.data, caliber.log);
+            }
         });
         //updateDB(caliber);
     }
-    
+
+    /* #region  SORTTABLE */
     function sortTable(table) {
         try {
             const team1Table = document.querySelector(table);
 
             const rowAssault = team1Table.querySelector("img.oper[src*='_A_']");
-            const rowGunner  = team1Table.querySelector("img.oper[src*='_G_']");
-            const rowMedic   = team1Table.querySelector("img.oper[src*='_M_']");
-            const rowSniper  = team1Table.querySelector("img.oper[src*='_S_']");
-            
-            const firstRow   = team1Table.querySelectorAll('tbody')[1];
+            const rowGunner = team1Table.querySelector("img.oper[src*='_G_']");
+            const rowMedic = team1Table.querySelector("img.oper[src*='_M_']");
+            const rowSniper = team1Table.querySelector("img.oper[src*='_S_']");
+
+            const firstRow = team1Table.querySelectorAll('tbody')[1];
             team1Table.insertBefore(rowAssault.closest('tbody'), firstRow);
 
-            const secondRow  = team1Table.querySelectorAll('tbody')[2];
+            const secondRow = team1Table.querySelectorAll('tbody')[2];
             team1Table.insertBefore(rowGunner.closest('tbody'), secondRow);
 
-            const thirdRow   = team1Table.querySelectorAll('tbody')[3];
+            const thirdRow = team1Table.querySelectorAll('tbody')[3];
             team1Table.insertBefore(rowMedic.closest('tbody'), thirdRow);
 
-            const fourthRow  = team1Table.querySelectorAll('tbody')[4];
+            const fourthRow = team1Table.querySelectorAll('tbody')[4];
             team1Table.insertBefore(rowSniper.closest('tbody'), fourthRow);
-            
+
             document.querySelectorAll('.team1Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultLogo"><title>assault</title><use xlink:href="#assault"></use></svg>`
             document.querySelectorAll('.team1Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerLogo"><title>assault</title><use xlink:href="#gunner"></use></svg>`
             document.querySelectorAll('.team1Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicLogo"><title>assault</title><use xlink:href="#medic"></use></svg>`
@@ -2104,7 +2093,8 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.team2Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerRLogo"><title>assault</title><use xlink:href="#gunnerR"></use></svg>`
             document.querySelectorAll('.team2Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicRLogo"><title>assault</title><use xlink:href="#medicR"></use></svg>`
             document.querySelectorAll('.team2Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperRLogo"><title>assault</title><use xlink:href="#sniperR"></use></svg>`
-        } catch {}
+        } catch { }
     }
+    /* #endregion */
 
 }); /////////////////END
