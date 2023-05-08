@@ -1222,18 +1222,18 @@ window.addEventListener('DOMContentLoaded', () => {
         /* #region  CHANGE CST OPERS */
         document.querySelectorAll('.nameOp').forEach(element => {
             if (element.innerText == 'СЛАЙ') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/sly.png";
+                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/sly_A_.png";
                 //operator.avatar = 'img/sly.png';
             }
             if (element.innerText == 'ФОРТРЕСС') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/fortress.png";
+                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/fortress_G_.png";
                 //operator.avatar = 'img/fortress.png';
             }
             if (element.innerText == 'БОУНС') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/bounce.png";
+                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/bounce_M_.png";
             }
             if (element.innerText == 'АВАЛАНШ') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/avalansh.png";
+                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/avalansh_S_.png";
             }
         });
         /* #endregion */
