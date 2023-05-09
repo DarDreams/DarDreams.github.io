@@ -118,7 +118,7 @@ $(document).ready(function () {
 			function setLinks() {
 				$(".inicio_link").click(function (e) {
 					e.preventDefault();
-					document.body.style.setProperty('--header', "'"+document.querySelector("a.inicio_link").textContent+"'");
+					document.body.style.setProperty('--header', "'" + document.querySelector("a.inicio_link").textContent + "'");
 					menuGoRight();
 
 					$(".overlay").fadeIn();
@@ -137,7 +137,7 @@ $(document).ready(function () {
 					e.preventDefault();
 					menuGoRight();
 
-					document.body.style.setProperty('--header', "'"+document.querySelector("a.empresa_link").textContent+"'");
+					document.body.style.setProperty('--header', "'" + document.querySelector("a.empresa_link").textContent + "'");
 
 					$("html, body").animate({ scrollTop: 0 + "px" });
 					$(".overlay").fadeIn();
@@ -173,7 +173,7 @@ $(document).ready(function () {
 					e.preventDefault();
 					menuGoRight();
 
-					document.body.style.setProperty('--header', "'"+document.querySelector("a.productos_link").textContent+"'");
+					document.body.style.setProperty('--header', "'" + document.querySelector("a.productos_link").textContent + "'");
 
 					document.querySelector('.productos').style.visibility = '';
 					//$('button.slick-prev').click();
@@ -239,10 +239,10 @@ $(document).ready(function () {
 				divList.classList.add('animate__animated');
 
 				divBackground.onclick = hideMenu;
-				divInicio.onclick     = hideMenu;
-				divEmpresa.onclick    = hideMenu;
-				divProductos.onclick  = hideMenu;
-				divContactos.onclick  = hideMenu;
+				divInicio.onclick = hideMenu;
+				divEmpresa.onclick = hideMenu;
+				divProductos.onclick = hideMenu;
+				divContactos.onclick = hideMenu;
 
 				if (divList.getBoundingClientRect().left > 0) {
 					divList.classList.toggle('animate__slideOutRight');
@@ -284,7 +284,7 @@ $(document).ready(function () {
 			`);
 
 			let langList = document.querySelector("#lang");
-			
+
 			setLang(); // Первая загрузка
 			document.body.style.cssText = "";
 
@@ -292,7 +292,7 @@ $(document).ready(function () {
 				if (langList.value.toLowerCase() !== localStorage.getItem("lang").toLowerCase()) {
 					localStorage.setItem("lang", langList.value.toLowerCase());
 					setLang();
-				}	
+				}
 				if (langList.value.toLowerCase() == "es") {
 					document.body.style.opacity = "0";
 					setTimeout(() => {
@@ -302,13 +302,13 @@ $(document).ready(function () {
 				}
 				document.querySelector('#lang').placeholder = document.querySelector('#lang').value;
 				langList.value = "";
-				
+
 			});
 			/* #endregion */
 
 			/* #region  SET LANGUAGE */
 			function lang(selector, res, cont) {
-			//	console.log("Selected language: " + localStorage.getItem("lang"));
+				//	console.log("Selected language: " + localStorage.getItem("lang"));
 				if (localStorage.getItem("lang").toLowerCase() == "es") {
 					if (cont == "innerHTML") {
 						document.querySelector(selector).innerHTML = res;
@@ -333,22 +333,22 @@ $(document).ready(function () {
 
 			async function langCards(text) {
 				if (localStorage.getItem("lang").toLowerCase() == "es") {
-				  return text;
-				} else {
-				  try {
-					const translatedText = await translate(text);
-					return translatedText;
-				  } catch (error) {
-					console.error("error language ", error);
 					return text;
-				  }
+				} else {
+					try {
+						const translatedText = await translate(text);
+						return translatedText;
+					} catch (error) {
+						console.error("error language ", error);
+						return text;
+					}
 				}
-			  }
-			  
-			
-			  
-			  
-			  
+			}
+
+
+
+
+
 
 			function setLang() {
 				for (let i = 0; i < content.menu.length; i++) {
@@ -373,15 +373,15 @@ $(document).ready(function () {
 				setLinks();
 
 				lang("div.tel", content.contactos[0], "textContent");
-				lang(".email",content.contactos[1], "textContent");
-				lang(".direccion",content.contactos[2], "textContent");
-				lang(".contactos__informacion__mensaje_sub",content.contactos[3], "textContent");
-				lang(".name",  content.contactos[4], "placeholder");
-				lang("input.tel",   content.contactos[5], "placeholder");
+				lang(".email", content.contactos[1], "textContent");
+				lang(".direccion", content.contactos[2], "textContent");
+				lang(".contactos__informacion__mensaje_sub", content.contactos[3], "textContent");
+				lang(".name", content.contactos[4], "placeholder");
+				lang("input.tel", content.contactos[5], "placeholder");
 				lang("input.email", content.contactos[6], "placeholder");
-				lang("textarea.text",  content.contactos[7], "placeholder");
-				lang(".button_submit",  content.contactos[8], "textContent");
-				document.querySelector('iframe').src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1.1m3!1d2211.998792828823!2d-2.605439178379319!3d36.96124486917935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9217c8222779a86!2zMzbCsDU3JzQ2LjAiTiAywrAzNicxOC43Ilc!5e1!3m2!1ses!2ses!4v1672748299814!5m2!1s${localStorage.getItem("lang")}!2s${localStorage.getItem("lang")}` 
+				lang("textarea.text", content.contactos[7], "placeholder");
+				lang(".button_submit", content.contactos[8], "textContent");
+				document.querySelector('iframe').src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1.1m3!1d2211.998792828823!2d-2.605439178379319!3d36.96124486917935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc9217c8222779a86!2zMzbCsDU3JzQ2LjAiTiAywrAzNicxOC43Ilc!5e1!3m2!1ses!2ses!4v1672748299814!5m2!1s${localStorage.getItem("lang")}!2s${localStorage.getItem("lang")}`
 				// document.querySelectorAll('.description').forEach(element => {
 				// 	console.log(element.className);
 				// 	lang(element.className, element.textContent,"textContent");
@@ -440,25 +440,25 @@ $(document).ready(function () {
 						}
 					});
 			}
-			  
+
 
 			function watchLinkText(link, callback) {
 				const observer = new MutationObserver((mutationsList) => {
-				  for (const mutation of mutationsList) {
-					if (mutation.type === 'childList') {
-					  const newText = mutation.target.textContent;
-					  callback(newText);
+					for (const mutation of mutationsList) {
+						if (mutation.type === 'childList') {
+							const newText = mutation.target.textContent;
+							callback(newText);
+						}
 					}
-				  }
 				});
 				observer.observe(link, { childList: true });
-			  }
-			  
+			}
+
 			watchLinkText(document.querySelector('.inicio_link'), (newText) => {
 				setTimeout(() => {
-					document.body.classList.remove('blink');	
+					document.body.classList.remove('blink');
 				}, 500);
-				
+
 				//console.log(`Link text changed to: ${newText}`);
 			});
 			/* #endregion */
@@ -640,8 +640,8 @@ $(document).ready(function () {
 					slidesToShow: 1,
 					slidesPerRow: 1,
 					infinite: false,
-						waitForAnimate: false,
-						waitForLoad: true,
+					waitForAnimate: false,
+					waitForLoad: true,
 				});
 				//$(".productos__items").slickGoTo(0);
 				// } else if (mediaQuery1900.matches) {
@@ -909,7 +909,7 @@ $(document).ready(function () {
 							document.querySelector('#img').value = cards[index].img;
 							document.querySelector('#descr').value = cards[index].descr;
 							document.querySelector('#ingredientes').value = cards[index].ingredientes;
-							document.querySelector('#informacion').value = cards[index].informacion;
+							document.querySelector('#informacion').value = cards[index].informacion.join('\n');
 
 							for (let i = 0; i < cards[index].sellos.length; i++) {
 								switch (cards[index].sellos[i]) {
@@ -1068,6 +1068,8 @@ $(document).ready(function () {
 				card.ingredientes = updatedCard.ingredientes;
 				card.img = updatedCard.img;
 				card.informacion = updatedCard.informacion;
+				console.log(updatedCard.informacion);
+				//console.log(updatedCard.informacion.split('\n'));
 				card.sellos = updatedCard.sellos;
 				card.precio = updatedCard.precio;
 
@@ -1079,9 +1081,14 @@ $(document).ready(function () {
 				formData.append('ingredientes', card.ingredientes);
 				formData.append('img', card.img);
 				formData.append('informacion', card.informacion);
+				card.sellos.push(document.querySelector("#imageSelect").value.split("/").pop().split(".")[0]);
 				formData.append('sellos', card.sellos.join(','));
-				formData.append('precio', card.precio);
+				
+				//formData.append("sellos", document.querySelector("#imageSelect").value.split("/").pop().split(".")[0]);
+			  //formData.append('sellos', card.sellos.reduce((acc, curr) => acc + ',' + curr));
+			  //formData.append('sellos', card.sellos.reduce((acc, curr) => acc + ',' + curr, ""));
 
+				formData.append('precio', card.precio);
 
 				$.ajax({
 					url: 'https://www.conservasalboran.es/php/query.php',
@@ -1098,9 +1105,12 @@ $(document).ready(function () {
 						console.error(error);
 					}
 				});
+				location.reload();
 			};
 
-
+			/* #endregion */
+			
+			/* #region  ADD BUTTON */
 
 			document.querySelector('#addCardForm > button').addEventListener('click', (e) => {
 				e.preventDefault();
@@ -1115,14 +1125,16 @@ $(document).ready(function () {
 					descr: document.querySelector('#descr').value,
 					ingredientes: document.querySelector('#ingredientes').value,
 					img: document.querySelector('#img').value.toLowerCase(),
-					informacion: document.querySelector('#informacion').value.split('.,'),
+					//informacion: document.querySelector('#informacion').value.split('.,'),
+					informacion: document.querySelector('#informacion').value.split('\n'),
 					sellos: aplSellos,
 					precio: document.querySelector('#precio').value
 				});
 			});
+			
 			/* #endregion */
 
-			/* #region  MODAL & THEME WHITE */
+			/* #region  MODAL & THEME LIGHT */
 			function modalShow() {
 				document.querySelector('.b_mail').addEventListener('click', (e) => {
 					e.preventDefault();
@@ -1132,6 +1144,21 @@ $(document).ready(function () {
 							.productos__items_item img {
 								filter: brightness(150%)
 							}
+
+							.item:before {
+								border-top-color: var(--yellow);
+								border-left-color: var(--yellow);
+							}
+
+							.item:after {
+								border-bottom-color: var(--yellow);
+								border-right-color: var(--yellow);
+							}
+
+							button.slick-prev, button.slick-next {
+								color: var(--yellow);
+							}
+
 							section.footer, footer {
 								box-sizing: border-box;
 								position: absolute;
@@ -1154,7 +1181,7 @@ $(document).ready(function () {
 							}
 
 							.background {
-								background: url("../img/gavno2.jpg");
+								background: url("../img/bg_light.jpg");
 								height: calc(100vh + 200px);
 								background-position: center;
 								background-repeat: no-repeat;
@@ -1256,8 +1283,8 @@ $(document).ready(function () {
 				});
 			});
 			/* #endregion */
-		
-		
+
+
 		})
 		.catch(function (error) {
 			console.log(error, " База данных не найдена");
