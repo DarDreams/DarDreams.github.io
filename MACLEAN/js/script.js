@@ -1083,10 +1083,10 @@ $(document).ready(function () {
 				formData.append('informacion', card.informacion);
 				card.sellos.push(document.querySelector("#imageSelect").value.split("/").pop().split(".")[0]);
 				formData.append('sellos', card.sellos.join(','));
-				
+
 				//formData.append("sellos", document.querySelector("#imageSelect").value.split("/").pop().split(".")[0]);
-			  //formData.append('sellos', card.sellos.reduce((acc, curr) => acc + ',' + curr));
-			  //formData.append('sellos', card.sellos.reduce((acc, curr) => acc + ',' + curr, ""));
+				//formData.append('sellos', card.sellos.reduce((acc, curr) => acc + ',' + curr));
+				//formData.append('sellos', card.sellos.reduce((acc, curr) => acc + ',' + curr, ""));
 
 				formData.append('precio', card.precio);
 
@@ -1109,7 +1109,7 @@ $(document).ready(function () {
 			};
 
 			/* #endregion */
-			
+
 			/* #region  ADD BUTTON */
 
 			document.querySelector('#addCardForm > button').addEventListener('click', (e) => {
@@ -1131,7 +1131,7 @@ $(document).ready(function () {
 					precio: document.querySelector('#precio').value
 				});
 			});
-			
+
 			/* #endregion */
 
 			/* #region  MODAL & THEME LIGHT */
@@ -1284,6 +1284,13 @@ $(document).ready(function () {
 			});
 			/* #endregion */
 
+			/* #region  UP_LETTER */
+			function upLetter(sentence) {
+				return sentence.split('. ')
+					.map(str => str.charAt(0).toUpperCase() + str.slice(1))
+					.join('. ');
+			}
+			/* #endregion */
 
 		})
 		.catch(function (error) {
