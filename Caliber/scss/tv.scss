@@ -1,18 +1,31 @@
-.tv {
-    position: absolute;
-    background: url("../img/table.png") center;
-    background-size:cover;
-    z-index: 9;
-    bottom: 0;
-  }
-  
-//   .small_frame {
-//     position: relative;
-//     left: -100px;
-//     top: 59px;
-//     width: 112%;
-//     height: 62%;
-//     transform: perspective(1100px) rotateY(-60deg) rotateX(0deg) rotate3d(-5, 13, 7, 3deg);
-//     overflow: hidden;
-//   }
-  
+.card {
+    backface-visibility: hidden;
+}
+
+.item_front {
+    backface-visibility: hidden;
+}
+
+    .item_back {
+        position: absolute;
+        z-index: 999;
+        transition: all .8s ease-in-out;
+        display: block;
+       // margin-top: 0px;
+        width: 50%;
+        height: 50%;
+        backface-visibility: hidden;
+        // position: absolute;
+        background: url("../img/tv.png") center;
+        background-size: cover;
+        z-index: 9;
+        //bottom: 0;
+        transition: all 1s ease;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        iframe {
+            width: 100%;
+            height: 100%;
+            padding: 11px 2px;
+        }
+    }

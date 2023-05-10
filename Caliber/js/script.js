@@ -3,7 +3,7 @@ import {
     caliber2 as caliberImport02
 } from "./game.js";
 
-import {tv} from "./tv.js";
+//import {tv} from "./tv.js";
 
 
 window.addEventListener('DOMContentLoaded', () => {
