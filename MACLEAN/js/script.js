@@ -86,20 +86,15 @@ $(document).ready(function () {
 				empresa: `
 				<ul>
 				<li>
-					La empresa almeriense Conservas Alborán nace bajo la filosofía de ofrecer al consumidor un  producto natural  de calidad,  resaltando su sabor, proporcionando salud, nutrición y bienestar  a través de una alimentación natural de la más alta calidad.
+					Empresa nacida en Almería situada en Huécija, un pequeño pueblo ubicado en una de las puertas de la Alpujarra almeriense. 
 				</li>
 				<br>
 				<li>
-					Se ofrecen diversas líneas de productos naturales, vegano – naturales  y artesanales mezclando la cocina tradicional con la cocina moderna. Se ofertan distintos productos en  conservas  (ensalada de tomate cherry y pimiento asado al carbón, sobrasada vegetal, morcilla vegetal, cebollitas francesas en vinagre balsámico..), sopas frías y calientes, jaleas ( jalea de aove, jalea de arándanos..), salsas de verduras, caracoles en salsa.
+					Tenemos como premisa la filosofía de ofrecer al consumidor un producto de calidad, elaborados con materia 	prima de calidad ecológica. Queremos ofrecer la contribución de producción de alimentos sanos, que promueva el bienestar de las personas y cuya producción apoye la expansión de la agricultura ecológica y de esta forma se genere un valor añadido en favor de todos los eslabones de la cadena de los productos, desde el campo hasta la mesa. Creemos en trabajar por un mundo digno y justo, en el que la globalización suponga una oportunidad y no una amenaza.
 				</li>
 				<br>
-				<li>
-					En Conservas Alborán comprendemos que las principales preocupaciones de los consumidores de hoy, es consumir productos saludables, sin derivados industriales pero con un exquisito sabor. Por ello, elaboramos de forma artesana, sin conservantes ni colorantes, sin gluten, sin lactosa y con sustitutos del azúcar 100% naturales ( azúcar de abedul..), por lo que la mayoría de  nuestros productos son también aptos para celiacos, diabéticos tipo 2, intolerantes a la lactosa y gran parte de ellos son aptos para personas que lleven una dieta vegetariana o vegana.
-				</li>
-				<br>
-				<li>
-					Nos basamos para nuestras elaboraciones en recetas tradicionales de nuestros antepasados, dándoles un toque de innovación e investigación introduciendo otros productos sustitutivos ( azúcar de abedul), y aprovechar el poder de otros ( semillas de chía).
-				</li>
+				<li>El objetivo es alcanzar una “calidad selecta de los productos", utilizando materia prima con una calidad biológica insuperable, resaltando su sabor, proporcionando salud, nutrición y bienestar a través de una alimentación natural de la más alta calidad. Se Ofrecen diversas líneas de productos naturales, vegano — naturales y artesanales mezclando la cocina tradicional con la cocina moderna.</li>
+				En Conservas Alborán comprendemos que las principales preocupaciones de los consumidores de hoy, es consumir productos saludables, sin derivados industriales pero con un exquisito sabor. Por ello, nuestros productos son elaborados de forma artesanal, totalmente natural, sin aditivos, sin gluten y sin lactosa.
 				</ul>
 			`
 			}
@@ -154,7 +149,6 @@ $(document).ready(function () {
 				$(".contactos_link").click(function (e) {
 					e.preventDefault();
 					menuGoRight();
-
 					document.body.style.setProperty('--header', "");
 
 					$("html, body").animate({ scrollTop: 0 + "px" });
@@ -174,6 +168,7 @@ $(document).ready(function () {
 					menuGoRight();
 
 					document.body.style.setProperty('--header', "'" + document.querySelector("a.productos_link").textContent + "'");
+
 
 					document.querySelector('.productos').style.visibility = '';
 					//$('button.slick-prev').click();
@@ -615,11 +610,13 @@ $(document).ready(function () {
 				slidesToScroll: 1,
 				slidesToShow: 3,
 				arrows: true,
-				//autoplaySpeed: 1,
+				autoplaySpeed: 1,
+				//autoplay: true,
 				draggable: false,
 				rows: 2,
 				infinite: false
 			});
+			
 			$('button.slick-next').html("&#10154;");
 			$('button.slick-prev').html("&#10154;");
 
@@ -639,6 +636,8 @@ $(document).ready(function () {
 					arrows: false,
 					slidesToShow: 1,
 					slidesPerRow: 1,
+					autoplaySpeed: 1,
+					//autoplay: true,
 					infinite: false,
 					waitForAnimate: false,
 					waitForLoad: true,
@@ -660,6 +659,14 @@ $(document).ready(function () {
 				// 		infinite: false
 				// 	});
 			}
+			// $('.productos__items').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+			// 	console.log(nextSlide);
+			// 	//$('.productos__items').slickPause();
+			//   });
+				//$('.productos__items').slick({autoplay: false});
+				
+				//$(".productos__items").slick({slickGoTo: 0});
+				//console.log("time");
 			/* #endregion */
 
 			/* #region  CALC_SUM */
