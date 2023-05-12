@@ -1324,11 +1324,66 @@ window.addEventListener('DOMContentLoaded', () => {
 
         /* #endregion */
 
-        // #region  MAPS
-        (function () {
-            const mode = document.querySelector('.mode');
-            const time = document.querySelector('.time');
-            const divMap = document.querySelector('.map');
+        // #region  OLD MAPS
+        // function mapRus() {
+        //     const mode = document.querySelector('.mode');
+        //     const time = document.querySelector('.time');
+        //     const divMap = document.querySelector('.map');
+        //     const maps = {
+        //         originalMap: [
+        //             'lv_zalessye_radarbase_overcast',
+        //             'lv_karhad_emirresidence_evening',
+        //             'lv_karhad_caravanserai_night',
+        //             'lv_zalessye_dam_default',
+        //             'lv_zalessye_passage_overcast',
+        //             'lv_karhad_hospital_default',
+        //             'lv_zalessye_oilrig_sunrise',
+        //             'lv_karhad_village_default',
+        //             'lv_karhad_hangar_storm',
+        //             'lv_karhad_hotel_default',
+        //             'lv_zalessye_forest_default',
+        //             'lv_zalessye_depot_twilight',
+        //             'lv_karhad_palmroad_default',
+        //             'lv_karhad_mall_storm',
+        //             'lv_zalessye_submarine_default'
+        //         ].map(str => str.split("_").slice(0, -1).join("_")),
+        //         rusMap: [
+        //             'Радар',
+        //             'Резиденция Эмира',
+        //             'Караван-Сарай',
+        //             'Дамба',
+        //             'Переправа',
+        //             'Больница',
+        //             'Переправа',
+        //             'Деревня',
+        //             'Гавань Амаль',
+        //             'Отель',
+        //             'Лес',
+        //             'Депо',
+        //             'Пальмовая дорога',
+        //             'Торговый центр',
+        //             'Объект 903'
+        //         ]
+        //     };
+        //     const mapName = data1[1].split("_").slice(0, -1).join("_");
+        //     if (maps.originalMap.some((value) => value === mapName)) {
+        //         const i = maps.originalMap.indexOf(mapName);
+        //         const rusMapName = maps.rusMap[i];
+        //         divMap.textContent = `\u00A0${rusMapName}`;
+        //     }
+        //     if (data1[1].split("_")[3] == 'pvp') {
+        //         mode.innerText = `Столкновение:`;
+        //     };
+
+        //     if (data1[1].split("_")[3] == 'hacking') {
+        //         mode.innerText = `Взлом:`;
+        //     };
+        //     time.innerText = convertSecondsToTime(data2.MatchTimeSeconds);
+        // }
+        // mapRus();
+        // #endregion MAPS
+
+        function getDataMap(mapName) {
             const maps = {
                 originalMap: [
                     'lv_zalessye_radarbase_overcast',
@@ -1365,22 +1420,31 @@ window.addEventListener('DOMContentLoaded', () => {
                     'Объект 903'
                 ]
             };
-            const mapName = data1[1].split("_").slice(0, -1).join("_");
-            if (maps.originalMap.some((value) => value === mapName)) {
-                const i = maps.originalMap.indexOf(mapName);
-                const rusMapName = maps.rusMap[i];
-                divMap.textContent = `\u00A0${rusMapName}`;
-            }
-            if (data1[1].split("_")[3] == 'pvp') {
-                mode.innerText = `Столкновение:`;
-            };
+            const map = mapName.split("_").slice(0, -1).join("_");
+            const index = maps.originalMap.indexOf(map);
+            const rusMapName = index > -1 ? maps.rusMap[index] : '';
+            const mode = mapName.split("_")[3] == 'pvp' ? 'Столкновение:' :
+                mapName.split("_")[3] == 'hacking' ? 'Взлом:' : '';
+            const time = convertSecondsToTime(data2.MatchTimeSeconds);
 
-            if (data1[1].split("_")[3] == 'hacking') {
-                mode.innerText = `Взлом:`;
-            };
-            time.innerText = convertSecondsToTime(data2.MatchTimeSeconds);
-        })();
-        // #endregion MAPS
+            return {
+                map: rusMapName,
+                mode: mode,
+                time: time
+            }
+        }
+
+        //const result = getDataMap('lv_zalessye_passage_overcast_pvp');
+              //     const mode = document.querySelector('.mode');
+        document.querySelector('.map').textContent =`\u00A0${getDataMap(data1[1]).map}`;
+        document.querySelector('.time').textContent = getDataMap(data1[1]).time;
+        document.querySelector('.mode').innerText = getDataMap(data1[1]).mode;
+        
+        //console.log(getDataMap('lv_zalessye_passage_overcast_pvp').time());  // Выведет 'Переправа'
+        //console.log(result.mode()); // Выведет 'Столкновение:'
+        //console.log(result.time()); // Выведет время в формате 'mm:ss'
+
+          
 
         //  #region WIN / LOSE
         function winLose() {
@@ -1413,8 +1477,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         // #endregion
         // #endregion 
-
-
 
         //  #region COLOR POINTS
 
@@ -1613,7 +1675,8 @@ window.addEventListener('DOMContentLoaded', () => {
                         console.log(`2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
 
                         getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-                        setUrl;
+                        history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+                        //setUrl();
                         //getFileList();
 
                         /* #region  OLD CLICK CALENDAR */
@@ -1708,7 +1771,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         //     let data = JSON.parse(localStorage.getItem(key));
                         //     upload(data[0], data[1]);
                         // }
-                        /* #endregion */
+                       
                     });
                 }
                 row.appendChild(cell);
@@ -1716,7 +1779,9 @@ window.addEventListener('DOMContentLoaded', () => {
             calendarBody.appendChild(row);
         }
     }
-    // Создаем календарь на текущий месяц и год
+     /* #endregion */
+    
+     // Создаем календарь на текущий месяц и год
     const month_selector = document.querySelector("#month-selector");
     month_selector.value = new Date().getMonth() + 1;
     //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
@@ -1724,18 +1789,31 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     /* #region  обновить список игр */
+    
     function getFileList(folder) {
+        try {
         // Отправляем GET-запрос на сервер
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
             // Парсим JSON-данные
-            console.log(data);
+            console.log("data: ",data);
             document.querySelector("#list-container").innerHTML = "";
             document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>")
             data.forEach(element => {
-                //loadList(element);
-                document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
-                    <li><span>${element}</span></li>
+
+            fetch(`data/${strPath}/${element}`)
+            .then(response => response.json())
+            .then(data => {
+            console.log("newdatalist", data); // Выводит содержимое файла в консоль
+            // Здесь можно выполнить дополнительную обработку данных
+            document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
+                    <li><span>${element}</span><span>${data.caliber.data[1]}</span></li>
                  `)
+  })
+  .catch(error => console.error(error));
+                //loadList(element);
+                // document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
+                //     <li><span>${element}</span></li>
+                //  `)
             });
             const divLi = document.querySelectorAll('#list-container > ul > li');
             divLi.forEach(element => {
@@ -1765,8 +1843,11 @@ window.addEventListener('DOMContentLoaded', () => {
             //     var listItem = $("<li>").text(file.name);
             //     $("#file-list").append(listItem);
             //   }
+    
         });
+    } catch {}
     }
+
 
 
 
@@ -1836,7 +1917,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 setUrl = function () {
                     history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
                 }
-                setUrl;
+                setUrl();
                 // window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
                 //sounds(); 
 
@@ -2100,7 +2181,7 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
 
 document.body.addEventListener('click',()=> {
-    tv();
+   // tv();
 });
 
 }); /////////////////END
