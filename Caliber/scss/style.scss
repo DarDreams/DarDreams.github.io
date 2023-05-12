@@ -412,7 +412,7 @@ html {
     #list-container {
         display: none;
         overflow-y: auto;
-        height: 300px;
+        height: 65vh;
     }
 }
 
@@ -426,7 +426,7 @@ html {
         display: block;
         color: grey;
         position: absolute;
-        top: 46%;
+        top: 50%;
 
         //cursor: url('../img/grab.png'), auto;
         cursor: var(--grab);
@@ -439,7 +439,7 @@ html {
 
         li {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             width: 700px;
             list-style: none;
             font-size: 15px;
@@ -450,10 +450,11 @@ html {
             margin-left: 20px;
             //cursor: url('../img/grab.png'), auto;
             cursor: var(--grab);
-            border: 1px solid rgba(128, 128, 128, 0.51);
+            //border: 1px solid rgba(128, 128, 128, 0.51);
+            outline: 1px solid rgba(128, 128, 128, 0.51);
 
             & span {
-                text-align: left;
+                //text-align: left;
 
                 & img.basket {
                     display: none;
@@ -486,8 +487,8 @@ html {
 
         li:hover {
             color: white;
-            padding: 8px 28px 8px 8px;
-            border: 3px solid white;
+           // padding: 8px 28px 8px 8px;
+            outline: 3px solid white;
 
             & span {
                 & img.basket {
