@@ -1969,17 +1969,17 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
     //try {
         //let map;
-        document.querySelector('.geo').addEventListener('click', () => {
-            let humap = caliber.data[1].split('_').slice(1, -1).join('_');
-            //let humap = getDataMap().engMap(document.querySelector('.map').textContent.replace(' ',''));
-            //console.log("map: ", map);
-            if (!document.querySelector('.imgMap')) {
-                document.body.insertAdjacentHTML('afterbegin', `
-            <img class="imgMap" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${humap}_hacking.png">
-            `);
-            } else document.querySelector('.imgMap').remove();
-            //$('.imgMap').fadeToggle(1000);
-        })
+        // document.querySelector('.geo').addEventListener('click', () => {
+        //     //let humap = caliber.data[1].split('_').slice(1, -1).join('_');
+        //     let humap = getDataMap().engMap(document.querySelector('.map').textContent.replace(' ',''));
+        //     //console.log("map: ", map);
+        //     if (!document.querySelector('.imgMap')) {
+        //         document.body.insertAdjacentHTML('afterbegin', `
+        //     <img class="imgMap" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${humap}_hacking.png">
+        //     `);
+        //     } else document.querySelector('.imgMap').remove();
+        //     //$('.imgMap').fadeToggle(1000);
+        // })
     //}
     // catch (e) {
     //     console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);

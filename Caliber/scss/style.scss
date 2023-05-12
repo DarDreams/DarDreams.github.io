@@ -793,10 +793,42 @@ button#show-panel {
 
 
 
-// @media (max-width: 1800px) {
-//     body {
-//         max-height: 600px;
-//     }
+ @media (max-width: 900px) {
+
+    html {
+        //max-height: 600px;
+  //      transform: rotate(90deg);
+        zoom: 50%;
+        //width: 100vw;
+        height: 100vh !important;
+
+        .winLose {
+            position: absolute;
+            svg {
+                position: relative;
+                top:-20px !important;
+                margin: 0 !important;
+            }
+            .winLoseText {
+                position: relative;
+                font-size: 3em;
+                top: -70px !important;
+                left: 70px;
+                margin: 0 !important;
+            }
+            
+        }
+       
+
+        .container_tables {
+            position: absolute;
+            top:50%;
+            margin:-150px !important;
+            padding: 0;
+            transform: translateY(-50%);
+        }
+    }
+ }
 
 //     .winLose {
 //         margin-top: -136px;
