@@ -7,7 +7,7 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap;
+    let id, alldata, setUrl, getDataMap, userID, date, time;
     let rankTeam = [];
 
     /* #region CREATE OBJECT CALIBER */
@@ -28,7 +28,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 MatchTimeSeconds: caliberImport2.Log.MatchTimeSeconds,
                 MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
                 PlayerReport: caliberImport2.Log.PlayerReports,
-                Rounds: caliberImport2.Log.Rounds
+                Rounds: caliberImport2.Log.Rounds,
+                userID: userID,
+                date: date,
+                time: time
             }
         };
 
@@ -1856,17 +1859,13 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log("file: ",file.name);
 
         const parts = file.name.split("_");
-        const id = parts[0];
-        const userID = parts[1];
-        const date = parts[2];
-        const time = parts[3];
-        const ver = parts[4];
+         userID = parts[1];
+         date = parts[2].replaceAll("-","/");
+         time = parts[3];
 
-        console.log("id: ",id);
-        console.log("userID: ",userID);
-        console.log("date: ",date);
-        console.log("time: ",time);
-        console.log("ver: ",ver);
+        // console.log("userID: ",userID);
+        // console.log("date: ",date);
+        // console.log("time: ",time);
 
         createdDate = new Date(file.lastModified);
         const reader = new FileReader();
@@ -1892,6 +1891,18 @@ window.addEventListener('DOMContentLoaded', () => {
                 caliber_b = fix(caliber_b);
                 caliber_b2 = fix(caliber_b2);
 
+                //console.log("caliber_b: ", caliber_b);
+
+                //const newCaliber_b = [caliber_b2.log, userID, date, time];
+                //caliber_b2[1] = newCaliber_b;
+                //console.log(caliber_b2);
+               //  caliber_b2.Log.userID = userID;
+                // caliber_b2.log.date = date;
+                // caliber_b2.log.time = time;
+                
+
+                //console.log("caliber_b: ", caliber_b);
+
                 // caliber_b[8] = caliber_b[7].splice(4);
                 // caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0], caliber_b2.Log.Users[1], caliber_b2.Log.Users[2], caliber_b2.Log.Users[3]]
                 // caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
@@ -1914,7 +1925,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 //saveData();
             } catch (e) {
-                alert("Файл поврежден")
+                alert("Файл поврежден:",e.message)
             }
         }
 
@@ -2091,17 +2102,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //function updateDB(map, res, mode) {
     function updateDB(dataFile) {
-        var folderPath = "/data/" + saveData(createdDate) + "/";
-        console.log(folderPath);
+        var folderPath2 = "/data/" + saveData(createdDate) + "/";
+        let folderPath= "/data/" + dataFile.log.date + "/"
+        console.log("fp: ",folderPath);
+        console.log("fp2: ",folderPath2);
+      //  console.log(dataFile.data[0]);
         var data = {
             caliber: dataFile,
             metadata: {
-                mapName: "map",
-                result: "res",
+               // userId: dataFile.data[0][1],
+                //date: dataFile[0][2],
                 createdAt: folderPath,
-                gameMode: "mode"
+               // time: dataFile[0][3]
             },
             folderPath: folderPath
+            
         };
 
         $.ajax({
