@@ -1853,6 +1853,21 @@ window.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
+        //console.log("file: ",file.name);
+
+        const parts = file.name.split("_");
+        const id = parts[0];
+        const userID = parts[1];
+        const date = parts[2];
+        const time = parts[3];
+        const ver = parts[4];
+
+        console.log("id: ",id);
+        console.log("userID: ",userID);
+        console.log("date: ",date);
+        console.log("time: ",time);
+        console.log("ver: ",ver);
+
         createdDate = new Date(file.lastModified);
         const reader = new FileReader();
         reader.readAsText(file);
