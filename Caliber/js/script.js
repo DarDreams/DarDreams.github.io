@@ -7,13 +7,14 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap, userID, date, time;
+    let id, alldata, setUrl, getDataMap, userID, date, time, winner;
     let rankTeam = [];
 
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
 
     let caliberFunc = function (caliberImport, caliberImport2) {
+        //console.log(caliberImport);
         const caliberNew = {
             data: [caliberImport[0],
             caliberImport[2],
@@ -31,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 Rounds: caliberImport2.Log.Rounds,
                 userID: userID,
                 date: date,
-                time: time
+                time: time,
             }
         };
 
@@ -1455,12 +1456,38 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelector("div.winLose > svg > path").style.fill = color;
                 document.querySelector("div.winLoseText").style.color = color;
             }
-
+            let winTeam, colorWin;
             if (score(0) > data2.Rounds.length - score(0)) {
-                color('#6aa5ee', 'ПОБЕДА!');
+                //color('#6aa5ee', 'ПОБЕДА!');
+                winTeam = 2;
+                colorWin = "#6aa5ee";
             } else {
-                color('#ff323b', 'ПОБЕДА!');
+                //color('#ff323b', 'ПОБЕДА!');
+                winTeam = 3;
+                colorWin = "#ff323b";
             }
+
+
+            function imWinner(team) {
+                for (let i = 0; i < 4; i++) {
+                    if (data1[team][i][0] == data2.userID) {
+                        //console.log("MASTER WIN ", team);
+                        color(colorWin, 'ПОБЕДА!');
+                    } else {
+                        //console.log("MASTER LOSE ", team);
+                        color(colorWin, 'ПОРАЖЕНИЕ!');
+                    } 
+                }
+            }
+            
+
+            imWinner(winTeam);
+            
+
+            //for (let k = 2; k < 4; k++) {
+                
+            //}
+
         };
 
         //  #region SCORE
@@ -1508,7 +1535,6 @@ window.addEventListener('DOMContentLoaded', () => {
         setScore();
 
         // #endregion
-
         id = data1[0];
         alldata = [data1, data2]
         sounds();
@@ -1806,6 +1832,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${element}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
+                    <span>${data.caliber.log.time}</span>
                   </li>
                 `)
               })
@@ -1815,6 +1842,7 @@ window.addEventListener('DOMContentLoaded', () => {
           // Создаем обработчики событий после создания списка
           const ul = document.querySelector('#list-container > ul');
           ul.addEventListener('click', (e) => {
+            console.clear();
             const li = e.target.closest('li');
             if (li) {
               const span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
@@ -1861,11 +1889,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const parts = file.name.split("_");
          userID = parts[1];
          date = parts[2].replaceAll("-","/");
-         time = parts[3];
-
-        // console.log("userID: ",userID);
-        // console.log("date: ",date);
-        // console.log("time: ",time);
+         time = parts[3].replaceAll("-",":");
 
         createdDate = new Date(file.lastModified);
         const reader = new FileReader();
@@ -1890,16 +1914,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 caliber_b = fix(caliber_b);
                 caliber_b2 = fix(caliber_b2);
-
-                //console.log("caliber_b: ", caliber_b);
-
-                //const newCaliber_b = [caliber_b2.log, userID, date, time];
-                //caliber_b2[1] = newCaliber_b;
-                //console.log(caliber_b2);
-               //  caliber_b2.Log.userID = userID;
-                // caliber_b2.log.date = date;
-                // caliber_b2.log.time = time;
-                
 
                 //console.log("caliber_b: ", caliber_b);
 
@@ -2100,12 +2114,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  AJAX UPDATE DATABASE */
 
-    //function updateDB(map, res, mode) {
     function updateDB(dataFile) {
-        var folderPath2 = "/data/" + saveData(createdDate) + "/";
+        //var folderPath2 = "/data/" + saveData(createdDate) + "/";
         let folderPath= "/data/" + dataFile.log.date + "/"
-        console.log("fp: ",folderPath);
-        console.log("fp2: ",folderPath2);
+        //console.log("fp: ",folderPath);
+        //console.log("fp2: ",folderPath2);
       //  console.log(dataFile.data[0]);
         var data = {
             caliber: dataFile,
