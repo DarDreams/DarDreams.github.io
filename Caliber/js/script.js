@@ -1450,93 +1450,40 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.mode').innerText = `${getDataMap(data1[1]).mode}:`;
 
         //  #region WIN / LOSE
-        // function winLose() {
-        //     function color(color, text) {
-        //         document.querySelector("div.winLose > div").innerText = text;
-        //         document.querySelector("div.winLose > svg > path").style.fill = color;
-        //         document.querySelector("div.winLoseText").style.color = color;
-        //     }
-        //     let winTeam, colorWin;
-        //     console.log(`${score(0)} > ${data2.Rounds.length - score(0)}`);
-        //     if (score(0) > data2.Rounds.length - score(0)) {
-        //         //color('#6aa5ee', 'ПОБЕДА!');
-        //         winTeam = 2;
-        //         colorWin = "#6aa5ee";
-        //     } else {
-        //         //color('#ff323b', 'ПОБЕДА!');
-        //         winTeam = 3;
-        //         colorWin = "#ff323b";
-        //     }
-           
-
-        //     function imWinner(team) {
-        //         for (let i = 0; i < 4; i++) {
-        //             if (data1[team][i][0] == data2.userID) {
-        //                 if (winTeam == 2)
-        //                 //console.log("MASTER WIN ", team);
-        //                 color(colorWin, 'ПОБЕДА!');
-        //                 return
-        //             } else {
-        //                 //console.log("MASTER LOSE ", team);
-        //                 color(colorWin, 'ПОРАЖЕНИЕ!');
-        //             } 
-        //         }
-        //     }
-            
-
-        //     imWinner(winTeam);
-            
-
-        //     //for (let k = 2; k < 4; k++) {
-                
-        //     //}
-
-        // };
-
         function winLose() {
+
             function color(color, text) {
-                // Установка цвета текста, иконки и области
                 document.querySelector("div.winLose > div").innerText = text;
                 document.querySelector("div.winLose > svg > path").style.fill = color;
                 document.querySelector("div.winLoseText").style.color = color;
             }
-        
-            let winTeam, colorWin;
-        
-            if (score(0) > data2.Rounds.length - score(0)) {
-                winTeam = 2;
-                colorWin = "#6aa5ee"; // Цвет победы для команды 2 (синяя команда)
-            } else {
-                winTeam = 3;
-                colorWin = "#ff323b"; // Цвет победы для команды 3 (красная команда)
-            }
-        
-            function imWinner(team) {
-                let isWinner = false; // Переменная для хранения информации о победителе
-        
-                // Проверяем, является ли оперативник победителем в своей команде
+            let winText, colorWin, winTeam;
+            
+            for (let k = 2; k < 4; k++) {
                 for (let i = 0; i < 4; i++) {
-                    if (data1[team][i][0] === data2.userID) {
-                        isWinner = true;
-                        break;
-                    }
-                }
-        
-                // Устанавливаем цвет и текст только если команда соответствует выигрышной команде
-                if (team === winTeam) {
-                    if (isWinner) {
-                        color(colorWin, 'ПОБЕДА!');
-                    } else {
-                        color(colorWin, 'ПОРАЖЕНИЕ!');
+                    if (data1[k][i][0] == data2.userID) {
+                        if (k == 2) {
+                            colorWin = "#6aa5ee";
+                            winTeam = 0;
+                        } else {
+                            colorWin = "#ff323b";
+                            winTeam = 1;
+                        }
                     }
                 }
             }
+
+            console.log(`${score(winTeam)} >= ${data2.Rounds.length - score(winTeam)}`);
+
+            if (score(winTeam) > data2.Rounds.length - score(winTeam)) {
+                winText = "ПОБЕДА!"
+            }  else  {
+                winText = "ПОРАЖЕНИЕ!"
+            }
         
-            imWinner(2); // Проверяем для команды 2 (синяя команда)
-            imWinner(3); // Проверяем для команды 3 (красная команда)
-        }
-        
-        
+            color(colorWin, winText);
+
+        };
 
         //  #region SCORE
         function score(teamNumber) {
