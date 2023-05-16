@@ -1495,7 +1495,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         function winLose() {
             function color(color, text) {
-                // Задание цвета текста, иконки и области
+                // Установка цвета текста, иконки и области
                 document.querySelector("div.winLose > div").innerText = text;
                 document.querySelector("div.winLose > svg > path").style.fill = color;
                 document.querySelector("div.winLoseText").style.color = color;
@@ -1503,33 +1503,37 @@ window.addEventListener('DOMContentLoaded', () => {
         
             let winTeam, colorWin;
         
-            // Определение команды, которая выиграла
             if (score(0) > data2.Rounds.length - score(0)) {
                 winTeam = 2;
-                colorWin = "#6aa5ee";
+                colorWin = "#6aa5ee"; // Цвет победы для команды 2 (синяя команда)
             } else {
                 winTeam = 3;
-                colorWin = "#ff323b";
+                colorWin = "#ff323b"; // Цвет победы для команды 3 (красная команда)
             }
         
             function imWinner(team) {
                 let isWinner = false; // Переменная для хранения информации о победителе
+        
+                // Проверяем, является ли оперативник победителем в своей команде
                 for (let i = 0; i < 4; i++) {
                     if (data1[team][i][0] === data2.userID) {
-                        isWinner = true; // Если найдено совпадение, команда является победителем
-                        break; // Прерываем цикл, так как уже найден победитель
+                        isWinner = true;
+                        break;
                     }
                 }
         
-                // Установка цвета и текста в зависимости от значения переменной isWinner
-                if (isWinner) {
-                    color(colorWin, 'ПОБЕДА!');
-                } else {
-                    color(colorWin, 'ПОРАЖЕНИЕ!');
+                // Устанавливаем цвет и текст только если команда соответствует выигрышной команде
+                if (team === winTeam) {
+                    if (isWinner) {
+                        color(colorWin, 'ПОБЕДА!');
+                    } else {
+                        color(colorWin, 'ПОРАЖЕНИЕ!');
+                    }
                 }
             }
         
-            imWinner(winTeam);
+            imWinner(2); // Проверяем для команды 2 (синяя команда)
+            imWinner(3); // Проверяем для команды 3 (красная команда)
         }
         
         
