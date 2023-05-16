@@ -1450,45 +1450,89 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.mode').innerText = `${getDataMap(data1[1]).mode}:`;
 
         //  #region WIN / LOSE
+        // function winLose() {
+        //     function color(color, text) {
+        //         document.querySelector("div.winLose > div").innerText = text;
+        //         document.querySelector("div.winLose > svg > path").style.fill = color;
+        //         document.querySelector("div.winLoseText").style.color = color;
+        //     }
+        //     let winTeam, colorWin;
+        //     console.log(`${score(0)} > ${data2.Rounds.length - score(0)}`);
+        //     if (score(0) > data2.Rounds.length - score(0)) {
+        //         //color('#6aa5ee', 'ПОБЕДА!');
+        //         winTeam = 2;
+        //         colorWin = "#6aa5ee";
+        //     } else {
+        //         //color('#ff323b', 'ПОБЕДА!');
+        //         winTeam = 3;
+        //         colorWin = "#ff323b";
+        //     }
+           
+
+        //     function imWinner(team) {
+        //         for (let i = 0; i < 4; i++) {
+        //             if (data1[team][i][0] == data2.userID) {
+        //                 if (winTeam == 2)
+        //                 //console.log("MASTER WIN ", team);
+        //                 color(colorWin, 'ПОБЕДА!');
+        //                 return
+        //             } else {
+        //                 //console.log("MASTER LOSE ", team);
+        //                 color(colorWin, 'ПОРАЖЕНИЕ!');
+        //             } 
+        //         }
+        //     }
+            
+
+        //     imWinner(winTeam);
+            
+
+        //     //for (let k = 2; k < 4; k++) {
+                
+        //     //}
+
+        // };
+
         function winLose() {
             function color(color, text) {
+                // Задание цвета текста, иконки и области
                 document.querySelector("div.winLose > div").innerText = text;
                 document.querySelector("div.winLose > svg > path").style.fill = color;
                 document.querySelector("div.winLoseText").style.color = color;
             }
+        
             let winTeam, colorWin;
+        
+            // Определение команды, которая выиграла
             if (score(0) > data2.Rounds.length - score(0)) {
-                //color('#6aa5ee', 'ПОБЕДА!');
                 winTeam = 2;
                 colorWin = "#6aa5ee";
             } else {
-                //color('#ff323b', 'ПОБЕДА!');
                 winTeam = 3;
                 colorWin = "#ff323b";
             }
-
-
+        
             function imWinner(team) {
+                let isWinner = false; // Переменная для хранения информации о победителе
                 for (let i = 0; i < 4; i++) {
-                    if (data1[team][i][0] == data2.userID) {
-                        //console.log("MASTER WIN ", team);
-                        color(colorWin, 'ПОБЕДА!');
-                    } else {
-                        //console.log("MASTER LOSE ", team);
-                        color(colorWin, 'ПОРАЖЕНИЕ!');
-                    } 
+                    if (data1[team][i][0] === data2.userID) {
+                        isWinner = true; // Если найдено совпадение, команда является победителем
+                        break; // Прерываем цикл, так как уже найден победитель
+                    }
+                }
+        
+                // Установка цвета и текста в зависимости от значения переменной isWinner
+                if (isWinner) {
+                    color(colorWin, 'ПОБЕДА!');
+                } else {
+                    color(colorWin, 'ПОРАЖЕНИЕ!');
                 }
             }
-            
-
+        
             imWinner(winTeam);
-            
-
-            //for (let k = 2; k < 4; k++) {
-                
-            //}
-
-        };
+        }
+        
+        
 
         //  #region SCORE
         function score(teamNumber) {
