@@ -366,6 +366,7 @@ html {
     }
 
     .different {
+        left: 1.5%;
         width: 372px;
         opacity: 0;
         text-align: right;
@@ -432,6 +433,7 @@ html {
         cursor: var(--grab);
 
         ul {
+            display: grid;
             list-style: none;
             margin-left: 0;
             padding: 0;

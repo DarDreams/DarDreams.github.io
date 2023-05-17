@@ -1536,6 +1536,9 @@ window.addEventListener('DOMContentLoaded', () => {
         sortTable(".team1Table");
         sortTable(".team2Table");
         winLose();
+        summRank();
+        
+        //different();
 
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
     }
@@ -1796,8 +1799,10 @@ window.addEventListener('DOMContentLoaded', () => {
                         // }
 
                     });
+                    
                 }
                 row.appendChild(cell);
+            
             }
             calendarBody.appendChild(row);
         }
@@ -1830,6 +1835,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${data.caliber.log.time}</span>
                   </li>
                 `)
+                sortList();
               })
               .catch(error => console.error(error));
           });
@@ -1838,6 +1844,7 @@ window.addEventListener('DOMContentLoaded', () => {
           const ul = document.querySelector('#list-container > ul');
           ul.addEventListener('click', (e) => {
             console.clear();
+            
             const li = e.target.closest('li');
             if (li) {
               const span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
@@ -1846,7 +1853,6 @@ window.addEventListener('DOMContentLoaded', () => {
               document.querySelector('.bluePoints').innerHTML = '';
               document.querySelector('.redPoints').innerHTML = '';
               loadData(`data/${strPath}/${span}`);
-      
               history.pushState(null, null, `/?filename=data/${strPath}/${span}`);
             }
           });
@@ -2020,37 +2026,61 @@ window.addEventListener('DOMContentLoaded', () => {
     //     console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);
     // }
 
-    function summRank(selector) {
-        let rank = 0;
-        document.querySelectorAll(`.${selector} > tbody > tr > td > span.rank`).forEach(element => {
-            rank += +element.textContent;
+    function summRank() {
+        document.querySelector(`.different`).innerHTML = '';
+        const divRank = document.querySelectorAll('.rank');
+        let team1Diff = 0;
+        let team2Diff = 0;
+        
+        divRank.forEach((element, index) => {
+          const number = parseInt(element.textContent);
+        
+          if (index < 4) {
+            team1Diff += number;
+          } else if (index < 8) {
+            team2Diff += number;
+          }
         });
-        document.querySelector(`.different`).insertAdjacentHTML('beforeend', `
-            <span class='${selector}Diff'>${rank}</span>
-        `)
-        return rank;
-    }
-
-    function different() {
-        if (document.querySelector(`.team1TableDiff`)) { document.querySelector(`.team1TableDiff`).innerHTML = ''; }
-        if (document.querySelector(`.team2TableDiff`)) { document.querySelector(`.team2TableDiff`).innerHTML = ''; }
-        if (document.querySelector(`.diffTeams`)) { document.querySelector(`.diffTeams`).innerHTML = ''; }
-        const team1Diff = +document.querySelector('.team1TableDiff').textContent;
-        const team2Diff = +document.querySelector('.team2TableDiff').textContent;
-
-        document.querySelector(`.team1TableDiff`).insertAdjacentHTML('afterend', `
-            <span class='diffTeams'>${Math.abs(team1Diff - team2Diff)}</span>
+        
+        document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
+        <span class='team2TableDiff'>${team2Diff}</span>
         `);
+        document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
+        <span class='team1TableDiff'>${team1Diff}</span>
+        `);
+        document.querySelector(`.team1TableDiff`).insertAdjacentHTML('afterend', `
+                 <span class='diffTeams'>${Math.abs(team1Diff - team2Diff)}</span>
+             `);
         let max = Math.max(+team1Diff, +team2Diff);
-        //console.log(diff);
-        //document.querySelector(`span:contains('2444')`)
-        $(`team1Table span:contains('${max}')`).css('color', '#c49a30');;
+        $(`span:contains('${max}')`).css('color', '#c49a30');
     }
 
-    // summRank('team1Table');
-    // summRank('team2Table');
-    //different();
+    function sortList() {
+        const divLi = document.querySelectorAll('li');
+        let timesInSeconds = [];
+        divLi.forEach((element) => {
+            let divSpan = element.querySelectorAll('span')[3];
+            let timeInSeconds = getSec(divSpan.textContent);
+            timesInSeconds.push(timeInSeconds);
+        });
 
+        let sortedTimes = [...timesInSeconds].sort((a, b) => b - a);
+
+        divLi.forEach((element, index) => {
+            let divSpan = element.querySelectorAll('span')[3];
+            let timeInSeconds = getSec(divSpan.textContent);
+            let order = sortedTimes.indexOf(timeInSeconds);
+            element.style.order = order;
+        });
+
+        function getSec(time) {
+            let timeString = time.trim();
+            let timeParts = timeString.split(':');
+            let timeInSeconds = (+timeParts[0]) * 3600 + (+timeParts[1]) * 60 + (+timeParts[2]);
+            return timeInSeconds;
+        }
+
+    }
 
     /* #region  ANIMATION */
     window.onload = function () {
@@ -2124,7 +2154,6 @@ window.addEventListener('DOMContentLoaded', () => {
                // time: dataFile[0][3]
             },
             folderPath: folderPath
-            
         };
 
         $.ajax({
@@ -2148,7 +2177,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function loadData(fileName) {
         //console.log(fileName);
-        // console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
+        //console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
         //const urlParams = new URLSearchParams(window.location.search);
         // const fileName = urlParams.get('filename');
         //console.log(`../${fileName}.json`);
