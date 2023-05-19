@@ -8,6 +8,10 @@
 }
 
 
+.team1Table tr:not([class]), .team2Table tr:not([class]) {
+    pointer-events: none;
+}
+
 html {
     //cursor: url('../img/cur.png'), auto;
     cursor: var(--cur);
