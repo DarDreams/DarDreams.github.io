@@ -640,6 +640,10 @@ button#show-panel {
         //transform: translateY(-50%);
         table {
             border-collapse: collapse;
+            thead>tr {
+                color:#6aa5ee;
+                text-decoration-line: underline;
+            }
 
         }
 
