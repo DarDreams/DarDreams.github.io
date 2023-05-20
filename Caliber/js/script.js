@@ -1431,7 +1431,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const mode = mapName.split("_")[3] == 'pvp' ? 'Столкновение' :
                 mapName.split("_")[3] == 'hacking' ? 'Взлом' : '';
             const time = convertSecondsToTime(data2.MatchTimeSeconds);
-        
+
             return {
                 map: rusMapName,
                 mode: mode,
@@ -1442,7 +1442,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-        
+
         /* #endregion */
 
         document.querySelector('.map').textContent = `\u00A0${getDataMap(data1[1]).map}`;
@@ -1458,7 +1458,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelector("div.winLoseText").style.color = color;
             }
             let winText, colorWin, winTeam;
-            
+
             for (let k = 2; k < 4; k++) {
                 for (let i = 0; i < 4; i++) {
                     if (data1[k][i][0] == data2.userID) {
@@ -1477,10 +1477,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
             if (score(winTeam) > data2.Rounds.length - score(winTeam)) {
                 winText = "ПОБЕДА!"
-            }  else  {
+            } else {
                 winText = "ПОРАЖЕНИЕ!"
             }
-        
+
             color(colorWin, winText);
 
         };
@@ -1537,7 +1537,7 @@ window.addEventListener('DOMContentLoaded', () => {
         sortTable(".team2Table");
         winLose();
         summRank();
-        
+
         //different();
 
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
@@ -1799,10 +1799,10 @@ window.addEventListener('DOMContentLoaded', () => {
                         // }
 
                     });
-                    
+
                 }
                 row.appendChild(cell);
-            
+
             }
             calendarBody.appendChild(row);
         }
@@ -1814,20 +1814,21 @@ window.addEventListener('DOMContentLoaded', () => {
     month_selector.value = new Date().getMonth() + 1;
     //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
     generateCalendar(month_selector.value - 1, new Date().getFullYear());
+    nowDay();
 
 
     /* #region  обновить список игр */
     let span;
     function getFileList(folder) {
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
-          document.querySelector("#list-container").innerHTML = "";
-          document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>")
-          data.forEach(element => {
-            fetch(`data/${strPath}/${element}`)
-              .then(response => response.json())
-              .then(data => {
-                // Здесь можно выполнить дополнительную обработку данных
-                document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
+            document.querySelector("#list-container").innerHTML = "";
+            document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>")
+            data.forEach(element => {
+                fetch(`data/${strPath}/${element}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Здесь можно выполнить дополнительную обработку данных
+                        document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                   <li>
                     <span>${element}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
@@ -1835,30 +1836,36 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${data.caliber.log.time}</span>
                   </li>
                 `)
-                sortList();
-              })
-              .catch(error => console.error(error));
-          });
-      
-          // Создаем обработчики событий после создания списка
-          const ul = document.querySelector('#list-container > ul');
-          ul.addEventListener('click', (e) => {
-            console.clear();
-            
-            const li = e.target.closest('li');
-            if (li) {
-              const span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
-              document.querySelector('.team1Table').innerHTML = '';
-              document.querySelector('.team2Table').innerHTML = '';
-              document.querySelector('.bluePoints').innerHTML = '';
-              document.querySelector('.redPoints').innerHTML = '';
-              loadData(`data/${strPath}/${span}`);
-              history.pushState(null, null, `/?filename=data/${strPath}/${span}`);
-            }
-          });
+                        sortList();
+                    })
+                    .catch(error => console.error(error));
+                    
+                // const filePath = "https://exlusive.pro/?filename=data/2023/05/18/a9a2bcc8-523d-41ea-9ce4-8aa7908a1fba_12431_2023-05-18_00-02-18_10468_000.json";
+
+                // const file = new File([JSON.stringify(data)], filePath, { type: "application/json" });
+                // processFile(file);
+
+            });
+
+            // Создаем обработчики событий после создания списка
+            const ul = document.querySelector('#list-container > ul');
+            ul.addEventListener('click', (e) => {
+                console.clear();
+
+                const li = e.target.closest('li');
+                if (li) {
+                    const span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
+                    document.querySelector('.team1Table').innerHTML = '';
+                    document.querySelector('.team2Table').innerHTML = '';
+                    document.querySelector('.bluePoints').innerHTML = '';
+                    document.querySelector('.redPoints').innerHTML = '';
+                    loadData(`data/${strPath}/${span}`);
+                    history.pushState(null, null, `/?filename=data/${strPath}/${span}`);
+                }
+            });
         });
-      }
-    
+    }
+
     /* #endregion */
 
     month_selector.addEventListener('change', () => {
@@ -1881,17 +1888,65 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log('Путь скопирован в буфер обмена');
     });
     // #endregion
+    /* #region  OLD FILE_INPUT */
     let createdDate;
-    const fileInput = document.getElementById('file-input');
-    fileInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        //console.log("file: ",file.name);
+    // const fileInput = document.getElementById('file-input');
+    // fileInput.addEventListener('change', (event) => {
+    //     const file = event.target.files[0];
+    //     const parts = file.name.split("_");
+    //     userID = parts[1];
+    //     date = parts[2].replaceAll("-", "/");
+    //     time = parts[3].replaceAll("-", ":");
+    //     createdDate = new Date(file.lastModified);
+    //     const reader = new FileReader();
+    //     reader.readAsText(file);
+    //     reader.onload = (event) => {
+    //         let caliber_b = [];
+    //         let caliber_b2 = [];
+    //         let data = event.target.result.match(/^(.*\n){0,2}.*/g);
+    //         data = data[0].replaceAll(/[^\x20-\x7E]+/g);
+    //         data = data.replaceAll(/[^ -~]+/g);
+    //         data = data.replace(/.*?({.*)/, "$1");
+    //         caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
+    //         try {
+    //             caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
 
+    //             function fix(obj) {
+    //                 let brokenObject = obj;
+    //                 let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+    //                 fixedObject = JSON.parse(fixedObject);
+    //                 return fixedObject;
+    //             }
+
+    //             caliber_b = fix(caliber_b);
+    //             caliber_b2 = fix(caliber_b2);
+
+    //             let caliber_file = caliberFunc(caliber_b, caliber_b2)
+    //             document.querySelectorAll('.points').forEach(item => {
+    //                 item.remove();
+    //             })
+    //             upload(caliber_file.data, caliber_file.log);
+    //             updateDB(caliber_file);
+
+    //             setUrl = function () {
+    //                 history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+    //             }
+    //             setUrl();
+    //         } catch (e) {
+    //             alert("Файл поврежден:", e.message)
+    //         }
+    //     }
+
+    //     //saveData(createdDate);
+
+    // });
+    /* #endregion */
+
+    function processFile(file) {
         const parts = file.name.split("_");
-         userID = parts[1];
-         date = parts[2].replaceAll("-","/");
-         time = parts[3].replaceAll("-",":");
-
+        userID = parts[1];
+        date = parts[2].replaceAll("-", "/");
+        time = parts[3].replaceAll("-", ":");
         createdDate = new Date(file.lastModified);
         const reader = new FileReader();
         reader.readAsText(file);
@@ -1905,48 +1960,40 @@ window.addEventListener('DOMContentLoaded', () => {
             caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
             try {
                 caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
-
+    
                 function fix(obj) {
                     let brokenObject = obj;
                     let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
                     fixedObject = JSON.parse(fixedObject);
                     return fixedObject;
                 }
-
+    
                 caliber_b = fix(caliber_b);
                 caliber_b2 = fix(caliber_b2);
-
-                //console.log("caliber_b: ", caliber_b);
-
-                // caliber_b[8] = caliber_b[7].splice(4);
-                // caliber_b2.Log.Users[0] = [caliber_b2.Log.Users[0], caliber_b2.Log.Users[1], caliber_b2.Log.Users[2], caliber_b2.Log.Users[3]]
-                // caliber_b2.Log.Users[1] = [caliber_b2.Log.Users[4], caliber_b2.Log.Users[5], caliber_b2.Log.Users[6], caliber_b2.Log.Users[7]]
-                // caliber_b2.Log.Users.splice(2);
-
-                let caliber_file = caliberFunc(caliber_b, caliber_b2)
+    
+                let caliber_file = caliberFunc(caliber_b, caliber_b2);
                 document.querySelectorAll('.points').forEach(item => {
                     item.remove();
-                })
+                });
                 upload(caliber_file.data, caliber_file.log);
                 updateDB(caliber_file);
-                //history.pushState(null, null, `/?filename=${caliber_file.data[0]}_${saveData(createdDate)}`);
-
+    
                 setUrl = function () {
-                    history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-                }
+                    history.pushState(null, null, `/?filename=${file}`);
+                };
                 setUrl();
-                // window.location.href = `${window.location.origin}/?filename=${caliber_file.data[0]}`;
-                //sounds(); 
-
-                //saveData();
             } catch (e) {
-                alert("Файл поврежден:",e.message)
+                alert("Файл поврежден:", e.message);
             }
-        }
+        };
+    }
 
-        //saveData(createdDate);
-
+    const fileInput = document.getElementById('file-input');
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        processFile(file);
     });
+
     //#endregion CALENDAR
     /* #endregion */
 
@@ -1995,32 +2042,32 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  FUNCTION SAVE DATA */
     function saveData(createdDate) {
-       // const map = document.querySelector('.map').textContent.trim();
-       // const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
-       try {
-        const day = `${createdDate.getFullYear()}/${setZero(createdDate.getMonth() + 1)}/${setZero(createdDate.getDate())}`;
-        return day;
-       } catch {} 
+        // const map = document.querySelector('.map').textContent.trim();
+        // const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
+        try {
+            const day = `${createdDate.getFullYear()}/${setZero(createdDate.getMonth() + 1)}/${setZero(createdDate.getDate())}`;
+            return day;
+        } catch { }
         // if (localStorage.getItem('rec') == 'true') {
-            // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
-            //  localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
+        // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
+        //  localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
         // }
     }
 
     /* #endregion */
     //try {
-        //let map;
-        // document.querySelector('.geo').addEventListener('click', () => {
-        //     //let humap = caliber.data[1].split('_').slice(1, -1).join('_');
-        //     let humap = getDataMap().engMap(document.querySelector('.map').textContent.replace(' ',''));
-        //     //console.log("map: ", map);
-        //     if (!document.querySelector('.imgMap')) {
-        //         document.body.insertAdjacentHTML('afterbegin', `
-        //     <img class="imgMap" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${humap}_hacking.png">
-        //     `);
-        //     } else document.querySelector('.imgMap').remove();
-        //     //$('.imgMap').fadeToggle(1000);
-        // })
+    //let map;
+    // document.querySelector('.geo').addEventListener('click', () => {
+    //     //let humap = caliber.data[1].split('_').slice(1, -1).join('_');
+    //     let humap = getDataMap().engMap(document.querySelector('.map').textContent.replace(' ',''));
+    //     //console.log("map: ", map);
+    //     if (!document.querySelector('.imgMap')) {
+    //         document.body.insertAdjacentHTML('afterbegin', `
+    //     <img class="imgMap" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${humap}_hacking.png">
+    //     `);
+    //     } else document.querySelector('.imgMap').remove();
+    //     //$('.imgMap').fadeToggle(1000);
+    // })
     //}
     // catch (e) {
     //     console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);
@@ -2031,17 +2078,17 @@ window.addEventListener('DOMContentLoaded', () => {
         const divRank = document.querySelectorAll('.rank');
         let team1Diff = 0;
         let team2Diff = 0;
-        
+
         divRank.forEach((element, index) => {
-          const number = parseInt(element.textContent);
-        
-          if (index < 4) {
-            team1Diff += number;
-          } else if (index < 8) {
-            team2Diff += number;
-          }
+            const number = parseInt(element.textContent);
+
+            if (index < 4) {
+                team1Diff += number;
+            } else if (index < 8) {
+                team2Diff += number;
+            }
         });
-        
+
         document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
         <span class='team2TableDiff'>${team2Diff}</span>
         `);
@@ -2141,17 +2188,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function updateDB(dataFile) {
         //var folderPath2 = "/data/" + saveData(createdDate) + "/";
-        let folderPath= "/data/" + dataFile.log.date + "/"
+        let folderPath = "/data/" + dataFile.log.date + "/"
         //console.log("fp: ",folderPath);
         //console.log("fp2: ",folderPath2);
-      //  console.log(dataFile.data[0]);
+        //  console.log(dataFile.data[0]);
         var data = {
             caliber: dataFile,
             metadata: {
-               // userId: dataFile.data[0][1],
+                // userId: dataFile.data[0][1],
                 //date: dataFile[0][2],
                 createdAt: folderPath,
-               // time: dataFile[0][3]
+                // time: dataFile[0][3]
             },
             folderPath: folderPath
         };
@@ -2226,6 +2273,14 @@ window.addEventListener('DOMContentLoaded', () => {
         } catch { }
     }
     /* #endregion */
+
+    function nowDay() {
+        $("#calendar-body > tr > td:contains('" + new Date().getDate() + "')").css({
+            "outline": "3px ridge red",
+            "margin-left": 0,
+            "padding-left": 0
+        });
+    }
 
     document.body.addEventListener('click', () => {
         // tv();
