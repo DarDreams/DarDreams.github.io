@@ -1942,56 +1942,65 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // });
     /* #endregion */
+    //processFile({url:"https://exlusive.pro/?filename=data/2023/05/19/1ac4c656-3027-4b8e-930e-d88ec07f8005_12431_2023-05-19_21-13-39_10468_000.bytes"},fromInternet=true);
+    function processFile(file,internet = false){
+        if (internet === false) {
+                const file = event.target.files[0];
+                const parts = file.name.split("_");
+                userID = parts[1];
+                date = parts[2].replaceAll("-", "/");
+                time = parts[3].replaceAll("-", ":");
+                createdDate = new Date(file.lastModified);
+                const reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = (event) => {
+                    let caliber_b = [];
+                    let caliber_b2 = [];
+                    let data = event.target.result.match(/^(.*\n){0,2}.*/g);
+                    data = data[0].replaceAll(/[^\x20-\x7E]+/g);
+                    data = data.replaceAll(/[^ -~]+/g);
+                    data = data.replace(/.*?({.*)/, "$1");
+                    caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
+                    try {
+                        caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
 
-    function processFile(file) {
-        const parts = file.name.split("_");
-        userID = parts[1];
-        date = parts[2].replaceAll("-", "/");
-        time = parts[3].replaceAll("-", ":");
-        createdDate = new Date(file.lastModified);
-        const reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = (event) => {
-            let caliber_b = [];
-            let caliber_b2 = [];
-            let data = event.target.result.match(/^(.*\n){0,2}.*/g);
-            data = data[0].replaceAll(/[^\x20-\x7E]+/g);
-            data = data.replaceAll(/[^ -~]+/g);
-            data = data.replace(/.*?({.*)/, "$1");
-            caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
-            try {
-                caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
-    
-                function fix(obj) {
-                    let brokenObject = obj;
-                    let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
-                    fixedObject = JSON.parse(fixedObject);
-                    return fixedObject;
+                        function fix(obj) {
+                            let brokenObject = obj;
+                            let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+                            fixedObject = JSON.parse(fixedObject);
+                            return fixedObject;
+                        }
+
+                        caliber_b = fix(caliber_b);
+                        caliber_b2 = fix(caliber_b2);
+
+                        let caliber_file = caliberFunc(caliber_b, caliber_b2)
+                        document.querySelectorAll('.points').forEach(item => {
+                            item.remove();
+                        })
+                        upload(caliber_file.data, caliber_file.log);
+                        updateDB(caliber_file);
+
+                        setUrl = function () {
+                            history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+                        }
+                        setUrl();
+                    } catch (e) {
+                        alert("Файл поврежден:", e.message)
+                    }
                 }
-    
-                caliber_b = fix(caliber_b);
-                caliber_b2 = fix(caliber_b2);
-    
-                let caliber_file = caliberFunc(caliber_b, caliber_b2);
-                document.querySelectorAll('.points').forEach(item => {
-                    item.remove();
-                });
-                upload(caliber_file.data, caliber_file.log);
-                updateDB(caliber_file);
-    
-                setUrl = function () {
-                    history.pushState(null, null, `/?filename=${file}`);
-                };
-                setUrl();
-            } catch (e) {
-                alert("Файл поврежден:", e.message);
-            }
-        };
+
+                //saveData(createdDate);
+
+        }
     }
+         
+      
 
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
+        console.log("file:",file);
         processFile(file);
     });
 
