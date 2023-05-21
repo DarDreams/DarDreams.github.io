@@ -1695,13 +1695,16 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
 
                     cell.addEventListener("click", function () {
-
+                        console.log("click day");
                         selectedDate = new Date(2023, month_selector.value - 1, 1);
                         //var formattedDate = formatDate(selectedDate);
                         strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
                         //console.log(`2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
 
                         getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                        //processFile({name:"https://exlusive.pro/data/2023/05/19/3888ed9f-dce6-4f59-b7d0-30f6266b6c23_12431_2023-05-19_21-13-39_10468_000.bytes"},true);
+                        //console.log(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                        repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
                         //setUrl();
                         //getFileList();
@@ -1840,6 +1843,13 @@ window.addEventListener('DOMContentLoaded', () => {
                         sortList();
                     })
                     .catch(error => console.error(error));
+                    //console.log(element);
+                  //  processFile(element,true)
+                //     document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
+                //   <li>
+                //     <span>${element}</span>
+                //   </li>
+                // `)
                     
                 // const filePath = "https://exlusive.pro/?filename=data/2023/05/18/a9a2bcc8-523d-41ea-9ce4-8aa7908a1fba_12431_2023-05-18_00-02-18_10468_000.json";
 
@@ -1866,6 +1876,14 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    function repairFile(folder) {
+        var url = "https://exlusive.pro/php/repair.php"; // Указываем базовый URL-адрес
+        $.get(url, { folder: folder }, function(data) {
+          // Ваши действия после получения данных
+        });
+      }
+      
 
     /* #endregion */
 
@@ -1942,28 +1960,81 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // });
     /* #endregion */
-    //processFile({url:"https://exlusive.pro/?filename=data/2023/05/19/1ac4c656-3027-4b8e-930e-d88ec07f8005_12431_2023-05-19_21-13-39_10468_000.bytes"},fromInternet=true);
-    function processFile(file,internet = false){
+    
+    function processFile(file, internet = false) {
         if (internet === false) {
-                const file = event.target.files[0];
-                const parts = file.name.split("_");
-                userID = parts[1];
-                date = parts[2].replaceAll("-", "/");
-                time = parts[3].replaceAll("-", ":");
-                createdDate = new Date(file.lastModified);
-                const reader = new FileReader();
-                reader.readAsText(file);
-                reader.onload = (event) => {
+            const file = event.target.files[0];
+            const parts = file.name.split("_");
+            userID = parts[1];
+            date = parts[2].replaceAll("-", "/");
+            time = parts[3].replaceAll("-", ":");
+            createdDate = new Date(file.lastModified);
+            const reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = (event) => {
+                let caliber_b = [];
+                let caliber_b2 = [];
+                let data = event.target.result.match(/^(.*\n){0,2}.*/g);
+                data = data[0].replaceAll(/[^\x20-\x7E]+/g);
+                data = data.replaceAll(/[^ -~]+/g);
+                data = data.replace(/.*?({.*)/, "$1");
+                caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
+                try {
+                    caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
+
+                    function fix(obj) {
+                        let brokenObject = obj;
+                        let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+                        fixedObject = JSON.parse(fixedObject);
+                        return fixedObject;
+                    }
+
+                    caliber_b = fix(caliber_b);
+                    caliber_b2 = fix(caliber_b2);
+
+                    let caliber_file = caliberFunc(caliber_b, caliber_b2)
+                    document.querySelectorAll('.points').forEach(item => {
+                        item.remove();
+                    })
+                    upload(caliber_file.data, caliber_file.log);
+                    updateDB(caliber_file);
+
+                    setUrl = function () {
+                        history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+                    }
+                    setUrl();
+                } catch (e) {
+                    alert("Файл поврежден:", e.message)
+                }
+            }
+            //saveData(createdDate);
+        } else {
+            console.log("auto-file open");
+            //const file = event.target.files[0];
+            const parts = file.name.split("_");
+            userID = parts[1];
+            date = parts[2].replaceAll("-", "/");
+            time = parts[3].replaceAll("-", ":");
+            createdDate = new Date(file.lastModified);
+            //const reader = new FileReader();
+            //reader.readAsText(file);
+            //reader.onload = (event) => {
+            $.ajax({
+                url: file.name,
+                dataType: "text",
+                success: function (result) {
+                    console.log("url:", file.name);
+                    //console.log("result: ",result);
                     let caliber_b = [];
                     let caliber_b2 = [];
-                    let data = event.target.result.match(/^(.*\n){0,2}.*/g);
+                    let data = result.match(/^(.*\n){0,2}.*/g);
                     data = data[0].replaceAll(/[^\x20-\x7E]+/g);
                     data = data.replaceAll(/[^ -~]+/g);
                     data = data.replace(/.*?({.*)/, "$1");
                     caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
                     try {
                         caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
-
+                        //console.log("caliber_b", caliber_b);
                         function fix(obj) {
                             let brokenObject = obj;
                             let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
@@ -1978,20 +2049,22 @@ window.addEventListener('DOMContentLoaded', () => {
                         document.querySelectorAll('.points').forEach(item => {
                             item.remove();
                         })
-                        upload(caliber_file.data, caliber_file.log);
-                        updateDB(caliber_file);
+                       // console.log("caliber_file:",caliber_file);
+                         upload(caliber_file.data, caliber_file.log);
+                         updateDB(caliber_file);
+                        
 
-                        setUrl = function () {
-                            history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-                        }
-                        setUrl();
+                        // setUrl = function () {
+                        //     history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+                        // }
+                        // setUrl();
                     } catch (e) {
-                        alert("Файл поврежден:", e.message)
+                        alert("Файл из интернета поврежден:", e.message)
                     }
                 }
+            });
 
-                //saveData(createdDate);
-
+            //}
         }
     }
          
