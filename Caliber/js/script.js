@@ -1618,6 +1618,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const recElem = document.querySelector('.rec');
 
     button.addEventListener('mousemove', () => {
+        nowDay();
         document.querySelector('.container_tables').classList.remove('animate__animated');
     });
 
@@ -1814,7 +1815,7 @@ window.addEventListener('DOMContentLoaded', () => {
     month_selector.value = new Date().getMonth() + 1;
     //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
     generateCalendar(month_selector.value - 1, new Date().getFullYear());
-    nowDay();
+    // nowDay();
 
 
     /* #region  обновить список игр */
