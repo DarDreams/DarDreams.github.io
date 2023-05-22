@@ -44,7 +44,7 @@ if (isset($_GET['folder'])) {
         }
     }
 }
-function caliberFunc($caliberImport, $caliberImport2,$userID, $date, $time) {
+function caliberFunc($caliberImport, $caliberImport2,$userID = null, $date = null, $time = null) {
     $time = str_replace("-", ":", $time);
     $caliberNew = [
         'data' => [
@@ -114,11 +114,8 @@ $caliber_file = '{"caliber":{"data":'. stripslashes($caliber_b) . ',"log":' . st
 $caliberImport = $caliber_file["caliber"]["data"];
 $caliberImport2 = $caliber_file["caliber"]["log"];
 
-try {
 $caliberNew = caliberFunc($caliberImport, $caliberImport2);
-} catch (Exception $e) {
-    echo $e
-}
+
 
 // Вывод результатов
 echo json_encode($caliberNew);

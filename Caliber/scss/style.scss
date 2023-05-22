@@ -428,10 +428,13 @@ html {
     #list-container {
         text-align: center;
         padding: 10px;
+        padding-top: 0;
         display: block;
         color: grey;
         position: absolute;
         top: 50%;
+        font-family: monospace;
+        font-size: 16px;
 
         //cursor: url('../img/grab.png'), auto;
         cursor: var(--grab);
@@ -459,6 +462,7 @@ html {
             cursor: var(--grab);
             //border: 1px solid rgba(128, 128, 128, 0.51);
             outline: 1px solid rgba(128, 128, 128, 0.51);
+            font-family: monospace;
 
             & span {
                 //text-align: left;
@@ -480,15 +484,17 @@ html {
                     margin-left: -59px;
                     margin-top: -18px;
                 }
+              
             }
 
             & span:nth-child(1) {
-                width: 127px;
+                width: 65px;
                 padding-left: 50px;
                 text-align: center;
                 white-space: nowrap;
                 overflow: hidden;
-                text-overflow: ellipsis;
+                //text-overflow: ellipsis;
+                text-transform: uppercase;
             }
         }
 

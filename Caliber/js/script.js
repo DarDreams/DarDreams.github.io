@@ -1694,8 +1694,12 @@ window.addEventListener('DOMContentLoaded', () => {
                         return day + '.' + month + '.' + year;
                     }
 
-                    cell.addEventListener("click", function () {
+                    cell.addEventListener("click", function (e) {
                         console.log("click day");
+                        document.querySelectorAll('#calendar-body>tr>td').forEach((element)=> {
+                            element.style.outline = "unset";
+                        })
+                        e.target.style.outline = "2px ridge red";
                         selectedDate = new Date(2023, month_selector.value - 1, 1);
                         //var formattedDate = formatDate(selectedDate);
                         strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
@@ -1705,6 +1709,26 @@ window.addEventListener('DOMContentLoaded', () => {
                         //processFile({name:"https://exlusive.pro/data/2023/05/19/3888ed9f-dce6-4f59-b7d0-30f6266b6c23_12431_2023-05-19_21-13-39_10468_000.bytes"},true);
                         //console.log(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                         repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+
+                        const listItems = document.querySelectorAll('#list-container>*>li');
+                        listItems.forEach(element => {
+                            element.querySelector('span:first-child').insertAdjacentHTML("afterbegin",`
+                            <svg class='star' viewBox="281.634 158.464 106.675 70" width="106.675" height="70">
+                                    <defs>
+                                        <mask id="mask" x="0" y="0" width="69" height="69">
+                                        <rect x="278.691" y="158.464" width="69" height="69" fill="white"></rect>
+                                        <path d="M 294.111 189.782 L 302.188 189.782 L 304.683 182.109 L 307.179 189.782 L 315.256 189.782 L 308.722 194.524 L 311.218 202.197 L 304.683 197.455 L 298.149 202.197 L 300.645 194.524 L 294.111 189.782 Z" fill="black"></path>
+                                        </mask>
+                                    </defs>
+                                    <g class="layer" transform="matrix(1, 0, 0, 1, 319.590825, 158.343768)" height="70&quot; class=&quot;layer">
+                                        <title>Layer 1</title>
+                                        <path d="m-0.20636,0.12021l68.92459,0l-0.12566,34.50001l0.12566,34.50016l-68.92459,0l15.4421,-34.50016l-15.4421,-34.50001z" fill="#9f9f9f" id="svg_1" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" transform="rotate(-180 34.2559 34.6203)"></path>
+                                    </g>
+                                    <rect width="70" height="70" fill="#9f9f9f" mask="url(#mask)" x="281.634" y="158.464"></rect>
+                                    </svg>
+                            `);
+                        });
+
                         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
                         //setUrl();
                         //getFileList();
@@ -1751,25 +1775,10 @@ window.addEventListener('DOMContentLoaded', () => {
                         //         //listContainer.appendChild(item);
                         //     }
                         // });
-                        // const listItems = document.querySelectorAll('#list-container > li');
-                        // listItems.forEach(item => {
-                        //     const lastSpan = item.querySelector('span:last-child');
-                        //     const firstSpan = item.querySelector('span:first-child');
-                        //     firstSpan.insertAdjacentHTML('afterbegin', `
-                        //         <svg class='star' viewBox="281.634 158.464 106.675 70" width="106.675" height="70">
-                        //         <defs>
-                        //             <mask id="mask" x="0" y="0" width="69" height="69">
-                        //             <rect x="278.691" y="158.464" width="69" height="69" fill="white"></rect>
-                        //             <path d="M 294.111 189.782 L 302.188 189.782 L 304.683 182.109 L 307.179 189.782 L 315.256 189.782 L 308.722 194.524 L 311.218 202.197 L 304.683 197.455 L 298.149 202.197 L 300.645 194.524 L 294.111 189.782 Z" fill="black"></path>
-                        //             </mask>
-                        //         </defs>
-                        //         <g class="layer" transform="matrix(1, 0, 0, 1, 319.590825, 158.343768)" height="70&quot; class=&quot;layer">
-                        //             <title>Layer 1</title>
-                        //             <path d="m-0.20636,0.12021l68.92459,0l-0.12566,34.50001l0.12566,34.50016l-68.92459,0l15.4421,-34.50016l-15.4421,-34.50001z" fill="#9f9f9f" id="svg_1" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" transform="rotate(-180 34.2559 34.6203)"></path>
-                        //         </g>
-                        //         <rect width="70" height="70" fill="#9f9f9f" mask="url(#mask)" x="281.634" y="158.464"></rect>
-                        //         </svg>
-                        //     `)
+                        // const listItems = document.querySelectorAll('#list-container>*>li');
+                         
+                        
+    
                         //     lastSpan.insertAdjacentHTML('beforeend', '<img class="basket" src="img/basket.png"></img>');
 
                         //     /* #region  AJAX UPLOAD DB */
@@ -1878,12 +1887,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function repairFile(folder) {
-        console.log("aqui?");
-        //var url = ; // Указываем базовый URL-адрес
-        //console.log(`${url}, ${folder}`);
         $.get("https://exlusive.pro/php/repair.php", { folder: folder })
         .done(function (data) {
-            console.log("yep?", data);
+            //$('td[style*="outline"][style*="red"]').click();
+            //return
+            //console.log("tse");
             // Ваши действия после получения данных
         })
         .fail(function (error) {
@@ -2367,7 +2375,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function nowDay() {
         $("#calendar-body > tr > td:contains('" + new Date().getDate() + "')").css({
-            "outline": "3px ridge red",
+            // "outline": "3px ridge red",
+            "color": "#6aa5ee",
             "margin-left": 0,
             "padding-left": 0
         });
