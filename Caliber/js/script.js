@@ -1878,11 +1878,19 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function repairFile(folder) {
-        var url = "https://exlusive.pro/php/repair.php"; // Указываем базовый URL-адрес
-        $.get(url, { folder: folder }, function(data) {
-          // Ваши действия после получения данных
+        console.log("aqui?");
+        //var url = ; // Указываем базовый URL-адрес
+        //console.log(`${url}, ${folder}`);
+        $.get("https://exlusive.pro/php/repair.php", { folder: folder })
+        .done(function (data) {
+            console.log("yep?", data);
+            // Ваши действия после получения данных
+        })
+        .fail(function (error) {
+            console.log("Ошибка:", error);
+            // Обработка ошибки
         });
-      }
+    }
       
 
     /* #endregion */
