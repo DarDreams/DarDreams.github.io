@@ -1710,25 +1710,6 @@ window.addEventListener('DOMContentLoaded', () => {
                         //console.log(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                         repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
 
-                        const listItems = document.querySelectorAll('#list-container>*>li');
-                        listItems.forEach(element => {
-                            element.querySelector('span:first-child').insertAdjacentHTML("afterbegin",`
-                            <svg class='star' viewBox="281.634 158.464 106.675 70" width="106.675" height="70">
-                                    <defs>
-                                        <mask id="mask" x="0" y="0" width="69" height="69">
-                                        <rect x="278.691" y="158.464" width="69" height="69" fill="white"></rect>
-                                        <path d="M 294.111 189.782 L 302.188 189.782 L 304.683 182.109 L 307.179 189.782 L 315.256 189.782 L 308.722 194.524 L 311.218 202.197 L 304.683 197.455 L 298.149 202.197 L 300.645 194.524 L 294.111 189.782 Z" fill="black"></path>
-                                        </mask>
-                                    </defs>
-                                    <g class="layer" transform="matrix(1, 0, 0, 1, 319.590825, 158.343768)" height="70&quot; class=&quot;layer">
-                                        <title>Layer 1</title>
-                                        <path d="m-0.20636,0.12021l68.92459,0l-0.12566,34.50001l0.12566,34.50016l-68.92459,0l15.4421,-34.50016l-15.4421,-34.50001z" fill="#9f9f9f" id="svg_1" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" transform="rotate(-180 34.2559 34.6203)"></path>
-                                    </g>
-                                    <rect width="70" height="70" fill="#9f9f9f" mask="url(#mask)" x="281.634" y="158.464"></rect>
-                                    </svg>
-                            `);
-                        });
-
                         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
                         //setUrl();
                         //getFileList();
@@ -1829,6 +1810,16 @@ window.addEventListener('DOMContentLoaded', () => {
     generateCalendar(month_selector.value - 1, new Date().getFullYear());
     // nowDay();
 
+    function star() {
+        const listItems = document.querySelectorAll('#list-container>ul>li');
+        listItems.forEach(element => {
+           // if (!listItems.querySelector('svg')) {
+            element.querySelector('span:first-child').insertAdjacentHTML("afterbegin", `
+            <svg class="star" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><defs><clipPath id="a"><path style="fill:#d8d8d8;stroke:#000" d="M51.506 146.508h177.005v184.054H51.506z"/></clipPath><mask id="b" x="0" y="0" width="69" height="69"><path fill="#fff" d="M-5.039 39.02h373.624v373.624H-5.039z"/><path d="M78.458 208.601h43.734l13.512-41.547 13.514 41.547h43.736l-35.38 25.677 13.516 41.548-35.386-25.677-35.381 25.677 13.514-41.548-35.379-25.677Z"/></mask></defs><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M50.879 146.508h24.627v184.054H50.879c-13.586 0-24.6-11.014-24.6-24.6V171.108c0-13.586 11.014-24.6 24.6-24.6Zm90.766-21.291H285.64v22.858H141.645v-22.858Z"/><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M46.679 125.217h123.595v40.727H26.279v-20.363c0-11.247 9.133-20.364 20.4-20.364Zm172.832 0h65.866v205.345h-65.866V125.217Z"/><path fill="#9f9f9f" style="clip-path:url(#a)" d="M200.397 39.02h180.765a8.772 8.772 0 0 1 8.772 8.772v361.493a8.772 8.772 0 0 1-8.772 8.772H200.397a189.5 189.5 0 0 1-189.5-189.5v-.037a189.5 189.5 0 0 1 189.5-189.5Z" mask="url(#b)" bx:origin="0.494821 0.5" bx:shape="rect 10.897 39.02 379.037 379.037 189.5 8.772 8.772 189.5 1@059535bd"/><path style="paint-order:stroke;fill:#9f9f9f;stroke:#000;stroke-opacity:0" d="m316.73 229.167-41.353-103.384 62.269-.566v205.345h-62.03l41.114-101.395Z" transform="rotate(180 306.511 227.89)"/></svg>
+            `);
+            //}
+        });
+    }
 
     /* #region  обновить список игр */
     let span;
@@ -1843,13 +1834,16 @@ window.addEventListener('DOMContentLoaded', () => {
                         // Здесь можно выполнить дополнительную обработку данных
                         document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                   <li>
-                    <span>${element}</span>
+                    <span>
+                    <svg class="star" viewBox="0 0 339 205" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><defs><clipPath id="a"><path style="fill:#d8d8d8;stroke:#000" d="M25.227 21.291h177.005v184.054H25.227z"/></clipPath><mask id="b" x="0" y="0" width="69" height="69"><path fill="#fff" d="M-31.318-86.197h373.624v373.624H-31.318z"/><path d="M52.179 83.384h43.734l13.512-41.547 13.514 41.547h43.736l-35.38 25.677 13.516 41.548-35.386-25.677-35.381 25.677 13.514-41.548-35.379-25.677Z"/></mask></defs><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M24.6 21.291h24.627v184.054H24.6c-13.586 0-24.6-11.014-24.6-24.6V45.891c0-13.586 11.014-24.6 24.6-24.6ZM115.366 0h143.995v22.858H115.366V0Z"/><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M20.4 0h123.595v40.727H0V20.364C0 9.117 9.133 0 20.4 0Zm172.832 0h65.866v205.345h-65.866V0Z"/><path fill="#9f9f9f" style="clip-path:url(#a)" d="M174.118-86.197h180.765a8.772 8.772 0 0 1 8.772 8.772v361.493a8.772 8.772 0 0 1-8.772 8.772H174.118a189.5 189.5 0 0 1-189.5-189.5v-.037a189.5 189.5 0 0 1 189.5-189.5Z" mask="url(#b)" bx:origin="0.494821 0.5" bx:shape="rect -15.382 -86.197 379.037 379.037 189.5 8.772 8.772 189.5 1@0d3a780c"/><path style="paint-order:stroke;fill:#9f9f9f;stroke:#000;stroke-opacity:0" d="M290.451 103.95 249.098.566 311.367 0v205.345h-62.03l41.114-101.395Z" transform="rotate(180 280.233 102.672)"/></svg>
+                    ${element}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
                     <span>${data.caliber.log.time}</span>
                   </li>
                 `)
                         sortList();
+                        //star();
                     })
                     .catch(error => console.error(error));
                     //console.log(element);
@@ -1866,6 +1860,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 // processFile(file);
 
             });
+            
 
             // Создаем обработчики событий после создания списка
             const ul = document.querySelector('#list-container > ul');
@@ -1884,7 +1879,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+        
     }
+    
 
     function repairFile(folder) {
         $.get("https://exlusive.pro/php/repair.php", { folder: folder })
