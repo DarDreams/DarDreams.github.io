@@ -967,7 +967,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     lvlText: data1[k][i][3],
                     nameOp: roleName,
                     lvlOp: data1[k][i][8][18],
-                    rank: data1[k][i][16][2],
+                    rank: data1[k][i][16][1],
                     name: data1[k][i][2],
                     group: String(data1[k][i][1]).slice(0, 4),
                     perks: [data1[k][i + 0][8][15][0], data1[k][i + 0][8][15][1], data1[k][i + 0][8][15][2], data1[k][i + 0][8][15][3]],
