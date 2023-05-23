@@ -1834,33 +1834,19 @@ window.addEventListener('DOMContentLoaded', () => {
                         // Здесь можно выполнить дополнительную обработку данных
                         document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                   <li>
-                    <span><svg class="star" viewBox="0 0 339 205" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><defs><clipPath id="a"><path style="fill:#d8d8d8;stroke:#000" d="M25.227 21.291h177.005v184.054H25.227z"/></clipPath><mask id="b" x="0" y="0" width="69" height="69"><path fill="#fff" d="M-31.318-86.197h373.624v373.624H-31.318z"/><path d="M52.179 83.384h43.734l13.512-41.547 13.514 41.547h43.736l-35.38 25.677 13.516 41.548-35.386-25.677-35.381 25.677 13.514-41.548-35.379-25.677Z"/></mask></defs><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M24.6 21.291h24.627v184.054H24.6c-13.586 0-24.6-11.014-24.6-24.6V45.891c0-13.586 11.014-24.6 24.6-24.6ZM115.366 0h143.995v22.858H115.366V0Z"/><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M20.4 0h123.595v40.727H0V20.364C0 9.117 9.133 0 20.4 0Zm172.832 0h65.866v205.345h-65.866V0Z"/><path fill="#9f9f9f" style="clip-path:url(#a)" d="M174.118-86.197h180.765a8.772 8.772 0 0 1 8.772 8.772v361.493a8.772 8.772 0 0 1-8.772 8.772H174.118a189.5 189.5 0 0 1-189.5-189.5v-.037a189.5 189.5 0 0 1 189.5-189.5Z" mask="url(#b)" bx:origin="0.494821 0.5" bx:shape="rect -15.382 -86.197 379.037 379.037 189.5 8.772 8.772 189.5 1@0d3a780c"/><path style="paint-order:stroke;fill:#9f9f9f;stroke:#000;stroke-opacity:0" d="M290.451 103.95 249.098.566 311.367 0v205.345h-62.03l41.114-101.395Z" transform="rotate(180 280.233 102.672)"/></svg>${element}</span>
+                    <span><svg class="star" viewBox="0 0 339 205" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><defs><clipPath id="a"><path style="fill:#d8d8d8;stroke:#000" d="M25.227 21.291h177.005v184.054H25.227z"/></clipPath><mask id="b" x="0" y="0" width="69" height="69"><path class="no" fill="#fff" d="M-31.318-86.197h373.624v373.624H-31.318z"/><path d="M52.179 83.384h43.734l13.512-41.547 13.514 41.547h43.736l-35.38 25.677 13.516 41.548-35.386-25.677-35.381 25.677 13.514-41.548-35.379-25.677Z"/></mask></defs><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M24.6 21.291h24.627v184.054H24.6c-13.586 0-24.6-11.014-24.6-24.6V45.891c0-13.586 11.014-24.6 24.6-24.6ZM115.366 0h143.995v22.858H115.366V0Z"/><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M20.4 0h123.595v40.727H0V20.364C0 9.117 9.133 0 20.4 0Zm172.832 0h65.866v205.345h-65.866V0Z"/><path fill="#9f9f9f" style="clip-path:url(#a)" d="M174.118-86.197h180.765a8.772 8.772 0 0 1 8.772 8.772v361.493a8.772 8.772 0 0 1-8.772 8.772H174.118a189.5 189.5 0 0 1-189.5-189.5v-.037a189.5 189.5 0 0 1 189.5-189.5Z" mask="url(#b)" bx:origin="0.494821 0.5" bx:shape="rect -15.382 -86.197 379.037 379.037 189.5 8.772 8.772 189.5 1@0d3a780c"/><path style="paint-order:stroke;fill:#9f9f9f;stroke:#000;stroke-opacity:0" d="M290.451 103.95 249.098.566 311.367 0v205.345h-62.03l41.114-101.395Z" transform="rotate(180 280.233 102.672)"/></svg>${element}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
-                    <span>${winner()}</span>
                     <span>${data.caliber.log.Rounds.filter(item => item.winner_team === 0).length} - ${data.caliber.log.Rounds.filter(item => item.winner_team === 1).length}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
                     <span>${data.caliber.log.time}</span>
                   </li>
                 `)
-                    function winner(){
-                        //const idToFind = data.caliber.log.userID;
-                        //console.log(data);
-                        let winningTeam = null;
-                        //console.log(data.caliber.data[2][3][0]);
-                        //console.log(data.caliber.data[3][1][0]);
-                         data.caliber.data[2].some(item => {
-                            for (let i = 0; i <= 3; i++) {
-                                console.log(Array.isArray(item[i][0]));
-                              if (Array.isArray(item[i][0]) && item[i[0]].includes(data.caliber.log.userID)) {
-                                return "true";
-                              }
-                            }
-                            return "false";
-                          });
-                    }
-
-                        sortList();
-                        //star();
+                  
+                    ///////////////////////////////////////////////////////////////////
+                    setFav();
+                    sortList();
+                    
+                        
                     })
                     .catch(error => console.error(error));
                     //console.log(element);
@@ -1878,7 +1864,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             });
             
-
+            
             // Создаем обработчики событий после создания списка
             const ul = document.querySelector('#list-container > ul');
             ul.addEventListener('click', (e) => {
@@ -1899,6 +1885,17 @@ window.addEventListener('DOMContentLoaded', () => {
         
     }
     
+    function setFav() {
+        //console.log("setfav");
+        document.querySelectorAll('svg.star').forEach( item => {
+            item.onclick = function (event) {
+                event.stopPropagation();
+                //console.dir(event);
+                event.target.parentElement.classList.toggle('fav');
+                
+            }
+        })
+    }
 
     function repairFile(folder) {
         $.get("https://exlusive.pro/php/repair.php", { folder: folder })
@@ -2219,7 +2216,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const divLi = document.querySelectorAll('li');
         let timesInSeconds = [];
         divLi.forEach((element) => {
-            let divSpan = element.querySelectorAll('span')[3];
+            let divSpan = element.querySelector('span:last-Child');
             let timeInSeconds = getSec(divSpan.textContent);
             timesInSeconds.push(timeInSeconds);
         });
@@ -2227,7 +2224,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let sortedTimes = [...timesInSeconds].sort((a, b) => b - a);
 
         divLi.forEach((element, index) => {
-            let divSpan = element.querySelectorAll('span')[3];
+            let divSpan = element.querySelector('span:last-Child');
             let timeInSeconds = getSec(divSpan.textContent);
             let order = sortedTimes.indexOf(timeInSeconds);
             element.style.order = order;

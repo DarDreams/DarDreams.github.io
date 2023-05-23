@@ -494,6 +494,11 @@ html {
               
             }
 
+            .fav>path:not(.no), svg.fav {
+                fill: #FFC83D !important;
+                opacity: 1 !important;
+            }
+
             & span:nth-child(1) {
                 width: 65px;
                 padding-left: 50px;
