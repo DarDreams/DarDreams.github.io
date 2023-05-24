@@ -1810,17 +1810,6 @@ window.addEventListener('DOMContentLoaded', () => {
     generateCalendar(month_selector.value - 1, new Date().getFullYear());
     // nowDay();
 
-    function star() {
-        const listItems = document.querySelectorAll('#list-container>ul>li');
-        listItems.forEach(element => {
-           // if (!listItems.querySelector('svg')) {
-            element.querySelector('span:first-child').insertAdjacentHTML("afterbegin", `
-            <svg class="star" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><defs><clipPath id="a"><path style="fill:#d8d8d8;stroke:#000" d="M51.506 146.508h177.005v184.054H51.506z"/></clipPath><mask id="b" x="0" y="0" width="69" height="69"><path fill="#fff" d="M-5.039 39.02h373.624v373.624H-5.039z"/><path d="M78.458 208.601h43.734l13.512-41.547 13.514 41.547h43.736l-35.38 25.677 13.516 41.548-35.386-25.677-35.381 25.677 13.514-41.548-35.379-25.677Z"/></mask></defs><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M50.879 146.508h24.627v184.054H50.879c-13.586 0-24.6-11.014-24.6-24.6V171.108c0-13.586 11.014-24.6 24.6-24.6Zm90.766-21.291H285.64v22.858H141.645v-22.858Z"/><path style="fill-rule:nonzero;fill:#9f9f9f;paint-order:stroke markers" d="M46.679 125.217h123.595v40.727H26.279v-20.363c0-11.247 9.133-20.364 20.4-20.364Zm172.832 0h65.866v205.345h-65.866V125.217Z"/><path fill="#9f9f9f" style="clip-path:url(#a)" d="M200.397 39.02h180.765a8.772 8.772 0 0 1 8.772 8.772v361.493a8.772 8.772 0 0 1-8.772 8.772H200.397a189.5 189.5 0 0 1-189.5-189.5v-.037a189.5 189.5 0 0 1 189.5-189.5Z" mask="url(#b)" bx:origin="0.494821 0.5" bx:shape="rect 10.897 39.02 379.037 379.037 189.5 8.772 8.772 189.5 1@059535bd"/><path style="paint-order:stroke;fill:#9f9f9f;stroke:#000;stroke-opacity:0" d="m316.73 229.167-41.353-103.384 62.269-.566v205.345h-62.03l41.114-101.395Z" transform="rotate(180 306.511 227.89)"/></svg>
-            `);
-            //}
-        });
-    }
-
     /* #region  обновить список игр */
     let span;
     function getFileList(folder) {
@@ -1836,7 +1825,7 @@ window.addEventListener('DOMContentLoaded', () => {
                   <li>
                     <span><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
-                    <span>${data.caliber.log.Rounds.filter(item => item.winner_team === 0).length} - ${data.caliber.log.Rounds.filter(item => item.winner_team === 1).length}</span>
+                    <span>${winner(data.caliber)}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
                     <span>${data.caliber.log.time}</span>
                   </li>
@@ -1862,6 +1851,43 @@ window.addEventListener('DOMContentLoaded', () => {
                 // processFile(file);
             });
             
+            function winner(mainObj) {
+                function findValueInObject(obj) {
+                    const result = {
+                        team: null,
+                        pos: null
+                    };
+                    for (let i = 0; i < 4; i++) {
+                        if (obj.data[2][i][0] === 12431) {
+                            result.team = 0;
+                            result.pos = i;
+                            return result;
+                        }
+                    }
+                    for (let i = 0; i < 4; i++) {
+                        if (obj.data[3][i][0] === 12431) {
+                            result.team = 1;
+                            result.pos = i;
+                            return result;
+                        }
+                    }
+                    return result;
+                }
+            
+                const result = findValueInObject(mainObj);
+                console.log(result.team); // 2 или 3
+                console.log(result.pos); // 0
+            
+                console.log(mainObj.log.Users[result.team][result.pos].WinRoundCount);
+                
+                if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
+                    return "ПОБЕДА";
+                } else {
+                    return "ПОРАЖЕНИЕ";
+                }
+            }
+              
+              
             
             // Создаем обработчики событий после создания списка
             const ul = document.querySelector('#list-container > ul');
