@@ -7,7 +7,7 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap, userID, date, time, winner,score,winTeam;
+    let id, alldata, setUrl, getDataMap, userID, date, time,score,winTeam, clickDay;
     let rankTeam = [];
 
     /* #region CREATE OBJECT CALIBER */
@@ -1464,24 +1464,16 @@ window.addEventListener('DOMContentLoaded', () => {
                     if (data1[k][i][0] == data2.userID) {
                         if (k == 2) {
                             colorWin = "#6aa5ee";
-                            winTeam = 0;
+                          //  winTeam = 0;
                         } else {
                             colorWin = "#ff323b";
-                            winTeam = 1;
+                         //   winTeam = 1;
                         }
                     }
                 }
             }
 
-            console.log(`${score(winTeam)} >= ${data2.Rounds.length - score(winTeam)}`);
-
-            if (score(winTeam) > data2.Rounds.length - score(winTeam)) {
-                winText = "ПОБЕДА!"
-            } else {
-                winText = "ПОРАЖЕНИЕ!"
-            }
-
-            color(colorWin, winText);
+            color(colorWin, winner({data:data1,log:data2}));
 
         };
 
@@ -1696,6 +1688,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     cell.addEventListener("click", function (e) {
                         console.log("click day");
+                        clickDay = setZero(cell.textContent);
                         document.querySelectorAll('#calendar-body>tr>td').forEach((element)=> {
                             element.style.outline = "unset";
                         })
@@ -1837,57 +1830,8 @@ window.addEventListener('DOMContentLoaded', () => {
                         
                     })
                     .catch(error => console.error(error));
-                    //console.log(element);
-                  //  processFile(element,true)
-                //     document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
-                //   <li>
-                //     <span>${element}</span>
-                //   </li>
-                // `)
-                    
-                // const filePath = "https://exlusive.pro/?filename=data/2023/05/18/a9a2bcc8-523d-41ea-9ce4-8aa7908a1fba_12431_2023-05-18_00-02-18_10468_000.json";
-
-                // const file = new File([JSON.stringify(data)], filePath, { type: "application/json" });
-                // processFile(file);
             });
             
-            function winner(mainObj) {
-                function findValueInObject(obj) {
-                    const result = {
-                        team: null,
-                        pos: null
-                    };
-                    for (let i = 0; i < 4; i++) {
-                        if (obj.data[2][i][0] === 12431) {
-                            result.team = 0;
-                            result.pos = i;
-                            return result;
-                        }
-                    }
-                    for (let i = 0; i < 4; i++) {
-                        if (obj.data[3][i][0] === 12431) {
-                            result.team = 1;
-                            result.pos = i;
-                            return result;
-                        }
-                    }
-                    return result;
-                }
-            
-                const result = findValueInObject(mainObj);
-                console.log(result.team); // 2 или 3
-                console.log(result.pos); // 0
-            
-                console.log(mainObj.log.Users[result.team][result.pos].WinRoundCount);
-                
-                if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
-                    return "ПОБЕДА";
-                } else {
-                    return "ПОРАЖЕНИЕ";
-                }
-            }
-              
-              
             
             // Создаем обработчики событий после создания списка
             const ul = document.querySelector('#list-container > ul');
@@ -1909,18 +1853,55 @@ window.addEventListener('DOMContentLoaded', () => {
         
     }
     
+    function winner(mainObj) {
+        function findValueInObject(obj) {
+            const result = {
+                team: null,
+                pos: null
+            };
+            for (let i = 0; i < 4; i++) {
+                if (obj.data[2][i][0] === 12431) {
+                    result.team = 0;
+                    result.pos = i;
+                    return result;
+                }
+            }
+            for (let i = 0; i < 4; i++) {
+                if (obj.data[3][i][0] === 12431) {
+                    result.team = 1;
+                    result.pos = i;
+                    return result;
+                }
+            }
+            return result;
+        }
+        const result = findValueInObject(mainObj);
+        
+        if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
+            return "ПОБЕДА";
+        } else {
+            return "ПОРАЖЕНИЕ";
+        }
+    }
+
     function setFav() {
-        //console.log("setfav");
         document.querySelectorAll('svg.star').forEach( item => {
             item.onclick = function (event) {
                 event.stopPropagation();
-                //console.dir(event);
                 event.target.parentElement.classList.toggle('fav');
-               // if (document.querySelector('#list-container>ul>li:first-child').querySelector('defs')) document.querySelector('#list-container>ul>li:first-child').querySelector('defs').remove();
+                let id = event.target.closest('li').querySelector('span:first-child').textContent;
+                let path = `2023/${document.querySelector('#month-selector').value}/${clickDay}`;
+                if (event.target.parentElement.classList.contains('fav')) {
+                    if (localStorage.getItem(id)) {
+                        localStorage.removeItem(id);
+                    } else {
+                        localStorage.setItem(id,path);
+                    }
+                }
             }
         })
-        
     }
+    // setFav()
     
 
     function repairFile(folder) {
