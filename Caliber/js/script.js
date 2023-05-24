@@ -1808,7 +1808,8 @@ window.addEventListener('DOMContentLoaded', () => {
     function getFileList(folder) {
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
             document.querySelector("#list-container").innerHTML = "";
-            document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>")
+            document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>");
+            console.log(data);
             data.forEach(element => {
                 fetch(`data/${strPath}/${element}`)
                     .then(response => response.json())
@@ -1826,7 +1827,9 @@ window.addEventListener('DOMContentLoaded', () => {
                   
                     ///////////////////////////////////////////////////////////////////
                     setFav();
+                    applyFavFromLocalStorage();
                     sortList();
+                    
                         
                     })
                     .catch(error => console.error(error));
@@ -1850,7 +1853,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-        
     }
     
     function winner(mainObj) {
@@ -1885,22 +1887,47 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function setFav() {
-        document.querySelectorAll('svg.star').forEach( item => {
+        document.querySelectorAll('svg.star').forEach(item => {
             item.onclick = function (event) {
                 event.stopPropagation();
                 event.target.parentElement.classList.toggle('fav');
+    
                 let id = event.target.closest('li').querySelector('span:first-child').textContent;
                 let path = `2023/${document.querySelector('#month-selector').value}/${clickDay}`;
+    
                 if (event.target.parentElement.classList.contains('fav')) {
                     if (localStorage.getItem(id)) {
                         localStorage.removeItem(id);
                     } else {
-                        localStorage.setItem(id,path);
+                        localStorage.setItem(id, path);
                     }
+                } else {
+                    localStorage.removeItem(id);
                 }
             }
         })
     }
+    
+    function applyFavFromLocalStorage() {
+        let elements = document.querySelectorAll('li');
+        elements.forEach(element => {
+            let id = element.querySelector('span:first-child').textContent;
+            if (localStorage.getItem(id)) {
+                element.querySelector('svg').classList.add('fav');
+            }
+        });
+    }
+    
+    function setButtonFavorite() {
+        const buttonFavorite = document.querySelector('#calendar-body>tr:last-child>td:last-child');
+        buttonFavorite.textContent="*";
+        buttonFavorite.addEventListener('click',() => {
+            
+        })
+    }
+    
+
+    
     // setFav()
     
 
