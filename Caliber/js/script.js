@@ -683,10 +683,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
                 //  for (let i = 0 ; i < 4; i++) {
-
+                let serverImg = '&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#99;&#97;&#108;&#105;&#98;&#101;&#114;&#102;&#97;&#110;&#46;&#114;&#117;&#47;&#47;&#119;&#112;&#45;&#99;&#111;&#110;&#116;&#101;&#110;&#116;&#47;&#116;&#104;&#101;&#109;&#101;&#115;&#47;&#99;&#97;&#108;&#105;&#98;&#101;&#114;&#46;&#105;&#109;&#103;';
 
                 // operLoop = ['assault', 'gunner', 'medic', 'sniper'];
 
+                console.dir(serverImg);
 
                 if (k == 3) {
 
@@ -2160,8 +2161,8 @@ window.addEventListener('DOMContentLoaded', () => {
             //}
         }
     }
-         
-      
+        
+    
 
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
