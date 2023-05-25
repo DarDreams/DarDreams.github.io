@@ -1808,7 +1808,27 @@ window.addEventListener('DOMContentLoaded', () => {
     function getFileList(folder) {
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
             document.querySelector("#list-container").innerHTML = "";
-            document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>");
+
+            document.querySelector('#list-container').insertAdjacentHTML("afterbegin", `
+            <ul>
+            <select class="sotrMap">
+                <option value="1">Радар</option>
+                <option value="2">Резиденция Эмира</option>
+                <option value="3">Караван-Сарай</option>
+                <option value="4">Дамба</option>
+                <option value="5">Переправа</option>
+                <option value="6">Больница</option>
+                <option value="7">Нефтяная вышка</option>
+                <option value="8">Деревня</option>
+                <option value="9">Гавань Амаль</option>
+                <option value="10">Отель</option>
+                <option value="11">Лес</option>
+                <option value="12">Депо</option>
+                <option value="13">Пальмовая дорога</option>
+                <option value="14">Торговый центр</option>
+                <option value="15">Объект 903</option>
+            </select>
+            `);
             //console.log(data);
             data.forEach(element => {
                 fetch(`data/${strPath}/${element}`)
