@@ -1864,7 +1864,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function createEventList(fecha) {
         const ul = document.querySelector('#list-container > ul');
         ul.addEventListener('click', (e) => {
-         //   console.clear();
+            console.clear();
 
             const li = e.target.closest('li');
             if (li) {
