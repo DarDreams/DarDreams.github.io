@@ -1811,7 +1811,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             document.querySelector('#list-container').insertAdjacentHTML("afterbegin", `
             <ul>
-            <select class="sotrMap">
+         <!--   <select class="sortMap">
                 <option value="1">Радар</option>
                 <option value="2">Резиденция Эмира</option>
                 <option value="3">Караван-Сарай</option>
@@ -1827,7 +1827,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <option value="13">Пальмовая дорога</option>
                 <option value="14">Торговый центр</option>
                 <option value="15">Объект 903</option>
-            </select>
+            </select>-->
             `);
             //console.log(data);
             data.forEach(element => {
