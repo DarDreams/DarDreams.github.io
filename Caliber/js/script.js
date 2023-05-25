@@ -683,11 +683,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
                 //  for (let i = 0 ; i < 4; i++) {
-                let serverImg = '&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#99;&#97;&#108;&#105;&#98;&#101;&#114;&#102;&#97;&#110;&#46;&#114;&#117;&#47;&#47;&#119;&#112;&#45;&#99;&#111;&#110;&#116;&#101;&#110;&#116;&#47;&#116;&#104;&#101;&#109;&#101;&#115;&#47;&#99;&#97;&#108;&#105;&#98;&#101;&#114;&#46;&#105;&#109;&#103;';
+                    
 
                 // operLoop = ['assault', 'gunner', 'medic', 'sniper'];
 
-                console.dir(serverImg);
 
                 if (k == 3) {
 
@@ -1817,7 +1816,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         // Здесь можно выполнить дополнительную обработку данных
                         document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
-                  <li>
+                  <li map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
                     <span><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${winner(data.caliber)}</span>
