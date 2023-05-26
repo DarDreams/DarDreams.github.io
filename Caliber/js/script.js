@@ -1036,6 +1036,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.log("caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.pn\g");
                 let img = new Image();
                 img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
+                console.log(img.src);
 
                 img.onload = function () {
                     try {
@@ -1831,6 +1832,7 @@ window.addEventListener('DOMContentLoaded', () => {
             `);
             //console.log(data);
             data.forEach(element => {
+                //console.log("check",element);
                 fetch(`data/${strPath}/${element}`)
                     .then(response => response.json())
                     .then(data => {
@@ -1856,19 +1858,18 @@ window.addEventListener('DOMContentLoaded', () => {
             
             
             // Создаем обработчики событий после создания списка
-            //console.log(strPath,span);
-            createEventList(strPath);
+            createEventList(strPath,"xyu");
         });
     }
 
-    function createEventList(fecha) {
+    function createEventList(fecha,key) {
         const ul = document.querySelector('#list-container > ul');
+        console.clear();
         ul.addEventListener('click', (e) => {
-            console.clear();
-
+           if (key == e.target.closest('li').querySelector('span:nth-child(1)').textContent) {
             const li = e.target.closest('li');
             if (li) {
-                const span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
+                let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
                 document.querySelector('.team1Table').innerHTML = '';
                 document.querySelector('.team2Table').innerHTML = '';
                 document.querySelector('.bluePoints').innerHTML = '';
@@ -1876,6 +1877,18 @@ window.addEventListener('DOMContentLoaded', () => {
                 loadData(`data/${fecha}/${span}`);
                 history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
             }
+        } if (key == "xyu") {
+            const li = e.target.closest('li');
+            if (li) {
+                let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
+                document.querySelector('.team1Table').innerHTML = '';
+                document.querySelector('.team2Table').innerHTML = '';
+                document.querySelector('.bluePoints').innerHTML = '';
+                document.querySelector('.redPoints').innerHTML = '';
+                loadData(`data/${fecha}/${span}`);
+                history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
+            }
+        }
         });
     }
 
@@ -1952,6 +1965,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 const keys = Object.keys(localStorage);
                 for (let i = 0; i < keys.length; i++) {
                     const key = keys[i];
+                   // console.log("check",key);
+                  //  console.log(keys[i]);
                    // console.log(key);
                    // console.log(localStorage.getItem(key));
                     fetch(`data/${localStorage.getItem(key)}/${key}`)
@@ -1966,14 +1981,13 @@ window.addEventListener('DOMContentLoaded', () => {
                                 <span>${data.caliber.log.time}</span>
                             </li>
                             `)
-                            console.log(localStorage.getItem(key));
-                            createEventList(localStorage.getItem(key));
+                            createEventList(localStorage.getItem(key),key);
                             setFav();
                             applyFavFromLocalStorage();
                         })
                         .catch(error => console.error(error));
                 };
-            
+              //  createEventList(localStorage.getItem(key));
         })
     }
     setButtonFavorite();
@@ -2428,7 +2442,7 @@ window.addEventListener('DOMContentLoaded', () => {
             url: `../${fileName}.json`,
             dataType: "json",
             success: function ({ caliber }) {
-                console.log("CALIBER_DATA_FILE:", caliber);
+                console.log(`${ caliber.data[1].split('_').slice(1, -1).join('_')}:`, caliber);
                 upload(caliber.data, caliber.log);
             }
         });

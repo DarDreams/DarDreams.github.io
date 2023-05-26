@@ -469,6 +469,8 @@ html {
             list-style: none;
             margin-left: 0;
             padding: 0;
+            margin-top: 1px;
+            margin-bottom: -11px;
         }
 
         li {
@@ -611,13 +613,26 @@ img.folder {
     //   }
 
 }
-
-#month-selector  {
-  //  cursor: url('../img/grab.png'), auto;
-  cursor: var(--grab);
-    margin: 30px 0 10px;
-    width: 226px;
-    font-size: 16px;
+.calendar {
+    .container {
+        display: grid !important;
+        justify-items: end;
+        #month-selector {
+            //display: inline;
+            cursor: var(--grab);
+            margin: 30px 0 10px;
+            font-size: 16px;
+            appearance: none;
+            border: none;
+            outline: none;
+            background-color: #000;
+            color: #fff;
+            width: 80px;
+            //float: right;
+        // margin-top: 29px;
+            text-align: right;
+        }
+    }
 }
 
 button#show-panel {
