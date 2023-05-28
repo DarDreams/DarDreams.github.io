@@ -1473,7 +1473,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
-
+           // console.log(userID);
             color(colorWin, winner({data:data1,log:data2}));
 
         };
@@ -1528,8 +1528,10 @@ window.addEventListener('DOMContentLoaded', () => {
         sounds();
         sortTable(".team1Table");
         sortTable(".team2Table");
-        winLose();
-        summRank();
+        winLose();console.log("winlose");
+        summRank();console.log("sumRank");
+        //console.log("setSelectMe()");
+       // setSelectMe();console.log("setSelectMe");
 
         //different();
 
@@ -1894,19 +1896,31 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function winner(mainObj) {
         function findValueInObject(obj) {
+           //console.log("userID", userID );
+            userID = mainObj.log.userID;
+            
             const result = {
                 team: null,
                 pos: null
             };
             for (let i = 0; i < 4; i++) {
-                if (obj.data[2][i][0] === 12431) {
+              //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
+                if (obj.data[2][i][0] == userID) {
+                  //  console.log(obj.data[2][i][2]);
+                    let nickName = obj.data[2][i][2];
+                  //  console.log(obj.data[2][i][0],userID);
                     result.team = 0;
                     result.pos = i;
                     return result;
                 }
             }
+        
             for (let i = 0; i < 4; i++) {
-                if (obj.data[3][i][0] === 12431) {
+             //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
+                if (obj.data[3][i][0] == userID) {
+                    //console.log(obj.data[3][i][2]);
+                    let nickName = obj.data[3][i][2];
+                  //  console.log(obj.data[3][i][0],userID);
                     result.team = 1;
                     result.pos = i;
                     return result;
@@ -2093,6 +2107,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const file = event.target.files[0];
             const parts = file.name.split("_");
             userID = parts[1];
+            //console.log(userID);
             date = parts[2].replaceAll("-", "/");
             time = parts[3].replaceAll("-", ":");
             createdDate = new Date(file.lastModified);
@@ -2106,7 +2121,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 data = data.replaceAll(/[^ -~]+/g);
                 data = data.replace(/.*?({.*)/, "$1");
                 caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
-                try {
+              //  try {
                     caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
 
                     function fix(obj) {
@@ -2130,15 +2145,17 @@ window.addEventListener('DOMContentLoaded', () => {
                         history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
                     }
                     setUrl();
-                } catch (e) {
-                    alert("Файл поврежден:", e.message)
-                }
+              //  } catch (e) {
+                  //  alert("Файл поврежден:", e.message)
+                  console.error(e.message)
+               // }
             }
             //saveData(createdDate);
         } else {
             console.log("auto-file open");
             //const file = event.target.files[0];
             const parts = file.name.split("_");
+            console.log("userID",userID);
             userID = parts[1];
             date = parts[2].replaceAll("-", "/");
             time = parts[3].replaceAll("-", ":");
@@ -2186,7 +2203,8 @@ window.addEventListener('DOMContentLoaded', () => {
                         // }
                         // setUrl();
                     } catch (e) {
-                        alert("Файл из интернета поврежден:", e.message)
+                      //  alert("Файл из интернета поврежден:", e.message)
+                      console.error(e.message)
                     }
                 }
             });
@@ -2492,6 +2510,25 @@ window.addEventListener('DOMContentLoaded', () => {
             "padding-left": 0,
             "font-weight": 600
         });
+    }
+    function setSelectMe() {
+    console.log(nickName);
+        let divMe = $(`td:contains('MASTER')`).closest('.line');
+        let howTeam = divMe[0].getAttribute('class').slice(-1)
+        selectMe(howTeam);
+        function selectMe(team) {
+            if (team == "R") {
+                divMe.css({
+                    "border-left": "4px solid #FFC83D",
+                    "background-color": "rgba(255,50,59,30%)"
+                })
+            } else {
+                divMe.css({
+                    "border-left": "4px solid #FFC83D",
+                    "background-color": "rgba(106,165,238,30%)"
+                })
+            }
+        }
     }
 
     document.body.addEventListener('click', () => {
