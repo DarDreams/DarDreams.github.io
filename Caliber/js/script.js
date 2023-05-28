@@ -1036,7 +1036,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.log("caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.pn\g");
                 let img = new Image();
                 img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
-                console.log(img.src);
+                //console.log(img.src);
 
                 img.onload = function () {
                     try {
@@ -1860,12 +1860,14 @@ window.addEventListener('DOMContentLoaded', () => {
             
             // Создаем обработчики событий после создания списка
             createEventList(strPath,"xyu");
+            
+            
         });
     }
 
     function createEventList(fecha,key) {
         const ul = document.querySelector('#list-container > ul');
-        console.clear();
+         console.clear();
         ul.addEventListener('click', (e) => {
            if (key == e.target.closest('li').querySelector('span:nth-child(1)').textContent) {
             const li = e.target.closest('li');
@@ -1891,6 +1893,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
         });
+        addFocusOnClick();
     }
 
     function winner(mainObj) {
@@ -2527,6 +2530,22 @@ window.addEventListener('DOMContentLoaded', () => {
                 })
             }
         }
+    }
+
+    function addFocusOnClick() {
+        
+        const liElements = document.querySelectorAll('#list-container > ul > li');
+        liElements.forEach((li) => {
+            console.log("addFOcusonCliick");
+            li.addEventListener('click', () => {
+                liElements.forEach((el) => {
+                    el.removeAttribute('id');
+                });
+                li.tabIndex = "0";
+                li.id = 'focused';
+                document.getElementById('focused').focus();
+            });
+        });
     }
 
     document.body.addEventListener('click', () => {
