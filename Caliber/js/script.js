@@ -1524,6 +1524,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // #endregion
         id = data1[0];
         alldata = [data1, data2]
+        addFocusOnClick();
         sounds();
         sortTable(".team1Table");
         sortTable(".team2Table");
@@ -1531,6 +1532,7 @@ window.addEventListener('DOMContentLoaded', () => {
         summRank();
         //console.log("setSelectMe()");
         setSelectMe();
+        
 
         //different();
 
@@ -1867,7 +1869,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function createEventList(fecha,key) {
         const ul = document.querySelector('#list-container > ul');
-         console.clear();
+        console.clear();
         ul.addEventListener('click', (e) => {
            if (key == e.target.closest('li').querySelector('span:nth-child(1)').textContent) {
             const li = e.target.closest('li');
@@ -1880,20 +1882,19 @@ window.addEventListener('DOMContentLoaded', () => {
                 loadData(`data/${fecha}/${span}`);
                 history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
             }
-        } if (key == "xyu") {
-            const li = e.target.closest('li');
-            if (li) {
-                let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
-                document.querySelector('.team1Table').innerHTML = '';
-                document.querySelector('.team2Table').innerHTML = '';
-                document.querySelector('.bluePoints').innerHTML = '';
-                document.querySelector('.redPoints').innerHTML = '';
-                loadData(`data/${fecha}/${span}`);
-                history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
+            } if (key == "xyu") {
+                const li = e.target.closest('li');
+                if (li) {
+                    let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
+                    document.querySelector('.team1Table').innerHTML = '';
+                    document.querySelector('.team2Table').innerHTML = '';
+                    document.querySelector('.bluePoints').innerHTML = '';
+                    document.querySelector('.redPoints').innerHTML = '';
+                    loadData(`data/${fecha}/${span}`);
+                    history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
+                }
             }
-        }
         });
-        addFocusOnClick();
     }
 
     function winner(mainObj) {
