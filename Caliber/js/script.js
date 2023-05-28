@@ -7,7 +7,7 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap, userID, date, time,score,winTeam, clickDay;
+    let id, alldata, setUrl, getDataMap, userID, date, time,score,winTeam, clickDay, nickName;
     let rankTeam = [];
 
     /* #region CREATE OBJECT CALIBER */
@@ -1473,7 +1473,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
-           // console.log(userID);
             color(colorWin, winner({data:data1,log:data2}));
 
         };
@@ -1528,10 +1527,10 @@ window.addEventListener('DOMContentLoaded', () => {
         sounds();
         sortTable(".team1Table");
         sortTable(".team2Table");
-        winLose();console.log("winlose");
-        summRank();console.log("sumRank");
+        winLose();
+        summRank();
         //console.log("setSelectMe()");
-       // setSelectMe();console.log("setSelectMe");
+        setSelectMe();
 
         //different();
 
@@ -1907,7 +1906,7 @@ window.addEventListener('DOMContentLoaded', () => {
               //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
                 if (obj.data[2][i][0] == userID) {
                   //  console.log(obj.data[2][i][2]);
-                    let nickName = obj.data[2][i][2];
+                    nickName = obj.data[2][i][2];
                   //  console.log(obj.data[2][i][0],userID);
                     result.team = 0;
                     result.pos = i;
@@ -1919,7 +1918,7 @@ window.addEventListener('DOMContentLoaded', () => {
              //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
                 if (obj.data[3][i][0] == userID) {
                     //console.log(obj.data[3][i][2]);
-                    let nickName = obj.data[3][i][2];
+                    nickName = obj.data[3][i][2];
                   //  console.log(obj.data[3][i][0],userID);
                     result.team = 1;
                     result.pos = i;
@@ -2512,8 +2511,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
     function setSelectMe() {
-    console.log(nickName);
-        let divMe = $(`td:contains('MASTER')`).closest('.line');
+        let divMe = $(`td:contains('${nickName}')`).closest('.line');
         let howTeam = divMe[0].getAttribute('class').slice(-1)
         selectMe(howTeam);
         function selectMe(team) {
