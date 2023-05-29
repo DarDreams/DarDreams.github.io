@@ -1028,7 +1028,6 @@ window.addEventListener('DOMContentLoaded', () => {
                             }
                         }
                     }
-
                     return "Число не входит в диапазон";
                 }
                 /* #endregion */
@@ -1046,7 +1045,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 img.onload = function () {
                     try {
-                        document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}" onerror="this.src='img/default.png'">`);
+                        document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}" onerror='../img/defaultN.png'">`);
                     } catch {
                         console.error('Ошибка при загрузке картинки');
                     }
@@ -1054,7 +1053,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 img.onerror = function () {
                     document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
-                    <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${operator.emblem}">
+                    <img class = "baner" src="../img/emblems/defaultN.png" alt="${operator.emblem}">
                     `);
                     console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
 
@@ -1092,8 +1091,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 /* #endregion */
 
                 /* #region  INPUT TABLE OPERATORS */
-
-
+                
+                console.log(`https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png`);
                 document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('beforeend', `
             
                 <tr class = 'line ${operator.role}'>
@@ -1101,7 +1100,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <svg class = "${operator.role}Logo"><title>${operator.role}</title><use xlink:href="#${operator.role}"></use></svg>
                 </td>
                 <td>
-                <img class = "oper" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png" alt=""> 
+                <img class = "oper" src="../img/avatars/${operator.avatar}.png" alt=""> 
                 </td>
                 <td>
                     <div class = "wrapper"><svg><use xlink:href="#whiteWrapper"></use></svg>
@@ -1237,18 +1236,18 @@ window.addEventListener('DOMContentLoaded', () => {
         /* #region  CHANGE CST OPERS */
         document.querySelectorAll('.nameOp').forEach(element => {
             if (element.innerText == 'СЛАЙ') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/sly_A_.png";
+                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/sly_A.png";
                 //operator.avatar = 'img/sly.png';
             }
             if (element.innerText == 'ФОРТРЕСС') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/fortress_G_.png";
+                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/fortress_G.png";
                 //operator.avatar = 'img/fortress.png';
             }
             if (element.innerText == 'БОУНС') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/bounce_M_.png";
+                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/bounce_M.png";
             }
             if (element.innerText == 'АВАЛАНШ') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "img/avalansh_S_.png";
+                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/avalansh_S.png";
             }
         });
         /* #endregion */
@@ -2487,10 +2486,10 @@ window.addEventListener('DOMContentLoaded', () => {
         try {
             const team1Table = document.querySelector(table);
 
-            const rowAssault = team1Table.querySelector("img.oper[src*='_A_']");
-            const rowGunner = team1Table.querySelector("img.oper[src*='_G_']");
-            const rowMedic = team1Table.querySelector("img.oper[src*='_M_']");
-            const rowSniper = team1Table.querySelector("img.oper[src*='_S_']");
+            const rowAssault = team1Table.querySelector("img.oper[src*='_A.png']");
+            const rowGunner  = team1Table.querySelector("img.oper[src*='_G.png']");
+            const rowMedic   = team1Table.querySelector("img.oper[src*='_M.png']");
+            const rowSniper  = team1Table.querySelector("img.oper[src*='_S.png']");
 
             const firstRow = team1Table.querySelectorAll('tbody')[1];
             team1Table.insertBefore(rowAssault.closest('tbody'), firstRow);
