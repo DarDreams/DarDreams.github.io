@@ -705,255 +705,124 @@ window.addEventListener('DOMContentLoaded', () => {
                 function oper(collection) {
                     collection = collection.toUpperCase();
                     let res;
-                    let division = collection.replace(/(\d+)?.$/g, '');
-                    let year = collection.match(/\d\d\d\d/g);
-                    if (year === null) {
-                        year = ''
-                    }
+                    console.log(collection);
+                    let col = collection.replace(/.$/, "");
                     let role = collection.slice(-1);
-                    if (division == 'SSO' || division == 'FSB' || division == '22SPN' || division == 'RECRUIT') {
-                        res = `RUS_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'SSO') {
-                            roleName = 'ВОРОН'
-                        };
-                        if (role == 'G' && division == 'SSO') {
-                            roleName = 'СПУТНИК'
-                        };
-                        if (role == 'M' && division == 'SSO') {
-                            roleName = 'БАРД'
-                        };
-                        if (role == 'S' && division == 'SSO') {
-                            roleName = 'КОМАР'
-                        };
 
-                        if (role == 'A' && division == 'FSB') {
-                            roleName = 'ПЕРУН'
-                        };
-                        if (role == 'G' && division == 'FSB') {
-                            roleName = 'СВАРОГ'
-                        };
-                        if (role == 'M' && division == 'FSB') {
-                            roleName = 'ТРАВНИК'
-                        };
-                        if (role == 'S' && division == 'FSB') {
-                            roleName = 'СОКОЛ'
-                        };
-
-                        if (role == 'A' && division == 'FSB' && year == 2004) {
-                            roleName = 'ВОЛК'
-                        };
-                        if (role == 'G' && division == 'FSB' && year == 2004) {
-                            roleName = 'АЛМАЗ'
-                        };
-                        if (role == 'M' && division == 'FSB' && year == 2004) {
-                            roleName = 'ДЕД'
-                        };
-                        if (role == 'S' && division == 'FSB' && year == 2004) {
-                            roleName = 'СТРЕЛОК'
-                        };
-
-                        if (role == 'A' && division == '22SPN') {
-                            roleName = 'ПЛУТ'
-                        };
-                        if (role == 'G' && division == '22SPN') {
-                            roleName = 'КИТ'
-                        };
-                        if (role == 'M' && division == '22SPN') {
-                            roleName = 'КАРАВАЙ'
-                        };
-                        if (role == 'S' && division == '22SPN') {
-                            roleName = 'ТЕНЬ'
-                        };
+                    //console.log("division",division);
+                    console.log("col", col);
+                    console.log("role", role);
+                    const mappings = {
+                        "RECRUIT": {
+                            'A': 'РЕКРУТ',
+                            'G': 'РЕКРУТ',
+                            'M': 'РЕКРУТ',
+                            'S': 'РЕКРУТ'
+                        },
+                        'SSO2013': {
+                            'A': 'ВОРОН',
+                            'G': 'СПУТНИК',
+                            'M': 'БАРД',
+                            'S': 'КОМАР'
+                        },
+                        'FSB2016': {
+                            'A': 'ПЕРУН',
+                            'G': 'СВАРОГ',
+                            'M': 'ТРАВНИК',
+                            'S': 'СОКОЛ'
+                        },
+                        'FSB2004': {
+                            'A': 'ВОЛК',
+                            'G': 'АЛМАЗ',
+                            'M': 'ДЕД',
+                            'S': 'СТРЕЛОК'
+                        },
+                        '22SPN2016': {
+                            'A': 'ПЛУТ',
+                            'G': 'КИТ',
+                            'M': 'КАРАВАЙ',
+                            'S': 'ТЕНЬ'
+                        },
+                        'BELSSO': {
+                            'A': 'ЛАЗУТЧИК',
+                            'G': 'ЗУБР',
+                            'M': 'КАВАЛЬ',
+                            'S': 'БУСЕЛ'
+                        },
+                        'GROM2014': {
+                            'A': 'КОШМАР',
+                            'G': 'ПРОРОК',
+                            'M': 'МИКОЛА',
+                            'S': 'СТИЛЕТ'
+                        },
+                        'KSK2011': {
+                            'A': 'РЕЙН',
+                            'G': 'ШТЕРН',
+                            'M': 'ШАТЦ',
+                            'S': 'КУРТ'
+                        },
+                        'SEAL2014': {
+                            'A': 'КОРСАР',
+                            'G': 'БУРБОН',
+                            'M': 'МОНК',
+                            'S': 'СКАУТ'
+                        },
+                        'TFB2008': {
+                            'A': 'СТЕРЛИНГ',
+                            'G': 'БИШОП',
+                            'M': 'ВАТСОН',
+                            'S': 'АРЧЕР'
+                        },
+                        'RAID2017': {
+                            'A': 'АВАНГАРД',
+                            'G': 'БАСТИОН',
+                            'M': 'ВЕЛЮР',
+                            'S': 'ВАГАБОНД'
+                        },
+                        'NESHER2015': {
+                            'A': 'АФЕЛА',
+                            'G': 'ХАГАНА',
+                            'M': 'ШАРШЕРЕТ',
+                            'S': 'ЭЙМА'
+                        },
+                        'EZAPAC': {
+                            'A': 'ФАРО',
+                            'G': 'МАТАДОР',
+                            'M': 'МИГЕЛЬ',
+                            'S': 'ДИАБЛО'
+                        },
+                        'ARYSTAN': {
+                            'A': 'МУСТАНГ',
+                            'G': 'ТИБЕТ',
+                            'M': 'БАГГИ',
+                            'S': 'СУЛТАН'
+                        },
+                        'AMF': {
+                            'A': 'СТАРКАД',
+                            'G': 'ОДИН',
+                            'M': 'ФРЕЙР',
+                            'S': 'ВИДАР'
+                        },
+                        'JIAOLONG': {
+                            'A': 'ШАОВЭЙ',
+                            'G': 'ИНЧЖОУ',
+                            'M': 'ЯОВАН',
+                            'S': 'ЦАНЛУН'
+                        },
+                        'CST': {
+                            'A': 'СЛАЙ',
+                            'G': 'ФОРТРЕСС',
+                            'M': 'БОУНС',
+                            'S': 'АВАЛАНШ'
+                        }
                     };
 
-                    if (year == '' && division == 'BELSSO') {
-                        res = `BLR_${division.slice(3, 6)}${year}_${role}`;
-                        if (role == 'A') {
-                            roleName = 'ЛАЗУТЧИК'
-                        };
-                        if (role == 'G') {
-                            roleName = 'ЗУБР'
-                        };
-                        if (role == 'M') {
-                            roleName = 'КАВАЛЬ'
-                        };
-                        if (role == 'S') {
-                            roleName = 'БУСЕЛ'
-                        };
-                    };
-
-                    if (division == 'GROM') {
-                        res = `POL_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'GROM') {
-                            roleName = 'КОШМАР'
-                        };
-                        if (role == 'G' && division == 'GROM') {
-                            roleName = 'ПРОРОК'
-                        };
-                        if (role == 'M' && division == 'GROM') {
-                            roleName = 'МИКОЛА'
-                        };
-                        if (role == 'S' && division == 'GROM') {
-                            roleName = 'СТИЛЕТ'
-                        };
-                    };
-                    if (division == 'KSK') {
-                        res = `DEU_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'KSK') {
-                            roleName = 'РЕЙ'
-                        };
-                        if (role == 'G' && division == 'KSK') {
-                            roleName = 'ШТЕРН'
-                        };
-                        if (role == 'M' && division == 'KSK') {
-                            roleName = 'ШАТЦ'
-                        };
-                        if (role == 'S' && division == 'KSK') {
-                            roleName = 'КУРТ'
-                        };
-                    };
-                    if (division == 'SEAL') {
-                        res = `USA_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'SEAL') {
-                            roleName = 'КОРСАР'
-                        };
-                        if (role == 'G' && division == 'SEAL') {
-                            roleName = 'БУРБОН'
-                        };
-                        if (role == 'M' && division == 'SEAL') {
-                            roleName = 'МОНК'
-                        };
-                        if (role == 'S' && division == 'SEAL') {
-                            roleName = 'СКАУТ'
-                        };
-
-                    };
-                    if (division == 'TFB') {
-                        res = `GBR_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'TFB') {
-                            roleName = 'СТЕРЛИНГ'
-                        };
-                        if (role == 'G' && division == 'TFB') {
-                            roleName = 'БИШОП'
-                        };
-                        if (role == 'M' && division == 'TFB') {
-                            roleName = 'ВАТСОН'
-                        };
-                        if (role == 'S' && division == 'TFB') {
-                            roleName = 'АРЧЕР'
-                        };
-                    };
-                    if (division == 'RAID') {
-                        res = `FRA_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'RAID') {
-                            roleName = 'АВАНГАРД'
-                        };
-                        if (role == 'G' && division == 'RAID') {
-                            roleName = 'БАСТИОН'
-                        };
-                        if (role == 'M' && division == 'RAID') {
-                            roleName = 'ВЕЛЮР'
-                        };
-                        if (role == 'S' && division == 'RAID') {
-                            roleName = 'ВАГАБОНД'
-                        };
-                    };
-                    if (division == 'NESHER') {
-                        res = `ISR_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'NESHER') {
-                            roleName = 'АФЕЛА'
-                        };
-                        if (role == 'G' && division == 'NESHER') {
-                            roleName = 'ХАГАНА'
-                        };
-                        if (role == 'M' && division == 'NESHER') {
-                            roleName = 'ШАРШЕРЕТ'
-                        };
-                        if (role == 'S' && division == 'NESHER') {
-                            roleName = 'ЭЙМА'
-                        };
-
-                    };
-                    if (division == 'EZAPAC') {
-                        res = `ESP_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'EZAPAC') {
-                            roleName = 'ФАРО'
-                        };
-                        if (role == 'G' && division == 'EZAPAC') {
-                            roleName = 'МАТАДОР'
-                        };
-                        if (role == 'M' && division == 'EZAPAC') {
-                            roleName = 'МИГЕЛЬ'
-                        };
-                        if (role == 'S' && division == 'EZAPAC') {
-                            roleName = 'ДИАБЛО'
-                        };
-                    };
-                    if (division == 'ARYSTAN') {
-                        res = `KAZ_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'ARYSTAN') {
-                            roleName = 'МУСТАНГ'
-                        };
-                        if (role == 'G' && division == 'ARYSTAN') {
-                            roleName = 'ТИБЕТ'
-                        };
-                        if (role == 'M' && division == 'ARYSTAN') {
-                            roleName = 'БАГГИ'
-                        };
-                        if (role == 'S' && division == 'ARYSTAN') {
-                            roleName = 'СУЛТАН'
-                        };
-                    };
-                    if (division == 'AMF') {
-                        res = `SWE_${division}${year}_${role}`
-                        if (role == 'A' && division == 'AMF') {
-                            roleName = 'СТАРКАД'
-                        };
-                        if (role == 'G' && division == 'AMF') {
-                            roleName = 'ОДИН'
-                        };
-                        if (role == 'M' && division == 'AMF') {
-                            roleName = 'ФРЕЙР'
-                        };
-                        if (role == 'S' && division == 'AMF') {
-                            roleName = 'ВИДАР'
-                        };
-                    };
-                    if (division == 'JIAOLONG') {
-                        res = `CHN_${division}${year}_${role}`;
-                        if (role == 'A' && division == 'JIAOLONG') {
-                            roleName = 'ШАОВЭЙ'
-                        };
-                        if (role == 'G' && division == 'JIAOLONG') {
-                            roleName = 'ИНЧЖОУ'
-                        };
-                        if (role == 'M' && division == 'JIAOLONG') {
-                            roleName = 'ЯОВАН'
-                        };
-                        if (role == 'S' && division == 'JIAOLONG') {
-                            roleName = 'ЦАНЛУН'
-                        };
-                    };
-                    if (division == 'CST') {
-                        if (role == 'A' && division == 'CST') {
-                            roleName = 'СЛАЙ';
-
-                        };
-                        if (role == 'G' && division == 'CST') {
-                            roleName = 'ФОРТРЕСС';
-                        };
-                        if (role == 'M' && division == 'CST') {
-                            roleName = 'БОУНС';
-                        };
-                        if (role == 'S' && division == 'CST') {
-                            roleName = 'АВАЛАНШ'
-                        };
-
-                    };
-                    //console.log(res);
-                    return res
-
+                    res = `${col}_${role}`;
+                    console.log("res", res);
+                    roleName = mappings[col][role];
+                    return res;
                 }
+                
                 /* #endregion */;
                 // console.log(data1[k][i][16]);
                 if (!data1[k][i][16]) {
@@ -1035,7 +904,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.log("caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.pn\g");
                 let img = new Image();
                 if (localStorage.getItem("tumbler") == "true") {
-                    img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
+                  //  img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
                 } else {
                     img.src = "../img/emblems/" + operator.emblem + ".png";    
                 }
@@ -1234,22 +1103,22 @@ window.addEventListener('DOMContentLoaded', () => {
         /* #endregion */
 
         /* #region  CHANGE CST OPERS */
-        document.querySelectorAll('.nameOp').forEach(element => {
-            if (element.innerText == 'СЛАЙ') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/sly_A.png";
-                //operator.avatar = 'img/sly.png';
-            }
-            if (element.innerText == 'ФОРТРЕСС') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/fortress_G.png";
-                //operator.avatar = 'img/fortress.png';
-            }
-            if (element.innerText == 'БОУНС') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/bounce_M.png";
-            }
-            if (element.innerText == 'АВАЛАНШ') {
-                element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/avalansh_S.png";
-            }
-        });
+        // document.querySelectorAll('.nameOp').forEach(element => {
+        //     if (element.innerText == 'СЛАЙ') {
+        //         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/sly_A.png";
+        //         //operator.avatar = 'img/sly.png';
+        //     }
+        //     if (element.innerText == 'ФОРТРЕСС') {
+        //         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/fortress_G.png";
+        //         //operator.avatar = 'img/fortress.png';
+        //     }
+        //     if (element.innerText == 'БОУНС') {
+        //         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/bounce_M.png";
+        //     }
+        //     if (element.innerText == 'АВАЛАНШ') {
+        //         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/avalansh_S.png";
+        //     }
+        // });
         /* #endregion */
 
         /* #region  TOP-STATS */
@@ -1876,6 +1745,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function createEventList(fecha,key) {
         const ul = document.querySelector('#list-container > ul');
         ul.addEventListener('click', (e) => {
+            if (e.target.localName == "ul") return;
            if (key == e.target.closest('li').querySelector('span:nth-child(1)').textContent) {
             const li = e.target.closest('li');
             if (li) {
