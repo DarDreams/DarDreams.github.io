@@ -7,7 +7,7 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap, userID, date, time,score,winTeam, clickDay, nickName;
+    let id, alldata, setUrl, getDataMap, userID, date, time,score,winTeam, clickDay, nickName,tumbler=true;
     let rankTeam = [];
 
     /* #region CREATE OBJECT CALIBER */
@@ -1035,7 +1035,13 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.log(operator.emblem);
                 //console.log("caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.pn\g");
                 let img = new Image();
-                img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
+                if (localStorage.getItem("tumbler") == "true") {
+                    img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
+                } else {
+                    img.src = "../img/emblems/" + operator.emblem + ".png";    
+                }
+                
+                
                 //console.log(img.src);
 
                 img.onload = function () {
@@ -1050,6 +1056,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
                     <img class = "baner" src="https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_default_large.png" alt="${operator.emblem}">
                     `);
+                    console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
+
                 };
 
                 /* #region  FUNCTION CHECK IMAGES */
@@ -1524,7 +1532,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // #endregion
         id = data1[0];
         alldata = [data1, data2]
-        addFocusOnClick();
         sounds();
         sortTable(".team1Table");
         sortTable(".team2Table");
@@ -1810,6 +1817,7 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #region  обновить список игр */
     let span;
     function getFileList(folder) {
+        console.clear();
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
             document.querySelector("#list-container").innerHTML = "";
 
@@ -1854,7 +1862,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     setFav();
                     applyFavFromLocalStorage();
                     sortList();
-                        
                     })
                     .catch(error => console.error(error));
             });
@@ -1869,7 +1876,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function createEventList(fecha,key) {
         const ul = document.querySelector('#list-container > ul');
-        console.clear();
         ul.addEventListener('click', (e) => {
            if (key == e.target.closest('li').querySelector('span:nth-child(1)').textContent) {
             const li = e.target.closest('li');
@@ -1881,6 +1887,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('.redPoints').innerHTML = '';
                 loadData(`data/${fecha}/${span}`);
                 history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
+                
             }
             } if (key == "xyu") {
                 const li = e.target.closest('li');
@@ -1898,9 +1905,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function winner(mainObj) {
+        if (!mainObj.log.userID) return;
         function findValueInObject(obj) {
            //console.log("userID", userID );
-            userID = mainObj.log.userID;
+            
+           userID = mainObj.log.userID;
+            
             
             const result = {
                 team: null,
@@ -2349,6 +2359,8 @@ window.addEventListener('DOMContentLoaded', () => {
             let timeInSeconds = getSec(divSpan.textContent);
             let order = sortedTimes.indexOf(timeInSeconds);
             element.style.order = order;
+            element.id = `focus${order}`;
+            element.tabIndex = order;
         });
 
         function getSec(time) {
@@ -2533,24 +2545,30 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function addFocusOnClick() {
+    // function addFocusOnClick(selector=document.querySelectorAll('#list-container > ul > li')) {
         
-        const liElements = document.querySelectorAll('#list-container > ul > li');
-        liElements.forEach((li) => {
-            console.log("addFOcusonCliick");
-            li.addEventListener('click', () => {
-                liElements.forEach((el) => {
-                    el.removeAttribute('id');
-                });
-                li.tabIndex = "0";
-                li.id = 'focused';
-                document.getElementById('focused').focus();
-            });
-        });
-    }
+    //     const liElements = selector;
+    //     liElements.forEach((li) => {
+    //         console.log("addFOcusonCliick");
+    //         li.addEventListener('click', () => {
+    //             liElements.forEach((el) => {
+    //                 el.removeAttribute('id');
+    //             });
+    //             li.tabIndex = "0";
+    //             li.id = 'focused';
+    //             document.getElementById('focused').focus();
+    //         });
+    //     });
+    // }
 
-    document.body.addEventListener('click', () => {
+    document.querySelector('img.geo').addEventListener('click', () => {
         // tv();
+        if (localStorage.getItem("tumbler") == "false") {
+            localStorage.setItem("tumbler","true");
+        } else {
+            localStorage.setItem("tumbler","false");
+        }
+        console.log("tumbler",tumbler);
     });
 
 }); /////////////////END
