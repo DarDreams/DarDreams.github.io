@@ -1421,7 +1421,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
-        <input id="searchInput" list="suggestionsList" placeholder="..." autocomplete="on" class="search" type="text">
+        <input id="searchInput" list="suggestionsList" placeholder="" autocomplete="on" class="search" type="text">
         <datalist id="suggestionsList">
             <option value="ПОБЕДА">
             <option value="ПОРАЖЕНИЕ">
@@ -1442,9 +1442,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', () => {
        // console.log("panel");
-
-        let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
-        $("#calendar-body > tr > td:contains('" + mes + "')").click();
+        let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
+        $("#month-selector").value = mes;
+        let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
+        $("#calendar-body > tr > td:contains('" + day + "')").click();
          let id = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[4];
          
          setTimeout(() => {
@@ -1648,7 +1649,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
             document.querySelector('#list-container').insertAdjacentHTML("afterbegin", `
             <ul>
-         
             `);
             //console.log(data);
             data.forEach(element => {

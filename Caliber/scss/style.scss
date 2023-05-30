@@ -515,7 +515,9 @@ html {
             & span {
                 width: 132px;
                 white-space: nowrap;
-
+                &:nth-child(2){
+                    margin-left: -10px;
+                }
                 & img.basket {
                     display: none;
                     position: absolute;
