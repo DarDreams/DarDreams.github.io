@@ -1654,7 +1654,7 @@ window.addEventListener('DOMContentLoaded', () => {
             //console.log(data);
             data.forEach(element => {
                 //console.log("check",element);
-                if (nickName ==""){nickName = "NO"}
+                if (!nickName){nickName = "NO"}
                 fetch(`data/${strPath}/${element}`)
                     .then(response => response.json())
                     .then(data => {
@@ -2232,7 +2232,7 @@ window.addEventListener('DOMContentLoaded', () => {
         addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('img', "onmouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('.line', "onmouseenter", '../mp3/menu.mp3', 0.1);
-        addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
+       // addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
         addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('li', "onclick", "../mp3/click.mp3", 0.01);
