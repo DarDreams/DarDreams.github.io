@@ -1442,16 +1442,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', () => {
        // console.log("panel");
-        let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
-        document.querySelector("#month-selector").value = +mes;
-        document.querySelector("#month-selector").dispatchEvent(new Event("change"));
-        let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
-        $("#calendar-body > tr > td:contains('" + day + "')").click();
-         let id = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[4];
+       if (button.textContent == ">") { 
+       let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
+            document.querySelector("#month-selector").value = +mes;
+            document.querySelector("#month-selector").dispatchEvent(new Event("change"));
+            let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
+            $("#calendar-body > tr > td:contains('" + day + "')").click();
+            let id = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[4];
+            setTimeout(() => {
+                $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
+             }, 1000);
+       }
          
-         setTimeout(() => {
-            $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
-         }, 1000);
+         
 
         panel.classList.toggle('show');
         //tables.classList.add('animate__animated');
@@ -2232,7 +2235,9 @@ window.addEventListener('DOMContentLoaded', () => {
         addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('img', "onmouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('.line', "onmouseenter", '../mp3/menu.mp3', 0.1);
-       // addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
+        if (button.textContent == "<") { 
+            addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
+        }
         addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('li', "onclick", "../mp3/click.mp3", 0.01);
