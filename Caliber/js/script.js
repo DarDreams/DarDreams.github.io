@@ -1443,7 +1443,8 @@ window.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', () => {
        // console.log("panel");
         let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
-        $("#month-selector").value = mes;
+        document.querySelector("#month-selector").value = +mes;
+        document.querySelector("#month-selector").dispatchEvent(new Event("change"));
         let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
         $("#calendar-body > tr > td:contains('" + day + "')").click();
          let id = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[4];
@@ -1653,6 +1654,7 @@ window.addEventListener('DOMContentLoaded', () => {
             //console.log(data);
             data.forEach(element => {
                 //console.log("check",element);
+                if (nickName ==""){nickName = "NO"}
                 fetch(`data/${strPath}/${element}`)
                     .then(response => response.json())
                     .then(data => {
