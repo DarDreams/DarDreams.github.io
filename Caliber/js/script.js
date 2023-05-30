@@ -7,7 +7,7 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap, userID, date, time,score,winTeam, clickDay, nickName,tumbler=true;
+    let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true;
     let rankTeam = [];
 
     /* #region CREATE OBJECT CALIBER */
@@ -683,7 +683,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
                 //  for (let i = 0 ; i < 4; i++) {
-                    
+
 
                 // operLoop = ['assault', 'gunner', 'medic', 'sniper'];
 
@@ -702,6 +702,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 let roleName;
 
+                /* #region  OPER_NAME */
                 function oper(collection) {
                     collection = collection.toUpperCase();
                     let res;
@@ -710,8 +711,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     let role = collection.slice(-1);
 
                     //console.log("division",division);
-                    console.log("col", col);
-                    console.log("role", role);
+                   // console.log("col", col);
+                  //  console.log("role", role);
                     const mappings = {
                         "RECRUIT": {
                             'A': 'РЕКРУТ',
@@ -818,11 +819,12 @@ window.addEventListener('DOMContentLoaded', () => {
                     };
 
                     res = `${col}_${role}`;
-                    console.log("res", res);
+                  //  console.log("res", res);
                     roleName = mappings[col][role];
                     return res;
                 }
-                
+                /* #endregion */
+
                 /* #endregion */;
                 // console.log(data1[k][i][16]);
                 if (!data1[k][i][16]) {
@@ -904,12 +906,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.log("caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.pn\g");
                 let img = new Image();
                 if (localStorage.getItem("tumbler") == "true") {
-                  //  img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
+                    //  img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
                 } else {
-                    img.src = "../img/emblems/" + operator.emblem + ".png";    
+                    img.src = "../img/emblems/" + operator.emblem + ".png";
                 }
-                
-                
+
+
                 //console.log(img.src);
 
                 img.onload = function () {
@@ -960,7 +962,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 /* #endregion */
 
                 /* #region  INPUT TABLE OPERATORS */
-                
+
                 console.log(`https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png`);
                 document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('beforeend', `
             
@@ -1341,15 +1343,15 @@ window.addEventListener('DOMContentLoaded', () => {
                     if (data1[k][i][0] == data2.userID) {
                         if (k == 2) {
                             colorWin = "#6aa5ee";
-                          //  winTeam = 0;
+                            //  winTeam = 0;
                         } else {
                             colorWin = "#ff323b";
-                         //   winTeam = 1;
+                            //   winTeam = 1;
                         }
                     }
                 }
             }
-            color(colorWin, winner({data:data1,log:data2}));
+            color(colorWin, winner({ data: data1, log: data2 }));
 
         };
 
@@ -1407,7 +1409,7 @@ window.addEventListener('DOMContentLoaded', () => {
         summRank();
         //console.log("setSelectMe()");
         setSelectMe();
-        
+
 
         //different();
 
@@ -1494,6 +1496,16 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     button.addEventListener('click', () => {
+       // console.log("panel");
+
+        let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
+        $("#calendar-body > tr > td:contains('" + mes + "')").click();
+         let id = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[4];
+         
+         setTimeout(() => {
+            $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
+         }, 1000);
+
         panel.classList.toggle('show');
         //tables.classList.add('animate__animated');
         tables.classList.toggle('show');
@@ -1568,7 +1580,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     cell.addEventListener("click", function (e) {
                         console.log("click day");
                         clickDay = setZero(cell.textContent);
-                        document.querySelectorAll('#calendar-body>tr>td').forEach((element)=> {
+                        document.querySelectorAll('#calendar-body>tr>td').forEach((element) => {
                             element.style.outline = "unset";
                         })
                         e.target.style.outline = "2px ridge red";
@@ -1629,9 +1641,9 @@ window.addEventListener('DOMContentLoaded', () => {
                         //     }
                         // });
                         // const listItems = document.querySelectorAll('#list-container>*>li');
-                         
-                        
-    
+
+
+
                         //     lastSpan.insertAdjacentHTML('beforeend', '<img class="basket" src="img/basket.png"></img>');
 
                         //     /* #region  AJAX UPLOAD DB */
@@ -1685,7 +1697,7 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #region  обновить список игр */
     let span;
     function getFileList(folder) {
-        console.clear();
+        //console.clear();
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
             document.querySelector("#list-container").innerHTML = "";
 
@@ -1716,6 +1728,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     .then(response => response.json())
                     .then(data => {
                         // Здесь можно выполнить дополнительную обработку данных
+                        if (data.caliber.data[1]) {
                         document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                   <li map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
                     <span><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
@@ -1725,39 +1738,40 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${data.caliber.log.time}</span>
                   </li>
                 `)
-                  
-                    ///////////////////////////////////////////////////////////////////
-                    setFav();
-                    applyFavFromLocalStorage();
-                    sortList();
+            }
+
+                        ///////////////////////////////////////////////////////////////////
+                        setFav();
+                        applyFavFromLocalStorage();
+                        sortList();
                     })
                     .catch(error => console.error(error));
             });
-            
-            
+
+
             // Создаем обработчики событий после создания списка
-            createEventList(strPath,"xyu");
-            
-            
+            createEventList(strPath, "xyu");
+
+
         });
     }
 
-    function createEventList(fecha,key) {
+    function createEventList(fecha, key) {
         const ul = document.querySelector('#list-container > ul');
         ul.addEventListener('click', (e) => {
             if (e.target.localName == "ul") return;
-           if (key == e.target.closest('li').querySelector('span:nth-child(1)').textContent) {
-            const li = e.target.closest('li');
-            if (li) {
-                let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
-                document.querySelector('.team1Table').innerHTML = '';
-                document.querySelector('.team2Table').innerHTML = '';
-                document.querySelector('.bluePoints').innerHTML = '';
-                document.querySelector('.redPoints').innerHTML = '';
-                loadData(`data/${fecha}/${span}`);
-                history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
-                
-            }
+            if (key == e.target.closest('li').querySelector('span:nth-child(1)').textContent) {
+                const li = e.target.closest('li');
+                if (li) {
+                    let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
+                    document.querySelector('.team1Table').innerHTML = '';
+                    document.querySelector('.team2Table').innerHTML = '';
+                    document.querySelector('.bluePoints').innerHTML = '';
+                    document.querySelector('.redPoints').innerHTML = '';
+                    loadData(`data/${fecha}/${span}`);
+                    history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
+
+                }
             } if (key == "xyu") {
                 const li = e.target.closest('li');
                 if (li) {
@@ -1776,33 +1790,33 @@ window.addEventListener('DOMContentLoaded', () => {
     function winner(mainObj) {
         if (!mainObj.log.userID) return;
         function findValueInObject(obj) {
-           //console.log("userID", userID );
-            
-           userID = mainObj.log.userID;
-            
-            
+            //console.log("userID", userID );
+
+            userID = mainObj.log.userID;
+
+
             const result = {
                 team: null,
                 pos: null
             };
             for (let i = 0; i < 4; i++) {
-              //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
+                //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
                 if (obj.data[2][i][0] == userID) {
-                  //  console.log(obj.data[2][i][2]);
+                    //  console.log(obj.data[2][i][2]);
                     nickName = obj.data[2][i][2];
-                  //  console.log(obj.data[2][i][0],userID);
+                    //  console.log(obj.data[2][i][0],userID);
                     result.team = 0;
                     result.pos = i;
                     return result;
                 }
             }
-        
+
             for (let i = 0; i < 4; i++) {
-             //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
+                //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
                 if (obj.data[3][i][0] == userID) {
                     //console.log(obj.data[3][i][2]);
                     nickName = obj.data[3][i][2];
-                  //  console.log(obj.data[3][i][0],userID);
+                    //  console.log(obj.data[3][i][0],userID);
                     result.team = 1;
                     result.pos = i;
                     return result;
@@ -1811,7 +1825,7 @@ window.addEventListener('DOMContentLoaded', () => {
             return result;
         }
         const result = findValueInObject(mainObj);
-        
+
         if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
             return "ПОБЕДА";
         } else {
@@ -1824,10 +1838,10 @@ window.addEventListener('DOMContentLoaded', () => {
             item.onclick = function (event) {
                 event.stopPropagation();
                 event.target.parentElement.classList.toggle('fav');
-    
+
                 let id = event.target.closest('li').querySelector('span:first-child').textContent;
                 let path = `2023/${setZero(document.querySelector('#month-selector').value)}/${clickDay}`;
-    
+
                 if (event.target.parentElement.classList.contains('fav')) {
                     if (localStorage.getItem(id)) {
                         localStorage.removeItem(id);
@@ -1840,7 +1854,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         })
     }
-    
+
     function applyFavFromLocalStorage() {
         let elements = document.querySelectorAll('li');
         elements.forEach(element => {
@@ -1850,25 +1864,25 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
+
     function setButtonFavorite() {
         const buttonFavorite = document.querySelector('#calendar-body>tr:last-child>td:last-child');
         buttonFavorite.style.color = '#FFC83D';
-        buttonFavorite.innerHTML="&#9733;";
-        buttonFavorite.addEventListener('click',() => {
-                document.querySelector("#list-container").innerHTML = "";
-                document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>");
-                const keys = Object.keys(localStorage);
-                for (let i = 0; i < keys.length; i++) {
-                    const key = keys[i];
-                   // console.log("check",key);
-                  //  console.log(keys[i]);
-                   // console.log(key);
-                   // console.log(localStorage.getItem(key));
-                    fetch(`data/${localStorage.getItem(key)}/${key}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
+        buttonFavorite.innerHTML = "&#9733;";
+        buttonFavorite.addEventListener('click', () => {
+            document.querySelector("#list-container").innerHTML = "";
+            document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>");
+            const keys = Object.keys(localStorage);
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                // console.log("check",key);
+                //  console.log(keys[i]);
+                // console.log(key);
+                // console.log(localStorage.getItem(key));
+                fetch(`data/${localStorage.getItem(key)}/${key}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                             <li>
                                 <span><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${key}</span>
                                 <span>${getDataMap(data.caliber.data[1]).map}</span>
@@ -1877,36 +1891,36 @@ window.addEventListener('DOMContentLoaded', () => {
                                 <span>${data.caliber.log.time}</span>
                             </li>
                             `)
-                            createEventList(localStorage.getItem(key),key);
-                            setFav();
-                            applyFavFromLocalStorage();
-                        })
-                        .catch(error => console.error(error));
-                };
-              //  createEventList(localStorage.getItem(key));
+                        createEventList(localStorage.getItem(key), key);
+                        setFav();
+                        applyFavFromLocalStorage();
+                    })
+                    .catch(error => console.error(error));
+            };
+            //  createEventList(localStorage.getItem(key));
         })
     }
     setButtonFavorite();
-    
 
-    
+
+
     // setFav()
-    
+
 
     function repairFile(folder) {
         $.get("https://exlusive.pro/php/repair.php", { folder: folder })
-        .done(function (data) {
-            //$('td[style*="outline"][style*="red"]').click();
-            //return
-            //console.log("tse");
-            // Ваши действия после получения данных
-        })
-        .fail(function (error) {
-            console.log("Ошибка:", error);
-            // Обработка ошибки
-        });
+            .done(function (data) {
+                //$('td[style*="outline"][style*="red"]').click();
+                //return
+                //console.log("tse");
+                // Ваши действия после получения данных
+            })
+            .fail(function (error) {
+                console.log("Ошибка:", error);
+                // Обработка ошибки
+            });
     }
-      
+
 
     /* #endregion */
 
@@ -1983,7 +1997,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // });
     /* #endregion */
-    
+
     function processFile(file, internet = false) {
         if (internet === false) {
             const file = event.target.files[0];
@@ -2003,41 +2017,41 @@ window.addEventListener('DOMContentLoaded', () => {
                 data = data.replaceAll(/[^ -~]+/g);
                 data = data.replace(/.*?({.*)/, "$1");
                 caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
-              //  try {
-                    caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
+                //  try {
+                caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
 
-                    function fix(obj) {
-                        let brokenObject = obj;
-                        let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
-                        fixedObject = JSON.parse(fixedObject);
-                        return fixedObject;
-                    }
+                function fix(obj) {
+                    let brokenObject = obj;
+                    let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+                    fixedObject = JSON.parse(fixedObject);
+                    return fixedObject;
+                }
 
-                    caliber_b = fix(caliber_b);
-                    caliber_b2 = fix(caliber_b2);
+                caliber_b = fix(caliber_b);
+                caliber_b2 = fix(caliber_b2);
 
-                    let caliber_file = caliberFunc(caliber_b, caliber_b2)
-                    document.querySelectorAll('.points').forEach(item => {
-                        item.remove();
-                    })
-                    upload(caliber_file.data, caliber_file.log);
-                    updateDB(caliber_file);
+                let caliber_file = caliberFunc(caliber_b, caliber_b2)
+                document.querySelectorAll('.points').forEach(item => {
+                    item.remove();
+                })
+                upload(caliber_file.data, caliber_file.log);
+                updateDB(caliber_file);
 
-                    setUrl = function () {
-                        history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-                    }
-                    setUrl();
-              //  } catch (e) {
-                  //  alert("Файл поврежден:", e.message)
-                  console.error(e.message)
-               // }
+                setUrl = function () {
+                    history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+                }
+                setUrl();
+                //  } catch (e) {
+                //  alert("Файл поврежден:", e.message)
+                console.error(e.message)
+                // }
             }
             //saveData(createdDate);
         } else {
             console.log("auto-file open");
             //const file = event.target.files[0];
             const parts = file.name.split("_");
-            console.log("userID",userID);
+            console.log("userID", userID);
             userID = parts[1];
             date = parts[2].replaceAll("-", "/");
             time = parts[3].replaceAll("-", ":");
@@ -2075,18 +2089,18 @@ window.addEventListener('DOMContentLoaded', () => {
                         document.querySelectorAll('.points').forEach(item => {
                             item.remove();
                         })
-                       // console.log("caliber_file:",caliber_file);
-                         upload(caliber_file.data, caliber_file.log);
-                         updateDB(caliber_file);
-                        
+                        // console.log("caliber_file:",caliber_file);
+                        upload(caliber_file.data, caliber_file.log);
+                        updateDB(caliber_file);
+
 
                         // setUrl = function () {
                         //     history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
                         // }
                         // setUrl();
                     } catch (e) {
-                      //  alert("Файл из интернета поврежден:", e.message)
-                      console.error(e.message)
+                        //  alert("Файл из интернета поврежден:", e.message)
+                        console.error(e.message)
                     }
                 }
             });
@@ -2094,13 +2108,13 @@ window.addEventListener('DOMContentLoaded', () => {
             //}
         }
     }
-        
-    
+
+
 
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
-        console.log("file:",file);
+        console.log("file:", file);
         processFile(file);
     });
 
@@ -2344,7 +2358,7 @@ window.addEventListener('DOMContentLoaded', () => {
             url: `../${fileName}.json`,
             dataType: "json",
             success: function ({ caliber }) {
-                console.log(`${ caliber.data[1].split('_').slice(1, -1).join('_')}:`, caliber);
+                console.log(`${caliber.data[1].split('_').slice(1, -1).join('_')}:`, caliber);
                 upload(caliber.data, caliber.log);
             }
         });
@@ -2357,9 +2371,9 @@ window.addEventListener('DOMContentLoaded', () => {
             const team1Table = document.querySelector(table);
 
             const rowAssault = team1Table.querySelector("img.oper[src*='_A.png']");
-            const rowGunner  = team1Table.querySelector("img.oper[src*='_G.png']");
-            const rowMedic   = team1Table.querySelector("img.oper[src*='_M.png']");
-            const rowSniper  = team1Table.querySelector("img.oper[src*='_S.png']");
+            const rowGunner = team1Table.querySelector("img.oper[src*='_G.png']");
+            const rowMedic = team1Table.querySelector("img.oper[src*='_M.png']");
+            const rowSniper = team1Table.querySelector("img.oper[src*='_S.png']");
 
             const firstRow = team1Table.querySelectorAll('tbody')[1];
             team1Table.insertBefore(rowAssault.closest('tbody'), firstRow);
@@ -2415,7 +2429,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // function addFocusOnClick(selector=document.querySelectorAll('#list-container > ul > li')) {
-        
+
     //     const liElements = selector;
     //     liElements.forEach((li) => {
     //         console.log("addFOcusonCliick");
@@ -2433,11 +2447,11 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('img.geo').addEventListener('click', () => {
         // tv();
         if (localStorage.getItem("tumbler") == "false") {
-            localStorage.setItem("tumbler","true");
+            localStorage.setItem("tumbler", "true");
         } else {
-            localStorage.setItem("tumbler","false");
+            localStorage.setItem("tumbler", "false");
         }
-        console.log("tumbler",tumbler);
+        console.log("tumbler", tumbler);
     });
 
 }); /////////////////END
