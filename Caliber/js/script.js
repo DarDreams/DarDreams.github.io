@@ -1202,68 +1202,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         })();
 
-
-
-
         /* #endregion */
-
-        // #region  OLD MAPS
-        // function mapRus() {
-        //     const mode = document.querySelector('.mode');
-        //     const time = document.querySelector('.time');
-        //     const divMap = document.querySelector('.map');
-        //     const maps = {
-        //         originalMap: [
-        //             'lv_zalessye_radarbase_overcast',
-        //             'lv_karhad_emirresidence_evening',
-        //             'lv_karhad_caravanserai_night',
-        //             'lv_zalessye_dam_default',
-        //             'lv_zalessye_passage_overcast',
-        //             'lv_karhad_hospital_default',
-        //             'lv_zalessye_oilrig_sunrise',
-        //             'lv_karhad_village_default',
-        //             'lv_karhad_hangar_storm',
-        //             'lv_karhad_hotel_default',
-        //             'lv_zalessye_forest_default',
-        //             'lv_zalessye_depot_twilight',
-        //             'lv_karhad_palmroad_default',
-        //             'lv_karhad_mall_storm',
-        //             'lv_zalessye_submarine_default'
-        //         ].map(str => str.split("_").slice(0, -1).join("_")),
-        //         rusMap: [
-        //             'Радар',
-        //             'Резиденция Эмира',
-        //             'Караван-Сарай',
-        //             'Дамба',
-        //             'Переправа',
-        //             'Больница',
-        //             'Переправа',
-        //             'Деревня',
-        //             'Гавань Амаль',
-        //             'Отель',
-        //             'Лес',
-        //             'Депо',
-        //             'Пальмовая дорога',
-        //             'Торговый центр',
-        //             'Объект 903'
-        //         ]
-        //     };
-        //     const mapName = data1[1].split("_").slice(0, -1).join("_");
-        //     if (maps.originalMap.some((value) => value === mapName)) {
-        //         const i = maps.originalMap.indexOf(mapName);
-        //         const rusMapName = maps.rusMap[i];
-        //         divMap.textContent = `\u00A0${rusMapName}`;
-        //     }
-        //     if (data1[1].split("_")[3] == 'pvp') {
-        //         mode.innerText = `Столкновение:`;
-        //     };
-
-        //     if (data1[1].split("_")[3] == 'hacking') {
-        //         mode.innerText = `Взлом:`;
-        //     };
-        //     time.innerText = convertSecondsToTime(data2.MatchTimeSeconds);
-        // }
-        // mapRus();
         // #endregion MAPS
 
         /* #region  getDataMap */
@@ -1410,9 +1349,6 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log("setSelectMe()");
         setSelectMe();
 
-
-        //different();
-
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
     }
 
@@ -1484,7 +1420,16 @@ window.addEventListener('DOMContentLoaded', () => {
     `);
 
 
-    document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `<div id="list-container"></div>`);
+    document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
+        <input id="searchInput" list="suggestionsList" placeholder="..." autocomplete="on" class="search" type="text">
+        <datalist id="suggestionsList">
+            <option value="ПОБЕДА">
+            <option value="ПОРАЖЕНИЕ">
+            <option value="ВЗЛОМ">
+            <option value="СТОЛКНОВЕНИЕ">
+        </datalist>    
+        <div id="list-container"></div>
+    `);
     const button = document.getElementById('show-panel');
     const panel = document.querySelector('.slide-out-panel');
     const tables = document.querySelector('.container_tables');
@@ -1703,23 +1648,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             document.querySelector('#list-container').insertAdjacentHTML("afterbegin", `
             <ul>
-         <!--   <select class="sortMap">
-                <option value="1">Радар</option>
-                <option value="2">Резиденция Эмира</option>
-                <option value="3">Караван-Сарай</option>
-                <option value="4">Дамба</option>
-                <option value="5">Переправа</option>
-                <option value="6">Больница</option>
-                <option value="7">Нефтяная вышка</option>
-                <option value="8">Деревня</option>
-                <option value="9">Гавань Амаль</option>
-                <option value="10">Отель</option>
-                <option value="11">Лес</option>
-                <option value="12">Депо</option>
-                <option value="13">Пальмовая дорога</option>
-                <option value="14">Торговый центр</option>
-                <option value="15">Объект 903</option>
-            </select>-->
+         
             `);
             //console.log(data);
             data.forEach(element => {
@@ -1732,6 +1661,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                   <li map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
                     <span><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
+                    <span>${nickName.toUpperCase()}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${winner(data.caliber)}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
@@ -1744,6 +1674,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         setFav();
                         applyFavFromLocalStorage();
                         sortList();
+                        document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
                     })
                     .catch(error => console.error(error));
             });
@@ -1751,6 +1682,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             // Создаем обработчики событий после создания списка
             createEventList(strPath, "xyu");
+            setSearch();
 
 
         });
@@ -2428,21 +2360,23 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // function addFocusOnClick(selector=document.querySelectorAll('#list-container > ul > li')) {
-
-    //     const liElements = selector;
-    //     liElements.forEach((li) => {
-    //         console.log("addFOcusonCliick");
-    //         li.addEventListener('click', () => {
-    //             liElements.forEach((el) => {
-    //                 el.removeAttribute('id');
-    //             });
-    //             li.tabIndex = "0";
-    //             li.id = 'focused';
-    //             document.getElementById('focused').focus();
-    //         });
-    //     });
-    // }
+    function setSearch() {
+        var ul = document.querySelector('ul');
+        var input = document.querySelector('input.search');
+        input.style.display = 'unset';
+        input.addEventListener('input', function () {
+            var searchValue = input.value.toLowerCase();
+            for (var i = 0; i < ul.children.length; i++) {
+                var li = ul.children[i];
+                var text = li.textContent.toLowerCase();
+                if (text.includes(searchValue)) {
+                    li.style.display = '';
+                } else {
+                    li.style.display = 'none';
+                }
+            }
+        });
+    }
 
     document.querySelector('img.geo').addEventListener('click', () => {
         // tv();
