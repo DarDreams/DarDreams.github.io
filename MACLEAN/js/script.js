@@ -63,7 +63,7 @@ $(document).ready(function () {
 				],
 				inicio: `
 				<h2>
-					Estamos trabajando en la mejora de nuestro sitio web. En breve dispondremos de nuevos productos y contenidos. Disculpen las molestias.
+					<!--Estamos trabajando en la mejora de nuestro sitio web. En breve dispondremos de nuevos productos y contenidos. Disculpen las molestias.-->
 				</h2>
 				<br>
 				<h3 class="cap">Hummus  
