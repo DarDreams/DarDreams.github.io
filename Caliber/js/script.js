@@ -915,7 +915,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     //  img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
                // } else {
                     img.src = "../img/emblems/" + operator.emblem + ".png";
-                    // img.querySelector('td').addEventListener('click',(e) => {
+                    // img.closest('td').addEventListener('click',(e) => {
                     //     window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
                     // })
                     
