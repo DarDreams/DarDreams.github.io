@@ -911,11 +911,15 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.log(operator.emblem);
                 //console.log("caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.pn\g");
                 let img = new Image();
-                if (localStorage.getItem("tumbler") == "true") {
+               // if (localStorage.getItem("tumbler") == "true") {
                     //  img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
-                } else {
+               // } else {
                     img.src = "../img/emblems/" + operator.emblem + ".png";
-                }
+                    // img.querySelector('td').addEventListener('click',(e) => {
+                    //     window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
+                    // })
+                    
+               // }
 
 
                 //console.log(img.src);
