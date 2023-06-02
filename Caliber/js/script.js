@@ -1466,10 +1466,10 @@ window.addEventListener('DOMContentLoaded', () => {
        // console.log("panel");
        if (button.textContent == ">") { 
        let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
-            document.querySelector("#month-selector").value = +mes;
+            document.querySelector("#month-selector").value = +mes.replace('/^0/g',"");
             document.querySelector("#month-selector").dispatchEvent(new Event("change"));
             let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
-            $("#calendar-body > tr > td:contains('" + day + "')").click();
+            $("#calendar-body > tr > td:contains('" + day.replace('^0',"") + "')").click();
             let id = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[4];
             setTimeout(() => {
                 $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
