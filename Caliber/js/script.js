@@ -936,7 +936,19 @@ window.addEventListener('DOMContentLoaded', () => {
                     document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
                     <img class = "baner" src="../img/emblems/defaultN.png" alt="${operator.emblem}">
                     `);
-                    console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
+                    //console.dir(img);
+                    //console.log(img)
+                    document.querySelectorAll('.imgBaner').forEach((el) => {
+                        el.addEventListener('click',(e) => {
+                            //console.dir(e.target)
+                            //console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
+                            if (e.target.firstElementChild.src == "https://exlusive.pro/img/emblems/defaultN.png") {
+                                window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
+                            };
+                        })
+                    })
+                    
+                    
 
                 };
 
@@ -973,7 +985,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 /* #region  INPUT TABLE OPERATORS */
 
-                console.log(`https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png`);
+               // console.log(`https://caliberfan.ru/wp-content/themes/caliberfan/img/avatars/UI_PL_${operator.avatar}_Small.png`);
                 document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('beforeend', `
             
                 <tr class = 'line ${operator.role}'>
