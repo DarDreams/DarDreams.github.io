@@ -858,8 +858,16 @@ window.addEventListener('DOMContentLoaded', () => {
                 };
 
                 function listKills() {
+                    // console.log(typeOf(data2.Users[k-2][i].SpecificPlayerKills));
+                    // let arr = data2.Users[k-2][i].SpecificPlayerKills
+                    // const result2 = {};
+                    // for (let i = 0; i < arr.length; i++) {
+                    //     result[i.toString()] = arr[i];
+                    // }
+                    // console.log(result2);
                     let specKills = JSON.stringify(data2.Users[k-2][i].SpecificPlayerKills);
-                    //console.log(data1[2][0][2]);
+
+
                         specKills = specKills.replace(`"0"`, `"${data1[2][0][2]}"`);
                         specKills = specKills.replace(`"1"`, `"${data1[2][1][2]}"`);
                         specKills = specKills.replace(`"2"`, `"${data1[2][2][2]}"`);
@@ -869,9 +877,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         specKills = specKills.replace(`"6"`, `"${data1[3][2][2]}"`);
                         specKills = specKills.replace(`"7"`, `"${data1[3][3][2]}"`);
 
-                       // let playerKills = JSON.parse(specKills);
-                    //console.log(specKills);
-                   // return specKills.replaceAll("{")
+                    //console.log("After", specKills);
 
                     var obj = JSON.parse(specKills);
                     var result = '';
