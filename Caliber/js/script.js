@@ -706,7 +706,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 function oper(collection) {
                     collection = collection.toUpperCase();
                     let res;
-                    console.log(collection);
+                    //console.log(collection);
                     let col = collection.replace(/.$/, "");
                     let role = collection.slice(-1);
 
@@ -844,16 +844,47 @@ window.addEventListener('DOMContentLoaded', () => {
                     lvlText: data1[k][i][3],
                     nameOp: roleName,
                     lvlOp: data1[k][i][8][18],
+                    lvlprest: data1[k][i][8][19],
                     rank: data1[k][i][16][1],
                     name: data1[k][i][2],
                     group: String(data1[k][i][1]).slice(0, 4),
                     perks: [data1[k][i + 0][8][15][0], data1[k][i + 0][8][15][1], data1[k][i + 0][8][15][2], data1[k][i + 0][8][15][3]],
                     kills: data2.Users[k - 2][i].PlayerKills,
+                    specKills: listKills,
                     deaths: data2.Users[k - 2][i].Deaths,
                     assists: data2.Users[k - 2][i].Assists,
                     damage: Math.floor(data2.Users[k - 2][i].DamageDealt),
                     recive: Math.floor(data2.Users[k - 2][i].DamageReceived)
                 };
+
+                function listKills() {
+                    let specKills = JSON.stringify(data2.Users[k-2][i].SpecificPlayerKills);
+                    //console.log(data1[2][0][2]);
+                        specKills = specKills.replace(`"0"`, `"${data1[2][0][2]}"`);
+                        specKills = specKills.replace(`"1"`, `"${data1[2][1][2]}"`);
+                        specKills = specKills.replace(`"2"`, `"${data1[2][2][2]}"`);
+                        specKills = specKills.replace(`"3"`, `"${data1[2][3][2]}"`);
+                        specKills = specKills.replace(`"4"`, `"${data1[3][0][2]}"`);
+                        specKills = specKills.replace(`"5"`, `"${data1[3][1][2]}"`);
+                        specKills = specKills.replace(`"6"`, `"${data1[3][2][2]}"`);
+                        specKills = specKills.replace(`"7"`, `"${data1[3][3][2]}"`);
+
+                       // let playerKills = JSON.parse(specKills);
+                    //console.log(specKills);
+                   // return specKills.replaceAll("{")
+
+                    var obj = JSON.parse(specKills);
+                    var result = '';
+
+                    for (var key in obj) {
+                        result += obj[key]+ ' : ' + key + '\n';
+                    }
+
+                    return result;
+
+                }
+                //listKills();
+                
 
                 /* #region  RATING RANGE */
                 function getRange(number) {
@@ -1001,6 +1032,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         <div class="bevel">
                             <span class = "nameOp">${operator.nameOp}</span>
                             <span class = "lvlOp">${operator.lvlOp}</span>
+                            <span class = "lvlPrest">${(operator.lvlprest > 0) ? "&#160;"+operator.lvlprest+"&#160;" : ""}</span>
                         </div>
                     </div>
                 </td>
@@ -1020,7 +1052,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         <svg class="perk _4"><title>${operator.perks[3] in perksRus ? perksRus[operator.perks[3]][0] : operator.perks[3]}</title><use xlink:href="#${operator.perks[3]}"></use></svg>
                     </div>
                 </td>
-                <td class = "kills"  >${operator.kills}</td>
+                <td title="${operator.specKills()}"class = "kills"  >${operator.kills}</td>
                 <td class = "deaths" >${operator.deaths}</td>
                 <td class = "assists">${operator.assists}</td>
                 <td class = "damages">${operator.damage}</td>
@@ -1336,8 +1368,11 @@ window.addEventListener('DOMContentLoaded', () => {
         //  #region COLOR POINTS
 
         function setScore() {
-            const winBlue = data2.Rounds.filter(item => item.winner_team === 0);
-            const winRed = data2.Rounds.filter(item => item.winner_team === 1);
+           // const winBlue = data2.Rounds.filter(item => item.winner_team === 0);
+           // const winRed = data2.Rounds.filter(item => item.winner_team === 1);
+          //  console.log(winBlue);
+           // const winBlue = data2.Users[0][0].WinRoundCount;
+
             const color = ['blue', 'red', '#6aa5ee', '#ff323b', 'afterbegin', 'beforeend'];
             //const colorH = ['#6aa5ee', '#ff323b'];
             for (let i = 0; i < 2; i++) {
@@ -1349,13 +1384,17 @@ window.addEventListener('DOMContentLoaded', () => {
                 `);
                 }
             }
-            winBlue.forEach(function (e, j) {
+            //winBlue.forEach(function (e, j) {
+              for (let j = 0; j < data2.Users[0][0].WinRoundCount; j++) {
                 document.querySelector(`.bluePoint${j + 1} > path`).style.fillOpacity = 1;
-            });
+              }
+            //});
 
-            winRed.forEach((e, q) => {
+            //winRed.forEach((e, q) => {
+            for (let q = 0; q < data2.Users[1][0].WinRoundCount; q++) {
                 document.querySelector(`.redPoint${q + 1} > path`).style.fillOpacity = 1;
-            });
+            }
+            //});
 
         }
         setScore();
@@ -1469,7 +1508,12 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#month-selector").value = +mes.replace('/^0/g',"");
             document.querySelector("#month-selector").dispatchEvent(new Event("change"));
             let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
-            $("#calendar-body > tr > td:contains('" + day.replace('^0',"") + "')").click();
+            document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
+            if (+el.textContent == +day) {
+                el.click();
+            }
+        });
+
             let id = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[4];
             setTimeout(() => {
                 $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
@@ -1570,66 +1614,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         //setUrl();
                         //getFileList();
 
-                        /* #region  OLD CLICK CALENDAR */
-                        // const listContainer = document.getElementById('list-container');
-                        // const keys = Object.keys(localStorage);
-
-                        // listContainer.innerHTML = '';
-                        // keys.forEach(key => {
-                        //     //console.log(key);
-                        //     if (key == 'rec') {
-                        //         return
-                        //     };
-                        //     // console.log(`(${setZero(this.textContent)} == ${key.match(/\d+/g)[0]} && ${setZero(month_selector.value)} == ${key.match(/\d+/g)[1]}`);
-                        //     console.log(key.match(/\d+/g)[0]);
-                        //     if (setZero(this.textContent) == key.match(/\d+/g)[0] && setZero(month_selector.value) == key.match(/\d+/g)[1]) {
-                        //         const listItem = document.createElement('li');
-                        //         listItem.textContent = key;
-                        //         listItem.addEventListener('click', (e) => {
-                        //             //e.path[1].classList.add('disabled');
-                        //             document.querySelectorAll('#list-container > li').forEach((element) => {
-                        //                 // element.classList.remove('disabled');
-                        //             })
-                        //             // e.path[1].classList.add('disabled');
-                        //             myFunction(key);
-
-                        //         });
-                        //         const date = listItem.textContent.split(' ')[0];
-                        //         const id = listItem.textContent.split(' ')[1];
-                        //         const win = listItem.textContent.split(' ')[2];
-                        //         const map = listItem.textContent.split(' ')[3];
-                        //         const time = `${new Date().getHours()}:${new Date().getMinutes()}`;
-                        //         listItem.innerHTML = `${id} ${map} Столкновение ${win} ${date}`;
-                        //         listContainer.appendChild(listItem);
-                        //         const words = listItem.textContent.split(' ');
-                        //         listItem.textContent = '';
-
-                        //         for (let i = 0; i < words.length; i++) {
-                        //             const span = document.createElement('span');
-                        //             span.textContent = words[i];
-                        //             listItem.appendChild(span);
-                        //         }
-                        //         //listContainer.appendChild(item);
-                        //     }
-                        // });
-                        // const listItems = document.querySelectorAll('#list-container>*>li');
-
-
-
-                        //     lastSpan.insertAdjacentHTML('beforeend', '<img class="basket" src="img/basket.png"></img>');
-
-                        //     /* #region  AJAX UPLOAD DB */
-                        //     // $.ajax({
-                        //     //     url: 'games.json',
-                        //     //     dataType: 'json',
-                        //     //     success: function (db) {
-                        //     //     },
-                        //     //     error: function () {
-                        //     //         console.log("База данных не найдена");
-                        //     //     }
-                        //     // });
-                        //     /* #endregion */
-
+                        
                         //     const imgBasket = document.querySelectorAll('.basket')
                         //     imgBasket.forEach(function (item) {
                         //         item.addEventListener('click', (e) => {
@@ -1656,6 +1641,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             calendarBody.appendChild(row);
         }
+        setButtonFavorite();
     }
     /* #endregion */
 
@@ -1664,6 +1650,7 @@ window.addEventListener('DOMContentLoaded', () => {
     month_selector.value = new Date().getMonth() + 1;
     //console.log(`${month_selector.value}, ${new Date().getFullYear()}`);
     generateCalendar(month_selector.value - 1, new Date().getFullYear());
+    
     // nowDay();
 
     /* #region  обновить список игр */
@@ -1750,9 +1737,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!mainObj.log.userID) return;
         function findValueInObject(obj) {
             //console.log("userID", userID );
-
             userID = mainObj.log.userID;
-
 
             const result = {
                 team: null,
@@ -1903,59 +1888,8 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log('Путь скопирован в буфер обмена');
     });
     // #endregion
-    /* #region  OLD FILE_INPUT */
+
     let createdDate;
-    // const fileInput = document.getElementById('file-input');
-    // fileInput.addEventListener('change', (event) => {
-    //     const file = event.target.files[0];
-    //     const parts = file.name.split("_");
-    //     userID = parts[1];
-    //     date = parts[2].replaceAll("-", "/");
-    //     time = parts[3].replaceAll("-", ":");
-    //     createdDate = new Date(file.lastModified);
-    //     const reader = new FileReader();
-    //     reader.readAsText(file);
-    //     reader.onload = (event) => {
-    //         let caliber_b = [];
-    //         let caliber_b2 = [];
-    //         let data = event.target.result.match(/^(.*\n){0,2}.*/g);
-    //         data = data[0].replaceAll(/[^\x20-\x7E]+/g);
-    //         data = data.replaceAll(/[^ -~]+/g);
-    //         data = data.replace(/.*?({.*)/, "$1");
-    //         caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
-    //         try {
-    //             caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
-
-    //             function fix(obj) {
-    //                 let brokenObject = obj;
-    //                 let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
-    //                 fixedObject = JSON.parse(fixedObject);
-    //                 return fixedObject;
-    //             }
-
-    //             caliber_b = fix(caliber_b);
-    //             caliber_b2 = fix(caliber_b2);
-
-    //             let caliber_file = caliberFunc(caliber_b, caliber_b2)
-    //             document.querySelectorAll('.points').forEach(item => {
-    //                 item.remove();
-    //             })
-    //             upload(caliber_file.data, caliber_file.log);
-    //             updateDB(caliber_file);
-
-    //             setUrl = function () {
-    //                 history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-    //             }
-    //             setUrl();
-    //         } catch (e) {
-    //             alert("Файл поврежден:", e.message)
-    //         }
-    //     }
-
-    //     //saveData(createdDate);
-
-    // });
-    /* #endregion */
 
     function processFile(file, internet = false) {
         if (internet === false) {
@@ -2182,7 +2116,12 @@ window.addEventListener('DOMContentLoaded', () => {
                  <span class='diffTeams'>${Math.abs(team1Diff - team2Diff)}</span>
              `);
         let max = Math.max(+team1Diff, +team2Diff);
-        $(`span:contains('${max}')`).css('color', '#c49a30');
+        document.querySelectorAll(`.different>span`).forEach((el) => {
+            if (el.textContent == max) {
+                el.style.color = "#c49a30";
+            }
+        });
+        //$(`span:contains('${max}')`).css('color', '#c49a30');
     }
 
     function sortList() {
@@ -2362,12 +2301,15 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
 
     function nowDay() {
-        $("#calendar-body > tr > td:contains('" + new Date().getDate() + "')").css({
-            // "outline": "3px ridge red",
-            "color": "#6aa5ee",
-            "margin-left": 0,
-            "padding-left": 0,
-            "font-weight": 600
+        document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
+            if (el.textContent == new Date().getDate()) {
+                el.style.cssText = `
+                color: #6aa5ee;
+                margin-left: 0;
+                padding-left: 0;
+                font-weight: 600;
+                `;
+            }
         });
     }
     function setSelectMe() {
