@@ -1034,7 +1034,7 @@ window.addEventListener('DOMContentLoaded', () => {
             
                 <tr class = 'line ${operator.role}'>
                 <td>
-                    <svg class = "${operator.role}Logo"><title>${operator.role}</title><use xlink:href="#${operator.role}"></use></svg>
+                    <svg class = "${operator.role}Logo"><title></title><use xlink:href="#${operator.role}"></use></svg>
                 </td>
                 <td>
                 <img class = "oper" src="../img/avatars/${operator.avatar}.png" alt=""> 
@@ -2290,15 +2290,15 @@ window.addEventListener('DOMContentLoaded', () => {
             const fourthRow = team1Table.querySelectorAll('tbody')[4];
             team1Table.insertBefore(rowSniper.closest('tbody'), fourthRow);
 
-            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultLogo"><title>assault</title><use xlink:href="#assault"></use></svg>`
-            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerLogo"><title>assault</title><use xlink:href="#gunner"></use></svg>`
-            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicLogo"><title>assault</title><use xlink:href="#medic"></use></svg>`
-            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperLogo"><title>assault</title><use xlink:href="#sniper"></use></svg>`
+            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultLogo"><title></title><use xlink:href="#assault"></use></svg>`
+            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerLogo"><title></title><use xlink:href="#gunner"></use></svg>`
+            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicLogo"><title></title><use xlink:href="#medic"></use></svg>`
+            document.querySelectorAll('.team1Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperLogo"><title></title><use xlink:href="#sniper"></use></svg>`
             /////////////
-            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultRLogo"><title>assault</title><use xlink:href="#assaultR"></use></svg>`
-            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerRLogo"><title>assault</title><use xlink:href="#gunnerR"></use></svg>`
-            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicRLogo"><title>assault</title><use xlink:href="#medicR"></use></svg>`
-            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperRLogo"><title>assault</title><use xlink:href="#sniperR"></use></svg>`
+            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[0].innerHTML = `<svg class="assaultRLogo"><title></title><use xlink:href="#assaultR"></use></svg>`
+            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[2].innerHTML = `<svg class="gunnerRLogo"><title></title><use xlink:href="#gunnerR"></use></svg>`
+            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[4].innerHTML = `<svg class="medicRLogo"><title></title><use xlink:href="#medicR"></use></svg>`
+            document.querySelectorAll('.team2Table>tbody>tr>td>svg')[6].innerHTML = `<svg class="sniperRLogo"><title></title><use xlink:href="#sniperR"></use></svg>`
         } catch { }
     }
     /* #endregion */
