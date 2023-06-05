@@ -970,7 +970,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         console.log(img.width)
                         if (img.width > 336) {
                             console.log("qwe");
-                            img.style.width = "100%";
+                            img.width = "336px";
                         }
                     } catch {
                         console.error('Ошибка при загрузке картинки');
