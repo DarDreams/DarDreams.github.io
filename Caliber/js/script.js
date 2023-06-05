@@ -964,14 +964,13 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.log(img.src);
 
                 img.onload = function () {
+                    console.log(img.width)
+                    if (img.width > 336) {
+                        console.dir(img);
+                        img.style.display = "none !important";
+                    }
                     try {
                         document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}" onerror='../img/defaultN.png'">`);
-                       // console.dir(img);
-                        console.log(img.width)
-                        if (img.width > 336) {
-                            console.dir(img);
-                            //img.style.width = "33600px !important";
-                        }
                     } catch {
                         console.error('Ошибка при загрузке картинки');
                     }
@@ -993,9 +992,9 @@ window.addEventListener('DOMContentLoaded', () => {
                         })
                     })
                     
-                    
-
                 };
+
+              
 
                 /* #region  FUNCTION CHECK IMAGES */
 
