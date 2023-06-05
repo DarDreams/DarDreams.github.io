@@ -951,7 +951,9 @@ window.addEventListener('DOMContentLoaded', () => {
                // if (localStorage.getItem("tumbler") == "true") {
                     //  img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
                // } else {
+                
                     img.src = "../img/emblems/" + operator.emblem + ".png";
+                    
                     // img.closest('td').addEventListener('click',(e) => {
                     //     window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
                     // })
@@ -964,6 +966,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 img.onload = function () {
                     try {
                         document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}" onerror='../img/defaultN.png'">`);
+                       // console.dir(img);
+                        console.log(img.width)
+                        if (img.width > 336) {
+                            console.log("qwe");
+                            img.style.width = "100%";
+                        }
                     } catch {
                         console.error('Ошибка при загрузке картинки');
                     }
@@ -1071,6 +1079,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <tr><th></th></tr>
             </tr>
         `)
+
                 /* #endregion */
                 const perks = document.querySelectorAll(`.team${k - 1}Table>tbody>tr.${operator.role}>td>.perks>svg`);
 
@@ -1162,25 +1171,6 @@ window.addEventListener('DOMContentLoaded', () => {
         //         hint.style.display = 'none';
         //     });
         // }
-        /* #endregion */
-
-        /* #region  CHANGE CST OPERS */
-        // document.querySelectorAll('.nameOp').forEach(element => {
-        //     if (element.innerText == 'СЛАЙ') {
-        //         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/sly_A.png";
-        //         //operator.avatar = 'img/sly.png';
-        //     }
-        //     if (element.innerText == 'ФОРТРЕСС') {
-        //         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/fortress_G.png";
-        //         //operator.avatar = 'img/fortress.png';
-        //     }
-        //     if (element.innerText == 'БОУНС') {
-        //         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/bounce_M.png";
-        //     }
-        //     if (element.innerText == 'АВАЛАНШ') {
-        //         element.parentElement.parentElement.parentElement.previousElementSibling.children[0].src = "../img/avalansh_S.png";
-        //     }
-        // });
         /* #endregion */
 
         /* #region  TOP-STATS */
@@ -1419,6 +1409,14 @@ window.addEventListener('DOMContentLoaded', () => {
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
     }
 
+    function fixImg() {
+        console.log("q");
+        document.querySelectorAll('img.baner').forEach((el) => {
+            if (el.width > 336) {
+                el.style.width = "100%";
+            }
+        })
+    }
     // summRank('team1Table');
     // summRank('team2Table');
     // different();
