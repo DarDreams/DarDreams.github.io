@@ -967,7 +967,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     console.log(img.width)
                     if (img.width > 336) {
                         console.dir(img);
-                        img.style.display = "none !important";
+                        img.style.zoom = "50%";
                     }
                     try {
                         document.querySelector(`.team${k - 1}Table > tbody > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `<img class = "baner" src="${img.src}" onerror='../img/defaultN.png'">`);
