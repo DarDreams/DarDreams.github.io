@@ -1909,11 +1909,15 @@ window.addEventListener('DOMContentLoaded', () => {
                 let caliber_b = [];
                 let caliber_b2 = [];
                 let data = event.target.result.match(/^(.*\n){0,2}.*/g);
+                console.log(data);
                 data = data[0].replaceAll(/[^\x20-\x7E]+/g);
+                
                 data = data.replaceAll(/[^ -~]+/g);
                 data = data.replace(/.*?({.*)/, "$1");
+                
                 caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
-                //  try {
+                  try {
+                    
                 caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
 
                 function fix(obj) {
@@ -1937,10 +1941,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
                 }
                 setUrl();
-                //  } catch (e) {
-                //  alert("Файл поврежден:", e.message)
+                  } catch (e) {
+                  alert("Файл поврежден")
+                  location.reload();
                 console.error(e.message)
-                // }
+                }
             }
             //saveData(createdDate);
         } else {
