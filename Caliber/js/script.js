@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  PERK RUS */
     const perksRus = {
-        "enhanced_armor": ["Зачарованая броня", `Оперативник получает улучшенную
+        "enhanced_armor": ["Усиленная защита", `Оперативник получает улучшенную
         бронезащиту, но снижает скорость
         передвижения во всех состояниях
         на 30/25/20%
@@ -879,6 +879,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     // }
                     // console.log(result2);
                     let specKills = JSON.stringify(data2.Users[k-2][i].SpecificPlayerKills);
+                    console.log("begin: ",data2.Users[k-2][i].SpecificPlayerKills);
+                    //console.log(specKills);
 
 
                         specKills = specKills.replace(`"0"`, `"${data1[2][0][2]}"`);
@@ -890,7 +892,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         specKills = specKills.replace(`"6"`, `"${data1[3][2][2]}"`);
                         specKills = specKills.replace(`"7"`, `"${data1[3][3][2]}"`);
 
-                    //console.log("After", specKills);
+                    console.log("After: ", specKills);
 
                     var obj = JSON.parse(specKills);
                     var result = '';
@@ -977,9 +979,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.log(img.src);
 
                 img.onload = function () {
-                    console.log(img.width)
+                    // console.log(img.width)
                     if (img.width > 336) {
-                        console.dir(img);
+                        // console.dir(img);
                         img.style.zoom = "50%";
                     }
                     try {
