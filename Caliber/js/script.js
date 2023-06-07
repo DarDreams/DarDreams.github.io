@@ -879,7 +879,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     // }
                     // console.log(result2);
                     let specKills = JSON.stringify(data2.Users[k-2][i].SpecificPlayerKills);
-                    console.log("begin: ",data2.Users[k-2][i].SpecificPlayerKills);
+                    
                     //console.log(specKills);
 
 
@@ -892,15 +892,16 @@ window.addEventListener('DOMContentLoaded', () => {
                         specKills = specKills.replace(`"6"`, `"${data1[3][2][2]}"`);
                         specKills = specKills.replace(`"7"`, `"${data1[3][3][2]}"`);
 
-                    console.log("After: ", specKills);
-
+                    
+                    specKills = specKills.replace("[","{");
+                    specKills = specKills.replace("]","}");
                     var obj = JSON.parse(specKills);
                     var result = '';
 
                     for (var key in obj) {
                         result += obj[key]+ ' : ' + key + '\n';
                     }
-
+                    console.log("After: ", result);
                     return result;
 
                 }
