@@ -871,7 +871,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 };
 
                 function listKills() {
-                    // console.log(typeOf(data2.Users[k-2][i].SpecificPlayerKills));
+                    //console.log(typeOf(data2.Users[k-2][i].SpecificPlayerKills));
                     // let arr = data2.Users[k-2][i].SpecificPlayerKills
                     // const result2 = {};
                     // for (let i = 0; i < arr.length; i++) {
@@ -879,9 +879,19 @@ window.addEventListener('DOMContentLoaded', () => {
                     // }
                     // console.log(result2);
                     let specKills = JSON.stringify(data2.Users[k-2][i].SpecificPlayerKills);
-                    
-                    //console.log(specKills);
-
+                    if (specKills.includes("[")&&!specKills.includes("[]")) {
+                        // console.log(data2.Users[k-2][i].SpecificPlayerKills[0]);
+                        // console.log(data2.Users[k-2][i].SpecificPlayerKills[1]);
+                        // console.log(data2.Users[k-2][i]?.SpecificPlayerKills[2]);
+                        // console.log(data2.Users[k-2][i]?.SpecificPlayerKills[3]);
+                     specKills = {
+                           "0":data2.Users[k-2][i].SpecificPlayerKills[0],
+                           "1":data2.Users[k-2][i].SpecificPlayerKills[1],
+                           "2":data2.Users[k-2][i].SpecificPlayerKills[2],
+                           "3":data2.Users[k-2][i].SpecificPlayerKills[3],
+                        }
+                        specKills = JSON.stringify(specKills);
+                     }
 
                         specKills = specKills.replace(`"0"`, `"${data1[2][0][2]}"`);
                         specKills = specKills.replace(`"1"`, `"${data1[2][1][2]}"`);
@@ -891,17 +901,14 @@ window.addEventListener('DOMContentLoaded', () => {
                         specKills = specKills.replace(`"5"`, `"${data1[3][1][2]}"`);
                         specKills = specKills.replace(`"6"`, `"${data1[3][2][2]}"`);
                         specKills = specKills.replace(`"7"`, `"${data1[3][3][2]}"`);
+                        
 
-                    
-                    specKills = specKills.replace("[","{");
-                    specKills = specKills.replace("]","}");
                     var obj = JSON.parse(specKills);
                     var result = '';
 
                     for (var key in obj) {
                         result += obj[key]+ ' : ' + key + '\n';
                     }
-                    console.log("After: ", result);
                     return result;
 
                 }
