@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 UTC: new Date().getTimezoneOffset(),
                 userID: userID,
                 date: date,
-                time: time,
+                time: getTime(time, new Date().getTimezoneOffset()),
             }
         };
 
