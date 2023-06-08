@@ -1733,7 +1733,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function getTime(time,utc = 0) {
         var date = new Date("2000-01-01 " + time);
-        date.setMinutes(date.getMinutes() - Number(utc));
+        date.setMinutes(date.getMinutes() + Number(utc));
         var newTime = date.toLocaleTimeString("en-US", { hour12: false });
         //console.log(newTime);
         return newTime
