@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let caliberFunc = function (caliberImport, caliberImport2) {
         //console.log(caliberImport);
+        // let utc = new date().getTimezoneOffset();
         const caliberNew = {
             data: [caliberImport[0],
             caliberImport[2],
@@ -30,6 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
                 PlayerReport: caliberImport2.Log.PlayerReports,
                 Rounds: caliberImport2.Log.Rounds,
+                UTC: new Date().getTimezoneOffset(),
                 userID: userID,
                 date: date,
                 time: time,
@@ -1705,7 +1707,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${winner(data.caliber)}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
-                    <span>${data.caliber.log.time}</span>
+                    <span>${getTime(data.caliber.log.time,data.caliber.log.UTC)}</span>
+                   <!-- <span>${data.caliber.log.time}</span> -->
                   </li>
                 `)
             }
@@ -1726,6 +1729,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         });
+    }
+
+    function getTime(time,utc = 0) {
+        var date = new Date("2000-01-01 " + time);
+        date.setMinutes(date.getMinutes() - Number(utc));
+        var newTime = date.toLocaleTimeString("en-US", { hour12: false });
+        //console.log(newTime);
+        return newTime
     }
 
     function createEventList(fecha, key) {
