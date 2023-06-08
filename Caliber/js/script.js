@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 UTC: new Date().getTimezoneOffset(),
                 userID: userID,
                 date: date,
-                time: getTime(time, new Date().getTimezoneOffset()),
+                time: getTime(getTime(time, new Date().getTimezoneOffset()),new Date().getTimezoneOffset()),
             }
         };
 
@@ -1707,7 +1707,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${winner(data.caliber)}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
-                    <span>${getTime(data.caliber.log.time,data.caliber.log.UTC,new Date().getTimezoneOffset())}</span>
+                    <span>${getTime(getTime(data.caliber.log.time,new Date().getTimezoneOffset()),data.caliber.log.UTC,new Date().getTimezoneOffset())}</span>
                    <!-- <span>${data.caliber.log.time}</span> -->
                   </li>
                 `)
