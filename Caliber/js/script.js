@@ -1707,7 +1707,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${winner(data.caliber)}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
-                    <span>${getTime(data.caliber.log.time,data.caliber.log.UTC)}</span>
+                    <span>${getTime(data.caliber.log.time,data.caliber.log.UTC,new Date().getTimezoneOffset())}</span>
                    <!-- <span>${data.caliber.log.time}</span> -->
                   </li>
                 `)
@@ -1731,13 +1731,12 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function getTime(time,utc = 0) {
+    function getTime(time, offset1=0, offset2=0) {
         var date = new Date("2000-01-01 " + time);
-        date.setMinutes(date.getMinutes() + Number(utc));
+        date.setMinutes(date.getMinutes() + offset1 - offset2);
         var newTime = date.toLocaleTimeString("en-US", { hour12: false });
-        //console.log(newTime);
-        return newTime
-    }
+        return newTime;
+      }
 
     function createEventList(fecha, key) {
         const ul = document.querySelector('#list-container > ul');
