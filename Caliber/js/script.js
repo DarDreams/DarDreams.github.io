@@ -1510,7 +1510,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
-        <input id="searchInput" list="suggestionsList" placeholder="" autocomplete="on" class="search" type="text">
+        <input id="searchInput" list="suggestionsList" placeholder="Фильтр..." style="text-transform: capitalize" autocomplete="on" class="search" type="text">
         <datalist id="suggestionsList">
             <option value="ПОБЕДА">
             <option value="ПОРАЖЕНИЕ">
@@ -1624,6 +1624,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     cell.addEventListener("click", function (e) {
                         console.log("click day");
                         clickDay = setZero(cell.textContent);
+                        document.querySelector('input.search').value = localStorage.getItem("filter");
+                        document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
                         document.querySelectorAll('#calendar-body>tr>td').forEach((element) => {
                             element.style.outline = "unset";
                         })
@@ -1702,7 +1704,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         if (data.caliber.data[1]) {
                         document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                   <li map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
-                    <span><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
+                    <span title="${element.replace(".json","").toUpperCase()}"><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
                     <span>${nickName.toUpperCase()}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${winner(data.caliber)}</span>
@@ -2376,18 +2378,24 @@ window.addEventListener('DOMContentLoaded', () => {
         var input = document.querySelector('input.search');
         input.style.display = 'unset';
         input.addEventListener('input', function () {
-            var searchValue = input.value.toLowerCase();
-            for (var i = 0; i < ul.children.length; i++) {
-                var li = ul.children[i];
-                var text = li.textContent.toLowerCase();
-                if (text.includes(searchValue)) {
-                    li.style.display = '';
-                } else {
-                    li.style.display = 'none';
-                }
+          localStorage.setItem("filter", input.value);
+          var searchValue = input.value.toLowerCase();
+          var searchWords = searchValue.split(' '); // Разделяем вводимое значение на отдельные слова
+          for (var i = 0; i < ul.children.length; i++) {
+            var li = ul.children[i];
+            var text = li.textContent.toLowerCase();
+            var containsAllWords = searchWords.every(function (word) {
+              return text.includes(word);
+            });
+            if (containsAllWords) {
+              li.style.display = '';
+            } else {
+              li.style.display = 'none';
             }
+          }
         });
-    }
+      }
+      
 
     document.querySelector('img.geo').addEventListener('click', () => {
         // tv();
