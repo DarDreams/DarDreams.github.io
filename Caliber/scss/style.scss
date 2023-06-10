@@ -72,7 +72,7 @@ html {
                 width: 100vw;
                 height: 100vh;
                 transition: all 3s ease;
-                filter: brightness(0.25);
+                filter: brightness(0.15);
                 //object-fit: contain;
                 z-index: -1;
                 @media (max-width: 1800px) {
@@ -86,7 +86,7 @@ html {
                 position: fixed;
                 background-size: cover;
                 left: 55%;
-                transition: all 3s ease;
+                transition: all 1.5s ease;
                 transform: translateX(-50%);
                 //top:calc(100vh - 83%);
                 bottom: 0;

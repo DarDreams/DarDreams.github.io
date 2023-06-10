@@ -2420,7 +2420,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             document.querySelector('.foneBg').src = "../img/maps/" + obj[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg");
             document.querySelector('.foneBg').style.opacity = "1";
-        }, 300); // Задержка 300 миллисекунд (0.3 секунды)
+        }, 1000); // Задержка 300 миллисекунд (0.3 секунды)
 
         
     }
