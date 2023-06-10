@@ -1426,10 +1426,12 @@ window.addEventListener('DOMContentLoaded', () => {
         sounds();
         sortTable(".team1Table");
         sortTable(".team2Table");
+        
         winLose();
         summRank();
         //console.log("setSelectMe()");
         setSelectMe();
+        setBg();
         //setOper();
         
 
@@ -2409,6 +2411,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         setOper();
         divMe[0].click();
+    }
+
+    function setBg(){
+        document.querySelector('.foneBg').src = "../img/maps/" + caliber.data[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg");
     }
 
     function setSearch() {
