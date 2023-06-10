@@ -1431,7 +1431,7 @@ window.addEventListener('DOMContentLoaded', () => {
         summRank();
         //console.log("setSelectMe()");
         setSelectMe();
-        setBg(data1);
+        //setBg(data1);
         //setOper();
         
 
@@ -2340,6 +2340,7 @@ window.addEventListener('DOMContentLoaded', () => {
             success: function ({ caliber }) {
                 console.log(`${caliber.data[1].split('_').slice(1, -1).join('_')}:`, caliber);
                 upload(caliber.data, caliber.log);
+                setBg(caliber.data);
             }
         });
         //updateDB(caliber);
@@ -2411,12 +2412,17 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         setOper();
         divMe[0].click();
-        setBg();
     }
 
-    function setBg(data) {
-        console.log("../img/maps/" + data[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg"));
-        document.querySelector('.foneBg').src = "../img/maps/" + data[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg");
+    function setBg(obj) {
+
+        document.querySelector('.foneBg').style.opacity = "0";
+        setTimeout(() => {
+            document.querySelector('.foneBg').src = "../img/maps/" + obj[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg");
+            document.querySelector('.foneBg').style.opacity = "1";
+        }, 300); // Задержка 300 миллисекунд (0.3 секунды)
+
+        
     }
 
     function setSearch() {

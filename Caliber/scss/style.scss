@@ -71,6 +71,7 @@ html {
                 background-size: cover;
                 width: 100vw;
                 height: 100vh;
+                transition: all 3s ease;
                 filter: brightness(0.25);
                 //object-fit: contain;
                 z-index: -1;
@@ -85,7 +86,7 @@ html {
                 position: fixed;
                 background-size: cover;
                 left: 55%;
-                transition: all 1s ease;
+                transition: all 3s ease;
                 transform: translateX(-50%);
                 //top:calc(100vh - 83%);
                 bottom: 0;
