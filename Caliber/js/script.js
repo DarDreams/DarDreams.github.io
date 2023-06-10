@@ -2411,6 +2411,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         setOper();
         divMe[0].click();
+        setBg();
     }
 
     function setBg(){
