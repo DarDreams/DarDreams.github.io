@@ -31,10 +31,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
                 PlayerReport: caliberImport2.Log.PlayerReports,
                 Rounds: caliberImport2.Log.Rounds,
-                UTC: new Date().getTimezoneOffset(),
+                // UTC: new Date().getTimezoneOffset(),
                 userID: userID,
                 date: date,
-                time: time,
+                time: convertToUTC(time),
             }
         };
 
@@ -1429,6 +1429,8 @@ window.addEventListener('DOMContentLoaded', () => {
         summRank();
         //console.log("setSelectMe()");
         setSelectMe();
+        //setOper();
+        
 
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
     }
@@ -1702,6 +1704,10 @@ window.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         // Здесь можно выполнить дополнительную обработку данных
                         if (data.caliber.data[1]) {
+
+
+
+
                         document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
                   <li map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
                     <span title="${element.replace(".json","").toUpperCase()}"><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
@@ -1709,9 +1715,13 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
                     <span>${winner(data.caliber)}</span>
                     <span>${getDataMap(data.caliber.data[1]).mode}</span>
-                    <span>${data.caliber.log.time}</span>
+                    <span>${convertToLocalTime(data.caliber.log.time)}</span>
                   </li>
                 `)
+
+
+
+
             }
 
                         ///////////////////////////////////////////////////////////////////
@@ -1732,12 +1742,37 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function getTime(time, offset1=0, offset2=0) {
-        var date = new Date("2000-01-01 " + time);
-        date.setMinutes(date.getMinutes() + offset1 - offset2);
-        var newTime = date.toLocaleTimeString("en-US", { hour12: false });
-        return newTime;
-      }
+    function convertToUTC(timeString = "00:00:00") {
+        const [hours, minutes, seconds] = timeString.split(":");
+        const currentDate = new Date();
+        const utcDate = new Date(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate(), hours, minutes, seconds);
+
+        const leadingZero = (value) => (value < 10 ? "0" : "") + value; // Функция для добавления ведущего нуля
+
+        const utcTimeString = `${leadingZero(utcDate.getUTCHours())}:${leadingZero(utcDate.getUTCMinutes())}:${leadingZero(utcDate.getUTCSeconds())}`;
+        return utcTimeString;
+    }
+
+    function convertToLocalTime(utcTime) {
+        const [hours, minutes, seconds] = utcTime.split(':').map(Number);
+        const date = new Date();
+        date.setUTCHours(hours);
+        date.setUTCMinutes(minutes);
+        date.setUTCSeconds(seconds);
+
+        const timezoneOffset = date.getTimezoneOffset();
+        const localHours = hours - Math.floor(timezoneOffset / 60);
+        const localMinutes = minutes - (timezoneOffset % 60);
+        const localSeconds = seconds;
+
+        return `${padZero(localHours)}:${padZero(localMinutes)}:${padZero(localSeconds)}`;
+    }
+
+    function padZero(number) {
+        return number.toString().padStart(2, '0');
+    }
+      
+ 
 
     function createEventList(fecha, key) {
         const ul = document.querySelector('#list-container > ul');
@@ -2371,6 +2406,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 })
             }
         }
+        setOper();
+        divMe[0].click();
     }
 
     function setSearch() {
@@ -2396,6 +2433,33 @@ window.addEventListener('DOMContentLoaded', () => {
         });
       }
       
+    // function setOper() {
+    //     document.querySelectorAll("tr.line").forEach((el) => {
+    //         el.addEventListener("click", (ev) => {
+    //             let avatar = el.querySelector('img.oper').src;
+    //             let operBg = document.querySelector(".operBg");
+    //             let match = avatar.match(/\/([^/]+)\.[^.]+$/);
+    //             operBg.style.opacity="0";
+    //             operBg.src = "img/opers/" + match[1] + "_Alpha.webp";
+    //             operBg.style.opacity="1";
+    //         });
+    //     });
+    // }
+    function setOper() {
+        document.querySelectorAll("tr.line").forEach((el) => {
+            el.addEventListener("click", (ev) => {
+                let avatar = el.querySelector('img.oper').src;
+                let operBg = document.querySelector(".operBg");
+                let match = avatar.match(/\/([^/]+)\.[^.]+$/);
+                operBg.style.opacity = "0";
+                setTimeout(() => {
+                    operBg.src = "img/opers/" + match[1] + "_Alpha.webp";
+                    operBg.style.opacity = "1";
+                }, 500); // Задержка 300 миллисекунд (0.3 секунды)
+            });
+        });
+    }
+
 
     document.querySelector('img.geo').addEventListener('click', () => {
         // tv();

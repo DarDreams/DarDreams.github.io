@@ -81,13 +81,16 @@ html {
                 //outline: 2px ridge red;
                 position: fixed;
                 background-size: cover;
-                left: 50%;
+                left: 55%;
+                transition: all 1s ease;
                 transform: translateX(-50%);
                 //top:calc(100vh - 83%);
                 bottom: 0;
                 z-index: -1;
+                zoom: 150%;
+                filter: drop-shadow(6px 6px 15px black) drop-shadow(-6px -6px 15px black);
                 @media (max-width: 1800px) {
-                    zoom:110%;
+                    zoom:160%;
                 }
             }
         
