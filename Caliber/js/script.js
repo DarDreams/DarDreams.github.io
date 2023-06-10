@@ -1422,6 +1422,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // #endregion
         id = data1[0];
         alldata = [data1, data2]
+        //document.querySelector('.foneBg').src = "../img/maps/" + caliber.data[1].replace('_pvp','_default.jpg').replace("_hacking","");
         sounds();
         sortTable(".team1Table");
         sortTable(".team2Table");
