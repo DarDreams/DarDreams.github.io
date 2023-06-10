@@ -2470,7 +2470,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     operBg.src = "img/opers/" + match[1] + "_Alpha.webp";
                     operBg.style.opacity = "1";
-                }, 500); // Задержка 300 миллисекунд (0.3 секунды)
+                }, 1000); // Задержка 300 миллисекунд (0.3 секунды)
             });
         });
     }
