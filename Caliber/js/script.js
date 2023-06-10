@@ -1431,7 +1431,7 @@ window.addEventListener('DOMContentLoaded', () => {
         summRank();
         //console.log("setSelectMe()");
         setSelectMe();
-        setBg();
+        setBg(data1);
         //setOper();
         
 
@@ -2414,8 +2414,9 @@ window.addEventListener('DOMContentLoaded', () => {
         setBg();
     }
 
-    function setBg(){
-        document.querySelector('.foneBg').src = "../img/maps/" + caliber.data[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg");
+    function setBg(data) {
+        console.log("../img/maps/" + data[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg"));
+        document.querySelector('.foneBg').src = "../img/maps/" + data[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg");
     }
 
     function setSearch() {
