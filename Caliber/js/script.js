@@ -920,49 +920,63 @@ window.addEventListener('DOMContentLoaded', () => {
                 /* #region  RATING RANGE */
                 function getRange(number) {
                     const ranges = [
-                        { min: 0, max: 100, rank: "#804E26 III" },
-                        { min: 100, max: 200, rank: "#804E26 II" },
-                        { min: 200, max: 300, rank: "#804E26 I" },
-                        { min: 300, max: 400, rank: "#5D5D5D III" },
-                        { min: 400, max: 500, rank: "#5D5D5D II" },
-                        { min: 500, max: 600, rank: "#5D5D5D I" },
-                        { min: 600, max: 700, rank: "#D08B14 III" },
-                        { min: 700, max: 800, rank: "#D08B14 II" },
-                        { min: 800, max: 900, rank: "#D08B14 I" },
-                        { min: 900, max: 1000, rank: "#692B71 III" },
-                        { min: 1000, max: 1100, rank: "#692B71 II" },
-                        { min: 1100, max: 1200, rank: "#692B71 I" },
-                        { min: 1200, max: 9999, rank: "#017dfe I" }
+                        // { min: 0, max: 100, rank: "#804E26 III" },
+                        // { min: 100, max: 200, rank: "#804E26 II" },
+                        // { min: 200, max: 300, rank: "#804E26 I" },
+                        // { min: 300, max: 400, rank: "silver III" },
+                        // { min: 400, max: 500, rank: "silver II" },
+                        // { min: 500, max: 600, rank: "silver I" },
+                        // { min: 600, max: 700, rank: "gold III" },
+                        // { min: 700, max: 800, rank: "gold II" },
+                        // { min: 800, max: 900, rank: "gold I" },
+                        // { min: 900, max: 1000, rank: "platinum III" },
+                        // { min: 1000, max: 1100, rank: "platinum II" },
+                        // { min: 1100, max: 1200, rank: "platinum I" },
+                        // { min: 1200, max: 9999, rank: "#017dfe I" }
+                        { min: 0, max: 100, rank:   "bronze III" },
+                        { min: 100, max: 200, rank: "bronze II" },
+                        { min: 200, max: 300, rank: "bronze I" },
+                        { min: 300, max: 400, rank: "silver III" },
+                        { min: 400, max: 500, rank: "silver II" },
+                        { min: 500, max: 600, rank: "silver I" },
+                        { min: 600, max: 700, rank: "gold III" },
+                        { min: 700, max: 800, rank: "gold II" },
+                        { min: 800, max: 900, rank: "gold I" },
+                        { min: 900, max: 1000, rank: "platinum III" },
+                        { min: 1000, max: 1100, rank: "platinum II" },
+                        { min: 1100, max: 1200, rank: "platinum I" },
+                        { min: 1200, max: 9999, rank: "diamond I" }
                     ];
 
                     for (let i = 0; i < ranges.length; i++) {
                         if (number >= ranges[i].min && number < ranges[i].max) {
                             switch (ranges[i].rank) {
-                                case "#804E26 III":
+                                case "bronze III":
+                                    // document.querySelector.
                                     return `${ranges[i].rank}`;
-                                case "#804E26 II":
+                                case "bronze II":
                                     return `${ranges[i].rank}`;
-                                case "#804E26 I":
+                                case "bronze I":
                                     return `${ranges[i].rank}`;
-                                case "#5D5D5D III":
+                                case "silver III":
                                     return `${ranges[i].rank}`;
-                                case "#5D5D5D II":
+                                case "silver II":
                                     return `${ranges[i].rank}`;
-                                case "#5D5D5D I":
+                                case "silver I":
                                     return `${ranges[i].rank}`;
-                                case "#D08B14 III":
+                                case "gold III":
                                     return `${ranges[i].rank}`;
-                                case "#D08B14 II":
+                                case "gold II":
                                     return `${ranges[i].rank}`;
-                                case "#D08B14 I":
+                                case "gold I":
                                     return `${ranges[i].rank}`;
-                                case "#692B71 III":
+                                case "platinum III":
                                     return `${ranges[i].rank}`;
-                                case "#692B71 II":
+                                case "platinum II":
                                     return `${ranges[i].rank}`;
-                                case "#692B71 I":
+                                case "platinum I":
                                     return `${ranges[i].rank}`;
-                                case "#017dfe I":
+                                case "diamond I":
                                     return `${ranges[i].rank}`;
                             }
                         }
@@ -1077,7 +1091,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 <td class = "imgBaner">
                 
                     <span class = "rank">${operator.rank}</span>
-                    <svg class='rankEmbed' width="522" height="270" viewBox="70 0 386 270" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M333.06 5.745 5.67 5.669l-.001 258.54h503.533L333.06 5.746Z" stroke-width="20" stroke="#000" fill="${getRange(operator.rank).replaceAll("I", "")}" vector-effect="null"/><text transform="translate(8.797 94.414)" font-family="Roboto" font-size="12" font-weight="400" fill="#000" text-anchor="middle" data-use-rich-text="true"><tspan data-start-offset="0" style="white-space:pre" fill="#FFF" stroke-width="0" font-family="Roboto, sans-serif" font-size="140" font-weight="700" letter-spacing="0" word-spacing="0" x="184.122" dy="110"><![CDATA[${getRange(operator.rank).match(/\s.*/g)[0]}]]>
+                    <img class="rankEmbed" src="img/ranks/${getRange(operator.rank).replaceAll("I","").trim()}.png">
+                    <span class="rankNumber">${getRange(operator.rank).replace(/\w+ /, "")}</span>
+                    <!--<svg class='rankEmbed' width="522" height="270" viewBox="70 0 386 270" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M333.06 5.745 5.67 5.669l-.001 258.54h503.533L333.06 5.746Z" stroke-width="20" stroke="#000" fill="${getRange(operator.rank).replaceAll("I", "")}" vector-effect="null"/><text transform="translate(8.797 94.414)" font-family="Roboto" font-size="12" font-weight="400" fill="#000" text-anchor="middle" data-use-rich-text="true"><tspan data-start-offset="0" style="white-space:pre" fill="#FFF" stroke-width="0" font-family="Roboto, sans-serif" font-size="140" font-weight="700" letter-spacing="0" word-spacing="0" x="184.122" dy="110"><![CDATA[${getRange(operator.rank).match(/\s.*/g)[0]}]]> -->
                     </tspan></text></svg>
                     <span class = "name" style = "position: absolute">${operator.name}</span>
                 </td>

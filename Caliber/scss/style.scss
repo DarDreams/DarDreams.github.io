@@ -68,18 +68,18 @@ html {
             img.foneBg {
                 position: fixed;
                 pointer-events:none;
-                object-fit: fill;
+                object-fit: cover;
                 background-size: cover;
                 width: 100vw;
                 height: 100vh;
                 transition: all 3s ease;
-                filter: brightness(0.15);
+                filter: brightness(55%) contrast(150%);
                 //object-fit: contain;
                 z-index: -1;
                 @media (max-width: 1800px) {
                   width: 100%;
                   height: 100%;
-                  object-fit: fill;
+                  object-fit: cover;
                 }
             }
             
@@ -270,6 +270,16 @@ html {
                 height: 30px;
                 transform: translate(-146px, 35px) rotateY(180deg);
                 transform: translate(-427px, 37px) rotateY(0deg);
+            }
+
+            .rankNumber {
+                position: absolute;
+                font-size: 19px;
+                font-weight: 600;
+                transform: translate(-414px, 42px);
+                text-align: center;
+                width: 20px;
+                z-index: 10;
             }
 
             .assaultLogo,
