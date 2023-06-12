@@ -920,7 +920,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 /* #region  RATING RANGE */
                 function getRange(number) {
                     const ranges = [
-                        { min: 0, max: 10,     rank: "bronze NA"},
+                        { min: 0, max: 10,     rank: "bronze TBD"},
                         { min: 1, max: 100,   rank: "bronze III" },
                         { min: 100, max: 200, rank: "bronze II" },
                         { min: 200, max: 300, rank: "bronze I" },
@@ -939,7 +939,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     for (let i = 0; i < ranges.length; i++) {
                         if (number >= ranges[i].min && number < ranges[i].max) {
                             switch (ranges[i].rank) {
-                                case "bronze NA":
+                                case "bronze TBD":
                                     return `${ranges[i].rank}`;
                                 case "bronze III":
                                     return `${ranges[i].rank}`;

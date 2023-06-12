@@ -315,8 +315,12 @@ html {
                 position: absolute;
                 background-color: #FFC83D;
                 color: black;
-                font-weight: 600;
-                transform: translate(18px, -1px);
+                font-weight: 800;
+                transform: translate(18px, -3px);
+                font-size: 15px;
+                width: 20px;
+                max-height: 20px;
+                text-align: center;
                 z-index: 10;
             }
 
