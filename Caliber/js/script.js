@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 // UTC: new Date().getTimezoneOffset(),
                 userID: userID,
                 date: date,
-                time: convertToUTC(time),
+                time: time,
             }
         };
 
@@ -1748,7 +1748,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function convertToUTC(timeString = "00:00:00") {
+    function convertToUTC(timeString) {
         const [hours, minutes, seconds] = timeString.split(":");
         const currentDate = new Date();
         const utcDate = new Date(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate(), hours, minutes, seconds);
@@ -1976,7 +1976,11 @@ window.addEventListener('DOMContentLoaded', () => {
             userID = parts[1];
             //console.log(userID);
             date = parts[2].replaceAll("-", "/");
+            console.log("date",date);
             time = parts[3].replaceAll("-", ":");
+            console.log(time);
+            time = convertToUTC(time);
+            console.log(time);
             createdDate = new Date(file.lastModified);
             const reader = new FileReader();
             reader.readAsText(file);
