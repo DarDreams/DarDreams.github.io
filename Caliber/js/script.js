@@ -1757,7 +1757,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const utcTimeString = `${leadingZero(utcDate.getUTCHours())}:${leadingZero(utcDate.getUTCMinutes())}:${leadingZero(utcDate.getUTCSeconds())}`;
         if (hours > 0 && utcDate.getUTCHours() <= 23) {
-            date.replace(/\/\d+\/(\d+)/g,$1-1)
+            date.replace(/\/\d+\/(\d+)/g, function(match, captureGroup) {
+                return "/" + (parseInt(captureGroup) - 1) + "/";
+              });
         }
         return utcTimeString;
     }
@@ -1768,14 +1770,17 @@ window.addEventListener('DOMContentLoaded', () => {
         date.setUTCHours(hours);
         date.setUTCMinutes(minutes);
         date.setUTCSeconds(seconds);
-
+      
         const timezoneOffset = date.getTimezoneOffset();
-        const localHours = hours - Math.floor(timezoneOffset / 60);
-        const localMinutes = minutes - (timezoneOffset % 60);
+        const totalMinutes = hours * 60 + minutes - timezoneOffset;
+        const localHours = Math.floor(totalMinutes / 60) % 24;
+        const localMinutes = totalMinutes % 60;
         const localSeconds = seconds;
-
+      
+      
         return `${padZero(localHours)}:${padZero(localMinutes)}:${padZero(localSeconds)}`;
-    }
+      }
+      
 
     function padZero(number) {
         return number.toString().padStart(2, '0');
