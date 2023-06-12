@@ -1756,6 +1756,9 @@ window.addEventListener('DOMContentLoaded', () => {
         const leadingZero = (value) => (value < 10 ? "0" : "") + value; // Функция для добавления ведущего нуля
 
         const utcTimeString = `${leadingZero(utcDate.getUTCHours())}:${leadingZero(utcDate.getUTCMinutes())}:${leadingZero(utcDate.getUTCSeconds())}`;
+        if (hours > 0 && utcDate.getUTCHours() <= 23) {
+            date.replace(/\/\d+\/(\d+)/g,$1-1)
+        }
         return utcTimeString;
     }
 
