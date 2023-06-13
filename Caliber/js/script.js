@@ -1724,6 +1724,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${convertToLocalTime(data.caliber.log.time)}</span>
                   </li>
                 `)
+                console.log(getDataMap(data.caliber.data[1]).map);
+                console.log("data.caliber.log.time",data.caliber.log.time);
+                console.log("convert",convertToLocalTime(data.caliber.log.time));
 
 
 
@@ -1986,9 +1989,9 @@ window.addEventListener('DOMContentLoaded', () => {
             date = parts[2].replaceAll("-", "/");
             console.log("date",date);
             time = parts[3].replaceAll("-", ":");
-            console.log(time);
+            console.log("real",time);
             time = convertToUTC(time);
-            console.log(time);
+            console.log("UTC",time);
             createdDate = new Date(file.lastModified);
             const reader = new FileReader();
             reader.readAsText(file);
@@ -2043,6 +2046,7 @@ window.addEventListener('DOMContentLoaded', () => {
             userID = parts[1];
             date = parts[2].replaceAll("-", "/");
             time = parts[3].replaceAll("-", ":");
+            time = convertToUTC(time);
             createdDate = new Date(file.lastModified);
             //const reader = new FileReader();
             //reader.readAsText(file);
