@@ -1987,11 +1987,11 @@ window.addEventListener('DOMContentLoaded', () => {
             userID = parts[1];
             //console.log(userID);
             date = parts[2].replaceAll("-", "/");
-            console.log("date",date);
+            // console.log("date",date);
             time = parts[3].replaceAll("-", ":");
-            console.log("real",time);
+            // console.log("real",time);
             time = convertToUTC(time);
-            console.log("UTC",time);
+            // console.log("UTC",time);
             createdDate = new Date(file.lastModified);
             const reader = new FileReader();
             reader.readAsText(file);
