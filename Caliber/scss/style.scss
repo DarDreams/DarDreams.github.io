@@ -522,6 +522,28 @@ html {
 
         //cursor: url('../img/grab.png'), auto;
         cursor: var(--grab);
+        div.totalStatUl {
+            position: fixed;
+            margin-left: 10px;
+            bottom:0;
+            color: white;
+            text-align: left;
+            .winLiCountArrow {
+                color:lime;
+            }
+            .winLiCount{
+                
+            }
+            .loseLiCountArrow {
+                color:red;
+            }
+            .loseLiCount {
+
+            }
+            .totalLiCount {
+                color: white;
+            }
+        }
 
         ul {
             display: grid;

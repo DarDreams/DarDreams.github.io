@@ -1746,9 +1746,25 @@ window.addEventListener('DOMContentLoaded', () => {
             // Создаем обработчики событий после создания списка
             createEventList(strPath, "xyu");
             setSearch();
+            setCounts();
 
 
         });
+    }
+
+    function setCounts() {
+        let total = document.querySelectorAll("ul li:not([style*='display: none'])").length;
+        let win = document.querySelectorAll("ul li:not([status*='ПОБЕДА'])").length;
+        let lose = document.querySelectorAll("ul li:not([status*='ПОРАЖЕНИЕ'])").length;
+        document.querySelector("ul").insertAdjacentHTML("afterend", `
+            <div class="totalStatUl">
+                <span class="winLiCountArrow">&#9650;</>
+                <span class="winLiCount">${win}</>
+                <span class="loseLiCountArrow">&#9660;</>
+                <span class="loseLiCount">${lose}</>
+                <span class="totalLiCount">= ${total}</>
+            </div>
+        `);
     }
 
     function convertToUTC(timeString) {
