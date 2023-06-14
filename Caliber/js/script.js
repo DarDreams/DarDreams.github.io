@@ -1738,6 +1738,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         applyFavFromLocalStorage();
                         sortList();
                         document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
+                        setCounts();
                     })
                     .catch(error => console.error(error));
             });
@@ -1746,16 +1747,15 @@ window.addEventListener('DOMContentLoaded', () => {
             // Создаем обработчики событий после создания списка
             createEventList(strPath, "xyu");
             setSearch();
-            setCounts();
-
 
         });
     }
 
     function setCounts() {
+        document.querySelector(".totalStatUl")?.remove();
         let total = document.querySelectorAll("ul li:not([style*='display: none'])").length;
-        let win = document.querySelectorAll("ul li:not([status*='ПОБЕДА'])").length;
-        let lose = document.querySelectorAll("ul li:not([status*='ПОРАЖЕНИЕ'])").length;
+        let win = document.querySelectorAll("ul li[status*='ПОБЕДА']:not([style*='display: none'])").length;
+        let lose = document.querySelectorAll("ul li[status*='ПОРАЖЕНИЕ']:not([style*='display: none'])").length;;
         document.querySelector("ul").insertAdjacentHTML("afterend", `
             <div class="totalStatUl">
                 <span class="winLiCountArrow">&#9650;</>
@@ -2480,6 +2480,7 @@ window.addEventListener('DOMContentLoaded', () => {
               li.style.display = 'none';
             }
           }
+          setCounts();
         });
       }
       

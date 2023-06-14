@@ -492,7 +492,7 @@ html {
 .slide-out-panel.show {
     left: 0;
     margin-top: 10px;
-    input.search {
+    .search {
         opacity: 1;
         position: absolute;
         top: 47%;
@@ -524,7 +524,7 @@ html {
         cursor: var(--grab);
         div.totalStatUl {
             position: fixed;
-            margin-left: 10px;
+            margin-left: 1%;
             bottom:0;
             color: white;
             text-align: left;
@@ -532,13 +532,13 @@ html {
                 color:lime;
             }
             .winLiCount{
-                
+                color: white;
             }
             .loseLiCountArrow {
-                color:red;
+                color:#ff323b;
             }
             .loseLiCount {
-
+                color: white;
             }
             .totalLiCount {
                 color: white;
