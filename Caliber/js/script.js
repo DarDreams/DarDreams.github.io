@@ -1724,9 +1724,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${convertToLocalTime(data.caliber.log.time)}</span>
                   </li>
                 `)
-                console.log(getDataMap(data.caliber.data[1]).map);
-                console.log("data.caliber.log.time",data.caliber.log.time);
-                console.log("convert",convertToLocalTime(data.caliber.log.time));
+                // console.log(getDataMap(data.caliber.data[1]).map);
+                // console.log("data.caliber.log.time",data.caliber.log.time);
+                // console.log("convert",convertToLocalTime(data.caliber.log.time));
 
 
 
