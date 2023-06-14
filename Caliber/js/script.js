@@ -973,6 +973,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     return "Число не входит в диапазон";
                 }
                 /* #endregion */
+               
                 //console.log(operator.emblem);
                 //console.log("caliberfan.ru/wp-content/themes/caliberfan/img/emblems/UI_Emblems__large.pn\g");
                 let img = new Image();
@@ -1429,12 +1430,14 @@ window.addEventListener('DOMContentLoaded', () => {
         sounds();
         sortTable(".team1Table");
         sortTable(".team2Table");
+        setClassOper();
         
         winLose();
         summRank();
         //console.log("setSelectMe()");
         setSelectMe();
-        //setBg(data1);
+        // console.log("data1: ",data1);
+        setBg(data1);
         //setOper();
         
 
@@ -1518,13 +1521,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
+    <div class="containerInput">
         <input id="searchInput" list="suggestionsList" placeholder="Фильтр..." style="text-transform: capitalize" autocomplete="on" class="search" type="text">
         <datalist id="suggestionsList">
-            <option value="ПОБЕДА">
-            <option value="ПОРАЖЕНИЕ">
-            <option value="ВЗЛОМ">
-            <option value="СТОЛКНОВЕНИЕ">
-        </datalist>    
+        </datalist>
+        <span class="clearInput">❌</span>
+    </div>    
         <div id="list-container"></div>
     `);
     const button = document.getElementById('show-panel');
@@ -1748,6 +1750,17 @@ window.addEventListener('DOMContentLoaded', () => {
             createEventList(strPath, "xyu");
             setSearch();
 
+        });
+    }
+
+    function setClassOper() {
+        const lines = document.querySelectorAll('.line');
+        const hrefValues = ['assault', 'gunner', 'medic', 'sniper', 'assaultR', 'gunnerR', 'medicR', 'sniperR'];
+        lines.forEach((line, index) => {
+            const useElement = line.querySelector('svg use');
+            if (useElement) {
+                useElement.setAttribute('xlink:href', `#${hrefValues[index]}`);
+            }
         });
     }
 
@@ -2001,13 +2014,9 @@ window.addEventListener('DOMContentLoaded', () => {
             const file = event.target.files[0];
             const parts = file.name.split("_");
             userID = parts[1];
-            //console.log(userID);
             date = parts[2].replaceAll("-", "/");
-            // console.log("date",date);
             time = parts[3].replaceAll("-", ":");
-            // console.log("real",time);
             time = convertToUTC(time);
-            // console.log("UTC",time);
             createdDate = new Date(file.lastModified);
             const reader = new FileReader();
             reader.readAsText(file);
@@ -2042,6 +2051,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 })
                 upload(caliber_file.data, caliber_file.log);
                 updateDB(caliber_file);
+
 
                 setUrl = function () {
                     history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
@@ -2376,6 +2386,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log(`${caliber.data[1].split('_').slice(1, -1).join('_')}:`, caliber);
                 upload(caliber.data, caliber.log);
                 setBg(caliber.data);
+                // console.log("caliber.data:", caliber.data);
             }
         });
         //updateDB(caliber);
@@ -2480,6 +2491,39 @@ window.addEventListener('DOMContentLoaded', () => {
               li.style.display = 'none';
             }
           }
+
+            const dataList = document.getElementById('suggestionsList');
+            const listItems = document.querySelectorAll("li>span:nth-child(2)");
+            const addedOptions = new Set();
+
+            // Очистка списка
+            while (dataList.firstChild) {
+                dataList.removeChild(dataList.firstChild);
+            }
+
+            listItems.forEach((el) => {
+                const optionValue = el.textContent.trim();
+                if (!addedOptions.has(optionValue)) {
+                    const newOption = document.createElement('option');
+                    newOption.value = optionValue;
+                    dataList.appendChild(newOption);
+                    addedOptions.add(optionValue);
+                }
+            });
+
+            // Добавление обязательных опций
+            const mandatoryOptions = ["ПОБЕДА", "ПОРАЖЕНИЕ", "СТОЛКНОВЕНИЕ", "ВЗЛОМ"];
+            mandatoryOptions.forEach((option) => {
+                const newOption = document.createElement('option');
+                newOption.value = option;
+                dataList.appendChild(newOption);
+            });
+                document.querySelector(".clearInput").onclick = function (){
+                document.querySelector("input").value = "";
+                // document.querySelector("input").focus();
+                document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
+                
+                }
           setCounts();
         });
       }

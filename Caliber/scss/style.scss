@@ -492,11 +492,15 @@ html {
 .slide-out-panel.show {
     left: 0;
     margin-top: 10px;
-    .search {
-        opacity: 1;
+    .containerInput {
         position: absolute;
+        width: 165px;
         top: 47%;
         left: 80%;
+    }
+    #searchInput {
+        opacity: 1;
+        position: absolute;
         background-color: #000;
         color: #fff;
         text-transform: uppercase;
@@ -509,8 +513,23 @@ html {
         font-size: 15px;
         font-weight: 600;
     }
+    
+    .clearInput {
+        cursor: var(--grab);
+        position: absolute;
+        right: 0;
+        top: 0.3em;
+        background-color: black;
+        z-index: 99;
+        font-size: 10px;
+        margin-left: -20px;
+        // color: red;
+        // transform: translate(752px, 481px);
+        }
+
     #list-container {
         text-align: center;
+        height: 46%;
         padding: 10px;
         padding-top: 0;
         display: block;
