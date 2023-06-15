@@ -1770,7 +1770,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let win = document.querySelectorAll("ul li[status*='ПОБЕДА']:not([style*='display: none'])").length;
         let lose = document.querySelectorAll("ul li[status*='ПОРАЖЕНИЕ']:not([style*='display: none'])").length;;
         document.querySelector("ul").insertAdjacentHTML("afterend", `
-            <div class="totalStatUl">
+            <div title="Победы/Поражения/Общее количество игр" class="totalStatUl">
                 <span class="winLiCountArrow">&#9650;</>
                 <span class="winLiCount">${win}</>
                 <span class="loseLiCountArrow">&#9660;</>
