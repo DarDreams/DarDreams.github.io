@@ -861,6 +861,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     lvlOp: data1[k][i][8][18],
                     lvlprest: data1[k][i][8][19],
                     rank: data1[k][i][16][1],
+                    rankTop: data1[k][i][16][2],
                     name: data1[k][i][2],
                     group: String(data1[k][i][1]).slice(0, 4),
                     perks: [data1[k][i + 0][8][15][0], data1[k][i + 0][8][15][1], data1[k][i + 0][8][15][2], data1[k][i + 0][8][15][3]],
@@ -1080,7 +1081,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td class = "imgBaner">
                 
-                    <span class = "rank">${operator.rank}</span>
+                    <span title="${operator.rankTop}" class = "rank">${(operator.rank == 0) ? operator.rankTop:operator.rank }</span>
                     <img class="rankEmbed" src="img/ranks/${getRange(operator.rank).replaceAll(/\w+$/g,"").trim()}.png">
                     <span class="rankNumber">${getRange(operator.rank).replace(/\w+ /, "")}</span>
                     <span class = "name" style = "position: absolute">${operator.name}</span>
