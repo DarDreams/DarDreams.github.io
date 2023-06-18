@@ -2019,22 +2019,39 @@ window.addEventListener('DOMContentLoaded', () => {
             time = parts[3].replaceAll("-", ":");
             time = convertToUTC(time);
             createdDate = new Date(file.lastModified);
+            console.log("createdDate",createdDate);
+            console.log("saveData(createdDate)",saveData(createdDate));
+            console.log("date",date);
             const reader = new FileReader();
             reader.readAsText(file);
             reader.onload = (event) => {
                 let caliber_b = [];
                 let caliber_b2 = [];
-                let data = event.target.result.match(/^(.*\n){0,2}.*/g);
-                console.log(data);
+                let data;
+                data = event.target.result.split('\n').slice(0, 3);
+                // console.log("DATA",data);
+                
+                
+                // console.log("data", data);
+               // data = event.target.result.match(/^(.*\n){0,14}.*/g);
+                
                 data = data[0].replaceAll(/[^\x20-\x7E]+/g);
+                data = data.replace(/"11":.*?(?=,"12"|$)/g,'"11": []');
+                // console.log("data2", data);
                 
+                // console.log(data);
                 data = data.replaceAll(/[^ -~]+/g);
-                data = data.replace(/.*?({.*)/, "$1");
                 
-                caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
+                data = data.replace(/.*?({.*:true})/, "$1");
+                
+                // console.log("caliber_1", data.match(/^(.*14":\[\]\})\w/s)[1]);
+                caliber_b = data.match(/^(.*14":\[\]\}).*Log/s)[1];
+                // console.error("caliber_b",caliber_b);
                   try {
-                    
+                // console.log("caliber_2",data.match(/({"Log":.*:true})/s)[1]);
+                //console.log("data",data);
                 caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
+                // console.log("caliber_b2",caliber_b2);
 
                 function fix(obj) {
                     let brokenObject = obj;
@@ -2055,7 +2072,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
                 setUrl = function () {
-                    history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+                    // history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+                    history.pushState(null, null, `/?filename=data/${date}/${caliber_file.data[0]}`);
                 }
                 setUrl();
                   } catch (e) {
@@ -2075,6 +2093,8 @@ window.addEventListener('DOMContentLoaded', () => {
             time = parts[3].replaceAll("-", ":");
             time = convertToUTC(time);
             createdDate = new Date(file.lastModified);
+            console.log("createdDate",createdDate);
+            console.log("date",date);
             //const reader = new FileReader();
             //reader.readAsText(file);
             //reader.onload = (event) => {
@@ -2090,7 +2110,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     data = data[0].replaceAll(/[^\x20-\x7E]+/g);
                     data = data.replaceAll(/[^ -~]+/g);
                     data = data.replace(/.*?({.*)/, "$1");
-                    caliber_b = data.match(/^(.*14":\[\]\})\w/s)[1];
+                    caliber_b = data.match(/^(.*14":\[\]\})\w?/s)[1];
                     try {
                         caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
                         //console.log("caliber_b", caliber_b);
@@ -2133,7 +2153,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
-        console.log("file:", file);
+        // console.log("file:", file);
         processFile(file);
     });
 
@@ -2325,7 +2345,9 @@ window.addEventListener('DOMContentLoaded', () => {
         if (button.textContent == "<") { 
             addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
         }
-        addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
+        addClickSound('.container_tables>.team1Table>tbody', "onclick", "../mp3/click.mp3", 0.01);
+        addClickSound('.container_tables>.team2Table>tbody', "onclick", "../mp3/click.mp3", 0.01);
+
         addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('li', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('li', "onmouseenter", "../mp3/move.mp3", 0.035);
