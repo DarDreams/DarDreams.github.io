@@ -1541,6 +1541,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     button.addEventListener('click', () => {
+     //   button.onclick = function () {
        // console.log("panel");
        if (button.textContent == ">") { 
        let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
