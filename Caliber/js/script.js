@@ -1826,6 +1826,7 @@ window.addEventListener('DOMContentLoaded', () => {
         ul.addEventListener('click', (e) => {
             if (e.target.localName == "ul") return;
             if (key == e.target.closest('li').querySelector('span:nth-child(1)').textContent) {
+                
                 const li = e.target.closest('li');
                 if (li) {
                     let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
@@ -2321,23 +2322,51 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  SOUNDS */
 
-    function sounds() {
-        function addClickSound(selector, event, path, vol) {
-            const elements = document.querySelectorAll(selector);
-            for (let i = 0; i < elements.length; i++) {
-                const element = elements[i];
-                element[event] = handleClickSound;
-            }
+    // function sounds() {
+    //     function addClickSound(selector, event, path, vol) {
+    //         const elements = document.querySelectorAll(selector);
+    //         for (let i = 0; i < elements.length; i++) {
+    //             const element = elements[i];
+    //             element[event] = handleClickSound;
+    //         }
 
-            function handleClickSound(e) {
-                if (event === 'click' && e.button !== 0) return;
-                const audio = new Audio(path);
-                audio.volume = vol;
-                audio.play().catch(function (error) {
-                    console.log('Error playing sound: ' + error);
-                });
+    //         function handleClickSound(e) {
+    //             if (event === 'click' && e.button !== 0) return;
+    //             const audio = new Audio(path);
+    //             audio.volume = vol;
+    //             audio.play().catch(function (error) {
+    //                 console.log('Error playing sound: ' + error);
+    //             });
+    //         }
+    //     }
+
+        function sounds() {
+            function addClickSound(selector, event, path, vol) {
+                const elements = document.querySelectorAll(selector);
+                for (let i = 0; i < elements.length; i++) {
+                    const element = elements[i];
+                    element[event] = handleClickSound;
+                }
+                let isSoundPlaying = false; // Флаг для отслеживания состояния воспроизведения звука
+                function handleClickSound(e) {
+                    if (event === 'click' && e.button !== 0) return;
+                    if (isSoundPlaying) return;
+                    const audio = new Audio(path);
+                    audio.volume = vol;
+                    isSoundPlaying = true;
+                    audio.play().catch(function (error) {
+                        console.log('Ошибка воспроизведения звука: ' + error);
+                        isSoundPlaying = false;
+                    });
+                    audio.onended = function() {
+                        isSoundPlaying = false;
+                    };
+                }
             }
-        }
+        
+        
+
+        
 
         addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('img', "onmouseenter", '../mp3/move.mp3', 0.035);
@@ -2345,11 +2374,11 @@ window.addEventListener('DOMContentLoaded', () => {
         if (button.textContent == "<") { 
             addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
         }
-        addClickSound('.container_tables>.team1Table>tbody', "onclick", "../mp3/click.mp3", 0.01);
-        addClickSound('.container_tables>.team2Table>tbody', "onclick", "../mp3/click.mp3", 0.01);
+        addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
+        // addClickSound('.container_tables>.team2Table>tbody', "onclick", "../mp3/click.mp3", 0.01);
 
         addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
-        addClickSound('li', "onclick", "../mp3/click.mp3", 0.01);
+        // addClickSound('li', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('li', "onmouseenter", "../mp3/move.mp3", 0.035);
 
         document.addEventListener('contextmenu', event => event.preventDefault());  // RMB
