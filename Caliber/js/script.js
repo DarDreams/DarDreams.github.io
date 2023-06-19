@@ -855,8 +855,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 const operator = {
                     role: operLoop[i],
                     emblem: data1[k][i][5],
-                    avatar: oper(data1[k][i][8][1]),
-                    skin: data1[k][i][8][9][data1[k][i][8][9].length - 1],
+                    avatar: (data1[k][i][8][9][data1[k][i][8][9].length - 1].match(/ES\d?|LS\d?/g)) ? oper(data1[k][i][8][1])+"_"+data1[k][i][8][9][data1[k][i][8][9].length - 1].match(/ES\d?|LS\d?/g):oper(data1[k][i][8][1]), 
+                    skin: data1[k][i][8][9][data1[k][i][8][9].length - 1].match(/ES\d?|LS\d?/g),
                     lvlText: data1[k][i][3],
                     nameOp: roleName,
                     lvlOp: data1[k][i][8][18],
