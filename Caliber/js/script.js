@@ -856,6 +856,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     role: operLoop[i],
                     emblem: data1[k][i][5],
                     avatar: oper(data1[k][i][8][1]),
+                    skin: data1[k][i][8][9][data1[k][i][8][9].length - 1],
                     lvlText: data1[k][i][3],
                     nameOp: roleName,
                     lvlOp: data1[k][i][8][18],
@@ -872,6 +873,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     damage: Math.floor(data2.Users[k - 2][i].DamageDealt),
                     recive: Math.floor(data2.Users[k - 2][i].DamageReceived)
                 };
+                console.log(operator.avatar," - ",operator.skin);
 
                 function listKills() {
                     //console.log(typeOf(data2.Users[k-2][i].SpecificPlayerKills));
