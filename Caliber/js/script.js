@@ -2452,10 +2452,10 @@ window.addEventListener('DOMContentLoaded', () => {
         try {
             const team1Table = document.querySelector(table);
 
-            const rowAssault = team1Table.querySelector("img.oper[src*='_A.png']");
-            const rowGunner = team1Table.querySelector("img.oper[src*='_G.png']");
-            const rowMedic = team1Table.querySelector("img.oper[src*='_M.png']");
-            const rowSniper = team1Table.querySelector("img.oper[src*='_S.png']");
+            const rowAssault = team1Table.querySelector("img.oper[src*='_A']");
+            const rowGunner = team1Table.querySelector ("img.oper[src*='_G']");
+            const rowMedic = team1Table.querySelector(  "img.oper[src*='_M']");
+            const rowSniper = team1Table.querySelector( "img.oper[src*='_S']");
 
             const firstRow = team1Table.querySelectorAll('tbody')[1];
             team1Table.insertBefore(rowAssault.closest('tbody'), firstRow);
