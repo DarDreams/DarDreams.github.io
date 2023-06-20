@@ -672,6 +672,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  ALL DATAS */
     function upload(data1, data2) {
+      //  document.querySelector('.vLoading').style.display="block";
         document.querySelector(`.team1Table`).innerHTML = '';
         document.querySelector(`.team2Table`).innerHTML = '';
         let operLoop = [];
@@ -855,7 +856,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 const operator = {
                     role: operLoop[i],
                     emblem: data1[k][i][5],
-                    avatar: (data1[k][i][8][9][data1[k][i][8][9].length - 1].match(/ES\d?|LS\d?/g)) ? oper(data1[k][i][8][1])+"_"+data1[k][i][8][9][data1[k][i][8][9].length - 1].match(/ES\d?|LS\d?/g):oper(data1[k][i][8][1]), 
+                    avatar: (data1[k][i][8][9][data1[k][i][8][9].length - 1].
+                        match(/ES_Model\d?|LS_Model\d?/g)) ? oper(data1[k][i][8][1])+"_"+data1[k][i][8][9][data1[k][i][8][9].length - 1].
+                        match(/ES\d?|LS\d?/g):oper(data1[k][i][8][1]), 
                     skin: data1[k][i][8][9][data1[k][i][8][9].length - 1].match(/ES\d?|LS\d?/g),
                     lvlText: data1[k][i][3],
                     nameOp: roleName,
@@ -1445,6 +1448,7 @@ window.addEventListener('DOMContentLoaded', () => {
         
 
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+      //  document.querySelector('.vLoading').style.display="none";
     }
 
     function fixImg() {
@@ -2429,6 +2433,7 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
 
     function loadData(fileName) {
+        document.querySelector('.vLoading').style.display="block !important";
         //console.log(fileName);
         //console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
         //const urlParams = new URLSearchParams(window.location.search);
@@ -2445,6 +2450,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
         //updateDB(caliber);
+        document.querySelector('.vLoading').style.display="none !important";
     }
 
     /* #region  SORT_TABLE */
