@@ -1648,10 +1648,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
                             // Обработка данных
                             // console.log(data);
-                        })
-                            .fail(function (error) {
-                                // console.log("Произошла ошибка:", error);
-                            });
+                        
 
                         $('.containerInput').fadeOut();
                         $('.totalStatUl').fadeOut();
@@ -1675,6 +1672,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
                         getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                         repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                    })
+                    .fail(function (error) {
+                        // console.log("Произошла ошибка:", error);
+                    });
                     });
 
                 }
@@ -1682,6 +1683,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             }
             calendarBody.appendChild(row);
+            
         }
         setButtonFavorite();
     }
