@@ -914,7 +914,7 @@ button#show-panel {
             width: 50% !important;
             transition: all 1s ease;
             height: 50% !important;
-            pointer-events: none;
+            // pointer-events: none;
             &:hover {
                 zoom: 1.5%;
             }
