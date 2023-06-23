@@ -1445,7 +1445,6 @@ window.addEventListener('DOMContentLoaded', () => {
         setSelectMe();
         // console.log("data1: ",data1);
         setBg(data1);
-        setMap();
         //setOper();
         
 
@@ -2425,6 +2424,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log(`${caliber.data[1].split('_').slice(1, -1).join('_')}:`, caliber);
                 upload(caliber.data, caliber.log);
                 setBg(caliber.data);
+                setMap(caliber.data);
                 // console.log("caliber.data:", caliber.data);
             }
         });
@@ -2589,10 +2589,10 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function setMap() {
+    function setMap(caliberData) {
         // document.querySelector('.imgMap').innerHTML="";
-        console.log(caliber.data[1]);
-        document.querySelector('.imgMap').src = `img/maps/plans/${caliber.data[1].split("_").slice(-2).join("_")}_base.webp`;
+        console.log(caliberData[1]);
+        document.querySelector('.imgMap').src = `img/maps/plans/${caliberData[1].split("_").slice(-2).join("_")}_base.webp`;
     }
 
 }); /////////////////END
