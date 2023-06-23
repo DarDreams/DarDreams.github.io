@@ -1646,6 +1646,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         console.log("click day");
 
                         $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
+                            // document.querySelector(".vLoading").style.display = "unset";
                             // Обработка данных
                             // console.log(data);
                         
@@ -1677,15 +1678,15 @@ window.addEventListener('DOMContentLoaded', () => {
                         // console.log("Произошла ошибка:", error);
                     });
                     });
-
+                    
                 }
                 row.appendChild(cell);
 
             }
             calendarBody.appendChild(row);
-            
         }
         setButtonFavorite();
+        // document.querySelector(".vLoading").style.display = "none";
     }
     /* #endregion */
 
