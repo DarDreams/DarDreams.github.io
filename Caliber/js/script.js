@@ -2591,6 +2591,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function setMap() {
         // document.querySelector('.imgMap').innerHTML="";
+        console.log(caliber.data[1]);
         document.querySelector('.imgMap').src = `img/maps/plans/${caliber.data[1].split("_").slice(-2).join("_")}_base.webp`;
     }
 
