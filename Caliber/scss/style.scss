@@ -910,13 +910,15 @@ button#show-panel {
         right: 0px;
         top: 14px;
         .imgMap {
+            cursor: var(--grab);
             position: relative;
             width: 50% !important;
             transition: all 1s ease;
             height: 50% !important;
             // pointer-events: none;
             &:hover {
-                zoom: 1.5%;
+                
+                transform: scale(1.2);
             }
         }
 
