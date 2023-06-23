@@ -7,6 +7,11 @@
     --grab: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAZCAYAAADe1WXtAAAAAXNSR0IArs4c6QAAAoZJREFUSEvVle9LU1EYx79nu95x25x1py6nRkLvgrX5xhm07A9IkX5igpCWUTYnxYoKtL2QLN9UWDFzrF4FLX8EAwX/gN71Q0PIF0klkw6RMq+wsXtPnIvZCM2r+cYvXLj3cM7nfJ/nPOe5BKuIMWYD8GVhYWGXIAiwWq1xAE2EkKXV5v89RtaAvgFQJeWJ8B/2Y2x8nE/rIoTc/m+o01GIQ34/4kODWwctde6Gr7oar4aHtg7qKnai+iCHDm8dlDut8vkwOLLNoCkA/OHaTwiZX6sS/llSuQelqipazjaj9UKrfngAxByoSgjRfn+vC/VWVqLv8SMM9D9FLBrFj/l5fJ39hoKCAszMzMBms8HpdD4A8HAZ+nldqCRJYIyBOzWbzfr7k/4INE3DqRMnUX/8GGKxGKamplBWWoZ8e369IWhu7gghyGazOpxfYbfbjdMNDXj+LIaamiMIdASxYSjfgC3vwhfnRsGjeTvxYXFT0LVOPZPJ4N3kRHIbQRljMoC5nJCaALTz1sfrlJ++Ua2Er6pqdmx0NDsQiSzd7+vLyLJcKEmSCQApKSrmDdooEytQSulsRfkelyzLWEylcClwea62rm6nx+sVy0tcps1Cv+/bW1HkcDjAazCdTuvO7t7rTd+6ecPCx4yKO33/cfInURSFdQTa8XpkRM8fvzWaqkJjDGbB/KcoDZCP1taiu+cOCGMsRCntCXd2Iv4yroNNJp7SjYv/IQ54PNc4NA9AIJlM9oY7u5BIJJAnCHoqNqLmcy242NbGG41DX8kY28HLiFLaTSnNXAkGhelP04btNjSewdVQCHa7vRHAixU7y47DAK4riqJ3IaMSRREWi+U8gCghRP0FclNORopVtbsAAAAASUVORK5CYII="), auto;
 }
 
+
+.focus {
+    outline: 2px ridge red;
+}
+
 svg.star {               
     opacity: 0;
     height: 38.5px;
@@ -512,6 +517,9 @@ html {
         width: 165px;
         font-size: 15px;
         font-weight: 600;
+        &::placeholder {
+            text-transform: capitalize;
+          }
     }
     
     .clearInput {
@@ -901,11 +909,24 @@ button#show-panel {
         height: auto;
         right: 20px;
         top: 14px;
+        .imgMap {
+            position: relative;
+            width: 50% !important;
+            height: 50% !important;
+            left: 50% !important;
+            transform: translateY(2%) !important;
+        }
+        
 
         .container {
             display: flex;
             justify-content: center;
             margin-top: 0px;
+            .map {
+                left: 50%;
+                position: relative;
+                transform: translateX(-50%);
+            }
         }
 
         img {
@@ -915,13 +936,14 @@ button#show-panel {
     }
 
     .mode {
-        text-align: center;
+        position: relative;
         left: 50%;
         //width: 100%;
         //overflow-x: hidden;
         //margin-left: 10px;
-        transform: translateX(5%);
+        transform: translateX(8%);
         //margin-left: 60px;
+    
     }
     .geo {
         z-index: 10;

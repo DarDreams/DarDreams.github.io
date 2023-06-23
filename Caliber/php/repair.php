@@ -7,6 +7,23 @@ if (isset($_GET['folder'])) {
     foreach ($files as $file) {
         if (in_array($file, array(".", ".."))) continue;
         $ext = pathinfo($file, PATHINFO_EXTENSION);
+        $path = preg_replace('//','"11": []', $path);
+        $path = explode('_', $file);
+        // echo $path[2];
+        // echo "<br>";
+        $path = explode('-', $path[2]);
+        
+        // echo $path[0];
+        // echo "<br>";
+        // echo $path[1];
+        // echo "<br>";
+        // echo $path[2];
+        // echo "<br>";
+        $path = $path[0] . "/" . $path[1] . "/" . $path[2];
+        $path = rtrim($path, "/");
+        // echo $path;
+        // echo "<br>";
+
         if ($ext == 'bytes') {
             $filePath = $folder . '/' . $file;
 
@@ -15,30 +32,43 @@ if (isset($_GET['folder'])) {
             $date = $fileParts[2];
             $time = $fileParts[3];
 
+            // $fileContent = file_get_contents($filePath);
+            // $fileContent = preg_replace('/^(.*\n){0,2}.*/', '$0', $fileContent);
+            // $fileContent = preg_replace('/[^\x20-\x7E]+/', '', $fileContent);
+            // $fileContent = preg_replace('/[^ -~]+/', '', $fileContent);
+            // $fileContent = preg_replace('/.*?({.*)/', '$1', $fileContent);
+
+            // $caliber_b = preg_match('/^(.*14":\[\]\})\w/s', $fileContent, $matches);
+            // $caliber_b = $matches[1];
+            // $caliber_b2 = preg_match('/({"Log":.*:true})/s', $fileContent, $matches);
+            // $caliber_b2 = $matches[1];
+
             $fileContent = file_get_contents($filePath);
-            $fileContent = preg_replace('/^(.*\n){0,2}.*/', '$0', $fileContent);
             $fileContent = preg_replace('/[^\x20-\x7E]+/', '', $fileContent);
-            $fileContent = preg_replace('/[^ -~]+/', '', $fileContent);
-            $fileContent = preg_replace('/.*?({.*)/', '$1', $fileContent);
-
-            $caliber_b = preg_match('/^(.*14":\[\]\})\w/s', $fileContent, $matches);
+            $fileContent = preg_match('/[\s\S]*?(\{"0":.*"PlayerReportsEnabled":true\})/', $fileContent, $matches);
+            $fileContent = $matches[1];
+            $fileContent = preg_replace('/"11":.*?(?=,"12"|$)/','"11": []', $fileContent); //NEW
+            
+            $caliber_b = preg_match('/^(.*14":\[\]\})[\s\S]*?Log/s', $fileContent, $matches);//NEW
             $caliber_b = $matches[1];
-            $caliber_b2 = preg_match('/({"Log":.*:true})/s', $fileContent, $matches);
+            // echo $caliber_b . "<Br>";
+            // echo "<Br>";echo "<Br>";echo "<Br>";
+            $caliber_b2 = preg_match('/({"Log":.*:true})/si', $fileContent, $matches);
             $caliber_b2 = $matches[1];
-
+            // echo $caliber_b . "<Br>";
+            // echo "<Br>";echo "<Br>";echo "<Br>";
             $caliber_file = '{"caliber":{"data":' . stripslashes($caliber_b) . ',"log":' . stripslashes($caliber_b2) . "}}";
-
+            // echo $caliber_file;
             $caliberImport = json_decode($caliber_file, true);
             $caliberImport2 = json_decode($caliber_file, true);
 
             $caliberNew = caliberFunc($caliberImport['caliber']['data'], $caliberImport2['caliber']['log'],$userID,$date,$time);
-
-            //echo json_encode($caliberNew);
             echo json_encode(['caliber' => $caliberNew]);
-
-            //file_put_contents($filePath, $fileContent); // Пересохранение файла с новым содержимым
-            //echo $caliberNew["data"][0] . '.json';
-            file_put_contents($folder . "/" . $caliberNew["data"][0] . '.json', json_encode(['caliber' => $caliberNew]));
+            // echo "<br>";
+            $path = $folder . "/" . $path;
+                // echo $path;
+            // file_put_contents($folder . "/" . $caliberNew["data"][0] . '.json', json_encode(['caliber' => $caliberNew]));
+            file_put_contents($path . "/" . $caliberNew["data"][0] . '.json', json_encode(['caliber' => $caliberNew]));
             unlink($filePath);
             $result[] = $fileContent;
         }
@@ -116,7 +146,6 @@ $caliberImport2 = $caliber_file["caliber"]["log"];
 
 $caliberNew = caliberFunc($caliberImport, $caliberImport2);
 
-
 // Вывод результатов
-echo json_encode($caliberNew);
+// echo json_encode($caliberNew);
 exit;

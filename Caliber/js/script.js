@@ -7,7 +7,7 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true;
+    let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true, oper,roleName;
     let rankTeam = [];
 
     /* #region CREATE OBJECT CALIBER */
@@ -716,10 +716,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 //console.dir(operLoop);
                 /* #region  OPER */
 
-                let roleName;
 
                 /* #region  OPER_NAME */
-                function oper(collection) {
+                oper = function (collection) {
                     collection = collection.toUpperCase();
                     let res;
                     //console.log(collection);
@@ -841,9 +840,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     };
 
                     res = `${col}_${role}`;
-                  //  console.log("res", res);
+                   
                     roleName = mappings[col][role];
-                    return res;
+                    
+                    // console.log("rolename", roleName);
+                    return [res,roleName];
                 }
                 /* #endregion */
 
@@ -857,8 +858,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     role: operLoop[i],
                     emblem: data1[k][i][5],
                     avatar: (data1[k][i][8][9][data1[k][i][8][9].length - 1].
-                        match(/ES_Model\d?|LS_Model\d?/g)) ? oper(data1[k][i][8][1])+"_"+data1[k][i][8][9][data1[k][i][8][9].length - 1].
-                        match(/ES\d?|LS\d?/g):oper(data1[k][i][8][1]), 
+                        match(/ES_Model\d?|LS_Model\d?/g)) ? oper(data1[k][i][8][1])[0]+"_"+data1[k][i][8][9][data1[k][i][8][9].length - 1].
+                        match(/ES\d?|LS\d?/g):oper(data1[k][i][8][1])[0], 
                     skin: data1[k][i][8][9][data1[k][i][8][9].length - 1].match(/ES\d?|LS\d?/g),
                     lvlText: data1[k][i][3],
                     nameOp: roleName,
@@ -876,7 +877,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     damage: Math.floor(data2.Users[k - 2][i].DamageDealt),
                     recive: Math.floor(data2.Users[k - 2][i].DamageReceived)
                 };
-                console.log(operator.avatar," - ",operator.skin);
+                // console.log(operator.avatar," - ",operator.skin);
 
                 function listKills() {
                     //console.log(typeOf(data2.Users[k-2][i].SpecificPlayerKills));
@@ -1444,6 +1445,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setSelectMe();
         // console.log("data1: ",data1);
         setBg(data1);
+        setMap();
         //setOper();
         
 
@@ -1487,7 +1489,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <input type="file" multiple id="file-input" accept=".bytes">
             <img class = 'rec icons' src='img/REC.png'>
                 <label for="file-input">
-                <img class ='folder icons' src='img/FOLDER.png'>
+                <img title="После нажатия в буфер обмена будет добавлен стандартный адрес расположения повторов, остается только нажать CTRL+V" class ='folder icons' src='img/FOLDER.png'>
                 </label>
 	        </div>
             <div class="container">
@@ -1526,16 +1528,18 @@ window.addEventListener('DOMContentLoaded', () => {
     <button id="show-panel">></button>
     `);
 
+    
+        document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
+        <div class="containerInput">
+            <input id="searchInput" title="Можно искать несколько слов разделяя их пробелом: имена, позывные, режимы, карты, статусы, id и время" list="suggestionsList" placeholder="Фильтр..." style="text-transform: lowercase" autocomplete="on" class="search" type="text">
+            <datalist id="suggestionsList">
+            </datalist>
+            <span class="clearInput">❌</span>
+        </div>    
+            <div id="list-container"></div>
+        `);
 
-    document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
-    <div class="containerInput">
-        <input id="searchInput" list="suggestionsList" placeholder="Фильтр..." style="text-transform: capitalize" autocomplete="on" class="search" type="text">
-        <datalist id="suggestionsList">
-        </datalist>
-        <span class="clearInput">❌</span>
-    </div>    
-        <div id="list-container"></div>
-    `);
+    
     const button = document.getElementById('show-panel');
     const panel = document.querySelector('.slide-out-panel');
     const tables = document.querySelector('.container_tables');
@@ -1641,6 +1645,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     cell.addEventListener("click", function (e) {
                         console.log("click day");
+
+                        $('.containerInput').fadeOut();
+                        $('.totalStatUl').fadeOut();
+                        // setTimeout(() => {
+                        //     if (document.querySelectorAll('ul>li').length) {
+                        //         $('.containerInput').fadeIn()
+                        //     } else {
+                        //         $('.containerInput').fadeOut()
+                        //     }
+                        // }, 200);
+
                         clickDay = setZero(cell.textContent);
                         document.querySelector('input.search').value = localStorage.getItem("filter");
                         document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
@@ -1649,38 +1664,10 @@ window.addEventListener('DOMContentLoaded', () => {
                         })
                         e.target.style.outline = "2px ridge red";
                         selectedDate = new Date(2023, month_selector.value - 1, 1);
-                        //var formattedDate = formatDate(selectedDate);
                         strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
-                        //console.log(`2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
 
                         getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-                        //processFile({name:"https://exlusive.pro/data/2023/05/19/3888ed9f-dce6-4f59-b7d0-30f6266b6c23_12431_2023-05-19_21-13-39_10468_000.bytes"},true);
-                        //console.log(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                         repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-
-                        //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-                        //setUrl();
-                        //getFileList();
-
-                        
-                        //     const imgBasket = document.querySelectorAll('.basket')
-                        //     imgBasket.forEach(function (item) {
-                        //         item.addEventListener('click', (e) => {
-                        //             console.log(e.target.parentElement.parentElement);
-                        //             e.target.parentElement.parentElement.remove();
-                        //             //console.log(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0]);
-                        //             localStorage.removeItem(Object.keys(localStorage).
-                        //                 find(key => key.includes(e.target.parentElement.parentElement.children[0].innerText.match(/(\w{1,8}.*$)/g)[0])));
-                        //         });
-                        //     });
-
-                        // });
-
-                        // function myFunction(key) {
-                        //     let data = JSON.parse(localStorage.getItem(key));
-                        //     upload(data[0], data[1]);
-                        // }
-
                     });
 
                 }
@@ -1722,10 +1709,10 @@ window.addEventListener('DOMContentLoaded', () => {
                         if (data.caliber.data[1]) {
 
 
-
-
                         document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
-                  <li map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
+                  <li users="${data.caliber.data[2][0][2].toLowerCase()};${data.caliber.data[2][1][2].toLowerCase()}${data.caliber.data[2][2][2].toLowerCase()};${data.caliber.data[2][3][2].toLowerCase()};${data.caliber.data[3][0][2].toLowerCase()};${data.caliber.data[3][1][2].toLowerCase()};${data.caliber.data[3][2][2].toLowerCase()};${data.caliber.data[3][3][2].toLowerCase()}"
+                  avatars="${oper(data.caliber.data[2][0][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][1][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][2][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][3][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][0][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][1][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][2][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][3][8][1])[1].toLowerCase()}"
+                  "map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
                     <span title="${element.replace(".json","").toUpperCase()}"><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
                     <span>${nickName.toUpperCase()}</span>
                     <span>${getDataMap(data.caliber.data[1]).map}</span>
@@ -1734,30 +1721,28 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span>${convertToLocalTime(data.caliber.log.time)}</span>
                   </li>
                 `)
-                // console.log(getDataMap(data.caliber.data[1]).map);
-                // console.log("data.caliber.log.time",data.caliber.log.time);
-                // console.log("convert",convertToLocalTime(data.caliber.log.time));
-
-
-
 
             }
-
                         ///////////////////////////////////////////////////////////////////
                         setFav();
                         applyFavFromLocalStorage();
                         sortList();
                         document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
                         setCounts();
+                        if (document.querySelectorAll('ul>li').length) {
+                            $('.containerInput').fadeIn()
+                            $('.totalStatUl').fadeIn()
+                        } else {
+                            $('.containerInput').fadeOut()
+                            $('.totalStatUl').fadeOut()
+                        }
                     })
                     .catch(error => console.error(error));
             });
 
-
             // Создаем обработчики событий после создания списка
             createEventList(strPath, "xyu");
             setSearch();
-
         });
     }
 
@@ -1773,19 +1758,22 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function setCounts() {
-        document.querySelector(".totalStatUl")?.remove();
-        let total = document.querySelectorAll("ul li:not([style*='display: none'])").length;
-        let win = document.querySelectorAll("ul li[status*='ПОБЕДА']:not([style*='display: none'])").length;
-        let lose = document.querySelectorAll("ul li[status*='ПОРАЖЕНИЕ']:not([style*='display: none'])").length;;
-        document.querySelector("ul").insertAdjacentHTML("afterend", `
-            <div title="Победы/Поражения/Общее количество игр" class="totalStatUl">
-                <span class="winLiCountArrow">&#9650;</>
-                <span class="winLiCount">${win}</>
-                <span class="loseLiCountArrow">&#9660;</>
-                <span class="loseLiCount">${lose}</>
-                <span class="totalLiCount">= ${total}</>
-            </div>
-        `);
+        if (document.querySelectorAll('ul>li').length) {
+        
+            document.querySelector(".totalStatUl")?.remove();
+            let total = document.querySelectorAll("ul li:not([style*='display: none'])").length;
+            let win = document.querySelectorAll("ul li[status*='ПОБЕДА']:not([style*='display: none'])").length;
+            let lose = document.querySelectorAll("ul li[status*='ПОРАЖЕНИЕ']:not([style*='display: none'])").length;;
+            document.querySelector("ul").insertAdjacentHTML("afterend", `
+                <div title="Победы/Поражения/Общее количество игр" class="totalStatUl">
+                    <span class="winLiCountArrow">&#9650;</>
+                    <span class="winLiCount">${win}</>
+                    <span class="loseLiCountArrow">&#9660;</>
+                    <span class="loseLiCount">${lose}</>
+                    <span class="totalLiCount">= ${total}</>
+                </div>
+            `);
+        }
     }
 
     function convertToUTC(timeString) {
@@ -2037,17 +2025,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 let caliber_b2 = [];
                 let data;
                 data = event.target.result.split('\n').slice(0, 3);
-                // console.log("DATA",data);
-                
-                
-                // console.log("data", data);
-               // data = event.target.result.match(/^(.*\n){0,14}.*/g);
-                
                 data = data[0].replaceAll(/[^\x20-\x7E]+/g);
                 data = data.replace(/"11":.*?(?=,"12"|$)/g,'"11": []');
-                // console.log("data2", data);
-                
-                // console.log(data);
                 data = data.replaceAll(/[^ -~]+/g);
                 
                 data = data.replace(/.*?({.*:true})/, "$1");
@@ -2329,47 +2308,47 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  SOUNDS */
 
-    // function sounds() {
-    //     function addClickSound(selector, event, path, vol) {
-    //         const elements = document.querySelectorAll(selector);
-    //         for (let i = 0; i < elements.length; i++) {
-    //             const element = elements[i];
-    //             element[event] = handleClickSound;
-    //         }
-
-    //         function handleClickSound(e) {
-    //             if (event === 'click' && e.button !== 0) return;
-    //             const audio = new Audio(path);
-    //             audio.volume = vol;
-    //             audio.play().catch(function (error) {
-    //                 console.log('Error playing sound: ' + error);
-    //             });
-    //         }
-    //     }
-
-        function sounds() {
-            function addClickSound(selector, event, path, vol) {
-                const elements = document.querySelectorAll(selector);
-                for (let i = 0; i < elements.length; i++) {
-                    const element = elements[i];
-                    element[event] = handleClickSound;
-                }
-                let isSoundPlaying = false; // Флаг для отслеживания состояния воспроизведения звука
-                function handleClickSound(e) {
-                    if (event === 'click' && e.button !== 0) return;
-                    if (isSoundPlaying) return;
-                    const audio = new Audio(path);
-                    audio.volume = vol;
-                    isSoundPlaying = true;
-                    audio.play().catch(function (error) {
-                        console.log('Ошибка воспроизведения звука: ' + error);
-                        isSoundPlaying = false;
-                    });
-                    audio.onended = function() {
-                        isSoundPlaying = false;
-                    };
-                }
+    function sounds() {
+        function addClickSound(selector, event, path, vol) {
+            const elements = document.querySelectorAll(selector);
+            for (let i = 0; i < elements.length; i++) {
+                const element = elements[i];
+                element[event] = handleClickSound;
             }
+
+            function handleClickSound(e) {
+                if (event === 'click' && e.button !== 0) return;
+                const audio = new Audio(path);
+                audio.volume = vol;
+                audio.play().catch(function (error) {
+                    console.log('Error playing sound: ' + error);
+                });
+            }
+        }
+
+        // function sounds() {
+        //     function addClickSound(selector, event, path, vol) {
+        //         const elements = document.querySelectorAll(selector);
+        //         for (let i = 0; i < elements.length; i++) {
+        //             const element = elements[i];
+        //             element[event] = handleClickSound;
+        //         }
+        //         let isSoundPlaying = false; // Флаг для отслеживания состояния воспроизведения звука
+        //         function handleClickSound(e) {
+        //             if (event === 'click' && e.button !== 0) return;
+        //             if (isSoundPlaying) return;
+        //             const audio = new Audio(path);
+        //             audio.volume = vol;
+        //             isSoundPlaying = true;
+        //             audio.play().catch(function (error) {
+        //                 console.log('Ошибка воспроизведения звука: ' + error);
+        //                 isSoundPlaying = false;
+        //             });
+        //             audio.onended = function() {
+        //                 isSoundPlaying = false;
+        //             };
+        //         }
+        //     }
         
         
 
@@ -2433,7 +2412,7 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
 
     function loadData(fileName) {
-        document.querySelector('.vLoading').style.display="block !important";
+        // document.querySelector('.vLoading').style.display="block !important";
         //console.log(fileName);
         //console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
         //const urlParams = new URLSearchParams(window.location.search);
@@ -2450,7 +2429,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
         //updateDB(caliber);
-        document.querySelector('.vLoading').style.display="none !important";
+        // document.querySelector('.vLoading').style.display="none !important";
     }
 
     /* #region  SORT_TABLE */
@@ -2537,70 +2516,64 @@ window.addEventListener('DOMContentLoaded', () => {
         var input = document.querySelector('input.search');
         input.style.display = 'unset';
         input.addEventListener('input', function () {
-          localStorage.setItem("filter", input.value);
-          var searchValue = input.value.toLowerCase();
-          var searchWords = searchValue.split(' '); // Разделяем вводимое значение на отдельные слова
-          for (var i = 0; i < ul.children.length; i++) {
-            var li = ul.children[i];
-            var text = li.textContent.toLowerCase();
-            var containsAllWords = searchWords.every(function (word) {
-              return text.includes(word);
-            });
-            if (containsAllWords) {
-              li.style.display = '';
-            } else {
-              li.style.display = 'none';
-            }
-          }
+            localStorage.setItem("filter", input.value);
+            var searchValue = input.value.toLowerCase();
+            var searchWords = searchValue.split(' ');
 
-            const dataList = document.getElementById('suggestionsList');
-            const listItems = document.querySelectorAll("li>span:nth-child(2)");
-            const addedOptions = new Set();
+            for (var i = 0; i < ul.children.length; i++) {
+                var li = ul.children[i];
+                var text = li.textContent.toLowerCase();
+                var attributeValue1 = li.getAttribute('users');
+                var attributeValue2 = li.getAttribute('avatars');
 
-            // Очистка списка
-            while (dataList.firstChild) {
-                dataList.removeChild(dataList.firstChild);
-            }
+                var showItem = searchWords.every(function (word) {
+                    return text.indexOf(word) !== -1 ||
+                        (attributeValue1 && attributeValue1.toLowerCase().indexOf(word) !== -1) ||
+                        (attributeValue2 && attributeValue2.toLowerCase().indexOf(word) !== -1);
+                });
 
-            listItems.forEach((el) => {
-                const optionValue = el.textContent.trim();
-                if (!addedOptions.has(optionValue)) {
-                    const newOption = document.createElement('option');
-                    newOption.value = optionValue;
-                    dataList.appendChild(newOption);
-                    addedOptions.add(optionValue);
+                if (showItem) {
+                    li.style.display = '';
+                } else {
+                    li.style.display = 'none';
                 }
-            });
+            }
 
-            // Добавление обязательных опций
-            const mandatoryOptions = ["ПОБЕДА", "ПОРАЖЕНИЕ", "СТОЛКНОВЕНИЕ", "ВЗЛОМ"];
-            mandatoryOptions.forEach((option) => {
+        const dataList = document.getElementById('suggestionsList');
+        const listItems = document.querySelectorAll("li>span:nth-child(2)");
+        const addedOptions = new Set();
+
+        // Очистка списка
+        while (dataList.firstChild) {
+            dataList.removeChild(dataList.firstChild);
+        }
+        listItems.forEach((el) => {
+            const optionValue = el.textContent.trim();
+            if (!addedOptions.has(optionValue)) {
                 const newOption = document.createElement('option');
-                newOption.value = option;
+                newOption.value = optionValue;
                 dataList.appendChild(newOption);
-            });
-                document.querySelector(".clearInput").onclick = function (){
-                document.querySelector("input").value = "";
-                // document.querySelector("input").focus();
-                document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
-                
-                }
-          setCounts();
+                addedOptions.add(optionValue);
+            }
         });
-      }
-      
-    // function setOper() {
-    //     document.querySelectorAll("tr.line").forEach((el) => {
-    //         el.addEventListener("click", (ev) => {
-    //             let avatar = el.querySelector('img.oper').src;
-    //             let operBg = document.querySelector(".operBg");
-    //             let match = avatar.match(/\/([^/]+)\.[^.]+$/);
-    //             operBg.style.opacity="0";
-    //             operBg.src = "img/opers/" + match[1] + "_Alpha.webp";
-    //             operBg.style.opacity="1";
-    //         });
-    //     });
-    // }
+
+
+        // Добавление обязательных опций
+        const mandatoryOptions = ["ПОБЕДА", "ПОРАЖЕНИЕ", "СТОЛКНОВЕНИЕ", "ВЗЛОМ"];
+        mandatoryOptions.forEach((option) => {
+            const newOption = document.createElement('option');
+            newOption.value = option;
+            dataList.appendChild(newOption);
+        });
+        document.querySelector(".clearInput").onclick = function () {
+            document.querySelector("input").value = "";
+            document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        setCounts();
+        });
+    };
+
+
     function setOper() {
         document.querySelectorAll("tr.line").forEach((el) => {
             el.addEventListener("click", (ev) => {
@@ -2616,15 +2589,9 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    document.querySelector('img.geo').addEventListener('click', () => {
-        // tv();
-        if (localStorage.getItem("tumbler") == "false") {
-            localStorage.setItem("tumbler", "true");
-        } else {
-            localStorage.setItem("tumbler", "false");
-        }
-        console.log("tumbler", tumbler);
-    });
+    function setMap() {
+        // document.querySelector('.imgMap').innerHTML="";
+        document.querySelector('.imgMap').src = `img/maps/plans/${caliber.data[1].split("_").slice(-2).join("_")}_base.webp`;
+    }
 
 }); /////////////////END
