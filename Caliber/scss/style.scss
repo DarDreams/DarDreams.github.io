@@ -905,43 +905,41 @@ button#show-panel {
     .wrapper {
         //outline: 1px ridge red;
         position: absolute;
-        width: auto;
+        width: 500px;
         height: auto;
-        right: 20px;
+        right: 0px;
         top: 14px;
         .imgMap {
             position: relative;
             width: 50% !important;
+            transition: all 1s ease;
             height: 50% !important;
-            left: 50% !important;
-            transform: translateY(2%) !important;
-        }
-        
-
-        .container {
-            display: flex;
-            justify-content: center;
-            margin-top: 0px;
-            .map {
-                left: 50%;
-                position: relative;
-                transform: translateX(-50%);
+            pointer-events: none;
+            &:hover {
+                zoom: 1.5%;
             }
         }
 
-        img {
-            width: 30px;
-            height: 30px;
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 0px;
         }
+
+        // img {
+        //     width: 30px;
+        //     height: 30px;
+        // }
     }
 
     .mode {
-        position: relative;
-        left: 50%;
+        // position: relative;
+        // left: 50%;
         //width: 100%;
         //overflow-x: hidden;
         //margin-left: 10px;
-        transform: translateX(8%);
+        // transform: translateX(8%);
         //margin-left: 60px;
     
     }
@@ -956,16 +954,16 @@ button#show-panel {
    
 }
 
-.imgMap {
-    position: absolute;
-    z-index: 9;
-    height: 85%;
-    width: 85%;
-    object-fit:contain;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}
+// .imgMap {
+//     position: absolute;
+//     z-index: 9;
+//     height: 85%;
+//     width: 85%;
+//     object-fit:contain;
+//     left: 50%;
+//     top: 50%;
+//     transform: translateX(-50%) translateY(-50%);
+// }
 
 
 

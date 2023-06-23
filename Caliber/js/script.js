@@ -1348,7 +1348,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         /* #endregion */
 
-        document.querySelector('.map').textContent = `\u00A0${getDataMap(data1[1]).map}`;
+        document.querySelector('.map').textContent = `${getDataMap(data1[1]).map}`;
         document.querySelector('.time').textContent = getDataMap(data1[1]).time;
         document.querySelector('.mode').innerText = `${getDataMap(data1[1]).mode}:`;
 
