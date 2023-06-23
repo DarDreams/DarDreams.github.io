@@ -1645,6 +1645,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     cell.addEventListener("click", function (e) {
                         console.log("click day");
 
+                        $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
+                            // Обработка данных
+                            // console.log(data);
+                        })
+                            .fail(function (error) {
+                                // console.log("Произошла ошибка:", error);
+                            });
+
                         $('.containerInput').fadeOut();
                         $('.totalStatUl').fadeOut();
                         // setTimeout(() => {
