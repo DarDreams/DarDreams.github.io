@@ -2320,42 +2320,43 @@ window.addEventListener('DOMContentLoaded', () => {
        document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
     <span style="
     position: absolute;
-    font-size: 10vh;
+    font-size: 6vh;
+    font-weight: 100;
     color: #ffc83d;
-    transform: translate(265px, 330px);
+    transform: translate(5.5em, 7.15em);
     font-family: consolas;
 " class="team1TableDiff">${team1Diff}</span>
 
     <span style="
-    font-size: 40vh;
+    font-size: 23vh;
     position: fixed;
     z-index: 999;
     color: #ffc83d;
     font-weight: 1;
-    transform: translate(433px, 144px);
+    transform: translate(2.1em, 1.22em);
     font-family: system-ui;
 " class="">{
 </span><span style="
-    font-size: 40vh;
+    font-size: 23vh;
     position: fixed;
     z-index: 999;
     color: #ffc83d;
     font-weight: 1;
-    transform: translate(433px, 481px);
+    transform: translate(2.1em, 2.695em);
     font-family: system-ui;
 " class="">{
 </span><span style="
     position: absolute;
-    font-size: 10vh;
-    color: white;
-    transform: translate(265px, 666px);
+    font-size: 6vh;
+    color: rgb(196, 154, 48);
+    transform: translate(5.5em, 12.8em);
     font-family: consolas;
 " class="team2TableDiff">${team2Diff}</span>
     <span style="
     position: absolute;
-    font-size: 10vh;
+    font-size: 6vh;
     color: white;
-    transform: translate(260px, 484px);
+    transform: translate(17vw, 59vh);
     font-family: consolas;
 " class="diffTeams">${Math.abs(team1Diff - team2Diff)} ⚖️</span>
      `);
