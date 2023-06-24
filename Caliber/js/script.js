@@ -2675,13 +2675,26 @@ window.addEventListener('DOMContentLoaded', () => {
         let imgMap = document.querySelector('.imgMap');
         let wrapper = document.querySelector(".stats>.wrapper");
         let table = document.querySelector(".container_tables");
+        function setMouseActions (){
+            imgMap.onmousemove = function () {
+                this.style.transform = "scale(1.2)";
+            }
+
+            imgMap.onmouseleave = function () {
+                this.style.transform = "scale(1)";
+            }
+        }
+        setMouseActions();
+
         imgMap.onclick = function () {
             if (!wrapper.classList.contains("big")) {
+               this.onmousemove = null;
                 wrapper.classList.add("big");
                 imgMap.style.marginTop = "20vh";
                 table.classList.add("animate__animated");
                 table.classList.replace("animate__zoomIn", "animate__zoomOut");
             } else {
+                setMouseActions();
                 wrapper.classList.remove("big");
                 imgMap.style.marginTop = "unset";
                 table.classList.replace("animate__zoomOut", "animate__zoomIn");

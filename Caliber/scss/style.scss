@@ -922,6 +922,7 @@ button#show-panel {
         height: auto;
         right: 0px;
         top: 14px;
+       
         .imgMap {
             cursor: var(--grab);
             position: relative;
@@ -929,10 +930,11 @@ button#show-panel {
             transition: all 1s ease;
             height: 60% !important;
             margin-bottom: 20px;
-            // pointer-events: none;
-            &:hover {
-                // transform: scale(1.2);
-            }
+            -webkit-user-drag: none;
+            // &:hover {
+            //     transform: scale(1.1);
+            // }
+            
         }
 
         
@@ -960,18 +962,15 @@ button#show-panel {
         object-fit: contain;
         transition: all 1s ease;
         image-rendering: pixelated;
+        
         @media (max-width: 1800px) {
-            zoom:142%;
+            zoom:143%;
             top:-10%;
         }
     }
 
     .mode_text {
-        // position: relative;
-        // left: 50%;
-        //width: 100%;
-        //overflow-x: hidden;
-        //margin-left: 10px;
+        white-space: nowrap;
         display: flex;
         flex-direction: column;
         align-items:center;
