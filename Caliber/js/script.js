@@ -1643,23 +1643,19 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
 
                     cell.addEventListener("click", function (e) {
+                        // if (!document.querySelector('.vLoading2')){
+                            document.querySelector(".slide-out-panel").insertAdjacentHTML("afterbegin",`
+                                <img class="vLoading2" src="img/loading.gif" alt="loading...">
+                            `)
+                        // }
+                        // document.querySelector(".vLoading").style.display = "unset";
                         console.log("click day");
 
                         $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
-                            // document.querySelector(".vLoading").style.display = "unset";
                             // Обработка данных
                             // console.log(data);
-                        
-
                         $('.containerInput').fadeOut();
                         $('.totalStatUl').fadeOut();
-                        // setTimeout(() => {
-                        //     if (document.querySelectorAll('ul>li').length) {
-                        //         $('.containerInput').fadeIn()
-                        //     } else {
-                        //         $('.containerInput').fadeOut()
-                        //     }
-                        // }, 200);
 
                         clickDay = setZero(cell.textContent);
                         document.querySelector('input.search').value = localStorage.getItem("filter");
@@ -1673,6 +1669,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
                         getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                         repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                        
+                        document.querySelector(".vLoading2").style.display = "none";
+                        document.querySelector(".vLoading2").style.left = ""
+                        
                     })
                     .fail(function (error) {
                         // console.log("Произошла ошибка:", error);
@@ -1681,12 +1681,10 @@ window.addEventListener('DOMContentLoaded', () => {
                     
                 }
                 row.appendChild(cell);
-
             }
             calendarBody.appendChild(row);
         }
         setButtonFavorite();
-        // document.querySelector(".vLoading").style.display = "none";
     }
     /* #endregion */
 
