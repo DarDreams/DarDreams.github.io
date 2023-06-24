@@ -1445,6 +1445,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setSelectMe();
         // console.log("data1: ",data1);
         setBg(data1);
+        // setPlan();
         //setOper();
         
 
@@ -1529,7 +1530,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     
         document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
-        <div class="containerInput">
+        <div style="display:none" class="containerInput">
             <input id="searchInput" title="Можно искать несколько слов разделяя их пробелом: имена, позывные, режимы, карты, статусы, id и время" list="suggestionsList" placeholder="Фильтр..." style="text-transform: lowercase" autocomplete="on" class="search" type="text">
             <datalist id="suggestionsList">
             </datalist>
@@ -1550,26 +1551,29 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     button.addEventListener('click', () => {
-     //   button.onclick = function () {
-       // console.log("panel");
-       if (button.textContent == ">") { 
-       let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
-            document.querySelector("#month-selector").value = +mes.replace('/^0/g',"");
+        //   button.onclick = function () {
+        // console.log("panel");
+        if (button.textContent == ">") {
+            document.querySelector('.wrapper>.container').style.marginLeft = "100vw";
+            let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
+            document.querySelector("#month-selector").value = +mes.replace('/^0/g', "");
             document.querySelector("#month-selector").dispatchEvent(new Event("change"));
             let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
             document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
-            if (+el.textContent == +day) {
-                el.click();
-            }
-        });
+                if (+el.textContent == +day) {
+                    el.click();
+                }
+            });
 
             let id = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[4];
             setTimeout(() => {
                 $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
-             }, 1000);
-       }
-         
-         
+            }, 1000);
+        } else {
+            document.querySelector('.wrapper>.container').style.marginLeft = "0";
+            $('.containerInput').hide();
+        }
+
 
         panel.classList.toggle('show');
         //tables.classList.add('animate__animated');
@@ -1685,7 +1689,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     // });
 
                     cell.addEventListener("click", function (e) {
-                        $("#list-container").fadeIn();
+                        // $("#list-container").fadeIn();
                       
                         if (!document.querySelector('.vLoading2')) {
                                     document.querySelector(".slide-out-panel").insertAdjacentHTML("afterbegin", `
@@ -1726,7 +1730,7 @@ window.addEventListener('DOMContentLoaded', () => {
                       
                         // Переделываем $.get в промис, чтобы использовать await
                         var fetchData = new Promise(function (resolve, reject) {
-                          $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
+                          $.get("https://exlusive.pro/php/repair.php?folder=data/tmp", function (data) {
                             resolve(data);
                           }).fail(function (error) {
                             reject(error);
@@ -2665,10 +2669,24 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     function setMap(caliberData) {
-        // document.querySelector('.imgMap').innerHTML="";
-        // console.log(caliberData[1]);
         document.querySelector('.imgMap').src = `img/maps/plans/${caliberData[1].split("_").slice(-2).join("_")}_base.webp`;
+        let imgMap = document.querySelector('.imgMap');
+        let wrapper = document.querySelector(".stats>.wrapper");
+        let table = document.querySelector(".container_tables");
+        imgMap.onclick = function () {
+            if (!wrapper.classList.contains("big")) {
+                wrapper.classList.add("big");
+                imgMap.style.marginTop = "20vh";
+                table.classList.add("animate__animated");
+                table.classList.replace("animate__zoomIn", "animate__zoomOut");
+            } else {
+                wrapper.classList.remove("big");
+                imgMap.style.marginTop = "unset";
+                table.classList.replace("animate__zoomOut", "animate__zoomIn");
+            }
+        };
     }
 
 }); /////////////////END

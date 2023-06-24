@@ -2,12 +2,6 @@
 
 if (isset($_GET['folder'])) {
     $folder = '../' . $_GET['folder'];
-
-    if (!is_dir($folder)) {
-        // Создаем папку
-        mkdir($folder, 0755, true);
-    }
-
     $files = scandir($folder);
     $result = array();
     foreach ($files as $file) {
@@ -72,6 +66,12 @@ if (isset($_GET['folder'])) {
             echo json_encode(['caliber' => $caliberNew]);
             // echo "<br>";
             $path = $folder . "/" . $path;
+            $path = preg_replace('/\/tmp/', '', $path);
+            // echo "this is = " . $path;
+            if (!is_dir($path)) {
+                // Создаем папку
+                mkdir($path, 0755, true);
+            }
                 // echo $path;
             // file_put_contents($folder . "/" . $caliberNew["data"][0] . '.json', json_encode(['caliber' => $caliberNew]));
             file_put_contents($path . "/" . $caliberNew["data"][0] . '.json', json_encode(['caliber' => $caliberNew]));

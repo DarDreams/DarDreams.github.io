@@ -8,6 +8,7 @@
 }
 
 
+
 .vLoading2 {
     position: relative;
     margin-left: 50%;
@@ -901,6 +902,8 @@ button#show-panel {
   
 }
 
+
+
 .stats {
     
     top: 0;
@@ -913,6 +916,7 @@ button#show-panel {
 
     .wrapper {
         //outline: 1px ridge red;
+        transition: all 1s ease;
         position: absolute;
         width: 500px;
         height: auto;
@@ -921,18 +925,21 @@ button#show-panel {
         .imgMap {
             cursor: var(--grab);
             position: relative;
-            width: 50% !important;
+            width: 60% !important;
             transition: all 1s ease;
-            height: 50% !important;
+            height: 60% !important;
+            margin-bottom: 20px;
             // pointer-events: none;
             &:hover {
-                
-                transform: scale(1.2);
+                // transform: scale(1.2);
             }
         }
 
+        
+
         .container {
             display: flex;
+            transition: all 1s ease;
             flex-direction: column;
             align-items: center;
             margin-top: 0px;
@@ -944,24 +951,44 @@ button#show-panel {
         // }
     }
 
-    .mode {
+    .big {
+        position: fixed;
+        // transform: translate(-45%, 15%);
+        right:0;
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: contain;
+        transition: all 1s ease;
+        image-rendering: pixelated;
+        @media (max-width: 1800px) {
+            zoom:142%;
+            top:-10%;
+        }
+    }
+
+    .mode_text {
         // position: relative;
         // left: 50%;
         //width: 100%;
         //overflow-x: hidden;
         //margin-left: 10px;
-        // transform: translateX(8%);
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+         transform: none;
+         transition: all 1s ease;
         //margin-left: 60px;
     
     }
-    .geo {
-        z-index: 10;
-        //cursor: url('../img/grab.png'), auto;
-        cursor: var(--grab);
-        &:hover {
-            transform: scale(1.2);
-        }
-    }
+ 
+    // .geo {
+    //     z-index: 10;
+    //     //cursor: url('../img/grab.png'), auto;
+    //     cursor: var(--grab);
+    //     &:hover {
+    //         transform: scale(1.2);
+    //     }
+    // }
    
 }
 
