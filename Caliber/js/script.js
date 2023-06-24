@@ -1642,43 +1642,110 @@ window.addEventListener('DOMContentLoaded', () => {
                         return day + '.' + month + '.' + year;
                     }
 
+                    // cell.addEventListener("click", function (e) {
+                    //     // if (document.querySelector("#list-container")) {
+                    //     $("#list-container").fadeIn();
+                    //     // }
+                    //     if (!document.querySelector('.vLoading2')) {
+                    //         document.querySelector(".slide-out-panel").insertAdjacentHTML("afterbegin", `
+                    //             <img class="vLoading2" src="img/loading.gif" alt="loading...">
+                    //         `)
+                    //     } else { 
+                    //         document.querySelector('.vLoading2').style.display = "unset" 
+                    //     }
+
+                    //     console.log("click day");
+
+                    //     $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
+                    //         // Обработка данных
+                    //         // console.log(data);
+                    //         $('.containerInput').fadeOut();
+                    //         $('.totalStatUl').fadeOut();
+
+                    //         clickDay = setZero(cell.textContent);
+                    //         document.querySelector('input.search').value = localStorage.getItem("filter");
+                    //         document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
+                    //         document.querySelectorAll('#calendar-body>tr>td').forEach((element) => {
+                    //             element.style.outline = "unset";
+                    //         })
+                    //         e.target.style.outline = "2px ridge red";
+                    //         selectedDate = new Date(2023, month_selector.value - 1, 1);
+                    //         strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
+
+                    //         getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                    //         repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+
+                    //         $(".vLoading2").hide();
+                    //         $("#list-container").show();
+
+                    //     })
+                    //         .fail(function (error) {
+                    //             $(".vLoading2").show();
+                    //         });
+                    // });
+
                     cell.addEventListener("click", function (e) {
-                        // if (!document.querySelector('.vLoading2')){
-                            document.querySelector(".slide-out-panel").insertAdjacentHTML("afterbegin",`
-                                <img class="vLoading2" src="img/loading.gif" alt="loading...">
-                            `)
-                        // }
-                        // document.querySelector(".vLoading").style.display = "unset";
+                        $("#list-container").fadeIn();
+                      
+                        if (!document.querySelector('.vLoading2')) {
+                                    document.querySelector(".slide-out-panel").insertAdjacentHTML("afterbegin", `
+                                        <img class="vLoading2" src="img/loading.gif" alt="loading...">
+                                    `)
+                                } else { 
+                                    $(".vLoading2").show();
+                                }
+                        // Показать "загрузку"
+                        
+                      
                         console.log("click day");
-
-                        $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
-                            // Обработка данных
-                            // console.log(data);
-                        $('.containerInput').fadeOut();
-                        $('.totalStatUl').fadeOut();
-
-                        clickDay = setZero(cell.textContent);
-                        document.querySelector('input.search').value = localStorage.getItem("filter");
-                        document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
-                        document.querySelectorAll('#calendar-body>tr>td').forEach((element) => {
+                      
+                        // Функция для обработки данных и обновления списка
+                        function handleData(data) {
+                          $('.containerInput').fadeOut();
+                          $('.totalStatUl').fadeOut();
+                      
+                          clickDay = setZero(cell.textContent);
+                          document.querySelector('input.search').value = localStorage.getItem("filter");
+                          document.querySelector('input.search').dispatchEvent(new Event('input',
+                            { bubbles: true }));
+                          document.querySelectorAll('#calendar-body>tr>td').forEach((element) => {
                             element.style.outline = "unset";
-                        })
-                        e.target.style.outline = "2px ridge red";
-                        selectedDate = new Date(2023, month_selector.value - 1, 1);
-                        strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
+                          })
+                          e.target.style.outline = "2px ridge red";
+                          selectedDate = new Date(2023, month_selector.value - 1, 1);
+                          strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
+                      
+                          getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                          repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                      
+                          // Скрыть "загрузку"
+                          $(".vLoading2").hide();
+                          $("#list-container").show();
+                          console.log("finish"); // Логирование завершения загрузки списка
+                        }
+                      
+                        // Переделываем $.get в промис, чтобы использовать await
+                        var fetchData = new Promise(function (resolve, reject) {
+                          $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
+                            resolve(data);
+                          }).fail(function (error) {
+                            reject(error);
+                          });
+                        });
+                      
+                        // Асинхронная функция для выполнения асинхронных операций
+                        async function fetchDataAndHandle() {
+                          try {
+                            var data = await fetchData;
+                            handleData(data);
+                          } catch (error) {
+                            $(".vLoading2").show();
+                          }
+                        }
+                      
+                        fetchDataAndHandle();
+                      });
 
-                        getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-                        repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-                        
-                        document.querySelector(".vLoading2").style.display = "none";
-                        document.querySelector(".vLoading2").style.left = ""
-                        
-                    })
-                    .fail(function (error) {
-                        // console.log("Произошла ошибка:", error);
-                    });
-                    });
-                    
                 }
                 row.appendChild(cell);
             }
@@ -2600,7 +2667,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function setMap(caliberData) {
         // document.querySelector('.imgMap').innerHTML="";
-        console.log(caliberData[1]);
+        // console.log(caliberData[1]);
         document.querySelector('.imgMap').src = `img/maps/plans/${caliberData[1].split("_").slice(-2).join("_")}_base.webp`;
     }
 

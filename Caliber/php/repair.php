@@ -2,6 +2,12 @@
 
 if (isset($_GET['folder'])) {
     $folder = '../' . $_GET['folder'];
+
+    if (!is_dir($folder)) {
+        // Создаем папку
+        mkdir($folder, 0755, true);
+    }
+
     $files = scandir($folder);
     $result = array();
     foreach ($files as $file) {
