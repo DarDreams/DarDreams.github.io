@@ -2317,16 +2317,58 @@ window.addEventListener('DOMContentLoaded', () => {
                 team2Diff += number;
             }
         });
+       document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
+    <span style="
+    position: absolute;
+    font-size: 10vh;
+    color: #ffc83d;
+    transform: translate(265px, 330px);
+    font-family: consolas;
+" class="team1TableDiff">${team1Diff}</span>
 
-        document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
-        <span class='team2TableDiff'>${team2Diff}</span>
-        `);
-        document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
-        <span class='team1TableDiff'>${team1Diff}</span>
-        `);
-        document.querySelector(`.team1TableDiff`).insertAdjacentHTML('afterend', `
-                 <span class='diffTeams'>${Math.abs(team1Diff - team2Diff)}</span>
-             `);
+    <span style="
+    font-size: 40vh;
+    position: fixed;
+    z-index: 999;
+    color: #ffc83d;
+    font-weight: 1;
+    transform: translate(433px, 144px);
+    font-family: system-ui;
+" class="">{
+</span><span style="
+    font-size: 40vh;
+    position: fixed;
+    z-index: 999;
+    color: #ffc83d;
+    font-weight: 1;
+    transform: translate(433px, 481px);
+    font-family: system-ui;
+" class="">{
+</span><span style="
+    position: absolute;
+    font-size: 10vh;
+    color: white;
+    transform: translate(265px, 666px);
+    font-family: consolas;
+" class="team2TableDiff">${team2Diff}</span>
+    <span style="
+    position: absolute;
+    font-size: 10vh;
+    color: white;
+    transform: translate(260px, 484px);
+    font-family: consolas;
+" class="diffTeams">${Math.abs(team1Diff - team2Diff)} ⚖️</span>
+     `);
+        // document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
+        // <span class='team2TableDiff'>${team2Diff}</span>
+        // `);
+        // document.querySelector(`.different`).insertAdjacentHTML('afterbegin', `
+        // <span class='team1TableDiff'>${team1Diff}</span>
+        // `);
+        // document.querySelector(`.team1TableDiff`).insertAdjacentHTML('afterend', `
+        //          <span class='diffTeams'>${Math.abs(team1Diff - team2Diff)}</span>
+        //      `);
+
         let max = Math.max(+team1Diff, +team2Diff);
         document.querySelectorAll(`.different>span`).forEach((el) => {
             if (el.textContent == max) {
