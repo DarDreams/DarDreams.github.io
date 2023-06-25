@@ -2490,6 +2490,7 @@ window.addEventListener('DOMContentLoaded', () => {
             addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
         }
         addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
+        addClickSound('.imgMap', "onclick", "../mp3/click.mp3", 0.01);
         // addClickSound('.container_tables>.team2Table>tbody', "onclick", "../mp3/click.mp3", 0.01);
 
         addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
