@@ -902,8 +902,6 @@ button#show-panel {
   
 }
 
-
-
 .stats {
     
     top: 0;
@@ -914,11 +912,14 @@ button#show-panel {
     font-weight: 600;
     right: 0px;
 
+
+
     .wrapper {
         //outline: 1px ridge red;
+        
         transition: all 1s ease;
         position: absolute;
-        width: 500px;
+        width: 400px;
         height: auto;
         right: 0px;
         top: 14px;
@@ -974,8 +975,12 @@ button#show-panel {
         display: flex;
         flex-direction: column;
         align-items:center;
-         transform: none;
-         transition: all 1s ease;
+        transform: none;
+        transition: all 1s ease;
+        line-height: 1.4;
+        .mode {
+        text-transform: uppercase;
+        }
         //margin-left: 60px;
     
     }

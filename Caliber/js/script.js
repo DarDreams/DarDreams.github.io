@@ -1350,7 +1350,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         document.querySelector('.map').textContent = `${getDataMap(data1[1]).map}`;
         document.querySelector('.time').textContent = getDataMap(data1[1]).time;
-        document.querySelector('.mode').innerText = `${getDataMap(data1[1]).mode}:`;
+        document.querySelector('.mode').innerText = `${getDataMap(data1[1]).mode}`;
 
         //  #region WIN / LOSE
         function winLose() {
@@ -1555,6 +1555,9 @@ window.addEventListener('DOMContentLoaded', () => {
         // console.log("panel");
         if (button.textContent == ">") {
             document.querySelector('.wrapper>.container').style.marginLeft = "100vw";
+            // document.querySelector(".mode_text").style.position = "absolute";
+            // document.querySelector(".mode_text").style.left = "-19px";
+            // document.querySelector(".mode_text").style.top = "14%";
             let mes = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[2]
             document.querySelector("#month-selector").value = +mes.replace('/^0/g', "");
             document.querySelector("#month-selector").dispatchEvent(new Event("change"));
@@ -1571,6 +1574,10 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 1000);
         } else {
             document.querySelector('.wrapper>.container').style.marginLeft = "0";
+            // document.querySelector(".wrapper>.container").style.flexDirection = "column";
+            // document.querySelector(".mode_text").style.position = "unset";
+            // document.querySelector(".mode_text").style.left = "unset";
+            // document.querySelector(".mode_text").style.top = "unset";
             $('.containerInput').hide();
         }
 
