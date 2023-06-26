@@ -2103,7 +2103,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         el.click();
                         setTimeout(() => {
                             document.querySelector('[id="focus0"]').click();
-                        }, 1000);
+                        }, 2000);
                     }
                 });
             // } else {
