@@ -853,6 +853,7 @@ button#show-panel {
     .winLoseText {
         display: inline-block;
         transform: translate(35px, -80px);
+        filter: drop-shadow(4px 4px 2px black);
         color: #6aa5ee;
         //position: absolute;
         font-size: 70px;
@@ -941,6 +942,7 @@ button#show-panel {
             transition: all 1s ease;
             height: 60% !important;
             margin-bottom: 20px;
+            filter: drop-shadow(0px 0px 100px black);
             -webkit-user-drag: none;
             // &:hover {
             //     transform: scale(1.1);
@@ -988,6 +990,7 @@ button#show-panel {
         transform: none;
         transition: all 1s ease;
         line-height: 1.4;
+        filter: drop-shadow(4px 4px 2px black);
         .mode {
         text-transform: uppercase;
         }
@@ -1037,6 +1040,7 @@ button#show-panel {
             }
             .winLoseText {
                 position: relative;
+                filter: drop-shadow(4px 4px 2px black);
                 font-size: 3em;
                 top: -70px !important;
                 left: 70px;
