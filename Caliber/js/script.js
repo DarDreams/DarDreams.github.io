@@ -2102,8 +2102,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     if (+el.textContent == +day) {
                         el.click();
                         setTimeout(() => {
-                            document.querySelector('[tabindex="0"]').click();
-                        }, 200);
+                            document.querySelector('[id="focus0"]').click();
+                        }, 1000);
                     }
                 });
             // } else {
