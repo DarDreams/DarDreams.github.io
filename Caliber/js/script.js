@@ -1487,7 +1487,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <div class="calendar">
         <div class="custom-file-input">
             <input type="file" multiple id="file-input" accept=".bytes">
-            <img class = 'rec icons' src='img/REC.png'>
+            <img title="Если горит красным значит каждую минуту будет автоматически обновлять список игр за сегодняшний день" class='rec icons' src='img/REC.png'>
                 <label for="file-input">
                 <img title="После нажатия в буфер обмена будет добавлен стандартный адрес расположения повторов, остается только нажать CTRL+V" class ='folder icons' src='img/FOLDER.png'>
                 </label>
@@ -1603,7 +1603,6 @@ window.addEventListener('DOMContentLoaded', () => {
         if (localStorage.getItem("rec") === "false" || !localStorage.getItem("rec")) {
             localStorage.setItem("rec", true);
             recElem.style.filter = "grayscale(0%)";
-            refresh();
         } else {
             localStorage.setItem("rec", false);
             recElem.style.filter = "grayscale(100%)";
@@ -2093,25 +2092,29 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log('Путь скопирован в буфер обмена');
     });
     // #endregion
-
-    let ref;
     function refresh() {
-        if (localStorage.getItem("rec") === "true") {
-            console.log("run");
-             ref = setInterval(() => {
+
+        setInterval(() => {
+            if (localStorage.getItem("rec") === "true") {
+                // console.log("run");
                 document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
                     let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
                     if (+el.textContent == +day) {
-                        
                         el.click();
+                        setTimeout(() => {
+                            document.querySelector('[tabindex="0"]').click();
+                        }, 200);
                     }
                 });
-            }, 60000);
-        } else {
-            console.log("clear");
-            clearInterval(ref)
-        }
+            // } else {
+                // console.log("clear");
+                // clearInterval(ref);
+            }
+        }, 30000);
     }
+    refresh();
+
+
 
     let createdDate;
 
@@ -2512,7 +2515,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (button.textContent == "<") { 
             addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
         }
-        addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
+        // addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('.imgMap', "onclick", "../mp3/click.mp3", 0.01);
         // addClickSound('.container_tables>.team2Table>tbody', "onclick", "../mp3/click.mp3", 0.01);
 
