@@ -4,6 +4,7 @@
 
 :root {
     --cur:  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAUCAYAAAC9BQwsAAAAAXNSR0IArs4c6QAAAcdJREFUOE+V1E2rEmEUB/D/39woCIoIyiCIIiLiy0bEhRJKgi4S/AxhqxbRJ2ihuBMXBdrCVeDmwm0hgYvu+gpRwaC06MVamIStxqhm8cQZuJfK185yOL8553nmnKFSSgF4CeAmSQMnBk3TVLPZDKlUagLgDsnPp1iu12uVzWYxHA5RLBbPATwg+f4YtqDX60UikUCv10O5XH4G4N6xytdQKsTjcfT7fRQKhQsAtw+d+S8oOBgMYjweI5lMzkgm9rW8BSXR5XJhsVjA4/F8IRnYhXdCSXS73dB1HZqmvQZQIfn1zxfshZIUCoUwGo2Qy+VeAGiSfHeFD8IrLBdWqVSeA7hP8q08PwolKRaLodvtolqtypDcJfnxJCg4EolgMBigVCpdArh1MhTs8/kwmUyQyWQ+/Re02+2w2WxYLpfHz+h0Oq02JTqdDmq12gcAxt6KJNFoNBCNRtFut5eyeiR/AngIQN+C9XrdGniJVqv1A8Bj0zTfzOfzs3Q6vdn6jvl8Hs1mU1YLgUDgkcPheAXgO4Azkr/+HTtrkafTqXVj4XD4qVLqyWq10jVN+0ZS/g47g0oprwzCZrO5YRiG4ff7r9s5tMy/AQJmwJDfLPGDAAAAAElFTkSuQmCC"), auto;
+    // --cur: url("../img/cur2.svg");
     --grab: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAZCAYAAADe1WXtAAAAAXNSR0IArs4c6QAAAoZJREFUSEvVle9LU1EYx79nu95x25x1py6nRkLvgrX5xhm07A9IkX5igpCWUTYnxYoKtL2QLN9UWDFzrF4FLX8EAwX/gN71Q0PIF0klkw6RMq+wsXtPnIvZCM2r+cYvXLj3cM7nfJ/nPOe5BKuIMWYD8GVhYWGXIAiwWq1xAE2EkKXV5v89RtaAvgFQJeWJ8B/2Y2x8nE/rIoTc/m+o01GIQ34/4kODWwctde6Gr7oar4aHtg7qKnai+iCHDm8dlDut8vkwOLLNoCkA/OHaTwiZX6sS/llSuQelqipazjaj9UKrfngAxByoSgjRfn+vC/VWVqLv8SMM9D9FLBrFj/l5fJ39hoKCAszMzMBms8HpdD4A8HAZ+nldqCRJYIyBOzWbzfr7k/4INE3DqRMnUX/8GGKxGKamplBWWoZ8e369IWhu7gghyGazOpxfYbfbjdMNDXj+LIaamiMIdASxYSjfgC3vwhfnRsGjeTvxYXFT0LVOPZPJ4N3kRHIbQRljMoC5nJCaALTz1sfrlJ++Ua2Er6pqdmx0NDsQiSzd7+vLyLJcKEmSCQApKSrmDdooEytQSulsRfkelyzLWEylcClwea62rm6nx+sVy0tcps1Cv+/bW1HkcDjAazCdTuvO7t7rTd+6ecPCx4yKO33/cfInURSFdQTa8XpkRM8fvzWaqkJjDGbB/KcoDZCP1taiu+cOCGMsRCntCXd2Iv4yroNNJp7SjYv/IQ54PNc4NA9AIJlM9oY7u5BIJJAnCHoqNqLmcy242NbGG41DX8kY28HLiFLaTSnNXAkGhelP04btNjSewdVQCHa7vRHAixU7y47DAK4riqJ3IaMSRREWi+U8gCghRP0FclNORopVtbsAAAAASUVORK5CYII="), auto;
 }
 
@@ -469,10 +470,19 @@ html {
         transition: opacity .5s ease-in-out;
         transform: translate(-12em, -55em);
         &:hover{
-            opacity:1;
+            // opacity:1;
         }
     }
 
+    .iconDiff {
+        position: absolute;
+        font-size: 33px;
+        transform: translate(34vw, -5vh);
+    }
+
+    .iconDiff:hover + .different {
+        opacity: 1;   
+       }
 
     .team2Table {
         margin-top: -70px;
