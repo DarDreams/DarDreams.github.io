@@ -9,7 +9,7 @@ import {
 window.addEventListener('DOMContentLoaded', () => {
     let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true, oper,roleName;
     let rankTeam = [];
-
+    localStorage.setItem("rec","false")
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
 
@@ -2100,13 +2100,10 @@ window.addEventListener('DOMContentLoaded', () => {
               if (+el.textContent == +day) {
                 console.log(document.querySelector('[id="focus0"]>span').textContent);
                 console.log(window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0]+".json");
-                if (document.querySelector('[id="focus0"]>span').textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0]+".json") {
-                    el.click();
+                el.click();
+                if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0]+".json") {
                     checkLoading();
                 }
-
-                
-                
               }
             });
           } else {
@@ -2122,7 +2119,7 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector('[id="focus0"]').click();
             clearInterval(interval);
           }
-        }, 200);
+        }, 500);
       }
 
     refresh();
