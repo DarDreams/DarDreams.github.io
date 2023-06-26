@@ -2093,25 +2093,38 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     // #endregion
     function refresh() {
+        const interval = setInterval(() => {
+          if (localStorage.getItem("rec") === "true") {
+            document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
+              let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
+              if (+el.textContent == +day) {
+                console.log(document.querySelector('[id="focus0"]>span').textContent);
+                console.log(window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0]+".json");
+                if (document.querySelector('[id="focus0"]>span').textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0]+".json") {
+                    el.click();
+                    checkLoading();
+                }
 
-        setInterval(() => {
-            if (localStorage.getItem("rec") === "true") {
-                // console.log("run");
-                document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
-                    let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
-                    if (+el.textContent == +day) {
-                        el.click();
-                        setTimeout(() => {
-                            document.querySelector('[id="focus0"]').click();
-                        }, 2000);
-                    }
-                });
-            // } else {
-                // console.log("clear");
-                // clearInterval(ref);
-            }
-        }, 30000);
-    }
+                
+                
+              }
+            });
+          } else {
+            clearInterval(interval);
+          }
+        }, 10000);
+      }
+      
+      function checkLoading() {
+        const loadingElement = document.querySelector(".vLoading");
+        const interval = setInterval(() => {
+          if (loadingElement.style.display === "none") {
+            document.querySelector('[id="focus0"]').click();
+            clearInterval(interval);
+          }
+        }, 200);
+      }
+
     refresh();
 
 
