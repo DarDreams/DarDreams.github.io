@@ -1603,6 +1603,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (localStorage.getItem("rec") === "false" || !localStorage.getItem("rec")) {
             localStorage.setItem("rec", true);
             recElem.style.filter = "grayscale(0%)";
+            refresh();
         } else {
             localStorage.setItem("rec", false);
             recElem.style.filter = "grayscale(100%)";
@@ -1730,9 +1731,12 @@ window.addEventListener('DOMContentLoaded', () => {
                           repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                       
                           // Скрыть "загрузку"
-                          $(".vLoading2").hide();
+                          setTimeout(() => {
+                            $(".vLoading2").hide();
+                          }, 500);
+                          
                           $("#list-container").show();
-                          console.log("finish"); // Логирование завершения загрузки списка
+                        //   console.log("finish"); // Логирование завершения загрузки списка
                         }
                       
                         // Переделываем $.get в промис, чтобы использовать await
@@ -2089,6 +2093,25 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log('Путь скопирован в буфер обмена');
     });
     // #endregion
+
+    let ref;
+    function refresh() {
+        if (localStorage.getItem("rec") === "true") {
+            console.log("run");
+             ref = setInterval(() => {
+                document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
+                    let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
+                    if (+el.textContent == +day) {
+                        
+                        el.click();
+                    }
+                });
+            }, 60000);
+        } else {
+            console.log("clear");
+            clearInterval(ref)
+        }
+    }
 
     let createdDate;
 
