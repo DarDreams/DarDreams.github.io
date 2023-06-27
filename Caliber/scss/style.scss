@@ -472,12 +472,22 @@ html {
         &:hover{
             // opacity:1;
         }
+
+        @media (max-width: 1800px) {
+            top: 716px;
+            left: 206px;
+        }
+        
     }
 
     .iconDiff {
         position: absolute;
         font-size: 33px;
-        transform: translate(34vw, -8vh);
+        transform: translate(26.4vw, -6vh);
+        @media (max-width: 1800px) {
+            top: 521px;
+            left: 130px;
+        }
     }
 
     .iconDiff:hover + .different {

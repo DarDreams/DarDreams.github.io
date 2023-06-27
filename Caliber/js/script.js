@@ -1487,7 +1487,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <div class="calendar">
         <div class="custom-file-input">
             <input type="file" multiple id="file-input" accept=".bytes">
-            <img title="Если горит красным значит каждую минуту будет автоматически обновлять список игр за сегодняшний день" class='rec icons' src='img/REC.png'>
+            <img title="Если включено то обновление последней доступной игры за выбраный день будет происходит автоматически" class='rec icons' src='img/REC.png'>
                 <label for="file-input">
                 <img title="После нажатия в буфер обмена будет добавлен стандартный адрес расположения повторов, остается только нажать CTRL+V" class ='folder icons' src='img/FOLDER.png'>
                 </label>
@@ -1586,6 +1586,7 @@ window.addEventListener('DOMContentLoaded', () => {
         //tables.classList.add('animate__animated');
         tables.classList.toggle('show');
         if (localStorage.getItem("rec") === "true") {
+           
             recElem.style.filter = "grayscale(0%)";
         } else {
             recElem.style.filter = "grayscale(100%)";
@@ -1602,9 +1603,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (localStorage.getItem("rec") === "false" || !localStorage.getItem("rec")) {
             localStorage.setItem("rec", true);
+            document.querySelector("#list-container").style.visibility = "hidden";
+            document.querySelector(".containerInput").style.visibility = "hidden";
             recElem.style.filter = "grayscale(0%)";
         } else {
             localStorage.setItem("rec", false);
+            document.querySelector("#list-container").style.visibility = "unset";
+            document.querySelector(".containerInput").style.visibility = "unset";
             recElem.style.filter = "grayscale(100%)";
         }
         //save();
@@ -1704,7 +1709,6 @@ window.addEventListener('DOMContentLoaded', () => {
                                     `)
                                 } else { 
                                     $(".vLoading2").show();
-                                    document.querySelector("ul").style.pointerEvents = 'none';
                                 }
                         // Показать "загрузку"
                         
@@ -1733,8 +1737,7 @@ window.addEventListener('DOMContentLoaded', () => {
                           // Скрыть "загрузку"
                           setTimeout(() => {
                             $(".vLoading2").hide();
-                            document.querySelector("ul").style.pointerEvents = 'auto';
-                          }, 500);
+                          }, 700);
                           
                           $("#list-container").show();
                         //   console.log("finish"); // Логирование завершения загрузки списка
@@ -2095,7 +2098,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     // #endregion
     let interval; // Объявление переменной interval в области видимости функций
-
+    let timerCount = 0;
     function refresh() {
         console.log("запуск функции refresh");
         interval = setInterval(() => { // Присваиваем интервал переменной interval
@@ -2111,24 +2114,38 @@ window.addEventListener('DOMContentLoaded', () => {
                 // clearInterval(interval); // Очистка интервала при необходимости
             }
         }, 10000);
+        timerCount++; // Увеличиваем счетчик таймеров при создании
+    console.log("Текущее количество таймеров: " + timerCount);
     }
 
     function checkLoading() {
         const loadingElement = document.querySelector(".vLoading");
         console.log("checkLoading");
-        const intervalCheckLoading = setInterval(() => {
-            if (loadingElement.style.display === "none") {
-                //   console.log(document.querySelector('[id="focus0"]>span')?.textContent);
-                //   console.log(window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json");
-                if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
-                    document.querySelector('[id="focus0"]').click();
-                    console.log("click li");
-                    $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
-                    clearInterval(intervalCheckLoading); console.log("удаляем таймер");// Очистка интервала при необходимости 
+    
+        // Проверяем, если элемент уже невидимый, сразу выполняем нужные действия
+        if (loadingElement.style.display === "none") {
+            performActions();
+        } else {
+            const intervalCheckLoading = setInterval(() => {
+                if (loadingElement.style.display === "none") {
+                    performActions();
+                    clearInterval(intervalCheckLoading);
+                    console.log("удаляем таймер");
+                    timerCount--; // Уменьшаем счетчик таймеров при удалении
+                    console.log("Текущее количество таймеров: " + timerCount);
                 }
-            }
-        }, 500);
+            }, 1000);
+        }
     }
+    
+    function performActions() {
+        if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
+            document.querySelector('[id="focus0"]').click();
+            console.log("click li");
+            $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
+        }
+    }
+    
 
     refresh();
 
