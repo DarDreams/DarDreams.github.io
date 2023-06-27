@@ -2113,7 +2113,7 @@ window.addEventListener('DOMContentLoaded', () => {
             } else {
                 // clearInterval(interval); // Очистка интервала при необходимости
             }
-        }, 10000);
+        }, 30000);
         timerCount++; // Увеличиваем счетчик таймеров при создании
     console.log("Текущее количество таймеров: " + timerCount);
     }
