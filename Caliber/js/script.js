@@ -1704,6 +1704,7 @@ window.addEventListener('DOMContentLoaded', () => {
                                     `)
                                 } else { 
                                     $(".vLoading2").show();
+                                    document.querySelector("ul").style.pointerEvents = 'none';
                                 }
                         // Показать "загрузку"
                         
@@ -1732,6 +1733,7 @@ window.addEventListener('DOMContentLoaded', () => {
                           // Скрыть "загрузку"
                           setTimeout(() => {
                             $(".vLoading2").hide();
+                            document.querySelector("ul").style.pointerEvents = 'auto';
                           }, 500);
                           
                           $("#list-container").show();
@@ -2092,35 +2094,41 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log('Путь скопирован в буфер обмена');
     });
     // #endregion
+    let interval; // Объявление переменной interval в области видимости функций
+
     function refresh() {
-        const interval = setInterval(() => {
-          if (localStorage.getItem("rec") === "true") {
-            document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
-              let day = window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3];
-              if (+el.textContent == +day) {
-                console.log(document.querySelector('[id="focus0"]>span').textContent);
-                console.log(window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0]+".json");
-                el.click();
-                if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0]+".json") {
-                    checkLoading();
-                }
-              }
-            });
-          } else {
-            clearInterval(interval);
-          }
+        console.log("запуск функции refresh");
+        interval = setInterval(() => { // Присваиваем интервал переменной interval
+            if (localStorage.getItem("rec") === "true") {
+                document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
+                    if (+el.textContent == +window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3]) {
+                        el.click();
+                        console.log("click month");
+                        checkLoading();
+                    }
+                });
+            } else {
+                // clearInterval(interval); // Очистка интервала при необходимости
+            }
         }, 10000);
-      }
-      
-      function checkLoading() {
+    }
+
+    function checkLoading() {
         const loadingElement = document.querySelector(".vLoading");
-        const interval = setInterval(() => {
-          if (loadingElement.style.display === "none") {
-            document.querySelector('[id="focus0"]').click();
-            clearInterval(interval);
-          }
+        console.log("checkLoading");
+        const intervalCheckLoading = setInterval(() => {
+            if (loadingElement.style.display === "none") {
+                //   console.log(document.querySelector('[id="focus0"]>span')?.textContent);
+                //   console.log(window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json");
+                if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
+                    document.querySelector('[id="focus0"]').click();
+                    console.log("click li");
+                    $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
+                    clearInterval(intervalCheckLoading); console.log("удаляем таймер");// Очистка интервала при необходимости 
+                }
+            }
         }, 500);
-      }
+    }
 
     refresh();
 
