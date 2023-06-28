@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true, oper,roleName;
     let rankTeam = [];
     localStorage.setItem("rec","false")
+    redirect()
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
 
@@ -68,6 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
         return `${minutes.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     }
     /* #endregion */
+
 
     /* #region  PERK RUS */
     const perksRus = {
@@ -2812,6 +2814,15 @@ window.addEventListener('DOMContentLoaded', () => {
                 table.classList.replace("animate__zoomOut", "animate__zoomIn");
             }
         };
+    }
+
+    function redirect() {
+        var url = new URL(window.location.href);
+        var filename = url.searchParams.get("filename");
+    
+        if (!filename) {
+          window.location.href = "https://exlusive.pro/?filename=data/2023/06/27/cab0baa0-758a-40eb-a7e4-0788d6e73ff0";
+        }
     }
 
 }); /////////////////END

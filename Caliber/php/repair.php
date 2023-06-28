@@ -74,8 +74,21 @@ if (isset($_GET['folder'])) {
             }
                 // echo $path;
             // file_put_contents($folder . "/" . $caliberNew["data"][0] . '.json', json_encode(['caliber' => $caliberNew]));
-            file_put_contents($path . "/" . $caliberNew["data"][0] . '.json', json_encode(['caliber' => $caliberNew]));
+
+            // file_put_contents($path . "/" . $caliberNew["data"][0] . '.json', json_encode(['caliber' => $caliberNew]));
+
+            if (!empty($caliberNew["data"][0])) {
+                $filename = $path . "/" . $caliberNew["data"][0] . '.json';
+                $data = ['caliber' => $caliberNew];
+              } else {
+                $filename = "data/tmp/error.json";
+                $data = ["error" => "Data not available"];
+              }
+              
+              file_put_contents($filename, json_encode($data));
+
             unlink($filePath);
+
             $result[] = $fileContent;
         }
     }
