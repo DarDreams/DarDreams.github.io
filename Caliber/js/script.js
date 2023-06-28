@@ -674,7 +674,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  ALL DATAS */
     function upload(data1, data2) {
-        document.querySelector('.vLoading').style.display="block";
+        // document.querySelector('.vLoading').style.display="block";
         document.querySelector(`.team1Table`).innerHTML = '';
         document.querySelector(`.team2Table`).innerHTML = '';
         let operLoop = [];
@@ -1452,7 +1452,7 @@ window.addEventListener('DOMContentLoaded', () => {
         
 
         //history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-      //  document.querySelector('.vLoading').style.display="none";
+    //    document.querySelector('.vLoading').style.display="none";
     }
 
     function fixImg() {
@@ -2029,10 +2029,6 @@ window.addEventListener('DOMContentLoaded', () => {
             const keys = Object.keys(localStorage);
             for (let i = 0; i < keys.length; i++) {
                 const key = keys[i];
-                // console.log("check",key);
-                //  console.log(keys[i]);
-                // console.log(key);
-                // console.log(localStorage.getItem(key));
                 if (key == "rec"||key == "filter") {continue}
                 fetch(`data/${localStorage.getItem(key)}/${key}`)
                     .then(response => response.json())
@@ -2821,7 +2817,7 @@ window.addEventListener('DOMContentLoaded', () => {
         var filename = url.searchParams.get("filename");
     
         if (!filename) {
-          window.location.href = "https://exlusive.pro/?filename=data/2023/06/27/cab0baa0-758a-40eb-a7e4-0788d6e73ff0";
+          window.location.href = "https://exlusive.pro/?filename=data/2023/06/04/7021db9f-b457-4d08-913e-188f1e483cba";
         }
     }
 
