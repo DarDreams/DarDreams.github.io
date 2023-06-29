@@ -14,7 +14,8 @@ if (!$response) {
 
 $filename = pathinfo($url, PATHINFO_FILENAME);
 $parts = explode('_', $filename);
-$name = $parts[2] . ".png";
+$name = preg_match('/(\w+).png$/', $parts, $matches);
+$name = $matches[1] . ".png";
 
 $file = fopen("../img/emblems/" . $name, 'wb');         
 fwrite($file, $response);
