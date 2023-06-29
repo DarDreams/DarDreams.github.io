@@ -1025,7 +1025,8 @@ window.addEventListener('DOMContentLoaded', () => {
                             //console.dir(e.target)
                             //console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
                             if (e.target.firstElementChild.src == "https://exlusive.pro/img/emblems/defaultN.png") {
-                                window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
+                                repairImg("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");    
+                            //window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
                             };
                         })
                     })
@@ -1803,9 +1804,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         // Здесь можно выполнить дополнительную обработку данных
                         if (data.caliber.data[1]) {
-
+                            // console.log(`<span title="${element.replace(".json","").toUpperCase()}"><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span> ;<li users="${data.caliber.data[2][0][2].toLowerCase()};${data.caliber.data[2][1][2].toLowerCase()};${data.caliber.data[2][2][2].toLowerCase()};${data.caliber.data[2][3][2].toLowerCase()};${data.caliber.data[3][0][2].toLowerCase()};${data.caliber.data[3][1][2].toLowerCase()};${data.caliber.data[3][2][2].toLowerCase()};${data.caliber.data[3][3][2].toLowerCase()}"`);
                                     document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
-                            <li users="${data.caliber.data[2][0][2].toLowerCase()};${data.caliber.data[2][1][2].toLowerCase()}${data.caliber.data[2][2][2].toLowerCase()};${data.caliber.data[2][3][2].toLowerCase()};${data.caliber.data[3][0][2].toLowerCase()};${data.caliber.data[3][1][2].toLowerCase()};${data.caliber.data[3][2][2].toLowerCase()};${data.caliber.data[3][3][2].toLowerCase()}"
+                            <li users="${data.caliber.data[2][0][2].toLowerCase()};${data.caliber.data[2][1][2].toLowerCase()};${data.caliber.data[2][2][2].toLowerCase()};${data.caliber.data[2][3][2].toLowerCase()};${data.caliber.data[3][0][2].toLowerCase()};${data.caliber.data[3][1][2].toLowerCase()};${data.caliber.data[3][2][2].toLowerCase()};${data.caliber.data[3][3][2].toLowerCase()}"
                             avatars="${oper(data.caliber.data[2][0][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][1][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][2][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][3][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][0][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][1][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][2][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][3][8][1])[1].toLowerCase()}"
                             "map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
                                 <span title="${element.replace(".json","").toUpperCase()}"><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
@@ -2820,5 +2821,30 @@ window.addEventListener('DOMContentLoaded', () => {
           window.location.href = "https://exlusive.pro/?filename=data/2023/06/04/7021db9f-b457-4d08-913e-188f1e483cba";
         }
     }
+
+    function repairImg(url) {
+        $.get("https://exlusive.pro/php/download.php", { url: url })
+            .done(function (data) {
+                //$('td[style*="outline"][style*="red"]').click();
+                //return
+                //console.log("tse");
+                // Ваши действия после получения данных
+            })
+            .fail(function (error) {
+                console.log("Ошибка:", error);
+                // Обработка ошибки
+            });
+    }
+
+    // function redirect() {
+    //     $files = scandir('files/'); // Получаем список файлов
+    //     usort($files, function($a, $b) { // Сортируем по дате
+    //         return filemtime("files/$b") - filemtime("files/$a"); 
+    //     });
+    //     $latest_file = $files[0]; // Берем первый - самый новый файл
+    //     $url = "https://example.com/files/$latest_file"; // Формируем URL
+    //     header("Location: $url"); // Перенаправляем
+    // }
+    
 
 }); /////////////////END
