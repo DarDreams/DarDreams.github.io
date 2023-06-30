@@ -1020,15 +1020,17 @@ window.addEventListener('DOMContentLoaded', () => {
                     `);
                     //console.dir(img);
                     //console.log(img)
-                    document.querySelectorAll('.imgBaner').forEach((el) => {
-                        el.addEventListener('click',(e) => {
+                     document.querySelectorAll('.imgBaner').forEach((el) => {
+                        // el.addEventListener('click',(e) => {
                             //console.dir(e.target)
                             //console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
-                            if (e.target.firstElementChild.src == "https://exlusive.pro/img/emblems/defaultN.png") {
-                                repairImg("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");    
+                            console.log(el);
+                            if (el.firstElementChild.src == "https://exlusive.pro/img/emblems/defaultN.png") {
+                                console.log(`https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${operator.emblem}_large.png`);       
+                                repairImg("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png"); 
                             //window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
                             };
-                        })
+                        // })
                     })
                     
                 };
@@ -1534,7 +1536,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
         document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
         <div style="display:none" class="containerInput">
-            <input id="searchInput" title="Можно искать несколько слов разделяя их пробелом: имена, позывные, режимы, карты, статусы, id и время" list="suggestionsList" placeholder="Фильтр..." style="text-transform: lowercase" autocomplete="on" class="search" type="text">
+            <input id="searchInput" title="Можно искать несколько слов разделяя их пробелом: имена, позывные, режимы, карты, статусы, id и время" list="suggestionsList" placeholder="Фильтр..." style="text-transform: lowercase" class="search" type="text">
             <datalist id="suggestionsList">
             </datalist>
             <span class="clearInput">❌</span>
@@ -2823,6 +2825,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function repairImg(url) {
+        console.log("url",url);
         $.get("https://exlusive.pro/php/download.php", { url: url })
             .done(function (data) {
                 //$('td[style*="outline"][style*="red"]').click();

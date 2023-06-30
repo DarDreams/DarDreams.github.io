@@ -12,10 +12,10 @@ if (!$response) {
     die('Не удалось загрузить файл по URL: ' . $url); 
 }
 
-$filename = pathinfo($url, PATHINFO_FILENAME);
-$parts = explode('_', $filename);
-$name = preg_match('/(\w+).png$/', $parts, $matches);
-$name = $matches[1] . ".png";
+$filename = pathinfo($url, PATHINFO_FILENAME); 
+
+$name = preg_replace('/UI_Emblems_/','', $filename);
+$name = preg_replace('/_large/','', $name) . ".png";
 
 $file = fopen("../img/emblems/" . $name, 'wb');         
 fwrite($file, $response);
