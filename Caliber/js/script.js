@@ -2143,7 +2143,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     
     function performActions() {
-        if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
+        // if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
+            // console.log(getLastItem().querySelector('span').textContent);
+        if (getLastItem().querySelector('span').textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
             //document.querySelector('[id="focus0"]').click();
             getLastItem().click();
             console.log("click li");
