@@ -1570,6 +1570,8 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
                 if (+el.textContent == +day) {
                     el.click();
+                    // getLastItem();
+                    // console.log("this");
                 }
             });
 
@@ -1835,7 +1837,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             $('.totalStatUl').fadeOut()
                         }
                     })
-                    .catch(error => console.error(error));
+                    .catch(error => console.error(element," - ", error));
             });
 
             // Создаем обработчики событий после создания списка
@@ -2107,6 +2109,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
                     if (+el.textContent == +window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3]) {
                         el.click();
+                        // getLastItem().click();
                         console.log("click month");
                         checkLoading();
                     }
@@ -2131,9 +2134,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (loadingElement.style.display === "none") {
                     performActions();
                     clearInterval(intervalCheckLoading);
-                    console.log("удаляем таймер");
+                    // console.log("удаляем таймер");
                     timerCount--; // Уменьшаем счетчик таймеров при удалении
-                    console.log("Текущее количество таймеров: " + timerCount);
+                    // console.log("Текущее количество таймеров: " + timerCount);
                 }
             }, 1000);
         }
@@ -2141,12 +2144,33 @@ window.addEventListener('DOMContentLoaded', () => {
     
     function performActions() {
         if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
-            document.querySelector('[id="focus0"]').click();
+            //document.querySelector('[id="focus0"]').click();
+            getLastItem().click();
             console.log("click li");
             $("#list-container > ul > li > span:contains('" + id + ".json" + "')").closest('li').focus();
+            
         }
     }
     
+    function getLastItem() {
+        var listItems = document.querySelectorAll("ul > li");
+        var firstVisibleItem = null;
+        var lowestTabIndex = Number.MAX_SAFE_INTEGER;
+
+        for (var i = 0; i < listItems.length; i++) {
+            if (listItems[i].style.display !== "none" && listItems[i].tabIndex >= 0) {
+                if (listItems[i].tabIndex < lowestTabIndex) {
+                    lowestTabIndex = listItems[i].tabIndex;
+                    firstVisibleItem = listItems[i];
+                }
+            }
+        }
+
+        if (firstVisibleItem) {
+            // firstVisibleItem.style.outline = "1px ridge red";
+            return firstVisibleItem;
+        }
+    }
 
     refresh();
 
