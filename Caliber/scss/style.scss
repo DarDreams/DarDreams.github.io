@@ -890,6 +890,7 @@ button#show-panel {
 
     .redPoints {
         svg > path {
+            transition: all 1s ease;
             stroke: #ff323b;
         }
 
@@ -906,6 +907,7 @@ button#show-panel {
 
     .bluePoints {
         svg > path {
+            transition: all 1s ease;
             stroke: #6aa5ee;
         }
 
