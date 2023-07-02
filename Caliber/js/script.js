@@ -1421,17 +1421,21 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             }
             //winBlue.forEach(function (e, j) {
-              for (let j = 0; j < data2.Users[0][0].WinRoundCount; j++) {
-                document.querySelector(`.bluePoint${j + 1} > path`).style.fillOpacity = 1;
-              }
+                for (let j = 0; j < data2.Users[0][0].WinRoundCount; j++) {
+                    setTimeout(() => {
+                        document.querySelector(`.bluePoint${j + 1} > path`).style.fillOpacity = 1;
+                    }, 1000);
+                }
+            
             //});
 
             //winRed.forEach((e, q) => {
             for (let q = 0; q < data2.Users[1][0].WinRoundCount; q++) {
+                setTimeout(() => {
                 document.querySelector(`.redPoint${q + 1} > path`).style.fillOpacity = 1;
+            }, 1000);
             }
             //});
-
         }
         setScore();
 
@@ -2103,12 +2107,14 @@ window.addEventListener('DOMContentLoaded', () => {
     let interval; // Объявление переменной interval в области видимости функций
     let timerCount = 0;
     function refresh() {
-        console.log("запуск функции refresh");
+        // console.log("запуск функции refresh");
         interval = setInterval(() => { // Присваиваем интервал переменной interval
             if (localStorage.getItem("rec") === "true") {
                 document.querySelectorAll('#calendar-body > tr > td').forEach((el) => {
                     if (+el.textContent == +window.location.search.match(/data\/(\d{4})\/(\d{2})\/(\d{2})\/(\w+-\w+-\w+-\w+-\w+)/)[3]) {
-                        el.click();
+                        setTimeout(() => {
+                            el.click();
+                        }, 5000);
                         // getLastItem().click();
                         console.log("click month");
                         checkLoading();
@@ -2117,9 +2123,9 @@ window.addEventListener('DOMContentLoaded', () => {
             } else {
                 // clearInterval(interval); // Очистка интервала при необходимости
             }
-        }, 30000);
+        }, 25000);
         timerCount++; // Увеличиваем счетчик таймеров при создании
-    console.log("Текущее количество таймеров: " + timerCount);
+    // console.log("Текущее количество таймеров: " + timerCount);
     }
 
     function checkLoading() {
