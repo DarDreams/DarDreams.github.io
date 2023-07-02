@@ -1403,40 +1403,63 @@ window.addEventListener('DOMContentLoaded', () => {
 
         //  #region COLOR POINTS
 
-        function setScore() {
-           // const winBlue = data2.Rounds.filter(item => item.winner_team === 0);
-           // const winRed = data2.Rounds.filter(item => item.winner_team === 1);
-          //  console.log(winBlue);
-           // const winBlue = data2.Users[0][0].WinRoundCount;
+        // function setScore() {
 
-            const color = ['blue', 'red', '#6aa5ee', '#ff323b', 'afterbegin', 'beforeend'];
-            //const colorH = ['#6aa5ee', '#ff323b'];
-            for (let i = 0; i < 2; i++) {
-                for (let k = 0; k < data2.MaxRoundsWon; k++) {
-                    document.querySelector(`.${color[i]}Points`).insertAdjacentHTML(color[i + 4], `
-                    <svg class="${color[i]}Point${k + 1} points ${color[i]}" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
-                        <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="${color[i + 2]}" fill-opacity="0" stroke="${color[i + 2]}" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
-                    </svg>
-                `);
-                }
-            }
-            //winBlue.forEach(function (e, j) {
-                for (let j = 0; j < data2.Users[0][0].WinRoundCount; j++) {
-                    setTimeout(() => {
-                        document.querySelector(`.bluePoint${j + 1} > path`).style.fillOpacity = 1;
-                    }, 1000);
-                }
+        //     const color = ['blue', 'red', '#6aa5ee', '#ff323b', 'afterbegin', 'beforeend'];
+        //     //const colorH = ['#6aa5ee', '#ff323b'];
+        //     for (let i = 0; i < 2; i++) {
+        //         for (let k = 0; k < data2.MaxRoundsWon; k++) {
+        //             document.querySelector(`.${color[i]}Points`).insertAdjacentHTML(color[i + 4], `
+        //             <svg class="${color[i]}Point${k + 1} points ${color[i]}" viewBox="0 0 70 206" xmlns="http://www.w3.org/2000/svg" width="30px">
+        //                 <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="${color[i + 2]}" fill-opacity="0" stroke="${color[i + 2]}" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>
+        //             </svg>
+        //         `);
+        //         }
+        //     }
+            //     for (let j = 0; j < data2.Users[0][0].WinRoundCount; j++) {
+            //         setTimeout(() => {
+            //             document.querySelector(`.bluePoint${j + 1} > path`).style.fillOpacity = 1;
+            //         }, (j+1) * 1000);
+            //     }
             
-            //});
 
-            //winRed.forEach((e, q) => {
-            for (let q = 0; q < data2.Users[1][0].WinRoundCount; q++) {
-                setTimeout(() => {
-                document.querySelector(`.redPoint${q + 1} > path`).style.fillOpacity = 1;
-            }, 1000);
+            // for (let q = 0; q < data2.Users[1][0].WinRoundCount; q++) {
+            //     setTimeout(() => {
+            //     document.querySelector(`.redPoint${q + 1} > path`).style.fillOpacity = 1;
+            // }, (q+1) * 2000);
+            // }
+        // }
+
+        function setScore() {
+            let color = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
+            for (let i = 0; i < data2.MaxRoundsWon; i++) {
+              document.querySelector(".rounds").insertAdjacentHTML(
+                "beforeend",
+                `<svg class="point" width="10" height="10">  
+                              <path d="m2.859 3.044 62.853.02-.01 116.752-62.63 72.134L2.858 3.044z" fill="${color[i + 2]}" fill-opacity="0" stroke="${color[i + 2]}" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6" class="layer"/>  
+                              </svg>
+                          `);
+                          }
+                      }
+          function colorPath(i) {
+            if (i < data2.MaxRoundsWon) {
+              if (i < data2.Users[0][0].WinRoundCount) {
+                document.querySelector(`.bluePoint${i + 1} > path`).style.fillOpacity = 1;
+                score++; 
+              }
+              if (i < data2.Users[1][0].WinRoundCount) {
+                document.querySelector(`.redPoint${i + 1} > path`).style.fillOpacity = 1;
+                score--;
+              }
+              setTimeout(() => colorPath(i + 1), 1000);
             }
-            //});
-        }
+          }
+          
+          let score = 0; 
+          colorPath(0);
+          }
+          
+
         setScore();
 
         // #endregion
