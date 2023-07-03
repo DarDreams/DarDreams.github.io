@@ -2800,10 +2800,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 let avatar = el.querySelector('img.oper').src;
                 let operBg = document.querySelector(".operBg");
                 let match = avatar.match(/\/([^/]+)\.[^.]+$/);
-                operBg.style.opacity = "0";
+                // operBg.style.opacity = "0";
+                operBg.style.filter = "blur(20px)";
                 setTimeout(() => {
                     operBg.src = "img/opers/" + match[1] + "_Alpha.webp";
                     operBg.style.opacity = "1";
+                    operBg.style.filter = blur(0)
                 }, 1000); // Задержка 300 миллисекунд (0.3 секунды)
             });
         });
