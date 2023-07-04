@@ -7,7 +7,7 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true, oper,roleName;
+    let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true, oper,roleName, interval;
     let rankTeam = [];
     localStorage.setItem("rec","false")
     redirect()
@@ -1555,6 +1555,10 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     button.addEventListener('click', () => {
+        clearInterval(interval);
+        setTimeout(() => {
+            refresh();
+        }, 1000);
         //   button.onclick = function () {
         // console.log("panel");
         if (button.textContent == ">") {
@@ -1720,6 +1724,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         
                       
                         console.log("click day");
+                        console.log((window.performance.memory.usedJSHeapSize / (1024 * 1024)).toFixed(2)+" MB");
                       
                         // Функция для обработки данных и обновления списка
                         function handleData(data) {
@@ -2099,7 +2104,6 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log('Путь скопирован в буфер обмена');
     });
     // #endregion
-    let interval; // Объявление переменной interval в области видимости функций
     let timerCount = 0;
     function refresh() {
         // console.log("запуск функции refresh");
