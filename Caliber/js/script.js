@@ -1812,9 +1812,19 @@ window.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         // Здесь можно выполнить дополнительную обработку данных
                         if (data.caliber.data[1]) {
+                          let  listOfUsers = 
+                           `${data.caliber.data[2][0][2].toLowerCase()};
+                            ${data.caliber.data[2][1][2].toLowerCase()};
+                            ${data.caliber.data[2][2][2].toLowerCase()};
+                            ${data.caliber.data[2][3][2].toLowerCase()};
+                            ${data.caliber.data[3][0][2].toLowerCase()};
+                            ${data.caliber.data[3][1][2].toLowerCase()};
+                            ${data.caliber.data[3][2][2].toLowerCase()};
+                            ${data.caliber.data[3][3][2].toLowerCase()};`
+                            listOfUsers = "";
                             // console.log(`<span title="${element.replace(".json","").toUpperCase()}"><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span> ;<li users="${data.caliber.data[2][0][2].toLowerCase()};${data.caliber.data[2][1][2].toLowerCase()};${data.caliber.data[2][2][2].toLowerCase()};${data.caliber.data[2][3][2].toLowerCase()};${data.caliber.data[3][0][2].toLowerCase()};${data.caliber.data[3][1][2].toLowerCase()};${data.caliber.data[3][2][2].toLowerCase()};${data.caliber.data[3][3][2].toLowerCase()}"`);
                                     document.querySelector('#list-container > ul').insertAdjacentHTML("afterbegin", `
-                            <li users="${data.caliber.data[2][0][2].toLowerCase()};${data.caliber.data[2][1][2].toLowerCase()};${data.caliber.data[2][2][2].toLowerCase()};${data.caliber.data[2][3][2].toLowerCase()};${data.caliber.data[3][0][2].toLowerCase()};${data.caliber.data[3][1][2].toLowerCase()};${data.caliber.data[3][2][2].toLowerCase()};${data.caliber.data[3][3][2].toLowerCase()}"
+                            <li users="${listOfUsers}
                             avatars="${oper(data.caliber.data[2][0][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][1][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][2][8][1])[1].toLowerCase()};${oper(data.caliber.data[2][3][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][0][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][1][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][2][8][1])[1].toLowerCase()};${oper(data.caliber.data[3][3][8][1])[1].toLowerCase()}"
                             "map="${getDataMap(data.caliber.data[1]).map}" status="${winner(data.caliber)}" mode="${getDataMap(data.caliber.data[1]).mode}">
                                 <span title="${element.replace(".json","").toUpperCase()}"><svg class="star" viewBox="0 0 309.879 204.344" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com"><path class="bg_star" style="fill:#9f9f9f" d="M25.689 0h284.19l-40.954 100.344 40.954 104H25.689C11.501 204.344 0 192.843 0 178.655V25.689C0 11.501 11.501 0 25.689 0Z"/><path class="star_black" d="M126.834 38.473 141.352 87.1l50.733-1.219-41.761 28.833 16.837 47.874-40.327-30.807-40.327 30.807 16.837-47.874-41.761-28.833 50.733 1.219Z" style="fill:#000" bx:shape="star 126.834 107.082 68.609 68.609 0.36 5 1@8f4316da"/></svg>${element}</span>
@@ -2185,136 +2195,201 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let createdDate;
 
-    function processFile(file, internet = false) {
-        if (internet === false) {
-            const file = event.target.files[0];
+    // function processFile(file, internet = false) {
+    //     if (internet === false) {
+    //         const file = event.target.files[0];
+    //         const parts = file.name.split("_");
+    //         userID = parts[1];
+    //         date = parts[2].replaceAll("-", "/");
+    //         time = parts[3].replaceAll("-", ":");
+    //         time = convertToUTC(time);
+    //         createdDate = new Date(file.lastModified);
+    //         console.log("createdDate",createdDate);
+    //         console.log("saveData(createdDate)",saveData(createdDate));
+    //         console.log("date",date);
+    //         const reader = new FileReader();
+    //         reader.readAsText(file);
+    //         reader.onload = (event) => {
+    //             let caliber_b = [];
+    //             let caliber_b2 = [];
+    //             let data;
+    //             data = event.target.result.split('\n').slice(0, 3);
+    //             data = data[0]+data[1]+data[2];
+
+    //             data = data.replaceAll(/[^\x20-\x7E]+/g,"");
+    //             data = data.replace(/"11":.*?(?=,"12"|$)/g,'"11": []');
+    //             // data = data.replaceAll(/[^ -~]+/g);
+                
+    //             // data = data.replace(/.*?({.*:true})/, "$1");
+    //             // console.log(data);
+    //         try {
+    //             data = data.match(/({"Log":.*:true})/s)[1];
+
+    //             // console.log(data);
+    //             // return
+    //             // console.log("caliber_1", data.match(/^(.*14":\[\]\})\w/s)[1]);
+    //             // caliber_b = data.match(/^(.*14":\[\]\}).*Log/s)[1];
+    //             caliber_b2 = data;
+    //             // console.error("caliber_b",caliber_b);
+    //             //   try {
+    //             // console.log("caliber_2",data.match(/({"Log":.*:true})/s)[1]);
+    //             //console.log("data",data);
+    //             // caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
+    //             // console.log("caliber_b2",caliber_b2);
+
+    //             function fix(obj) {
+    //                 let brokenObject = obj;
+    //                 let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+    //                 fixedObject = JSON.parse(fixedObject);
+    //                 return fixedObject;
+    //             }
+
+    //             caliber_b2 = fix(caliber_b2);
+    //             caliber_b = caliber_b2.Log.Data;
+
+    //             let caliber_file = caliberFunc(caliber_b, caliber_b2)
+    //             document.querySelectorAll('.points').forEach(item => {
+    //                 item.remove();
+    //             })
+    //             upload(caliber_file.data, caliber_file.log);
+    //             updateDB(caliber_file);
+
+
+    //             setUrl = function () {
+    //                 // history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+    //                 history.pushState(null, null, `/?filename=data/${date}/${caliber_file.data[0]}`);
+    //             }
+    //             setUrl();
+    //         } catch (e) {
+    //             alert("Файл поврежден")
+    //             location.reload();
+    //         console.error(e.message)
+    //         }
+    //         }
+    //         //saveData(createdDate);
+    //     }
+    // }
+        // } else {
+        //     console.log("auto-file open");
+        //     //const file = event.target.files[0];
+        //     const parts = file.name.split("_");
+        //     console.log("userID", userID);
+        //     userID = parts[1];
+        //     date = parts[2].replaceAll("-", "/");
+        //     time = parts[3].replaceAll("-", ":");
+        //     time = convertToUTC(time);
+        //     createdDate = new Date(file.lastModified);
+        //     console.log("createdDate",createdDate);
+        //     console.log("date",date);
+        //     //const reader = new FileReader();
+        //     //reader.readAsText(file);
+        //     //reader.onload = (event) => {
+        //     $.ajax({
+        //         url: file.name,
+        //         dataType: "text",
+        //         success: function (result) {
+        //             console.log("url:", file.name);
+        //             //console.log("result: ",result);
+        //             let caliber_b = [];
+        //             let caliber_b2 = [];
+        //             let data = result.match(/^(.*\n){0,2}.*/g);
+        //             data = data[0].replaceAll(/[^\x20-\x7E]+/g);
+        //             data = data.replaceAll(/[^ -~]+/g);
+        //             data = data.replace(/.*?({.*)/, "$1");
+        //             caliber_b = data.match(/^(.*14":\[\]\})\w?/s)[1];
+        //             try {
+        //                 caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
+        //                 //console.log("caliber_b", caliber_b);
+        //                 function fix(obj) {
+        //                     let brokenObject = obj;
+        //                     let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+        //                     fixedObject = JSON.parse(fixedObject);
+        //                     return fixedObject;
+        //                 }
+
+        //                 caliber_b = fix(caliber_b);
+        //                 caliber_b2 = fix(caliber_b2);
+
+        //                 let caliber_file = caliberFunc(caliber_b, caliber_b2)
+        //                 document.querySelectorAll('.points').forEach(item => {
+        //                     item.remove();
+        //                 })
+        //                 // console.log("caliber_file:",caliber_file);
+        //                 upload(caliber_file.data, caliber_file.log);
+        //                 updateDB(caliber_file);
+
+
+        //                 // setUrl = function () {
+        //                 //     history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
+        //                 // }
+        //                 // setUrl();
+        //             } catch (e) {
+        //                 //  alert("Файл из интернета поврежден:", e.message)
+        //                 console.error(e.message)
+        //             }
+        //         }
+        //     });
+
+        //     //}
+        // }
+
+
+    function processFile(files, internet = false) {
+        for (let i = 0; i < event.target.files.length; i++) {
+            const file = event.target.files[i];
             const parts = file.name.split("_");
             userID = parts[1];
             date = parts[2].replaceAll("-", "/");
             time = parts[3].replaceAll("-", ":");
             time = convertToUTC(time);
             createdDate = new Date(file.lastModified);
-            console.log("createdDate",createdDate);
-            console.log("saveData(createdDate)",saveData(createdDate));
-            console.log("date",date);
+            console.log("createdDate", createdDate);
+            console.log("saveData(createdDate)", saveData(createdDate));
+            console.log("date", date);
             const reader = new FileReader();
             reader.readAsText(file);
             reader.onload = (event) => {
                 let caliber_b = [];
                 let caliber_b2 = [];
                 let data;
-                data = event.target.result.split('\n').slice(0, 3);
-                data = data[0].replaceAll(/[^\x20-\x7E]+/g);
-                data = data.replace(/"11":.*?(?=,"12"|$)/g,'"11": []');
-                data = data.replaceAll(/[^ -~]+/g);
-                
-                data = data.replace(/.*?({.*:true})/, "$1");
-                
-                // console.log("caliber_1", data.match(/^(.*14":\[\]\})\w/s)[1]);
-                caliber_b = data.match(/^(.*14":\[\]\}).*Log/s)[1];
-                // console.error("caliber_b",caliber_b);
-                  try {
-                // console.log("caliber_2",data.match(/({"Log":.*:true})/s)[1]);
-                //console.log("data",data);
-                caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
-                // console.log("caliber_b2",caliber_b2);
+                data = event.target.result.split('\n').slice(0, 3).join('');
+                data = data.replaceAll(/[^\x20-\x7E]+/g, "");
+                data = data.replace(/"11":.*?(?=,"12"|$)/g, '"11": []');
 
-                function fix(obj) {
-                    let brokenObject = obj;
-                    let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
-                    fixedObject = JSON.parse(fixedObject);
-                    return fixedObject;
-                }
+                try {
+                    data = data.match(/({"Log":.*:true})/s)[1];
 
-                caliber_b = fix(caliber_b);
-                caliber_b2 = fix(caliber_b2);
+                    function fix(obj) {
+                        let brokenObject = obj;
+                        let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
+                        fixedObject = JSON.parse(fixedObject);
+                        return fixedObject;
+                    }
 
-                let caliber_file = caliberFunc(caliber_b, caliber_b2)
-                document.querySelectorAll('.points').forEach(item => {
-                    item.remove();
-                })
-                upload(caliber_file.data, caliber_file.log);
-                updateDB(caliber_file);
+                    caliber_b2 = fix(data);
+                    caliber_b = caliber_b2.Log.Data;
 
-
-                setUrl = function () {
-                    // history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-                    history.pushState(null, null, `/?filename=data/${date}/${caliber_file.data[0]}`);
-                }
-                setUrl();
-                  } catch (e) {
-                  alert("Файл поврежден")
-                  location.reload();
-                console.error(e.message)
+                    let caliber_file = caliberFunc(caliber_b, caliber_b2)
+                    console.log(caliber_file);
+                    
+                    if (i === 0) {
+                        document.querySelectorAll('.points').forEach(item => item.remove());
+                        upload(caliber_file.data, caliber_file.log);
+                        
+                        setUrl = function () {
+                            history.pushState(null, null, `/?filename=data/${date}/${caliber_file.data[0]}`);
+                        }
+                        setUrl();
+                    }
+                    updateDB(caliber_file);
+                } catch (e) {
+                    alert("Файл поврежден")
+                    location.reload();
+                    console.error(e.message)
                 }
             }
-            //saveData(createdDate);
-        } else {
-            console.log("auto-file open");
-            //const file = event.target.files[0];
-            const parts = file.name.split("_");
-            console.log("userID", userID);
-            userID = parts[1];
-            date = parts[2].replaceAll("-", "/");
-            time = parts[3].replaceAll("-", ":");
-            time = convertToUTC(time);
-            createdDate = new Date(file.lastModified);
-            console.log("createdDate",createdDate);
-            console.log("date",date);
-            //const reader = new FileReader();
-            //reader.readAsText(file);
-            //reader.onload = (event) => {
-            $.ajax({
-                url: file.name,
-                dataType: "text",
-                success: function (result) {
-                    console.log("url:", file.name);
-                    //console.log("result: ",result);
-                    let caliber_b = [];
-                    let caliber_b2 = [];
-                    let data = result.match(/^(.*\n){0,2}.*/g);
-                    data = data[0].replaceAll(/[^\x20-\x7E]+/g);
-                    data = data.replaceAll(/[^ -~]+/g);
-                    data = data.replace(/.*?({.*)/, "$1");
-                    caliber_b = data.match(/^(.*14":\[\]\})\w?/s)[1];
-                    try {
-                        caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
-                        //console.log("caliber_b", caliber_b);
-                        function fix(obj) {
-                            let brokenObject = obj;
-                            let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
-                            fixedObject = JSON.parse(fixedObject);
-                            return fixedObject;
-                        }
-
-                        caliber_b = fix(caliber_b);
-                        caliber_b2 = fix(caliber_b2);
-
-                        let caliber_file = caliberFunc(caliber_b, caliber_b2)
-                        document.querySelectorAll('.points').forEach(item => {
-                            item.remove();
-                        })
-                        // console.log("caliber_file:",caliber_file);
-                        upload(caliber_file.data, caliber_file.log);
-                        updateDB(caliber_file);
-
-
-                        // setUrl = function () {
-                        //     history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-                        // }
-                        // setUrl();
-                    } catch (e) {
-                        //  alert("Файл из интернета поврежден:", e.message)
-                        console.error(e.message)
-                    }
-                }
-            });
-
-            //}
         }
     }
-
-
 
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
@@ -2323,41 +2398,6 @@ window.addEventListener('DOMContentLoaded', () => {
         processFile(file);
     });
 
-    //#endregion CALENDAR
-    /* #endregion */
-
-    /* #region  REFRESH PAGE */
-
-
-    // const filePath = 'js/game.js';
-
-    // let lastModifiedTime = null;
-
-    // function checkFile() {
-    //     const xhr = new XMLHttpRequest();
-    //     xhr.open('HEAD', filePath);
-    //     xhr.onreadystatechange = function () {
-    //         if (xhr.readyState === 4) {
-    //             if (xhr.status === 200) {
-    //                 const currentModifiedTime = xhr.getResponseHeader('Last-Modified');
-    //                 if (lastModifiedTime !== null && lastModifiedTime !== currentModifiedTime) {
-    //                     // location.reload(true);
-    //                     location.href = location.href + '?rand=' + Math.random();
-    //                 } else {
-    //                     console.log('Файл не изменился. Последнее изменение: ' + currentModifiedTime);
-    //                 }
-    //                 lastModifiedTime = currentModifiedTime;
-    //             } else {
-    //                 console.log('Ошибка проверки файла: ' + xhr.status);
-    //             }
-    //         }
-    //     };
-    //     xhr.send();
-    // }
-
-    // запускаем проверку каждые 10 секунд
-    //setInterval(checkFile, 10000);
-    /* #endregion */
 
     /* #region  FUNCTION SET_ZERO */
     function setZero(num) {
@@ -2371,36 +2411,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  FUNCTION SAVE DATA */
     function saveData(createdDate) {
-        // const map = document.querySelector('.map').textContent.trim();
-        // const win = document.querySelector("div.winLoseText").textContent.slice(0, document.querySelector("div.winLoseText").textContent.length - 1);
         try {
             const day = `${createdDate.getFullYear()}/${setZero(createdDate.getMonth() + 1)}/${setZero(createdDate.getDate())}`;
             return day;
         } catch { }
-        // if (localStorage.getItem('rec') == 'true') {
-        // localStorage.setItem(`${day} ${id} ${win} ${map}`, JSON.stringify([alldata[0], alldata[1]]));
-        //  localStorage.setItem(`${id}`, `${day}  ${win} ${map}`);
-        // }
     }
 
-    /* #endregion */
-    //try {
-    //let map;
-    // document.querySelector('.geo').addEventListener('click', () => {
-    //     //let humap = caliber.data[1].split('_').slice(1, -1).join('_');
-    //     let humap = getDataMap().engMap(document.querySelector('.map').textContent.replace(' ',''));
-    //     //console.log("map: ", map);
-    //     if (!document.querySelector('.imgMap')) {
-    //         document.body.insertAdjacentHTML('afterbegin', `
-    //     <img class="imgMap" src="https://caliberfan.ru/wp-content/themes/caliberfan/img/maps/tablet/UI_Map_${humap}_hacking.png">
-    //     `);
-    //     } else document.querySelector('.imgMap').remove();
-    //     //$('.imgMap').fadeToggle(1000);
-    // })
-    //}
-    // catch (e) {
-    //     console.log('Ошибка в загрузке карты, ее нет на сайте - ', e.message);
-    // }
 
     function summRank() {
         document.querySelector(`.different`).innerHTML = '';
@@ -2571,9 +2587,6 @@ window.addEventListener('DOMContentLoaded', () => {
         //             };
         //         }
         //     }
-        
-        
-
         
 
         addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
