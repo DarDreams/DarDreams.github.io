@@ -2011,6 +2011,9 @@ window.addEventListener('DOMContentLoaded', () => {
         const result = findValueInObject(mainObj);
 
         if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
+            // console.log("team1",mainObj.log.Users[result.team][result.pos].WinRoundCount);
+            // console.log("team0", mainObj.log.Users[result.team-1][result.pos].WinRoundCount);
+            // if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.Users[result.team-1][result.pos].WinRoundCount){return "НИЧЬЯ"}
             return "ПОБЕДА";
         } else {
             return "ПОРАЖЕНИЕ";
