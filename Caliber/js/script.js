@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 // UTC: new Date().getTimezoneOffset(),
                 userID: userID,
                 date: date,
-                time: time,
+                // time: time,
             }
         };
 
@@ -673,8 +673,19 @@ window.addEventListener('DOMContentLoaded', () => {
     /* #endregion */
 
     /* #region  ALL DATAS */
+
+    function showHide(bool) {
+        if (bool) {
+            document.querySelector('.container_tables').classList.replace("animate__zoomIn","animate__zoomOut");
+            document.querySelector('.vLoading').style.display="block";
+        } else {
+            document.querySelector('.container_tables').classList.replace("animate__zoomOut","animate__zoomIn")
+            document.querySelector('.vLoading').style.display="none";
+        }
+    }
+
     function upload(data1, data2) {
-        // document.querySelector('.vLoading').style.display="block";
+        showHide(true)
         document.querySelector(`.team1Table`).innerHTML = '';
         document.querySelector(`.team2Table`).innerHTML = '';
         let operLoop = [];
@@ -2334,7 +2345,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // }
 
 
-    function processFile(files, internet = false) {
+    function processFile() {
         for (let i = 0; i < event.target.files.length; i++) {
             const file = event.target.files[i];
             const parts = file.name.split("_");
@@ -2342,13 +2353,19 @@ window.addEventListener('DOMContentLoaded', () => {
             date = parts[2].replaceAll("-", "/");
             time = parts[3].replaceAll("-", ":");
             time = convertToUTC(time);
-            createdDate = new Date(file.lastModified);
-            console.log("createdDate", createdDate);
-            console.log("saveData(createdDate)", saveData(createdDate));
-            console.log("date", date);
+            // console.log("time", time);
+            // createdDate = new Date(file.lastModified);
+            // console.log("createdDate", createdDate);
+            // console.log("saveData(createdDate)", saveData(createdDate));
+            // console.log("date", date);
             const reader = new FileReader();
+            
             reader.readAsText(file);
+            let tTime = time;
+            let dDate = date;
+            let idUserID = userID;
             reader.onload = (event) => {
+                // console.log("before time", tTime);
                 let caliber_b = [];
                 let caliber_b2 = [];
                 let data;
@@ -2368,9 +2385,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     caliber_b2 = fix(data);
                     caliber_b = caliber_b2.Log.Data;
-
+                    console.log("dDate", dDate);
                     let caliber_file = caliberFunc(caliber_b, caliber_b2)
-                    console.log(caliber_file);
+                    caliber_file.log.time = tTime;
+                    caliber_file.log.date = dDate;
+                    caliber_file.log.userID = idUserID;
+                    
+                    console.log("caliber_file [",i,"]", caliber_file);
+                    // console.log("after time", tTime);
+                    // console.log(caliber_file);
                     
                     if (i === 0) {
                         document.querySelectorAll('.points').forEach(item => item.remove());
@@ -2383,9 +2406,15 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                     updateDB(caliber_file);
                 } catch (e) {
-                    alert("Файл поврежден")
-                    location.reload();
-                    console.error(e.message)
+                    // console.log(file);
+                    let result = confirm(`Файл:
+${file.name} поврежден
+Рекомендуется перезагрузить страницу`)
+                    if (result) {
+                        location.reload();
+                    } else {
+                            console.error(e.message)
+                        }
                 }
             }
         }
@@ -2393,9 +2422,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const fileInput = document.getElementById('file-input');
     fileInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
+        // const file = event.target.files[0];
         // console.log("file:", file);
-        processFile(file);
+        processFile();
     });
 
 
@@ -2635,7 +2664,7 @@ window.addEventListener('DOMContentLoaded', () => {
             contentType: 'application/json',
             success: function (response) {
                 console.log('Данные успешно обновлены');
-                console.log(response);
+                // console.log(response);
             },
             error: function (error) {
                 console.error('Ошибка при обновлении данных');
@@ -2646,6 +2675,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     /* #endregion */
+
+    
 
     function loadData(fileName) {
         // document.querySelector('.vLoading').style.display="block !important";
@@ -2659,12 +2690,22 @@ window.addEventListener('DOMContentLoaded', () => {
             dataType: "json",
             success: function ({ caliber }) {
                 console.log(`${caliber.data[1].split('_').slice(1, -1).join('_')}:`, caliber);
+               
                 upload(caliber.data, caliber.log);
                 setBg(caliber.data);
                 setMap(caliber.data);
+                
                 // console.log("caliber.data:", caliber.data);
             }
+            
+        }).then(() => {
+           setTimeout(() => {
+                showHide(false);
+                console.log("done");
+           }, 200);
+            
         });
+        
         //updateDB(caliber);
         // document.querySelector('.vLoading').style.display="none !important";
     }
@@ -2821,7 +2862,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 operBg.style.filter = "blur(200px)";
                 setTimeout(() => {
                     operBg.src = "img/opers/" + match[1] + "_Alpha.webp";
-                    console.log(`img/opers/" + ${match[1]} + "_Alpha.webp`);
+                    // console.log(`img/opers/" + ${match[1]} + "_Alpha.webp`);
                     operBg.style.opacity = "1";
                     operBg.style.filter = "blur(0)";
                 }, 1000); // Задержка 300 миллисекунд (0.3 секунды)
