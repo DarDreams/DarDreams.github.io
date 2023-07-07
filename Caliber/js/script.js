@@ -1819,7 +1819,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         ///////////////////////////////////////////////////////////////////
                         setFav();
                         applyFavFromLocalStorage();
-                        sortList();
+                        // sortList();
                         document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
                         setCounts();
 
