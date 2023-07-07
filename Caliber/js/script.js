@@ -686,8 +686,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function upload(data1, data2) {
         showHide(true)
-        document.querySelector(`.team1Table`).innerHTML = '';
-        document.querySelector(`.team2Table`).innerHTML = '';
+        // document.querySelector(`.team1Table`).innerHTML = '';
+        clearElement(".team1Table");
+        clearElement(".team2Table");
+        // document.querySelector(`.team2Table`).innerHTML = '';
         let operLoop = [];
         for (let k = 2; k < 4; k++) {
             document.querySelector(`.team${k - 1}Table`).insertAdjacentHTML('afterbegin', `
@@ -1646,7 +1648,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     var selectedDate, strPath;
     function generateCalendar(month, year) {
-        calendarBody.innerHTML = "";
+        // calendarBody.innerHTML = "";
+        clearElement("#calendar-body");
         const daysInMonth = getDaysInMonth(month, year);
         //console.log(daysInMonth);
         let firstDayOfMonth = new Date(year, month, 1).getDay() - 1;
@@ -1679,47 +1682,6 @@ window.addEventListener('DOMContentLoaded', () => {
                         return day + '.' + month + '.' + year;
                     }
 
-                    // cell.addEventListener("click", function (e) {
-                    //     // if (document.querySelector("#list-container")) {
-                    //     $("#list-container").fadeIn();
-                    //     // }
-                    //     if (!document.querySelector('.vLoading2')) {
-                    //         document.querySelector(".slide-out-panel").insertAdjacentHTML("afterbegin", `
-                    //             <img class="vLoading2" src="img/loading.gif" alt="loading...">
-                    //         `)
-                    //     } else { 
-                    //         document.querySelector('.vLoading2').style.display = "unset" 
-                    //     }
-
-                    //     console.log("click day");
-
-                    //     $.get("https://exlusive.pro/php/repair.php?folder=data", function (data) {
-                    //         // Обработка данных
-                    //         // console.log(data);
-                    //         $('.containerInput').fadeOut();
-                    //         $('.totalStatUl').fadeOut();
-
-                    //         clickDay = setZero(cell.textContent);
-                    //         document.querySelector('input.search').value = localStorage.getItem("filter");
-                    //         document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
-                    //         document.querySelectorAll('#calendar-body>tr>td').forEach((element) => {
-                    //             element.style.outline = "unset";
-                    //         })
-                    //         e.target.style.outline = "2px ridge red";
-                    //         selectedDate = new Date(2023, month_selector.value - 1, 1);
-                    //         strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
-
-                    //         getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-                    //         repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-
-                    //         $(".vLoading2").hide();
-                    //         $("#list-container").show();
-
-                    //     })
-                    //         .fail(function (error) {
-                    //             $(".vLoading2").show();
-                    //         });
-                    // });
 
                     cell.addEventListener("click", function (e) {
                         // $("#list-container").fadeIn();
@@ -1731,62 +1693,57 @@ window.addEventListener('DOMContentLoaded', () => {
                                 } else { 
                                     $(".vLoading2").show();
                                 }
-                        // Показать "загрузку"
-                        
                       
                         console.log("click day");
                         console.log((window.performance.memory.usedJSHeapSize / (1024 * 1024)).toFixed(2)+" MB");
                       
                         // Функция для обработки данных и обновления списка
                         function handleData(data) {
-                          $('.containerInput').fadeOut();
-                          $('.totalStatUl').fadeOut();
-                      
-                          clickDay = setZero(cell.textContent);
-                          document.querySelector('input.search').value = localStorage.getItem("filter");
-                          document.querySelector('input.search').dispatchEvent(new Event('input',
-                            { bubbles: true }));
-                          document.querySelectorAll('#calendar-body>tr>td').forEach((element) => {
-                            element.style.outline = "unset";
-                          })
-                          e.target.style.outline = "2px ridge red";
-                          selectedDate = new Date(2023, month_selector.value - 1, 1);
-                          strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
-                      
-                          getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-                          repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
-                      
-                          // Скрыть "загрузку"
-                          setTimeout(() => {
-                            $(".vLoading2").hide();
-                          }, 700);
-                          
-                          $("#list-container").show();
-                        //   console.log("finish"); // Логирование завершения загрузки списка
+                            $('.containerInput').fadeOut();
+                            $('.totalStatUl').fadeOut();
+
+                            clickDay = setZero(cell.textContent);
+                            document.querySelector('input.search').value = localStorage.getItem("filter");
+                            document.querySelector('input.search').dispatchEvent(new Event('input',
+                                { bubbles: true }));
+                            document.querySelectorAll('#calendar-body>tr>td').forEach((element) => {
+                                element.style.outline = "unset";
+                            })
+                            e.target.style.outline = "2px ridge red";
+                            selectedDate = new Date(2023, month_selector.value - 1, 1);
+                            strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
+                            getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                            repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+
+                            // Скрыть "загрузку"
+                            setTimeout(() => {
+                                $(".vLoading2").hide();
+                            }, 700);
+
+                            $("#list-container").show();
+                            //   console.log("finish"); // Логирование завершения загрузки списка
                         }
                       
                         // Переделываем $.get в промис, чтобы использовать await
                         var fetchData = new Promise(function (resolve, reject) {
-                          $.get("https://exlusive.pro/php/repair.php?folder=data/tmp", function (data) {
-                            resolve(data);
-                          }).fail(function (error) {
-                            reject(error);
-                          });
+                            $.get("https://exlusive.pro/php/repair.php?folder=data/tmp", function (data) {
+                                resolve(data);
+                            }).fail(function (error) {
+                                reject(error);
+                            });
                         });
-                      
+
                         // Асинхронная функция для выполнения асинхронных операций
                         async function fetchDataAndHandle() {
-                          try {
-                            var data = await fetchData;
-                            handleData(data);
-                          } catch (error) {
-                            $(".vLoading2").show();
-                          }
+                            try {
+                                var data = await fetchData;
+                                handleData(data);
+                            } catch (error) {
+                                $(".vLoading2").show();
+                            }
                         }
-                      
                         fetchDataAndHandle();
-                      });
-
+                    });
                 }
                 row.appendChild(cell);
             }
@@ -1795,6 +1752,16 @@ window.addEventListener('DOMContentLoaded', () => {
         setButtonFavorite();
     }
     /* #endregion */
+
+
+    function clearElement(selector) {
+        const element = document.querySelector(selector);
+        if (element) {
+          while (element.firstChild) {
+            element.removeChild(element.firstChild);
+          }
+        }
+      }
 
     // Создаем календарь на текущий месяц и год
     const month_selector = document.querySelector("#month-selector");
@@ -1809,7 +1776,8 @@ window.addEventListener('DOMContentLoaded', () => {
     function getFileList(folder) {
         //console.clear();
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
-            document.querySelector("#list-container").innerHTML = "";
+            // document.querySelector("#list-container").innerHTML = "";
+            clearElement("#list-container");
 
             document.querySelector('#list-container').insertAdjacentHTML("afterbegin", `
             <ul>
@@ -1854,6 +1822,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         sortList();
                         document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
                         setCounts();
+
                         if (document.querySelectorAll('ul>li').length) {
                             $('.containerInput').fadeIn()
                             $('.totalStatUl').fadeIn()
@@ -1864,8 +1833,13 @@ window.addEventListener('DOMContentLoaded', () => {
                     })
                     .catch(error => console.error(element," - ", error));
             });
+            console.log("once");
+            // setFav();
+            // applyFavFromLocalStorage();
+            // sortList();
+            // document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
 
-            // Создаем обработчики событий после создания списка
+            // // Создаем обработчики событий после создания списка
             createEventList(strPath, "xyu");
             setSearch();
         });
@@ -1950,10 +1924,15 @@ window.addEventListener('DOMContentLoaded', () => {
                 const li = e.target.closest('li');
                 if (li) {
                     let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
-                    document.querySelector('.team1Table').innerHTML = '';
-                    document.querySelector('.team2Table').innerHTML = '';
-                    document.querySelector('.bluePoints').innerHTML = '';
-                    document.querySelector('.redPoints').innerHTML = '';
+                    // document.querySelector('.team1Table').innerHTML = '';
+                    clearElement(".team1Table");
+                    clearElement(".team2Table");
+                    clearElement(".bluePoints");
+                    clearElement(".redPoints");
+                    // document.querySelector('.team2Table').innerHTML = '';
+                    // document.querySelector('.bluePoints').innerHTML = '';
+                    
+                    // document.querySelector('.redPoints').innerHTML = '';
                     loadData(`data/${fecha}/${span}`);
                     history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
 
@@ -1962,10 +1941,14 @@ window.addEventListener('DOMContentLoaded', () => {
                 const li = e.target.closest('li');
                 if (li) {
                     let span = li.querySelector('span:nth-child(1)').textContent.replace('.json', '');
-                    document.querySelector('.team1Table').innerHTML = '';
-                    document.querySelector('.team2Table').innerHTML = '';
-                    document.querySelector('.bluePoints').innerHTML = '';
-                    document.querySelector('.redPoints').innerHTML = '';
+                    // document.querySelector('.team1Table').innerHTML = '';
+                    // document.querySelector('.team2Table').innerHTML = '';
+                    // document.querySelector('.bluePoints').innerHTML = '';
+                    // document.querySelector('.redPoints').innerHTML = '';
+                    clearElement(".team1Table");
+                    clearElement(".team2Table");
+                    clearElement(".bluePoints");
+                    clearElement(".redPoints");
                     loadData(`data/${fecha}/${span}`);
                     history.pushState(null, null, `/?filename=data/${fecha}/${span}`);
                 }
@@ -2057,7 +2040,8 @@ window.addEventListener('DOMContentLoaded', () => {
         buttonFavorite.style.color = '#FFC83D';
         buttonFavorite.innerHTML = "&#9733;";
         buttonFavorite.addEventListener('click', () => {
-            document.querySelector("#list-container").innerHTML = "";
+            // document.querySelector("#list-container").innerHTML = "";
+            clearElement("#list-container")
             document.querySelector('#list-container').insertAdjacentHTML("afterbegin", "<ul>");
             const keys = Object.keys(localStorage);
             for (let i = 0; i < keys.length; i++) {
@@ -2139,7 +2123,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             el.click();
                         }, 5000);
                         // getLastItem().click();
-                        console.log("click month");
+                        console.log("click day refresh");
                         checkLoading();
                     }
                 });
@@ -2147,7 +2131,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 // clearInterval(interval); // Очистка интервала при необходимости
             }
         }, 25000);
-        timerCount++; // Увеличиваем счетчик таймеров при создании
+        // timerCount++; // Увеличиваем счетчик таймеров при создании
     // console.log("Текущее количество таймеров: " + timerCount);
     }
 
@@ -2164,7 +2148,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     performActions();
                     clearInterval(intervalCheckLoading);
                     // console.log("удаляем таймер");
-                    timerCount--; // Уменьшаем счетчик таймеров при удалении
+                    // timerCount--; // Уменьшаем счетчик таймеров при удалении
                     // console.log("Текущее количество таймеров: " + timerCount);
                 }
             }, 1000);
@@ -2451,7 +2435,8 @@ ${file.name} поврежден
 
 
     function summRank() {
-        document.querySelector(`.different`).innerHTML = '';
+        // document.querySelector(`.different`).innerHTML = '';
+        clearElement(".different");
         const divRank = document.querySelectorAll('.rank');
         let team1Diff = 0;
         let team2Diff = 0;
@@ -2793,21 +2778,21 @@ ${file.name} поврежден
     }
 
     function setSearch() {
-        var ul = document.querySelector('ul');
-        var input = document.querySelector('input.search');
+        let ul = document.querySelector('ul');
+        let input = document.querySelector('input.search');
         input.style.display = 'unset';
-        input.addEventListener('input', function () {
+        // input.addEventListener('input', function () {
+            input.oninput = function() {
             localStorage.setItem("filter", input.value);
-            var searchValue = input.value.toLowerCase();
-            var searchWords = searchValue.split(' ');
+            let searchValue = input.value.toLowerCase();
+            let searchWords = searchValue.split(' ');
+            for (let i = 0; i < ul.children.length; i++) {
+                let li = ul.children[i];
+                let text = li.textContent.toLowerCase();
+                let attributeValue1 = li.getAttribute('users');
+                let attributeValue2 = li.getAttribute('avatars');
 
-            for (var i = 0; i < ul.children.length; i++) {
-                var li = ul.children[i];
-                var text = li.textContent.toLowerCase();
-                var attributeValue1 = li.getAttribute('users');
-                var attributeValue2 = li.getAttribute('avatars');
-
-                var showItem = searchWords.every(function (word) {
+                let showItem = searchWords.every(function (word) {
                     return text.indexOf(word) !== -1 ||
                         (attributeValue1 && attributeValue1.toLowerCase().indexOf(word) !== -1) ||
                         (attributeValue2 && attributeValue2.toLowerCase().indexOf(word) !== -1);
@@ -2819,7 +2804,6 @@ ${file.name} поврежден
                     li.style.display = 'none';
                 }
             }
-
         const dataList = document.getElementById('suggestionsList');
         const listItems = document.querySelectorAll("li>span:nth-child(2)");
         const addedOptions = new Set();
@@ -2851,13 +2835,14 @@ ${file.name} поврежден
             document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
         }
         setCounts();
-        });
+        }// });
     };
 
 
     function setOper() {
         document.querySelectorAll("tr.line").forEach((el) => {
-            el.addEventListener("click", (ev) => {
+            // el.addEventListener("click", (ev) => {
+                el.onclick = function () {
                 let avatar = el.querySelector('img.oper').src;
                 let operBg = document.querySelector(".operBg");
                 let match = avatar.match(/\/([^/]+)\.[^.]+$/);
@@ -2869,7 +2854,7 @@ ${file.name} поврежден
                     operBg.style.opacity = "1";
                     operBg.style.filter = "blur(0)";
                 }, 1000); // Задержка 300 миллисекунд (0.3 секунды)
-            });
+            }// });
         });
     }
 
