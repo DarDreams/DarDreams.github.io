@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let rankTeam = [];
     localStorage.setItem("rec","false")
     redirect()
+
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
 
@@ -1548,7 +1549,8 @@ window.addEventListener('DOMContentLoaded', () => {
     
         document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
         <div style="display:none" class="containerInput">
-            <input id="searchInput" title="Можно искать несколько слов разделяя их пробелом: имена, позывные, режимы, карты, статусы, id и время" list="suggestionsList" placeholder="Фильтр..." style="text-transform: lowercase" class="search" type="text">
+            <button title="Сортировать список по времени" class="bSort">S</button>
+            <input autocomplete="off" id="searchInput" title="Можно искать несколько слов разделяя их пробелом: имена, позывные, режимы, карты, статусы, id и время" list="suggestionsList" placeholder="Фильтр..." style="text-transform: lowercase" class="search" type="text">
             <datalist id="suggestionsList">
             </datalist>
             <span class="clearInput">❌</span>
@@ -1783,7 +1785,8 @@ window.addEventListener('DOMContentLoaded', () => {
             <ul>
             `);
             //console.log(data);
-            data.forEach(element => {
+            let dataAll = data;
+            data.forEach((element, index) => {
                 //console.log("check",element);
                 if (!nickName){nickName = "NO"}
                 fetch(`data/${strPath}/${element}`)
@@ -1817,31 +1820,43 @@ window.addEventListener('DOMContentLoaded', () => {
 
             }
                         ///////////////////////////////////////////////////////////////////
-                        setFav();
-                        applyFavFromLocalStorage();
-                        // sortList();
-                        document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
-                        setCounts();
+                        if (index === dataAll.length - 1) {
+                            console.log("once");
+                            setFav();
+                            applyFavFromLocalStorage();
+                            document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
+                            setCounts();
 
-                        if (document.querySelectorAll('ul>li').length) {
-                            $('.containerInput').fadeIn()
-                            $('.totalStatUl').fadeIn()
-                        } else {
-                            $('.containerInput').fadeOut()
-                            $('.totalStatUl').fadeOut()
+                            if (document.querySelectorAll('ul>li').length) {
+                                $('.containerInput').fadeIn()
+                                $('.totalStatUl').fadeIn()
+                            } else {
+                                $('.containerInput').fadeOut()
+                                $('.totalStatUl').fadeOut()
+                            }
+                            setSearch();
+                            setSort();
+                            if (localStorage.getItem("sort") === "true") {
+                                sortList();
+                                document.querySelector('.bSort').style.color = "red";
+                            }
+                            createEventList(strPath, "xyu");
                         }
+                       
                     })
                     .catch(error => console.error(element," - ", error));
             });
-            console.log("once");
+            
             // setFav();
             // applyFavFromLocalStorage();
             // sortList();
             // document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
 
             // // Создаем обработчики событий после создания списка
-            createEventList(strPath, "xyu");
-            setSearch();
+            
+            
+            // setSort();
+            
         });
     }
 
@@ -1877,6 +1892,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function convertToUTC(timeString) {
         const [hours, minutes, seconds] = timeString.split(":");
+        const [years, months, days] = timeString.split("/");
         const currentDate = new Date();
         const utcDate = new Date(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate(), hours, minutes, seconds);
 
@@ -1884,6 +1900,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const utcTimeString = `${leadingZero(utcDate.getUTCHours())}:${leadingZero(utcDate.getUTCMinutes())}:${leadingZero(utcDate.getUTCSeconds())}`;
         if (hours > 0 && utcDate.getUTCHours() <= 23) {
+            console.log("WORK?");
             date.replace(/\/\d+\/(\d+)/g, function(match, captureGroup) {
                 return "/" + (parseInt(captureGroup) - 1) + "/";
               });
@@ -2074,6 +2091,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // setFav()
 
+    // function myFind() {
+    //     document.addEventListener("keydown", function (event) {
+    //         if (event.ctrlKey && event.key === "f") {
+    //             event.preventDefault(); // Предотвращаем стандартное поведение поиска браузера
+
+    //             // let myElement = document.getElementById("myElement");
+    //             // myElement.focus();
+    //             console.log("myFind");
+    //         }
+    //     });
+    // }
+    
 
     function repairFile(folder) {
         $.get("https://exlusive.pro/php/repair.php", { folder: folder })
@@ -2156,8 +2185,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     
     function performActions() {
-        // if (document.querySelector('[id="focus0"]>span')?.textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
-            // console.log(getLastItem().querySelector('span').textContent);
         if (getLastItem().querySelector('span').textContent !== window.location.search.match(/\w+-\w+-\w+-\w+-\w+/)[0] + ".json") {
             //document.querySelector('[id="focus0"]').click();
             getLastItem().click();
@@ -2189,148 +2216,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     refresh();
 
-
-
     let createdDate;
-
-    // function processFile(file, internet = false) {
-    //     if (internet === false) {
-    //         const file = event.target.files[0];
-    //         const parts = file.name.split("_");
-    //         userID = parts[1];
-    //         date = parts[2].replaceAll("-", "/");
-    //         time = parts[3].replaceAll("-", ":");
-    //         time = convertToUTC(time);
-    //         createdDate = new Date(file.lastModified);
-    //         console.log("createdDate",createdDate);
-    //         console.log("saveData(createdDate)",saveData(createdDate));
-    //         console.log("date",date);
-    //         const reader = new FileReader();
-    //         reader.readAsText(file);
-    //         reader.onload = (event) => {
-    //             let caliber_b = [];
-    //             let caliber_b2 = [];
-    //             let data;
-    //             data = event.target.result.split('\n').slice(0, 3);
-    //             data = data[0]+data[1]+data[2];
-
-    //             data = data.replaceAll(/[^\x20-\x7E]+/g,"");
-    //             data = data.replace(/"11":.*?(?=,"12"|$)/g,'"11": []');
-    //             // data = data.replaceAll(/[^ -~]+/g);
-                
-    //             // data = data.replace(/.*?({.*:true})/, "$1");
-    //             // console.log(data);
-    //         try {
-    //             data = data.match(/({"Log":.*:true})/s)[1];
-
-    //             // console.log(data);
-    //             // return
-    //             // console.log("caliber_1", data.match(/^(.*14":\[\]\})\w/s)[1]);
-    //             // caliber_b = data.match(/^(.*14":\[\]\}).*Log/s)[1];
-    //             caliber_b2 = data;
-    //             // console.error("caliber_b",caliber_b);
-    //             //   try {
-    //             // console.log("caliber_2",data.match(/({"Log":.*:true})/s)[1]);
-    //             //console.log("data",data);
-    //             // caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
-    //             // console.log("caliber_b2",caliber_b2);
-
-    //             function fix(obj) {
-    //                 let brokenObject = obj;
-    //                 let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
-    //                 fixedObject = JSON.parse(fixedObject);
-    //                 return fixedObject;
-    //             }
-
-    //             caliber_b2 = fix(caliber_b2);
-    //             caliber_b = caliber_b2.Log.Data;
-
-    //             let caliber_file = caliberFunc(caliber_b, caliber_b2)
-    //             document.querySelectorAll('.points').forEach(item => {
-    //                 item.remove();
-    //             })
-    //             upload(caliber_file.data, caliber_file.log);
-    //             updateDB(caliber_file);
-
-
-    //             setUrl = function () {
-    //                 // history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-    //                 history.pushState(null, null, `/?filename=data/${date}/${caliber_file.data[0]}`);
-    //             }
-    //             setUrl();
-    //         } catch (e) {
-    //             alert("Файл поврежден")
-    //             location.reload();
-    //         console.error(e.message)
-    //         }
-    //         }
-    //         //saveData(createdDate);
-    //     }
-    // }
-        // } else {
-        //     console.log("auto-file open");
-        //     //const file = event.target.files[0];
-        //     const parts = file.name.split("_");
-        //     console.log("userID", userID);
-        //     userID = parts[1];
-        //     date = parts[2].replaceAll("-", "/");
-        //     time = parts[3].replaceAll("-", ":");
-        //     time = convertToUTC(time);
-        //     createdDate = new Date(file.lastModified);
-        //     console.log("createdDate",createdDate);
-        //     console.log("date",date);
-        //     //const reader = new FileReader();
-        //     //reader.readAsText(file);
-        //     //reader.onload = (event) => {
-        //     $.ajax({
-        //         url: file.name,
-        //         dataType: "text",
-        //         success: function (result) {
-        //             console.log("url:", file.name);
-        //             //console.log("result: ",result);
-        //             let caliber_b = [];
-        //             let caliber_b2 = [];
-        //             let data = result.match(/^(.*\n){0,2}.*/g);
-        //             data = data[0].replaceAll(/[^\x20-\x7E]+/g);
-        //             data = data.replaceAll(/[^ -~]+/g);
-        //             data = data.replace(/.*?({.*)/, "$1");
-        //             caliber_b = data.match(/^(.*14":\[\]\})\w?/s)[1];
-        //             try {
-        //                 caliber_b2 = data.match(/({"Log":.*:true})/s)[1];
-        //                 //console.log("caliber_b", caliber_b);
-        //                 function fix(obj) {
-        //                     let brokenObject = obj;
-        //                     let fixedObject = brokenObject.replace(/'/g, '"').replace(/([a-zA-Z]+):/g, '"$1":');
-        //                     fixedObject = JSON.parse(fixedObject);
-        //                     return fixedObject;
-        //                 }
-
-        //                 caliber_b = fix(caliber_b);
-        //                 caliber_b2 = fix(caliber_b2);
-
-        //                 let caliber_file = caliberFunc(caliber_b, caliber_b2)
-        //                 document.querySelectorAll('.points').forEach(item => {
-        //                     item.remove();
-        //                 })
-        //                 // console.log("caliber_file:",caliber_file);
-        //                 upload(caliber_file.data, caliber_file.log);
-        //                 updateDB(caliber_file);
-
-
-        //                 // setUrl = function () {
-        //                 //     history.pushState(null, null, `/?filename=data/${saveData(createdDate)}/${caliber_file.data[0]}`);
-        //                 // }
-        //                 // setUrl();
-        //             } catch (e) {
-        //                 //  alert("Файл из интернета поврежден:", e.message)
-        //                 console.error(e.message)
-        //             }
-        //         }
-        //     });
-
-        //     //}
-        // }
-
 
     function processFile() {
         for (let i = 0; i < event.target.files.length; i++) {
@@ -2339,7 +2225,7 @@ window.addEventListener('DOMContentLoaded', () => {
             userID = parts[1];
             date = parts[2].replaceAll("-", "/");
             time = parts[3].replaceAll("-", ":");
-            time = convertToUTC(time);
+            time = convertToUTC(time, date);
             // console.log("time", time);
             // createdDate = new Date(file.lastModified);
             // console.log("createdDate", createdDate);
@@ -2372,13 +2258,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     caliber_b2 = fix(data);
                     caliber_b = caliber_b2.Log.Data;
-                    console.log("dDate", dDate);
+                    // console.log("dDate", dDate);
                     let caliber_file = caliberFunc(caliber_b, caliber_b2)
                     caliber_file.log.time = tTime;
                     caliber_file.log.date = dDate;
                     caliber_file.log.userID = idUserID;
                     
-                    console.log("caliber_file [",i,"]", caliber_file);
+                    console.log("caliber_loading_file [",i,"]", caliber_file);
                     // console.log("after time", tTime);
                     // console.log(caliber_file);
                     
@@ -2392,6 +2278,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         setUrl();
                     }
                     updateDB(caliber_file);
+                    showHide(false);
                 } catch (e) {
                     // console.log(file);
                     let result = confirm(`Файл:
@@ -2667,12 +2554,6 @@ ${file.name} поврежден
     
 
     function loadData(fileName) {
-        // document.querySelector('.vLoading').style.display="block !important";
-        //console.log(fileName);
-        //console.log("tset:",`data/2023/${setZero(selectedDate.getMonth()+1)}/${setZero(cell.textContent)}`);
-        //const urlParams = new URLSearchParams(window.location.search);
-        // const fileName = urlParams.get('filename');
-        //console.log(`../${fileName}.json`);
         $.ajax({
             url: `../${fileName}.json`,
             dataType: "json",
@@ -2775,6 +2656,28 @@ ${file.name} поврежден
         }, 1000); // Задержка 300 миллисекунд (0.3 секунды)
 
         
+    }
+
+    function setSort() {
+
+            document.querySelector('.bSort').onclick = function () {
+                if (localStorage.getItem("sort") === "false" || !localStorage.getItem("sort")) {
+                    localStorage.setItem("sort","true");
+                    document.querySelector('.bSort').style.color = "red";
+                    sortList(); 
+                } else { 
+                    localStorage.setItem("sort","false");
+                    document.querySelector('.bSort').style.color = "rgba(255,255,255,25%)";
+
+                    document.querySelectorAll("#calendar-body>tr>td").forEach(element => {
+                        let styles = window.getComputedStyle(element);
+                        if (styles.outlineColor === "rgb(255, 0, 0)") {
+                            element.click();
+                        }
+                    });
+                }
+                
+            }
     }
 
     function setSearch() {

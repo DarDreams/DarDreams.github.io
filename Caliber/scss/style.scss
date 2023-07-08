@@ -531,7 +531,15 @@ html {
         position: absolute;
         width: 165px;
         top: 47%;
-        left: 80%;
+        left: 77%;
+        .bSort {
+            margin-right: 4px;
+            background-color: black;
+            color: gray;
+            border: none;
+            outline: 1px ridge rgba(255,255,255,25%);
+            border-radius: 3px;
+        }
     }
     #searchInput {
         opacity: 1;
