@@ -1835,13 +1835,14 @@ window.addEventListener('DOMContentLoaded', () => {
                                 $('.totalStatUl').fadeOut()
                             }
                             setSearch();
-                            setSort();
+                            
                             if (localStorage.getItem("sort") === "true") {
                                 sortList();
                                 document.querySelector('.bSort').style.color = "red";
                             }
                             createEventList(strPath, "xyu");
                         }
+                        setSort();
                        
                     })
                     .catch(error => console.error(element," - ", error));
@@ -2659,6 +2660,7 @@ ${file.name} поврежден
     }
 
     function setSort() {
+        console.log("sorting..");
 
             document.querySelector('.bSort').onclick = function () {
                 if (localStorage.getItem("sort") === "false" || !localStorage.getItem("sort")) {
