@@ -1445,9 +1445,9 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
 
-
+        setBg(data1);
         setScore();
-
+        // console.log("runall");
         // #endregion
         id = data1[0];
         alldata = [data1, data2]
@@ -1461,8 +1461,9 @@ window.addEventListener('DOMContentLoaded', () => {
         summRank();
         //console.log("setSelectMe()");
         setSelectMe();
+        setSort();
         // console.log("data1: ",data1);
-        setBg(data1);
+        
         // setPlan();
         //setOper();
         
@@ -1824,7 +1825,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             console.log("once");
                             setFav();
                             applyFavFromLocalStorage();
-                            document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
+                            
                             setCounts();
 
                             if (document.querySelectorAll('ul>li').length) {
@@ -1835,14 +1836,16 @@ window.addEventListener('DOMContentLoaded', () => {
                                 $('.totalStatUl').fadeOut()
                             }
                             setSearch();
-                            
-                            if (localStorage.getItem("sort") === "true") {
-                                sortList();
-                                document.querySelector('.bSort').style.color = "red";
-                            }
+                           
                             createEventList(strPath, "xyu");
                         }
+
+                        if (localStorage.getItem("sort") === "true") {
+                            sortList();
+                            document.querySelector('.bSort').style.color = "red";
+                        }
                         setSort();
+                        document.querySelector('input.search').dispatchEvent(new Event('input', { bubbles: true }));
                        
                     })
                     .catch(error => console.error(element," - ", error));
@@ -2495,13 +2498,15 @@ ${file.name} поврежден
         
 
         addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
-        addClickSound('img', "onmouseenter", '../mp3/move.mp3', 0.035);
+        addClickSound('.imgMap', "onmouseenter", '../mp3/move.mp3', 0.035);
+        addClickSound('.icons', "onmouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('.line', "onmouseenter", '../mp3/menu.mp3', 0.1);
         if (button.textContent == "<") { 
             addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
         }
         // addClickSound('tbody', "onclick", "../mp3/click.mp3", 0.01);
         addClickSound('.imgMap', "onclick", "../mp3/click.mp3", 0.01);
+        // addClickSound('.bSort', "onclick", "../mp3/move.mp3", 0.01);
         // addClickSound('.container_tables>.team2Table>tbody', "onclick", "../mp3/click.mp3", 0.01);
 
         addClickSound('img', "onclick", "../mp3/click.mp3", 0.01);
