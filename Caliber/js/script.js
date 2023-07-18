@@ -1551,6 +1551,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.slide-out-panel').insertAdjacentHTML("afterbegin", `
         <div style="display:none" class="containerInput">
             <button title="Сортировать список по времени" class="bSort">S</button>
+            <!-- <button title="Показать все игры за все время" class="bAllGames">All</button>-->
             <input autocomplete="off" id="searchInput" title="Можно искать несколько слов разделяя их пробелом: имена, позывные, режимы, карты, статусы, id и время" list="suggestionsList" placeholder="Фильтр..." style="text-transform: lowercase" class="search" type="text">
             <datalist id="suggestionsList">
             </datalist>
@@ -1716,6 +1717,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             selectedDate = new Date(2023, month_selector.value - 1, 1);
                             strPath = `2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`;
                             getFileList(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
+                            console.log("my_str",`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
                             repairFile(`data/2023/${setZero(selectedDate.getMonth() + 1)}/${setZero(cell.textContent)}`);
 
                             // Скрыть "загрузку"
@@ -1776,11 +1778,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     /* #region  обновить список игр */
     let span;
-    function getFileList(folder) {
+    function getFileList(folder, clear=true) {
         //console.clear();
         $.get("https://exlusive.pro/php/loadList.php", { folder: folder }, function (data) {
             // document.querySelector("#list-container").innerHTML = "";
-            clearElement("#list-container");
+            if (clear == true) {
+                clearElement("#list-container");
+            } 
+            
 
             document.querySelector('#list-container').insertAdjacentHTML("afterbegin", `
             <ul>
@@ -1790,6 +1795,7 @@ window.addEventListener('DOMContentLoaded', () => {
             data.forEach((element, index) => {
                 //console.log("check",element);
                 if (!nickName){nickName = "NO"}
+                // console.log(`data/${strPath}/${element}`);
                 fetch(`data/${strPath}/${element}`)
                     .then(response => response.json())
                     .then(data => {
@@ -2090,6 +2096,26 @@ window.addEventListener('DOMContentLoaded', () => {
         })
     }
     setButtonFavorite();
+
+    // function setButtonAllGames() {
+    //     const bAllGames = document.querySelector('.bAllGames');
+    //     bAllGames.style.color = '#FFC83D';
+    //     bAllGames.innerHTML = "ALL";
+    //     bAllGames.addEventListener('click', () => {
+    //         clearElement('#list-container');
+
+    //         strPath = "2023/07/01";
+    //         getFileList(`data/2023/07/01`, false, () => {
+    //             strPath = "2023/07/02";
+    //             getFileList(`data/2023/07/02`, false, () => {
+    //             });
+    //         });
+
+
+
+    //     })
+    // }
+    // setButtonAllGames()
 
 
 
