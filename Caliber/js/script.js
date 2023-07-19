@@ -1330,7 +1330,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     'lv_karhad_palmroad_default',
                     'lv_karhad_mall_storm',
                     'lv_zalessye_submarine_default',
-                    'lv_arctic_polarstation'
+                    'lv_arctic_polarstation_default'
                 ].map(str => str.split("_").slice(0, -1).join("_")),
                 rusMap: [
                     'Радар',
@@ -1354,8 +1354,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const map = mapName.split("_").slice(0, -1).join("_");
             const index = maps.originalMap.indexOf(map);
             const rusMapName = index > -1 ? maps.rusMap[index] : '';
-            const mode = mapName.split("_")[3] == 'pvp' ? 'Столкновение' :
-                mapName.split("_")[3] == 'hacking' ? 'Взлом' : '';
+            const mode = mapName.split("_")[3] == 'pvp' ? 'Столкновение' : mapName.split("_")[3] == 'hacking' ? 'Взлом' : mapName.split("_")[3] == 've2' ? 'Рубеж' : '';
             const time = convertSecondsToTime(data2.MatchTimeSeconds);
 
             return {
