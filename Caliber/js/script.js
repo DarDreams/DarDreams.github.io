@@ -1329,7 +1329,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     'lv_zalessye_depot_twilight',
                     'lv_karhad_palmroad_default',
                     'lv_karhad_mall_storm',
-                    'lv_zalessye_submarine_default'
+                    'lv_zalessye_submarine_default',
+                    'lv_arctic_polarstation'
                 ].map(str => str.split("_").slice(0, -1).join("_")),
                 rusMap: [
                     'Радар',
@@ -1346,7 +1347,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     'Депо',
                     'Пальмовая дорога',
                     'Торговый центр',
-                    'Объект 903'
+                    'Объект 903',
+                    'Полярная станция'
                 ]
             };
             const map = mapName.split("_").slice(0, -1).join("_");
