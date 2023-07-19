@@ -31,6 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 ],
                 MatchTimeSeconds: caliberImport2.Log.MatchTimeSeconds,
                 MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
+                WinnerTeamId: caliberImport2.Log.WinnerTeamId,
                 PlayerReport: caliberImport2.Log.PlayerReports,
                 Rounds: caliberImport2.Log.Rounds,
                 // UTC: new Date().getTimezoneOffset(),
