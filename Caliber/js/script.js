@@ -1422,16 +1422,19 @@ window.addEventListener('DOMContentLoaded', () => {
         // #endregion 
 
         //  #region COLOR POINTS
-        let count = 0;
+        let countByTeamId = {
+            0: 0,
+            1: 0
+          };
         function howPvo() {
-            console.log(data2.PvPvEModeEntries.length);
+            // console.log(data2.PvPvEModeEntries.length);
             data2.PvPvEModeEntries?.forEach((item) => {
                 console.log(item);
-                if (item.ActionType === 9 && item.TeamId === 1) {
-                  count++;
+                if (item.ActionType === 9) {
+                    countByTeamId[item.TeamId]++;
                 }
               });
-              return count;
+              return countByTeamId;
         }
 
         console.log('pvo',howPvo());
