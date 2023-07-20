@@ -30,13 +30,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     [caliberImport2.Log.Users[4], caliberImport2.Log.Users[5], caliberImport2.Log.Users[6], caliberImport2.Log.Users[7]]
                 ],
                 MatchTimeSeconds: caliberImport2.Log.MatchTimeSeconds,
-                MaxRoundsWon: caliberImport2.Log.MaxRoundsWon,
-                WinnerTeamId: caliberImport2.Log.WinnerTeamId,
-                PlayerReport: caliberImport2.Log.PlayerReports,
-                Rounds: caliberImport2.Log.Rounds,
+                MaxRoundsWon:     caliberImport2.Log.MaxRoundsWon,
+                WinnerTeamId:     caliberImport2.Log.WinnerTeamId,
+                PlayerReport:     caliberImport2.Log.PlayerReports,
+                Rounds:           caliberImport2.Log.Rounds,
+                TeamScore:        caliberImport2.Log.TeamScore,
                 // UTC: new Date().getTimezoneOffset(),
-                userID: userID,
-                date: date,
+                userID:           userID,
+                date:             date,
                 // time: time,
             }
         };
@@ -1422,7 +1423,9 @@ window.addEventListener('DOMContentLoaded', () => {
         //  #region COLOR POINTS
 
         function setScore() {
-
+            if (data2.MaxRoundsWon == 0) {
+                document.querySelector('.time').textContent = `${data2.TeamScore[0]}:${data2.TeamScore[1]}`
+            }
             const color = ['blue', 'red', '#6aa5ee', '#ff323b', 'afterbegin', 'beforeend'];
             //const colorH = ['#6aa5ee', '#ff323b'];
             for (let i = 0; i < 2; i++) {
@@ -1988,6 +1991,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function winner(mainObj) {
+       
         if (!mainObj.log.userID) return;
         function findValueInObject(obj) {
             //console.log("userID", userID );
@@ -2022,16 +2026,22 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             return result;
         }
-        const result = findValueInObject(mainObj);
+       
 
-        if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
-            // console.log("team1",mainObj.log.Users[result.team][result.pos].WinRoundCount);
-            // console.log("team0", mainObj.log.Users[result.team-1][result.pos].WinRoundCount);
-            // if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.Users[result.team-1][result.pos].WinRoundCount){return "НИЧЬЯ"}
+        const result = findValueInObject(mainObj);
+        console.log("winteam = ",mainObj.log.WinnerTeamId);
+        console.log(`${mainObj.log.WinnerTeamId} == ${result.pos}`);
+        if (mainObj.log.WinnerTeamId == result.pos || mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
+
+            // console.log(mainObj.log.Users[result.team][result.pos].WinRoundCount,"=",mainObj.log.MaxRoundsWon);
+
+
+
             return "ПОБЕДА";
         } else {
             return "ПОРАЖЕНИЕ";
         }
+        
     }
 
     function setFav() {
@@ -2687,7 +2697,7 @@ ${file.name} поврежден
 
         document.querySelector('.foneBg').style.opacity = "0";
         setTimeout(() => {
-            document.querySelector('.foneBg').src = "../img/maps/" + obj[1].replace('_pvp','_default.jpg').replace('_hacking',"_default.jpg");
+            document.querySelector('.foneBg').src = "../img/maps/" + obj[1].replace(/_pvp.*$/,'_default.jpg').replace('_hacking',"_default.jpg");
             document.querySelector('.foneBg').style.opacity = "1";
         }, 1000); // Задержка 300 миллисекунд (0.3 секунды)
 

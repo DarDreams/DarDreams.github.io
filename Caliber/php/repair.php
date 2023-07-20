@@ -129,6 +129,8 @@ function caliberFunc($caliberImport, $caliberImport2,$userID = null, $date = nul
             ],
             'MatchTimeSeconds' => $caliberImport2['Log']['MatchTimeSeconds'],
             'MaxRoundsWon' => $caliberImport2['Log']['MaxRoundsWon'],
+            'WinnerTeamId' => $caliberImport2['Log']['WinnerTeamId'],
+            'TeamScore' => $caliberImport2['Log']['TeamScore'],
             'PlayerReport' => $caliberImport2['Log']['PlayerReports'],
             'Rounds' => $caliberImport2['Log']['Rounds'],
             'userID' => $userID,
