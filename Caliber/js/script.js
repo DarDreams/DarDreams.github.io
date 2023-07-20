@@ -35,6 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 PlayerReport:     caliberImport2.Log.PlayerReports,
                 Rounds:           caliberImport2.Log.Rounds,
                 TeamScore:        caliberImport2.Log.TeamScore,
+                PvPvEModeEntries: caliberImport2.Log.PvPvEModeEntries,
                 // UTC: new Date().getTimezoneOffset(),
                 userID:           userID,
                 date:             date,
@@ -1421,6 +1422,19 @@ window.addEventListener('DOMContentLoaded', () => {
         // #endregion 
 
         //  #region COLOR POINTS
+        let count = 0;
+        function howPvo() {
+            console.log(data2.PvPvEModeEntries.length);
+            data2.PvPvEModeEntries?.forEach((item) => {
+                console.log(item);
+                if (item.ActionType === 9 && item.TeamId === 1) {
+                  count++;
+                }
+              });
+              return count;
+        }
+
+        console.log('pvo',howPvo());
 
         function setScore() {
             document.querySelector('.timeScore>h1').remove;
