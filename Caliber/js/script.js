@@ -1422,16 +1422,24 @@ window.addEventListener('DOMContentLoaded', () => {
         // #endregion 
 
         //  #region COLOR POINTS
+        let skipNext = false;
         let countByTeamId = {
             0: 0,
             1: 0
           };
         function howPvo() {
             // console.log(data2.PvPvEModeEntries.length);
-            data2.PvPvEModeEntries?.forEach((item) => {
-                console.log(item);
-                if (item.ActionType === 9) {
-                    countByTeamId[item.TeamId]++;
+            data2.PvPvEModeEntries?.forEach((item, index) => {
+                if (skipNext) {
+                  skipNext = false;
+                  return;
+                }
+              
+                if (item.ActionType === 9 && item.UserId !== -1) {
+                  countByTeamId[item.TeamId]++;
+                  if (index < data2.PvPvEModeEntries.length - 1 && data2.PvPvEModeEntries[index + 1].UserId === -1) {
+                    skipNext = true;
+                  }
                 }
               });
               return countByTeamId;
