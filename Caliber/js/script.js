@@ -1423,6 +1423,7 @@ window.addEventListener('DOMContentLoaded', () => {
         //  #region COLOR POINTS
 
         function setScore() {
+            document.querySelector('.timeScore>h1').remove;
             if (data2.MaxRoundsWon == 0) {
                 document.querySelector('.timeScore>h1').innerHTML = `
                     <span style="color: rgb(106, 165, 238);">${data2.TeamScore[0]}</span>&nbsp;&nbsp;&nbsp;СЧЕТ&nbsp;&nbsp;&nbsp;<span style="color: #ff323b;">${data2.TeamScore[1]}</span>
