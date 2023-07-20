@@ -1424,8 +1424,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         function setScore() {
             if (data2.MaxRoundsWon == 0) {
-                document.querySelector('.time').innerHTML = `
-                    <span style="color: rgb(106, 165, 238);font-size:45px">${data2.TeamScore[0]}</span> : <span style="font-size:45px;color: #ff323b;">${data2.TeamScore[1]}</span>
+                document.querySelector('.timeScore>h1').innerHTML = `
+                    <span style="color: rgb(106, 165, 238);">${data2.TeamScore[0]}</span>&nbsp;&nbsp;&nbsp;СЧЕТ&nbsp;&nbsp;&nbsp;<span style="color: #ff323b;">${data2.TeamScore[1]}</span>
                 `;
                 document.querySelector('.time').parentElement.style.display = "flex";
                 document.querySelector('.time').parentElement.style.flexDirection = "column";
