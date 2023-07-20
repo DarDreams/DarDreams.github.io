@@ -1424,7 +1424,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
         function setScore() {
             if (data2.MaxRoundsWon == 0) {
-                document.querySelector('.time').textContent = `${data2.TeamScore[0]}:${data2.TeamScore[1]}`
+                document.querySelector('.time').innerHTML = `
+                    <span style="color: rgb(106, 165, 238);font-size:45px">${data2.TeamScore[0]}</span> : <span style="font-size:45px;color: #ff323b;">${data2.TeamScore[1]}</span>
+                `;
+                document.querySelector('.time').parentElement.style.display = "flex";
+                document.querySelector('.time').parentElement.style.flexDirection = "column";
+                document.querySelector('.time').parentElement.style.alignItems = "center";
             }
             const color = ['blue', 'red', '#6aa5ee', '#ff323b', 'afterbegin', 'beforeend'];
             //const colorH = ['#6aa5ee', '#ff323b'];
@@ -2029,19 +2034,26 @@ window.addEventListener('DOMContentLoaded', () => {
        
 
         const result = findValueInObject(mainObj);
-        console.log("winteam = ",mainObj.log.WinnerTeamId);
-        console.log(`${mainObj.log.WinnerTeamId} == ${result.pos}`);
-        if (mainObj.log.WinnerTeamId == result.pos || mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
-
-            // console.log(mainObj.log.Users[result.team][result.pos].WinRoundCount,"=",mainObj.log.MaxRoundsWon);
-
-
-
-            return "ПОБЕДА";
-        } else {
-            return "ПОРАЖЕНИЕ";
-        }
+        // console.log("winteam = ",mainObj.log.WinnerTeamId);
+        // console.log(`${mainObj.log.WinnerTeamId} == ${result.team}`);
         
+        if (mainObj.log.Users[result.team][result.pos].WinRoundCount > 0) {
+            if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
+
+                // console.log(mainObj.log.Users[result.team][result.pos].WinRoundCount,"=",mainObj.log.MaxRoundsWon);
+
+
+
+                return "ПОБЕДА";
+            } 
+
+        } else {
+            if (mainObj.log.WinnerTeamId == result.team) {
+                return "ПОБЕДА";
+            } else {
+                return "ПОРАЖЕНИЕ"
+            }
+        }
     }
 
     function setFav() {
