@@ -32,17 +32,6 @@ if (isset($_GET['folder'])) {
             $date = $fileParts[2];
             $time = $fileParts[3];
 
-            // $fileContent = file_get_contents($filePath);
-            // $fileContent = preg_replace('/^(.*\n){0,2}.*/', '$0', $fileContent);
-            // $fileContent = preg_replace('/[^\x20-\x7E]+/', '', $fileContent);
-            // $fileContent = preg_replace('/[^ -~]+/', '', $fileContent);
-            // $fileContent = preg_replace('/.*?({.*)/', '$1', $fileContent);
-
-            // $caliber_b = preg_match('/^(.*14":\[\]\})\w/s', $fileContent, $matches);
-            // $caliber_b = $matches[1];
-            // $caliber_b2 = preg_match('/({"Log":.*:true})/s', $fileContent, $matches);
-            // $caliber_b2 = $matches[1];
-
             $fileContent = file_get_contents($filePath);
             $fileContent = preg_replace('/[^\x20-\x7E]+/', '', $fileContent);
             $fileContent = preg_match('/[\s\S]*?(\{"0":.*"PlayerReportsEnabled":true\})/', $fileContent, $matches);
@@ -128,14 +117,15 @@ function caliberFunc($caliberImport, $caliberImport2,$userID = null, $date = nul
                 ]
             ],
             'MatchTimeSeconds' => $caliberImport2['Log']['MatchTimeSeconds'],
-            'MaxRoundsWon' => $caliberImport2['Log']['MaxRoundsWon'],
-            'WinnerTeamId' => $caliberImport2['Log']['WinnerTeamId'],
-            'TeamScore' => $caliberImport2['Log']['TeamScore'],
-            'PlayerReport' => $caliberImport2['Log']['PlayerReports'],
-            'Rounds' => $caliberImport2['Log']['Rounds'],
-            'userID' => $userID,
-            'date' => $date,
-            'time' => $time
+            'MaxRoundsWon'     => $caliberImport2['Log']['MaxRoundsWon'],
+            'WinnerTeamId'     => $caliberImport2['Log']['WinnerTeamId'],
+            'TeamScore'        => $caliberImport2['Log']['TeamScore'],
+            'PvPvEModeEntries' => $caliberImport2['Log']['PvPvEModeEntries'],
+            'PlayerReport'     => $caliberImport2['Log']['PlayerReports'],
+            'Rounds'           => $caliberImport2['Log']['Rounds'],
+            'userID'           => $userID,
+            'date'             => $date,
+            'time'             => $time
 
             // Дополнительные поля, если необходимо
         ]

@@ -695,6 +695,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // document.querySelector(`.team1Table`).innerHTML = '';
         clearElement(".team1Table");
         clearElement(".team2Table");
+        document.querySelector('.timeScore>h1').innerHTML = `СЧЁТ`;
         // document.querySelector(`.team2Table`).innerHTML = '';
         let operLoop = [];
         for (let k = 2; k < 4; k++) {
@@ -1427,25 +1428,38 @@ window.addEventListener('DOMContentLoaded', () => {
             0: 0,
             1: 0
           };
-        function howPvo() {
+        function checkPvo() {
             // console.log(data2.PvPvEModeEntries.length);
+            // data2.PvPvEModeEntries?.forEach((item, index) => {
+            //     if (skipNext) {
+            //         skipNext = false;
+            //         return;
+            //     }
+
+            //     if (item.ActionType === 9 && item.UserId !== -1) {
+            //         countByTeamId[item.TeamId]++;
+            //         if (index < data2.PvPvEModeEntries.length - 1 && data2.PvPvEModeEntries[index + 1].UserId === -1) {
+            //             skipNext = true;
+            //         }
+            //     }
+            // });
+
             data2.PvPvEModeEntries?.forEach((item, index) => {
-                if (skipNext) {
-                  skipNext = false;
-                  return;
+                if (item.ActionType == 9||item.ActionType == 11) {
+                    console.log(item);
                 }
-              
-                if (item.ActionType === 9 && item.UserId !== -1) {
-                  countByTeamId[item.TeamId]++;
-                  if (index < data2.PvPvEModeEntries.length - 1 && data2.PvPvEModeEntries[index + 1].UserId === -1) {
-                    skipNext = true;
-                  }
-                }
-              });
-              return countByTeamId;
+            })
+
+            const allValuesAreZero = Object.values(countByTeamId).every(value => value === 0);
+            if (allValuesAreZero == true) {
+                return "none";
+            } else {
+                return countByTeamId;
+            }
+
         }
 
-        console.log('pvo',howPvo());
+        console.log('pvo',checkPvo());
 
         function setScore() {
             document.querySelector('.timeScore>h1').remove;
@@ -2060,8 +2074,9 @@ window.addEventListener('DOMContentLoaded', () => {
        
 
         const result = findValueInObject(mainObj);
-        // console.log("winteam = ",mainObj.log.WinnerTeamId);
-        // console.log(`${mainObj.log.WinnerTeamId} == ${result.team}`);
+         console.log("winRoundCount = ",mainObj.log.Users[result.team][result.pos].WinRoundCount);
+         console.log("maxRoundWin",mainObj.log.MaxRoundsWon);
+        //  console.log(`${mainObj.log.WinnerTeamId} == ${result.team}`);
         
         if (mainObj.log.Users[result.team][result.pos].WinRoundCount > 0) {
             if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
@@ -2071,7 +2086,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
                 return "ПОБЕДА";
-            } 
+            } else {
+                return "ПОРАЖЕНИЕ"
+            }
 
         } else {
             if (mainObj.log.WinnerTeamId == result.team) {
