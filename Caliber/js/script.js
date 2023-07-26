@@ -65,6 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     let caliber = caliberFunc(caliberImport01, caliberImport02);
+
     /* #region  CONVERT_SECONDS */
     function convertSecondsToTime(seconds) {
         //const hours = Math.floor(seconds / 3600);
@@ -2042,58 +2043,39 @@ window.addEventListener('DOMContentLoaded', () => {
         function findValueInObject(obj) {
             //console.log("userID", userID );
             userID = mainObj.log.userID;
-            let result = {
+
+            const result = {
                 team: null,
                 pos: null
             };
-            function getNameUserId(id) {
-
-                for (let i = 0; i < 4; i++) {
-                    //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
-                    if (obj.data[2][i][0] == id) {
-                        //  console.log(obj.data[2][i][2]);
-                        nickName = obj.data[2][i][2];
-                        //  console.log(obj.data[2][i][0],userID);
-                        result.team = 0;
-                        result.pos = i;
-                        return result;
-                    }
+            for (let i = 0; i < 4; i++) {
+                //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
+                if (obj.data[2][i][0] == userID) {
+                    //  console.log(obj.data[2][i][2]);
+                    nickName = obj.data[2][i][2];
+                    //  console.log(obj.data[2][i][0],userID);
+                    result.team = 0;
+                    result.pos = i;
+                    return result;
                 }
+            }
 
-                for (let i = 0; i < 4; i++) {
-                    //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
-                    if (obj.data[3][i][0] == id) {
-                        //console.log(obj.data[3][i][2]);
-                        nickName = obj.data[3][i][2];
-                        //  console.log(obj.data[3][i][0],userID);
-                        result.team = 1;
-                        result.pos = i;
-                        return result;
-                    }
+            for (let i = 0; i < 4; i++) {
+                //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
+                if (obj.data[3][i][0] == userID) {
+                    //console.log(obj.data[3][i][2]);
+                    nickName = obj.data[3][i][2];
+                    //  console.log(obj.data[3][i][0],userID);
+                    result.team = 1;
+                    result.pos = i;
+                    return result;
                 }
-                return result;
             }
-            if (mainObj.log.Surrenders) {
-                let surrender = getNameUserId(mainObj.log.Surrenders[0].InitiatorUserId);
-                console.log("surr", surrender.team);
-            }
-            result = getNameUserId(userID);
-            // console.log("MY", getNameUserId(userID));
-
-            console.log("pvpve2",mainObj.data[1].match("pvpve2")[0]);
-            if (mainObj.log.WinnerTeamId == result.team && !mainObj.data[1].match("pvpve2")[0]) {
-                return "ПОБЕДА"
-            } else {
-                return "ПОРАЖЕНИЕ"
-            }
-
+            return result;
         }
-
-        const result = findValueInObject(mainObj);
-        
        
 
-        
+        const result = findValueInObject(mainObj);
         //  console.log("maxRoundWin",mainObj.log.MaxRoundsWon);
         //  console.log("winRoundCount", mainObj.log.Users[result.team][result.pos].WinRoundCount);
         //  console.log(`${mainObj.log.WinnerTeamId} == ${result.team}`);
@@ -2118,7 +2100,11 @@ window.addEventListener('DOMContentLoaded', () => {
         //     }
         // }
         //}
-        
+        if (mainObj.log.WinnerTeamId == result.team) {
+            return "ПОБЕДА"
+        } else {
+                return "ПОРАЖЕНИЕ"
+            }
         
     }
 
