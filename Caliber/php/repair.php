@@ -121,6 +121,7 @@ function caliberFunc($caliberImport, $caliberImport2,$userID = null, $date = nul
             'WinnerTeamId'     => $caliberImport2['Log']['WinnerTeamId'],
             'TeamScore'        => $caliberImport2['Log']['TeamScore'],
             'PvPvEModeEntries' => $caliberImport2['Log']['PvPvEModeEntries'],
+            'Surrenders'       => $caliberImport2['Log']['Surrenders'],
             'PlayerReport'     => $caliberImport2['Log']['PlayerReports'],
             'Rounds'           => $caliberImport2['Log']['Rounds'],
             'userID'           => $userID,

@@ -36,6 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 Rounds:           caliberImport2.Log.Rounds,
                 TeamScore:        caliberImport2.Log.TeamScore,
                 PvPvEModeEntries: caliberImport2.Log.PvPvEModeEntries,
+                Surrenders:       caliberImport2.Log.Surrenders,
                 // UTC: new Date().getTimezoneOffset(),
                 userID:           userID,
                 date:             date,
@@ -64,7 +65,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     let caliber = caliberFunc(caliberImport01, caliberImport02);
-
     /* #region  CONVERT_SECONDS */
     function convertSecondsToTime(seconds) {
         //const hours = Math.floor(seconds / 3600);
@@ -1407,9 +1407,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
         //  #region SCORE
         score = function (teamNumber) {
-            let data = data2.Rounds;
+
+             
             const teamKey = `winner_team_${teamNumber}`;
-            const counts = data.reduce((acc, cur) => {
+            const counts = data2.reduce((acc, cur) => {
                 if (cur.winner_team === teamNumber) {
                     acc[teamKey] += 1;
                 }
@@ -1446,7 +1447,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             data2.PvPvEModeEntries?.forEach((item, index) => {
                 if (item.ActionType == 9||item.ActionType == 11) {
-                    console.log(item);
+                    // console.log(item);
                 }
             })
 
@@ -1459,7 +1460,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        console.log('pvo',checkPvo());
+        // console.log('pvo',checkPvo());
 
         function setScore() {
             document.querySelector('.timeScore>h1').remove;
@@ -2041,62 +2042,84 @@ window.addEventListener('DOMContentLoaded', () => {
         function findValueInObject(obj) {
             //console.log("userID", userID );
             userID = mainObj.log.userID;
-
-            const result = {
+            let result = {
                 team: null,
                 pos: null
             };
-            for (let i = 0; i < 4; i++) {
-                //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
-                if (obj.data[2][i][0] == userID) {
-                    //  console.log(obj.data[2][i][2]);
-                    nickName = obj.data[2][i][2];
-                    //  console.log(obj.data[2][i][0],userID);
-                    result.team = 0;
-                    result.pos = i;
-                    return result;
+            function getNameUserId(id) {
+
+                for (let i = 0; i < 4; i++) {
+                    //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
+                    if (obj.data[2][i][0] == id) {
+                        //  console.log(obj.data[2][i][2]);
+                        nickName = obj.data[2][i][2];
+                        //  console.log(obj.data[2][i][0],userID);
+                        result.team = 0;
+                        result.pos = i;
+                        return result;
+                    }
                 }
+
+                for (let i = 0; i < 4; i++) {
+                    //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
+                    if (obj.data[3][i][0] == id) {
+                        //console.log(obj.data[3][i][2]);
+                        nickName = obj.data[3][i][2];
+                        //  console.log(obj.data[3][i][0],userID);
+                        result.team = 1;
+                        result.pos = i;
+                        return result;
+                    }
+                }
+                return result;
+            }
+            if (mainObj.log.Surrenders) {
+                let surrender = getNameUserId(mainObj.log.Surrenders[0].InitiatorUserId);
+                console.log("surr", surrender.team);
+            }
+            result = getNameUserId(userID);
+            // console.log("MY", getNameUserId(userID));
+
+            console.log("pvpve2",mainObj.data[1].match("pvpve2")[0]);
+            if (mainObj.log.WinnerTeamId == result.team && !mainObj.data[1].match("pvpve2")[0]) {
+                return "ПОБЕДА"
+            } else {
+                return "ПОРАЖЕНИЕ"
             }
 
-            for (let i = 0; i < 4; i++) {
-                //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
-                if (obj.data[3][i][0] == userID) {
-                    //console.log(obj.data[3][i][2]);
-                    nickName = obj.data[3][i][2];
-                    //  console.log(obj.data[3][i][0],userID);
-                    result.team = 1;
-                    result.pos = i;
-                    return result;
-                }
-            }
-            return result;
         }
-       
 
         const result = findValueInObject(mainObj);
-         console.log("winRoundCount = ",mainObj.log.Users[result.team][result.pos].WinRoundCount);
-         console.log("maxRoundWin",mainObj.log.MaxRoundsWon);
-        //  console.log(`${mainObj.log.WinnerTeamId} == ${result.team}`);
         
-        if (mainObj.log.Users[result.team][result.pos].WinRoundCount > 0) {
-            if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
+       
 
-                // console.log(mainObj.log.Users[result.team][result.pos].WinRoundCount,"=",mainObj.log.MaxRoundsWon);
+        
+        //  console.log("maxRoundWin",mainObj.log.MaxRoundsWon);
+        //  console.log("winRoundCount", mainObj.log.Users[result.team][result.pos].WinRoundCount);
+        //  console.log(`${mainObj.log.WinnerTeamId} == ${result.team}`);
+        // if (mainObj.log.Users[result.team][result.pos].WinRoundCount > 0) {
+        //     if (mainObj.log.Users[result.team][result.pos].WinRoundCount == mainObj.log.MaxRoundsWon) {
 
+        //         // console.log(mainObj.log.Users[result.team][result.pos].WinRoundCount,"=",mainObj.log.MaxRoundsWon);
 
+               
 
-                return "ПОБЕДА";
-            } else {
-                return "ПОРАЖЕНИЕ"
-            }
+        //         return "ПОБЕДА";
+        //     } else {
+        //         return "ПОРАЖЕНИЕ"
+        //     }
 
-        } else {
-            if (mainObj.log.WinnerTeamId == result.team) {
-                return "ПОБЕДА";
-            } else {
-                return "ПОРАЖЕНИЕ"
-            }
-        }
+        // } else {
+            
+        //     if (mainObj.log.WinnerTeamId == result.team) {
+        //         return "ПОБЕДА";
+        //     } else {
+        //         return "ПОРАЖЕНИЕ"
+        //     }
+        // }
+        //}
+        
+        
     }
 
     function setFav() {
