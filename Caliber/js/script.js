@@ -1359,7 +1359,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const map = mapName.split("_").slice(0, -1).join("_");
             const index = maps.originalMap.indexOf(map);
             const rusMapName = index > -1 ? maps.rusMap[index] : '';
-            const mode = mapName.split("_")[3] == 'pvp' ? 'Столкновение' : mapName.split("_")[3] == 'hacking' ? 'Взлом' : mapName.split("_")[3] == 'pvpve2' ? 'Рубеж' : '';
+            const mode = mapName.split("_")[3] == 'pvp' ? 'Столкновение' : mapName.split("_")[3] == 'hacking' ? 'Взлом' : mapName.split("_")[3] == 'pvpve2' ? 'Рубеж' : mapName.split("_")[3] == 'pvpdestruction' ? "Уничтожение" : "";
             const time = convertSecondsToTime(data2.MatchTimeSeconds);
 
             return {
@@ -1465,16 +1465,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
         function setScore() {
             document.querySelector('.timeScore>h1').remove;
-            if (data2.MaxRoundsWon == 0) {
+            if (data2.MaxRoundsWon == 0 || data2.MaxRoundsWon > 4) {
                 document.querySelector('.timeScore>h1').innerHTML = `
                     <span style="color: rgb(106, 165, 238);">${data2.TeamScore[0]}</span>&nbsp;&nbsp;&nbsp;СЧЕТ&nbsp;&nbsp;&nbsp;<span style="color: #ff323b;">${data2.TeamScore[1]}</span>
                 `;
                 document.querySelector('.time').parentElement.style.display = "flex";
                 document.querySelector('.time').parentElement.style.flexDirection = "column";
                 document.querySelector('.time').parentElement.style.alignItems = "center";
+                return
             }
             const color = ['blue', 'red', '#6aa5ee', '#ff323b', 'afterbegin', 'beforeend'];
             //const colorH = ['#6aa5ee', '#ff323b'];
+            
             for (let i = 0; i < 2; i++) {
                 for (let k = 0; k < data2.MaxRoundsWon; k++) {
                     document.querySelector(`.${color[i]}Points`).insertAdjacentHTML(color[i + 4], `
@@ -2876,6 +2878,11 @@ ${file.name} поврежден
     function setMap(caliberData) {
         document.querySelector('.imgMap').src = `img/maps/plans/${caliberData[1].split("_").slice(-2).join("_")}_base.webp`;
         let imgMap = document.querySelector('.imgMap');
+
+        imgMap.onerror = function () {
+            console.log(`img/maps/plans/${caliberData[1].split("_")[2]}_pvp_base.webp`);
+             document.querySelector('.imgMap').src = `img/maps/plans/${caliberData[1].split("_")[2]}_pvp_base.webp`;
+        }
         let wrapper = document.querySelector(".stats>.wrapper");
         let table = document.querySelector(".container_tables");
         function setMouseActions (){
