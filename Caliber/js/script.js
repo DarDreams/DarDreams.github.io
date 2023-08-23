@@ -1124,7 +1124,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <span title="${operator.rankTop}" class = "rank">${(operator.rank == 0) ? operator.rankTop:operator.rank }</span>
                     <img class="rankEmbed" src="img/ranks/${getRange(operator.rank).replaceAll(/\w+$/g,"").trim()}.png">
                     <span class="rankNumber">${getRange(operator.rank).replace(/\w+ /, "")}</span>
-                    <span class = "name" style = "position: absolute">${operator.name}</span>
+                    <span title="${operator.name}"class = "name" style = "position: absolute">${operator.name}</span>
                 </td>
                 <td data-gr = "${operator.group}" class = "groups">
                 ${operator.group}
