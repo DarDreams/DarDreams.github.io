@@ -898,6 +898,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     lvlprest: data1[k][i][8][19],
                     rank: data1[k][i][16][1],
                     rankTop: data1[k][i][16][2],
+                    rankProcent: Math.floor((data1[k][i][16][4] / data1[k][i][16][3]) * 100),
                     name: data1[k][i][2],
                     group: String(data1[k][i][1]).slice(0, 4),
                     perks: [data1[k][i + 0][8][15][0], data1[k][i + 0][8][15][1], data1[k][i + 0][8][15][2], data1[k][i + 0][8][15][3]],
@@ -906,7 +907,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     deaths: data2.Users[k - 2][i].Deaths,
                     assists: data2.Users[k - 2][i].Assists,
                     damage: Math.floor(data2.Users[k - 2][i].DamageDealt),
-                    recive: Math.floor(data2.Users[k - 2][i].DamageReceived)
+                    recive: Math.floor(data2.Users[k - 2][i].DamageReceived),
+                    revive: Math.floor(data2.Users[k - 2][i].Ribbons.Reanimation),
+                    heal:   Math.floor(data2.Users[k - 2][i].HealProvided),
+                    consum: `${data1[k][i][8][14][0]}
+${data1[k][i][8][14][1]}`
                 };
                 // console.log(operator.avatar," - ",operator.skin);
 
@@ -1115,18 +1120,19 @@ window.addEventListener('DOMContentLoaded', () => {
                         <div class="bevel">
                             <span class = "nameOp">${operator.nameOp}</span>
                             <span class = "lvlOp">${operator.lvlOp}</span>
-                            <span class = "lvlPrest">${(operator.lvlprest > 0) ? "&#160;"+operator.lvlprest+"&#160;" : ""}</span>
+                            <span class = "lvlPrest">${(operator.lvlprest > 0) ? operator.lvlprest : ""}</span>
                         </div>
                     </div>
                 </td>
                 <td class = "imgBaner">
                 
-                    <span title="${operator.rankTop}" class = "rank">${(operator.rank == 0) ? operator.rankTop:operator.rank }</span>
+                    <span title="MAX: ${operator.rankTop} 
+WIN: ${operator.rankProcent}%" class = "rank">${(operator.rank == 0) ? operator.rankTop:operator.rank }</span>
                     <img class="rankEmbed" src="img/ranks/${getRange(operator.rank).replaceAll(/\w+$/g,"").trim()}.png">
                     <span class="rankNumber">${getRange(operator.rank).replace(/\w+ /, "")}</span>
                     <span title="${operator.name}"class = "name" style = "position: absolute">${operator.name}</span>
                 </td>
-                <td data-gr = "${operator.group}" class = "groups">
+                <td title = "${operator.consum}" data-gr = "${operator.group}" class = "groups">
                 ${operator.group}
                     <div class = "perks">
                         <svg class="perk _1"><title>${operator.perks[0] in perksRus ? perksRus[operator.perks[0]][0] : operator.perks[0]}</title><use xlink:href="#${operator.perks[0]}"></use></svg>
@@ -1137,9 +1143,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td title="${operator.specKills()}"class = "kills"  >${operator.kills}</td>
                 <td class = "deaths" >${operator.deaths}</td>
-                <td class = "assists">${operator.assists}</td>
+                <td title = "${(operator.revive > 0) ? operator.revive : ""}" class = "assists">${operator.assists}</td>
                 <td class = "damages">${operator.damage}</td>
-                <td class = "recive" >${operator.recive}</td>
+                <td title = "${operator.heal}" class = "recive" >${operator.recive}</td>
                 <tr><th></th></tr>
                 <tr><th></th></tr>
                 <tr><th></th></tr>
@@ -1696,6 +1702,7 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem("rec", true);
             document.querySelector("#list-container").style.visibility = "hidden";
             document.querySelector(".containerInput").style.visibility = "hidden";
+            document.querySelector('#show-panel').click();
             recElem.style.filter = "grayscale(0%)";
         } else {
             localStorage.setItem("rec", false);
