@@ -1127,7 +1127,7 @@ ${data1[k][i][8][14][1]}`
                 <td class = "imgBaner">
                 
                     <span title="MAX: ${operator.rankTop} 
-WIN: ${operator.rankProcent}%" class = "rank">${(operator.rank == 0) ? operator.rankTop:operator.rank }</span>
+WIN: ${(operator.rankProcent > 0) ? operator.rankProcent+"%" : ""}" class = "rank">${(operator.rank == 0) ? operator.rankTop:operator.rank }</span>
                     <img class="rankEmbed" src="img/ranks/${getRange(operator.rank).replaceAll(/\w+$/g,"").trim()}.png">
                     <span class="rankNumber">${getRange(operator.rank).replace(/\w+ /, "")}</span>
                     <span title="${operator.name}"class = "name" style = "position: absolute">${operator.name}</span>
