@@ -1127,7 +1127,7 @@ ${data1[k][i][8][14][1]}`
                 <td class = "imgBaner">
                 
                     <span title="MAX: ${operator.rankTop} 
-WIN: ${(operator.rankProcent > 0) ? operator.rankProcent+"%" : ""}" class = "rank">${(operator.rank == 0) ? operator.rankTop:operator.rank }</span>
+${(operator.rankProcent > 0) ? "WIN:"+operator.rankProcent+"%" : ""}" class = "rank">${(operator.rank == 0) ? operator.rankTop:operator.rank }</span>
                     <img class="rankEmbed" src="img/ranks/${getRange(operator.rank).replaceAll(/\w+$/g,"").trim()}.png">
                     <span class="rankNumber">${getRange(operator.rank).replace(/\w+ /, "")}</span>
                     <span title="${operator.name}"class = "name" style = "position: absolute">${operator.name}</span>
@@ -2620,7 +2620,10 @@ ${file.name} поврежден
 
         addClickSound('.points', "onmouseenter", '../mp3/move.mp3', 0.035);
         addClickSound('.imgMap', "onmouseenter", '../mp3/move.mp3', 0.035);
-        addClickSound('.icons', "onmouseenter", '../mp3/move.mp3', 0.035);
+        if (localStorage.getItem("rec") === "false") {
+            addClickSound('.icons', "onmouseenter", '../mp3/move.mp3', 0.035);
+        }
+        
         addClickSound('.line', "onmouseenter", '../mp3/menu.mp3', 0.1);
         if (button.textContent == "<") { 
             addClickSound('button', "onclick", '../mp3/click.mp3', 0.01);
