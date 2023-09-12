@@ -908,7 +908,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     assists: data2.Users[k - 2][i].Assists,
                     damage: Math.floor(data2.Users[k - 2][i].DamageDealt),
                     recive: Math.floor(data2.Users[k - 2][i].DamageReceived),
-                    revive: Math.floor(data2.Users[k - 2][i].Ribbons.Reanimation),
+                    revive: Math.floor(data2.Users[k - 2][i].Ribbons.Reanimation)+Math.floor(data2.Users[k - 2][i].Ribbons.FastReanimation),
                     heal:   Math.floor(data2.Users[k - 2][i].HealProvided),
                     consum: `${data1[k][i][8][14][0]}
 ${data1[k][i][8][14][1]}`
