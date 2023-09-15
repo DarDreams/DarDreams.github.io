@@ -19,8 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
         //console.log(caliberImport);
         // let utc = new date().getTimezoneOffset();
         const caliberNew = {
-            data: [caliberImport[0],
-            caliberImport[2],
+            data: [caliberImport[0], caliberImport[2],
             [caliberImport[7][0], caliberImport[7][1], caliberImport[7][2], caliberImport[7][3]],
             [caliberImport[7][4], caliberImport[7][5], caliberImport[7][6], caliberImport[7][7]]
             ],
@@ -43,7 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 // time: time,
             }
         };
-
 
         for (let i = 2; i <= 3; i++) {
             for (let j = 0; j <= 3; j++) {
@@ -2067,11 +2065,19 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
             };
             for (let i = 0; i < 4; i++) {
                 //  console.log("obj.data[2][i][0]", obj.data[2][i][0]);
+                // console.log(obj.data[2][i][21]);
                 if (obj.data[2][i][0] == userID) {
                     //  console.log(obj.data[2][i][2]);
                     nickName = obj.data[2][i][2];
                     //  console.log(obj.data[2][i][0],userID);
-                    result.team = 0;
+                    
+                    if (obj.data[2][i][21] == 0) {
+                        result.team = 0;
+                    } else {
+                        result.team = 1;
+                    }
+
+                    //result.team = 0;
                     result.pos = i;
                     return result;
                 }
@@ -2079,11 +2085,19 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
 
             for (let i = 0; i < 4; i++) {
                 //   console.log("obj.data[3][i][0]", obj.data[3][i][0]);
+                // console.log(obj.data[3][i][21]);
                 if (obj.data[3][i][0] == userID) {
                     //console.log(obj.data[3][i][2]);
                     nickName = obj.data[3][i][2];
                     //  console.log(obj.data[3][i][0],userID);
-                    result.team = 1;
+
+                    if (obj.data[3][i][21] == 1) {
+                        result.team = 1;
+                    } else {
+                        result.team = 0;
+                    }
+
+                    // result.team = 1;
                     result.pos = i;
                     return result;
                 }
