@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let rankTeam = [];
     localStorage.setItem("rec","false")
     redirect()
-
+    // setMetaTags();
     /* #region CREATE OBJECT CALIBER */
     //caliber: [caliber[0],caliber[2],[caliber[7][0], caliber[7][1], caliber[7][2], caliber[7][3]],[caliber[7][4], caliber[7][5], caliber[7][6], caliber[7][7]]],
 
@@ -1530,6 +1530,7 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
         //console.log("setSelectMe()");
         setSelectMe();
         setSort();
+        setMetaTags();
         // console.log("data1: ",data1);
         
         // setPlan();
@@ -1590,7 +1591,7 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
                 <option value="7">Июль</option>
                 <option value="8">Август</option>
                 <option value="9">Сентябрь</option>
-                <option value="10">Октябр</option>
+                <option value="10">Октябрь</option>
                 <option value="11">Ноябрь</option>
                 <option value="12">Декабрь</option>
             </select>
@@ -2968,6 +2969,14 @@ ${file.name} поврежден
             });
     }
 
+
+    function setMetaTags() {
+        
+         document.querySelector('meta[property="og:description"]').setAttribute('content', `PLAYER3`);
+         document.querySelector('meta[property="og:title"]').setAttribute('content', `НИЧЬЯ`);
+
+        // document.head.insertAdjacentHTML("beforeend",);
+    }
     // function redirect() {
     //     $files = scandir('files/'); // Получаем список файлов
     //     usort($files, function($a, $b) { // Сортируем по дате
