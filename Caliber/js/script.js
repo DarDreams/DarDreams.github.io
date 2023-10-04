@@ -2972,7 +2972,7 @@ ${file.name} поврежден
 
     function setMetaTags() {
         
-         document.querySelector('meta[property="og:description"]').setAttribute('content', `PLAYER3`);
+         document.querySelector('meta[property="og:description"]').setAttribute('content', `${nickName}`);
          document.querySelector('meta[property="og:title"]').setAttribute('content', `НИЧЬЯ`);
 
         // document.head.insertAdjacentHTML("beforeend",);
