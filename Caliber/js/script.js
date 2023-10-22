@@ -1057,11 +1057,11 @@ ${data1[k][i][8][14][1]}`
                             //console.dir(e.target)
                             //console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
                             console.log(el);
-                            if (el.firstElementChild.src == "https://exlusive.pro/img/emblems/defaultN.png") {
-                                console.log(`https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${operator.emblem}_large.png`);       
-                                repairImg("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png"); 
-                            //window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
-                            };
+                            // if (el.firstElementChild.src == "https://exlusive.pro/img/emblems/defaultN.png") {
+                            //     console.log(`https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${operator.emblem}_large.png`);       
+                            //     repairImg("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png"); 
+                            // //window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
+                            // };
                         // })
                     })
                     
