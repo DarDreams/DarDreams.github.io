@@ -1021,8 +1021,8 @@ ${data1[k][i][8][14][1]}`
                // if (localStorage.getItem("tumbler") == "true") {
                     //  img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
                // } else {
-                
                     img.src = "../img/emblems/" + operator.emblem + ".png";
+                    // debugger;
                     
                     // img.closest('td').addEventListener('click',(e) => {
                     //     window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
@@ -1047,16 +1047,34 @@ ${data1[k][i][8][14][1]}`
                 };
 
                 img.onerror = function () {
-                    document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
-                    <img class = "baner" src="../img/emblems/defaultN.png" alt="${operator.emblem}">
-                    `);
+                    img.src = "../img/emblems/defaultN.png";
+                    // img.src = "../img/emblems/" + operator.emblem + ".png";
+                    img.src = "../img/emblems/UI_Emblems_" + operator.emblem + "_large.jpg";
+                    // img.src = "../img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
+                        //  try {
+                          
+                    //   } catch {}
+                        //  console.log("error");
+                    //  }
+                    //     try {
+                             
+                    //     } catch {
+                    //         img.src = "../img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
+                    //     }
+                    // }
+
+                    // document.querySelector(`.team${k - 1}Table > * > tr.${operator.role} >.imgBaner`).insertAdjacentHTML('afterbegin', `
+                    // <img class = "baner" src="../img/emblems/defaultN.png" alt="${operator.emblem}">
+                    // `);
+
+
                     //console.dir(img);
                     //console.log(img)
                      document.querySelectorAll('.imgBaner').forEach((el) => {
                         // el.addEventListener('click',(e) => {
                             //console.dir(e.target)
                             //console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
-                            console.log(el);
+                            // console.log(el);
                             // if (el.firstElementChild.src == "https://exlusive.pro/img/emblems/defaultN.png") {
                             //     console.log(`https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_${operator.emblem}_large.png`);       
                             //     repairImg("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png"); 
@@ -1514,6 +1532,7 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
 
 
         setBg(data1);
+        // debugger;
         setScore();
         // console.log("runall");
         // #endregion
@@ -1641,6 +1660,7 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
     });
 
     button.addEventListener('click', () => {
+        document.querySelector('.arrow')?.remove();
         clearInterval(interval);
         setTimeout(() => {
             refresh();
@@ -1681,12 +1701,13 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
         panel.classList.toggle('show');
         //tables.classList.add('animate__animated');
         tables.classList.toggle('show');
+
         if (localStorage.getItem("rec") === "true") {
-           
             recElem.style.filter = "grayscale(0%)";
         } else {
             recElem.style.filter = "grayscale(100%)";
         }
+
         if (button.innerText == '>') {
             button.innerText = '<'
         } else {
@@ -2793,14 +2814,11 @@ ${file.name} поврежден
     }
 
     function setBg(obj) {
-
         document.querySelector('.foneBg').style.opacity = "0";
         setTimeout(() => {
             document.querySelector('.foneBg').src = "../img/maps/" + obj[1].replace(/_pvp.*$/,'_default.jpg').replace('_hacking',"_default.jpg");
             document.querySelector('.foneBg').style.opacity = "1";
         }, 1000); // Задержка 300 миллисекунд (0.3 секунды)
-
-        
     }
 
     function setSort() {
@@ -2814,7 +2832,6 @@ ${file.name} поврежден
                 } else { 
                     localStorage.setItem("sort","false");
                     document.querySelector('.bSort').style.color = "rgba(255,255,255,25%)";
-
                     document.querySelectorAll("#calendar-body>tr>td").forEach(element => {
                         let styles = window.getComputedStyle(element);
                         if (styles.outlineColor === "rgb(255, 0, 0)") {
@@ -2987,5 +3004,14 @@ ${file.name} поврежден
     //     header("Location: $url"); // Перенаправляем
     // }
     
+    if (localStorage.getItem("beginer") === "true") {
+        document.querySelector("body").insertAdjacentHTML("afterbegin",`<img class="arrow" src="../img/arrow.png" style="position:absolute;display:none">`);
+        let topArrow = document.querySelector('#show-panel').offsetTop - 265;
+        document.querySelector('.arrow').style.top = topArrow + "px";
+        document.querySelector('.arrow').style.left = "30px";
+        document.querySelector('.arrow').style.display = "";
+        localStorage.setItem("beginer","false");
+     } else {
+     }
 
 }); /////////////////END
