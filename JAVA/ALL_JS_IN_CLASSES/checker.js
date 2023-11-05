@@ -1,4 +1,5 @@
-function checkAuthor() {
+const checker = {
+    checkAuthor: function () {
     create     = document.querySelectorAll('.issue');
     note       = document.querySelectorAll('.issue-note');
      
@@ -31,9 +32,8 @@ function checkAuthor() {
                 console.error('Ошибка при выполнении запроса:', error);
             });
     }
-}
-
-function count() {
+},
+    count: function () {
     let issue = {};     
     document.querySelectorAll('.issue-note').forEach(element => {
         let link = element.querySelector('a').getAttribute('href');
@@ -46,14 +46,14 @@ function count() {
         }
         issue.create = document.querySelectorAll('.issue').length;
         issue.note   = document.querySelectorAll('.issue-note').length;
-    });
-  
-    // return issue.create.how+issue.note.how;
+    }); 
+
     return issue;
-}
-// checkAuthor();
-// count;
-
-
-
-
+},
+    check: function () {
+        this.checkAuthor();
+    },
+    how: function () {
+        return this.count();
+    }
+};
