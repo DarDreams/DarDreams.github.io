@@ -1022,6 +1022,7 @@ ${data1[k][i][8][14][1]}`
                     //  img.src = "https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
                // } else {
                     img.src = "../img/emblems/" + operator.emblem + ".png";
+                    //img.src = "../img/emblems/UI_Emblems_" + operator.emblem + "_large.jpg";
                     // debugger;
                     
                     // img.closest('td').addEventListener('click',(e) => {
@@ -1049,7 +1050,7 @@ ${data1[k][i][8][14][1]}`
                 img.onerror = function () {
                     img.src = "../img/emblems/defaultN.png";
                     // img.src = "../img/emblems/" + operator.emblem + ".png";
-                    img.src = "../img/emblems/UI_Emblems_" + operator.emblem + "_large.jpg";
+                    //  img.src = "../img/emblems/UI_Emblems_" + operator.emblem + "_large.jpg";
                     // img.src = "../img/emblems/UI_Emblems_" + operator.emblem + "_large.png";
                         //  try {
                           
@@ -1070,7 +1071,7 @@ ${data1[k][i][8][14][1]}`
 
                     //console.dir(img);
                     //console.log(img)
-                     document.querySelectorAll('.imgBaner').forEach((el) => {
+                    //  document.querySelectorAll('.imgBaner').forEach((el) => {
                         // el.addEventListener('click',(e) => {
                             //console.dir(e.target)
                             //console.log("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png");
@@ -1081,7 +1082,7 @@ ${data1[k][i][8][14][1]}`
                             // //window.open("https://caliberfan.ru//wp-content/themes/caliberfan/img/emblems/UI_Emblems_" + operator.emblem + "_large.png")
                             // };
                         // })
-                    })
+                    // })
                     
                 };
 
