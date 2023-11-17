@@ -2909,7 +2909,9 @@ ${file.name} поврежден
     function setOper() {
         document.querySelectorAll("tr.line").forEach((el) => {
             // el.addEventListener("click", (ev) => {
-                el.onclick = function () {
+            el.onclick = function () {
+                console.log('click oper');
+                getStatData();
                 let avatar = el.querySelector('img.oper').src;
                 let operBg = document.querySelector(".operBg");
                 let match = avatar.match(/\/([^/]+)\.[^.]+$/);
@@ -2995,6 +2997,8 @@ ${file.name} поврежден
 
         // document.head.insertAdjacentHTML("beforeend",);
     }
+
+
     // function redirect() {
     //     $files = scandir('files/'); // Получаем список файлов
     //     usort($files, function($a, $b) { // Сортируем по дате
@@ -3005,6 +3009,24 @@ ${file.name} поврежден
     //     header("Location: $url"); // Перенаправляем
     // }
     
+    function getStatData() {
+        $.get("https://exlusive.pro/php/data.php")
+          .done(function (dataStat) {
+            // Преобразование JSON в объект JavaScript
+            var jsonData = JSON.parse(dataStat);
+            
+            // Ваши дальнейшие действия с полученными данными в виде объекта
+            console.log(jsonData);
+          })
+          .fail(function (error) {
+            console.log("Ошибка:", error);
+            // Обработка ошибки
+          });
+      }
+      
+      
+
+
     if (localStorage.getItem("beginer") === "true") {
         document.querySelector("body").insertAdjacentHTML("afterbegin",`<img class="arrow" src="../img/arrow.png" style="position:absolute;display:none">`);
         let topArrow = document.querySelector('#show-panel').offsetTop - 265;
@@ -3014,5 +3036,8 @@ ${file.name} поврежден
         localStorage.setItem("beginer","false");
      } else {
      }
+
+
+
 
 }); /////////////////END
