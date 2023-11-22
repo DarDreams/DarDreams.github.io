@@ -3052,8 +3052,8 @@ ${file.name} поврежден
             console.log(nameCards);
             let classes = {a: "assault.png", g: "gunner.png", m: "medic.png", s: "sniper.png"}
             document.querySelector('.oper_card')?.remove();
-            document.body.insertAdjacentHTML('afterbegin',`
-            <div style="display:none; "class="oper_card">
+            document.querySelector('.container_tables').insertAdjacentHTML('afterbegin',`
+            <div style="display:none" class="oper_card">
                 <img src="https://exlusive.pro/img/icons/collections/UI_OperatorEmblems_${nameCards.replace(/\w$/,"").toUpperCase()}.png">
                 <div class="card oper_card_header"><img src="https://exlusive.pro/img/icons/${classes[nameCards.match(/\w$/)[0]]}" alt="name">
                 <span class="oper_card_name">${operatorCard.name}</span>
