@@ -759,112 +759,112 @@ window.addEventListener('DOMContentLoaded', () => {
                   //  console.log("role", role);
                     const mappings = {
                         "RECRUIT": {
-                            'A': 'РЕКРУТ',
-                            'G': 'РЕКРУТ',
-                            'M': 'РЕКРУТ',
-                            'S': {name:'РЕКРУТ',ability:'Охотник за головами', img: ""},
+                            'A': {name:'РЕКРУТ', ability:'Штурм'},
+                            'G': {name:'РЕКРУТ', ability:'Замедляющий выстрел'},
+                            'M': {name:'РЕКРУТ', ability:'Тугая повязка'},
+                            'S': {name:'РЕКРУТ', ability:'Охотник за головами'},
                         },
                         'SSO2013': {
-                            'A': 'ВОРОН',
-                            'G': 'СПУТНИК',
-                            'M': 'БАРД',
-                            'S': 'КОМАР'
+                            'A': {name:'ВОРОН',   ability:'Превентивная мера'},
+                            'G': {name:'СПУТНИК', ability:'Дрон-разведчик'},
+                            'M': {name:'БАРД',    ability:'Воодушевление'},
+                            'S': {name:'КОМАР',   ability:'Пробивной выстрел'},
                         },
                         'FSB2016': {
-                            'A': 'ПЕРУН',
-                            'G': 'СВАРОГ',
-                            'M': 'ТРАВНИК',
-                            'S': 'СОКОЛ'
+                            'A': {name:'ПЕРУН',   ability:'Навылет'},
+                            'G': {name:'СВАРОГ',  ability:'Подавление'},
+                            'M': {name:'ТРАВНИК', ability:'Перевязка'},
+                            'S': {name:'СОКОЛ',   ability:'Шквал'},
                         },
                         'FSB2004': {
-                            'A': 'ВОЛК',
-                            'G': 'АЛМАЗ',
-                            'M': 'ДЕД',
-                            'S': 'СТРЕЛОК'
+                            'A': {name:'ВОЛК',    ability:'Железный хват'},
+                            'G': {name:'АЛМАЗ',   ability:'Заслон'},
+                            'M': {name:'ДЕД',     ability:'Лечение'},
+                            'S': {name:'СТРЕЛОК', ability:'Разведка'},
                         },
                         '22SPN2016': {
-                            'A': 'ПЛУТ',
-                            'G': 'КИТ',
-                            'M': 'КАРАВАЙ',
-                            'S': 'ТЕНЬ'
+                            'A': {name:'ПЛУТ',    ability:'Диверсия'},
+                            'G': {name:'КИТ',     ability:'Штандарт'},
+                            'M': {name:'КАРАВАЙ', ability:'Лечебная капсула'},
+                            'S': {name:'ТЕНЬ',    ability:'Побег'},
                         },
                         'BELSSO': {
-                            'A': 'ЛАЗУТЧИК',
-                            'G': 'ЗУБР',
-                            'M': 'КАВАЛЬ',
-                            'S': 'БУСЕЛ'
+                            'A': {name:'ЛАЗУТЧИК', ability:'Манёвр'},
+                            'G': {name:'ЗУБР',     ability:'Окоп'},
+                            'M': {name:'КАВАЛЬ',   ability:'Сшив'},
+                            'S': {name:'БУСЕЛ',    ability:'Уклонение'},
                         },
                         'GROM2014': {
-                            'A': 'КОШМАР',
-                            'G': 'ПРОРОК',
-                            'M': 'МИКОЛА',
-                            'S': 'СТИЛЕТ'
+                            'A': {name:'КОШМАР', ability:'Гром'},
+                            'G': {name:'ПРОРОК', ability:'Дымовая завеса'},
+                            'M': {name:'МИКОЛА', ability:'Полевой госпиталь'},
+                            'S': {name:'СТИЛЕТ', ability:'Глубокие раны'},
                         },
                         'KSK2011': {
-                            'A': 'РЕЙН',
-                            'G': 'ШТЕРН',
-                            'M': 'ШАТЦ',
-                            'S': 'КУРТ'
+                            'A': {name:'РЕЙН',  ability:'Штиль'},
+                            'G': {name:'ШТЕРН', ability:'Хранитель'},
+                            'M': {name:'ШАТЦ',  ability:'Первая помощь'},
+                            'S': {name:'КУРТ',  ability:'Приманка'},
                         },
                         'SEAL2014': {
-                            'A': 'КОРСАР',
-                            'G': 'БУРБОН',
-                            'M': 'МОНК',
-                            'S': 'СКАУТ'
+                            'A': {name:'КОРСАР', ability:'Черная метка'},
+                            'G': {name:'БУРБОН', ability:'Ошеломление'},
+                            'M': {name:'МОНК',   ability:'Инъекция'},
+                            'S': {name:'СКАУТ',  ability:'Вспышка'},
                         },
                         'TFB2008': {
-                            'A': 'СТЕРЛИНГ',
-                            'G': 'БИШОП',
-                            'M': 'ВАТСОН',
-                            'S': 'АРЧЕР'
+                            'A': {name:'СТЕРЛИНГ', ability:'Незаконченное дело'},
+                            'G': {name:'БИШОП',    ability:'Глушилка'},
+                            'M': {name:'ВАТСОН',   ability:'Лечебная пена'},
+                            'S': {name:'АРЧЕР',    ability:'Разрывная пуля'},
                         },
                         'RAID2017': {
-                            'A': 'АВАНГАРД',
-                            'G': 'БАСТИОН',
-                            'M': 'ВЕЛЮР',
-                            'S': 'ВАГАБОНД'
+                            'A': {name:'АВАНГАРД', ability:'Расплата'},
+                            'G': {name:'БАСТИОН',  ability:'Отражение'},
+                            'M': {name:'ВЕЛЮР',    ability:'Заплатка'},
+                            'S': {name:'ВАГАБОНД', ability:'Фрагменированные пули'},
                         },
                         'NESHER2015': {
-                            'A': 'АФЕЛА',
-                            'G': 'ХАГАНА',
-                            'M': 'ШАРШЕРЕТ',
-                            'S': {name:'ЭЙМА', ability:'Станящий патрон'},
+                            'A': {name:'АФЕЛА',    ability:'Риск'},
+                            'G': {name:'ХАГАНА',   ability:'Турель'},
+                            'M': {name:'ШАРШЕРЕТ', ability:'Цепь'},
+                            'S': {name:'ЭЙМА',     ability:'Калечащий выстрел'},
                         },
                         'EZAPAC': {
-                            'A': 'ФАРО',
-                            'G': 'МАТАДОР',
-                            'M': 'МИГЕЛЬ',
-                            'S': 'ДИАБЛО'
+                            'A': {name:'ФАРО',    ability:'Мулета'},
+                            'G': {name:'МАТАДОР', ability:'Плотный огонь'},
+                            'M': {name:'МИГЕЛЬ',  ability:'Медицинский дрон'},
+                            'S': {name:'ДИАБЛО',  ability:'Инферно'},
                         },
                         'ARYSTAN': {
-                            'A': 'МУСТАНГ',
-                            'G': 'ТИБЕТ',
-                            'M': 'БАГГИ',
-                            'S': 'СУЛТАН'
+                            'A': {name:'МУСТАНГ', ability:'Радар'},
+                            'G': {name:'ТИБЕТ',   ability:'Заграждение'},
+                            'M': {name:'БАГГИ',   ability:'Дисперсия'},
+                            'S': {name:'СУЛТАН',  ability:'Прикрытие'},
                         },
                         'AMF': {
-                            'A': 'СТАРКАД',
-                            'G': 'ОДИН',
-                            'M': 'ФРЕЙР',
-                            'S': 'ВИДАР'
+                            'A': {name:'СТАРКАД', ability:'Берсерк'},
+                            'G': {name:'ОДИН',    ability:'Знамение'},
+                            'M': {name:'ФРЕЙР',   ability:'Касание Идунн'},
+                            'S': {name:'ВИДАР',   ability:'Месть'},
                         },
                         'JIAOLONG': {
-                            'A': 'ШАОВЭЙ',
-                            'G': 'ИНЧЖОУ',
-                            'M': 'ЯОВАН',
-                            'S': 'ЦАНЛУН'
+                            'A': {name:'ШАОВЭЙ', ability:'Отдать приказ'},
+                            'G': {name:'ИНЧЖОУ', ability:'Генератор электромагнитного поля'},
+                            'M': {name:'ЯОВАН',  ability:'Лечебная пластина'},
+                            'S': {name:'ЦАНЛУН', ability:'Маскировка'},
                         },
                         'CST': {
-                            'A': 'СЛАЙ',
-                            'G': 'ФОРТРЕСС',
-                            'M': 'БОУНС',
-                            'S': 'АВАЛАНШ'
+                            'A': {name:'СЛАЙ',     ability:'Перевоплащение'},
+                            'G': {name:'ФОРТРЕСС', ability:'Зуб дракона'},
+                            'M': {name:'БОУНС',    ability:'Отдать приказ'},
+                            'S': {name:'АВАЛАНШ',  ability:'Наступление'},
                         },
                         'BOPE': {
-                            'A': 'МАРТЕЛУ',
-                            'G': 'БАРРЕЙРА',
-                            'M': 'АСАИ',
-                            'S': 'КАСАДОР'
+                            'A': {name:'МАРТЕЛУ',  ability:'Рубящий удар'},
+                            'G': {name:'БАРРЕЙРА', ability:'Решето'},
+                            'M': {name:'АСАИ',     ability:'Переснаряжение'},
+                            'S': {name:'КАСАДОР',  ability:'Глаз орла'},
                         }
                     };
 
@@ -3065,10 +3065,10 @@ ${file.name} поврежден
             <div class="oper_card_caption_center">УРОН</div>
             <div class="oper_card_caption_right">БОЕКОМПЛЕКТ</div>
    
-            <div class="item oper_card_weapon"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.firstWeapon.img}_128x128.png" alt="главное оружие"><br>${operatorCard.firstWeapon.name}</div>
+            <div class="item oper_card_weapon"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.firstWeapon.img.toUpperCase()}_128x128.png" alt="главное оружие"><br>${operatorCard.firstWeapon.name}</div>
             <div class="item oper_card_weapon_damage">${operatorCard.firstWeapon.damage}</div>
             <div class="item oper_card_weapon_ammo">${operatorCard.firstWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
-            <div class="item oper_card_second"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.secondWeapon.img}_128x128.png" alt="второе оружие"><br>${operatorCard.secondWeapon.name}</div>
+            <div class="item oper_card_second"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.secondWeapon.img.toUpperCase()}_128x128.png" alt="второе оружие"><br>${operatorCard.secondWeapon.name}</div>
             <div class="item oper_card_second_damage">${operatorCard.secondWeapon.damage}</div>
             <div class="item oper_card_second_ammo">${operatorCard.secondWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
    
