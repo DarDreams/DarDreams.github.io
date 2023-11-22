@@ -3079,7 +3079,7 @@ ${file.name} поврежден
    
    
    
-            <div class="item oper_card_spec"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.spec.img}_128x128.png" alt="спецсредство">${operatorCard.spec.name}</div>
+            <div class="item oper_card_spec"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.spec.img.toUpperCase()}_128x128.png" alt="спецсредство">${operatorCard.spec.name}</div>
             <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_${operatorCard.ability.img}_Base.png" alt="способность">${operatorCard.ability.name}</div>
    
             
