@@ -7,7 +7,7 @@ import {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true, oper,roleName, interval;
+    let id, alldata, setUrl, getDataMap, userID, date, time, score, winTeam, clickDay, nickName, tumbler = true, oper,roleName, interval, jsonData;
     let rankTeam = [];
     localStorage.setItem("rec","false")
     redirect()
@@ -762,7 +762,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             'A': 'РЕКРУТ',
                             'G': 'РЕКРУТ',
                             'M': 'РЕКРУТ',
-                            'S': 'РЕКРУТ'
+                            'S': 'РЕКРУТ',
                         },
                         'SSO2013': {
                             'A': 'ВОРОН',
@@ -2910,11 +2910,13 @@ ${file.name} поврежден
         document.querySelectorAll("tr.line").forEach((el) => {
             // el.addEventListener("click", (ev) => {
             el.onclick = function () {
-                console.log('click oper');
-                getStatData();
+                console.log('click oper');                
                 let avatar = el.querySelector('img.oper').src;
                 let operBg = document.querySelector(".operBg");
                 let match = avatar.match(/\/([^/]+)\.[^.]+$/);
+                let nameCards = match[1].split('_')[0].toLowerCase()+match[1].split('_')[1].toLowerCase();
+                getStatData(nameCards);
+                console.log(nameCards);
                 // operBg.style.opacity = "0";
                 operBg.style.filter = "blur(200px)";
                 setTimeout(() => {
@@ -3009,14 +3011,79 @@ ${file.name} поврежден
     //     header("Location: $url"); // Перенаправляем
     // }
     
-    function getStatData() {
+    function getStatData(nameCards) {
         $.get("https://exlusive.pro/php/data.php")
           .done(function (dataStat) {
             // Преобразование JSON в объект JavaScript
-            var jsonData = JSON.parse(dataStat);
+             jsonData = JSON.parse(dataStat);
+            // var jsonData = dataStat;
             
             // Ваши дальнейшие действия с полученными данными в виде объекта
-            console.log(jsonData);
+            const operatorCard = {
+                name         : oper(nameCards)[1],
+                collection   : nameCards.replace(/\w$/,"").replace(/20\d\d/,"").toUpperCase(),
+                hp           : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseHealth,
+                armor        : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseArmor,
+                stamina      : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseStamina,
+                firstWeapon: {
+                    name     : jsonData.character_cards[nameCards].items.PrimaryWeapon.split("_")[1].toUpperCase(),
+                    damage   : jsonData.items[jsonData.character_cards[nameCards].items.PrimaryWeapon].default.modifiers.ui.UI_Damage,
+                    ammo     : jsonData.items[jsonData.character_cards[nameCards].items.PrimaryWeapon].default.modifiers.ui.UI_MagAmount,
+                },
+                secondWeapon: {
+                    name     : jsonData.character_cards[nameCards].items.SecondaryWeapon.split("_")[1].toUpperCase(),
+                    damage   : jsonData.items[jsonData.character_cards[nameCards].items.SecondaryWeapon].default.modifiers.ui.UI_Damage,
+                    ammo     : jsonData.items[jsonData.character_cards[nameCards].items.SecondaryWeapon].default.modifiers.ui.UI_MagAmount
+                },
+                spec         : jsonData.character_cards[nameCards].items.HeavyWeapon.split("_")[1].toUpperCase(),
+            };
+
+            console.log(operatorCard.name);
+
+            document.querySelector('.oper_card')?.remove();
+            document.body.insertAdjacentHTML('afterbegin',`
+            <div style="display:none; "class="oper_card">
+                <img src="https://exlusive.pro/img/icons/collections/raid.png">
+                <div class="card oper_card_header"><img src="https://exlusive.pro/img/icons/sniper.png" alt="name">
+                <span class="oper_card_name">${operatorCard.name}</span>
+            </div>
+            <span class="oper_card_collection">${operatorCard.collection}</span>
+   
+            <div class="card oper_card_caption"></div>
+            <div class="oper_card_caption_left">ОРУЖИЕ</div>
+            <div class="oper_card_caption_center">УРОН</div>
+            <div class="oper_card_caption_right">БОЕКОМПЛЕКТ</div>
+   
+            <div class="item oper_card_weapon"><img src="https://exlusive.pro/img/icons/weapons/svd.png" alt="главное оружие"><br>${operatorCard.firstWeapon.name}</div>
+            <div class="item oper_card_weapon_damage">${operatorCard.firstWeapon.damage}</div>
+            <div class="item oper_card_weapon_ammo">${operatorCard.firstWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
+            <div class="item oper_card_second"><img src="https://exlusive.pro/img/icons/weapons/pm.png" alt="второе оружие"><br>${operatorCard.secondWeapon.name}</div>
+            <div class="item oper_card_second_damage">${operatorCard.secondWeapon.damage}</div>
+            <div class="item oper_card_second_ammo">${operatorCard.secondWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
+   
+           
+   
+            <div class="oper_card_spec_left">СПЕЦСРЕДСТВО</div>
+            <div class="oper_card_spec_right">СПОСОБНОСТЬ</div>
+   
+   
+   
+            <div class="item oper_card_spec"><img src="https://exlusive.pro/img/icons/weapons/Recruit_RGD5.png" alt="спецсредство">${operatorCard.spec}</div>
+            <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_RecruitSniper_Base.png" alt="способность">Охотник за головами</div>
+   
+            
+            <div class="item oper_card_stats_head_health">ЗДОРОВЬЕ</div>
+            <div class="item oper_card_stats_head_armor">БРОНЯ</div>
+            <div class="item oper_card_stats_head_stamina">ВЫНОСЛИВОСТЬ</div>
+   
+   <div class="item oper_card_stats_health"><img src="https://exlusive.pro/img/icons/health_icon.png" alt="+"><span> ${operatorCard.hp}</span></div>
+            <div class="item oper_card_stats_armor"><img src="https://exlusive.pro/img/icons/armor_icon.png" alt="броня"><span>${operatorCard.armor}</span></div>
+            <div class="item oper_card_stats_stamina"><img src="https://exlusive.pro/img/icons/stamina_icon.png" alt="выносливость"><span>${operatorCard.stamina}</span></div>
+          </div>
+   
+
+            `)
+            //console.log(jsonData.character_cards.recruita.modifiers.additive["Move.Run.Speed"]);
           })
           .fail(function (error) {
             console.log("Ошибка:", error);
@@ -3024,8 +3091,6 @@ ${file.name} поврежден
           });
       }
       
-      
-
 
     if (localStorage.getItem("beginer") === "true") {
         document.querySelector("body").insertAdjacentHTML("afterbegin",`<img class="arrow" src="../img/arrow.png" style="position:absolute;display:none">`);
