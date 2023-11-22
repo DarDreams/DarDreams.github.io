@@ -747,7 +747,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
                 /* #region  OPER_NAME */
-                oper = function (collection) {
+                oper = function (collection, name='name') {
                     collection = collection.toUpperCase();
                     let res;
                     //console.log(collection);
@@ -762,7 +762,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             'A': 'РЕКРУТ',
                             'G': 'РЕКРУТ',
                             'M': 'РЕКРУТ',
-                            'S': 'РЕКРУТ',
+                            'S': {name:'РЕКРУТ',ability:'Охотник за головами', img: ""},
                         },
                         'SSO2013': {
                             'A': 'ВОРОН',
@@ -828,7 +828,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             'A': 'АФЕЛА',
                             'G': 'ХАГАНА',
                             'M': 'ШАРШЕРЕТ',
-                            'S': 'ЭЙМА'
+                            'S': {name:'ЭЙМА', ability:'Станящий патрон'},
                         },
                         'EZAPAC': {
                             'A': 'ФАРО',
@@ -873,7 +873,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     roleName = mappings[col][role];
                     
                     // console.log("rolename", roleName);
-                    return [res,roleName];
+                    return [res, roleName.name, roleName.ability];
                 }
                 /* #endregion */
 
@@ -891,7 +891,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         match(/ES\d?|LS\d?/g):oper(data1[k][i][8][1])[0], 
                     skin: data1[k][i][8][9][data1[k][i][8][9].length - 1].match(/ES\d?|LS\d?/g),
                     lvlText: data1[k][i][3],
-                    nameOp: roleName,
+                    nameOp: (roleName.name == undefined)? roleName:roleName.name,
                     lvlOp: data1[k][i][8][18],
                     lvlprest: data1[k][i][8][19],
                     rank: data1[k][i][16][1],
@@ -3022,6 +3022,7 @@ ${file.name} поврежден
             const operatorCard = {
                 name         : oper(nameCards)[1],
                 collection   : nameCards.replace(/\w$/,"").replace(/20\d\d/,"").toUpperCase(),
+                ability      : oper(nameCards)[2],
                 hp           : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseHealth,
                 armor        : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseArmor,
                 stamina      : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseStamina,
@@ -3029,6 +3030,7 @@ ${file.name} поврежден
                     name     : jsonData.character_cards[nameCards].items.PrimaryWeapon.split("_")[1].toUpperCase(),
                     damage   : jsonData.items[jsonData.character_cards[nameCards].items.PrimaryWeapon].default.modifiers.ui.UI_Damage,
                     ammo     : jsonData.items[jsonData.character_cards[nameCards].items.PrimaryWeapon].default.modifiers.ui.UI_MagAmount,
+                    img      : jsonData.items[jsonData.character_cards[nameCards].items.PrimaryWeapon].default.visual,
                 },
                 secondWeapon: {
                     name     : jsonData.character_cards[nameCards].items.SecondaryWeapon.split("_")[1].toUpperCase(),
@@ -3038,13 +3040,13 @@ ${file.name} поврежден
                 spec         : jsonData.character_cards[nameCards].items.HeavyWeapon.split("_")[1].toUpperCase(),
             };
 
-            console.log(operatorCard.name);
-
+            console.log(nameCards);
+            let classes = {a: "assault.png", g: "gunner.png", m: "medic.png", s: "sniper.png"}
             document.querySelector('.oper_card')?.remove();
             document.body.insertAdjacentHTML('afterbegin',`
             <div style="display:none; "class="oper_card">
-                <img src="https://exlusive.pro/img/icons/collections/raid.png">
-                <div class="card oper_card_header"><img src="https://exlusive.pro/img/icons/sniper.png" alt="name">
+                <img src="https://exlusive.pro/img/icons/collections/UI_OperatorEmblems_${nameCards.replace(/\w$/,"").toUpperCase()}.png">
+                <div class="card oper_card_header"><img src="https://exlusive.pro/img/icons/${classes[nameCards.match(/\w$/)[0]]}" alt="name">
                 <span class="oper_card_name">${operatorCard.name}</span>
             </div>
             <span class="oper_card_collection">${operatorCard.collection}</span>
@@ -3054,7 +3056,7 @@ ${file.name} поврежден
             <div class="oper_card_caption_center">УРОН</div>
             <div class="oper_card_caption_right">БОЕКОМПЛЕКТ</div>
    
-            <div class="item oper_card_weapon"><img src="https://exlusive.pro/img/icons/weapons/svd.png" alt="главное оружие"><br>${operatorCard.firstWeapon.name}</div>
+            <div class="item oper_card_weapon"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.firstWeapon.img}_128x128.png" alt="главное оружие"><br>${operatorCard.firstWeapon.name}</div>
             <div class="item oper_card_weapon_damage">${operatorCard.firstWeapon.damage}</div>
             <div class="item oper_card_weapon_ammo">${operatorCard.firstWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
             <div class="item oper_card_second"><img src="https://exlusive.pro/img/icons/weapons/pm.png" alt="второе оружие"><br>${operatorCard.secondWeapon.name}</div>
@@ -3069,7 +3071,7 @@ ${file.name} поврежден
    
    
             <div class="item oper_card_spec"><img src="https://exlusive.pro/img/icons/weapons/Recruit_RGD5.png" alt="спецсредство">${operatorCard.spec}</div>
-            <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_RecruitSniper_Base.png" alt="способность">Охотник за головами</div>
+            <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_RecruitSniper_Base.png" alt="способность">${operatorCard.ability}</div>
    
             
             <div class="item oper_card_stats_head_health">ЗДОРОВЬЕ</div>
