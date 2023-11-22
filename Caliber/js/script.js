@@ -3022,7 +3022,12 @@ ${file.name} поврежден
             const operatorCard = {
                 name         : oper(nameCards)[1],
                 collection   : nameCards.replace(/\w$/,"").replace(/20\d\d/,"").toUpperCase(),
-                ability      : oper(nameCards)[2],
+
+                ability      : {
+                    name     : oper(nameCards)[2],
+                    img      : jsonData.character_cards[nameCards].abilities.PrimaryAbility,
+                },
+                
                 hp           : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseHealth,
                 armor        : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseArmor,
                 stamina      : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseStamina,
@@ -3035,9 +3040,13 @@ ${file.name} поврежден
                 secondWeapon: {
                     name     : jsonData.character_cards[nameCards].items.SecondaryWeapon.split("_")[1].toUpperCase(),
                     damage   : jsonData.items[jsonData.character_cards[nameCards].items.SecondaryWeapon].default.modifiers.ui.UI_Damage,
-                    ammo     : jsonData.items[jsonData.character_cards[nameCards].items.SecondaryWeapon].default.modifiers.ui.UI_MagAmount
+                    ammo     : jsonData.items[jsonData.character_cards[nameCards].items.SecondaryWeapon].default.modifiers.ui.UI_MagAmount,
+                    img      : jsonData.items[jsonData.character_cards[nameCards].items.SecondaryWeapon].default.visual,
                 },
-                spec         : jsonData.character_cards[nameCards].items.HeavyWeapon.split("_")[1].toUpperCase(),
+                spec         : {
+                    name     : jsonData.character_cards[nameCards].items.HeavyWeapon.split("_")[1].toUpperCase(),
+                    img      : jsonData.items[jsonData.character_cards[nameCards].items.HeavyWeapon].default.visual,
+                },
             };
 
             console.log(nameCards);
@@ -3059,7 +3068,7 @@ ${file.name} поврежден
             <div class="item oper_card_weapon"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.firstWeapon.img}_128x128.png" alt="главное оружие"><br>${operatorCard.firstWeapon.name}</div>
             <div class="item oper_card_weapon_damage">${operatorCard.firstWeapon.damage}</div>
             <div class="item oper_card_weapon_ammo">${operatorCard.firstWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
-            <div class="item oper_card_second"><img src="https://exlusive.pro/img/icons/weapons/pm.png" alt="второе оружие"><br>${operatorCard.secondWeapon.name}</div>
+            <div class="item oper_card_second"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.secondWeapon.img}_128x128.png" alt="второе оружие"><br>${operatorCard.secondWeapon.name}</div>
             <div class="item oper_card_second_damage">${operatorCard.secondWeapon.damage}</div>
             <div class="item oper_card_second_ammo">${operatorCard.secondWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
    
@@ -3070,8 +3079,8 @@ ${file.name} поврежден
    
    
    
-            <div class="item oper_card_spec"><img src="https://exlusive.pro/img/icons/weapons/Recruit_RGD5.png" alt="спецсредство">${operatorCard.spec}</div>
-            <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_RecruitSniper_Base.png" alt="способность">${operatorCard.ability}</div>
+            <div class="item oper_card_spec"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.spec.img}_128x128.png" alt="спецсредство">${operatorCard.spec.name}</div>
+            <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_${operatorCard.ability.img}_Base.png" alt="способность">${operatorCard.ability.name}</div>
    
             
             <div class="item oper_card_stats_head_health">ЗДОРОВЬЕ</div>
