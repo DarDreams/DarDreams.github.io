@@ -2906,17 +2906,27 @@ ${file.name} поврежден
     };
 
 
-    function setOper() {
+    function setOper(x=0) {
         document.querySelectorAll("tr.line").forEach((el) => {
+            x++;
             // el.addEventListener("click", (ev) => {
             el.onclick = function () {
-                console.log('click oper');                
+                // console.log('click oper');                
                 let avatar = el.querySelector('img.oper').src;
                 let operBg = document.querySelector(".operBg");
                 let match = avatar.match(/\/([^/]+)\.[^.]+$/);
                 let nameCards = match[1].split('_')[0].toLowerCase()+match[1].split('_')[1].toLowerCase();
                 getStatData(nameCards);
-                console.log(nameCards);
+                // if (x > 1) {
+                //     // getStatData(nameCards);
+                //     if (document.querySelector('.oper_card')) {
+                        
+                //         document.querySelector('.oper_card').style.opacity = "1";
+                //     } else {
+                //         getStatData(nameCards);
+                //     }
+                // }
+                // console.log("match1 : ",match);
                 // operBg.style.opacity = "0";
                 operBg.style.filter = "blur(200px)";
                 setTimeout(() => {
@@ -3029,12 +3039,67 @@ ${file.name} поврежден
                 },
                 
                 hp           : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseHealth,
+                hpF          : function () {
+                                let hpFull = 0;
+                                for (let i = 0; i < jsonData.character_cards[nameCards].upgrades.length; i++) { 
+                                    if (jsonData.character_cards[nameCards].upgrades[i].includes('hp_base')) {
+                                        hpFull += jsonData.upgrades[jsonData.character_cards[nameCards].upgrades[i]].modifiers.ui.UI_BaseHealth;
+                                    } else continue
+                                }         
+                                if (hpFull !== 0) {
+                                    return " + " + hpFull //+ jsonData.character_cards[nameCards].modifiers.ui.UI_BaseHealth;          
+                                } else return "";
+                                
+                            },
+
                 armor        : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseArmor,
+
+                armorF       : function () {
+                                let armorFull = 0;
+                                for (let i = 0; i < jsonData.character_cards[nameCards].upgrades.length; i++) { 
+                                    if (jsonData.character_cards[nameCards].upgrades[i].includes('armor_base')) {
+                                        armorFull += jsonData.upgrades[jsonData.character_cards[nameCards].upgrades[i]].modifiers.ui.UI_BaseArmor;
+                                    } else continue
+                                }         
+                                if (armorFull !== 0) {
+                                    return " + " + armorFull //+ jsonData.character_cards[nameCards].modifiers.ui.UI_BaseArmor;          
+                                } else return "";
+                                },
+
                 stamina      : jsonData.character_cards[nameCards].modifiers.ui.UI_BaseStamina,
+
+                staminaF     : function () {
+                                let staminaFull = 0;
+                                for (let i = 0; i < jsonData.character_cards[nameCards].upgrades.length; i++) { 
+                                    if (jsonData.character_cards[nameCards].upgrades[i].includes('stamina_base')) {
+                                        staminaFull += jsonData.upgrades[jsonData.character_cards[nameCards].upgrades[i]].modifiers.ui.UI_BaseStamina;
+                                    } else continue
+                                }      
+                                if (staminaFull !== 0) {
+                                    return " + " + staminaFull //+ jsonData.character_cards[nameCards].modifiers.ui.UI_BaseStamina;          
+                                } else {
+                                    return "";
+                                }
+                                
+                },
+
                 firstWeapon: {
                     name     : jsonData.character_cards[nameCards].items.PrimaryWeapon.split("_")[1].toUpperCase(),
                     damage   : jsonData.items[jsonData.character_cards[nameCards].items.PrimaryWeapon].default.modifiers.ui.UI_Damage,
                     ammo     : jsonData.items[jsonData.character_cards[nameCards].items.PrimaryWeapon].default.modifiers.ui.UI_MagAmount,
+                    ammoF    : function () {
+                                let ammoFull = 0;
+                                for (let i = 0; i < jsonData.character_cards[nameCards].upgrades.length; i++) { 
+                                    if (jsonData.character_cards[nameCards].upgrades[i].includes('_mag')) {
+                                        ammoFull += jsonData.upgrades[jsonData.character_cards[nameCards].upgrades[i]].modifiers.ui.UI_MagAmount;
+                                    } else continue
+                                }      
+                                if (ammoFull !== 0) {
+                                    return " + " + ammoFull //+ jsonData.character_cards[nameCards].modifiers.ui.UI_BaseStamina;          
+                                } else {
+                                    return "";
+                                }
+                     },
                     img      : jsonData.items[jsonData.character_cards[nameCards].items.PrimaryWeapon].default.visual,
                 },
                 secondWeapon: {
@@ -3049,11 +3114,11 @@ ${file.name} поврежден
                 },
             };
 
-            console.log(nameCards);
+            
             let classes = {a: "assault.png", g: "gunner.png", m: "medic.png", s: "sniper.png"}
             document.querySelector('.oper_card')?.remove();
             document.querySelector('.card').insertAdjacentHTML('beforeend',`
-            <div style="display:none" class="oper_card">
+            <div style="position:absolute;left:200vw" class="oper_card animate__animated">
                 <img src="https://exlusive.pro/img/icons/collections/UI_OperatorEmblems_${nameCards.replace(/\w$/,"").toUpperCase()}.png">
                 <div class="card oper_card_header"><img src="https://exlusive.pro/img/icons/${classes[nameCards.match(/\w$/)[0]]}" alt="name">
                 <span class="oper_card_name">${operatorCard.name}</span>
@@ -3067,7 +3132,7 @@ ${file.name} поврежден
    
             <div class="item oper_card_weapon"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.firstWeapon.img.toUpperCase()}_128x128.png" alt="главное оружие"><br>${operatorCard.firstWeapon.name}</div>
             <div class="item oper_card_weapon_damage">${operatorCard.firstWeapon.damage}</div>
-            <div class="item oper_card_weapon_ammo">${operatorCard.firstWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
+            <div class="item oper_card_weapon_ammo">${operatorCard.firstWeapon.ammo}${operatorCard.firstWeapon.ammoF()}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
             <div class="item oper_card_second"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.secondWeapon.img.toUpperCase()}_128x128.png" alt="второе оружие"><br>${operatorCard.secondWeapon.name}</div>
             <div class="item oper_card_second_damage">${operatorCard.secondWeapon.damage}</div>
             <div class="item oper_card_second_ammo">${operatorCard.secondWeapon.ammo}<img src="https://exlusive.pro/img/icons/weapons/magazine.png" alt="Магазины"></div>
@@ -3079,27 +3144,30 @@ ${file.name} поврежден
    
    
    
-            <div class="item oper_card_spec"><img src="https://exlusive.pro/img/icons/weapons/UI_${operatorCard.spec.img.toUpperCase()}_128x128.png" alt="спецсредство">${operatorCard.spec.name}</div>
+            <div class="item oper_card_spec"><img src=   "https://exlusive.pro/img/icons/weapons/UI_${operatorCard.spec.img.toUpperCase()}_128x128.png" alt="спецсредство">${operatorCard.spec.name}</div>
             <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_${operatorCard.ability.img}_Base.png" alt="способность">${operatorCard.ability.name}</div>
    
             
-            <div class="item oper_card_stats_head_health">ЗДОРОВЬЕ</div>
-            <div class="item oper_card_stats_head_armor">БРОНЯ</div>
+            <div class="item oper_card_stats_head_health" >ЗДОРОВЬЕ</div>
+            <div class="item oper_card_stats_head_armor"  >БРОНЯ</div>
             <div class="item oper_card_stats_head_stamina">ВЫНОСЛИВОСТЬ</div>
    
-   <div class="item oper_card_stats_health"><img src="https://exlusive.pro/img/icons/health_icon.png" alt="+"><span> ${operatorCard.hp}</span></div>
-            <div class="item oper_card_stats_armor"><img src="https://exlusive.pro/img/icons/armor_icon.png" alt="броня"><span>${operatorCard.armor}</span></div>
-            <div class="item oper_card_stats_stamina"><img src="https://exlusive.pro/img/icons/stamina_icon.png" alt="выносливость"><span>${operatorCard.stamina}</span></div>
+   <div class="item oper_card_stats_health"><img src="https://exlusive.pro/img/icons/health_icon.png" alt="+"><span> ${operatorCard.hp}${operatorCard.hpF()}</span></div>
+            <div class="item oper_card_stats_armor"><img src=  "https://exlusive.pro/img/icons/armor_icon.png" alt="броня"><span>${operatorCard.armor}${operatorCard.armorF()}</span></div>
+            <div class="item oper_card_stats_stamina"><img src="https://exlusive.pro/img/icons/stamina_icon.png" alt="выносливость"><span>${operatorCard.stamina}${operatorCard.staminaF()}</span></div>
           </div>
    
 
             `)
             //console.log(jsonData.character_cards.recruita.modifiers.additive["Move.Run.Speed"]);
+            document.querySelector('.oper_card').classList.add('animate__bounceInRight');
+            document.querySelector('.oper_card').style.position = "";
           })
           .fail(function (error) {
             console.log("Ошибка:", error);
             // Обработка ошибки
           });
+          
       }
       
 
