@@ -1547,11 +1547,9 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
         
         winLose();
         summRank();
-        //console.log("setSelectMe()");
         setSelectMe();
         setSort();
         setMetaTags();
-        // console.log("data1: ",data1);
         
         // setPlan();
         //setOper();
@@ -1662,6 +1660,7 @@ ${(operator.rankProcent > 0) ? "WIN: "+operator.rankProcent+"%" : ""}" class = "
 
     button.addEventListener('click', () => {
         document.querySelector('.arrow')?.remove();
+        document.querySelector('.oper_card').classList.replace('animate__bounceInRight','animate__fadeOutRight');
         clearInterval(interval);
         setTimeout(() => {
             refresh();
@@ -2906,26 +2905,26 @@ ${file.name} поврежден
     };
 
 
-    function setOper(x=0) {
+    function setOper() {
+        let x = 0;
         document.querySelectorAll("tr.line").forEach((el) => {
-            x++;
             // el.addEventListener("click", (ev) => {
             el.onclick = function () {
+                x++;
                 // console.log('click oper');                
                 let avatar = el.querySelector('img.oper').src;
                 let operBg = document.querySelector(".operBg");
                 let match = avatar.match(/\/([^/]+)\.[^.]+$/);
                 let nameCards = match[1].split('_')[0].toLowerCase()+match[1].split('_')[1].toLowerCase();
-                getStatData(nameCards);
-                // if (x > 1) {
-                //     // getStatData(nameCards);
-                //     if (document.querySelector('.oper_card')) {
+                getStatData(nameCards)
+
+                if (x > 1 && document.querySelector('.slide-out-panel').classList.contains('show') == false) {
+                    
+                    if (document.querySelector('.oper_card')) {
                         
-                //         document.querySelector('.oper_card').style.opacity = "1";
-                //     } else {
-                //         getStatData(nameCards);
-                //     }
-                // }
+                        getStatData(nameCards,"visibility");
+                    }
+                } else getStatData(nameCards);
                 // console.log("match1 : ",match);
                 // operBg.style.opacity = "0";
                 operBg.style.filter = "blur(200px)";
@@ -2967,12 +2966,12 @@ ${file.name} поврежден
                 wrapper.classList.add("big");
                 imgMap.style.marginTop = "20vh";
                 table.classList.add("animate__animated");
-                table.classList.replace("animate__zoomIn", "animate__zoomOut");
+                table.classList.replace("animate__zoomIn", "animate__fadeOutRight");
             } else {
                 setMouseActions();
                 wrapper.classList.remove("big");
                 imgMap.style.marginTop = "unset";
-                table.classList.replace("animate__zoomOut", "animate__zoomIn");
+                table.classList.replace("animate__fadeOutRight", "animate__zoomIn");
             }
         };
     }
@@ -3021,7 +3020,7 @@ ${file.name} поврежден
     //     header("Location: $url"); // Перенаправляем
     // }
     
-    function getStatData(nameCards) {
+    function getStatData(nameCards,visible = "hidden") {
         $.get("https://exlusive.pro/php/data.php")
           .done(function (dataStat) {
             // Преобразование JSON в объект JavaScript
@@ -3118,7 +3117,7 @@ ${file.name} поврежден
             let classes = {a: "assault.png", g: "gunner.png", m: "medic.png", s: "sniper.png"}
             document.querySelector('.oper_card')?.remove();
             document.querySelector('.card').insertAdjacentHTML('beforeend',`
-            <div style="position:absolute;left:200vw" class="oper_card animate__animated">
+            <div style="visibility:${visible}" class="oper_card animate__animated">
                 <img src="https://exlusive.pro/img/icons/collections/UI_OperatorEmblems_${nameCards.replace(/\w$/,"").toUpperCase()}.png">
                 <div class="card oper_card_header"><img src="https://exlusive.pro/img/icons/${classes[nameCards.match(/\w$/)[0]]}" alt="name">
                 <span class="oper_card_name">${operatorCard.name}</span>
@@ -3152,16 +3151,16 @@ ${file.name} поврежден
             <div class="item oper_card_stats_head_armor"  >БРОНЯ</div>
             <div class="item oper_card_stats_head_stamina">ВЫНОСЛИВОСТЬ</div>
    
-   <div class="item oper_card_stats_health"><img src="https://exlusive.pro/img/icons/health_icon.png" alt="+"><span> ${operatorCard.hp}${operatorCard.hpF()}</span></div>
-            <div class="item oper_card_stats_armor"><img src=  "https://exlusive.pro/img/icons/armor_icon.png" alt="броня"><span>${operatorCard.armor}${operatorCard.armorF()}</span></div>
-            <div class="item oper_card_stats_stamina"><img src="https://exlusive.pro/img/icons/stamina_icon.png" alt="выносливость"><span>${operatorCard.stamina}${operatorCard.staminaF()}</span></div>
+   <div class="item oper_card_stats_health"><img src="https://exlusive.pro/img/icons/health_icon.png" alt="+"><span> ${operatorCard.hp}</span><span style="font-size:0.7em">${operatorCard.hpF()}</span></div>
+            <div class="item oper_card_stats_armor"><img src=  "https://exlusive.pro/img/icons/armor_icon.png" alt="броня"><span>${operatorCard.armor}</span><span style="font-size:0.7em"> ${operatorCard.armorF()}</span></div>
+            <div class="item oper_card_stats_stamina"><img src="https://exlusive.pro/img/icons/stamina_icon.png" alt="выносливость"><span>${operatorCard.stamina}</span><span style="font-size:0.7em;margin-left:0.2em">${operatorCard.staminaF()}</span></div>
           </div>
    
 
             `)
             //console.log(jsonData.character_cards.recruita.modifiers.additive["Move.Run.Speed"]);
             document.querySelector('.oper_card').classList.add('animate__bounceInRight');
-            document.querySelector('.oper_card').style.position = "";
+            // document.querySelector('.oper_card').style.position = "";
           })
           .fail(function (error) {
             console.log("Ошибка:", error);
