@@ -2966,12 +2966,12 @@ ${file.name} поврежден
                 wrapper.classList.add("big");
                 imgMap.style.marginTop = "20vh";
                 table.classList.add("animate__animated");
-                table.classList.replace("animate__zoomIn", "animate__fadeOutRight");
+                table.classList.replace("animate__zoomIn", "animate__zoomOut");
             } else {
                 setMouseActions();
                 wrapper.classList.remove("big");
                 imgMap.style.marginTop = "unset";
-                table.classList.replace("animate__fadeOutRight", "animate__zoomIn");
+                table.classList.replace("animate__zoomOut", "animate__zoomIn");
             }
         };
     }
@@ -3089,7 +3089,7 @@ ${file.name} поврежден
                     ammoF    : function () {
                                 let ammoFull = 0;
                                 for (let i = 0; i < jsonData.character_cards[nameCards].upgrades.length; i++) { 
-                                    if (jsonData.character_cards[nameCards].upgrades[i].includes('_mag')) {
+                                    if (jsonData.character_cards[nameCards].upgrades[i].includes('_magamount')) {
                                         ammoFull += jsonData.upgrades[jsonData.character_cards[nameCards].upgrades[i]].modifiers.ui.UI_MagAmount;
                                     } else continue
                                 }      
@@ -3144,7 +3144,7 @@ ${file.name} поврежден
    
    
             <div class="item oper_card_spec"><img src=   "https://exlusive.pro/img/icons/weapons/UI_${operatorCard.spec.img.toUpperCase()}_128x128.png" alt="спецсредство">${operatorCard.spec.name}</div>
-            <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_${operatorCard.ability.img}_Base.png" alt="способность">${operatorCard.ability.name}</div>
+            <div class="item oper_card_ability"><img src="https://exlusive.pro/img/icons/ability/UI_${operatorCard.ability.img.toUpperCase()}_BASE.png" alt="способность">${operatorCard.ability.name}</div>
    
             
             <div class="item oper_card_stats_head_health" >ЗДОРОВЬЕ</div>
